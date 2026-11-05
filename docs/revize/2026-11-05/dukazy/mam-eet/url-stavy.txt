@@ -1,0 +1,33 @@
+000ERR  cannot open `zdroje/url/1.bin' (No such file or directory)  | https://adisspr.mfcr.cz/dpr/adis/idpr_epo/epo2/form/form_uvod.faces?pisemnost=DPFOPR&ext=t
+200 1040 text/html  | https://e-sbirka.gov.cz/sb/1992/586
+200 1040 text/html  | https://e-sbirka.gov.cz/sb/1992/589
+200 1040 text/html  | https://e-sbirka.gov.cz/sb/1992/592
+200 1040 text/html  | https://e-sbirka.gov.cz/sb/1995/155
+200 1040 text/html  | https://e-sbirka.gov.cz/sb/2026/164
+200 1040 text/html  | https://e-sbirka.gov.cz/sb/2026/177
+200 52217 application/javascript  | https://eet.gov.cz/
+200 312258 application/pdf  | https://eet.gov.cz/assets/cs/cmsmedia/pro-media/EET_v_5_krocich.pdf
+200 51733 application/javascript  | https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off
+200 56350 application/javascript  | https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off
+200 51423 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#dalsi-vyneti-z-evidence-trzeb-512
+200 51423 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#osobni-vyneti-z-evidence-trzeb-514
+200 51423 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513
+200 66875 application/javascript  | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby
+200 66875 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-evidovana-trzba-328
+200 66875 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334
+200 66875 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#jake-platby-musite-evidovat-325
+200 66875 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdo-musi-evidovat-trzby-319
+200 66875 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdy-nejde-o-prijem-z-podnikani-322
+200 66875 application/javascript kotva OK | https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdy-platbu-evidovat-nemusite-326
+200 49792 application/javascript  | https://eet.gov.cz/cs/o-eet/jaky-je-harmonogram-eet-2-0
+200 48101 application/javascript  | https://eet.gov.cz/cs/online-sluzby
+200 59792 application/javascript  | https://eet.gov.cz/cs/pro-media/tiskove-zpravy/2026/eet-2-0-podnikatele-se-jiz-mohou-prihlasit-k-evide-1386
+200 90028 application/javascript  | https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat
+200 48717 application/javascript  | https://eet.gov.cz/cs/zacinam-s-eet/nastaveni-pred-zahajenim-evidence-trzeb
+200 68020 application/javascript  | https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace
+200 169899 application/pdf  | https://financnisprava.gov.cz/assets/tiskopisy/5255_3.pdf
+200 134740 application/pdf  | https://financnisprava.gov.cz/assets/tiskopisy/5260_1.pdf
+200 78010 application/javascript  | https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace
+200 1180998 application/javascript  | https://financnisprava.gov.cz/cs/dane/danove-tiskopisy
+200 47417 application/javascript  | https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/zajem-o-pausalni-dan-roste-letos
+200 173548 application/pdf  | https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf

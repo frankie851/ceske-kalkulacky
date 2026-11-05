@@ -33,9 +33,11 @@ export function spustServer(koren) {
 }
 
 /** Otevře prohlížeč a stránku se záznamem sítě, konzole, dialogů. */
-export async function otevriProhlizec({ sirka = 360, vyska = 800 } = {}) {
-  const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--no-sandbox', '--disable-gpu'] });
+/** `lang`: lokalizace prohlížeče – ovlivňuje, zda <input type=number> přijme desetinnou čárku (cs-CZ ano, en-US ne). */
+export async function otevriProhlizec({ sirka = 360, vyska = 800, lang = 'cs-CZ' } = {}) {
+  const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--no-sandbox', '--disable-gpu', `--lang=${lang}`] });
   const page = await browser.newPage();
+  await page.setExtraHTTPHeaders({ 'Accept-Language': lang === 'cs-CZ' ? 'cs-CZ,cs;q=0.9' : lang });
   await page.setViewport({ width: sirka, height: vyska, deviceScaleFactor: 1 });
   const zaznam = { sit: [], konzole: [], dialogy: [], chyby: [] };
   page.on('request', r => zaznam.sit.push({ url: r.url(), typ: r.resourceType(), metoda: r.method() }));
