@@ -43,7 +43,7 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 | EET | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V2 S7 N5) |
 | SPOT | ☐ | ☐ | ☐ | |
 | BYD | ☐ | ☐ | ☐ | |
-| SLV | ☑ | ☐ | ☐ | Opravit před sloučením (K0 V2 S5 N4) |
+| SLV | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V2 S5 N4) |
 | INF | ☐ | ☐ | ☐ | |
 | PRI | ☐ | ☐ | ☐ | |
 | CES | ☐ | ☐ | ☐ | |

@@ -20,9 +20,18 @@ async function nastav(page, id, value, udalost = 'input') {
   await page.evaluate(({ id, value, udalost }) => { const el = document.getElementById(id); el.value = value; el.dispatchEvent(new Event(udalost, { bubbles: true })); }, { id, value, udalost });
 }
 async function napis(page, id, text) {
-  await page.click(`#${id}`, { clickCount: 3 });
+  await page.focus(`#${id}`);
+  await page.keyboard.down('Control'); await page.keyboard.press('KeyA'); await page.keyboard.up('Control');
   await page.keyboard.press('Backspace');
   await page.type(`#${id}`, text, { delay: 10 });
+}
+/** Simulace vložení ze schránky (execCommand insertText) do vyprázdněného pole. */
+async function vloz(page, id, text) {
+  await page.focus(`#${id}`);
+  await page.keyboard.down('Control'); await page.keyboard.press('KeyA'); await page.keyboard.up('Control');
+  await page.keyboard.press('Backspace');
+  await page.evaluate((t) => document.execCommand('insertText', false, t), text);
+  await page.evaluate((id) => document.getElementById(id).dispatchEvent(new Event('input', { bubbles: true })), id);
 }
 async function karty(page) {
   await sleep(700);
@@ -115,8 +124,9 @@ try {
     await napis(b.page, 'fixPrice', '3000,50'); await zaznam('psáno 3000,50');
     if (lang === 'en-US') await b.page.screenshot({ path: path.join(OUT, 'vstup-carka-360.png'), fullPage: true });
     await napis(b.page, 'fixPrice', '3 000'); await zaznam('psáno 3 000 (mezera)');
-    await nastav(b.page, 'fixPrice', '3 000'); await zaznam('vloženo 3 000 (value=)');
-    await nastav(b.page, 'fixPrice', '3000,50'); await zaznam('vloženo 3000,50 (value=)');
+    await vloz(b.page, 'fixPrice', '3 000'); await zaznam('vloženo ze schránky 3 000');
+    await vloz(b.page, 'fixPrice', '3000,50'); await zaznam('vloženo ze schránky 3000,50');
+    await napis(b.page, 'fixPrice', '0,85'); await zaznam('psáno 0,85');
     await nastav(b.page, 'fixPrice', ''); await zaznam('prázdné');
     await nastav(b.page, 'fixPrice', '-500'); await zaznam('záporné −500');
     await napis(b.page, 'fixPrice', '3000');
@@ -132,8 +142,8 @@ try {
   {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'spot-csv-'));
     const radky = ['Datum a čas;Spotřeba [kWh]'];
-    for (const d of ['05.01.2026', '06.01.2026']) for (let q = 1; q <= 96; q++) { const h = Math.floor((q * 15) / 60) % 24, m = (q * 15) % 60; radky.push(`${q === 96 ? (d === '05.01.2026' ? '06.01.2026' : '07.01.2026') : d} ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')};${(0.2 + 0.3 * Math.sin(q / 10)).toFixed(3).replace('.', ',')}`); }
-    radky.push('07.01.2026 00:15;1 000,5');
+    for (const d of ['05.01.2026', '06.01.2026']) for (let q = 1; q <= 96; q++) { const h = Math.floor((q * 15) / 60) % 24, m = (q * 15) % 60; radky.push(`${q === 96 ? (d === '05.01.2026' ? '06.01.2026' : '07.01.2026') : d} ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')};${(0.08 + 0.06 * Math.sin(q / 10)).toFixed(3).replace('.', ',')}`); }
+    radky.push('07.01.2026 00:15;1 000,5'); // tisícová mezera + desetinná čárka (1 000,5 kWh)
     const dobry = path.join(tmp, 'mereni.csv'); fs.writeFileSync(dobry, radky.join('\r\n') + '\r\n');
     const spatny = path.join(tmp, 'spatny.csv'); fs.writeFileSync(spatny, 'toto není csv\nabc;def\n1;2;3\n');
     const xss = path.join(tmp, 'xss.csv'); fs.writeFileSync(xss, '<img src=x onerror=alert(1)>;<script>alert(2)</script>\n05.01.2026 00:15;0,25\n');
@@ -181,7 +191,7 @@ for (const [k, s] of Object.entries(vysledek.scenare)) {
   if (s.preteka) console.log(`  přetéká: ${s.preteka.preteka} (${s.preteka.scrollWidth}/${s.preteka.innerWidth})`);
   if (s.axe) console.log(`  axe: ${s.axe.length} (serious/critical ${s.axe.filter((a) => ['serious', 'critical'].includes(a.dopad)).length})`, s.axe.map((a) => `${a.dopad}:${a.id}×${a.pocet}`).join(', '));
   if (s.tab) console.log(`  tab: ${s.tab.map((t) => `${t.tag}#${t.id || t.popisek.slice(0, 15)}${t.fokusViditelny ? '' : '(!fokus)'}`).join(' → ')}`);
-  if (s.kroky) for (const [n, k] of Object.entries(s.kroky)) console.log(`  ${n}: ${JSON.stringify(k).slice(0, 300)}`);
+  if (s.kroky) { console.log('  navigator.language:', s.lang); for (const [n, k] of Object.entries(s.kroky)) console.log(`  ${n}: ${JSON.stringify(k).slice(0, 300)}`); }
   if (s.predvolby) console.log('  předvolby:', JSON.stringify(s.predvolby));
   if (k === 'csv') console.log(JSON.stringify(s, null, 0).slice(0, 2500));
   if (k === 'zivy') console.log(JSON.stringify(s).slice(0, 1500));

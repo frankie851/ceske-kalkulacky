@@ -114,7 +114,7 @@ Skript `dukazy/skripty/slevy-2027-prepocet.mjs` (bez kódu aplikace) a `slevy-20
 - **Reprodukce:** 1 dítě nar. 2023 → krok školka: zaškrtnout, školné 20 000 → Další → 2× Zpět → změnit rok dítěte na 2012 → Další: krok 4 říká „Nezadali jste žádné dítě v předškolním věku“ → projít na výsledek. Očekáváno: žádné školkovné (dítě 15 let není v předškolním zařízení, § 35bd odst. 1 a 6). Skutečnost: řádek „Sleva za umístění dítěte (školkovné) 20 000 Kč“, součet „Až 66 044 Kč ročně“ místo 46 044 Kč; totéž v kontrolním seznamu (`prohlizec.json.zastaraleSkolkovne`, `cisla-lokalizace.txt`).
 - **Dopad na uživatele:** po opravě překlepu v roce narození počítá s neexistující slevou 20 000 Kč (až 24 900 Kč) a odnese si špatný kontrolní seznam.
 - **Doporučená oprava:** v `cti` kroku školky vynulovat `skolka`, `skolne`, `dveDomacnosti`, `dohodaStrop` u dětí, pro které se pole nevykreslila (nebo to udělat v `odpovedi()` podle věku); v `slevy.js` navíc hlídat věk dítěte (předškolní zařízení).
-- **Ověření:** reprodukováno 2× (nový proces, en-US i cs-CZ) · skeptik:
+- **Ověření:** reprodukováno 2× (nový proces, en-US i cs-CZ) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – reprodukováno v prohlížeči (dítě 2023 → 2012, výsledek stále 20 000 Kč školkovné, „Až 66 044 Kč“); § 35bd odst. 1 ZDP ve znění 180/2026 Sb. potvrzen)
 
 ### SLV-02 · Vysoká · 2 Výpočty · Daňové zvýhodnění se nekrátí u dítěte, které v roce 2027 dovrší 26 let (ani 18 let bez studia)
 - **Kde:** `slevy.js:101–117` `zvyhodneniDeti()` (kontroluje jen narození a měsíce od–do), `app.js` validace přijímá rok narození ≥ 2001 (`rules.rok - 26`), nápověda kroku „Máte děti?“ říká „do 18 let, nebo do 26 let, pokud studují“, ale nevyzve ke zkrácení „V domácnosti do“ a neptá se na studium dítěte.
