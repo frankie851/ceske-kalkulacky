@@ -433,8 +433,8 @@
     "reprodukce": "vstup 800 000 Kč, 60% paušál, hlavní činnost, OSVČ v roce zahájení nebo ve 2 následujících letech (bez podnikání v předchozích 20 letech) → očekáváno podle § 14 odst. 5 věty druhé a § 5b odst. 2 písm. a) ZPSZ (znění od 1. 1. 2027, https://www.zakonyprolidi.cz/cs/1992-589/zneni-20270101; ČSSZ pro 2026 uvádí 25 % PM = 12 242 Kč, https://www.cssz.gov.cz/zalohy-na-pojistne-na-duchodove-pojisteni): min. roční VZ 12 × 12 916 = 154 992 Kč < 55 % × 320 000 = 176 000 Kč → sociální 51 392 Kč, přiznání 110 400 Kč, **přiznání levnější než paušál** (115 932 Kč) o 5 532 Kč → skutečnost: aplikace počítá minimum 216 996 Kč, sociální 63 363 Kč, přiznání 122 371 Kč a doporučí paušál („Nejlevněji vychází Paušální daň… Ušetříš 6 427 Kč“). Pro zisk do 394 537 Kč nadhodnocuje sociální pojistné až o 18 105 Kč/rok (`prepocet.txt` O18, O19). Paušál 1. pásma se u začínajících nemění (§ 14 odst. 3 písm. a) odkazuje jen na větu první).",
     "dopad": "začínající živnostník s nízkým ziskem dostane obrácené doporučení (paušál místo přiznání) a přeplatí tisíce korun ročně; aplikace o tomto zjednodušení nikde neinformuje.",
     "oprava": "přidat do formuláře přepínač „podnikám 1.–3. rokem (a 20 let předtím jsem nepodnikal)“, do `rules.json` `minBaseShareStarting 0.25` se zdrojem § 14 odst. 5 ZPSZ a v `socialIns` použít 12 × ceil(0,25 × PM) = 154 992 Kč; doplnit test; do textu poznámek uvést, že paušál 1. pásma se tím nemění.",
-    "overeni": "reprodukováno 2× (zákon § 5b odst. 2 + § 14 odst. 5 a ČSSZ; dva běhy `mam-eet-porovnani.mjs`) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (zákon § 5b odst. 2 + § 14 odst. 5 a ČSSZ; dva běhy `mam-eet-porovnani.mjs`) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – § 14 odst. 5 věta druhá a § 5b odst. 2 písm. a) ZPSZ potvrzeny, compare() reprodukováno (63 363 vs. 51 392 Kč, doporučení se obrací); upřesnění skeptika: paušál v aplikaci 115 944 Kč, rozdíl 5 544 Kč; 25 % neplatí, byl-li člověk OSVČ v předchozích 20 letech)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "EET-02",
@@ -445,8 +445,8 @@
     "reprodukce": "otevřít `#osvc`, zadat příjmy 800 000 Kč → axe-core (WCAG 2.2 A/AA) hlásí `aria-prohibited-attr`, dopad **serious**, uzel `rect` (`prohlizec-scenare.json` → `osvc.360.axeVysledek` i `axeChyba`; úvodní stránka bez grafu je čistá). Prvek `<rect>` má generickou roli, na které je `aria-label` zakázán, čtečka proto nápovědu „Najetím nebo šipkami na grafu…“ nepřečte, přestože je prvek fokusovatelný.",
     "dopad": "uživatel čtečky dostane neoznačený fokusovatelný prvek bez vysvětlení, co s ním dělat (hodnoty grafu jsou naštěstí dostupné i v tabulce pod grafem).",
     "oprava": "dát překryvu `role=\"application\"` nebo `role=\"img\"` (případně nahradit `<rect>` tlačítkem/`<g role=\"group\">`), nebo text přesunout do `<title>`/`aria-describedby` na `<svg>`; ověřit axe = 0 serious.",
-    "overeni": "reprodukováno 2× (dva běhy `mam-eet-prohlizec.mjs`, obě analýzy) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy `mam-eet-prohlizec.mjs`, obě analýzy) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – axe 4.14 reprodukoval aria-prohibited-attr serious na rect.overlay při 1280×900 i 390×844; rodičovské svg má role=img, popisek fokusovatelného prvku se nezpřístupní)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "EET-03",
@@ -466,7 +466,7 @@
     "oblast": "2 Výpočty",
     "nazev": "Kalkulačka EET OFF tiše bere neplatnou cenu pokladny jako 0 Kč a „20.000“ jako 20 Kč",
     "kde": "`app.js:205` (`Number(costInput.value.replace(/\\s/g, ''))`), `rules.js:223` (`ownCostAnnual > 0 ? ownCostAnnual : 0`), pole „Roční náklady na vlastní pokladnu“",
-    "reprodukce": "výsledek Z5 → „Budu evidovat ve vlastní pokladně“ → zadat „20 000,50“ nebo „−5000“ → očekáváno chybová hláška (jako u ostatních číselných polí) → skutečnost „Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.“; zadat „20.000“ → „Evidence vychází levněji: **20 Kč** ročně …, ušetříš 16 780 Kč“ (správně: EET OFF levnější o 3 200 Kč). `prohlizec-scenare.json` → `eet.360.kalkulacka`; `prepocet.txt` K4, K6.",
+    "reprodukce": "výsledek Z5 → „Budu evidovat ve vlastní pokladně“ → zadat „20 000,50“ nebo „−5000“ → očekáváno chybová hláška (jako u ostatních číselných polí) → skutečnost „Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.“; zadat „20.000“ → „Evidence vychází levněji: **20 Kč** ročně …, ušetříš 16 780 Kč“ (správně: EET OFF levnější o 3 200 Kč). `prohlizec-scenare.json` → `eet.360.kalkulacka`; `prepocet.txt` K4, K6. Chování je stejné v prohlížeči cs-CZ i en-US (`carka-lokalizace.txt`): pole je `type=\"text\"`, takže prohlížeč čárku nezahazuje a chyba je čistě v parsování `Number()` v aplikaci; ostatní tři číselná pole čárku správně odmítnou hláškou.",
     "dopad": "při českém zápisu s tečkou nebo desetinnou čárkou dostane opačné doporučení; částka 0/20 Kč je ve větě vidět, takže pozorný uživatel chybu odhalí, ale bez varování.",
     "oprava": "použít stejnou validaci jako v dotazníku (celé číslo ≥ 0, jinak hláška a bez věty), odmítnout tečku jako oddělovač tisíců nebo ji odstranit stejně jako mezery; v `compareCosts` vracet pro NaN/záporné `null` místo 0.",
     "overeni": "reprodukováno 2× (dva běhy prohlížeče) · skeptik:",
