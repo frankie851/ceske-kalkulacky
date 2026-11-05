@@ -1,6 +1,6 @@
 # Souhrn nezávislé revize 12 kalkulaček – 5. 11. 2026
 
-Revizor: Claude Fable 5.1 v čistém sezení (kód nepsal). Skeptik: Opus v čistém kontextu u každého kritického a vysokého nálezu. Zdroje pravdy: `docs/zadani.md` pro požadavky a výhradně úřední zdroje pro čísla (rejstřík `pravidla.md`, 288 položek). Každá aplikace má zprávu `<repo>.md`, důkazy v `dukazy/<repo>/`, nezávislý přepočet v `dukazy/skripty/<repo>-prepocet.mjs` a opravný prompt v `opravy/<repo>.md`. Souhrnná stránka: `revize.html`.
+Revizor: Claude Fable 5.1 v čistém sezení (kód nepsal). Skeptik: Opus v čistém kontextu u každého kritického a vysokého nálezu. Zdroje pravdy: `docs/zadani.md` pro požadavky a výhradně úřední zdroje pro čísla (rejstřík `pravidla.md`, 288 položek). Každá aplikace má zprávu `<repo>.md`, důkazy v `dukazy/<repo>/`, nezávislý přepočet v `dukazy/skripty/<repo>-prepocet.mjs` a opravný prompt v `opravy/<repo>.md`. Souhrnná stránka: `revize.html` (publikovaná také jako artefakt: https://claude.ai/artifact/PQPR15kcnX9co1WEYpe8Gj).
 
 ## 1. Verdikty a semafor (12 aplikací × 8 oblastí)
 

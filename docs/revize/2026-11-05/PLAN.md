@@ -53,8 +53,8 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 
 ## Fáze 5–6
 - ☑ `SOUHRN.md`
-- ☑ `revize.html` (artefakt viz PR)
-- ☐ PR do `main`
+- ☑ `revize.html` + artefakt https://claude.ai/artifact/PQPR15kcnX9co1WEYpe8Gj
+- ☑ PR do `main` (otevřen 5. 11. 2026)
 
 ## Poznámky k prostředí
 - Přímo přes curl nejsou dostupné `psp.cz`, `mfcr.cz`, `uradprace.cz` a `www.mpsv.gov.cz` (spojení se nenaváže); `mpsv.gov.cz` bez `www` odpovídá. Dostupné: zakonyprolidi.cz, e-sbirka.gov.cz, cnb.cz, ote-cr.cz, eru.gov.cz, csu.gov.cz, cermat.gov.cz, financnisprava.gov.cz, cssz.gov.cz, justice.cz, epravo.cz.
