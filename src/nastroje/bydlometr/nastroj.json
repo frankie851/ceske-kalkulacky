@@ -1,0 +1,16 @@
+{
+  "id": "bydlometr",
+  "nazev": "Bydlometr",
+  "typ": "kalkulačka",
+  "kategorie": "bydleni-energie",
+  "url": "/bydleni-energie/bydlometr/",
+  "poradi": 1,
+  "perex": "Co s hypotékou při refixaci a jestli se víc vyplatí nájem, nebo koupě.",
+  "otazka": "Končí mi fixace. Přijmout nabídku banky, refinancovat, nebo vůbec nekupovat?",
+  "stitky": ["hypotéka", "refixace", "nájem"],
+  "termin": null,
+  "novinka2027": false,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Spočítat",
+  "souvisi": ["spot-nebo-fix", "inflacni-kalkulacka", "plan48"]
+}

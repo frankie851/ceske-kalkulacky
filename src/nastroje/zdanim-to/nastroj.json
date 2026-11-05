@@ -1,0 +1,28 @@
+{
+  "id": "zdanim-to",
+  "nazev": "Zdaním to?",
+  "typ": "průvodce",
+  "kategorie": "penize",
+  "url": "/penize/zdanim-to/",
+  "poradi": 3,
+  "skryty": true,
+  "perex": "Ke každému prodeji akcií, ETF nebo krypta řekne, jestli je osvobozený, a připraví dividendy ze zahraničí do přiznání.",
+  "otazka": "Musím z prodeje akcií, ETF nebo krypta platit daň?",
+  "stitky": ["akcie", "krypto", "dividendy", "W-8BEN"],
+  "termin": "Přiznání za rok 2026 na jaře 2027",
+  "novinka2027": false,
+  "ilustrace": "nastroj-zdanim-to",
+  "cta": "Projít prodeje",
+  "souvisi": ["plan48", "penzijko-kompas", "inflacni-kalkulacka"],
+  "zalozky": [
+    {
+      "id": "zdanim-to-dividendy",
+      "nazev": "Dividendy ze zahraničí",
+      "typ": "kalkulačka",
+      "url": "/penize/zdanim-to/dividendy/",
+      "perex": "Přepočte dividendy ze zahraničí na koruny, započte sraženou daň a řekne, kolik doplatíš.",
+      "stitky": ["dividendy", "W-8BEN", "zápočet daně"],
+      "termin": "Přiznání za rok 2026 na jaře 2027"
+    }
+  ]
+}

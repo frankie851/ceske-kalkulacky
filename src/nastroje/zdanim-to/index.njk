@@ -1,0 +1,87 @@
+---
+layout: layouty/nastroj.njk
+nastroj: zdanim-to
+title: Zdaním to?
+description: Ke každému prodeji akcií, ETF nebo krypta zjistíš, jestli je osvobozený od daně podle časového a hodnotového testu.
+permalink: /penize/zdanim-to/
+uvod: Zadej prodeje za rok. U každého hned uvidíš, jestli je osvobozený a proč.
+skripty: ['/nastroje/zdanim-to/ui-prodeje.js']
+styly: ['/nastroje/zdanim-to/zdanim-to.css']
+stitkyNavic: ['Neověřeno: čeká na schválení pravidel', 'Za rok 2026']
+---
+{%- from "komponenty/vysledky.njk" import vysledek, lepiva_lista -%}
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set p = zt.prodeje -%}
+<div class="zt" id="zt-prodeje">
+  {% call upozorneni({ typ: 'navrh', titulek: zt.stavPravidel }) %}
+    <p class="small">Pravidla jsme zatím ověřili jen z článků daňových poradců, ne z oficiálních textů. Sporná místa nepočítáme a označujeme je. <a href="{{ zt.overitUrl }}">Ověř u finanční správy</a>.</p>
+  {% endcall %}
+
+  <section class="card zt-zadani" aria-labelledby="zt-zadani-nadpis">
+    <h2 id="zt-zadani-nadpis">Tvoje prodeje za rok {{ zt.rok }}</h2>
+    <p class="muted small">Každý nákup (tranši) zadej zvlášť. Částky v korunách, přepočtené kurzem ke dni obchodu. Nic se nikam neposílá ani neukládá.</p>
+    <form id="zt-prodeje-form" novalidate>
+      <ol class="zt-radky" data-radky>
+        {%- for r in p.radky %}
+        {%- set n = loop.index %}
+        <li class="zt-radek" data-radek>
+          <fieldset class="zt-radek-pole">
+            <legend data-radek-nazev>Prodej {{ n }}</legend>
+            <div class="field zt-pole-cele zt-pole-typ">
+              <label for="p{{ n }}-typ" data-for="typ">Co se prodávalo</label>
+              <div class="input input-select">
+                <select id="p{{ n }}-typ" name="p{{ n }}-typ" data-pole="typ">
+                  {%- for t in zt.typy %}<option value="{{ t.hodnota }}"{% if t.hodnota == r.typ %} selected{% endif %}>{{ t.text }}</option>{% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="field zt-pole-cele">
+              <label for="p{{ n }}-nakup" data-for="nakup">Datum nákupu</label>
+              <div class="input"><input id="p{{ n }}-nakup" name="p{{ n }}-nakup" type="date" value="{{ r.nakup }}" data-pole="nakup" autocomplete="off"></div>
+            </div>
+            <div class="field zt-pole-cele">
+              <label for="p{{ n }}-prodej" data-for="prodej">Datum prodeje</label>
+              <div class="input"><input id="p{{ n }}-prodej" name="p{{ n }}-prodej" type="date" value="{{ r.prodej }}" data-pole="prodej" autocomplete="off"></div>
+            </div>
+            <div class="field">
+              <label for="p{{ n }}-prijem" data-for="prijem">Příjem z prodeje</label>
+              <div class="input"><input id="p{{ n }}-prijem" name="p{{ n }}-prijem" type="text" inputmode="numeric" value="{{ r.prijem }}" data-pole="prijem" autocomplete="off"><span class="unit" aria-hidden="true">Kč</span></div>
+            </div>
+            <div class="field">
+              <label for="p{{ n }}-naklady" data-for="naklady">Náklady na nákup</label>
+              <div class="input"><input id="p{{ n }}-naklady" name="p{{ n }}-naklady" type="text" inputmode="numeric" value="{{ r.naklady }}" data-pole="naklady" autocomplete="off"><span class="unit" aria-hidden="true">Kč</span></div>
+            </div>
+            <div class="zt-radek-akce">
+              <button type="button" class="btn btn-ghost zt-odebrat" data-odebrat>Odebrat<span class="sr-only" data-odebrat-popis> prodej {{ n }}</span></button>
+            </div>
+          </fieldset>
+        </li>
+        {%- endfor %}
+      </ol>
+      <div class="form-actions zt-pridat">
+        <button type="button" class="btn btn-ghost" data-pridat>Přidat další prodej</button>
+      </div>
+      <noscript><p class="small muted">Bez JavaScriptu se výsledek nepřepočítá a řádky nejde přidat. Níže je spočítaný pro ukázkové prodeje.</p></noscript>
+    </form>
+  </section>
+
+  {%- call vysledek({ id: 'vysledek', kicker: 'Rok ' + zt.rok, nadpis: p.nadpis, cislo: p.cislo, popis: p.popis, vysvetleni: p.vysvetleni, ilustrace: 'nastroj-zdanim-to', ukazka: true }) %}
+    <div data-zt-detail>{{ p.detail | safe }}</div>
+    <h3 class="zt-polozky-nadpis">Prodej po prodeji</h3>
+    <div data-zt-polozky>{{ p.polozky | safe }}</div>
+    <p class="sr-only" aria-live="polite" data-oznameni></p>
+  {%- endcall %}
+
+  <section class="card" aria-labelledby="zt-sporne-nadpis">
+    <h2 id="zt-sporne-nadpis">Co jsme neověřili a jak s tím počítáme</h2>
+    <ul class="zt-sporne">
+      {%- for s in p.sporne %}
+      <li>{{ stitek({ typ: 'navrh' if s.stav.stitek == 'navrh' else 'plain', text: s.stav.text }) }}<span>{{ s.text }}</span></li>
+      {%- endfor %}
+    </ul>
+    <p class="note">{{ ikona('ikona-info') }}<span>Pravidla se mění skoro každý rok. Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř je u finanční správy</a>.</span></p>
+  </section>
+</div>
+{{ lepiva_lista({ cislo: p.lista.cislo, popis: p.lista.popis, cil: '#vysledek' }) }}

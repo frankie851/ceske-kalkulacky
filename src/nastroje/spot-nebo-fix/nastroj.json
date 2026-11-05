@@ -1,0 +1,17 @@
+{
+  "id": "spot-nebo-fix",
+  "nazev": "Spot, nebo fix?",
+  "typ": "kalkulačka",
+  "kategorie": "bydleni-energie",
+  "url": "/bydleni-energie/spot-nebo-fix/",
+  "poradi": 2,
+  "perex": "Kolik by domácnost zaplatila za elektřinu na spotu, na fixu a na dynamickém tarifu. Na skutečných cenách z burzy za posledních 12 měsíců.",
+  "otazka": "Vyplatí se mi spotová elektřina, nebo radši fixní cena?",
+  "stitky": ["elektřina", "spot", "dynamický tarif"],
+  "termin": null,
+  "novinka2027": false,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Spočítat",
+  "souvisi": ["bydlometr", "inflacni-kalkulacka"],
+  "verejneSoubory": ["data/tdd/*.json"]
+}

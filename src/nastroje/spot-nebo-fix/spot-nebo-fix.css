@@ -1,0 +1,103 @@
+/* Spot, nebo fix? – styly jen pro tento nástroj. Barvy jen z tokenů. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
+  .spot [hidden] { display: none !important; }
+
+  /* Formulář je delší než okno – na širokých obrazovkách proto nelepí */
+  @media (min-width: 1040px) { .spot .calc-side { position: static; } }
+
+  /* Předvolby domácnosti: dlaždice 2 × 2 */
+  .spot .options { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: var(--sp-2) 0 var(--sp-5); gap: var(--sp-2); }
+  .spot .opt label { display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; align-content: center; gap: 6px var(--sp-2); min-height: 76px; padding: var(--sp-3); line-height: 1.25; }
+  .spot .opt .box { width: 24px; height: 24px; }
+  .spot .opt .opt-note { grid-column: 2; justify-self: start; margin-left: 0; }
+  .spot fieldset.volby > .hint { margin: 0; }
+
+  /* Dvě pole vedle sebe */
+  .spot-dvojice { display: grid; gap: 0 var(--sp-3); }
+  /* Cena + stálý plat vedle sebe až tam, kde se vejdou i s jednotkou */
+  @media (min-width: 480px) { .spot-dvojice { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .spot-dvojice-vzdy { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spot-dvojice-vzdy .field { margin-bottom: 0; }
+  .spot-hint-pod { margin: 6px 0 var(--sp-4); }
+  .spot-dvojice .input .unit { padding: 0 10px; font-size: var(--fs-sm); }
+  .spot-dvojice .input input { padding-right: 8px; }
+
+  /* Nabídky dodavatelů */
+  .spot-nabidka { border: 2px solid var(--c-border); border-radius: var(--r-lg); padding: var(--sp-4); margin: 0 0 var(--sp-4); min-width: 0; background: var(--c-surface); }
+  .spot-nabidka > legend { font-weight: 800; font-size: var(--fs-lg); padding: 0 var(--sp-2); }
+  .spot-nabidka .field { margin-bottom: var(--sp-3); }
+  .spot-nabidka > .hint { margin-top: 0; }
+
+  /* Vlastní měření */
+  .spot-csv { border: 2px dashed var(--c-border-strong); border-radius: var(--r-lg); padding: 0 var(--sp-4); background: var(--c-surface); }
+  .spot-csv > summary { display: flex; align-items: center; min-height: 52px; cursor: pointer; font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px; }
+  .spot-csv[open] { padding-bottom: var(--sp-4); }
+  .spot-csv input[type="file"] { display: block; max-width: 100%; min-height: 44px; font: inherit; font-size: var(--fs-sm); }
+  .spot-csv .form-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .spot-csv-stav:empty { display: none; }
+  .spot-csv-stav.is-chyba { color: var(--c-error); font-weight: 700; }
+  .spot-soukromi { margin-bottom: var(--sp-3); }
+
+  /* Tři varianty */
+  .spot-varianty { list-style: none; padding: 0; margin: var(--sp-6) 0 0; display: grid; gap: var(--sp-5) var(--sp-3); }
+  @media (min-width: 760px) { .spot-varianty { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .spot-varianta { position: relative; background: var(--c-surface-2); border: 2px solid transparent; border-radius: var(--r-lg); padding: var(--sp-4); min-width: 0; }
+  .spot-varianta.is-best { background: var(--c-sage-soft); border-color: var(--c-sage-ink); }
+  .spot-varianta-nazev { display: flex; align-items: center; gap: var(--sp-2); margin: 0; font-size: var(--fs-md); }
+  .spot-tecka { width: 14px; height: 14px; border-radius: 50%; flex: none; background: var(--graf-barva); }
+  .spot-odznak {
+    position: absolute; top: -13px; right: var(--sp-3); margin: 0; padding: 2px 10px; border-radius: var(--r-pill);
+    background: var(--c-sage-ink); color: var(--c-surface); font-size: var(--fs-xs); font-weight: 800;
+  }
+  .spot-castka { margin: var(--sp-2) 0 0; font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.1; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .spot-varianta.is-best .spot-castka { color: var(--c-sage-ink); }
+  .spot-kwh { margin: 2px 0 0; font-size: var(--fs-sm); color: var(--c-text-muted); }
+  .spot-rozdil { margin: var(--sp-1) 0 0; font-weight: 800; font-size: var(--fs-sm); }
+  .spot-slozky { margin: var(--sp-3) 0 0; padding: var(--sp-3) 0 0; border-top: 2px dashed var(--c-border); font-size: var(--fs-sm); }
+  .spot-slozky > div { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: var(--sp-2); margin: 2px 0; }
+  .spot-slozky dt { color: var(--c-text-muted); }
+  .spot-slozky dd { margin: 0 0 0 auto; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .spot-posun-efekt { margin: var(--sp-2) 0 0; font-size: var(--fs-sm); font-weight: 700; color: var(--c-sage-ink); }
+
+  /* Posuvník posunu spotřeby */
+  .spot-posun { margin: var(--sp-5) 0 0; padding: var(--sp-4); border-radius: var(--r-lg); background: var(--c-surface-2); }
+  .spot-posun > label { display: block; font-weight: 800; }
+  .spot-posun-hodnota { margin: var(--sp-1) 0 var(--sp-2); font-weight: 700; }
+  .spot-posun-hodnota output { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; color: var(--c-primary); font-variant-numeric: tabular-nums; }
+  .spot-posun input[type="range"] { display: block; width: 100%; min-height: 40px; margin: 0; cursor: pointer; accent-color: var(--c-primary); }
+  .spot-posun input[type="range"]:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; border-radius: var(--r-sm); }
+
+  .spot-chyba { color: var(--c-error); font-weight: 700; }
+
+  /* Grafy: úzká verze na mobilu, široká od 560 px. Pevný poměr stran (viewBox) → po načtení nic neposkočí. */
+  .spot-graf .graf-svg { display: block; width: 100%; height: auto; }
+  .spot-graf-uzky .graf-svg { aspect-ratio: 360 / 280; }
+  .spot-graf-siroky .graf-svg { aspect-ratio: 640 / 300; }
+  .spot-graf-siroky { display: none; }
+  @media (min-width: 560px) {
+    .spot-graf-uzky { display: none; }
+    .spot-graf-siroky { display: block; }
+  }
+  .spot-tabulka { margin-top: var(--sp-4); }
+  @media (min-width: 560px) {
+    .spot-tabulka tbody th { white-space: nowrap; }
+    .spot-tabulka th, .spot-tabulka td { padding-top: 8px; padding-bottom: 8px; }
+  }
+  .spot-shrnuti { margin: var(--sp-4) 0 0; font-weight: 700; }
+
+  .spot-detaily { margin-top: var(--sp-4); }
+  .spot-detaily > summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .spot-detaily[open] > summary { margin-bottom: var(--sp-2); }
+
+  /* Předpoklady */
+  .spot-predpoklady { margin: var(--sp-4) 0 0; display: grid; gap: 0; }
+  .spot-predpoklady > div { display: grid; gap: 2px var(--sp-4); padding: var(--sp-2) 0; border-top: 2px solid var(--c-border); }
+  .spot-predpoklady > div:first-child { border-top: 0; }
+  @media (min-width: 560px) { .spot-predpoklady > div { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } }
+  .spot-predpoklady dt { font-weight: 800; }
+  .spot-predpoklady dd { margin: 0; font-variant-numeric: tabular-nums; }
+}

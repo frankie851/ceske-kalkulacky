@@ -1,0 +1,101 @@
+---
+layout: layouty/nastroj.njk
+nastroj: zdanim-to
+zalozka: zdanim-to-dividendy
+title: Dividendy ze zahraničí
+description: Přepočti dividendy ze zahraničí na koruny, započti sraženou daň a zjisti, kolik doplatíš v Česku.
+permalink: /penize/zdanim-to/dividendy/
+skripty: ['/nastroje/zdanim-to/ui-dividendy.js']
+styly: ['/nastroje/zdanim-to/zdanim-to.css']
+stitkyNavic: ['Neověřeno: čeká na schválení pravidel', 'Za rok 2026']
+---
+{%- from "komponenty/vysledky.njk" import vysledek, lepiva_lista -%}
+{%- from "komponenty/formular.njk" import segmenty -%}
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set d = zt.dividendy -%}
+<div class="zt" id="zt-dividendy">
+  {% call upozorneni({ typ: 'navrh', titulek: zt.stavPravidel }) %}
+    <p class="small">Pravidla jsme zatím ověřili jen z článků daňových poradců, ne z oficiálních textů. Sporná místa označujeme. <a href="{{ zt.overitUrl }}">Ověř u finanční správy</a>.</p>
+  {% endcall %}
+
+  <section class="card zt-zadani" aria-labelledby="zt-div-zadani-nadpis">
+    <h2 id="zt-div-zadani-nadpis">Dividendy za rok {{ zt.rok }}</h2>
+    <p class="muted small">Opiš výplaty z výpisu brokera. Částky v měně výplaty, kurz v korunách za 1 jednotku měny. Nic se nikam neposílá ani neukládá.</p>
+    <form id="zt-dividendy-form" novalidate>
+      {{ segmenty({ id: 'zpusob', legenda: 'Jak přepočítáš na koruny', moznosti: d.zpusoby, napoveda: d.napovedaZpusobu }) }}
+      <p class="note zt-jednotny-stav" data-jednotny-stav>{{ ikona('ikona-info') }}<span>{{ d.jednotnyStav }} V jednom roce nejde kombinovat jednotný kurz a denní kurzy.</span></p>
+      <ol class="zt-radky" data-radky>
+        {%- for r in d.radky %}
+        {%- set n = loop.index %}
+        <li class="zt-radek" data-radek>
+          <fieldset class="zt-radek-pole zt-radek-div">
+            <legend data-radek-nazev>Výplata {{ n }}</legend>
+            <div class="field zt-pole-cele">
+              <label for="d{{ n }}-zeme" data-for="zeme">Země zdroje</label>
+              <div class="input input-select">
+                <select id="d{{ n }}-zeme" name="d{{ n }}-zeme" data-pole="zeme">
+                  {%- for z in d.zeme %}<option value="{{ z.hodnota }}"{% if z.hodnota == r.zeme %} selected{% endif %}>{{ z.text }}</option>{% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="d{{ n }}-hruba" data-for="hruba">Hrubá dividenda</label>
+              <div class="input"><input id="d{{ n }}-hruba" name="d{{ n }}-hruba" type="text" inputmode="decimal" value="{{ r.hruba }}" data-pole="hruba" autocomplete="off"></div>
+            </div>
+            <div class="field">
+              <label for="d{{ n }}-mena" data-for="mena">Měna</label>
+              <div class="input input-select">
+                <select id="d{{ n }}-mena" name="d{{ n }}-mena" data-pole="mena">
+                  {%- for m in d.meny %}<option value="{{ m }}"{% if m == r.mena %} selected{% endif %}>{{ m }}</option>{% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="d{{ n }}-srazeno" data-for="srazeno">Sražená daň</label>
+              <div class="input"><input id="d{{ n }}-srazeno" name="d{{ n }}-srazeno" type="text" inputmode="decimal" value="{{ r.srazeno }}" data-pole="srazeno" autocomplete="off"></div>
+            </div>
+            <div class="field">
+              <label for="d{{ n }}-kurz" data-for="kurz">Kurz</label>
+              <div class="input"><input id="d{{ n }}-kurz" name="d{{ n }}-kurz" type="text" inputmode="decimal" value="{{ r.kurz }}" data-pole="kurz" autocomplete="off"><span class="unit" aria-hidden="true">Kč</span></div>
+            </div>
+            <div class="zt-radek-akce">
+              <button type="button" class="btn btn-ghost zt-odebrat" data-odebrat>Odebrat<span class="sr-only" data-odebrat-popis> výplatu {{ n }}</span></button>
+            </div>
+          </fieldset>
+        </li>
+        {%- endfor %}
+      </ol>
+      <div class="form-actions zt-pridat">
+        <button type="button" class="btn btn-ghost" data-pridat>Přidat další výplatu</button>
+      </div>
+      <p class="error-msg zt-chyba" data-chyba role="alert" hidden>{{ ikona('ikona-vystraha') }}<span><span class="sr-only">Chyba: </span><span class="error-text" data-chyba-text></span></span></p>
+      <noscript><p class="small muted">Bez JavaScriptu se výsledek nepřepočítá a řádky nejde přidat. Níže je spočítaný pro ukázkové výplaty (kurzy zaokrouhlené).</p></noscript>
+    </form>
+  </section>
+
+  {%- call vysledek({ id: 'vysledek', kicker: 'Rok ' + zt.rok, nadpis: d.nadpis, cislo: d.cislo, popis: d.popis, vysvetleni: d.vysvetleni, ilustrace: 'nastroj-zdanim-to', ukazka: true }) %}
+    <div data-zt-tabulka>{{ d.tabulka | safe }}</div>
+    <div data-zt-upozorneni>{{ d.upozorneni | safe }}</div>
+    <p class="sr-only" aria-live="polite" data-oznameni></p>
+  {%- endcall %}
+
+  <section class="card" aria-labelledby="zt-navod-nadpis">
+    <h2 id="zt-navod-nadpis">Jak to uvést v přiznání</h2>
+    <div data-zt-navod>{{ d.navod | safe }}</div>
+  </section>
+
+  <section class="card" aria-labelledby="zt-limity-nadpis">
+    <h2 id="zt-limity-nadpis">Musíš kvůli tomu podat přiznání?</h2>
+    <p class="muted small">Povinnost záleží na všech tvých příjmech, ne jen na dividendách. Tady jsou limity, jak je uvádějí zdroje.</p>
+    <ul class="zt-sporne">
+      {%- for l in d.limity %}
+      <li>{{ stitek({ typ: 'navrh' if l.stavInfo.stitek == 'navrh' else 'plain', text: l.stavInfo.text }) }}<span>{{ l.text }} <span class="num">{{ l.castka }}</span> ({{ l.obdobi }}).</span></li>
+      {%- endfor %}
+      <li>{{ stitek({ typ: 'navrh', text: d.dividendyVzdy.stavInfo.text }) }}<span>{{ d.dividendyVzdy.text }}</span></li>
+    </ul>
+    <p class="note">{{ ikona('ikona-info') }}<span>Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř limity a postup u finanční správy</a>.</span></p>
+  </section>
+</div>
+{{ lepiva_lista({ cislo: d.lista.cislo, popis: d.lista.popis, cil: '#vysledek' }) }}

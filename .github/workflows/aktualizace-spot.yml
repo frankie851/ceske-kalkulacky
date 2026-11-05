@@ -1,0 +1,110 @@
+name: Aktualizace dat OTE a ČNB (Spot, nebo fix?)
+
+# Ceny denního trhu OTE, kurzy ČNB a typové diagramy dodávek (TDD) pro nástroj Spot, nebo fix?.
+# Skript bere posledních 12 celých měsíců, takže nová data přibývají hlavně na začátku měsíce;
+# týdenní běh zachytí i opravy zpětně zveřejněných dat. Když se data změní, vznikne větev
+# automat/spot-RRRR-MM-DD a pull request (nic se necommituje přímo do výchozí větve).
+# V repozitáři musí být zapnuté Settings → Actions → General →
+# „Allow GitHub Actions to create and approve pull requests“.
+on:
+  schedule:
+    - cron: '41 4 * * 1'   # každé pondělí 4:41 UTC
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Stáhnout všechna data znovu (--full)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: aktualizace-spot
+  cancel-in-progress: false
+
+env:
+  NASTROJ: src/nastroje/spot-nebo-fix
+
+jobs:
+  aktualizace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Stáhnout data z OTE a ČNB
+        # Bez parametrů skript doplní jen chybějící dny (data/prices.json slouží jako mezipaměť).
+        # Když nějaký den nemá správný počet čtvrthodin nebo chybí kurz či TDD, skončí chybou a nic nepřepíše.
+        env:
+          FULL: ${{ inputs.full }}
+        run: |
+          if [ "$FULL" = "true" ]; then
+            node "$NASTROJ/scripts/update-data.mjs" --full
+          else
+            node "$NASTROJ/scripts/update-data.mjs"
+          fi
+
+      - name: Zapsat období dat do rules.json
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const dir = process.env.NASTROJ;
+            const meta = JSON.parse(fs.readFileSync(`${dir}/data/meta.json`, "utf8"));
+            const soubor = `${dir}/rules.json`;
+            const pravidla = JSON.parse(fs.readFileSync(soubor, "utf8"));
+            const data = { od: meta.from, do: meta.to, posledniDen: meta.lastPriceDay };
+            if (JSON.stringify(pravidla.data) !== JSON.stringify(data)) {
+              pravidla.data = data;
+              pravidla.meta.overeno = meta.generated;
+              fs.writeFileSync(soubor, JSON.stringify(pravidla, null, 2) + "\n");
+            }
+            fs.appendFileSync(process.env.GITHUB_ENV, `POSLEDNI=${meta.lastPriceDay}\nOD=${meta.from}\n`);
+          '
+
+      - name: Testy nástroje (výpočty i úplnost dat)
+        run: node --test "$NASTROJ/test/*.test.js"
+
+      - name: Kontrola sestavení webu
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+        run: |
+          npm ci
+          npx eleventy --quiet
+
+      - name: Otevřít pull request s novými daty
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- "$NASTROJ/data" "$NASTROJ/rules.json"; then
+            echo "Data se nezměnila (poslední den $POSLEDNI)."
+            exit 0
+          fi
+          vetev="automat/spot-$(date -u +%Y-%m-%d)"
+          if git ls-remote --exit-code --heads origin "$vetev" >/dev/null; then
+            echo "Větev $vetev už existuje, pull request s dnešními daty už čeká na sloučení."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$vetev"
+          git add "$NASTROJ/data" "$NASTROJ/rules.json"
+          git commit -m "Data OTE a ČNB: ceny elektřiny ${OD} až ${POSLEDNI}"
+          git push origin "$vetev"
+          gh pr create \
+            --base "${GITHUB_REF_NAME}" \
+            --head "$vetev" \
+            --title "Data OTE a ČNB: Spot, nebo fix? do ${POSLEDNI}" \
+            --body "Automatická aktualizace dat pro Spot, nebo fix?: ceny denního trhu OTE (15 min), kurzy ČNB a normalizované TDD OTE.
+
+          - Období: **${OD} až ${POSLEDNI}** (posledních 12 celých měsíců)
+          - Testy nástroje prošly (počet čtvrthodin, kurzy, součet TDD = 1, kontrolní příklady), web se sestavil.
+          - Regulované ceny (tariffs.json) a ceník dynamického tarifu (dynamic.json) se tím nemění; na nový rok je uprav ručně (ceníky distributorů a cenová rozhodnutí ERÚ).
+
+          Pull request otevřený tokenem GITHUB_TOKEN nespouští workflow Web; pusť ho ručně (Actions → Web → Run workflow) nebo PR zavři a znovu otevři."
