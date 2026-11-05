@@ -38,8 +38,8 @@ Nálezy: Kritická 0 · Vysoká 0 · Střední 7 · Nízká 4
 | Limit 300 000 Kč starší bytové potřeby | `rules.json:131` „smlouvy do 31. 12. 2020“ | bytová potřeba obstaraná před 1. 1. 2021 | zákon 386/2020 Sb. čl. IV (FD-15) | 5. 11. 2026 | hodnota shodná, kritérium nepřesné, v kódu nepoužito (BYD-07, BYD-09) |
 | Sazby daně 15 % / 23 % | `rules.json:140,149`; `ui-rentbuy.js:17` | § 16 ZDP | FD-16 | 5. 11. 2026 | shodné; URL banky.cz |
 | Práh zátěže 40 %, varování od 30 % | `rules.json:160,170`; `mortgage.js:177` | bez úřední hodnoty | FD-17 | — | správně označeno „orientační, není to limit ČNB“ |
-| Daň z nemovitosti Praha/Brno/Ostrava/ČR | `defaults.json:177,208,239,270` 38,43 / 14,95 / 14,95 / 8,54 Kč/m²/rok | 3,50 × 1,22 × koef. obce × místní koef. × infl. koef. 1,0 | zákon 338/1992 Sb. § 10–12, § 11f (FD-18, FD-19) | 5. 11. 2026 | vzorec shodný; místní koeficienty neověřené (aplikace to říká); UI dopočítá 60 m² → 2 306 Kč, 65,5 m² Brno → 979 Kč |
-| Správní poplatek vklad do KN | `defaults.json:54` 4 000 (2 × 2 000); `:310` 12 000 | 2 000 Kč (položka 120 písm. a)) | zákon 634/2004 Sb. (FD-20) | 5. 11. 2026 | shodné; zdroj banky.cz z roku 2020 |
+| Daň z nemovitosti Praha/Brno/Ostrava/ČR | `defaults.json:177–185,208–216,239–247,270–278` 38,43 / 14,95 / 14,95 / 8,54 Kč/m²/rok | 3,50 × 1,22 × koef. obce × místní koef. × infl. koef. 1,0 | zákon 338/1992 Sb. § 10–12, § 11f (FD-18, FD-19) | 5. 11. 2026 | vzorec shodný; místní koeficienty neověřené (aplikace to říká); UI dopočítá 60 m² → 2 306 Kč, 65,5 m² Brno → 979 Kč |
+| Správní poplatek vklad do KN | `defaults.json:54–62` 4 000 (2 × 2 000); `:310–318` 12 000 | 2 000 Kč (položka 120 písm. a)) | zákon 634/2004 Sb. (FD-20) | 5. 11. 2026 | shodné; zdroj banky.cz z roku 2020 |
 | Ceny bytů, nájmy, sazby, předpoklady | `defaults.json` rates, cities, ownership, assumptions | bez úředního zdroje; ČSÚ 2025: 72 410 / 131 520 Kč/m² | FD-21, FD-24 | 5. 11. 2026 | každá položka má zdroj a datum, odhady „předpoklad“; nabídkové ceny RealityMIX o 15–27 % nad ČSÚ (označeno); URL neověřitelné z prostředí |
 | Anuita a kalendář | `mortgage.js:14,45` | matematika | FD-22 | 5. 11. 2026 | shodné na 1e-9 (`prepocet.txt`) |
 | Datum ověření | `rules.json:3` checked 2026-11-05; `defaults.json:4` updated 2026-11-05; patička „Výchozí data zkontrolována 5. 11. 2026 … pravidla ČNB k 4. 6. 2026“ | — | — | 5. 11. 2026 | shodné (`vysledek-360.png`) |
@@ -88,9 +88,9 @@ Referenční výpočet od nuly: `dukazy/skripty/bydlometr-prepocet.mjs`; porovn�
 | Mimořádná splátka od 1. 9. 2024: 25 % 1× ročně měsíc před výročím a ke konci fixace zdarma, jinak 0,25 %/rok, max. 1 %; starší smlouvy jen upozornění | splněno (zadání samo je neúplné – odst. 5, § 117a, starší smlouvy mají bezplatné případy taky) | `mortgage.js:118–147`, D_poplatek; BYD-01, BYD-02 |
 | LTV 90 % do 36 let, jinak 80 %; investiční 70 % a DTI 7; DTI a DSTI jen informativně | částečně | LTV ano (`maxLtv`, varování v nájem vs. koupě); DTI se nepočítá ani neukazuje nikde, DSTI jen jako „podíl splátky na příjmu“ – BYD-04 |
 | Odpočet úroků max. 150 000 Kč/rok, úspora × sazba daně | částečně | `interestDeductionSaving` existuje a je testovaný, ale UI ho nepoužívá; simulace nájem vs. koupě odpočet započítá (`rentbuy.js:103–105`), částku ale nezobrazí – BYD-04 |
-| Nástroj 1 vstupy: dluh, doba, dosavadní, nabídnutá a konkurenční sazba, náklady refinancování, úspory, čistý příjem | splněno | `index.html:31–72` (+ délka fixace, prodloužení, práh) |
+| Nástroj 1 vstupy: dluh, doba, dosavadní, nabídnutá a konkurenční sazba, náklady refinancování, úspory, čistý příjem | splněno | `index.html:33–74` (+ délka fixace, prodloužení, práh) |
 | Nástroj 1 výstup: tabulka variant (splátka, změna, úroky do konce, celkové náklady), věta „Nejlevněji vychází…“, zátěžový test +1/+2 p. b. po další fixaci, podíl na příjmu s barvou, práh nastavitelný, výchozí 40 %, označen orientační | splněno | `vysledek-360.png`; `burden-note` text „Nejde o limit ČNB“ |
-| Nástroj 2 vstupy: město (předvyplní cenu a nájem), plocha, vlastní zdroje, věk, sazba a fixace, růst cen, růst nájmů, výnos investic, náklady vlastnictví (fond oprav, pojištění, daň, údržba %), horizont | splněno | `index.html:133–189`; Brno přepíše cenu 124 954, nájem 390, daň 897 Kč (E_rentbuy_brno) |
+| Nástroj 2 vstupy: město (předvyplní cenu a nájem), plocha, vlastní zdroje, věk, sazba a fixace, růst cen, růst nájmů, výnos investic, náklady vlastnictví (fond oprav, pojištění, daň, údržba %), horizont | splněno | `index.html:135–192`; Brno přepíše cenu 124 954, nájem 390, daň 897 Kč (E_rentbuy_brno) |
 | Simulace po měsících, rozdíl investuje ten, kdo má nižší výdaj (oběma směry) | splněno | `rentbuy.js:107–110`; testy „nájemník investuje rozdíl“ a „po splacení kupující investuje“; můj přepočet shodný |
 | Výstup: graf jmění v čase, rok zlomu, citlivost 3 × 3 (růst cen × výnos) | splněno | `rentbuy-360.png`; graf Chart.js vykreslen (canvas 294×260, fallback skrytý), tabulka 3×3 |
 | Dvě záložky, formulář vlevo / výsledky vpravo, na mobilu pod sebou | splněno | `styles.css` `.tool` grid + `@media (max-width: 860px)`; snímky 360 a 1440 |
@@ -104,7 +104,7 @@ Referenční výpočet od nuly: `dukazy/skripty/bydlometr-prepocet.mjs`; porovn�
 
 ## Nálezy
 ### BYD-01 · Střední · Pravidla a data / Texty · Kalkulačka poplatku ukazuje jen strop 0,25 %/rok; neuplatňuje omezení podle § 117 odst. 5 (úrok do konce fixace) ani § 117a (admin. náklady max. 1 000 Kč + úrokový rozdíl)
-- **Kde:** `js/mortgage.js:135–146` (`prepaymentFee`), `js/ui-refix.js:147` („Poplatek nejvýš …“), `rules.json:98–116` (`feePerStartedYear`, `feeCap`), zadání ř. 400–402
+- **Kde:** `js/mortgage.js:135–146` (`prepaymentFee`), `js/ui-refix.js:147` („Poplatek nejvýš …“), `rules.json:99–116` (`feePerStartedYear`, `feeCap`), zadání ř. 400–402
 - **Reprodukce:** (a) Obrazovka, výchozí kalkulačka poplatku: 300 000 Kč z úvěru 3 500 000 Kč, fixace 5. 11. 2024–5. 11. 2029, splátka 5. 11. 2026 → „Poplatek nejvýš 2 250 Kč“ (`prohlizec.json` D_poplatek.vychozi, 3 běhy, `poplatek-360.png`). Podle § 117 odst. 5 věty druhé a § 117a odst. 1 (`zdroje-a-zakony.txt`) je u účelového úvěru na bydlení náhrada navíc omezena na administrativní náklady nejvýše 1 000 Kč + kladný úrokový rozdíl proti průměru sazeb ČNB; je-li průměr ČNB vyšší nebo roven smluvní sazbě (dnes běžné u smluv z let 2024–2025), zákonné maximum je 1 000 Kč, ne 2 250 Kč. (b) Modul: 300 000 Kč měsíc před koncem fixace při 2,49 % → aplikace 750 Kč; § 117 odst. 5 (úrok do konce fixace) dává 622,50 Kč (`prepocet.txt`, jediná neshoda ze 152). Text „Banka smí účtovat jen skutečné náklady, může být méně“ to přiznává jen obecně.
 - **Dopad na uživatele:** Člověk s novou smlouvou může kvůli zdánlivému poplatku (až 1 % = desítky tisíc) odložit mimořádnou splátku na okno před výročím nebo na konec fixace a platit mezitím úroky, ačkoli zákonný strop je často 1 000 Kč.
 - **Doporučená oprava:** Do kalkulačky přidat smluvní sazbu (a volitelně průměr ČNB pro srovnatelné fixace s odkazem na zveřejnění ČNB podle § 117a odst. 2) a počítat `min(strop odst. 4, úrok z předčasně splacené části do konce fixace, 1 000 Kč + max(0, úrokový rozdíl))`; minimálně v textu výsledku říct, že při sazbách ČNB ≥ smluvní sazbě je náhrada nejvýš 1 000 Kč. Zároveň jde o chybu v zadání (ř. 400–402 omezení odst. 5 a § 117a neuvádí).
@@ -125,14 +125,14 @@ Referenční výpočet od nuly: `dukazy/skripty/bydlometr-prepocet.mjs`; porovn�
 - **Ověření:** reprodukováno 2× · skeptik:
 
 ### BYD-04 · Střední · Shoda se zadáním · DTI se nepočítá ani neukazuje (vlastní bydlení informativně, investiční doporučení 7) a úspora na dani z odpočtu úroků se uživateli nikde nezobrazí
-- **Kde:** `rules.json:43–60` (`dti.*` – v `js/` nikde nepoužito, grep), `js/mortgage.js:165` (`interestDeductionSaving` – voláno jen z testů), `js/rentbuy.js:103–105,113` (`taxSaving` se počítá, `ui-rentbuy.js` ho nevypisuje), zadání ř. 404–407
+- **Kde:** `rules.json:42–61` (`dti.*` – v `js/` nikde nepoužito, grep), `js/mortgage.js:165` (`interestDeductionSaving` – voláno jen z testů), `js/rentbuy.js:103–105,113` (`taxSaving` se počítá, `ui-rentbuy.js` ho nevypisuje), zadání ř. 404–407
 - **Reprodukce:** Zadání „DTI a DSTI pro vlastní bydlení nejsou závazné – ukazuj je jen informativně“ a „investiční nemovitost doporučeně 70 % a DTI 7“. Refixace s příjmem 75 000 Kč a dluhem 2 800 000 Kč: DTI = 3,1násobek ročního příjmu se nikde neobjeví (`vysledek-360.png`); nájem vs. koupě se zaškrtnutou investiční nemovitostí ukáže jen LTV 70 %, o DTI 7 ani slovo (příjem se tam nezadává). Úspora na dani (příklad zadání 22 500 Kč) není v UI vůbec; v simulaci je započtená skrytě. Ověřeno 3 běhy prohlížeče a grepem kódu.
 - **Dopad na uživatele:** Chybí informace, kterou zadání výslovně požaduje; u investiční hypotéky uživatel nezjistí, že by ho doporučení DTI 7 mohlo omezit víc než LTV. Čísla výsledků to nemění.
 - **Doporučená oprava:** V refixaci zobrazit řádek „DTI (dluh / roční čistý příjem): 3,1 – ČNB nemá závazný limit“; v nájem vs. koupě vypsat roční úsporu na dani z `taxSaving` (a použít k tomu `interestDeductionSaving`) a při investiční nemovitosti připomenout doporučení DTI 7 (s volitelným polem příjmu).
 - **Ověření:** reprodukováno 2× · skeptik:
 
 ### BYD-05 · Střední · Výpočty / Texty · Nájem vs. koupě počítá celý výsledek i s úvěrem nad limit LTV a hláška po zaokrouhlení tvrdí „LTV 80 %, ale limit je 80 %“
-- **Kde:** `js/rentbuy.js:26–33` (varování, simulace pokračuje s plným úvěrem), `js/ui-rentbuy.js:93–94`
+- **Kde:** `js/rentbuy.js:26–34` (varování, simulace pokračuje s plným úvěrem), `js/ui-rentbuy.js:94`
 - **Reprodukce:** Nájem vs. koupě, Brno, 60 m², vlastní zdroje 1 500 000 Kč, věk 40 → varování „Úvěr by měl LTV 80 %, ale limit je 80 %. Na koupi chybí 11 448 Kč vlastních zdrojů – banka by takový úvěr neposkytla.“ (skutečné LTV 80,15 %), a přesto souhrn „Za 20 let: koupě 13 456 570 Kč … vychází lépe koupě o 1 971 930 Kč“ (`prohlizec.json` E_rentbuy_vek40, 3 běhy). Při vlastních zdrojích 0 Kč jde simulace s LTV 100 %.
 - **Dopad na uživatele:** Výsledek se opírá o úvěr, který uživatel nedostane; varování je nad výsledkem, ale graf, tabulka i citlivost vypadají jako platné. Zaokrouhlená hláška mate.
 - **Doporučená oprava:** Při překročení limitu buď výsledek označit jako hypotetický (a graf/tabulku ztlumit), nebo přepočítat s úvěrem omezeným na limit a vypsat potřebné vlastní zdroje; v hlášce zobrazit LTV na 1 desetinné místo.
@@ -146,21 +146,21 @@ Referenční výpočet od nuly: `dukazy/skripty/bydlometr-prepocet.mjs`; porovn�
 - **Ověření:** reprodukováno 2× (přepočet, výstup testů) · skeptik:
 
 ### BYD-07 · Střední · Pravidla a data · Zdroje zákonných pravidel odkazují na neúřední weby a dvě citace jsou nepřesné
-- **Kde:** `rules.json:68,77,86,95,104,125,134,143,152` (URL kb.cz, banky.cz, hyponamiru.cz, stavebky.cz), `defaults.json:181,212,243,274` (mesec.cz), `rules.json:124` („§ 15 odst. 3“), `rules.json:129` („smlouvy do 31. 12. 2020“); patička `#sources`
+- **Kde:** `rules.json:70,79,88,97,106,126,135,144,153` (URL kb.cz, banky.cz, hyponamiru.cz, stavebky.cz), `defaults.json:183,214,245,276` (mesec.cz), `rules.json:125` („§ 15 odst. 3“), `rules.json:131–133` („smlouvy do 31. 12. 2020“); patička `#sources`
 - **Reprodukce:** Patička „Zdroje výchozích dat a pravidel“ vede u předčasného splacení, odpočtu úroků, sazby daně a daně z nemovitosti na komerční weby; zákon je jen jmenován v textu. Limit 150 000 Kč je v § 15 odst. 4 ZDP (odst. 3 upravuje odpočet) – FD-14; limit 300 000 Kč se váže na bytovou potřebu obstaranou před 1. 1. 2021, ne na datum smlouvy – FD-15 (zákon 386/2020 Sb. čl. IV). 15 z 22 URL nebylo z prostředí dosažitelných (`zdroje-a-zakony.txt`), takže nelze potvrdit, že stránky tvrdí to, co aplikace; 5 odkazů na ČNB a cdnjs fungují a obsah ČNB souhlasí.
 - **Dopad na uživatele:** Kdo si chce pravidlo ověřit, skončí na komerčním webu; čísla to nemění.
 - **Doporučená oprava:** U zákonných pravidel uvádět URL na zakonyprolidi.cz/e-sbírku (257/2016 Sb. § 117, 586/1992 Sb. § 15 a § 16, 338/1992 Sb., 634/2004 Sb. položka 120) a ČNB; opravit citaci na § 15 odst. 4 a formulaci „bytová potřeba obstaraná před 1. 1. 2021“.
 - **Ověření:** reprodukováno 2× (2 curl běhy, obsah souborů) · skeptik:
 
 ### BYD-08 · Nízká · Texty · Nejednotné oslovení a drobné textové nepřesnosti
-- **Kde:** `js/mortgage.js:124` („zkontroluj smlouvu“ – tykání, jinde vykání „Zkontrolujte“), `js/mortgage.js:233` („Prodloužit splatnost o 0 let“ při prodloužení 0), `js/ui-refix.js:45` (hláška „Zbývající dluh a doba musí být kladné“ bez `aria-invalid`)
+- **Kde:** `js/mortgage.js:124` („zkontroluj smlouvu“ – tykání, jinde vykání „Zkontrolujte“), `js/mortgage.js:235` („Prodloužit splatnost o 0 let“ při prodloužení 0), `js/ui-refix.js:45` (hláška „Zbývající dluh a doba musí být kladné“ bez `aria-invalid`)
 - **Reprodukce:** D_poplatek.starsiSmlouva: „Zkontrolujte smlouvu. Smlouva i současná fixace … – zkontroluj smlouvu…“; prodloužení 0 → varianta se jmenuje „Prodloužit splatnost o 0 let“ a je totožná s přijetím nabídky (`prepocet.txt`).
 - **Dopad na uživatele:** Kosmetika.
 - **Doporučená oprava:** Sjednotit na vykání; při prodloužení 0 variantu skrýt nebo přejmenovat.
 - **Ověření:** reprodukováno 2× · skeptik:
 
 ### BYD-09 · Nízká · Pravidla a data · Nepoužité položky JSON v patičce a texty s čísly natvrdo
-- **Kde:** `defaults.json:16–40` (`rates.fix1y`, `fix10y`, `newLoans` – v UI nepoužité, ale v seznamu zdrojů), `rules.json:128,43–60` (`limitPre2021`, `dti.*` nepoužité), `js/mortgage.js:133,140,141` („25 %“, „0,25 %“, „1 %“ v textech odůvodnění)
+- **Kde:** `defaults.json:16–40` (`rates.fix1y`, `fix10y`, `newLoans` – v UI nepoužité, ale v seznamu zdrojů), `rules.json:129–137,42–61` (`limitPre2021`, `dti.*` nepoužité), `js/mortgage.js:133,140,141` („25 %“, „0,25 %“, „1 %“ v textech odůvodnění)
 - **Reprodukce:** grep `fix1y|fix10y|newLoans|limitPre2021|dti` v `js/` → 0 výskytů mimo text; změna `feePerStartedYear` v `rules.json` by změnila výpočet, ale text „× 0,25 %“ ne.
 - **Dopad na uživatele:** Žádný dnes; riziko nesouladu textu a výpočtu při příští aktualizaci pravidel.
 - **Doporučená oprava:** Texty skládat z hodnot `rules.json` (`formatPct`), nepoužité položky buď použít (např. ukázat sazby podle fixace), nebo odstranit.
