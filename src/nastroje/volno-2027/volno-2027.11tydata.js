@@ -21,7 +21,7 @@ const srovnani = Array.from({ length: pravidla.maxDnuDovolene }, (_, i) => {
     : [v.dny(i + 1), '–', '–', '–'];
 });
 
-const ZAVRENO = { 'cely-den': 'zavřeno celý den', 'od-poledne': 'zavřeno od poledne' };
+const ZAVRENO = { 'cely-den': 'zavřeno', 'od-poledne': 'od 12:00 zavřeno' };
 const svatky = svatkyRoku(rok, pravidla);
 const zavrene = zavreneObchodyRoku(rok, pravidla);
 
@@ -84,7 +84,7 @@ export default {
     zavrene: zavrene.map((z) => ({
       datum: v.sDnem(z.datum, true),
       nazev: z.nazev,
-      kdy: z.zavreno === 'od-poledne' ? `od ${z.od} do konce dne` : 'celý den',
+      kdy: z.zavreno === 'od-poledne' ? `od ${z.od}` : 'celý den',
       odPoledne: z.zavreno === 'od-poledne',
     })),
     otevreneSvatky: vycet(svatky.filter((s) => !s.zavreno).map((s) => `${s.nazev} (${v.kratkeDatum(s.datum)})`)),

@@ -95,7 +95,7 @@ function prectiHlavicku() {
     const n = nactiCislo(id);
     if (n === null) { nastavChybu(id, ''); return max; }
     if (!Number.isFinite(n) || n < 0 || n > max) {
-      nastavChybu(id, `Nejvýš ${max} %.`);
+      nastavChybu(id, `Nejvýš ${max}\u00a0%.`);
       return h.kraceniPct?.[i] ?? max;
     }
     nastavChybu(id, '');
@@ -108,7 +108,7 @@ function prectiHlavicku() {
     const n = nactiCislo(id);
     if (n === null) { nastavChybu(id, ''); return null; }
     if (!Number.isFinite(n) || n < min || n > max) {
-      nastavChybu(id, `Jen ${min}–${max} Kč.`);
+      nastavChybu(id, `Jen ${min}–${max}\u00a0Kč.`);
       return h.stravneVerejna?.[i] ?? null;
     }
     nastavChybu(id, '');

@@ -34,7 +34,7 @@
   },
   "rok": 2027,
   "maxDnuDovolene": 5,
-  "maxNavrhu": 6,
+  "maxNavrhu": 7,
   "svatky": {
     "pevne": [
       { "mesic": 1, "den": 1, "nazev": "Den obnovy samostatného českého státu a Nový rok", "kratce": "Nový rok" },

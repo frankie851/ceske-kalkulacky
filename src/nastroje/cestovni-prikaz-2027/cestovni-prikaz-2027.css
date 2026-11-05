@@ -13,7 +13,7 @@
   .cp-trojice, .cp-jidla-obal { border: 0; padding: 0; margin: 0 0 var(--sp-4); min-width: 0; }
   .cp-trojice > legend, .cp-jidla-obal > legend { font-weight: 800; padding: 0; margin-bottom: 4px; }
   .cp-trojice > .hint, .cp-jidla-obal > .hint { margin: 0 0 var(--sp-3); }
-  .cp-trojice-pole { display: grid; gap: 0 var(--sp-3); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; }
+  .cp-trojice-pole { display: grid; gap: 0 var(--sp-3); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
   .cp-trojice-pole .field > label { font-weight: 700; font-size: var(--fs-sm); }
   .cp-trojice-pole .input input { min-width: 0; }
   .cp-trojice-pole .input .unit { padding: 0 8px; }

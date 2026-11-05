@@ -66,6 +66,7 @@ stitkyNavic: ['Svátky podle zákona č. 245/2000 Sb.']
       <p class="muted">Návrhy kolem svátků seřazené od nejvýhodnějšího: kolik dní volna v kuse dostaneš za každý den dovolené.</p>
       <div data-navrhy>{{ p.navrhyHtml | safe }}</div>
       {{ tabulka({
+        id: 'srovnani-tabulka',
         caption: 'Srovnání: nejdelší volno podle počtu dnů dovolené',
         popisek: 'srovnání podle počtu dnů dovolené',
         sloupce: ['Dovolená', 'Volno v kuse', 'Kdy', 'Vezmi si'],

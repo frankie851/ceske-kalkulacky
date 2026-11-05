@@ -55,7 +55,7 @@ export function dnyDovolene(dovolena) {
     if (posledni && rozdilDnu(posledni[posledni.length - 1], d) === 1) posledni.push(d);
     else skupiny.push([d]);
   }
-  return vycet(skupiny.map((s) => (s.length >= 3 ? `${sDnem(s[0])} – ${sDnem(s[s.length - 1])}` : vycet(s.map((d) => sDnem(d))))));
+  return vycet(skupiny.flatMap((s) => (s.length >= 3 ? [`${sDnem(s[0])} – ${sDnem(s[s.length - 1])}`] : s.map((d) => sDnem(d)))));
 }
 
 /** Krátký název volna podle svátků: „Velikonoce“, „Cyril a Metoděj, Jan Hus“. */

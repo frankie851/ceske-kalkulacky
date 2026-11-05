@@ -46,7 +46,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/css');
   eleventyConfig.addPassthroughCopy('src/js');
   eleventyConfig.addPassthroughCopy('src/img');
-  eleventyConfig.addPassthroughCopy({ 'src/nastroje': 'nastroje' }, { filter: jeKlientskyModul });
+  // Skryté nástroje: ani jejich JS a CSS se do veřejného webu nekopírují.
+  eleventyConfig.addPassthroughCopy({ 'src/nastroje': 'nastroje' }, {
+    filter: (rel) => jeKlientskyModul(rel) && !skryte.has(rel.split(path.sep).join('/').split('/')[0]),
+  });
 
   const pisma = {};
   for (const [rodina, rezy] of PISMA) {
