@@ -22,7 +22,7 @@ const js = jsSoubory.map((f) => cti(`nastroje/exekuce-nebo-oddluzeni/${f}`)).joi
 const rules = JSON.parse(fs.readFileSync(path.join(NASTROJ, 'rules.json'), 'utf8'));
 const VYHRADA = 'Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.';
 
-const POVOLENE = [/(^|\.)justice\.cz$/, /^mpsv\.gov\.cz$/, /^iregistr\.mpsv\.cz$/, /^e-sbirka\.gov\.cz$/, /^(www\.)?ceecr\.cz$/, /^(www\.)?ochrance\.cz$/];
+const POVOLENE = [/(^|\.)justice\.cz$/, /^mpsv\.gov\.cz$/, /^e-sbirka\.gov\.cz$/, /^(www\.)?ceecr\.cz$/, /^(www\.)?ochrance\.cz$/];
 const externi = (h) => [...h.matchAll(/href="(https?:[^"]+)"/g)].map((m) => new URL(m[1]).hostname);
 
 test('stránka nástroje existuje jen v sestavení se skrytými nástroji', () => {

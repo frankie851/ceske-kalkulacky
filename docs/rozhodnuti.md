@@ -166,8 +166,14 @@ výpočty a testy z 12 existujících repozitářů aplikací.
 
 | Odkaz | Provozovatel | Stav ověření |
 | --- | --- | --- |
-| https://iregistr.mpsv.cz/ – registr poskytovatelů sociálních služeb (odborné sociální poradenství) | MPSV | Uvádí ho příručka MPSV „Dluhové poradenství pro obce“. Stránku samotnou se z cloudové relace otevřít nepodařilo, protože síťová politika ji blokuje. **Ověřit ručně.** |
-| https://sako.justice.cz/ – seznam akreditovaných osob (bezplatný sepis návrhu na oddlužení) | Ministerstvo spravedlnosti | Totéž: uvádí ho příručka MPSV, přímé ověření nebylo možné. **Ověřit ručně.** |
+| https://mpsv.gov.cz/registr-poskytovatelu-sluzeb – registr poskytovatelů sociálních služeb (odborné sociální poradenství) | MPSV | Ověřeno přímým otevřením 5. 11. 2026, titulek „Registr poskytovatelů sociálních služeb \| MPSV“. Původně uvedená adresa `iregistr.mpsv.cz` neexistuje (doména nemá DNS záznam) a odkaz na webu nefungoval. Opraveno, hlídá to `test/sdilene/pomoc.test.js`. |
+| https://sako.justice.cz/ – seznam akreditovaných osob (bezplatný sepis návrhu na oddlužení) | Ministerstvo spravedlnosti | Ověřeno přímým otevřením 5. 11. 2026, titulek „Seznam akreditovaných osob“. |
+
+Přímým otevřením bylo 5. 11. 2026 ověřeno i všech 8 odkazů skryté kalkulačky Exekuce, nebo
+oddlužení? (`rules.json` → `pomoc` a další kroky). Všechny vrací 200 s odpovídajícím titulkem:
+www.ceecr.cz, isir.justice.cz, exekuce.justice.cz/vypocet-srazek-ze-mzdy/, insolvence.justice.cz,
+www.ochrance.cz, vesta.justice.cz, sako.justice.cz a mpsv.gov.cz/registr-poskytovatelu-sluzeb.
+O zveřejnění kalkulačky rozhoduje uživatel.
 
 Odkazy jsou v `src/_data/pomoc.json`. Kalkulačka dluhů (vlna 2) se zveřejní až po ručním
 ověření.
