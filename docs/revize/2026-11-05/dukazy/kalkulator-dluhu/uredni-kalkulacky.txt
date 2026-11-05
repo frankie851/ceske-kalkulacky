@@ -1,4 +1,4 @@
-# Úřední kalkulačky vs. můj výpočet · 2026-11-05T09:11:52.396Z
+# Úřední kalkulačky vs. můj výpočet · 2026-11-05T09:12:59.215Z
 
 ## A) exekuce.justice.cz – varianta „2026 výpočet od 1. 1.“ (012026)
 | Případ | Úřední srážka | k exekutorovi | náhrada plátce | zůstane | Můj výpočet (praxe) srážka / věřitelům / náhrada / zůstane | Shoda |
@@ -39,10 +39,9 @@ Moje kontrola se stejnými hodnotami: součet 5 500 + 9 430 + 2 300 = 17 230; N�
 | Z2 50 000, 0 os. | 30 368 Kč | 19 632 Kč | 25 391 Kč | 24 609 Kč | NE | úřední skript používá hranici 1 × 16 590 = 16 590 Kč místo 1,9 × (NV 595/2006 § 2 = 31 521 Kč) |
 
 ## B2) insolvence.justice.cz živě v prohlížeči (puppeteer)
-- O1 30 000, 0 os.: splátka „0“, zůstane „0“, za 3 roky „0“, platné k „
-                  “ (kalkuluj(): false)
-- O2 23 000, 0 os.: splátka „0“, zůstane „0“, za 3 roky „0“, platné k „
-                  “ (kalkuluj(): false)
-- Z2 50 000, 0 os.: splátka „0“, zůstane „0“, za 3 roky „0“, platné k „
-                  “ (kalkuluj(): false)
+- skripty stránky: ["https://insolvence.justice.cz/wp-content/themes/insolvence/js/TweenMax.min.js","https://insolvence.justice.cz/wp-content/themes/insolvence/js/main.js","https://insolvence.justice.cz/wp-content/themes/insolvence/js/skip-link-focus-fix.js?ver=20160816","https://insolvence.justice.cz/wp-content/themes/insolvence/js/functions.js?ver=20160816"]
+- kalkuluj() nebyla na stránce dostupná (konzole: ["Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED","Failed to load resource: the server responded with a status of 404 (Not Found)","TypeError: $ is not a function","Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED","Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"]); vložen jejich kalkul.js stažený curl
+- O1 30 000, 0 os.: splátka „10 598“, zůstane „19 402“, za 3 roky „381 528“, platné k „1.1.2026“ (kalkuluj(): true)
+- O2 23 000, 0 os.: splátka „5 932“, zůstane „17 068“, za 3 roky „213 552“, platné k „1.1.2026“ (kalkuluj(): true)
+- Z2 50 000, 0 os.: splátka „30 368“, zůstane „19 632“, za 3 roky „1 093 248“, platné k „1.1.2026“ (kalkuluj(): true)
 - chyby stránky v konzoli: ["TypeError: $ is not a function"]

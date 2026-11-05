@@ -1792,8 +1792,8 @@
     "reprodukce": "(a) modul `odstupne({kdo:'zamestnavatel', duvod:'d', delkaLet:5, prumernyHruby:40000})` → očekáváno 0 Kč odstupného: od 1. 6. 2025 (120/2025 Sb. čl. I bod 9) je písm. d) jednotný důvod „pozbyl … dlouhodobě způsobilost konat dále dosavadní práci“ bez rozlišení příčiny; odstupné přísluší jen u § 52 a)–c) (§ 67 odst. 1) a 12× jen u písm. e) (§ 67 odst. 3); u písm. d) náleží 12× pouze jako jednorázová náhrada podle § 271ca, a to jen je-li příčinou pracovní úraz, nemoc z povolání nebo její ohrožení (https://www.zakonyprolidi.cz/cs/2006-262#p67, #p271ca) → skutečnost 480 000 Kč, text „Pracovní úraz nebo nemoc z povolání (§ 52 písm. d) – nejméně 12× průměrný výdělek“. (b) `duvod:'e'` (výpověď i dohoda), 40 000 Kč → očekáváno 480 000 Kč (§ 67 odst. 3) → skutečnost 0 Kč „zákonné odstupné nenáleží“. (c) Obrazovka: doručení 31. 12. 2026, důvod d), 5 let, 40 000 Kč → „Odstupné (zákonné minimum) 480 000 Kč“ (`duvod-d-360.png`); po přepnutí na e) „0 Kč“ (`prohlizec.json` B-duvod-d, B-duvod-e). Přepočet O11–O14 v `prepocet.txt`.",
     "dopad": "Zaměstnanec s výpovědí podle § 52 písm. d) z běžných zdravotních důvodů (po 1. 6. 2025 nejčastější zdravotní důvod) uvidí nárok na 12 platů, který nemá, a může podle něj odmítnout dohodu nebo plánovat finance; zaměstnanec s výpovědí podle písm. e) uvidí 0 Kč a o 12násobek si neřekne; u úrazu je plnění označeno špatným titulem (jiný režim vracení podle § 68, jiný vztah k § 77 odst. 2).",
     "oprava": "Popisky v `index.html`: d) „Zdraví: podle lékařského posudku nemohu dlouhodobě dělat svou práci – § 52 písm. d)“, e) „Dosáhl/a jsem nejvyšší přípustné expozice – § 52 písm. e)“. U d) doplnit přepínač příčiny (pracovní úraz / nemoc z povolání / její ohrožení → zobrazit zvlášť „Jednorázová náhrada podle § 271ca: 12× průměrný měsíční výdělek“, odstupné 0; jinak 0 Kč). V `rules.json` nahradit `duvodUraz` za `duvodExpozice: \"e\"` (§ 67 odst. 3) a `nahrada271ca: {duvod:\"d\", nasobek:12}`, opravit `zdroj`; upravit `odstupne()` a texty v `app.js:44`, README a testy 13–14 (viz VYP-04).",
-    "overeni": "reprodukováno 2× (modul: 2 běhy `porovnani`; obrazovka: 2 běhy `prohlizec`) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (modul: 2 běhy `porovnani`; obrazovka: 2 běhy `prohlizec`) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – odstupne() reprodukováno: d) → 480 000 Kč, e) → 0 Kč u výpovědi i dohody; § 52 písm. d)/e), § 67 odst. 3 a § 271ca odst. 1 v platném znění potvrzují nález)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "VYP-02",
@@ -1804,8 +1804,8 @@
     "reprodukce": "doručení 10. 7. 2026, zaměstnavatel, důvod h), věk 40, čistý 30 000 Kč → očekáváno upozornění, že podle § 39 odst. 2 písm. b) ZoZ nárok na podporu nemá uchazeč, s nímž byl v posledních 6 měsících skončen pracovněprávní vztah pro porušení jiné povinnosti podle § 301a ZP zvlášť hrubým způsobem (pozn. 79 = § 52 písm. h) ZP; https://www.zakonyprolidi.cz/cs/2004-435#p39, 2. zdroj zákon č. 365/2011 Sb.), a obdobně u písm. g), šlo-li o porušení zvlášť hrubým způsobem (§ 39 odst. 2 písm. a)) → skutečnost: tabulka 24 000, 24 000, 15 000, 15 000, 12 000 Kč, „Celkem 90 000 Kč“, poznámka „Způsob skončení ani odstupné výši podpory neovlivňují“ (`duvod-h-360.png`, `prohlizec.json` B-duvod-h).",
     "dopad": "Člověk propuštěný pro zvlášť hrubé porušení počítá s 90 000 Kč podpory, kterou mu úřad práce nepřizná; věta o způsobu skončení je u citlivého tématu zavádějící (platí jen pro zrušení 45% sazby a § 44a).",
     "oprava": "U důvodu h) nahradit tabulku podpory upozorněním „Při skončení pro zvlášť hrubé porušení povinností v posledních 6 měsících nárok na podporu nevzniká (§ 39 odst. 2 ZoZ)“; u g) přidat dotaz „šlo o zvlášť hrubé porušení (důvod pro okamžité zrušení)?“ nebo aspoň upozornění; větu v `app.js:189` přeformulovat („Výpověď dohodou ani odstupné podporu nesnižují ani neodkládají; výjimkou je skončení pro zvlášť hrubé porušení povinností – § 39 odst. 2 ZoZ“); doplnit § 39 odst. 1 písm. c) (poživatel starobního důchodu).",
-    "overeni": "reprodukováno 2× (2 běhy `prohlizec`, modul důvod nezná – strukturálně) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (2 běhy `prohlizec`, modul důvod nezná – strukturálně) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – § 39 odst. 2 písm. a), b) ZoZ potvrzen; podpora() důvod skončení nedostává (app.js:141), výsledek 90 000 Kč reprodukován v Node)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "VYP-03",
@@ -1905,12 +1905,238 @@
   "kod": "ROD",
   "repo": "rodicovska",
   "nazev": "Rodičovská pro celou rodinu",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 4,
+   "stredni": 7,
+   "nizka": 4
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "🔴",
+    "nalez": "ROD-04 (92 místo 120 hodin), ROD-06, ROD-09, ROD-11"
+   },
+   "2 Výpočty": {
+    "stav": "🔴",
+    "nalez": "ROD-01, ROD-02, ROD-03, ROD-05"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "🟡",
+    "nalez": "ROD-09 (otcovská jen do 28. dne), příklady zadání v rozporu se zákonem (ROD-01, ROD-05)"
+   },
+   "4 Testy": {
+    "stav": "🟡",
+    "nalez": "ROD-10"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "🟡",
+    "nalez": "ROD-07, ROD-08"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "🟡",
+    "nalez": "ROD-06 (text o „schválení Senátem“), ROD-02 (text o souběhu)"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "🟢",
+    "nalez": "— (ROD-14 jen Nízká)"
+   },
+   "8 Nasazení a větve": {
+    "stav": "🟢",
+    "nalez": "— (ROD-15 jen Nízká)"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "ROD-01",
+    "zavaznost": "Vysoká",
+    "oblast": "Výpočty",
+    "nazev": "Rodičovská končí měsíc před 3. narozeninami, měsíc dovršení 3 let se nepočítá",
+    "kde": "`rodina.js:195` (`const vek = 36`), `rodina.js:125–138` (`cerpaniRp`, měsíce 0–35), `rodina.js:280` (konec osy = den před 1. dnem 36. měsíce), `app.js:182–183` (checklist „Do 28. 2. 2029: Poslední měsíc čerpání“), test `rodina.test.js:42–59`; zadání `docs/zadani.md` ř. 1075–1076.",
+    "reprodukce": "porod 15. 3. 2026, rodičovská 8 000 Kč od 6. měsíce → očekáváno: RP náleží za měsíce září 2026 – **březen 2029** (31 měsíců), tj. 248 000 Kč vyčerpáno a 102 000 Kč propadne, protože podle ZSSP § 30b odst. 1 písm. d) se podmínka celodenní péče po celý měsíc považuje za splněnou „i v kalendářním měsíci, v němž dítě dosáhlo věku 3 let“ (https://www.zakonyprolidi.cz/cs/1995-117#p30b; MPSV „Rodičovský příspěvek“: „dítě dovršilo věk 3 (4) let, do kterého náleží rodičovský příspěvek“) → skutečnost: modul i obrazovka 240 000 / 110 000 Kč, „30 měsíců čerpání“, osa končí únorem 2029, checklist „Do 28. 2. 2029“ (`prepocet.txt` Z4, V7; `vysledek-360.png`). Stejný vstup bez PPM s 9 000 Kč/měs.: zákon 37 měsíců, modul 36.",
+    "dopad": "každému, kdo rodičovskou nevyčerpá dřív, aplikace ukáže o jednu měsíční částku vyšší „propadlou“ částku, o měsíc kratší čerpání a chybný poslední den; návrh „vyčerpat přesně do 3 let“ je o jeden měsíc přísnější (11 700 místo 11 300 Kč). Směr chyby je konzervativní, rozhodnutí podle ní nevede k přímé ztrátě, ale částka i termín jsou špatně.",
+    "oprava": "počítat měsíce 0 až `vekMesicu` včetně (měsíc 3. narozenin), prodloužit horizont osy do konce měsíce 3. narozenin, použít `vekMesicu` z `rules.json` místo konstanty, opravit checklist („poslední měsíc = měsíc 3. narozenin“), upravit test i příklad v zadání (248 000 / 102 000 Kč).",
+    "overeni": "reprodukováno 2× (dva běhy modulu, dva běhy v prohlížeči) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-02",
+    "zavaznost": "Vysoká",
+    "oblast": "Výpočty",
+    "nazev": "Rodičovská podle aplikace nenáleží souběžně s mateřskou; zákon přiznává rozdíl už od měsíce narození",
+    "kde": "`rodina.js:313–314` (`rpOd = posledniPpm + 1`), `app.js:155` („Rodičovská se nevyplácí souběžně s mateřskou, začíná v kalendářním měsíci po jejím skončení“), `app.js:173–174` (checklist „Od <měsíc po PPM>: Rodičovský příspěvek: žádost na ÚP“), README bod 7.",
+    "reprodukce": "(a) porod 15. 3. 2026, matka 15 000 Kč (PPM 346 Kč/den), RP 15 000 Kč → očekáváno podle ZSSP § 30b odst. 3 („rodičovský příspěvek náleží, jen je-li vyšší, a to ve výši rozdílu“) a § 30b odst. 1 písm. a), b) (měsíc narození a měsíc s PPM se počítají celé; ÚP ČR: „rodičovský příspěvek náleží od měsíce narození dítěte, pouze je-li vyšší než dávky nemocenského pojištění … doplácen rozdíl“): RP březen 4 274 Kč, duben 4 620 Kč, …, srpen 9 810 Kč → skutečnost: 0 Kč v březnu až srpnu, RP až od září (`prepocet.txt` V5; obrazovka scénář C: řádky bře–srp 2026 jen 10 726 / 10 380 / 5 190 Kč). (b) matka bez nároku, PPM čerpá otec od 7. týdne (50 000 Kč), RP 34 440 Kč → očekáváno březen 34 440 Kč, duben 28 700 Kč → skutečnost 0 a 0, první RP až v říjnu (V6f–h).",
+    "dopad": "rodiny s nízkou mateřskou (příjem zhruba do 21 000 Kč) nebo s mateřskou otce vidí v prvních měsících o tisíce až desetitisíce korun nižší příjem a dřívější vyčerpání o několik měsíců (V5: měsíc 26 vs. 29); kontrolní seznam radí žádat o RP až po skončení mateřské, přičemž nárok na výplatu zaniká 3 měsíce zpětně (ZSSP § 54 odst. 2) – ve většině případů jde jen o posun peněz v čase, při nízkém stropu a pozdní žádosti může část celkové částky propadnout.",
+    "oprava": "počítat RP od měsíce narození jako `max(0, výše − PPM v měsíci)` (u PPM matky i otce), opravit text v „Jak jsme počítali“ a v kontrolním seznamu („žádost o RP lze podat hned po narození, nárok se uplatňuje nejvýš 3 měsíce zpětně“), přidat test.",
+    "overeni": "reprodukováno 2× (dva běhy modulu; obrazovka scénář C) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-03",
+    "zavaznost": "Vysoká",
+    "oblast": "Výpočty",
+    "nazev": "Mateřská a otcovská trvající přes 1. leden se nepřepočítá podle nových redukčních hranic; strop RP z DVZ k nástupu",
+    "kde": "`rodina.js:94–101` (`davkaRodice` – hranice jen podle data nástupu), `rodina.js:297–303` (jedna denní sazba po celou PPM), `rodina.js:315–319` (DVZ pro strop = DVZ z PPM k nástupu), README „Hranice se vybírají podle data nástupu na dávku, ne podle data porodu“, test `rodina.test.js:108–114`.",
+    "reprodukce": "porod 20. 1. 2027, matka 80 000 Kč, nástup 9. 12. 2026 → očekáváno podle ZNP § 22 odst. 2 („Výše dávek, na které vznikl nárok před 1. lednem … a tento nárok trvá ještě tohoto dne, se upraví bez žádosti od tohoto dne podle nové výše denního vyměřovacího základu stanoveného podle částek redukčních hranic platných od 1. ledna“; https://www.zakonyprolidi.cz/cs/2006-187#p22; MPSV příklady přechodu 2008/2009 popisují tentýž přepočet): prosinec 1 524 Kč/den (red. DVZ 2 177), od 1. 1. 2027 **1 578 Kč/den** (red. DVZ 2 254), celkem 23 × 1 524 + 173 × 1 578 = **308 046 Kč**; strop RP podle DVZ k datu narození (§ 30 odst. 3 písm. b) ZSSP, hranice 2027) 21 × 2 254 = **47 334 Kč** → skutečnost: 1 524 Kč/den po celých 196 dní = 298 704 Kč (o 9 342 Kč méně), strop 45 717 Kč (`prepocet.txt` V4a–e). Test aplikace s příjmem 200 000 Kč zakonzervovává 2 000 Kč/den po celou dobu, zákon od 1. 1. 2027 2 111 Kč/den (V4f–g). Otcovská 28. 12. 2026 – 10. 1. 2027 z 80 000 Kč: 21 876 vs. 21 336 Kč (V8e).",
+    "dopad": "týká se porodů zhruba od srpna do února s příjmem nad 1. redukční hranicí (nad cca 49 700 Kč měsíčně); mateřská je podhodnocena o jednotky tisíc až přes 19 000 Kč a maximální volitelná výše rodičovské je nižší, než na jakou má rodina nárok – uživatel si může zvolit nižší měsíční částku, než by mohl.",
+    "oprava": "v `planRodiny` počítat denní dávku po dnech podle roku, do kterého den spadá (DVZ zůstává, mění se jen redukce), pro strop RP použít redukci podle hranic roku narození, opravit test a README.",
+    "overeni": "reprodukováno 2× (dva běhy modulu) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-04",
+    "zavaznost": "Vysoká",
+    "oblast": "Pravidla a data",
+    "nazev": "Limit docházky dítěte do 2 let do jeslí 92 hodin místo 120",
+    "kde": "`rules.json:69` (`\"jesleHodinMesicne\": 92`), `rodina.js:394–399` (upozornění při návratu do práce), `app.js:177` (checklist „hlídejte limit 92 hodin měsíčně“).",
+    "reprodukce": "porod 10. 5. 2026, návrat do práce od 10. měsíce → očekáváno „nejvýše 120 hodin v kalendářním měsíci“ (ZSSP § 31 odst. 3 písm. a) ve znění zákona č. 84/2025 Sb., účinnost 1. 5. 2025, https://www.zakonyprolidi.cz/cs/1995-117#p31; ÚP ČR a MPSV „Státní sociální podpora“: „v rozsahu do 120 hodin v kalendářním měsíci“) → skutečnost: „dítě mladší 2 let smí být v jeslích nebo školce nejvýš 92 hodin měsíčně“ (výstup modulu 5. 11. 2026; rejstřík PR-50).",
+    "dopad": "rodič plánující dřívější návrat do práce si zbytečně omezí docházku dítěte (nebo odmítne úvazek) kvůli limitu, který už 18 měsíců neplatí; výpočet částek to neovlivní.",
+    "oprava": "`jesleHodinMesicne: 120` se zdrojem (84/2025 Sb., § 31 odst. 3 ZSSP) a test na hodnotu v textu upozornění.",
+    "overeni": "reprodukováno 2× (zákon + ÚP ČR + MPSV; modul dvakrát) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-05",
+    "zavaznost": "Střední",
+    "oblast": "Výpočty",
+    "nazev": "Zbytek nižší než měsíční částka se vyplácí jako samostatný měsíc navíc",
+    "kde": "`rodina.js:130–135` (`cerpaniRp`), `app.js:141` („Rodičovská se vyčerpá … 24 měsíců čerpání“); zadání ř. 1074.",
+    "reprodukce": "350 000 Kč po 15 000 Kč → očekáváno podle ZSSP § 30 odst. 6 (zbývá-li po odpočtu aktuální částky méně než aktuální částka, „vyplatí se tato zbývající částka … spolu s částkou náležející za aktuální kalendářní měsíc“, rejstřík PR-49): 23 měsíců, poslední 20 000 Kč → skutečnost: 24 měsíců, poslední 5 000 Kč (`prepocet.txt` Z3b–d); vícerčata 700 000 / 30 000: obrazovka „kvě 2028 (23. měsíc dítěte), 24 měsíců čerpání“, podle zákona duben 2028 (Z5d, `vysledek2-360.png`).",
+    "dopad": "měsíc vyčerpání je o jeden pozdější a poslední dvě částky jsou rozložené jinak; celková částka sedí, nikdo nepřijde o peníze. Zadání obsahuje stejnou chybu („24 měsíců = 23 × 15 000 + 5 000“).",
+    "oprava": "v `cerpaniRp` přičíst zbytek k poslední plné částce, je-li nižší než ona; upravit test a příklad v zadání (23 měsíců).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-06",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data",
+    "nazev": "Zvýšení na 400 000 / 800 000 Kč je popsáno jako „novela schválená Senátem“, je to zákon č. 152/2026 Sb.",
+    "kde": "`rules.json:64–66` (`pozn`, `zdroj`, `url` na tiskovou zprávu „Senát schválil…“), `rodina.js:393` (text se zobrazuje jako informační upozornění u každého termínu porodu od 1. 1. 2027), `README.md:70–71` („Až vyjde ve Sbírce, doplňte do `zdroj` číslo zákona“).",
+    "reprodukce": "termín porodu 4. 4. 2027 → očekáváno: pravidlo platné ze zákona č. 152/2026 Sb. (vyhlášen 26. 8. 2026, účinnost 1. 1. 2027; https://www.zakonyprolidi.cz/cs/2026-152; rejstřík PR-51) → skutečnost: „Novela zákona o státní sociální podpoře schválená Senátem 29. 7. 2026, pro děti narozené od 1. 1. 2027.“ (výstup modulu; živý web ukazuje pro výchozí termín 2027 „Celkem 400 000 Kč“, `prohlizec.json` H).",
+    "dopad": "částky jsou správné, ale text budí dojem, že jde o neschválený nebo nejistý stav; uživatel může s 400 000 Kč nepočítat.",
+    "oprava": "`pozn`: „zákon č. 152/2026 Sb., účinný od 1. 1. 2027“, `url` na zakonyprolidi.cz/e-Sbírku, smazat výzvu v README.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-07",
+    "zavaznost": "Střední",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Chybné vstupy bez hlášky; při neplatném termínu zůstane starý souhrn a kontrolní seznam",
+    "kde": "`app.js:53–64` (`prectiFormular` – `Number(el.value)` bez kontroly `validity`), `app.js:70–73` (`prepocitej` při neplatném termínu smaže jen osu), `index.html:25` (`novalidate`).",
+    "reprodukce": "(a) termín porodu 31. 12. 2025 nebo prázdný → očekáváno: chybová hláška a vyprázdněné nebo označené výsledky → skutečnost: hláška „Zadejte termín porodu od 1. 1. 2026“ ano, ale souhrn (7 dlaždic s částkami předchozího plánu), posuvník, tabulka i kontrolní seznam zůstanou z předchozího výpočtu (`chyba-360.png`, `prohlizec.json` D `souhrnZustal: 7`). (b) příjem matky −30 000 nebo prázdný → prohlížeč hlásí `rangeUnderflow`, aplikace bez hlášky u pole počítá „Matka nemá podle zadání nárok na mateřskou“ a 350 000 Kč od narození (D). (c) „30000,50“ v cs-CZ → `stepMismatch`, aplikace mlčky počítá s 30 000,50 Kč (E_cs-CZ).",
+    "dopad": "po překlepu v termínu vidí uživatel pod chybovou hláškou cizí čísla; záporný či prázdný příjem je tiše vyložen jako „bez nároku“.",
+    "oprava": "při neplatném termínu vyprázdnit souhrn, tabulku a checklist (nebo je označit), u polí kontrolovat `validity` a ukázat hlášku (`aria-describedby`), záporný příjem odmítnout.",
+    "overeni": "reprodukováno 2× (dva nově načtené běhy) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-08",
+    "zavaznost": "Střední",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Desetinná čárka v příjmu se v prohlížeči s lokalizací en-US zahodí (30000,50 → 3 000 050 Kč)",
+    "kde": "`index.html:42, 46` (`<input type=\"number\" … step=\"100\">`), `app.js:57`.",
+    "reprodukce": "příjem matky „30000,50“ → očekáváno 30 000,50 Kč (nebo odmítnutí) → skutečnost: v Chromiu s `--lang=cs-CZ` hodnota `30000.50` (jen `stepMismatch`, výpočet správný); s `--lang=en-US` hodnota **`3000050`**, aplikace bez varování počítá s příjmem 3 000 050 Kč (`prohlizec.json` E_en-US; „1500,5“ → 15 005). Mezera v „30 000“ se při psaní zahodí a hodnota je 30 000 v obou lokalizacích.",
+    "dopad": "jen v prohlížeči s anglickou lokalizací a jen při zadání haléřů (u měsíčního hrubého příjmu výjimečné); výsledkem je maximální mateřská a strop 59 997 Kč bez upozornění.",
+    "oprava": "`step=\"1\"` nebo `inputmode=\"decimal\"` s vlastním parsováním (`,` → `.`) z `type=\"text\"`, případně kontrola `validity.badInput`/`stepMismatch` s hláškou.",
+    "overeni": "reprodukováno 2× (cs-CZ i en-US, nové procesy) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-09",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data",
+    "nazev": "Nástup na otcovskou lze zadat jen do 28. dne po porodu, zákon dovoluje do 6 týdnů",
+    "kde": "`index.html:85` (`max=\"28\"`), `rodina.js:269` (`Math.min(P.otecOdDne - 14, …)`), přitom `index.html:168` a `app.js:168` tvrdí „Nástup je možný do 6 týdnů od narození“ a `rules.json otcovska.nastupDoDne 41`.",
+    "reprodukce": "otcovská od 35. nebo 41. dne → očekáváno nástup 19. 4., resp. 25. 4. 2026 (ZNP § 38a odst. 4: nástup „v období 6 týdnů ode dne narození“; § 38b odst. 1: podpůrčí doba 2 týdny – dávka tedy může skončit až 8 týdnů po porodu; ČSSZ „Otcovská“) → skutečnost: modul posune start vždy na 12. 4. 2026 (28. den), pole víc nedovolí (`prepocet.txt` V8c, V8d).",
+    "dopad": "otec, který chce otcovskou čerpat až v 5.–6. týdnu (např. po návratu matky z porodnice), si ji nenaplánuje; částka se nemění, mění se jen měsíc výplaty.",
+    "oprava": "`max=\"41\"` a `Math.min(rules.otcovska.nastupDoDne, …)`.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-10",
+    "zavaznost": "Střední",
+    "oblast": "Testy",
+    "nazev": "Testy zakonzervovávají chybné hodnoty a chybí testy důležitých větví",
+    "kde": "`test/rodina.test.js:29–40` (24 měsíců, poslední 5 000 Kč – ROD-05), `:42–59` a `:116–125` (240 000 / 110 000 a 160 000 – ROD-01), `:108–114` (2 000 Kč/den po celou PPM přes Nový rok – ROD-03), `:191–196` (ověřuje jen existenci upozornění na jesle, ne hodnotu 92/120 – ROD-04).",
+    "reprodukce": "`node --test` → 29/29 prošlo (`testy.txt`), ale čtyři testy potvrzují hodnoty, které jsou v rozporu se zákonem (viz ROD-01, 03, 05); žádný test nepokrývá souběh RP s PPM (§ 30b odst. 3), měsíc 3. narozenin, přepočet od 1. ledna, nástup otcovské po 28. dni ani chování `app.js` (parsování formuláře, neplatný termín).",
+    "dopad": "nepřímý – budoucí oprava výpočtu testy „rozbije“, takže chyby mají tendenci přežít.",
+    "oprava": "po opravách ROD-01/03/05 přepsat očekávané hodnoty podle zákona a doplnit testy na § 30b odst. 3, § 30b odst. 1 písm. d), § 22 odst. 2, hodnotu 120 hodin a nástup otcovské 29.–41. den.",
+    "overeni": "reprodukováno 2× (testy spuštěny 5. 11. 2026, výstup `testy.txt`; čtení kódu) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-11",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data",
+    "nazev": "Dva odkazy v patičce nevedou na slibovaný obsah, zdroje míchají domény",
+    "kde": "`rules.json zdroje[0]` („ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění“, `https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm`), `zdroje[1]` a `otcovska.url` („ČSSZ – Otcovská“, `https://cssz.cz/otcovska`), `rodicovsky[1].url` (tisková zpráva o Senátu místo Sbírky).",
+    "reprodukce": "curl -L 5. 11. 2026 → očekáváno stránka o PPM, resp. o otcovské → skutečnost: první odkaz končí na `https://www.cssz.gov.cz/web/cz/obecne-informace-osvc` (obecné informace pro OSVČ, přičemž aplikace OSVČ výslovně nepočítá), druhý na úvodní stránce `https://www.cssz.gov.cz/` (správná adresa je `https://www.cssz.gov.cz/web/cz/otcovska`, HTTP 200). Ostatních 7 odkazů vede na deklarované stránky (`mpsv.gov.cz/nemocenske-pojisteni` obsahuje hranice 2025 i 2026; e-Sbírka 185/2026 se skládá v prohlížeči).",
+    "dopad": "kdo si chce pravidla ověřit, skončí na nesouvisející stránce; důvěryhodnost patičky klesá.",
+    "oprava": "odkazovat na `cssz.gov.cz/web/cz/penezita-pomoc-v-materstvi`, `cssz.gov.cz/web/cz/otcovska`, u částek RP na zakonyprolidi.cz/e-Sbírku (117/1995 Sb. § 30, 152/2026 Sb.).",
+    "overeni": "reprodukováno 2× (curl dvakrát, `prohlizec.json` H `zdroje`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-12",
+    "zavaznost": "Nízká",
+    "oblast": "Pravidla a data",
+    "nazev": "Čistá mzda nemá parametry pro rok 2027",
+    "kde": "`rules.json cistaMzda` (jen 2026), `rodina.js:148–152` (poslední známý rok + příznak `odhad`), upozornění „Pro čistou mzdu v dalších letech jsou použity sazby roku 2026.“",
+    "reprodukce": "měsíce roku 2027 → očekáváno hranice 23 % 154 989 Kč/měs. (NV č. 177/2026 Sb.: průměrná mzda 51 663 Kč; rejstřík PR-54) → skutečnost 146 901 Kč s poctivým upozorněním (`prepocet.txt` V10e).",
+    "dopad": "rozdíl jen u hrubé mzdy mezi 146 901 a 154 989 Kč a jen v orientační čisté mzdě; sazby pojistného a sleva se nemění.",
+    "oprava": "doplnit `cistaMzda.2027` (`hraniceDan2Mesic 154989`, zdroj NV 177/2026 Sb.).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-13",
+    "zavaznost": "Nízká",
+    "oblast": "Výpočty",
+    "nazev": "Drobná zjednodušení bez vlivu na běžné částky",
+    "kde": "`rodina.js:195` (`vek = 36` – `vekMesicu` z `rules.json` se nepoužívá), `rodina.js:315–319` (matce bez zaškrtnutých 270 dní se DVZ pro strop RP nestanoví, ačkoli DVZ pro nemocenské v souvislosti s porodem lze mít i bez 270 dnů – ZSSP § 30 odst. 2), `app.js:180` (jednorázová výplata zbytku při dalším dítěti bez podmínky DVZ/OSVČ podle § 30a odst. 1), `README.md` tabulka „150 000 Kč | 2027 | 2 944 (max)“ (maximum 2027 je 3 015 Kč, 2 944 je hodnota pro DVZ 4 931,51).",
+    "reprodukce": "čtení kódu; `prepocet.txt` V11e.",
+    "dopad": "žádný při běžném použití; u matky zaměstnané krátce může být strop RP podhodnocen.",
+    "oprava": "použít `rp.vekMesicu`, zmínit podmínku § 30a v checklistu, opravit README.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-14",
+    "zavaznost": "Nízká",
+    "oblast": "Soukromí a bezpečnost",
+    "nazev": "Obnova plánu z `localStorage` bez validace; formulář předvyplněný smyšlenými příjmy",
+    "kde": "`app.js:203–204` (`stav = {…VYCHOZI_VSTUP, …ulozeny}` bez kontroly typů), `rodina.js:166–182` (`VYCHOZI_VSTUP` 40 000 / 50 000 Kč, otcovská zapnutá).",
+    "reprodukce": "podvržený záznam `{\"rpVyse\":\"<img …>\",\"kdoPpm\":\"<img …>\"}` → očekáváno ignorování neplatných hodnot → skutečnost: žádné vložení HTML (vše escapováno, dialog ani `<img>` se neobjevil – `prohlizec.json` F), ale souhrn ukáže „po NaN Kč měsíčně“ a „0 Kč vyčerpáno, 350 000 Kč propadne“. Uložení ukládá i příjmy obou rodičů (`prohlizec.json` G) – jen na výslovné kliknutí, s tlačítkem smazání a větou v patičce; hodnotím jako přijatelné.",
+    "dopad": "nesmyslný výstup jen při poškozeném úložišti; předvyplněné příjmy mohou uživatele, který formulář přehlédne, nechat počítat s cizími čísly.",
+    "oprava": "při načtení validovat typy a rozsahy (čísla, výčet `kdoPpm`), zvážit prázdné příjmy ve výchozím stavu.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "ROD-15",
+    "zavaznost": "Nízká",
+    "oblast": "Nasazení a větve",
+    "nazev": "Chybějící favicon → chyba v konzoli na živém webu",
+    "kde": "`index.html` (bez `<link rel=\"icon\">`), workflow kopíruje jen 6 souborů.",
+    "reprodukce": "načtení https://frankie851.github.io/rodicovska/ → očekáváno čistá konzole → skutečnost: `GET https://frankie851.github.io/favicon.ico` 404 a „Failed to load resource“ (`prohlizec.json` H; totéž lokálně v `uvod-kontrola.json`). Jiné chyby, cizí požadavky ani cookies nejsou.",
+    "dopad": "žádný funkční.",
+    "oprava": "přidat `<link rel=\"icon\" href=\"data:,\">` nebo malou ikonu.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `9ff80c369dcb60f61e74c067b7d6e96302c554aa` (5. 11. 2026) · živý web: https://frankie851.github.io/rodicovska/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 4,
+   "stredni": 7,
+   "nizka": 4
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "DLU",

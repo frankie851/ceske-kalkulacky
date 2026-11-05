@@ -1,5 +1,5 @@
 {
- "datum": "2026-11-05T09:12:23.387Z",
+ "datum": "2026-11-05T09:13:28.213Z",
  "exekuce": {
   "jan": [
    {
@@ -498,27 +498,27 @@
  "insolvenceZive": [
   {
    "popis": "O1 30 000, 0 os.",
-   "sem1": "0",
-   "sem2": "0",
-   "sem3": "0",
-   "sem4": "\n                  ",
-   "maKalkuluj": false
+   "sem1": "10 598",
+   "sem2": "19 402",
+   "sem3": "381 528",
+   "sem4": "1.1.2026",
+   "maKalkuluj": true
   },
   {
    "popis": "O2 23 000, 0 os.",
-   "sem1": "0",
-   "sem2": "0",
-   "sem3": "0",
-   "sem4": "\n                  ",
-   "maKalkuluj": false
+   "sem1": "5 932",
+   "sem2": "17 068",
+   "sem3": "213 552",
+   "sem4": "1.1.2026",
+   "maKalkuluj": true
   },
   {
    "popis": "Z2 50 000, 0 os.",
-   "sem1": "0",
-   "sem2": "0",
-   "sem3": "0",
-   "sem4": "\n                  ",
-   "maKalkuluj": false
+   "sem1": "30 368",
+   "sem2": "19 632",
+   "sem3": "1 093 248",
+   "sem4": "1.1.2026",
+   "maKalkuluj": true
   }
  ]
 }

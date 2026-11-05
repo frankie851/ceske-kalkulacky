@@ -33,7 +33,16 @@ const ctiVysledek = (page) => page.evaluate(() => {
     aktivni: document.activeElement?.id || document.activeElement?.tagName,
   };
 });
-const ctiChyby = (page) => page.evaluate(() => Object.fromEntries(['mzda', 'osoby', 'exekuce', 'dluh', 'sazba'].map((id) => [id, { hlaska: document.getElementById(`${id}-chyba`).textContent, ariaInvalid: document.getElementById(id).getAttribute('aria-invalid'), hodnota: document.getElementById(id).value, validity: document.getElementById(id).validity.valid }])).concat([['aktivni', document.activeElement?.id], ['obrazovka', [...document.querySelectorAll('[data-obrazovka]')].find((e) => !e.hidden)?.id]])));
+const ctiChyby = (page) => page.evaluate(() => {
+  const o = {};
+  for (const id of ['mzda', 'osoby', 'exekuce', 'dluh', 'sazba']) {
+    const el = document.getElementById(id);
+    o[id] = { hlaska: document.getElementById(`${id}-chyba`).textContent, ariaInvalid: el.getAttribute('aria-invalid'), hodnota: el.value, validity: el.validity.valid };
+  }
+  o.aktivni = document.activeElement?.id;
+  o.obrazovka = [...document.querySelectorAll('[data-obrazovka]')].find((e) => !e.hidden)?.id;
+  return o;
+});
 const napis = async (page, sel, text) => { await page.click(sel, { clickCount: 3 }); await page.keyboard.press('Backspace'); if (text !== '') await page.type(sel, text); };
 const kc0 = (x) => new Intl.NumberFormat('cs-CZ', { maximumFractionDigits: 0 }).format(Math.round(x)) + ' Kč';
 
@@ -110,7 +119,7 @@ async function beh(cislo, lang) {
   }
 
   // Z2: 50 000 / 1 000 000 přednostní, úrok 11,75 (výchozí hodnota pole)
-  await page.click('a[href="#formular"].tlacitko');
+  await page.click('#vysledek a[href="#formular"]');
   await cekej(200);
   await vyplnOdesli(page, { mzda: '50 000', druh: 'prednostni', dluh: '1 000 000', urok: true });
   await cekej(300);
@@ -118,7 +127,7 @@ async function beh(cislo, lang) {
   z.kroky.Z2 = { sazbaPole, obrazovka: await ctiVysledek(page), ocekavano: ocekavani({ mzda: 50000, osoby: 0, prednostni: true, exekuci: 1, dluh: 1000000, sazba: 11.75 }) };
 
   // H8: důchodce, 4 exekuce, 16 502 / 50 000 běžný bez úroku → 800
-  await page.click('a[href="#formular"].tlacitko');
+  await page.click('#vysledek a[href="#formular"]');
   await cekej(200);
   await vyplnOdesli(page, { mzda: '16 502', druh: 'bezne', exekuce: '4', duchod: true, dluh: '50 000', urok: false });
   await cekej(300);
@@ -127,7 +136,7 @@ async function beh(cislo, lang) {
   // Český zápis čísel
   const formaty = {};
   for (const [nazev, mzda] of [['23000,50', '23000,50'], ['23.000', '23.000'], ['23 000 Kč', '23 000 Kč'], ['1 500', '1 500'], ['23000.50', '23000.50']]) {
-    await page.click('a[href="#formular"].tlacitko'); await cekej(150);
+    await page.click('#vysledek a[href="#formular"]'); await cekej(150);
     await vyplnOdesli(page, { mzda, exekuce: '1', duchod: false, dluh: '100 000', urok: false });
     await cekej(200);
     const ch = await ctiChyby(page);
@@ -135,14 +144,14 @@ async function beh(cislo, lang) {
   }
   // desetinná čárka v sazbě (textové pole) a v poli osob (type=number) – závisí na lokalizaci
   for (const [nazev, vstup] of [['sazba 11,75', { sazba: '11,75' }], ['sazba 11.75', { sazba: '11.75' }], ['sazba 0,5', { sazba: '0,5' }]]) {
-    await page.click('a[href="#formular"].tlacitko'); await cekej(150);
+    await page.click('#vysledek a[href="#formular"]'); await cekej(150);
     await vyplnOdesli(page, { mzda: '23 000', dluh: '100 000', urok: true, ...vstup });
     await cekej(200);
     const ch = await ctiChyby(page);
     formaty[nazev] = { hodnotaPole: ch.sazba.hodnota, ...(ch.obrazovka === 'vysledek' ? { upozorneni: (await ctiVysledek(page)).upozorneni, doba: (await ctiVysledek(page)).doba } : { chyba: ch.sazba.hlaska }) };
   }
   for (const [nazev, vstup] of [['osoby 1,5', { osoby: '1,5' }], ['osoby 2', { osoby: '2' }]]) {
-    await page.click('a[href="#formular"].tlacitko'); await cekej(150);
+    await page.click('#vysledek a[href="#formular"]'); await cekej(150);
     await vyplnOdesli(page, { mzda: '23 000', dluh: '100 000', urok: false, ...vstup });
     await cekej(200);
     const ch = await ctiChyby(page);
@@ -151,7 +160,7 @@ async function beh(cislo, lang) {
   z.kroky.formaty = formaty;
 
   // XSS do všech polí včetně sazby (zobrazí se po zaškrtnutí úroku) a odeslání
-  await page.click('a[href="#formular"].tlacitko'); await cekej(150);
+  await page.click('#vysledek a[href="#formular"]'); await cekej(150);
   await page.evaluate(() => { const u = document.getElementById('urok'); if (!u.checked) u.click(); });
   await page.evaluate((pl) => {
     for (const id of ['mzda', 'osoby', 'exekuce', 'dluh', 'sazba']) { const el = document.getElementById(id); el.value = pl; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); }
