@@ -117,6 +117,15 @@ for (let pokus = 1; pokus <= 3 && !zive; pokus++) {
     b = await otevriProhlizec({ sirka: 1200, vyska: 900 });
     await b.page.goto('https://insolvence.justice.cz/kalkulator-splatek/', { waitUntil: 'domcontentloaded', timeout: 60000 });
     await new Promise((r) => setTimeout(r, 1500));
+    const skripty = await b.page.evaluate(() => [...document.scripts].map((s) => s.src).filter(Boolean));
+    log(`- skripty stránky: ${JSON.stringify(skripty.filter((s) => /kalkul|insolvence\/js/.test(s)))}`);
+    const maFunkci = await b.page.evaluate(() => typeof kalkuluj === 'function');
+    if (!maFunkci) {
+      // kalkul.js se v headless prohlížeči nenačetl/nevykonal – vložíme jejich skript (stažený 5. 11. 2026) do jejich stránky
+      const js = fs.readFileSync('/tmp/revize/scratch/kalkulator-dluhu/dl/insolvence-kalkul.js', 'utf8').replace(/window\.onload[\s\S]*?};\n/, '');
+      await b.page.evaluate((kod) => { const s = document.createElement('script'); s.textContent = kod; document.body.append(s); }, js);
+      log(`- kalkuluj() nebyla na stránce dostupná (konzole: ${JSON.stringify(b.zaznam.konzole.map((k) => k.text.slice(0, 100)))}); vložen jejich kalkul.js stažený curl`);
+    }
     zive = [];
     for (const c of [ODD[0], ODD[1], ODD[6]]) {
       const r = await b.page.evaluate(({ mzda, deti }) => {

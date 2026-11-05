@@ -1,4 +1,4 @@
-# Nezávislý přepočet vs. modul aplikace · kalkulator-dluhu @ abb6c1c · 2026-11-05T09:11:52.029Z · node v22.23.4 · běh 1
+# Nezávislý přepočet vs. modul aplikace · kalkulator-dluhu @ abb6c1c · 2026-11-05T09:12:58.897Z · node v22.23.4 · běh 1
 # Parametry rules.json 2026: ŽM 4860, nájemné 9430, paušál 2300, 85 %, 1/4, 1.9×, náhrada 50, správce 750+150, DPH 21, 36/60 m, úrok 11.75 %
 # Můj základ: součet 16590 · NČ 0 os. 14102 (modul 14102) · hranice 31521 (modul 31521) · správce 1089 (modul 1089)
 # Varianta „praxe“ = část nad hranicí z nezaokrouhleného zbytku (shodně s úřední kalkulačkou exekuce.justice.cz, POST 5. 11. 2026: 50 001 Kč → 14 885 Kč); „literal“ = nejdřív celý zbytek dolů na dělitelný třemi.
@@ -43,7 +43,7 @@
 | D4 500 000 Kč / 2 916 Kč, 11,75 % → úrok 4 895,83 > splátka → nesplatitelné | dluh 500 000 Kč, splátka 2 916 Kč, úrok 11.75 % | {"nesplatitelne":true,"duvod":"urok-vyssi","urokMesicne":4895.83,"rustZaRok":23758} | – | {"nesplatitelne":true,"duvod":"urok-vyssi","urokMesicne":4895.83,"rustZaRok":23758} | ano |
 | D5 hranice: splátka = úrok prvního měsíce (dluh 297 855,32 × 11,75 %/12 = 2 916,50 → splátka 2 916,50) | dluh 297 855,32 Kč, splátka 2 916,5 Kč, úrok 11.75 % | {"nesplatitelne":true,"duvod":"urok-vyssi","urokMesicne":2916.5,"rustZaRok":0} | – | {"nesplatitelne":true,"duvod":"urok-vyssi","urokMesicne":2916.5,"rustZaRok":0} | ano |
 | D6 dluh 0; splátka 0; dluh 10 000 000 bez úroku (> 600 měsíců) | dluh 0 Kč, splátka 2 916 Kč, úrok 0 % | {"mesicu":0} | – | {"mesicu":0} | ano |
-| D6 dluh 0; splátka 0; dluh 10 000 000 bez úroku (> 600 měsíců) | dluh 50 000 Kč, splátka 0 Kč, úrok 0 % | {"nesplatitelne":true,"duvod":"zadna-splatka","urokMesicne":0} | – | {"nesplatitelne":true,"duvod":"zadna-splatka","urokMesicne":0,"rustZaRok":0} | NE |
+| D6 dluh 0; splátka 0; dluh 10 000 000 bez úroku (> 600 měsíců) | dluh 50 000 Kč, splátka 0 Kč, úrok 0 % | {"nesplatitelne":true,"duvod":"zadna-splatka","urokMesicne":0,"rustZaRok":0} | – | {"nesplatitelne":true,"duvod":"zadna-splatka","urokMesicne":0,"rustZaRok":0} | ano |
 | D6 dluh 0; splátka 0; dluh 10 000 000 bez úroku (> 600 měsíců) | dluh 10 000 000 Kč, splátka 2 916 Kč, úrok 0 % | {"nesplatitelne":true,"duvod":"prilis-dlouho"} | – | {"nesplatitelne":true,"duvod":"prilis-dlouho"} | ano |
 | D7 Z2 na obrazovce: 1 000 000 Kč / 25 341 Kč, 11,75 % | dluh 1 000 000 Kč, splátka 25 341 Kč, úrok 11.75 % | {"mesicu":51,"uroky":270194,"zaplaceno":1270194} (vzorec 51 m) | – | {"mesicu":51,"uroky":270194,"zaplaceno":1270194} | ano |
 | O1 oddlužení 30 000 Kč, dluh 400 000 → splátka 10 598, správce 1 089, věřitelům 9 509, 36 m | mzda 30000, osoby 0, dluh 400 000 Kč, ne | {"splatka":10598,"zustane":19402,"spravce":1089,"vericum":9509,"delka":36,"mesicu":36,"zaplaceno":342324,"odpusteno":57676,"mira":0.856,"minimum":2178,"splnuje":true,"lze":true} | – | {"splatka":10598,"zustane":19402,"spravce":1089,"vericum":9509,"delka":36,"mesicu":36,"zaplaceno":342324,"odpusteno":57676,"mira":0.856,"minimum":2178,"splnuje":true,"lze":true} | ano |
@@ -63,6 +63,6 @@
 | U1 úrok z prodlení | prodlení od 2025-02-15 | 12 % (repo 4 % + 8) | – | aplikace nenabízí (výchozí 11,75 %) | — (viz DLU nález o výchozí sazbě) |
 | U1 úrok z prodlení | prodlení od 2022-03-01 | 11.75 % (repo 3.75 % + 8) | – | aplikace nenabízí (výchozí 11,75 %) | — (viz DLU nález o výchozí sazbě) |
 
-# Shod 52 · neshod 1
+# Shod 53 · neshod 0
 # pravidlaProRok(2027): odmítnuto: Pravidla pro rok 2027 jsou neúplné: Normativní nájemné pro rok 2027 ještě nebylo vyhlášeno (stav k 5. 11. 2026). Zákon č. 151/2025 Sb. § 28 je nově stanoví podle okresů, nařízení č. 595/2006 Sb. ale odkazuje na obec s alespoň 70 000 obyvateli. Výpočet pro rok 2027 proto zatím není možný. · nejnovejsiPlatnyRok(2026)=2026 · (2027)=2026 · (2025)=2026
 # srazka(cistaMzda: "23 000") → mzda 0, srážka 0 (modul Number("23 000") = NaN → 0; formulář parsuje sám v app.js cislo())

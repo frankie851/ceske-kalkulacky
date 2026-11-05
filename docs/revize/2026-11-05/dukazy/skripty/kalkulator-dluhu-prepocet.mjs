@@ -146,7 +146,7 @@ export function dobaSplaceni({ dluh, platba, sazbaRok = 0, maxMesicu = 600 }) {
   const r = Math.max(0, Number(sazbaRok) || 0) / 100 / 12;
   if (D === 0) return { stav: 'bez-dluhu', mesicu: 0, uroky: 0, zaplaceno: 0 };
   const urok1 = D * r;
-  if (P === 0) return { stav: 'zadna-splatka', urokMesicne: urok1 };
+  if (P === 0) return { stav: 'zadna-splatka', urokMesicne: urok1, rustZaRok: urok1 * 12 };
   if (P <= urok1) return { stav: 'urok-vyssi', urokMesicne: urok1, rustZaRok: (urok1 - P) * 12 };
   let j = D, uroky = 0, zaplaceno = 0;
   for (let m = 1; m <= maxMesicu; m++) {
