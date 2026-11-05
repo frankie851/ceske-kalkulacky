@@ -7,7 +7,7 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 - ☑ 12 klonů v `/tmp/revize/repos/<repo>` (všechny úspěšné)
 - ☑ SHA `main` a vzdálené větve (viz tabulka)
 - ☑ Nástroje: puppeteer + @axe-core/puppeteer v `/tmp/revize/nastroje` (prohlížeč: předinstalované Chromium Playwright)
-- ☐ Kostra commitnuta a pushnuta
+- ☑ Kostra commitnuta a pushnuta
 
 ## Revidované commity
 
@@ -29,10 +29,10 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 Živé weby: všech 12 adres `https://frankie851.github.io/<repo>/` vrátilo HTTP 200 (5. 11. 2026, curl).
 
 ## Fáze 1 – Rejstřík pravidel (`pravidla.md`)
-- ☐ Daně a penze (P48, PEN, SLV, EET/OSVČ)
-- ☐ Práce, rodina, cesty (VYP, ROD, CES)
-- ☐ Dluhy a školství (DLU, PRI)
-- ☐ Finance a datové řady (BYD, SPOT, INF)
+- ☑ Daně a penze (P48, PEN, SLV, EET/OSVČ) – 73 pravidel
+- ☑ Práce, rodina, cesty (VYP, ROD, CES) – 74 pravidel
+- ☑ Dluhy a školství (DLU, PRI) – 38 + 28 pravidel
+- ☑ Finance a datové řady (BYD, SPOT, INF) – 46 pravidel + 3 datové řady
 
 ## Fáze 2–3 – Revize aplikací a skeptik
 
