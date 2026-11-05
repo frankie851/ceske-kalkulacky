@@ -5,6 +5,80 @@ zalozka: osvc-2027
 title: OSVČ 2027
 description: Paušální daň, přiznání s výdajovým paušálem, nebo EET OFF? Porovnání tří cest pro živnostníky.
 permalink: /dane-podnikani/mam-eet/osvc-2027/
+skripty: ['/nastroje/mam-eet/osvc-app.js']
+styly: ['/nastroje/mam-eet/mam-eet.css']
+stitkyNavic: ['Paušální daň, přiznání, nebo EET OFF']
 ---
-{% from "komponenty/obsah.njk" import upozorneni %}
-{{ upozorneni({ typ: 'info', titulek: 'Připravujeme rozhraní', text: 'Srovnání sem právě přenášíme. Brzy tu porovnáš paušální daň, přiznání a EET OFF.' }) }}
+{%- from "komponenty/formular.njk" import pole, segmenty, volby -%}
+{%- from "komponenty/vysledky.njk" import lepiva_lista -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set sprite = '/img/sprite.svg' | url -%}
+{%- set p = osvc.pole -%}
+<div class="calc-layout osvc" id="osvc" data-sprite="{{ sprite }}">
+  <section class="calc-side" aria-labelledby="osvc-zadani-nadpis">
+    <div class="card">
+      <h2 id="osvc-zadani-nadpis">Tvoje zadání</h2>
+      <p class="muted small">{{ osvc.soukromi }}</p>
+      <form id="osvc-form" class="osvc-form" novalidate>
+        {{ pole({ id: 'osvc-income', label: p.prijmy.label, hodnota: p.prijmy.hodnota, jednotka: p.prijmy.jednotka, napoveda: p.prijmy.napoveda, chybaMisto: true }) }}
+        {{ pole({ id: 'osvc-flat', label: p.pausal.label, moznosti: p.pausal.moznosti, napoveda: p.pausal.napoveda }) }}
+        {{ segmenty({ id: 'osvc-exp', legenda: p.vydaje.legenda, moznosti: p.vydaje.moznosti }) }}
+        <div id="osvc-actual-pole" hidden>
+          {{ pole({ id: 'osvc-actual', label: p.skutecne.label, jednotka: p.skutecne.jednotka, chybaMisto: true }) }}
+        </div>
+        {{ segmenty({ id: 'osvc-vat', legenda: p.dph.legenda, moznosti: p.dph.moznosti }) }}
+        {{ pole({ id: 'osvc-children', label: p.deti.label, hodnota: p.deti.hodnota, napoveda: p.deti.napoveda, chybaMisto: true }) }}
+        {{ volby({ id: 'osvc-activity', typ: 'radio', legenda: p.cinnost.legenda, moznosti: p.cinnost.moznosti }) }}
+        {{ segmenty({ id: 'osvc-contact', legenda: p.kontakt.legenda, moznosti: p.kontakt.moznosti, napoveda: p.kontakt.napoveda }) }}
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">{{ p.spocitat }}{{ ikona('ikona-sipka') }}</button>
+        </div>
+        <p class="small muted mt-4 osvc-bez-js">Bez JavaScriptu se výsledek nepřepočítá. Vpravo je spočítaný pro výchozí hodnoty.</p>
+      </form>
+    </div>
+  </section>
+
+  <div class="calc-main">
+    <p class="sr-only" id="osvc-hlaseni" aria-live="polite"></p>
+    <div id="osvc-vysledek" class="osvc-vysledek">
+      {{ osvc.vysledek(sprite) | safe }}
+    </div>
+
+    <section class="card" id="osvc-graf" aria-labelledby="osvc-graf-nadpis">
+      <h2 id="osvc-graf-nadpis">{{ osvc.graf.titulek }}</h2>
+      <p class="muted small" id="osvc-graf-popis">{{ osvc.graf.popis }}</p>
+      {{ osvc.graf.svg | safe }}
+      <p class="graf-souhrn">{{ osvc.graf.zlom }}</p>
+      <details class="osvc-tabulka-grafu">
+        <summary>{{ osvc.graf.tabulkaSouhrn }}</summary>
+        {{ osvc.graf.tabulka | safe }}
+      </details>
+    </section>
+
+    <section class="card" id="osvc-terminy" aria-labelledby="osvc-terminy-nadpis">
+      <h2 id="osvc-terminy-nadpis">{{ osvc.terminy.nadpis }}</h2>
+      <ul class="checklist">
+        {%- for u in osvc.terminy.polozky %}
+        <li><input type="checkbox" id="osvc-termin-{{ loop.index }}"><label for="osvc-termin-{{ loop.index }}"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span><span class="task">{{ u.ukol }}</span><span class="eet-kdy"><span class="when firm">{{ ikona('ikona-kalendar') }}{{ u.termin }}</span></span></span></label><p class="eet-ukol-text">{{ u.text }}</p>{% if u.id == 'firstPayment' %}<p class="eet-ukol-text" id="osvc-first-payment"><strong>{{ osvc.terminy.prvniPlatba }}</strong></p>{% endif %}<span class="src">{{ ikona('ikona-odkaz') }}Zdroj: <a href="{{ u.zdroj.url }}">{{ u.zdroj.nazev }}</a></span></li>
+        {%- endfor %}
+      </ul>
+      <h3 class="mt-5">{{ osvc.terminy.odkazyNadpis }}</h3>
+      <ul class="sources">
+        {%- for l in osvc.terminy.odkazy %}
+        <li>{{ ikona('ikona-odkaz') }}<a href="{{ l.url }}">{{ l.nazev }}</a></li>
+        {%- endfor %}
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="osvc-stav-nadpis">
+      <h2 id="osvc-stav-nadpis">{{ osvc.stav.nadpis }}</h2>
+      <p class="muted small">{{ osvc.stav.disclaimer }} {{ osvc.stav.poznamka }}</p>
+      <ul class="osvc-stavy">
+        {%- for s in osvc.stav.polozky %}
+        <li><span class="osvc-stav-text">{{ s.text }}</span> <span class="tag osvc-stav-{{ s.status }}">{{ s.stav }}</span>{% if s.poznamka %}<span class="hint">{{ s.poznamka }}</span>{% endif %}<span class="src">{{ ikona('ikona-odkaz') }}Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.nazev }}</a></span></li>
+        {%- endfor %}
+      </ul>
+    </section>
+  </div>
+</div>
+{{ lepiva_lista({ cislo: osvc.lista.cislo, popis: osvc.lista.popis, cil: '#osvc-vysledek-karta' }) }}

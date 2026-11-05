@@ -1,7 +1,1090 @@
 {
   "meta": {
-    "overeno": "2026-11-04",
-    "zdroje": [],
-    "neovereno": []
+    "overeno": "2026-11-05",
+    "zdroje": [
+      {
+        "nazev": "eet.gov.cz – Online služby a infolinka",
+        "url": "https://eet.gov.cz/cs/online-sluzby"
+      },
+      {
+        "nazev": "Finanční správa – tisková zpráva k EET 2.0, 2. 11. 2026",
+        "url": "https://eet.gov.cz/cs/pro-media/tiskove-zpravy/2026/eet-2-0-podnikatele-se-jiz-mohou-prihlasit-k-evide-1386"
+      },
+      {
+        "nazev": "eet.gov.cz – Kdo musí evidovat tržby",
+        "url": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby"
+      },
+      {
+        "nazev": "eet.gov.cz – Co je z evidence tržeb vyjmuto",
+        "url": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto"
+      },
+      {
+        "nazev": "eet.gov.cz – Co je režim EET OFF",
+        "url": "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off"
+      },
+      {
+        "nazev": "MF – Brožura EET 2.0 jednoduše, moderně a přehledně (PDF)",
+        "url": "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf"
+      },
+      {
+        "nazev": "eet.gov.cz – Jak a kdy se přihlásit k režimu EET OFF",
+        "url": "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off"
+      },
+      {
+        "nazev": "eet.gov.cz – Praktické informace (MOJE eet)",
+        "url": "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace"
+      },
+      {
+        "nazev": "Leták FS „EET v 5 krocích“",
+        "url": "https://eet.gov.cz/assets/cs/cmsmedia/pro-media/EET_v_5_krocich.pdf"
+      },
+      {
+        "nazev": "eet.gov.cz – Jak začít evidovat",
+        "url": "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat"
+      },
+      {
+        "nazev": "eet.gov.cz – Nastavení před zahájením evidence",
+        "url": "https://eet.gov.cz/cs/zacinam-s-eet/nastaveni-pred-zahajenim-evidence-trzeb"
+      },
+      {
+        "nazev": "eet.gov.cz – Harmonogram EET 2.0",
+        "url": "https://eet.gov.cz/cs/o-eet/jaky-je-harmonogram-eet-2-0"
+      },
+      {
+        "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů",
+        "url": "https://e-sbirka.gov.cz/sb/1992/586"
+      },
+      {
+        "nazev": "Nařízení vlády č. 177/2026 Sb.",
+        "url": "https://e-sbirka.gov.cz/sb/2026/177"
+      },
+      {
+        "nazev": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení",
+        "url": "https://e-sbirka.gov.cz/sb/1992/589"
+      },
+      {
+        "nazev": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9",
+        "url": "https://e-sbirka.gov.cz/sb/1995/155"
+      },
+      {
+        "nazev": "Zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění",
+        "url": "https://e-sbirka.gov.cz/sb/1992/592"
+      },
+      {
+        "nazev": "Nařízení vlády č. 164/2026 Sb. (minimální mzda 2027)",
+        "url": "https://e-sbirka.gov.cz/sb/2026/164"
+      },
+      {
+        "nazev": "financnisprava.gov.cz – Paušální daň, obecné informace",
+        "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace"
+      },
+      {
+        "nazev": "Finanční správa – tisková zpráva k paušální dani, 19. 1. 2026",
+        "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/zajem-o-pausalni-dan-roste-letos"
+      },
+      {
+        "nazev": "Tiskopis 25 5255 – Oznámení o vstupu do paušálního režimu (PDF)",
+        "url": "https://financnisprava.gov.cz/assets/tiskopisy/5255_3.pdf"
+      },
+      {
+        "nazev": "Daňový portál finanční správy",
+        "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_epo/epo2/form/form_uvod.faces?pisemnost=DPFOPR&ext=t"
+      },
+      {
+        "nazev": "Tiskopis 25 5260 – Oznámení o změně pásma paušálního režimu (PDF)",
+        "url": "https://financnisprava.gov.cz/assets/tiskopisy/5260_1.pdf"
+      },
+      {
+        "nazev": "Všechny daňové tiskopisy",
+        "url": "https://financnisprava.gov.cz/cs/dane/danove-tiskopisy"
+      }
+    ],
+    "neovereno": [
+      "Výjimka pro malé hotovostní tržby – oficiální zdroje ji nepotvrdily, proto ji průvodce neuvádí.",
+      "Limit dvou zaměstnanců pro aplikaci MOJE eet – oficiální zdroje ho nepotvrdily.",
+      "Obecná výjimka pro držitele průkazu ZTP/P – zákon ji dává jen při průkazu kvůli nevidomosti, těžké ztrátě zraku nebo hluchoslepotě.",
+      "OSVČ 2027: tabulku paušální daně pro rok 2027 (1. pásmo je dopočtené ze zákona), rozhodnou částku pro vedlejší činnost a posouzení podmínky daňového bonusu z příjmů je potřeba ještě ověřit u finanční správy a ČSSZ.",
+      "OSVČ 2027: kalkulačka nepočítá slevu za evidenci tržeb, další slevy (manžel/ka, student, školkovné), nemocenské pojištění, odčitatelné položky ani děti se ZTP/P."
+    ],
+    "title": "Mám EET?",
+    "subtitle": "Průvodce EET 2.0 pro podnikatele",
+    "lastVerified": "2026-11-05",
+    "currency": "Kč",
+    "disclaimer": "Informativní průvodce, nejde o daňové poradenství. Rozhodující je zákon č. 180/2026 Sb. a výklad finanční správy.",
+    "officialSite": {
+      "label": "eet.gov.cz",
+      "url": "https://eet.gov.cz/",
+      "verified": "2026-11-05"
+    },
+    "hotline": {
+      "label": "Infolinka finanční správy",
+      "phone": "953 109 109",
+      "phoneHref": "tel:+420953109109",
+      "hours": "Po–Čt 9–17, Pá 9–14",
+      "source": "https://eet.gov.cz/cs/online-sluzby",
+      "verified": "2026-11-05"
+    },
+    "privacyNote": "Odpovědi zůstávají jen v tomto okně prohlížeče. Nikam se neukládají ani neodesílají."
+  },
+  "launch": {
+    "date": "2027-01-01",
+    "pilotNote": "Leden 2027 je pilotní režim: tržby se už evidují standardně, finanční správa ale plnění povinností nebude vymáhat.",
+    "source": "https://eet.gov.cz/cs/pro-media/tiskove-zpravy/2026/eet-2-0-podnikatele-se-jiz-mohou-prihlasit-k-evide-1386",
+    "sourceTitle": "Tisková zpráva FS, 2. 11. 2026",
+    "verified": "2026-11-05"
+  },
+  "forms": [
+    {
+      "id": "osvc",
+      "label": "OSVČ (podnikající fyzická osoba)",
+      "business": true,
+      "naturalPerson": true,
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdo-musi-evidovat-trzby-319",
+      "sourceTitle": "eet.gov.cz – Kdo musí evidovat tržby",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "po",
+      "label": "Právnická osoba (s.r.o., a.s., družstvo, spolek…)",
+      "business": true,
+      "naturalPerson": false,
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdo-musi-evidovat-trzby-319",
+      "sourceTitle": "eet.gov.cz – Kdo musí evidovat tržby",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "none",
+      "label": "Nepodnikám (jen zaměstnání, nájem, příležitostný prodej přebytků…)",
+      "business": false,
+      "naturalPerson": true,
+      "reason": "Evidují se jen příjmy z podnikání. Příjmy ze zaměstnání, z nájmu, z kapitálového majetku nebo příležitostný prodej přebytků evidenci nepodléhají.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdy-nejde-o-prijem-z-podnikani-322",
+      "sourceTitle": "eet.gov.cz – Kdy nejde o příjem z podnikání",
+      "verified": "2026-11-05"
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": "cash",
+      "label": "Hotovost (i mimo provozovnu)",
+      "recorded": true,
+      "reason": "Hotovost se eviduje vždy, i když ji přijmeš mimo provozovnu a bez osobního kontaktu.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334",
+      "sourceTitle": "eet.gov.cz – Co je kontaktní platba",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "card",
+      "label": "Platební karta na místě (terminál)",
+      "recorded": true,
+      "reason": "Platba kartou při osobním kontaktu nebo v provozovně je kontaktní platba a eviduje se.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#jake-platby-musite-evidovat-325",
+      "sourceTitle": "eet.gov.cz – Jaké platby musíte evidovat",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "qrOnSite",
+      "label": "QR kód nebo bankovní převod přímo u pultu / u zákazníka",
+      "recorded": true,
+      "reason": "Platba QR kódem, převodem nebo inkasem při osobním kontaktu je kontaktní platba a eviduje se.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#jake-platby-musite-evidovat-325",
+      "sourceTitle": "eet.gov.cz – Jaké platby musíte evidovat",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "vouchers",
+      "label": "Stravenky, poukázky, dárkové karty, Multisport",
+      "recorded": true,
+      "reason": "Platby stravenkami, poukázkami, dárkovými nebo předplacenými kartami se evidují.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#jake-platby-musite-evidovat-325",
+      "sourceTitle": "eet.gov.cz – Jaké platby musíte evidovat",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "virtual",
+      "label": "Kryptoměny a jiná virtuální aktiva na místě",
+      "recorded": true,
+      "reason": "Kontaktní platby kryptoaktivy a dalšími virtuálními aktivy se evidují.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#jake-platby-musite-evidovat-325",
+      "sourceTitle": "eet.gov.cz – Jaké platby musíte evidovat",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "cheque",
+      "label": "Šek, směnka nebo cestovní šek",
+      "recorded": true,
+      "reason": "Platby šekem, směnkou nebo cestovním šekem se evidují.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#jake-platby-musite-evidovat-325",
+      "sourceTitle": "eet.gov.cz – Jaké platby musíte evidovat",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "invoiceTransfer",
+      "label": "Faktura, kterou zákazník zaplatí převodem na dálku",
+      "recorded": false,
+      "reason": "Bankovní převod, kterým zákazník zaplatí fakturu z domova nebo z kanceláře, se neeviduje.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdy-platbu-evidovat-nemusite-326",
+      "sourceTitle": "eet.gov.cz – Kdy platbu evidovat nemusíte",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "online",
+      "label": "Online platba na e-shopu (platební brána, QR kód na webu)",
+      "recorded": false,
+      "reason": "Platba přes platební bránu nebo QR kód na webu e-shopu je platba na dálku a neeviduje se.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#kdy-platbu-evidovat-nemusite-326",
+      "sourceTitle": "eet.gov.cz – Kdy platbu evidovat nemusíte",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "cod",
+      "label": "Dobírka přes provozovatele poštovní služby",
+      "recorded": false,
+      "reason": "Hotovost od zákazníka, kterou přijme provozovatel poštovní služby (dobírka) a pošle ti ji na účet, není kontaktní platba a neeviduje se.",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334",
+      "sourceTitle": "eet.gov.cz – Co je kontaktní platba",
+      "verified": "2026-11-05"
+    }
+  ],
+  "sectors": [
+    {
+      "id": "none",
+      "label": "Nic z toho",
+      "exempt": false
+    },
+    {
+      "id": "air",
+      "label": "Obchodní letecká doprava a služby s ní přímo související",
+      "exempt": true,
+      "reason": "Tržby z obchodní letecké dopravy a ze služeb s ní přímo souvisejících zákon z evidence vyjímá (§ 12 odst. 1 písm. f).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "publicTransport",
+      "label": "Pravidelná hromadná přeprava osob (platby ve vozidle nebo na palubě)",
+      "exempt": true,
+      "reason": "Platby hrazené v dopravních prostředcích při pravidelné hromadné přepravě osob nebo na palubě letadel, pokud přímo souvisí s přepravou, se neevidují (§ 12 odst. 1 písm. d).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "rail",
+      "label": "Osobní železniční přeprava",
+      "exempt": true,
+      "reason": "Tržby z osobní železniční přepravy se neevidují (§ 12 odst. 1 písm. e).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "postal",
+      "label": "Poštovní služby (i držitel poštovní licence)",
+      "exempt": true,
+      "reason": "Tržby z poštovních služeb a ze zboží a služeb s nimi přímo souvisejících se neevidují (§ 12 odst. 1 písm. g), tržby držitele poštovní licence také ne (§ 11 odst. 1).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "school",
+      "label": "Stravování nebo ubytování dětí a studentů školou či školským zařízením",
+      "exempt": true,
+      "reason": "Tržby ze stravování nebo ubytování dětí, žáků a studentů školou nebo školským zařízením se neevidují (§ 12 odst. 1 písm. c).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "gambling",
+      "label": "Hazardní hry",
+      "exempt": true,
+      "reason": "Tržby z hazardních her se neevidují (§ 12 odst. 2 písm. a).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "energy",
+      "label": "Energetika na základě licence podle energetického zákona",
+      "exempt": true,
+      "reason": "Tržby z podnikání v energetických odvětvích na základě licence se neevidují (§ 12 odst. 2 písm. b).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "water",
+      "label": "Vodovody a kanalizace (s povolením krajského úřadu)",
+      "exempt": true,
+      "reason": "Tržby z provozování vodovodů a kanalizací na základě povolení krajského úřadu se neevidují (§ 12 odst. 2 písm. c).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "consumerCredit",
+      "label": "Nebankovní poskytovatel spotřebitelského úvěru",
+      "exempt": true,
+      "reason": "Tržby nebankovního poskytovatele spotřebitelského úvěru z této činnosti se neevidují (§ 12 odst. 2 písm. d).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "paymentInstitution",
+      "label": "Platební instituce, instituce elektronických peněz, správce nevýkonného úvěru, poskytovatel služeb kryptoaktiv",
+      "exempt": true,
+      "reason": "Tržby z činnosti na základě povolení platební instituce, instituce elektronických peněz, správce nevýkonného úvěru nebo poskytovatele služeb souvisejících s kryptoaktivy se neevidují (§ 12 odst. 2 písm. e).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "finance",
+      "label": "Banka, spořitelní družstvo, pojišťovna, investiční společnost či fond, obchodník s cennými papíry, penzijní společnost",
+      "exempt": true,
+      "reason": "Tržby bank, spořitelních družstev, pojišťoven, investičních společností a fondů, obchodníků s cennými papíry, centrálního depozitáře, penzijních společností a organizátora regulovaného trhu se neevidují (§ 11 odst. 2).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#osobni-vyneti-z-evidence-trzeb-514",
+      "sourceTitle": "eet.gov.cz – Osobní vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "public",
+      "label": "Stát, kraj, obec, svazek obcí, příspěvková organizace, veřejná vysoká škola",
+      "exempt": true,
+      "reason": "Tržby státu, státních fondů, územních samosprávných celků, svazků obcí, příspěvkových organizací, veřejných vysokých škol a vybraných školských právnických osob se neevidují (§ 11 odst. 1).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#osobni-vyneti-z-evidence-trzeb-514",
+      "sourceTitle": "eet.gov.cz – Osobní vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "publicBenefit",
+      "label": "Drobná vedlejší činnost veřejně prospěšného poplatníka (spolek, nadace…)",
+      "exempt": true,
+      "reason": "Tržby z drobné vedlejší podnikatelské činnosti veřejně prospěšných poplatníků se neevidují (§ 12 odst. 1 písm. a).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#vecne-vyneti-z-evidence-trzeb-513",
+      "sourceTitle": "eet.gov.cz – Věcné vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "vending",
+      "label": "Prodej jen přes prodejní automat",
+      "exempt": true,
+      "reason": "Tržby z prodeje přes prodejní automat (samoobslužné zařízení, které je samostatnou provozovnou) se neevidují (§ 13 odst. 2 a 3).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#dalsi-vyneti-z-evidence-trzeb-512",
+      "sourceTitle": "eet.gov.cz – Další vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "toilets",
+      "label": "Provozování veřejných toalet",
+      "exempt": true,
+      "reason": "Tržby z provozování veřejných toalet se neevidují (§ 13 odst. 5 písm. b).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#dalsi-vyneti-z-evidence-trzeb-512",
+      "sourceTitle": "eet.gov.cz – Další vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    },
+    {
+      "id": "fish",
+      "label": "Prodej sladkovodních ryb 18.–24. 12. v provozovně, kde se prodávají jen ryby",
+      "exempt": true,
+      "reason": "Tržby z prodeje sladkovodních ryb od 18. do 24. prosince v provozovně, kde se v té době uskutečňují jen tyto tržby, se neevidují (§ 13 odst. 5 písm. c).",
+      "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#dalsi-vyneti-z-evidence-trzeb-512",
+      "sourceTitle": "eet.gov.cz – Další vynětí z evidence tržeb",
+      "verified": "2026-11-05"
+    }
+  ],
+  "sectorOtherActivitiesNote": "Výjimka se týká jen tržeb z této činnosti. Pokud podnikáš i v jiném oboru a přijímáš tam kontaktní platby, tyto tržby evidovat musíš.",
+  "flatTaxBands": [
+    {
+      "id": "none",
+      "label": "Ne, paušální daň neplatím"
+    },
+    {
+      "id": "band1",
+      "label": "Ano, 1. pásmo"
+    },
+    {
+      "id": "band2",
+      "label": "Ano, 2. pásmo"
+    },
+    {
+      "id": "band3",
+      "label": "Ano, 3. pásmo"
+    }
+  ],
+  "blindExemption": {
+    "reasonMet": "Máš průkaz ZTP nebo ZTP/P kvůli nevidomosti, těžké ztrátě zraku nebo hluchoslepotě, podnikáš bez zaměstnanců a spolupracujících osob a tržby přijímáš osobně. Tvoje tržby se neevidují (§ 11 odst. 4).",
+    "reasonNotMet": "Výjimka pro nevidomé podnikatele platí jen bez zaměstnanců a spolupracujících osob (kromě osob se stejným postižením) a jen když tržby přijímáš osobně. Tuto podmínku nesplňuješ.",
+    "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/co-je-z-evidence-trzeb-vyjmuto#osobni-vyneti-z-evidence-trzeb-514",
+    "sourceTitle": "eet.gov.cz – Osobní vynětí z evidence tržeb",
+    "verified": "2026-11-05"
+  },
+  "eetOff": {
+    "eligibleFormId": "osvc",
+    "eligibleBandId": "band1",
+    "incomeLimit": 1000000,
+    "incomeYear": 2026,
+    "surchargeMonthly": 1400,
+    "taxComponentBaseMonthly": 100,
+    "taxComponentWithOffMonthly": 1500,
+    "monthsPerYear": 12,
+    "registrationDeadline": "2027-01-11",
+    "texts": {
+      "eligible": "Jsi OSVČ v 1. pásmu paušální daně a tvoje příjmy ze samostatné činnosti za rok {year} nepřesáhly {limit}. Můžeš si zvolit režim EET OFF: místo evidence zaplatíš přirážku {surchargeMonthly} měsíčně, tedy {surchargeAnnual} ročně. Daňová složka paušální zálohy tak bude {withOff} místo {base} měsíčně.",
+      "deadline": "K EET OFF se přihlásíš oznámením finančnímu úřadu nejpozději {deadline}. Pozdní oznámení je neúčinné a nelze ho napravit.",
+      "notPerson": "EET OFF je jen pro fyzické osoby (OSVČ), právnické osoby ho zvolit nemohou.",
+      "notFlatTax": "EET OFF je jen pro OSVČ v paušálním režimu. Paušální daň neplatíš, proto EET OFF zvolit nemůžeš.",
+      "wrongBand": "EET OFF je jen pro 1. pásmo paušální daně. Ve 2. ani 3. pásmu ho zvolit nemůžeš.",
+      "overLimit": "EET OFF je jen pro příjmy ze samostatné činnosti do {limit} za předchozí rok. Podle tvé odpovědi to bylo {income}, proto EET OFF zvolit nemůžeš.",
+      "missingIncome": "Pro posouzení EET OFF je potřeba zadat příjmy ze samostatné činnosti za rok {year}.",
+      "fixedForYear": "Zvolený režim nelze během roku měnit. Návrat k evidenci je možný až od dalšího kalendářního roku. Když během roku překročíš {limit}, přirážku platíš do konce roku a evidovat začneš od dalšího roku."
+    },
+    "source": "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off",
+    "sourceTitle": "eet.gov.cz – Co je režim EET OFF",
+    "amountsSource": "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "amountsSourceTitle": "Brožura MF EET 2.0, s. 9",
+    "deadlineSource": "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+    "deadlineSourceTitle": "eet.gov.cz – Jak a kdy se přihlásit k režimu EET OFF",
+    "verified": "2026-11-05"
+  },
+  "mojeEet": {
+    "name": "MOJE eet",
+    "availableFrom": "2026-12-01",
+    "maxUnits": 2,
+    "priceAnnual": 0,
+    "texts": {
+      "suitable": "Máš nejvýše {maxUnits} evidenční jednotky, takže ti může stačit bezplatná webová aplikace MOJE eet (od {from}). Potřebuješ k ní DIS+, pokladní certifikát si zajistí sama.",
+      "unsuitable": "Máš víc než {maxUnits} evidenční jednotky. Aplikace MOJE eet je určena zejména pro nejvýše {maxUnits} jednotky, počítej proto s vlastním pokladním řešením."
+    },
+    "source": "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+    "sourceTitle": "eet.gov.cz – Kdy mi postačí webová aplikace MOJE eet",
+    "certificateSource": "https://eet.gov.cz/assets/cs/cmsmedia/pro-media/EET_v_5_krocich.pdf",
+    "certificateSourceTitle": "Leták FS „EET v 5 krocích“",
+    "verified": "2026-11-05"
+  },
+  "taxCredit": {
+    "maxAmount": 5000,
+    "text": "Podnikající fyzická osoba si může uplatnit jednorázovou slevu na dani až {amount} na zavedení EET 2.0, a to za první rok, ve kterém zaevidovala tržbu. V kalkulačce ji nepočítáme.",
+    "source": "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "sourceTitle": "Brožura MF EET 2.0, s. 10",
+    "verified": "2026-11-05"
+  },
+  "calculator": {
+    "intro": "Porovnej přirážku EET OFF s tím, kolik tě bude stát evidence.",
+    "optionMojeEet": "Budu evidovat v aplikaci MOJE eet (zdarma)",
+    "optionOwn": "Budu evidovat ve vlastní pokladně nebo aplikaci",
+    "ownCostLabel": "Roční náklady na vlastní pokladnu (Kč, včetně předplatného a terminálu)",
+    "sentences": {
+      "evidenceCheaper": "Evidence vychází levněji: {evidenceCost} ročně proti přirážce {surcharge}, ušetříš {diff}.",
+      "offCheaper": "EET OFF vychází levněji: přirážka {surcharge} ročně proti {evidenceCost} za evidenci, ušetříš {diff}.",
+      "equal": "Obě možnosti vycházejí stejně: {surcharge} ročně."
+    },
+    "timeNote": "Kalkulačka nezapočítává čas strávený evidencí."
+  },
+  "results": {
+    "must": {
+      "headline": "Ano, musíš evidovat tržby v EET 2.0.",
+      "sub": "Povinnost začíná {launch}."
+    },
+    "not": {
+      "headline": "Ne, evidovat tržby v EET 2.0 nemusíš.",
+      "sub": "Pokud se tvoje podnikání změní (nový obor, nový způsob placení), projdi průvodce znovu."
+    },
+    "off": {
+      "headline": "Můžeš zvolit EET OFF.",
+      "sub": "Pokud EET OFF nezvolíš, musíš od {launch} evidovat tržby."
+    },
+    "recordedIntro": "Přijímáš kontaktní platby, které se evidují:",
+    "notRecordedIntro": "Žádný ze způsobů placení, které přijímáš, se neeviduje:",
+    "mustReason": "Podnikáš, přijímáš kontaktní platby a nevztahuje se na tebe žádná výjimka. Platí: podnikání + platba při osobním kontaktu + žádná výjimka = povinnost evidovat.",
+    "mustReasonSource": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-evidovana-trzba-328",
+    "mustReasonSourceTitle": "eet.gov.cz – Co je evidovaná tržba",
+    "verified": "2026-11-05"
+  },
+  "checklist": {
+    "title": "Kontrolní seznam",
+    "intro": "Co udělat a do kdy. Termíny „doporučeno do“ jsou naše doporučení, aby bylo vše hotové před {launch}.",
+    "offGroupTitle": "Když zvolíš EET OFF",
+    "evidenceGroupTitle": "Když budeš evidovat",
+    "evidenceGroupTitleIfOff": "Když EET OFF nezvolíš a budeš evidovat",
+    "notItems": [
+      {
+        "id": "recheck",
+        "title": "Při změně podnikání projdi průvodce znovu",
+        "text": "Nový obor nebo nový způsob placení (např. hotovost nebo platby kartou na místě) může znamenat povinnost evidovat.",
+        "source": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby",
+        "sourceTitle": "eet.gov.cz – Kdo musí evidovat tržby",
+        "verified": "2026-11-05"
+      }
+    ],
+    "offItems": [
+      {
+        "id": "offNotice",
+        "title": "Pošli oznámení o přihlášení k přirážce (EET OFF)",
+        "deadline": "2027-01-11",
+        "deadlineKind": "hard",
+        "text": "Oznámení podáš finančnímu úřadu elektronicky, poštou nebo osobně. Pozdní oznámení je neúčinné a zpoždění nelze napravit.",
+        "source": "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+        "sourceTitle": "eet.gov.cz – Jak a kdy se přihlásit k EET OFF",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "offPay",
+        "title": "Plať zvýšenou paušální zálohu",
+        "text": "Daňová složka paušální zálohy bude {withOff} měsíčně ({base} + přirážka {surchargeMonthly}). Pojistné platíš podle běžných pravidel. Režim nelze během roku změnit.",
+        "source": "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+        "sourceTitle": "Brožura MF EET 2.0, s. 9",
+        "verified": "2026-11-05"
+      }
+    ],
+    "evidenceItems": [
+      {
+        "id": "dis",
+        "title": "Aktivuj Daňovou informační schránku plus (DIS+) a přihlas se k evidenci tržeb",
+        "availableFrom": "2026-11-01",
+        "deadline": "2026-12-15",
+        "deadlineKind": "recommended",
+        "text": "Přes portál MOJE daně → Online finanční úřad → tlačítko „AKTIVOVAT EET“. Aktivace DIS+ trvá až 48 hodin. Pokud tě finanční správa dosud neeviduje, až 5 pracovních dnů.",
+        "source": "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+        "sourceTitle": "eet.gov.cz – Jak začít evidovat",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "units",
+        "title": "Založ v DIS+ evidenční jednotky",
+        "availableFrom": "2026-11-01",
+        "deadline": "2026-12-15",
+        "deadlineKind": "recommended",
+        "text": "Evidenční jednotka je provozovna, stánek, vozidlo, web nebo ty, když podnikáš u zákazníků. Potřebuješ aspoň jednu.",
+        "source": "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+        "sourceTitle": "eet.gov.cz – Jak začít evidovat",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "cert",
+        "title": "Získej pokladní certifikát",
+        "availableFrom": "2026-11-01",
+        "deadline": "2026-12-31",
+        "deadlineKind": "recommended",
+        "text": "Vygeneruj ho zdarma na portálu CA EET, do kterého vstoupíš z DIS+, a nainstaluj do pokladny podle pokynů dodavatele. Zákon vyžaduje certifikát před první evidovanou tržbou.",
+        "textMojeEet": "Pokud budeš používat MOJE eet, aplikace si certifikát zajistí sama po spárování s DIS+.",
+        "source": "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+        "sourceTitle": "eet.gov.cz – Jak začít evidovat",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "appMojeEet",
+        "requires": "mojeEetSuitable",
+        "title": "Připrav si aplikaci MOJE eet nebo pokladnu",
+        "availableFrom": "2026-12-01",
+        "deadline": "2026-12-31",
+        "deadlineKind": "recommended",
+        "text": "Bezplatná webová aplikace MOJE eet poběží v prohlížeči na mobilu, tabletu i počítači. Je určena zejména pro nejvýše {maxUnits} evidenční jednotky. Pokud už pokladnu máš, ověř u dodavatele podporu EET 2.0.",
+        "source": "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+        "sourceTitle": "eet.gov.cz – Praktické informace",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "appPos",
+        "requires": "mojeEetUnsuitable",
+        "title": "Zajisti pokladní zařízení s podporou EET 2.0",
+        "deadline": "2026-12-31",
+        "deadlineKind": "recommended",
+        "text": "Pokladna, počítač, tablet i mobil, zákon zařízení neomezuje. Pokud máš pokladnu z původní EET, ověř u dodavatele aktualizaci pro EET 2.0.",
+        "source": "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+        "sourceTitle": "eet.gov.cz – Praktické informace",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "test",
+        "title": "Vyzkoušej nastavení před spuštěním",
+        "deadline": "2026-12-31",
+        "deadlineKind": "recommended",
+        "text": "Ověř připojení k internetu, nainstalovaný certifikát a dobu odezvy (nejméně 2 sekundy). Když se tržba kvůli výpadku neodešle, musíš ji poslat nejpozději do 48 hodin.",
+        "source": "https://eet.gov.cz/cs/zacinam-s-eet/nastaveni-pred-zahajenim-evidence-trzeb",
+        "sourceTitle": "eet.gov.cz – Nastavení před zahájením evidence",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "start",
+        "title": "Začni evidovat tržby",
+        "deadline": "2027-01-01",
+        "deadlineKind": "hard",
+        "text": "Zákon o evidenci tržeb nabývá účinnosti 1. ledna 2027. Leden je pilotní režim, finanční správa nebude plnění vymáhat.",
+        "source": "https://eet.gov.cz/cs/o-eet/jaky-je-harmonogram-eet-2-0",
+        "sourceTitle": "eet.gov.cz – Harmonogram EET 2.0",
+        "verified": "2026-11-05"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "form",
+      "type": "single",
+      "optionsFrom": "forms",
+      "title": "V jaké formě podnikáš?",
+      "help": "Pokud podnikáš jako OSVČ i přes firmu, projdi průvodce pro každou zvlášť."
+    },
+    {
+      "id": "payments",
+      "type": "multi",
+      "optionsFrom": "paymentMethods",
+      "title": "Jak od zákazníků přijímáš platby?",
+      "help": "Zaškrtni všechno, co používáš."
+    },
+    {
+      "id": "sector",
+      "type": "single",
+      "optionsFrom": "sectors",
+      "title": "Podnikáš v některém z těchto oborů?",
+      "help": "Jde o obory, které zákon z evidence vyjímá. Pokud žádný nesedí, zvol „Nic z toho“."
+    },
+    {
+      "id": "flatTax",
+      "type": "single",
+      "optionsFrom": "flatTaxBands",
+      "title": "Platíš paušální daň?",
+      "help": "Pásmo najdeš v oznámení o vstupu do paušálního režimu."
+    },
+    {
+      "id": "income",
+      "type": "number",
+      "title": "Jaké máš příjmy ze samostatné činnosti za rok {year}?",
+      "help": "Celkové roční příjmy v Kč (ne zisk). Odhad stačí.",
+      "unit": "Kč",
+      "min": 0
+    },
+    {
+      "id": "blind",
+      "type": "yesno",
+      "title": "Máš průkaz ZTP nebo ZTP/P kvůli nevidomosti, těžké ztrátě zraku nebo hluchoslepotě?",
+      "help": "Zákon má výjimku jen pro tento důvod průkazu. Jiné zdravotní postižení výjimku nezakládá."
+    },
+    {
+      "id": "alone",
+      "type": "yesno",
+      "title": "Podnikáš bez zaměstnanců a spolupracujících osob a tržby přijímáš osobně?",
+      "help": "Zaměstnanci nebo spolupracující osoby se stejným postižením se nepočítají."
+    },
+    {
+      "id": "units",
+      "type": "number",
+      "title": "Kolik máš evidenčních jednotek?",
+      "help": "Provozovny, stánky, vozidla nebo weby, kde přijímáš kontaktní platby. Když podnikáš jen u zákazníků, jednotkou jsi ty (1).",
+      "unit": "ks",
+      "min": 1
+    }
+  ],
+  "ui": {
+    "start": "Začít",
+    "next": "Pokračovat",
+    "back": "Zpět",
+    "restart": "Začít znovu",
+    "print": "Vytisknout seznam",
+    "yes": "Ano",
+    "no": "Ne",
+    "progress": "Otázka {current} z {total}",
+    "whyTitle": "Proč to tak vychází",
+    "sourceLabel": "Zdroj",
+    "calcTitle": "EET OFF, nebo evidence?",
+    "eetOffTitle": "Režim EET OFF",
+    "deadlineHard": "Termín",
+    "deadlineRecommended": "Doporučeno do",
+    "availableFrom": "Dostupné od",
+    "footerVerified": "Pravidla naposledy zkontrolována",
+    "intro": "Odpověz na nejvýše 8 krátkých otázek. Dozvíš se, jestli musíš od {launch} evidovat tržby, jestli můžeš zvolit EET OFF a co udělat do kdy.",
+    "errorLoad": "Nepodařilo se načíst pravidla (rules.json). Spusť web přes webový server, viz README.",
+    "validationMulti": "Vyber aspoň jednu možnost.",
+    "validationNumber": "Zadej celé číslo, nejméně {min}."
+  },
+  "osvc2027": {
+    "year": 2027,
+    "monthsPerYear": 12,
+    "verificationNote": "Hodnoty se stavem „official“ jsou přečtené přímo na oficiálním webu. Stav „secondary“ znamená, že oficiální web (ČSSZ, VZP, e-Sbírka) nebyl z prostředí dostupný a hodnota je ověřená shodou více zdrojů a přepočtem ze zákonného vzorce. Stav „derived“ je dopočet ze zákona, který úřad zatím nezveřejnil.",
+    "averageWage": {
+      "monthly": 51663,
+      "note": "Průměrná mzda pro rok 2027 = 48 900 Kč × 1,0565, zaokrouhleno nahoru.",
+      "status": "secondary",
+      "source": "https://e-sbirka.gov.cz/sb/2026/177",
+      "sourceTitle": "Nařízení vlády č. 177/2026 Sb.",
+      "verified": "2026-11-05"
+    },
+    "social": {
+      "rate": 0.292,
+      "profitShare": 0.55,
+      "minBaseShareMain": 0.35,
+      "minBaseShareSide": 0.11,
+      "maxBaseAverageWageMultiple": 48,
+      "sideThresholdAverageWageMultiple": 2.4,
+      "expected": {
+        "minAdvanceMain": 5281,
+        "minAdvanceSide": 1660,
+        "minBaseMain": 18083,
+        "minBaseSide": 5683,
+        "maxBaseAnnual": 2479824,
+        "sideThreshold": 123991
+      },
+      "note": "Rozhodná částka pro vedlejší činnost (2,4 × průměrná mzda) je přepočet ze zákona, ČSSZ ji zatím nebylo možné ověřit.",
+      "status": "secondary",
+      "source": "https://e-sbirka.gov.cz/sb/1992/589",
+      "sourceTitle": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení",
+      "verified": "2026-11-05",
+      "sideSource": "https://e-sbirka.gov.cz/sb/1995/155",
+      "sideSourceTitle": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9"
+    },
+    "health": {
+      "rate": 0.135,
+      "profitShare": 0.5,
+      "minBaseShareMain": 0.5,
+      "expected": {
+        "minAdvanceMain": 3488,
+        "minBaseMain": 25832
+      },
+      "status": "secondary",
+      "source": "https://e-sbirka.gov.cz/sb/1992/592",
+      "sourceTitle": "Zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění",
+      "verified": "2026-11-05"
+    },
+    "incomeTax": {
+      "rate": 0.15,
+      "highRate": 0.23,
+      "highRateAverageWageMultiple": 36,
+      "baseRoundDownTo": 100,
+      "taxpayerCredit": 30840,
+      "childCredits": [
+        15204,
+        22320,
+        27840
+      ],
+      "bonusMinIncomeMinimumWageMultiple": 6,
+      "bonusMinAnnual": 100,
+      "minimumWage": 24900,
+      "minimumWageSource": "https://e-sbirka.gov.cz/sb/2026/164",
+      "minimumWageSourceTitle": "Nařízení vlády č. 164/2026 Sb. (minimální mzda 2027)",
+      "note": "Podmínku pro daňový bonus (příjmy aspoň 6 × minimální mzda) posuzujeme z příjmů, ne ze zisku.",
+      "status": "secondary",
+      "source": "https://e-sbirka.gov.cz/sb/1992/586",
+      "sourceTitle": "Zákon č. 586/1992 Sb., o daních z příjmů (§ 7, § 16, § 35ba, § 35c)",
+      "verified": "2026-11-05"
+    },
+    "expenseFlatRates": [
+      {
+        "id": "p80",
+        "rate": 0.8,
+        "cap": 1600000,
+        "label": "80 % – zemědělství, lesnictví, řemeslné živnosti"
+      },
+      {
+        "id": "p60",
+        "rate": 0.6,
+        "cap": 1200000,
+        "label": "60 % – ostatní živnosti (volné, vázané, koncesované)"
+      },
+      {
+        "id": "p40",
+        "rate": 0.4,
+        "cap": 800000,
+        "label": "40 % – svobodná povolání, autorská práva, jiné podnikání"
+      },
+      {
+        "id": "p30",
+        "rate": 0.3,
+        "cap": 600000,
+        "label": "30 % – nájem majetku v obchodním majetku"
+      }
+    ],
+    "expenseFlatRatesSource": "https://e-sbirka.gov.cz/sb/1992/586",
+    "expenseFlatRatesSourceTitle": "Zákon č. 586/1992 Sb., § 7 odst. 7",
+    "verified": "2026-11-05",
+    "activities": [
+      {
+        "id": "main",
+        "label": "Hlavní činnost",
+        "flatTaxAllowed": true,
+        "healthMinimum": true,
+        "socialSide": false
+      },
+      {
+        "id": "sideEmployed",
+        "label": "Vedlejší – zároveň jsem zaměstnanec",
+        "flatTaxAllowed": false,
+        "healthMinimum": false,
+        "socialSide": true
+      },
+      {
+        "id": "sideOther",
+        "label": "Vedlejší – studuji, pobírám důchod nebo jsem na rodičovské",
+        "flatTaxAllowed": true,
+        "healthMinimum": false,
+        "socialSide": true
+      }
+    ],
+    "flatTax": {
+      "maxIncome": 2000000,
+      "bands": [
+        {
+          "id": "band1",
+          "label": "1. pásmo",
+          "monthly": 9662,
+          "tax": 100,
+          "social": 6074,
+          "health": 3488,
+          "socialFromMinAdvanceMultiple": 1.15,
+          "limits": {
+            "p80": 2000000,
+            "p60": 1500000,
+            "p40": 1000000,
+            "p30": 1000000
+          },
+          "status": "derived",
+          "note": "Finanční správa tabulku pro rok 2027 zatím nezveřejnila. Částka je dopočtená stejně jako oficiální částky 2026: daň 100 Kč + minimální záloha na sociální pojištění × 1,15 (zaokrouhleno nahoru) + minimální záloha na zdravotní pojištění.",
+          "source": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/zajem-o-pausalni-dan-roste-letos",
+          "sourceTitle": "FS, tisková zpráva 19. 1. 2026 (výpočet 1. pásma 2026)",
+          "verified": "2026-11-05"
+        },
+        {
+          "id": "band2",
+          "label": "2. pásmo",
+          "monthly": 16745,
+          "tax": 4963,
+          "social": 8191,
+          "health": 3591,
+          "limits": {
+            "p80": 2000000,
+            "p60": 2000000,
+            "p40": 1500000,
+            "p30": 1500000
+          },
+          "status": "official",
+          "source": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
+          "sourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
+          "verified": "2026-11-05"
+        },
+        {
+          "id": "band3",
+          "label": "3. pásmo",
+          "monthly": 27139,
+          "tax": 9320,
+          "social": 12527,
+          "health": 5292,
+          "limits": {
+            "p80": 2000000,
+            "p60": 2000000,
+            "p40": 2000000,
+            "p30": 2000000
+          },
+          "status": "official",
+          "source": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
+          "sourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
+          "verified": "2026-11-05"
+        }
+      ],
+      "conditionsSource": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
+      "conditionsSourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
+      "verified": "2026-11-05"
+    },
+    "deadlines": [
+      {
+        "id": "notice",
+        "date": "2027-01-11",
+        "title": "Přihláška k paušální dani (a k EET OFF)",
+        "text": "Oznámení o vstupu do paušálního režimu, o změně pásma nebo o přihlášení k přirážce EET OFF podáš finančnímu úřadu nejpozději {date}. Desátý den roku 2027 připadá na neděli, proto termín končí v pondělí. Pozdní oznámení je neúčinné. Kdo už v paušálním režimu je a pásmo nemění, nic nepodává.",
+        "source": "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+        "sourceTitle": "eet.gov.cz – Jak a kdy se přihlásit k režimu EET OFF",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "firstPayment",
+        "date": "2027-01-20",
+        "title": "První paušální záloha za leden 2027",
+        "text": "Paušální zálohu platíš do 20. dne každého měsíce. Za leden 2027 tedy nejpozději {date}. Pokud máš trvalý příkaz, uprav ho na novou částku.",
+        "source": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
+        "sourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
+        "verified": "2026-11-05"
+      }
+    ],
+    "links": [
+      {
+        "id": "form5255",
+        "title": "Tiskopis 25 5255 – Oznámení o vstupu do paušálního režimu (PDF)",
+        "source": "https://financnisprava.gov.cz/assets/tiskopisy/5255_3.pdf",
+        "sourceTitle": "financnisprava.gov.cz",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "epo5255",
+        "title": "Elektronické podání oznámení o vstupu (EPO)",
+        "source": "https://adisspr.mfcr.cz/dpr/adis/idpr_epo/epo2/form/form_uvod.faces?pisemnost=DPFOPR&ext=t",
+        "sourceTitle": "Daňový portál finanční správy",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "form5260",
+        "title": "Tiskopis 25 5260 – Oznámení o změně pásma paušálního režimu (PDF)",
+        "source": "https://financnisprava.gov.cz/assets/tiskopisy/5260_1.pdf",
+        "sourceTitle": "financnisprava.gov.cz",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "eetOff",
+        "title": "Jak se přihlásit k režimu EET OFF",
+        "source": "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+        "sourceTitle": "eet.gov.cz",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "forms",
+        "title": "Všechny daňové tiskopisy",
+        "source": "https://financnisprava.gov.cz/cs/dane/danove-tiskopisy",
+        "sourceTitle": "financnisprava.gov.cz",
+        "verified": "2026-11-05"
+      },
+      {
+        "id": "pausal",
+        "title": "Paušální daň – podmínky a pásma",
+        "source": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
+        "sourceTitle": "financnisprava.gov.cz",
+        "verified": "2026-11-05"
+      }
+    ],
+    "chart": {
+      "min": 100000,
+      "max": 2000000,
+      "step": 10000,
+      "tickStep": 500000,
+      "breakEvenStep": 1000,
+      "tableStep": 100000,
+      "yTickSteps": [
+        50000,
+        100000,
+        200000,
+        250000
+      ],
+      "yTickTarget": 6,
+      "layout": {
+        "marginLeft": 56,
+        "marginRight": 92,
+        "marginTop": 20,
+        "marginBottom": 36,
+        "height": 320,
+        "heightNarrow": 280,
+        "narrowWidth": 480,
+        "minWidth": 280,
+        "labelGap": 15,
+        "markerRadius": 5,
+        "tickLength": 4,
+        "tooltipOffset": 12,
+        "marginRightNarrow": 12,
+        "minTickSpacing": 56,
+        "labelLift": 8
+      }
+    },
+    "texts": {
+      "tabEet": "Mám EET?",
+      "tabOsvc": "Paušál, nebo přiznání?",
+      "title": "OSVČ 2027: paušální daň, přiznání, nebo EET OFF?",
+      "intro": "Spočítej, kolik v roce {year} zaplatíš na dani, sociálním a zdravotním pojištění ve třech variantách a co se ti vyplatí.",
+      "fieldIncome": "Roční příjmy z podnikání v roce {year}",
+      "fieldIncomeHelp": "Celkové příjmy (tržby) bez odečtení výdajů.",
+      "fieldFlatRate": "Druh činnosti (výdajový paušál)",
+      "fieldFlatRateHelp": "Podle druhu činnosti se určí výdajový paušál i pásmo paušální daně.",
+      "fieldExpenses": "Jak uplatníš výdaje v přiznání?",
+      "optExpensesFlat": "Výdajovým paušálem",
+      "optExpensesActual": "Skutečnými výdaji",
+      "fieldActual": "Skutečné roční výdaje",
+      "fieldVat": "Jsi plátce DPH?",
+      "fieldChildren": "Počet vyživovaných dětí",
+      "fieldChildrenHelp": "Bez dětí se ZTP/P; u nich je zvýhodnění dvojnásobné a kalkulačka ho nepočítá.",
+      "fieldActivity": "Podnikání je",
+      "fieldContact": "Přijímáš kontaktní platby (hotovost, karta nebo QR na místě)?",
+      "fieldContactHelp": "Jen kontaktní platby se od {launch} evidují v EET 2.0. Pro jistotu projdi průvodce Mám EET?",
+      "calculate": "Spočítat",
+      "validationIncome": "Zadej roční příjmy jako celé číslo, nejméně {min}.",
+      "validationActual": "Zadej skutečné výdaje jako celé číslo (0 nebo víc).",
+      "validationChildren": "Zadej počet dětí jako celé číslo (0 nebo víc).",
+      "resultTitle": "Výsledek",
+      "colVariant": "Varianta",
+      "colAnnual": "Ročně",
+      "colMonthly": "Měsíčně",
+      "colDiff": "Rozdíl",
+      "cheapestBadge": "Nejlevnější",
+      "unavailable": "Nedostupné",
+      "variantFlat": "Paušální daň ({band})",
+      "variantFlatNoBand": "Paušální daň",
+      "variantClassicFlat": "Přiznání, výdajový paušál {rate}",
+      "variantClassicActual": "Přiznání, skutečné výdaje",
+      "variantEetOff": "EET OFF (1. pásmo + přirážka)",
+      "summaryCheapest": "Nejlevněji vychází varianta „{variant}“: {annual} ročně. Ušetříš {diff} proti variantě „{next}“.",
+      "summaryOnly": "Dostupná je jen varianta „{variant}“: {annual} ročně.",
+      "summaryEqual": "Varianty „{variant}“ a „{next}“ vycházejí stejně: {annual} ročně.",
+      "breakdownTitle": "Jak jsme počítali přiznání",
+      "lineProfit": "Zisk (základ daně): {income} − výdaje {expenses} = {profit}",
+      "lineTax": "Daň: {taxGross} − sleva na poplatníka {credit}{high} = {taxAfterCredit}",
+      "lineHigh": " (z toho 23 % nad {threshold})",
+      "lineChildren": "Daňové zvýhodnění na děti: −{children} → daň {tax}",
+      "lineBonus": ", daňový bonus {bonus} (stát ti ho vyplatí, ve výpočtu snižuje odvody)",
+      "lineNoBonus": "Daňový bonus se nevyplatí: příjmy nedosahují {limit} (6 × minimální mzda).",
+      "lineSocial": "Sociální pojištění: max(55 % zisku, minimum {min}) = základ {base} × 29,2 % = {amount}",
+      "lineSocialNone": "Sociální pojištění: 0 Kč, zisk z vedlejší činnosti nepřesáhl rozhodnou částku {threshold}.",
+      "lineHealth": "Zdravotní pojištění: max(50 % zisku, minimum {min}) = základ {base} × 13,5 % = {amount}",
+      "lineFlatParts": "{band}: {monthly} měsíčně = daň {tax} + sociální {social} + zdravotní {health}.",
+      "lineEetOff": "EET OFF: {band1} + přirážka {surcharge} měsíčně = {monthly} měsíčně.",
+      "reasonVat": "Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba).",
+      "reasonEmployee": "Zaměstnanec nemůže být v paušálním režimu (s výjimkou příjmů zdaněných srážkovou daní).",
+      "reasonOverMax": "Paušální daň je jen pro příjmy do {limit}. Zadáno: {income}.",
+      "reasonEetNoFlat": "EET OFF je jen pro OSVČ v paušálním režimu. {reason}",
+      "reasonEetBand": "EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „{flat}“ je limit 1. pásma {limit}, ty máš {income}, takže ti vychází {band}.",
+      "reasonEetLimit": "EET OFF je jen pro příjmy do {limit}. Zadáno: {income}.",
+      "reasonEetNoContact": "Nepřijímáš kontaktní platby, takže evidovat tržby nemusíš. Přirážka EET OFF by byla zbytečný výdaj.",
+      "bandsTitle": "Na která pásma máš nárok",
+      "bandOk": "{band}: ano (limit {limit}), {monthly} měsíčně",
+      "bandNo": "{band}: ne, s druhem činnosti „{flat}“ je limit {limit}",
+      "noteChildrenFlat": "V paušálním režimu nepodáváš přiznání, takže si neuplatníš slevu na poplatníka ani daňové zvýhodnění na děti ({children} ročně). Proto přiznání vychází s dětmi výhodněji.",
+      "noteEvidence": "Přijímáš kontaktní platby, takže u paušální daně bez EET OFF i u přiznání budeš od {launch} evidovat tržby. Aplikace MOJE eet je zdarma.",
+      "notePrevYear": "Limity pásem i EET OFF se posuzují podle příjmů za rok {prevYear}. Počítáme, že byly podobné jako zadané příjmy.",
+      "noteNotIncluded": "Nepočítáme slevu za evidenci tržeb (až 5 000 Kč), slevu na manžela nebo manželku, na studenta, školkovné, nemocenské pojištění ani odčitatelné položky (penzijní spoření, dary, úroky z hypotéky).",
+      "noteBand1Status": "Výše 1. pásma pro rok {year} je dopočtená ze zákona. Finanční správa ji k {verified} ještě nezveřejnila.",
+      "noteActualChart": "Graf počítá přiznání s výdajovým paušálem {rate}, i když jsou zadané skutečné výdaje.",
+      "chartTitle": "Roční odvody podle výše příjmů",
+      "chartDesc": "Daň + sociální + zdravotní pojištění za rok {year}, výdajový paušál {rate}, počet dětí: {children}, {activity}.",
+      "chartAxisX": "Roční příjmy",
+      "chartAxisY": "Odvody za rok",
+      "chartYou": "Ty",
+      "chartBreakEven": "Od příjmů {income} vychází levněji {cheaper}.",
+      "chartBreakEvenNone": "V rozsahu grafu se pořadí paušální daně a přiznání nemění.",
+      "chartTableSummary": "Zobrazit hodnoty grafu v tabulce",
+      "chartLegendFlat": "Paušální daň",
+      "chartLegendClassic": "Přiznání",
+      "chartLegendEetOff": "EET OFF",
+      "deadlinesTitle": "Termíny a formuláře",
+      "linksTitle": "Formuláře a odkazy",
+      "disclaimer": "Orientační výpočet, nejde o daňové poradenství.",
+      "verifiedLabel": "Pravidla ověřena",
+      "statusLabel": "Stav ověření parametrů",
+      "currencyMonthly": "měsíčně",
+      "cheaperFlat": "paušální daň",
+      "cheaperClassic": "přiznání",
+      "firstPaymentAmount": "Tvoje měsíční záloha: {amount}.",
+      "statusOfficial": "ověřeno na oficiálním webu",
+      "statusSecondary": "oficiální web nebyl dostupný, ověřeno shodou více zdrojů a přepočtem",
+      "statusDerived": "dopočteno ze zákona, úřad zatím nezveřejnil",
+      "statusItemAverageWage": "Průměrná mzda 2027: {value}",
+      "statusItemSocial": "Sociální pojištění: min. záloha {main} (vedlejší {side}), rozhodná částka {threshold}",
+      "statusItemHealth": "Zdravotní pojištění: min. záloha {main}",
+      "statusItemTax": "Daň: sleva na poplatníka {credit}, děti {children}, 23 % nad {threshold}",
+      "statusItemBand": "{band}: {monthly} měsíčně",
+      "chartUnavailable": "nedostupné",
+      "chartTooltipIncome": "Příjmy {income}",
+      "chartHelp": "Najetím nebo šipkami na grafu zobrazíš hodnoty pro konkrétní příjmy.",
+      "colIncome": "Příjmy",
+      "yes": "Ano",
+      "no": "Ne",
+      "emptyResult": "Zadej roční příjmy a výsledek se spočítá.",
+      "panelPrivacy": "Zadané údaje zůstávají jen v tomto okně prohlížeče. Nic se neukládá ani neodesílá."
+    }
   }
 }

@@ -2,8 +2,153 @@
 layout: layouty/nastroj.njk
 nastroj: penzijko-kompas
 title: Penzijko kompas
-description: Který penzijní fond, kolik sežerou poplatky a co přinese reforma Lepší penzijko podle věku.
+description: Kolik ti stát přidá na penzijko dnes a podle návrhu 2027, kolik budeš mít v 65, kolik sežerou poplatky a co s transformovaným fondem.
 permalink: /penize/penzijko-kompas/
+uvod: Vyplň pár údajů o svém penzijku. Spočítáme státní příspěvek, kolik budeš mít v 65 a co se vyplatí změnit.
+skripty: ['/nastroje/penzijko-kompas/app.js']
+styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
 ---
-{% from "komponenty/obsah.njk" import upozorneni %}
-{{ upozorneni({ typ: 'info', titulek: 'Připravujeme rozhraní', text: 'Kalkulačku sem právě přenášíme. Brzy si tu porovnáš fondy a poplatky.' }) }}
+{%- from "komponenty/zalozky.njk" import zalozky -%}
+{%- from "komponenty/formular.njk" import pole, segmenty, volby, krok -%}
+{%- from "komponenty/vysledky.njk" import vysledek, lepiva_lista -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set k = kompas -%}
+{{ zalozky({ popisek: 'Nástroje k penzijku', polozky: [
+  { nazev: 'Plán48', url: '/penize/plan48/' },
+  { nazev: 'Penzijko kompas', url: '/penize/penzijko-kompas/', aktivni: true }
+] }) }}
+
+<div class="calc-layout">
+  <section class="calc-side" aria-labelledby="kompas-form-nadpis">
+    <h2 id="kompas-form-nadpis">Tvoje penzijko</h2>
+    <p class="muted small">Cokoli změníš, výsledek vedle se hned přepočítá.</p>
+    <form id="kompas-formular" action="#" method="get" novalidate>
+      {% call krok({ cislo: 1, titulek: 'O tobě', shrnuti: k.shrnuti.oTobe, otevreny: true, hotovo: false, id: 'krok-o-tobe' }) %}
+        {{ pole({ id: 'vek', label: 'Kolik ti je?', hodnota: k.pole.vek, jednotka: 'let', chybaMisto: true,
+                  napoveda: 'Podle věku se určí státní příspěvek. Projekci počítáme do ' + k.vekPenze + ' let.' }) }}
+        {{ pole({ id: 'delkaSmlouvy', label: 'Jak dlouho máš smlouvu?', hodnota: k.pole.delkaSmlouvy, jednotka: 'let', chybaMisto: true,
+                  napoveda: 'Převod k jiné společnosti je zdarma, když smlouva trvá aspoň ' + k.prevod.zdarmaPoLetech + ' let. Nová smlouva = 0.' }) }}
+        {{ volby({ id: 'duchodce', legenda: 'Starobní důchod', typ: 'checkbox',
+                   moznosti: [{ hodnota: 'ano', text: 'Pobírám starobní důchod', vybrano: k.vstup.duchodce }],
+                   napoveda: 'Při pobírání starobního důchodu stát na penzijko nepřispívá.' }) }}
+        {{ segmenty({ id: 'sada', legenda: 'Podle jakých pravidel počítat', moznosti: k.sady,
+                      napoveda: 'Návrh 2027 zatím není zákon. Projekci, poplatky a doporučení spočítáme podle zvolených pravidel.' }) }}
+        <p class="kompas-navrh-stitek">{{ stitek({ typ: 'navrh' }) }}</p>
+      {% endcall %}
+
+      {% call krok({ cislo: 2, titulek: 'Tvoje spoření', shrnuti: k.shrnuti.penzijko, otevreny: true, hotovo: false, id: 'krok-penzijko' }) %}
+        {{ pole({ id: 'vklad', label: 'Kolik si měsíčně posíláš?', hodnota: k.pole.vklad, jednotka: 'Kč', chybaMisto: true,
+                  napoveda: 'Jen tvůj vlastní vklad, bez příspěvku zaměstnavatele.' }) }}
+        {{ pole({ id: 'zamestnavatel', label: 'Kolik přidává zaměstnavatel?', hodnota: k.pole.zamestnavatel, jednotka: 'Kč', chybaMisto: true,
+                  napoveda: 'Měsíčně. Do státního příspěvku ani do odpočtu se nepočítá. Když nepřidává, nech 0.' }) }}
+        {{ pole({ id: 'zustatek', label: 'Kolik už máš naspořeno?', hodnota: k.pole.zustatek, jednotka: 'Kč', chybaMisto: true,
+                  napoveda: 'Najdeš to na výpisu nebo v klientské zóně. Začínáš? Nech 0.' }) }}
+        {{ pole({ id: 'fond', label: 'V jakém fondu spoříš?', moznosti: k.fondy,
+                  napoveda: 'Transformovaný fond mají původní smlouvy penzijního připojištění (uzavřené do roku 2012).' }) }}
+        <fieldset class="kompas-poplatky" aria-describedby="poplatky-napoveda">
+          <legend>Poplatky fondu</legend>
+          <p class="hint" id="poplatky-napoveda">Předvyplníme typické poplatky podle fondu. Přesné najdeš v sazebníku své penzijní společnosti.</p>
+          {{ pole({ id: 'sprava', label: 'Za správu', hodnota: k.pole.sprava, jednotka: '% ročně', inputmode: 'decimal', chybaMisto: true }) }}
+          {{ pole({ id: 'zhodnoceni', label: 'Ze zhodnocení', hodnota: k.pole.zhodnoceni, jednotka: '%', inputmode: 'decimal', chybaMisto: true,
+                    napoveda: 'Výkonnostní poplatek, strhává se jen z kladného výnosu.' }) }}
+        </fieldset>
+      {% endcall %}
+    </form>
+  </section>
+
+  <div class="calc-main">
+    {% set obrazek %}
+    <svg class="result-art" viewBox="0 0 140 140" aria-hidden="true" focusable="false">
+      <circle cx="70" cy="70" r="66" class="il-bg"/>
+      <ellipse cx="70" cy="112" rx="38" ry="8" class="il-blush"/>
+      <rect x="40" y="88" width="48" height="14" rx="7" class="il-gold-d"/>
+      <rect x="44" y="76" width="48" height="14" rx="7" class="il-gold"/>
+      <rect x="38" y="64" width="48" height="14" rx="7" class="il-gold-d"/>
+      <circle cx="96" cy="46" r="24" class="il-paper"/>
+      <circle cx="96" cy="46" r="18" class="il-cream"/>
+      <path d="M96 30l6 16-6 16-6-16z" class="il-terra"/>
+      <path d="M96 46l6 0-6 16z" class="il-sage-d"/>
+      <path d="M30 32q2 6 8 8q-6 2-8 8q-2-6-8-8q6-2 8-8z" class="il-sage"/>
+    </svg>
+    {% endset %}
+    {% call vysledek({ id: 'vysledek', kicker: 'Ukázka pro výchozí hodnoty', nadpis: 'Stát ti přidá',
+                       cislo: k.hlavni.cislo, popis: k.hlavni.popis, ilustraceSvg: obrazek, ukazka: true }) %}
+      <ul class="badges kompas-hlavni-stitky">
+        <li class="badge badge-plain" data-hlavni-sada>Počítáno podle: {{ k.hlavni.sada }}</li>
+        <li class="kompas-stitek-obal" data-hlavni-navrh{% if not k.hlavni.navrh %} hidden{% endif %}>{{ stitek({ typ: 'navrh' }) }}</li>
+      </ul>
+      <div class="kompas-sady">
+        {%- for s in k.prispevky %}
+        <article class="kompas-sada{% if s.navrh %} kompas-sada-navrh{% endif %}{% if s.klic == k.vstup.sada %} is-vybrana{% endif %}" data-sada="{{ s.klic }}" aria-labelledby="sada-{{ s.klic }}-nadpis">
+          <div class="kompas-sada-hlava">
+            <h3 id="sada-{{ s.klic }}-nadpis">{{ s.kratce }}</h3>
+            {% if s.navrh %}{{ stitek({ typ: 'navrh' }) }}{% else %}{{ stitek({ typ: 'schvaleno', text: 'Platí' }) }}{% endif %}
+          </div>
+          <p class="kompas-sada-cislo"><span data-mesicne>{{ s.mesicne }}</span> <span class="kompas-sada-jednotka">měsíčně</span></p>
+          <p class="kompas-sada-rocne"><span data-rocne>{{ s.rocne }}</span> za rok</p>
+          <p class="kompas-sada-text" data-vysvetleni>{{ s.vysvetleni }}</p>
+        </article>
+        {%- endfor %}
+      </div>
+      <p class="note">{{ ikona('ikona-info') }}<span><span data-odpocet>{{ k.odpocet }}</span> Celý odpočet včetně DIP a životního pojištění spočítá <a href="{{ '/penize/plan48/' | url }}">Plán48</a>.</span></p>
+    {% endcall %}
+
+    <section class="card kompas-projekce" aria-labelledby="projekce-nadpis">
+      <div class="card-head">
+        <h2 id="projekce-nadpis">Kolik budeš mít v {{ k.vekPenze }}</h2>
+      </div>
+      <div data-projekce>{{ k.html.projekce | safe }}</div>
+      <div class="kompas-grafy" data-grafy{% if not k.maProjekci %} hidden{% endif %}>
+        {{ segmenty({ id: 'zobrazeni', legenda: 'Graf ukazuje částky', moznosti: [
+          { hodnota: 'realne', text: 'Reálně', vybrano: true },
+          { hodnota: 'nominal', text: 'Nominálně' }
+        ], napoveda: 'Reálně = v dnešních penězích, po odečtení inflace ' + k.inflace + ' ročně.' }) }}
+        <div class="kompas-graf" data-graf="realne">{{ k.html.grafRealne | safe }}</div>
+        <div class="kompas-graf" data-graf="nominal">{{ k.html.grafNominal | safe }}</div>
+        <div data-tabulka>{{ k.html.tabulka | safe }}</div>
+      </div>
+      <p class="note">{{ ikona('ikona-info') }}<span>Výnosy jsou předpoklad, ne slib, a můžou být i záporné. Transformovaný fond po {{ k.tf.konci | datum }} počítáme jako fond „{{ k.tf.nastupce }}“.</span></p>
+    </section>
+
+    <section class="card card-draft" aria-labelledby="poplatky-nadpis">
+      <div class="card-head">
+        <h2 id="poplatky-nadpis">Poplatky tě stojí</h2>
+        {{ stitek({ typ: 'navrh', text: 'Strop: návrh, zatím neschváleno' }) }}
+      </div>
+      <div data-poplatky>{{ k.html.poplatky | safe }}</div>
+    </section>
+
+    <section class="card" id="karta-tf" aria-labelledby="tf-nadpis" data-karta-tf{% if not k.maTF %} hidden{% endif %}>
+      <h2 id="tf-nadpis">Transformovaný fond: zůstat, nebo přejít?</h2>
+      <div data-tf>{{ k.html.tf | safe }}</div>
+      <p class="mt-4">Podle návrhu Lepší penzijko mají transformované fondy skončit {{ k.tf.konci | datum }} a peníze pak přejdou do fondu „{{ k.tf.nastupce }}“. Výhodou transformovaného fondu je, že nesmí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos.</p>
+      <h3>Jak přejít ve 3 krocích</h3>
+      <ol class="kompas-postup">
+        <li><strong>Vyber účastnický fond nebo strategii u své současné penzijní společnosti.</strong> Přechod v rámci stejné společnosti je zdarma. Ke konkurenci se dá jít až potom.</li>
+        <li><strong>Podej žádost o převod</strong> v klientské zóně nebo na pobočce. Převod obvykle trvá několik týdnů. Zpátky do transformovaného fondu to už nejde.</li>
+        <li><strong>Po převodu zkontroluj výpis</strong> a nastav vklad tak, aby ti chodil celý státní příspěvek.</li>
+      </ol>
+    </section>
+
+    <section class="card" aria-labelledby="kroky-nadpis">
+      <div class="card-head">
+        <h2 id="kroky-nadpis">Co udělat</h2>
+        <span class="badge badge-plain" data-kroky-sada>Podle: {{ k.hlavni.sada }}</span>
+      </div>
+      <div data-kroky>{{ k.html.kroky | safe }}</div>
+    </section>
+
+    <section class="card" aria-labelledby="predpoklady-nadpis">
+      <h2 id="predpoklady-nadpis">S čím počítáme</h2>
+      <ul class="kompas-predpoklady">
+        {%- for p in k.predpoklady %}
+        <li>{{ p }}</li>
+        {%- endfor %}
+      </ul>
+      <p class="mb-0"><a class="btn btn-ghost" href="{{ '/penize/plan48/' | url }}">Spočítat odpočet v Plánu48 {{ ikona('ikona-sipka') }}</a></p>
+    </section>
+  </div>
+</div>
+
+{{ lepiva_lista({ cislo: k.hlavni.cislo, popis: k.hlavni.lista, cil: '#vysledek' }) }}

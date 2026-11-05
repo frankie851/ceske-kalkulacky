@@ -1,0 +1,80 @@
+/* Penzijko kompas – styly jen pro tento nástroj. Barvy jen z tokenů v main.css. */
+@layer stranky {
+  [data-karta-tf][hidden], [data-grafy][hidden], [data-hlavni-navrh][hidden] { display: none; }
+
+  /* ---------- Formulář ---------- */
+  .kompas-navrh-stitek { margin: calc(-1 * var(--sp-2)) 0 0; }
+  .kompas-poplatky { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .kompas-poplatky > legend { display: block; font-weight: 800; padding: 0; margin-bottom: 2px; }
+  .kompas-poplatky > .hint { margin: 0 0 var(--sp-3); }
+  .kompas-poplatky .field:last-child { margin-bottom: 0; }
+  #krok-o-tobe fieldset.volby { margin-bottom: var(--sp-4); }
+  #krok-o-tobe .options { margin: var(--sp-2) 0 0; grid-template-columns: 1fr; }
+  #krok-o-tobe .opt label { min-height: 52px; }
+
+  /* ---------- Stát ti přidá ---------- */
+  .kompas-hlavni-stitky { margin: 0 0 var(--sp-4); }
+  .kompas-stitek-obal { display: flex; }
+  .kompas-sady { display: grid; gap: var(--sp-3); margin: 0 0 var(--sp-2); }
+  @media (min-width: 560px) { .kompas-sady { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } }
+  .kompas-sada { background: var(--c-surface-2); border: 2px solid transparent; border-radius: var(--r-md); padding: var(--sp-4); min-width: 0; }
+  .kompas-sada-navrh { background: var(--c-surface); border: 2px dashed var(--c-draft-line); }
+  .kompas-sada.is-vybrana { border: 3px solid var(--c-primary); }
+  .kompas-sada.kompas-sada-navrh.is-vybrana { border-style: dashed; }
+  .kompas-sada-hlava { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; justify-content: space-between; margin-bottom: var(--sp-2); }
+  .kompas-sada-hlava h3 { margin: 0; font-size: var(--fs-md); }
+  .kompas-sada-cislo { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 2rem; line-height: 1.1; color: var(--c-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .kompas-sada-jednotka { font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 800; color: var(--c-text-muted); }
+  .kompas-sada-rocne { margin: var(--sp-1) 0 var(--sp-2); font-weight: 800; }
+  .kompas-sada-text { margin: 0; font-size: var(--fs-sm); color: var(--c-text-muted); line-height: 1.45; }
+
+  /* ---------- Kolik budeš mít v 65 ---------- */
+  .kompas-projekce .stats { margin-top: var(--sp-3); }
+  @media (min-width: 560px) { .kompas-projekce .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .kompas-grafy { margin-top: var(--sp-5); }
+  .kompas-grafy > fieldset.field { margin-bottom: 0; }
+  .kompas-graf .graf-cara:not(.graf-zvyraznena) { stroke-width: 2.5; }
+  .kompas-graf .graf-cara.graf-zvyraznena { stroke-width: 6; }
+  .kompas-projekce:not(:has(#zobrazeni-nominal:checked)) [data-graf="nominal"],
+  .kompas-projekce:has(#zobrazeni-nominal:checked) [data-graf="realne"] { display: none; }
+  .kompas-projekce .table-wrap { margin-top: var(--sp-5); }
+
+  /* ---------- Poplatky ---------- */
+  .card-draft .stat.sage { background: var(--c-sage-soft); }
+
+  /* ---------- Transformovaný fond ---------- */
+  #karta-tf h3 { margin-top: var(--sp-5); }
+  .kompas-postup { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); counter-reset: postup; }
+  .kompas-postup li { counter-increment: postup; position: relative; padding-left: 52px; min-height: 40px; }
+  .kompas-postup li::before {
+    content: counter(postup); position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--c-sage-soft); color: var(--c-sage-ink);
+    font-family: var(--font-display); font-weight: 600; font-size: 1.1rem;
+  }
+
+  /* ---------- Co udělat ---------- */
+  .kompas-kroky { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); counter-reset: krok; }
+  .kompas-kroky li {
+    counter-increment: krok; position: relative; padding: var(--sp-4) var(--sp-4) var(--sp-4) calc(var(--sp-4) + 52px);
+    background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-md);
+  }
+  .kompas-kroky li:first-child { border-color: var(--c-accent); background: var(--c-accent-soft); }
+  .kompas-kroky li::before {
+    content: counter(krok); position: absolute; left: var(--sp-4); top: var(--sp-4); width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--c-primary); color: var(--c-on-primary);
+    font-family: var(--font-display); font-weight: 600; font-size: 1.15rem;
+  }
+  @media (max-width: 559px) {
+    .kompas-kroky li { padding-left: calc(var(--sp-3) + 44px); padding-right: var(--sp-3); }
+    .kompas-kroky li::before { left: var(--sp-3); width: 34px; height: 34px; font-size: 1rem; }
+  }
+  .kompas-kroky h3 { margin: 6px 0 var(--sp-1); font-size: var(--fs-md); }
+  .kompas-kroky p { margin: 0; }
+  .kompas-kroky .kompas-prinos { margin-top: var(--sp-2); color: var(--c-sage-ink); font-weight: 800; }
+  .kompas-kroky li:first-child .kompas-prinos { color: var(--c-text); }
+
+  /* ---------- Předpoklady ---------- */
+  .kompas-predpoklady { margin: 0 0 var(--sp-4); display: grid; gap: var(--sp-2); }
+  .kompas-predpoklady li { padding-left: var(--sp-1); }
+  .kompas-predpoklady li::marker { color: var(--c-primary); }
+}
