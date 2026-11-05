@@ -1,0 +1,134 @@
+[
+ {
+  "kod": "P48",
+  "repo": "plan48",
+  "nazev": "Plán48",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "PEN",
+  "repo": "penzijko-kompas",
+  "nazev": "Penzijko kompas",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "EET",
+  "repo": "mam-eet",
+  "nazev": "Mám EET? + OSVČ 2027",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "SPOT",
+  "repo": "spot-nebo-fix",
+  "nazev": "Spot, nebo fix?",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "BYD",
+  "repo": "bydlometr",
+  "nazev": "Bydlometr",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "SLV",
+  "repo": "slevy-2027",
+  "nazev": "Slevy 2027",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "INF",
+  "repo": "inflacni-kalkulacka",
+  "nazev": "Inflační kalkulačka",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "PRI",
+  "repo": "prijimacky-bez-paniky",
+  "nazev": "Přijímačky bez paniky",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "CES",
+  "repo": "cestovni-prikaz",
+  "nazev": "Cestovní příkaz 2027",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "VYP",
+  "repo": "vypoved-2026",
+  "nazev": "Výpověď 2026",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "ROD",
+  "repo": "rodicovska",
+  "nazev": "Rodičovská pro celou rodinu",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ },
+ {
+  "kod": "DLU",
+  "repo": "kalkulator-dluhu",
+  "nazev": "Dluhy – exekuce, nebo oddlužení?",
+  "zprava": false,
+  "verdikt": null,
+  "pocty": {},
+  "semafor": {},
+  "nalezy": [],
+  "hlavicka": ""
+ }
+]
