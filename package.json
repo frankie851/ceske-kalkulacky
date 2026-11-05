@@ -9,7 +9,7 @@
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
-    "test": "node --test \"src/**/*.test.js\" \"test/sdilene/**/*.test.js\"",
+    "test": "node --test \"src/**/*.test.js\" \"src/**/*.test.mjs\" \"test/sdilene/**/*.test.js\"",
     "test:e2e": "node --test --test-concurrency=1 \"test/e2e/*.test.js\"",
     "kontrola": "node tools/kontroly/kontrola-webu.mjs",
     "kontrola:navrhy": "node tools/kontroly/kontrola.mjs",
