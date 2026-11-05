@@ -35,7 +35,7 @@ export function spustServer(koren) {
 /** Otevře prohlížeč a stránku se záznamem sítě, konzole, dialogů. */
 /** `lang`: lokalizace prohlížeče – ovlivňuje, zda <input type=number> přijme desetinnou čárku (cs-CZ ano, en-US ne). */
 export async function otevriProhlizec({ sirka = 360, vyska = 800, lang = 'cs-CZ' } = {}) {
-  const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--no-sandbox', '--disable-gpu', `--lang=${lang}`] });
+  const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--no-sandbox', '--disable-gpu', `--lang=${lang}`], env: { ...process.env, LANG: `${lang.replace('-', '_')}.UTF-8`, LANGUAGE: lang, LC_ALL: `${lang.replace('-', '_')}.UTF-8` } });
   const page = await browser.newPage();
   await page.setExtraHTTPHeaders({ 'Accept-Language': lang === 'cs-CZ' ? 'cs-CZ,cs;q=0.9' : lang });
   await page.setViewport({ width: sirka, height: vyska, deviceScaleFactor: 1 });

@@ -1,0 +1,310 @@
+# Bydlometr – nezávislý přepočet vs. modul aplikace · 2026-11-05T08:34:49.894Z · node v22.23.4 · pid 26787
+# shod 151 / neshod 1 z 152
+OK  | zadání   | anuita 3 500 000 Kč, 25 let, 4,94 % | můj: 20338.4867 | modul: 20338.4867
+OK  | zadání   | anuita 1 200 000 Kč, 0 %, 10 let | můj: 10000 | modul: 10000
+OK  | zadání   | náhrada 500 000 Kč, 3 celé roky do konce fixace | můj: 3750 | modul: 3750
+OK  | zadání   | náhrada 500 000 Kč, 5 let do konce fixace (strop 1 %) | můj: 5000 | modul: 5000
+OK  | zadání   | náhrada 500 000 Kč ke konci fixace | můj: 0 | modul: 0
+OK  | zadání   | náhrada 250 000 Kč (25 % z 1 000 000) měsíc před výročím | můj: 0 | modul: 0
+OK  | zadání   | odpočet: úroky 200 000 Kč, sazba 15 % | můj: 22500 | modul: 22500
+OK  | zadání   | LTV věk 30 | můj: 0.9000 | modul: 0.9000
+OK  | zadání   | LTV věk 40 | můj: 0.8000 | modul: 0.8000
+OK  | zadání   | kalendář: Σ jistiny = úvěr (3 500 000 / 4,94 % / 300) | můj: 3500000.0000 | modul: 3500000.0000
+OK  | zadání   | kalendář: Σ jistiny = úvěr (2 345 678 / 6,35 % / 217) | můj: 2345678.0000 | modul: 2345678.0000
+OK  | zadání   | kalendář: Σ jistiny = úvěr (1 200 000 / 0 % / 120) | můj: 1200000 | modul: 1200000
+OK  | hranice  | anuita 3 500 000 Kč, 25 let, 5,30 % (Hypoindex 6/2026) | můj: 21077.0419 | modul: 21077.0419
+OK  | hranice  | anuita 1 Kč, 1 měsíc, 5 % | můj: 1.0042 | modul: 1.0042
+OK  | hranice  | anuita 100 000 Kč, 1 měsíc, 12 % | můj: 101000.0000 | modul: 101000.0000
+OK  | hranice  | anuita 0 Kč | můj: 0 | modul: 0
+OK  | hranice  | anuita záporná jistina −100 000 | můj: 0 | modul: 0
+OK  | hranice  | anuita doba 0 měsíců | můj: CHYBA: n musí být kladné | modul: CHYBA: Doba splácení musí být kladná.
+OK  | hranice  | anuita doba NaN | můj: CHYBA: n musí být kladné | modul: CHYBA: Doba splácení musí být kladná.
+OK  | hranice  | anuita 1 mld Kč, 40 let, 20 % | můj: 16672640.9219 | modul: 16672640.9219
+OK  | hranice  | celkové úroky 3 500 000 / 4,94 % / 300 | můj: 2601546.0069 | modul: 2601546.0069
+OK  | hranice  | zůstatek po 60 splátkách 3 500 000 / 4,94 % / 300 | můj: 3097330.2884 | modul: 3097330.2884
+OK  | hranice  | zůstatek po 60 splátkách 2 800 000 / 5,79 % / 264 | můj: 2434276.6211 | modul: 2434276.6211
+OK  | data     | započaté roky 2026-01-10 → 2029-01-10 | můj: 3 | modul: 3
+OK  | data     | započaté roky 2026-01-10 → 2029-01-11 | můj: 4 | modul: 4
+OK  | data     | započaté roky 2026-01-10 → 2026-03-01 | můj: 1 | modul: 1
+OK  | data     | započaté roky 2026-01-10 → 2026-01-10 (stejný den) | můj: 0 | modul: 0
+OK  | data     | započaté roky 2026-01-10 → 2025-01-10 (zpět) | můj: 0 | modul: 0
+OK  | data     | započaté roky 2028-02-29 → 2029-02-28 (přestupný) | můj: 1 | modul: 1
+OK  | data     | započaté roky 2028-02-29 → 2029-03-01 (přestupný + den) | můj: 2 | modul: 2
+OK  | data     | započaté roky 2026-12-31 → 2027-01-01 (přelom roku) | můj: 1 | modul: 1
+OK  | data     | započaté roky 2026-11-05 → 2029-11-05 (výchozí formulář) | můj: 3 | modul: 3
+OK  | data     | započaté roky 2026-11-05 → 2031-11-04 | můj: 5 | modul: 5
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-02-15 | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-02-14 | můj: false | modul: false
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-03-14 | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-03-15 (den výročí) | můj: false | modul: false
+OK  | data     | okno: smlouva 2025-12-31, splátka 2026-12-01 (přelom roku) | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-12-31, splátka 2026-11-30 | můj: true | modul: true
+OK  | data     | okno: smlouva 2024-03-31, splátka 2025-02-28 (únor) | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-03-15, splátka 2025-02-20 (před smlouvou) | můj: false | modul: false
+OK  | data     | nová pravidla: smlouva 2019-05-01, fixace 2024-10-01 | můj: true | modul: true
+OK  | data     | nová pravidla: smlouva 2019-05-01, fixace 2024-05-01 | můj: false | modul: false
+OK  | data     | nová pravidla: smlouva 2024-08-31, fixace 2024-08-31 | můj: false | modul: false
+OK  | data     | nová pravidla: smlouva 2024-09-01 | můj: true | modul: true
+OK  | náhrada  | 400 000 Kč v okně, 25 % z 1 000 000 zdarma, 3 roky | můj: 1125 | modul: 1125
+OK  | náhrada  | 250 000 Kč v okně, bezplatná už využita, 3 roky | můj: 1875 | modul: 1875
+OK  | náhrada  | 500 000 Kč, 4 započaté roky | můj: 5000 | modul: 5000
+OK  | náhrada  | 500 000 Kč, 1 započatý rok | můj: 1250 | modul: 1250
+OK  | náhrada  | 0 Kč | můj: 0 | modul: 0
+OK  | náhrada  | záporná částka −100 000 Kč | můj: 0 | modul: 0
+OK  | náhrada  | výchozí formulář: 300 000 Kč, 3 500 000, 2026-11-05 → 2029-11-05 (3 roky, mimo okno) | můj: 2250 | modul: 2250
+NE  | náhrada  | odst. 5: 300 000 Kč měsíc před koncem fixace, sazba 2,49 % – strop odst. 4 vs. úrok do konce fixace | můj: odst.4 750; odst.5 622.5; zákonný strop 622.5 | modul: odst.4 750; odst.5 nepočítá
+OK  | náhrada  | legacy: smlouva 2021, fixace 2021 → bez čísla | můj: null | modul: null
+OK  | odpočet  | úroky 100 000 Kč, 15 % | můj: 15000 | modul: 15000
+OK  | odpočet  | úroky 150 000 Kč, 23 % | můj: 34500 | modul: 34500
+OK  | odpočet  | úroky 150 001 Kč, 15 % | můj: 22500 | modul: 22500
+OK  | odpočet  | úroky 0 Kč | můj: 0 | modul: 0
+OK  | odpočet  | úroky záporné | můj: 0 | modul: 0
+OK  | LTV      | věk 35 | můj: 0.9000 | modul: 0.9000
+OK  | LTV      | věk 36 | můj: 0.8000 | modul: 0.8000
+OK  | LTV      | věk 0 | můj: 0.9000 | modul: 0.9000
+OK  | LTV      | investiční, věk 30 | můj: 0.7000 | modul: 0.7000
+OK  | zátěž    | 20 000 / 75 000, práh 40 % | můj: ok | modul: ok
+OK  | zátěž    | 22 500 / 75 000 (přesně 30 %) | můj: ok | modul: ok
+OK  | zátěž    | 30 000 / 75 000 (přesně 40 %) | můj: high | modul: high
+OK  | zátěž    | příjem 0 | můj: unknown | modul: unknown
+OK  | refix    | příklad: dosavadní splátka | můj: 13785.6993 | modul: 13785.6993
+OK  | refix    | příklad: accept splátka | můj: 18780.1854 | modul: 18780.1854
+OK  | refix    | příklad: accept úroky do konce | můj: 2157968.9396 | modul: 2157968.9396
+OK  | refix    | příklad: accept celkem | můj: 2157968.9396 | modul: 2157968.9396
+OK  | refix    | příklad: accept podíl na příjmu | můj: 0.2504 | modul: 0.2504
+OK  | refix    | příklad: accept stres +1 p. b. | můj: 20146.3517 | modul: 20146.3517
+OK  | refix    | příklad: accept stres +2 p. b. | můj: 21562.5025 | modul: 21562.5025
+OK  | refix    | příklad: refinance splátka | můj: 17587.0111 | modul: 17587.0111
+OK  | refix    | příklad: refinance úroky do konce | můj: 1842970.9322 | modul: 1842970.9322
+OK  | refix    | příklad: refinance celkem | můj: 1851970.9322 | modul: 1851970.9322
+OK  | refix    | příklad: refinance podíl na příjmu | můj: 0.2345 | modul: 0.2345
+OK  | refix    | příklad: refinance stres +1 p. b. | můj: 18898.9060 | modul: 18898.9060
+OK  | refix    | příklad: refinance stres +2 p. b. | můj: 20261.5588 | modul: 20261.5588
+OK  | refix    | příklad: prepay splátka | můj: 16768.0227 | modul: 16768.0227
+OK  | refix    | příklad: prepay úroky do konce | můj: 1926757.9818 | modul: 1926757.9818
+OK  | refix    | příklad: prepay celkem | můj: 1926757.9818 | modul: 1926757.9818
+OK  | refix    | příklad: prepay podíl na příjmu | můj: 0.2236 | modul: 0.2236
+OK  | refix    | příklad: prepay stres +1 p. b. | můj: 17987.8140 | modul: 17987.8140
+OK  | refix    | příklad: prepay stres +2 p. b. | můj: 19252.2344 | modul: 19252.2344
+OK  | refix    | příklad: extend splátka | můj: 17106.3030 | modul: 17106.3030
+OK  | refix    | příklad: extend úroky do konce | můj: 2742442.1605 | modul: 2742442.1605
+OK  | refix    | příklad: extend celkem | můj: 2742442.1605 | modul: 2742442.1605
+OK  | refix    | příklad: extend podíl na příjmu | můj: 0.2281 | modul: 0.2281
+OK  | refix    | příklad: extend stres +1 p. b. | můj: 18632.1032 | modul: 18632.1032
+OK  | refix    | příklad: extend stres +2 p. b. | můj: 20220.0570 | modul: 20220.0570
+OK  | refix    | příklad: nejlevnější varianta | můj: refinance | modul: refinance
+OK  | refix    | úspory 5 000 000 > dluh: prepay jistina | můj: 0 | modul: 0
+OK  | refix    | úspory 5 000 000 > dluh: prepay splátka | můj: 0 | modul: 0
+OK  | refix    | prodloužení 0: extend splátka = accept | můj: 0 | modul: 0
+OK  | refix    | fixace 30 let > zbývá 22: stres prázdný | můj: 0 | modul: 0
+OK  | refix    | sazba nabídky 0 %: accept splátka | můj: 10606.0606 | modul: 10606.0606
+OK  | refix    | příjem 0: zátěž | můj: unknown | modul: unknown
+OK  | refix    | konkurence 4 % s náklady 9 000: nejlevnější | můj: refinance | modul: refinance
+OK  | refix    | úspory 0: nejlevnější | můj: refinance | modul: refinance
+OK  | refix    | stres: 2 800 000 / 5,79 % / 264 / fix 5 → +1 | můj: 20146.3517 | modul: 20146.3517
+OK  | refix    | stres: 2 800 000 / 5,79 % / 264 / fix 5 → +2 | můj: 21562.5025 | modul: 21562.5025
+OK  | refix    | stres: fix 0 let → +1 hned | můj: 20455.2880 | modul: 20455.2880
+OK  | rentbuy  | plochý případ: úvěr | můj: 2400000 | modul: 2400000
+OK  | rentbuy  | plochý případ: splátka | můj: 10000 | modul: 10000
+OK  | rentbuy  | plochý případ: jmění koupě rok 10 | můj: 1800000 | modul: 1800000
+OK  | rentbuy  | plochý případ: jmění nájem rok 10 | můj: 600000 | modul: 600000
+OK  | rentbuy  | plochý případ: jmění koupě rok 25 | můj: 3600000 | modul: 3600000
+OK  | rentbuy  | plochý případ: rok zlomu | můj: 1 | modul: 1
+OK  | rentbuy  | plochý + výnos 6 %: nájem rok 1 | můj: 636000.0000 | modul: 636000.0000
+OK  | rentbuy  | plochý + růst cen 4 %: hodnota rok 5 | můj: 3649958.7072 | modul: 3649958.7072
+OK  | rentbuy  | plochý + náklady koupě 200 000 (vlastní 800 000): zlom | můj: 2 | modul: 2
+OK  | rentbuy  | plochý, nájem 50 Kč/m², ceny −5 %, 10 let: zlom | můj: null | modul: null
+OK  | rentbuy  | plochý, sazba 5 → 7 po fixaci: splátka po fixaci | můj: 18002.7817 | modul: 18002.7817
+OK  | rentbuy  | plochý, sazba 5 → 7: zůstatek rok 5 | můj: 2002916.7163 | modul: 2002916.7163
+OK  | rentbuy  | plochý, sazba 5, 20 let: zůstatek rok 20 | můj: 0 | modul: 0
+OK  | rentbuy  | plochý, sazba 5, 20 let: úroky celkem | můj: 1401345.0579 | modul: 1401345.0579
+OK  | rentbuy  | plochý, sazba 5, nájem 100, odpočet: rozdíl jmění rok 1 (odpočet − bez) | můj: 17755.7670 | modul: 17755.7670
+OK  | rentbuy  | věk 40, vlastní 300 000: LTV ok? | můj: false | modul: false
+OK  | rentbuy  | věk 30, vlastní 300 000: LTV ok? | můj: true | modul: true
+OK  | rentbuy  | vlastní 3 500 000 > cena: úvěr | můj: 0 | modul: 0
+OK  | rentbuy  | vlastní 3 500 000 > cena: portfolio kupujícího rok 0 | můj: 500000 | modul: 500000
+OK  | rentbuy  | vlastní 0, náklady koupě 12 000: akontace / LTV | můj: 0 / 1 | modul: 0 / 1
+OK  | rentbuy  | horizont 1 rok: počet řádků | můj: 2 | modul: 2
+OK  | rentbuy  | horizont 50 let: jmění koupě | můj: 6600000 | modul: 6600000
+OK  | rentbuy  | Praha výchozí: cena | můj: 9246720 | modul: 9246720
+OK  | rentbuy  | Praha výchozí: úvěr | můj: 7758720 | modul: 7758720
+OK  | rentbuy  | Praha výchozí: LTV | můj: 0.8391 | modul: 0.8391
+OK  | rentbuy  | Praha výchozí: splátka | můj: 45475.1291 | modul: 45475.1291
+OK  | rentbuy  | Praha výchozí: nájem 1. měsíc | můj: 27720 | modul: 27720
+OK  | rentbuy  | Praha výchozí: jmění koupě rok 20 | můj: 16166072.0575 | modul: 16166072.0575
+OK  | rentbuy  | Praha výchozí: jmění nájem rok 20 | můj: 14447620.7445 | modul: 14447620.7445
+OK  | rentbuy  | Praha výchozí: rozdíl rok 20 | můj: 1718451.3130 | modul: 1718451.3130
+OK  | rentbuy  | Praha výchozí: rok zlomu | můj: 1 | modul: 1
+OK  | rentbuy  | Praha výchozí: zůstatek rok 20 | můj: 4135273.0962 | modul: 4135273.0962
+OK  | rentbuy  | Praha výchozí: hodnota bytu rok 20 | můj: 20260702.1892 | modul: 20260702.1892
+OK  | rentbuy  | Praha výchozí: jmění koupě rok 1 | můj: 1956942.2031 | modul: 1956942.2031
+OK  | rentbuy  | Praha výchozí: jmění nájem rok 1 | můj: 1902781.7479 | modul: 1902781.7479
+OK  | rentbuy  | Praha investiční: LTV max / odpočet vypnut (rozdíl rok 20) | můj: 0.7 / 890775.5109294485 | modul: 0.7 / 890775.5109294541
+OK  | rentbuy  | Praha sazba po fixaci 7,79 %: rozdíl rok 20 | můj: -1298258.8313 | modul: -1298258.8313
+OK  | rentbuy  | Brno věk 40, vlastní 2 000 000: LTV / max / rozdíl rok 20 / zlom | můj: 0.734835752890397 / 0.8 / 1963693.157987522 / 1 | modul: 0.734835752890397 / 0.8 / 1963693.1579875257 / 1
+OK  | rentbuy  | citlivost Praha: osy | můj: 2,4,6 | 4,6,8 | modul: 2,4,6 | 4,6,8
+OK  | rentbuy  | citlivost Praha [2 %, 4 %] | můj: -556635.0773 | modul: -556635.0773
+OK  | rentbuy  | citlivost Praha [2 %, 6 %] | můj: -4014034.9444 | modul: -4014034.9444
+OK  | rentbuy  | citlivost Praha [2 %, 8 %] | můj: -8721510.9887 | modul: -8721510.9887
+OK  | rentbuy  | citlivost Praha [4 %, 4 %] | můj: 5274745.2749 | modul: 5274745.2749
+OK  | rentbuy  | citlivost Praha [4 %, 6 %] | můj: 1718451.3130 | modul: 1718451.3130
+OK  | rentbuy  | citlivost Praha [4 %, 8 %] | můj: -3107383.9720 | modul: -3107383.9720
+OK  | rentbuy  | citlivost Praha [6 %, 4 %] | můj: 13796328.1459 | modul: 13796328.1459
+OK  | rentbuy  | citlivost Praha [6 %, 6 %] | můj: 10122982.8876 | modul: 10122982.8876
+OK  | rentbuy  | citlivost Praha [6 %, 8 %] | můj: 5158057.9259 | modul: 5158057.9259
+
+# Bydlometr – nezávislý přepočet vs. modul aplikace · 2026-11-05T08:34:50.000Z · node v22.23.4 · pid 26795
+# shod 151 / neshod 1 z 152
+OK  | zadání   | anuita 3 500 000 Kč, 25 let, 4,94 % | můj: 20338.4867 | modul: 20338.4867
+OK  | zadání   | anuita 1 200 000 Kč, 0 %, 10 let | můj: 10000 | modul: 10000
+OK  | zadání   | náhrada 500 000 Kč, 3 celé roky do konce fixace | můj: 3750 | modul: 3750
+OK  | zadání   | náhrada 500 000 Kč, 5 let do konce fixace (strop 1 %) | můj: 5000 | modul: 5000
+OK  | zadání   | náhrada 500 000 Kč ke konci fixace | můj: 0 | modul: 0
+OK  | zadání   | náhrada 250 000 Kč (25 % z 1 000 000) měsíc před výročím | můj: 0 | modul: 0
+OK  | zadání   | odpočet: úroky 200 000 Kč, sazba 15 % | můj: 22500 | modul: 22500
+OK  | zadání   | LTV věk 30 | můj: 0.9000 | modul: 0.9000
+OK  | zadání   | LTV věk 40 | můj: 0.8000 | modul: 0.8000
+OK  | zadání   | kalendář: Σ jistiny = úvěr (3 500 000 / 4,94 % / 300) | můj: 3500000.0000 | modul: 3500000.0000
+OK  | zadání   | kalendář: Σ jistiny = úvěr (2 345 678 / 6,35 % / 217) | můj: 2345678.0000 | modul: 2345678.0000
+OK  | zadání   | kalendář: Σ jistiny = úvěr (1 200 000 / 0 % / 120) | můj: 1200000 | modul: 1200000
+OK  | hranice  | anuita 3 500 000 Kč, 25 let, 5,30 % (Hypoindex 6/2026) | můj: 21077.0419 | modul: 21077.0419
+OK  | hranice  | anuita 1 Kč, 1 měsíc, 5 % | můj: 1.0042 | modul: 1.0042
+OK  | hranice  | anuita 100 000 Kč, 1 měsíc, 12 % | můj: 101000.0000 | modul: 101000.0000
+OK  | hranice  | anuita 0 Kč | můj: 0 | modul: 0
+OK  | hranice  | anuita záporná jistina −100 000 | můj: 0 | modul: 0
+OK  | hranice  | anuita doba 0 měsíců | můj: CHYBA: n musí být kladné | modul: CHYBA: Doba splácení musí být kladná.
+OK  | hranice  | anuita doba NaN | můj: CHYBA: n musí být kladné | modul: CHYBA: Doba splácení musí být kladná.
+OK  | hranice  | anuita 1 mld Kč, 40 let, 20 % | můj: 16672640.9219 | modul: 16672640.9219
+OK  | hranice  | celkové úroky 3 500 000 / 4,94 % / 300 | můj: 2601546.0069 | modul: 2601546.0069
+OK  | hranice  | zůstatek po 60 splátkách 3 500 000 / 4,94 % / 300 | můj: 3097330.2884 | modul: 3097330.2884
+OK  | hranice  | zůstatek po 60 splátkách 2 800 000 / 5,79 % / 264 | můj: 2434276.6211 | modul: 2434276.6211
+OK  | data     | započaté roky 2026-01-10 → 2029-01-10 | můj: 3 | modul: 3
+OK  | data     | započaté roky 2026-01-10 → 2029-01-11 | můj: 4 | modul: 4
+OK  | data     | započaté roky 2026-01-10 → 2026-03-01 | můj: 1 | modul: 1
+OK  | data     | započaté roky 2026-01-10 → 2026-01-10 (stejný den) | můj: 0 | modul: 0
+OK  | data     | započaté roky 2026-01-10 → 2025-01-10 (zpět) | můj: 0 | modul: 0
+OK  | data     | započaté roky 2028-02-29 → 2029-02-28 (přestupný) | můj: 1 | modul: 1
+OK  | data     | započaté roky 2028-02-29 → 2029-03-01 (přestupný + den) | můj: 2 | modul: 2
+OK  | data     | započaté roky 2026-12-31 → 2027-01-01 (přelom roku) | můj: 1 | modul: 1
+OK  | data     | započaté roky 2026-11-05 → 2029-11-05 (výchozí formulář) | můj: 3 | modul: 3
+OK  | data     | započaté roky 2026-11-05 → 2031-11-04 | můj: 5 | modul: 5
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-02-15 | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-02-14 | můj: false | modul: false
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-03-14 | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-03-15, splátka 2026-03-15 (den výročí) | můj: false | modul: false
+OK  | data     | okno: smlouva 2025-12-31, splátka 2026-12-01 (přelom roku) | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-12-31, splátka 2026-11-30 | můj: true | modul: true
+OK  | data     | okno: smlouva 2024-03-31, splátka 2025-02-28 (únor) | můj: true | modul: true
+OK  | data     | okno: smlouva 2025-03-15, splátka 2025-02-20 (před smlouvou) | můj: false | modul: false
+OK  | data     | nová pravidla: smlouva 2019-05-01, fixace 2024-10-01 | můj: true | modul: true
+OK  | data     | nová pravidla: smlouva 2019-05-01, fixace 2024-05-01 | můj: false | modul: false
+OK  | data     | nová pravidla: smlouva 2024-08-31, fixace 2024-08-31 | můj: false | modul: false
+OK  | data     | nová pravidla: smlouva 2024-09-01 | můj: true | modul: true
+OK  | náhrada  | 400 000 Kč v okně, 25 % z 1 000 000 zdarma, 3 roky | můj: 1125 | modul: 1125
+OK  | náhrada  | 250 000 Kč v okně, bezplatná už využita, 3 roky | můj: 1875 | modul: 1875
+OK  | náhrada  | 500 000 Kč, 4 započaté roky | můj: 5000 | modul: 5000
+OK  | náhrada  | 500 000 Kč, 1 započatý rok | můj: 1250 | modul: 1250
+OK  | náhrada  | 0 Kč | můj: 0 | modul: 0
+OK  | náhrada  | záporná částka −100 000 Kč | můj: 0 | modul: 0
+OK  | náhrada  | výchozí formulář: 300 000 Kč, 3 500 000, 2026-11-05 → 2029-11-05 (3 roky, mimo okno) | můj: 2250 | modul: 2250
+NE  | náhrada  | odst. 5: 300 000 Kč měsíc před koncem fixace, sazba 2,49 % – strop odst. 4 vs. úrok do konce fixace | můj: odst.4 750; odst.5 622.5; zákonný strop 622.5 | modul: odst.4 750; odst.5 nepočítá
+OK  | náhrada  | legacy: smlouva 2021, fixace 2021 → bez čísla | můj: null | modul: null
+OK  | odpočet  | úroky 100 000 Kč, 15 % | můj: 15000 | modul: 15000
+OK  | odpočet  | úroky 150 000 Kč, 23 % | můj: 34500 | modul: 34500
+OK  | odpočet  | úroky 150 001 Kč, 15 % | můj: 22500 | modul: 22500
+OK  | odpočet  | úroky 0 Kč | můj: 0 | modul: 0
+OK  | odpočet  | úroky záporné | můj: 0 | modul: 0
+OK  | LTV      | věk 35 | můj: 0.9000 | modul: 0.9000
+OK  | LTV      | věk 36 | můj: 0.8000 | modul: 0.8000
+OK  | LTV      | věk 0 | můj: 0.9000 | modul: 0.9000
+OK  | LTV      | investiční, věk 30 | můj: 0.7000 | modul: 0.7000
+OK  | zátěž    | 20 000 / 75 000, práh 40 % | můj: ok | modul: ok
+OK  | zátěž    | 22 500 / 75 000 (přesně 30 %) | můj: ok | modul: ok
+OK  | zátěž    | 30 000 / 75 000 (přesně 40 %) | můj: high | modul: high
+OK  | zátěž    | příjem 0 | můj: unknown | modul: unknown
+OK  | refix    | příklad: dosavadní splátka | můj: 13785.6993 | modul: 13785.6993
+OK  | refix    | příklad: accept splátka | můj: 18780.1854 | modul: 18780.1854
+OK  | refix    | příklad: accept úroky do konce | můj: 2157968.9396 | modul: 2157968.9396
+OK  | refix    | příklad: accept celkem | můj: 2157968.9396 | modul: 2157968.9396
+OK  | refix    | příklad: accept podíl na příjmu | můj: 0.2504 | modul: 0.2504
+OK  | refix    | příklad: accept stres +1 p. b. | můj: 20146.3517 | modul: 20146.3517
+OK  | refix    | příklad: accept stres +2 p. b. | můj: 21562.5025 | modul: 21562.5025
+OK  | refix    | příklad: refinance splátka | můj: 17587.0111 | modul: 17587.0111
+OK  | refix    | příklad: refinance úroky do konce | můj: 1842970.9322 | modul: 1842970.9322
+OK  | refix    | příklad: refinance celkem | můj: 1851970.9322 | modul: 1851970.9322
+OK  | refix    | příklad: refinance podíl na příjmu | můj: 0.2345 | modul: 0.2345
+OK  | refix    | příklad: refinance stres +1 p. b. | můj: 18898.9060 | modul: 18898.9060
+OK  | refix    | příklad: refinance stres +2 p. b. | můj: 20261.5588 | modul: 20261.5588
+OK  | refix    | příklad: prepay splátka | můj: 16768.0227 | modul: 16768.0227
+OK  | refix    | příklad: prepay úroky do konce | můj: 1926757.9818 | modul: 1926757.9818
+OK  | refix    | příklad: prepay celkem | můj: 1926757.9818 | modul: 1926757.9818
+OK  | refix    | příklad: prepay podíl na příjmu | můj: 0.2236 | modul: 0.2236
+OK  | refix    | příklad: prepay stres +1 p. b. | můj: 17987.8140 | modul: 17987.8140
+OK  | refix    | příklad: prepay stres +2 p. b. | můj: 19252.2344 | modul: 19252.2344
+OK  | refix    | příklad: extend splátka | můj: 17106.3030 | modul: 17106.3030
+OK  | refix    | příklad: extend úroky do konce | můj: 2742442.1605 | modul: 2742442.1605
+OK  | refix    | příklad: extend celkem | můj: 2742442.1605 | modul: 2742442.1605
+OK  | refix    | příklad: extend podíl na příjmu | můj: 0.2281 | modul: 0.2281
+OK  | refix    | příklad: extend stres +1 p. b. | můj: 18632.1032 | modul: 18632.1032
+OK  | refix    | příklad: extend stres +2 p. b. | můj: 20220.0570 | modul: 20220.0570
+OK  | refix    | příklad: nejlevnější varianta | můj: refinance | modul: refinance
+OK  | refix    | úspory 5 000 000 > dluh: prepay jistina | můj: 0 | modul: 0
+OK  | refix    | úspory 5 000 000 > dluh: prepay splátka | můj: 0 | modul: 0
+OK  | refix    | prodloužení 0: extend splátka = accept | můj: 0 | modul: 0
+OK  | refix    | fixace 30 let > zbývá 22: stres prázdný | můj: 0 | modul: 0
+OK  | refix    | sazba nabídky 0 %: accept splátka | můj: 10606.0606 | modul: 10606.0606
+OK  | refix    | příjem 0: zátěž | můj: unknown | modul: unknown
+OK  | refix    | konkurence 4 % s náklady 9 000: nejlevnější | můj: refinance | modul: refinance
+OK  | refix    | úspory 0: nejlevnější | můj: refinance | modul: refinance
+OK  | refix    | stres: 2 800 000 / 5,79 % / 264 / fix 5 → +1 | můj: 20146.3517 | modul: 20146.3517
+OK  | refix    | stres: 2 800 000 / 5,79 % / 264 / fix 5 → +2 | můj: 21562.5025 | modul: 21562.5025
+OK  | refix    | stres: fix 0 let → +1 hned | můj: 20455.2880 | modul: 20455.2880
+OK  | rentbuy  | plochý případ: úvěr | můj: 2400000 | modul: 2400000
+OK  | rentbuy  | plochý případ: splátka | můj: 10000 | modul: 10000
+OK  | rentbuy  | plochý případ: jmění koupě rok 10 | můj: 1800000 | modul: 1800000
+OK  | rentbuy  | plochý případ: jmění nájem rok 10 | můj: 600000 | modul: 600000
+OK  | rentbuy  | plochý případ: jmění koupě rok 25 | můj: 3600000 | modul: 3600000
+OK  | rentbuy  | plochý případ: rok zlomu | můj: 1 | modul: 1
+OK  | rentbuy  | plochý + výnos 6 %: nájem rok 1 | můj: 636000.0000 | modul: 636000.0000
+OK  | rentbuy  | plochý + růst cen 4 %: hodnota rok 5 | můj: 3649958.7072 | modul: 3649958.7072
+OK  | rentbuy  | plochý + náklady koupě 200 000 (vlastní 800 000): zlom | můj: 2 | modul: 2
+OK  | rentbuy  | plochý, nájem 50 Kč/m², ceny −5 %, 10 let: zlom | můj: null | modul: null
+OK  | rentbuy  | plochý, sazba 5 → 7 po fixaci: splátka po fixaci | můj: 18002.7817 | modul: 18002.7817
+OK  | rentbuy  | plochý, sazba 5 → 7: zůstatek rok 5 | můj: 2002916.7163 | modul: 2002916.7163
+OK  | rentbuy  | plochý, sazba 5, 20 let: zůstatek rok 20 | můj: 0 | modul: 0
+OK  | rentbuy  | plochý, sazba 5, 20 let: úroky celkem | můj: 1401345.0579 | modul: 1401345.0579
+OK  | rentbuy  | plochý, sazba 5, nájem 100, odpočet: rozdíl jmění rok 1 (odpočet − bez) | můj: 17755.7670 | modul: 17755.7670
+OK  | rentbuy  | věk 40, vlastní 300 000: LTV ok? | můj: false | modul: false
+OK  | rentbuy  | věk 30, vlastní 300 000: LTV ok? | můj: true | modul: true
+OK  | rentbuy  | vlastní 3 500 000 > cena: úvěr | můj: 0 | modul: 0
+OK  | rentbuy  | vlastní 3 500 000 > cena: portfolio kupujícího rok 0 | můj: 500000 | modul: 500000
+OK  | rentbuy  | vlastní 0, náklady koupě 12 000: akontace / LTV | můj: 0 / 1 | modul: 0 / 1
+OK  | rentbuy  | horizont 1 rok: počet řádků | můj: 2 | modul: 2
+OK  | rentbuy  | horizont 50 let: jmění koupě | můj: 6600000 | modul: 6600000
+OK  | rentbuy  | Praha výchozí: cena | můj: 9246720 | modul: 9246720
+OK  | rentbuy  | Praha výchozí: úvěr | můj: 7758720 | modul: 7758720
+OK  | rentbuy  | Praha výchozí: LTV | můj: 0.8391 | modul: 0.8391
+OK  | rentbuy  | Praha výchozí: splátka | můj: 45475.1291 | modul: 45475.1291
+OK  | rentbuy  | Praha výchozí: nájem 1. měsíc | můj: 27720 | modul: 27720
+OK  | rentbuy  | Praha výchozí: jmění koupě rok 20 | můj: 16166072.0575 | modul: 16166072.0575
+OK  | rentbuy  | Praha výchozí: jmění nájem rok 20 | můj: 14447620.7445 | modul: 14447620.7445
+OK  | rentbuy  | Praha výchozí: rozdíl rok 20 | můj: 1718451.3130 | modul: 1718451.3130
+OK  | rentbuy  | Praha výchozí: rok zlomu | můj: 1 | modul: 1
+OK  | rentbuy  | Praha výchozí: zůstatek rok 20 | můj: 4135273.0962 | modul: 4135273.0962
+OK  | rentbuy  | Praha výchozí: hodnota bytu rok 20 | můj: 20260702.1892 | modul: 20260702.1892
+OK  | rentbuy  | Praha výchozí: jmění koupě rok 1 | můj: 1956942.2031 | modul: 1956942.2031
+OK  | rentbuy  | Praha výchozí: jmění nájem rok 1 | můj: 1902781.7479 | modul: 1902781.7479
+OK  | rentbuy  | Praha investiční: LTV max / odpočet vypnut (rozdíl rok 20) | můj: 0.7 / 890775.5109294485 | modul: 0.7 / 890775.5109294541
+OK  | rentbuy  | Praha sazba po fixaci 7,79 %: rozdíl rok 20 | můj: -1298258.8313 | modul: -1298258.8313
+OK  | rentbuy  | Brno věk 40, vlastní 2 000 000: LTV / max / rozdíl rok 20 / zlom | můj: 0.734835752890397 / 0.8 / 1963693.157987522 / 1 | modul: 0.734835752890397 / 0.8 / 1963693.1579875257 / 1
+OK  | rentbuy  | citlivost Praha: osy | můj: 2,4,6 | 4,6,8 | modul: 2,4,6 | 4,6,8
+OK  | rentbuy  | citlivost Praha [2 %, 4 %] | můj: -556635.0773 | modul: -556635.0773
+OK  | rentbuy  | citlivost Praha [2 %, 6 %] | můj: -4014034.9444 | modul: -4014034.9444
+OK  | rentbuy  | citlivost Praha [2 %, 8 %] | můj: -8721510.9887 | modul: -8721510.9887
+OK  | rentbuy  | citlivost Praha [4 %, 4 %] | můj: 5274745.2749 | modul: 5274745.2749
+OK  | rentbuy  | citlivost Praha [4 %, 6 %] | můj: 1718451.3130 | modul: 1718451.3130
+OK  | rentbuy  | citlivost Praha [4 %, 8 %] | můj: -3107383.9720 | modul: -3107383.9720
+OK  | rentbuy  | citlivost Praha [6 %, 4 %] | můj: 13796328.1459 | modul: 13796328.1459
+OK  | rentbuy  | citlivost Praha [6 %, 6 %] | můj: 10122982.8876 | modul: 10122982.8876
+OK  | rentbuy  | citlivost Praha [6 %, 8 %] | můj: 5158057.9259 | modul: 5158057.9259
+

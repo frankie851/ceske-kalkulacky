@@ -628,12 +628,190 @@
   "kod": "SLV",
   "repo": "slevy-2027",
   "nazev": "Slevy 2027",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 5,
+   "nizka": 4
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "SLV-04"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "SLV-01, SLV-02"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "SLV-06"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "SLV-03, SLV-07"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "SLV-01",
+    "zavaznost": "Vysoká",
+    "oblast": "2 Výpočty",
+    "nazev": "Školkovné zůstane po změně roku narození dítěte (zastaralý stav formuláře)",
+    "kde": "`app.js` krok „Chodí některé dítě do školky?“, funkce `cti` (aktualizuje jen děti, pro které byla pole vykreslena: `if (fd.has(\\`skolne${i}\\`))`), `html` filtruje děti s rokem ≥ 2020; `odpovedi()` předává `skolka: true` a `skolne` ze zastaralého stavu; `slevy.js:88–93` `skolkovne()` věk dítěte nekontroluje.",
+    "reprodukce": "1 dítě nar. 2023 → krok školka: zaškrtnout, školné 20 000 → Další → 2× Zpět → změnit rok dítěte na 2012 → Další: krok 4 říká „Nezadali jste žádné dítě v předškolním věku“ → projít na výsledek. Očekáváno: žádné školkovné (dítě 15 let není v předškolním zařízení, § 35bd odst. 1 a 6). Skutečnost: řádek „Sleva za umístění dítěte (školkovné) 20 000 Kč“, součet „Až 66 044 Kč ročně“ místo 46 044 Kč; totéž v kontrolním seznamu (`prohlizec.json.zastaraleSkolkovne`, `cisla-lokalizace.txt`).",
+    "dopad": "po opravě překlepu v roce narození počítá s neexistující slevou 20 000 Kč (až 24 900 Kč) a odnese si špatný kontrolní seznam.",
+    "oprava": "v `cti` kroku školky vynulovat `skolka`, `skolne`, `dveDomacnosti`, `dohodaStrop` u dětí, pro které se pole nevykreslila (nebo to udělat v `odpovedi()` podle věku); v `slevy.js` navíc hlídat věk dítěte (předškolní zařízení).",
+    "overeni": "reprodukováno 2× (nový proces, en-US i cs-CZ) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-02",
+    "zavaznost": "Vysoká",
+    "oblast": "2 Výpočty",
+    "nazev": "Daňové zvýhodnění se nekrátí u dítěte, které v roce 2027 dovrší 26 let (ani 18 let bez studia)",
+    "kde": "`slevy.js:101–117` `zvyhodneniDeti()` (kontroluje jen narození a měsíce od–do), `app.js` validace přijímá rok narození ≥ 2001 (`rules.rok - 26`), nápověda kroku „Máte děti?“ říká „do 18 let, nebo do 26 let, pokud studují“, ale nevyzve ke zkrácení „V domácnosti do“ a neptá se na studium dítěte.",
+    "reprodukce": "dítě nar. 3/2001, v domácnosti 1–12 → očekáváno 3 × 1 267 = 3 801 Kč (§ 35c odst. 6 písm. b) – vyživované je zletilé dítě „až do dovršení věku 26 let“; 1/12 za měsíc, na jehož počátku jsou podmínky splněny, § 35c odst. 10; na počátku dubna už 26 let má) → skutečnost 15 204 Kč (`prepocet.txt` V16). Obdobně dítě 2009 (18 let v roce 2027), které nestuduje, dostane 12/12.",
+    "dopad": "rodič staršího studenta počítá s 15 204 Kč, nárok je 3 801 Kč (rozdíl 11 403 Kč); u ZTP/P dvojnásobek.",
+    "oprava": "v `zvyhodneniDeti()` započítat jen měsíce, na jejichž počátku dítě nedovršilo 26 let (modul zná rok i měsíc narození, stejně jako u manžela `mladsiNez(d.narozeni, 3, …)`); u dětí 18+ se zeptat, zda se soustavně připravují (jinak hranice 18 let); doplnit test.",
+    "overeni": "reprodukováno 2× (dva běhy `slevy-2027-porovnani.mjs`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-03",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Desetinná čárka v číselném poli se v prohlížeči s jinou než českou lokalizací zahodí",
+    "kde": "`app.js` `cisloPole()` – `<input type=\"number\" step=\"1\">`, `num()`; chování závisí na lokalizaci prohlížeče, ne na stránce (`<html lang=\"cs\">` nestačí).",
+    "reprodukce": "testováno v Chromiu 1243 v obou lokalizacích (`prohlizec.json.cislaLokalizace`, `cisla-lokalizace.txt`): **cs-CZ** (navigator.language cs-CZ): „1500,50“ → 1500.50, „84 512,30“ → 84512.30, „0,85“ → 0.85, „1 500“ → 1500 – správně. **en-US**: „1500,50“ → `150050`, „84 512,30“ → `8451230`, „0,85“ → `085`, mezera se ignoruje správně („1 500“ → 1500); `validity.badInput` je false, žádná hláška. Očekáváno: 84 512 Kč nebo zamítnutí vstupu. Skutečnost v en-US: 100× vyšší číslo; u úroků pak strop 150 000 Kč místo 84 512 Kč (rozdíl „úspory“ 9 823 Kč), u školného strop 24 900 Kč.",
+    "dopad": "jen uživatelé s anglicky (jinak než česky) nastaveným prohlížečem – běžné na firemních počítačích; chyba je v poli vidět, ale nic na ni neupozorní (SLV-07).",
+    "oprava": "`type=\"text\" inputmode=\"decimal\"` s vlastním parserem (odstranit mezery a NBSP, čárku → tečka) a hláškou při nečíselném vstupu; nebo alespoň `step=\"any\"` a text „bez haléřů“.",
+    "overeni": "reprodukováno 2× (dva nezávislé procesy, obě lokalizace) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-04",
+    "zavaznost": "Střední",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Limit úroků 300 000 Kč navázán na datum smlouvy místo na obstarání bytové potřeby",
+    "kde": "`app.js` krok „Hypotéka“: nápověda „u smluv od roku 2021 nejvýš 150 000 Kč ročně, u starších 300 000 Kč“, zaškrtávátko „Úvěrová smlouva je uzavřená před 1. 1. 2021“; `rules.json:170` poznámka „150 000 Kč (smlouvy od 1. 1. 2021), 300 000 Kč u starších“.",
+    "reprodukce": "zákon č. 386/2020 Sb. čl. IV bod 3 (DP-31): limit 300 000 Kč platí pro úroky z úvěru na bytovou potřebu **obstaranou před 1. 1. 2021** bez ohledu na datum smlouvy (typicky refinancování). Uživatel, který byt koupil 2019 a úvěr refinancoval 2023 (úroky 180 000 Kč), podle textu políčko nezaškrtne → aplikace ukáže odpočet 150 000 Kč, nárok je 180 000 Kč; naopak smlouva z prosince 2020 na byt nabytý 2021 → aplikace 300 000 Kč, nárok 150 000 Kč.",
+    "dopad": "chybná částka jen u úroků nad 150 000 Kč ročně (méně častý případ), rozdíl až 22 500 Kč na dani.",
+    "oprava": "přeformulovat otázku na „bytová potřeba (byt, dům, pozemek…) obstaraná před 1. 1. 2021“ s vysvětlením, že refinancování nevadí; opravit poznámku v `rules.json`.",
+    "overeni": "reprodukováno 2× (text zákona 386/2020 Sb. + rejstřík DP-31) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-05",
+    "zavaznost": "Střední",
+    "oblast": "2 Výpočty",
+    "nazev": "Penzijní spoření: paušální odečet 20 400 Kč/rok místo měsíčního výpočtu",
+    "kde": "`slevy.js:121–126` `odpocetStari()` (`penzijko − 20 400`), `rules.json:151` `penzijkoNezapocitane`; nápověda kroku „Spoření na stáří“ předpoklad přiznává.",
+    "reprodukce": "§ 15 odst. 7 ZDP (DP-12): odečíst lze „pouze část **měsíčního** příspěvku, která převyšuje částku, od které náleží nejvyšší státní příspěvek“ (1 700 Kč). Vklad 48 000 Kč jednorázově v prosinci → zákon 48 000 − 1 700 = 46 300 Kč; aplikace 27 600 Kč (`prepocet.txt` V26). Vklady 3 000 Kč/měs. jen 6 měsíců (18 000 Kč/rok) → zákon 7 800 Kč, aplikace 0 Kč.",
+    "dopad": "u nepravidelných nebo mimořádných vkladů (běžné na konci roku) podhodnocený odpočet až o 18 700 Kč (úspora 2 805 Kč); u pravidelných vkladů shodné.",
+    "oprava": "ptát se na pravidelný měsíční vklad a případné mimořádné vklady (nebo počet měsíců placení) a počítat Σ max(0, měsíční vklad − 1 700); minimálně upozornit, že u nepravidelných vkladů je odpočet jiný.",
+    "overeni": "reprodukováno 2× (dva běhy porovnání) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-06",
+    "zavaznost": "Střední",
+    "oblast": "4 Testy",
+    "nazev": "Chybí testy pro věkovou hranici dítěte a vazbu formuláře na výpočet; test u úroků fixuje nepřesnou podmínku",
+    "kde": "`test/slevy.test.js` – žádný test dítěte, které dovrší 18/26 let (`zvyhodneniDeti` by s chybou SLV-02 prošla), žádný test stropu darů vůči základu před odpočty (SLV-08), žádný test `vyhodnot()` se mzdou + manželem + školkovným; test „úroky … stará smlouva 300 000“ (`slevy.test.js:117–121`) zakonzervovává sémantiku „smlouva“ (SLV-04). UI stav (SLV-01) není testovatelný, protože `app.js` stav neexportuje.",
+    "reprodukce": "`node --test` 30/30 prošlo (`testy.txt`, 2. běh shodný), přitom V16, V26, V38 se s referencí rozcházejí.",
+    "dopad": "nepřímý – chyby výpočtu projdou do nasazení.",
+    "oprava": "doplnit testy pro V16 (3 801 Kč), dítě 18 let bez studia, V38, celý scénář A; po opravě SLV-04 přejmenovat vstup na `bytovaPotrebaPred2021`; vyčlenit převod stavu formuláře (`odpovedi()`) do testovatelné funkce.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-07",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Číselná pole nekontrolují platnost vstupu a nic nehlásí",
+    "kde": "`app.js` `num()` (`Math.max(0, Math.floor(Number(v)))`), krok 1 `cti` (`Math.min(12, Math.max(1, …))`), `cisloPole()` (`<input type=\"number\" min max step=\"1\">` s `novalidate` na formuláři, `validity.badInput` se nečte); jediná hláška je u roku narození a u měsíců od > do.",
+    "reprodukce": "mzda „−5000“ a „15“ měsíců → formulář projde bez hlášky, po Zpět je v polích 0 a 12 (`prohlizec.json.chyby.zapornaMzdaA15Mesicu`); školné „1500.50“ → tiše 1 500; „84 512,30“ v en-US prohlížeči → tiše 8 451 230 (SLV-03); počet dětí nad 10 se podle kódu tiše ořízne na 10; rok dítěte 2000 (27 let) vrátí jen obecné „Zadejte u každého dítěte rok narození“ bez důvodu (`prohlizec.json.chyby.dite2000`). Očekáváno: hláška „zadejte celé kladné číslo“ / „nejvýš 12 měsíců“ a zastavení kroku, jako u roku narození.",
+    "dopad": "překlep nebo cizí formát projde až do výsledku, uživatel se o úpravě vstupu nedozví; v kombinaci se SLV-03 vede k chybné částce.",
+    "oprava": "společná validace číselných polí v `precti()`: `badInput`, záporná čísla, překročení `min`/`max` a desetinná místa → `role=\"alert\"` hláška u konkrétního pole (`aria-describedby`), krok nepustit dál; hodnoty neořezávat tiše.",
+    "overeni": "reprodukováno 2× (dva běhy `slevy-2027-prohlizec.mjs`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-08",
+    "zavaznost": "Nízká",
+    "oblast": "2 Výpočty",
+    "nazev": "Strop darů 15 % se počítá ze základu sníženého o ostatní odpočty",
+    "kde": "`slevy.js:274` `zakladProDary = zakladDane − stari.odpocet − uroky.odpocet`, `slevy.js:142`.",
+    "reprodukce": "§ 15 odst. 1 ZDP: „v úhrnu lze odečíst nejvýše 15 % ze základu daně“ (základ podle § 5, nikoli snížený o jiné nezdanitelné části). ZD 600 000 Kč, stáří 48 000, úroky 150 000, dary 100 000 → zákon strop 90 000 Kč, aplikace 60 300 Kč (`prepocet.txt` V38).",
+    "dopad": "jen u velkých darů v kombinaci s velkými odpočty; podhodnocení (konzervativní).",
+    "oprava": "počítat strop z `zakladDane`.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-09",
+    "zavaznost": "Nízká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Chybná citace zákona u zvýšeného stropu darů",
+    "kde": "`rules.json:185` („zákon č. 66/2022 Sb. ve znění zákona č. 24/2025 Sb.“).",
+    "reprodukce": "strop 30 % za roky 2022–2026 stanoví § 1 odst. 1 zákona č. 128/2022 Sb. (https://www.zakonyprolidi.cz/cs/2022-128), novelizovaný zákonem č. 24/2025 Sb.; zákon 66/2022 Sb. je jiný předpis (DP-32). Hodnoty v aplikaci jsou správně.",
+    "dopad": "jen dohledatelnost zdroje.",
+    "oprava": "opravit číslo předpisu v poznámce (a doplnit odkaz do `zdroje`).",
+    "overeni": "reprodukováno 2× (zakonyprolidi.cz + rejstřík) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-10",
+    "zavaznost": "Nízká",
+    "oblast": "2 Výpočty",
+    "nazev": "Nekonzistence vstupů: sleva na manžela bez zadaného dítěte, narozeniny 1. dne měsíce",
+    "kde": "`slevy.js:63–64` (manžel bez zadaného dítěte → 12 měsíců), `slevy.js:17–24` `mladsiNez()` (narozeniny v měsíci se berou jako „ještě nedovršeno“).",
+    "reprodukce": "0 dětí + zaškrtnuto „Žijeme spolu s naším dítětem mladším 3 let“ → sleva na manžela 24 840 Kč, ale žádné daňové zvýhodnění na totéž dítě a žádné upozornění; student narozený 1. 6. 2001 → 6/12 místo 5/12 (`prepocet.txt` V2; 1. 6. 2027 už 26 let dovršil – README předpoklad přiznává).",
+    "dopad": "matoucí (zapomenuté dítě = nižší zvýhodnění), rozdíl 335 Kč u narozených 1. dne měsíce.",
+    "oprava": "upozornit, že dítě do 3 let je třeba zadat i v kroku „Máte děti?“ (nebo slevu na manžela odvozovat jen ze zadaných dětí); volitelně den narození u hraničních měsíců.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SLV-11",
+    "zavaznost": "Nízká",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Celý dotazník je živá oblast `aria-live=\"polite\"`",
+    "kde": "`index.html:30` `<section id=\"dotaznik\" … aria-live=\"polite\">`; `app.js` `vykresliKrok()` přepisuje celý `innerHTML` oblasti.",
+    "reprodukce": "každý krok vymění obsah živé oblasti (nadpis, dlouhá nápověda, pole, tlačítka) → čtečka obrazovky má přečíst celý krok, přitom skript současně přesouvá fokus na nadpis (`.otazka.focus()`) – dvojí oznámení; axe to nehlásí (0 nálezů ve všech stavech, `prohlizec.json`). S čtečkou neověřeno.",
+    "dopad": "zdržení uživatelů čteček; funkce není omezena.",
+    "oprava": "`aria-live` ponechat jen pro chybovou hlášku (`role=\"alert\"` už je) a případně pro „Otázka X z 10“; fokus na nadpis stačí.",
+    "overeni": "reprodukováno 2× (kód + chování ve dvou bězích) · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `d88ba427d8f665161b10071deb45c3a26bd4ac9d` (5. 11. 2026) · živý web: https://frankie851.github.io/slevy-2027/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 5,
+   "nizka": 4
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "INF",

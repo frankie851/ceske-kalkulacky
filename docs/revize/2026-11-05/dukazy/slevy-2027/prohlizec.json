@@ -1,5 +1,5 @@
 {
- "datum": "2026-11-05T08:23:37.954Z",
+ "datum": "2026-11-05T08:32:48.282Z",
  "commit": "d88ba427d8f665161b10071deb45c3a26bd4ac9d",
  "scenarA360": {
   "kroky": [
@@ -232,11 +232,11 @@
  },
  "sit360": {
   "pozadavky": [
-   "http://127.0.0.1:45691/",
-   "http://127.0.0.1:45691/styles.css",
-   "http://127.0.0.1:45691/app.js",
-   "http://127.0.0.1:45691/slevy.js",
-   "http://127.0.0.1:45691/rules.json"
+   "http://127.0.0.1:43837/",
+   "http://127.0.0.1:43837/styles.css",
+   "http://127.0.0.1:43837/app.js",
+   "http://127.0.0.1:43837/slevy.js",
+   "http://127.0.0.1:43837/rules.json"
   ],
   "cizi": [],
   "konzole": [],
@@ -597,6 +597,64 @@
   "vlozenyImg": false,
   "dialogy": 0,
   "konzole": []
+ },
+ "cislaLokalizace": {
+  "cs-CZ": {
+   "navigatorLanguage": "cs-CZ",
+   "psani „1500,50“": {
+    "value": "1500.50",
+    "badInput": false
+   },
+   "psani „84 512,30“": {
+    "value": "84512.30",
+    "badInput": false
+   },
+   "psani „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "psani „0,85“": {
+    "value": "0.85",
+    "badInput": false
+   },
+   "vlozeni „84 512,30“": {
+    "value": "84512.30",
+    "badInput": false
+   },
+   "vlozeni „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "vysledekSkolkovne": "24 900 Kč"
+  },
+  "en-US": {
+   "navigatorLanguage": "en-US",
+   "psani „1500,50“": {
+    "value": "150050",
+    "badInput": false
+   },
+   "psani „84 512,30“": {
+    "value": "8451230",
+    "badInput": false
+   },
+   "psani „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "psani „0,85“": {
+    "value": "085",
+    "badInput": false
+   },
+   "vlozeni „84 512,30“": {
+    "value": "8451230",
+    "badInput": false
+   },
+   "vlozeni „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "vysledekSkolkovne": "24 900 Kč"
+  }
  },
  "zastaraleSkolkovne": {
   "pruchod": [

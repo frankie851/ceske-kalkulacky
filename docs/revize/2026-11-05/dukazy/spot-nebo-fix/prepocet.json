@@ -1,0 +1,1070 @@
+{
+ "pripady": [
+  {
+   "id": "Z1",
+   "typ": "zadání",
+   "popis": "fix: 3 MWh × (3 000 + 2 515,08) Kč/MWh, bez stálých plateb",
+   "vstup": {
+    "cons": [
+     1.5,
+     1.5
+    ],
+    "cena": 3000,
+    "distribuce": 2515.08
+   },
+   "muj": {
+    "castka": 16545.239999999998
+   }
+  },
+  {
+   "id": "Z2",
+   "typ": "zadání",
+   "popis": "spot: 2 × 0,5 MWh, ceny 100 a 0 EUR/MWh, kurz 25 Kč/EUR → silová elektřina bez marže",
+   "vstup": {
+    "cons": [
+     0.5,
+     0.5
+    ],
+    "eur": [
+     100,
+     0
+    ],
+    "kurz": [
+     25,
+     25
+    ]
+   },
+   "muj": {
+    "castka": 1250
+   }
+  },
+  {
+   "id": "Z3",
+   "typ": "zadání",
+   "popis": "dynamický tarif: celá spotřeba v pásmu −50 % → polovina základní ceny",
+   "vstup": {
+    "cons": [
+     0.7,
+     0.3
+    ],
+    "zaklad": 3900,
+    "pct": -50
+   },
+   "muj": {
+    "castka": 1950,
+    "pomer": 0.5
+   }
+  },
+  {
+   "id": "Z4",
+   "typ": "zadání",
+   "popis": "den přechodu na letní čas 92 čtvrthodin, na zimní 100; běžný den 96",
+   "vstup": {
+    "dny": [
+     "2026-03-29",
+     "2026-10-25",
+     "2025-10-26",
+     "2026-06-15",
+     "2027-03-28",
+     "2027-10-31"
+    ]
+   },
+   "muj": {
+    "ctvrthodin": [
+     92,
+     100,
+     100,
+     96,
+     92,
+     100
+    ],
+    "mrizkaCelkem": 35040
+   }
+  },
+  {
+   "id": "Z5",
+   "typ": "zadání",
+   "popis": "roční součet normalizovaného TDD = 1 (všech 11 tříd) a délka = mřížka",
+   "vstup": {
+    "tridy": [
+     "TDD4",
+     "TDD5-JC",
+     "TDD5-JM",
+     "TDD5-P",
+     "TDD5-SC",
+     "TDD5-SM",
+     "TDD5-STC",
+     "TDD5-VC",
+     "TDD5-ZC",
+     "TDD6",
+     "TDD7"
+    ]
+   },
+   "muj": {
+    "soucty": {
+     "TDD4": 0.9999999999999958,
+     "TDD5-JC": 1.0000000000000042,
+     "TDD5-JM": 1.0000000000000022,
+     "TDD5-P": 1.0000000000000058,
+     "TDD5-SC": 0.9999999999999943,
+     "TDD5-SM": 0.9999999999999987,
+     "TDD5-STC": 0.9999999999999983,
+     "TDD5-VC": 1.0000000000000047,
+     "TDD5-ZC": 1.0000000000000038,
+     "TDD6": 1.000000000000006,
+     "TDD7": 0.999999999999997
+    },
+    "delky": {
+     "TDD4": 35040,
+     "TDD5-JC": 35040,
+     "TDD5-JM": 35040,
+     "TDD5-P": 35040,
+     "TDD5-SC": 35040,
+     "TDD5-SM": 35040,
+     "TDD5-STC": 35040,
+     "TDD5-VC": 35040,
+     "TDD5-ZC": 35040,
+     "TDD6": 35040,
+     "TDD7": 35040
+    },
+    "mrizka": 35040
+   }
+  },
+  {
+   "id": "V1",
+   "typ": "vlastní",
+   "popis": "ČEZ Distribuce, D02d, 3 MWh, 3×25 A, fix 3 000 Kč/MWh, marže 400, stálé platby 163,35, dyn. ČEZ 3 900/163,35 (vše vč. DPH), posun 0 %",
+   "vstup": {
+    "distributor": "cez",
+    "sazba": "D02d",
+    "mwh": 3,
+    "jistic": "3x25",
+    "fix": 3000,
+    "marze": 400,
+    "tdd": "TDD4"
+   },
+   "muj": {
+    "fix": {
+     "celkem": 23108.357999999993,
+     "energie": 8999.99999999999,
+     "regulovane": 8244.165600000002,
+     "stale": 5864.192400000001,
+     "mwh": 2.9999999999999925
+    },
+    "spot": {
+     "celkem": 25838.98724491705,
+     "energie": 11730.629244917043,
+     "regulovane": 8244.165600000002,
+     "stale": 5864.192400000001,
+     "mwh": 2.9999999999999925
+    },
+    "dynamic": {
+     "celkem": 25733.597374138957,
+     "energie": 11625.239374138957,
+     "regulovane": 8244.165600000002,
+     "stale": 5864.192400000001,
+     "mwh": 2.9999999999999925
+    }
+   },
+   "obrazovka": true
+  },
+  {
+   "id": "Z6",
+   "typ": "zadání",
+   "popis": "posun 0 % nemění výsledek (V1 s posunem 0 vs. bez parametru)",
+   "vstup": {
+    "jako": "V1"
+   },
+   "muj": {
+    "shodne": true
+   }
+  },
+  {
+   "id": "Z7",
+   "typ": "zadání",
+   "popis": "posun 10/30 % nemění roční spotřebu a nezvyšuje náklady spotu ani dyn.; 50 % se ořízne na 30 %",
+   "vstup": {
+    "jako": "V1"
+   },
+   "muj": {
+    "mwh10": 2.9999999999999982,
+    "mwh30": 2.99999999999999,
+    "spot30": 24196.225740725968,
+    "dyn30": 24382.61059785804,
+    "spot10": 25291.40007685278,
+    "spot50rovnoSpot30": true,
+    "fix30": 23108.357999999993
+   }
+  },
+  {
+   "id": "V1b",
+   "typ": "vlastní",
+   "popis": "V1 s posunem 30 %",
+   "vstup": {
+    "jako": "V1",
+    "posun": 30
+   },
+   "muj": {
+    "fix": {
+     "celkem": 23108.357999999993,
+     "energie": 8999.99999999999,
+     "regulovane": 8244.165600000002,
+     "stale": 5864.192400000001,
+     "mwh": 2.9999999999999925
+    },
+    "spot": {
+     "celkem": 24196.225740725968,
+     "energie": 10087.867740726011,
+     "regulovane": 8244.165599999957,
+     "stale": 5864.192400000001,
+     "mwh": 2.99999999999999
+    },
+    "dynamic": {
+     "celkem": 24382.61059785804,
+     "energie": 10274.252597858003,
+     "regulovane": 8244.165600000037,
+     "stale": 5864.192400000001,
+     "mwh": 2.9999999999999893
+    }
+   },
+   "obrazovka": true
+  },
+  {
+   "id": "V2",
+   "typ": "vlastní",
+   "popis": "EG.D, D56d, 9 MWh, 3×25 A, fix 3 500, marže 400 – profil TDD6 (jak mapuje aplikace), okna NT = předpoklad aplikace (22 h)",
+   "vstup": {
+    "distributor": "egd",
+    "sazba": "D56d",
+    "mwh": 9,
+    "jistic": "3x25",
+    "fix": 3500,
+    "marze": 400,
+    "tdd": "TDD6"
+   },
+   "muj": {
+    "fix": {
+     "celkem": 45526.68969185955,
+     "energie": 31500.0000000001,
+     "regulovane": 4982.617291859453,
+     "stale": 9044.072400000001,
+     "mwh": 9.000000000000162
+    },
+    "spot": {
+     "celkem": 48709.87714260726,
+     "energie": 34683.18745074781,
+     "regulovane": 4982.617291859453,
+     "stale": 9044.072400000001,
+     "mwh": 9.000000000000162
+    },
+    "dynamic": {
+     "celkem": 48476.32988635253,
+     "energie": 34449.64019449308,
+     "regulovane": 4982.617291859453,
+     "stale": 9044.072400000001,
+     "mwh": 9.000000000000162
+    }
+   },
+   "obrazovka": true
+  },
+  {
+   "id": "V2z",
+   "typ": "vlastní",
+   "popis": "totéž s profilem TDD7 (třída podle přílohy 6 vyhl. 408/2015 Sb. pro D56d) – rozdíl proti V2",
+   "vstup": {
+    "distributor": "egd",
+    "sazba": "D56d",
+    "mwh": 9,
+    "jistic": "3x25",
+    "fix": 3500,
+    "marze": 400,
+    "tdd": "TDD7"
+   },
+   "muj": {
+    "fix": {
+     "celkem": 45596.311405818225,
+     "energie": 31499.99999999953,
+     "regulovane": 5052.239005818694,
+     "stale": 9044.072400000001,
+     "mwh": 9.000000000000055
+    },
+    "spot": {
+     "celkem": 49207.1223402472,
+     "energie": 35110.81093442851,
+     "regulovane": 5052.239005818694,
+     "stale": 9044.072400000001,
+     "mwh": 9.000000000000055
+    },
+    "dynamic": {
+     "celkem": 48932.92184130679,
+     "energie": 34836.61043548809,
+     "regulovane": 5052.239005818694,
+     "stale": 9044.072400000001,
+     "mwh": 9.000000000000055
+    }
+   },
+   "rozdilProtiV2": {
+    "fix": 69.62171395867335,
+    "spot": 497.24519763993885,
+    "dynamic": 456.59195495425956,
+    "spotMinusFixApp": 3183.1874507477114,
+    "spotMinusFixLaw": 3610.810934428977
+   }
+  },
+  {
+   "id": "V2c",
+   "typ": "vlastní",
+   "popis": "ČEZ, D57d, 9 MWh, 3×25 A, fix 3 500 – TDD6 (aplikace) vs. TDD7 (vyhláška)",
+   "vstup": {
+    "distributor": "cez",
+    "sazba": "D57d",
+    "mwh": 9,
+    "fix": 3500,
+    "tdd": "TDD6 vs TDD7"
+   },
+   "muj": {
+    "fix": {
+     "celkem": 46280.4925505315,
+     "energie": 31500.0000000001,
+     "regulovane": 4574.8201505313955,
+     "stale": 10205.6724,
+     "mwh": 9.000000000000162
+    },
+    "spot": {
+     "celkem": 49463.68000127921,
+     "energie": 34683.18745074781,
+     "regulovane": 4574.8201505313955,
+     "stale": 10205.6724,
+     "mwh": 9.000000000000162
+    },
+    "dynamic": {
+     "celkem": 49230.13274502447,
+     "energie": 34449.64019449308,
+     "regulovane": 4574.8201505313955,
+     "stale": 10205.6724,
+     "mwh": 9.000000000000162
+    }
+   },
+   "tdd7": {
+    "fix": {
+     "celkem": 46346.576044299676,
+     "energie": 31499.99999999953,
+     "regulovane": 4640.903644300142,
+     "stale": 10205.6724,
+     "mwh": 9.000000000000055
+    },
+    "spot": {
+     "celkem": 49957.38697872865,
+     "energie": 35110.81093442851,
+     "regulovane": 4640.903644300142,
+     "stale": 10205.6724,
+     "mwh": 9.000000000000055
+    },
+    "dynamic": {
+     "celkem": 49683.18647978824,
+     "energie": 34836.61043548809,
+     "regulovane": 4640.903644300142,
+     "stale": 10205.6724,
+     "mwh": 9.000000000000055
+    }
+   },
+   "rozdil": {
+    "spot": 493.7069774494448,
+    "dynamic": 453.05373476376553,
+    "fix": 66.08349376817932
+   }
+  },
+  {
+   "id": "V3",
+   "typ": "vlastní",
+   "popis": "PREdistribuce, D25d (TDD5 Praha), 2 MWh, 1×25 A, fix 2 900, marže 300, poplatky 100/120",
+   "vstup": {
+    "distributor": "pre",
+    "sazba": "D25d",
+    "mwh": 2,
+    "jistic": "1x25",
+    "fix": 2900,
+    "marze": 300,
+    "tdd": "TDD5-P"
+   },
+   "muj": {
+    "fix": {
+     "celkem": 11304.404321221786,
+     "energie": 5799.999999999986,
+     "regulovane": 2955.9319212217983,
+     "stale": 2548.4724,
+     "mwh": 2.0000000000000115
+    },
+    "spot": {
+     "celkem": 13047.598080172842,
+     "energie": 7303.193758951043,
+     "regulovane": 2955.9319212217983,
+     "stale": 2788.4724,
+     "mwh": 2.0000000000000115
+    },
+    "dynamic": {
+     "celkem": 13643.860193822464,
+     "energie": 7379.255872600665,
+     "regulovane": 2955.9319212217983,
+     "stale": 3308.6724,
+     "mwh": 2.0000000000000115
+    }
+   }
+  },
+  {
+   "id": "V4",
+   "typ": "vlastní",
+   "popis": "ČEZ, D61d, 2 MWh, 3×25 A, fix 3 000 – NT podle CV ERÚ 14/2025 (pá 12:00–ne 22:00) a profil TDD4 podle vyhlášky",
+   "vstup": {
+    "distributor": "cez",
+    "sazba": "D61d",
+    "mwh": 2,
+    "fix": 3000
+   },
+   "muj": {
+    "fix": {
+     "celkem": 16848.35292035519,
+     "energie": 5999.999999999979,
+     "regulovane": 5448.80052035521,
+     "stale": 5399.5524000000005,
+     "mwh": 1.9999999999999916
+    },
+    "spot": {
+     "celkem": 18668.772416966618,
+     "energie": 7820.419496611407,
+     "regulovane": 5448.80052035521,
+     "stale": 5399.5524000000005,
+     "mwh": 1.9999999999999916
+    },
+    "dynamic": {
+     "celkem": 18598.512503114453,
+     "energie": 7750.159582759242,
+     "regulovane": 5448.80052035521,
+     "stale": 5399.5524000000005,
+     "mwh": 1.9999999999999916
+    }
+   },
+   "aplikaceOknaATdd7": {
+    "fix": {
+     "celkem": 15775.41939212817,
+     "energie": 5999.999999999982,
+     "regulovane": 4375.866992128187,
+     "stale": 5399.5524000000005,
+     "mwh": 1.999999999999994
+    },
+    "spot": {
+     "celkem": 17577.82182200108,
+     "energie": 7802.40242987289,
+     "regulovane": 4375.866992128187,
+     "stale": 5399.5524000000005,
+     "mwh": 1.999999999999994
+    },
+    "dynamic": {
+     "celkem": 17516.88837779222,
+     "energie": 7741.4689856640325,
+     "regulovane": 4375.866992128187,
+     "stale": 5399.5524000000005,
+     "mwh": 1.999999999999994
+    }
+   },
+   "rozdilRegulovane": -1072.933528227023,
+   "podilNTeru": 0.3470319634703196,
+   "podilNTapp": 0.5470319634703197
+  },
+  {
+   "id": "V5",
+   "typ": "vlastní",
+   "popis": "spotřeba 0 MWh → jen stálé platby (ČEZ D02d 3×25: 12 × (256 + 12,87 + 135) × 1,21)",
+   "vstup": {
+    "mwh": 0
+   },
+   "muj": {
+    "fixCelkem": 5864.192400000001,
+    "ocekavanoStale": 5864.192400000001
+   }
+  },
+  {
+   "id": "V6",
+   "typ": "vlastní",
+   "popis": "spotřeba 100 MWh (max. formuláře) – lineární škálování energie fixu",
+   "vstup": {
+    "mwh": 100
+   },
+   "muj": {
+    "fixEnergie": 300000.00000000116,
+    "ocekavano": 300000
+   }
+  },
+  {
+   "id": "V7",
+   "typ": "vlastní",
+   "popis": "záporná spotřeba −1 MWh – modul neověřuje vstup (zjištění, ne očekávaná hodnota)",
+   "vstup": {
+    "mwh": -1
+   },
+   "muj": {
+    "fixEnergie": -2999.9999999999895
+   }
+  },
+  {
+   "id": "V8",
+   "typ": "vlastní",
+   "popis": "pásma dyn. tarifu: 25. 10. 2026 (100 čtvrthodin, 2:00 dvakrát → 3 510), 29. 3. 2026 (92), svátek 6. 7. 2026 v 6:00 → 4 290 (víkend), prac. den 7. 7. 2026 v 6:00 → 4 875",
+   "vstup": {
+    "dny": [
+     "2026-10-25",
+     "2026-03-29",
+     "2026-07-06",
+     "2026-07-07"
+    ]
+   },
+   "muj": {
+    "delka2510": 100,
+    "hod2count": 8,
+    "cena2510h2": [
+     3510
+    ],
+    "delka2903": 92,
+    "hod2chybi": true,
+    "svatek6h": 4290,
+    "pracovni6h": 4875,
+    "zima12h": 3510,
+    "leto12h": 1950
+   }
+  },
+  {
+   "id": "V9",
+   "typ": "vlastní",
+   "popis": "přestupný rok 28. 2.–1. 3. 2028 = 3 dny = 288 čtvrthodin; 29. 2. 2028 existuje",
+   "vstup": {
+    "od": "2028-02-28",
+    "do": "2028-03-01"
+   },
+   "muj": {
+    "ctvrthodin": 288,
+    "dny": [
+     "2028-02-28",
+     "2028-02-29",
+     "2028-03-01"
+    ]
+   }
+  },
+  {
+   "id": "V10",
+   "typ": "vlastní",
+   "popis": "svátky podle zákona 245/2000 Sb. – 2026 a 2027 (Velký pátek, Velikonoční pondělí + 11 pevných)",
+   "vstup": {
+    "roky": [
+     2026,
+     2027
+    ]
+   },
+   "muj": {
+    "2026": [
+     "2026-01-01",
+     "2026-04-03",
+     "2026-04-06",
+     "2026-05-01",
+     "2026-05-08",
+     "2026-07-05",
+     "2026-07-06",
+     "2026-09-28",
+     "2026-10-28",
+     "2026-11-17",
+     "2026-12-24",
+     "2026-12-25",
+     "2026-12-26"
+    ],
+    "2027": [
+     "2027-01-01",
+     "2027-03-26",
+     "2027-03-29",
+     "2027-05-01",
+     "2027-05-08",
+     "2027-07-05",
+     "2027-07-06",
+     "2027-09-28",
+     "2027-10-28",
+     "2027-11-17",
+     "2027-12-24",
+     "2027-12-25",
+     "2027-12-26"
+    ],
+    "velikonoce2026": "2026-04-05",
+    "velikonoce2027": "2027-03-28"
+   }
+  },
+  {
+   "id": "V11",
+   "typ": "vlastní",
+   "popis": "fx.json: sobota a neděle mají kurz z pátku (poslední vyhlášený)",
+   "vstup": {
+    "dnu": 365
+   },
+   "muj": {
+    "sobotyShodne": 52,
+    "sobotyCelkem": 52,
+    "nedeleShodne": 51,
+    "svatek17_11_2025": [
+     24.21,
+     24.21
+    ],
+    "prvniLeden2026": [
+     24.245,
+     24.245
+    ]
+   }
+  },
+  {
+   "id": "V12",
+   "typ": "vlastní",
+   "popis": "POZE = min(MWh × 495; A × fáze × Kč/A × 12) – hypoteticky 8,32 Kč/A (hodnota 2025 v CV 13/2025 před změnou CV 15/2025)",
+   "vstup": {
+    "mwh": 3,
+    "A": 25,
+    "faze": 3,
+    "sazbaA": 8.32
+   },
+   "muj": {
+    "poze3MWh": 1485,
+    "poze20MWh": 7488,
+    "poze2026": 0
+   }
+  }
+ ],
+ "modul": {
+  "V1": {
+   "fix": {
+    "celkem": 23108.357999999993,
+    "energie": 9000,
+    "regulovane": 8244.165599999997,
+    "stale": 5864.192399999999,
+    "mwh": 2.9999999999999996
+   },
+   "spot": {
+    "celkem": 25838.9872449171,
+    "energie": 11730.629244917107,
+    "regulovane": 8244.165599999997,
+    "stale": 5864.192399999999,
+    "mwh": 2.9999999999999996
+   },
+   "dynamic": {
+    "celkem": 25733.59737413886,
+    "energie": 11625.239374138859,
+    "regulovane": 8244.165599999997,
+    "stale": 5864.192399999999,
+    "mwh": 2.9999999999999996
+   }
+  }
+ },
+ "radky": [
+  {
+   "id": "Z1",
+   "vstup": "fix: 3 MWh × (3 000 + 2 515,08) Kč/MWh, bez stálých plateb",
+   "muj": "16545.24",
+   "modul": "16545.24",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z2",
+   "vstup": "spot: 2 × 0,5 MWh, ceny 100 a 0 EUR/MWh, kurz 25 Kč/EUR → silová elektřina bez marže",
+   "muj": "1250",
+   "modul": "1250",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z3",
+   "vstup": "dynamický tarif: celá spotřeba v pásmu −50 % → polovina základní ceny",
+   "muj": "1950",
+   "modul": "1950",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z4",
+   "vstup": "den přechodu na letní čas 92 čtvrthodin, na zimní 100; běžný den 96 2026-03-29, 2026-10-25, 2025-10-26, 2026-06-15, 2027-03-28, 2027-10-31",
+   "muj": "[92,100,100,96,92,100] mřížka 35040",
+   "modul": "[92,100,100,96,92,100] mřížka 35040",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z5",
+   "vstup": "roční součet normalizovaného TDD = 1 (všech 11 tříd) a délka = mřížka",
+   "muj": "součty 1 ± 1e-9 (11 tříd), délky 35040",
+   "modul": "součty 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000, 1.000000000000",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V1 fix",
+   "vstup": "ČEZ Distribuce, D02d, 3 MWh, 3×25 A, fix 3 000 Kč/MWh, marže 400, stálé platby 163,35, dyn. ČEZ 3 900/163,35 (vše vč. DPH), posun 0 %",
+   "muj": "celkem 23108.36 (energie 9000.00, regul. 8244.17, stálé 5864.19)",
+   "modul": "celkem 23108.36 (energie 9000, regul. 8244.17, stálé 5864.19)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V1 spot",
+   "vstup": "ČEZ Distribuce, D02d, 3 MWh, 3×25 A, fix 3 000 Kč/MWh, marže 400, stálé platby 163,35, dyn. ČEZ 3 900/163,35 (vše vč. DPH), posun 0 %",
+   "muj": "celkem 25838.99 (energie 11730.63, regul. 8244.17, stálé 5864.19)",
+   "modul": "celkem 25838.99 (energie 11730.63, regul. 8244.17, stálé 5864.19)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V1 dynamic",
+   "vstup": "ČEZ Distribuce, D02d, 3 MWh, 3×25 A, fix 3 000 Kč/MWh, marže 400, stálé platby 163,35, dyn. ČEZ 3 900/163,35 (vše vč. DPH), posun 0 %",
+   "muj": "celkem 25733.60 (energie 11625.24, regul. 8244.17, stálé 5864.19)",
+   "modul": "celkem 25733.60 (energie 11625.24, regul. 8244.17, stálé 5864.19)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z6",
+   "vstup": "posun 0 % nemění výsledek (V1 s posunem 0 vs. bez parametru)",
+   "muj": "true",
+   "modul": "true",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z7 MWh",
+   "vstup": "posun 10/30 %: roční spotřeba spotu",
+   "muj": "3.000000000 / 3.000000000",
+   "modul": "3.000000000 / 3.000000000",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z7 spot",
+   "vstup": "posun 10 % / 30 %: celkem spot (musí klesat)",
+   "muj": "25291.40 / 24196.23",
+   "modul": "25291.40 / 24196.23",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z7 ořez",
+   "vstup": "posun 50 % = posun 30 % (ořez na max.)",
+   "muj": "true",
+   "modul": "true",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Z7 fix",
+   "vstup": "posun 30 % nemění fix",
+   "muj": "23108.36",
+   "modul": "23108.36",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V1b fix",
+   "vstup": "V1 s posunem 30 %",
+   "muj": "celkem 23108.36 (energie 9000.00, regul. 8244.17, stálé 5864.19)",
+   "modul": "celkem 23108.36 (energie 9000, regul. 8244.17, stálé 5864.19)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V1b spot",
+   "vstup": "V1 s posunem 30 %",
+   "muj": "celkem 24196.23 (energie 10087.87, regul. 8244.17, stálé 5864.19)",
+   "modul": "celkem 24196.23 (energie 10087.87, regul. 8244.17, stálé 5864.19)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V1b dynamic",
+   "vstup": "V1 s posunem 30 %",
+   "muj": "celkem 24382.61 (energie 10274.25, regul. 8244.17, stálé 5864.19)",
+   "modul": "celkem 24382.61 (energie 10274.25, regul. 8244.17, stálé 5864.19)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V2 fix",
+   "vstup": "EG.D, D56d, 9 MWh, 3×25 A, fix 3 500, marže 400 – profil TDD6 (jak mapuje aplikace), okna NT = předpoklad aplikace (22 h)",
+   "muj": "celkem 45526.69 (energie 31500.00, regul. 4982.62, stálé 9044.07)",
+   "modul": "celkem 45526.69 (energie 31500, regul. 4982.62, stálé 9044.07)",
+   "shoda": true,
+   "pozn": "aplikace mapuje D56d → TDD6"
+  },
+  {
+   "id": "V2 spot",
+   "vstup": "EG.D, D56d, 9 MWh, 3×25 A, fix 3 500, marže 400 – profil TDD6 (jak mapuje aplikace), okna NT = předpoklad aplikace (22 h)",
+   "muj": "celkem 48709.88 (energie 34683.19, regul. 4982.62, stálé 9044.07)",
+   "modul": "celkem 48709.88 (energie 34683.19, regul. 4982.62, stálé 9044.07)",
+   "shoda": true,
+   "pozn": "aplikace mapuje D56d → TDD6"
+  },
+  {
+   "id": "V2 dynamic",
+   "vstup": "EG.D, D56d, 9 MWh, 3×25 A, fix 3 500, marže 400 – profil TDD6 (jak mapuje aplikace), okna NT = předpoklad aplikace (22 h)",
+   "muj": "celkem 48476.33 (energie 34449.64, regul. 4982.62, stálé 9044.07)",
+   "modul": "celkem 48476.33 (energie 34449.64, regul. 4982.62, stálé 9044.07)",
+   "shoda": true,
+   "pozn": "aplikace mapuje D56d → TDD6"
+  },
+  {
+   "id": "V2z fix",
+   "vstup": "totéž s profilem TDD7 (třída podle přílohy 6 vyhl. 408/2015 Sb. pro D56d) – rozdíl proti V2",
+   "muj": "celkem 45596.31 (energie 31500.00, regul. 5052.24, stálé 9044.07)",
+   "modul": "celkem 45596.31 (energie 31500.00, regul. 5052.24, stálé 9044.07)",
+   "shoda": true,
+   "pozn": "modul s profilem TDD7 (správná třída); aplikace ho pro D56d nepoužije"
+  },
+  {
+   "id": "V2z spot",
+   "vstup": "totéž s profilem TDD7 (třída podle přílohy 6 vyhl. 408/2015 Sb. pro D56d) – rozdíl proti V2",
+   "muj": "celkem 49207.12 (energie 35110.81, regul. 5052.24, stálé 9044.07)",
+   "modul": "celkem 49207.12 (energie 35110.81, regul. 5052.24, stálé 9044.07)",
+   "shoda": true,
+   "pozn": "modul s profilem TDD7 (správná třída); aplikace ho pro D56d nepoužije"
+  },
+  {
+   "id": "V2z dynamic",
+   "vstup": "totéž s profilem TDD7 (třída podle přílohy 6 vyhl. 408/2015 Sb. pro D56d) – rozdíl proti V2",
+   "muj": "celkem 48932.92 (energie 34836.61, regul. 5052.24, stálé 9044.07)",
+   "modul": "celkem 48932.92 (energie 34836.61, regul. 5052.24, stálé 9044.07)",
+   "shoda": true,
+   "pozn": "modul s profilem TDD7 (správná třída); aplikace ho pro D56d nepoužije"
+  },
+  {
+   "id": "V2z rozdíl",
+   "vstup": "dopad mapování TDD6→TDD7 u EG.D D56d 9 MWh (můj výpočet): spot / dyn / fix; spot−fix (aplikace) vs. (vyhláška)",
+   "muj": "497.25 / 456.59 / 69.62; 3183.19 vs. 3610.81",
+   "modul": "—",
+   "shoda": false,
+   "pozn": "nález: tariffs.json sazbyInfo D45d/D56d/D57d → TDD6, D61d → TDD7; příloha 6 vyhl. 408/2015 Sb.: D45d/D56d/D57d → TDD7, D61d → TDD4, D35d → TDD6"
+  },
+  {
+   "id": "V2c fix",
+   "vstup": "ČEZ, D57d, 9 MWh, 3×25 A, fix 3 500 – TDD6 (aplikace) vs. TDD7 (vyhláška)",
+   "muj": "celkem 46280.49 (energie 31500.00, regul. 4574.82, stálé 10205.67)",
+   "modul": "celkem 46280.49 (energie 31500, regul. 4574.82, stálé 10205.67)",
+   "shoda": true,
+   "pozn": "rozdíl TDD7−TDD6 (můj): spot 493.71, dyn 453.05, fix 66.08"
+  },
+  {
+   "id": "V2c spot",
+   "vstup": "ČEZ, D57d, 9 MWh, 3×25 A, fix 3 500 – TDD6 (aplikace) vs. TDD7 (vyhláška)",
+   "muj": "celkem 49463.68 (energie 34683.19, regul. 4574.82, stálé 10205.67)",
+   "modul": "celkem 49463.68 (energie 34683.19, regul. 4574.82, stálé 10205.67)",
+   "shoda": true,
+   "pozn": "rozdíl TDD7−TDD6 (můj): spot 493.71, dyn 453.05, fix 66.08"
+  },
+  {
+   "id": "V2c dynamic",
+   "vstup": "ČEZ, D57d, 9 MWh, 3×25 A, fix 3 500 – TDD6 (aplikace) vs. TDD7 (vyhláška)",
+   "muj": "celkem 49230.13 (energie 34449.64, regul. 4574.82, stálé 10205.67)",
+   "modul": "celkem 49230.13 (energie 34449.64, regul. 4574.82, stálé 10205.67)",
+   "shoda": true,
+   "pozn": "rozdíl TDD7−TDD6 (můj): spot 493.71, dyn 453.05, fix 66.08"
+  },
+  {
+   "id": "TDD mapování",
+   "vstup": "tariffs.json sazbyInfo.*.tdd vs. příloha č. 6 vyhlášky 408/2015 Sb.",
+   "muj": "{\"D01d\":\"TDD4\",\"D02d\":\"TDD4\",\"D61d\":\"TDD4\",\"D25d\":\"TDD5\",\"D26d\":\"TDD5\",\"D27d\":\"TDD5\",\"D35d\":\"TDD6\",\"D45d\":\"TDD7\",\"D56d\":\"TDD7\",\"D57d\":\"TDD7\"}",
+   "modul": "{\"D01d\":\"TDD4\",\"D02d\":\"TDD4\",\"D25d\":\"TDD5\",\"D26d\":\"TDD5\",\"D27d\":\"TDD5\",\"D35d\":\"TDD6\",\"D45d\":\"TDD6\",\"D56d\":\"TDD6\",\"D57d\":\"TDD6\",\"D61d\":\"TDD7\"}",
+   "shoda": false,
+   "pozn": ""
+  },
+  {
+   "id": "V3 fix",
+   "vstup": "PREdistribuce, D25d (TDD5 Praha), 2 MWh, 1×25 A, fix 2 900, marže 300, poplatky 100/120",
+   "muj": "celkem 11304.40 (energie 5800.00, regul. 2955.93, stálé 2548.47)",
+   "modul": "celkem 11304.40 (energie 5800.00, regul. 2955.93, stálé 2548.47)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V3 spot",
+   "vstup": "PREdistribuce, D25d (TDD5 Praha), 2 MWh, 1×25 A, fix 2 900, marže 300, poplatky 100/120",
+   "muj": "celkem 13047.60 (energie 7303.19, regul. 2955.93, stálé 2788.47)",
+   "modul": "celkem 13047.60 (energie 7303.19, regul. 2955.93, stálé 2788.47)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V3 dynamic",
+   "vstup": "PREdistribuce, D25d (TDD5 Praha), 2 MWh, 1×25 A, fix 2 900, marže 300, poplatky 100/120",
+   "muj": "celkem 13643.86 (energie 7379.26, regul. 2955.93, stálé 3308.67)",
+   "modul": "celkem 13643.86 (energie 7379.26, regul. 2955.93, stálé 3308.67)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V4 fix",
+   "vstup": "ČEZ, D61d, 2 MWh, 3×25 A, fix 3 000 – NT podle CV ERÚ 14/2025 (pá 12:00–ne 22:00) a profil TDD4 podle vyhlášky",
+   "muj": "celkem 16848.35 (energie 6000.00, regul. 5448.80, stálé 5399.55)",
+   "modul": "celkem 15775.42 (energie 6000.00, regul. 4375.87, stálé 5399.55)",
+   "shoda": false,
+   "pozn": "modul s okny aplikace + TDD7; podíl NT čtvrthodin ERÚ 34.7 % vs. aplikace 54.7 %"
+  },
+  {
+   "id": "V4 spot",
+   "vstup": "ČEZ, D61d, 2 MWh, 3×25 A, fix 3 000 – NT podle CV ERÚ 14/2025 (pá 12:00–ne 22:00) a profil TDD4 podle vyhlášky",
+   "muj": "celkem 18668.77 (energie 7820.42, regul. 5448.80, stálé 5399.55)",
+   "modul": "celkem 17577.82 (energie 7802.40, regul. 4375.87, stálé 5399.55)",
+   "shoda": false,
+   "pozn": "modul s okny aplikace + TDD7; podíl NT čtvrthodin ERÚ 34.7 % vs. aplikace 54.7 %"
+  },
+  {
+   "id": "V4 dynamic",
+   "vstup": "ČEZ, D61d, 2 MWh, 3×25 A, fix 3 000 – NT podle CV ERÚ 14/2025 (pá 12:00–ne 22:00) a profil TDD4 podle vyhlášky",
+   "muj": "celkem 18598.51 (energie 7750.16, regul. 5448.80, stálé 5399.55)",
+   "modul": "celkem 17516.89 (energie 7741.47, regul. 4375.87, stálé 5399.55)",
+   "shoda": false,
+   "pozn": "modul s okny aplikace + TDD7; podíl NT čtvrthodin ERÚ 34.7 % vs. aplikace 54.7 %"
+  },
+  {
+   "id": "V4 (konfigurace aplikace) fix",
+   "vstup": "tentýž vstup, můj výpočet s okny a TDD7 aplikace (kontrola aritmetiky)",
+   "muj": "celkem 15775.42 (energie 6000.00, regul. 4375.87, stálé 5399.55)",
+   "modul": "celkem 15775.42 (energie 6000.00, regul. 4375.87, stálé 5399.55)",
+   "shoda": true,
+   "pozn": "regulované složky aplikace nižší o 1072.93 Kč/rok"
+  },
+  {
+   "id": "V4 (konfigurace aplikace) spot",
+   "vstup": "tentýž vstup, můj výpočet s okny a TDD7 aplikace (kontrola aritmetiky)",
+   "muj": "celkem 17577.82 (energie 7802.40, regul. 4375.87, stálé 5399.55)",
+   "modul": "celkem 17577.82 (energie 7802.40, regul. 4375.87, stálé 5399.55)",
+   "shoda": true,
+   "pozn": "regulované složky aplikace nižší o 1072.93 Kč/rok"
+  },
+  {
+   "id": "V4 (konfigurace aplikace) dynamic",
+   "vstup": "tentýž vstup, můj výpočet s okny a TDD7 aplikace (kontrola aritmetiky)",
+   "muj": "celkem 17516.89 (energie 7741.47, regul. 4375.87, stálé 5399.55)",
+   "modul": "celkem 17516.89 (energie 7741.47, regul. 4375.87, stálé 5399.55)",
+   "shoda": true,
+   "pozn": "regulované složky aplikace nižší o 1072.93 Kč/rok"
+  },
+  {
+   "id": "V5",
+   "vstup": "spotřeba 0 MWh → jen stálé platby (ČEZ D02d 3×25: 12 × (256 + 12,87 + 135) × 1,21)",
+   "muj": "5864.19",
+   "modul": "5864.19",
+   "shoda": true,
+   "pozn": "app.js num(): prázdné/záporné → 0, pak Math.max(0,1; …) → 0,1 MWh"
+  },
+  {
+   "id": "V6",
+   "vstup": "spotřeba 100 MWh (max. formuláře) – lineární škálování energie fixu",
+   "muj": "300000.00",
+   "modul": "300000.00",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V7",
+   "vstup": "záporná spotřeba −1 MWh – modul neověřuje vstup (zjištění, ne očekávaná hodnota)",
+   "muj": "-3000.00",
+   "modul": "-3000",
+   "shoda": true,
+   "pozn": "modul záporný vstup nehlídá (stejně jako můj výpočet); v UI blokuje num()"
+  },
+  {
+   "id": "V7b",
+   "vstup": "neznámá sazba → modul vyhodí chybu",
+   "muj": "chyba",
+   "modul": "Neznámá kombinace cez / D99d / 3x25",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V8",
+   "vstup": "pásma dyn. tarifu: 25. 10. 2026 (100 čtvrthodin, 2:00 dvakrát → 3 510), 29. 3. 2026 (92), svátek 6. 7. 2026 v 6:00 → 4 290 (víkend), prac. den 7. 7. 2026 v 6:00 → 4 875",
+   "muj": "{\"delka2510\":100,\"hod2count\":8,\"cena2510h2\":[3510],\"delka2903\":92,\"hod2chybi\":true,\"svatek6h\":4290,\"pracovni6h\":4875,\"zima12h\":3510,\"leto12h\":1950}",
+   "modul": "{\"delka2510\":100,\"hod2count\":8,\"cena2510h2\":[3510],\"delka2903\":92,\"hod2chybi\":true,\"svatek6h\":4290,\"pracovni6h\":4875,\"zima12h\":3510,\"leto12h\":1950}",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V8b",
+   "vstup": "cena pásma dyn. tarifu pro všech 35 040 čtvrthodin (moje pásma z PDF ČEZ vs. dynamic.json)",
+   "muj": "0 rozdílů",
+   "modul": "0 rozdílů",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "Mřížka",
+   "vstup": "datum, hodina, minuta a víkend/svátek všech 35 040 čtvrthodin",
+   "muj": "0 rozdílů",
+   "modul": "0 rozdílů",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V9",
+   "vstup": "přestupný rok 28. 2.–1. 3. 2028 = 3 dny = 288 čtvrthodin; 29. 2. 2028 existuje",
+   "muj": "288; 2028-02-28, 2028-02-29, 2028-03-01",
+   "modul": "288; 2028-02-28, 2028-02-29, 2028-03-01",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V10",
+   "vstup": "svátky podle zákona 245/2000 Sb. – 2026 a 2027 (Velký pátek, Velikonoční pondělí + 11 pevných)",
+   "muj": "2026-01-01 2026-04-03 2026-04-06 2026-05-01 2026-05-08 2026-07-05 2026-07-06 2026-09-28 2026-10-28 2026-11-17 2026-12-24 2026-12-25 2026-12-26 | 2027-01-01 2027-03-26 2027-03-29 2027-05-01 2027-05-08 2027-07-05 2027-07-06 2027-09-28 2027-10-28 2027-11-17 2027-12-24 2027-12-25 2027-12-26",
+   "modul": "2026-01-01 2026-04-03 2026-04-06 2026-05-01 2026-05-08 2026-07-05 2026-07-06 2026-09-28 2026-10-28 2026-11-17 2026-12-24 2026-12-25 2026-12-26 | 2027-01-01 2027-03-26 2027-03-29 2027-05-01 2027-05-08 2027-07-05 2027-07-06 2027-09-28 2027-10-28 2027-11-17 2027-12-24 2027-12-25 2027-12-26",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V11",
+   "vstup": "fx.json: sobota a neděle mají kurz z pátku (poslední vyhlášený)",
+   "muj": "{\"sobotyShodne\":52,\"sobotyCelkem\":52,\"nedeleShodne\":51,\"svatek17_11_2025\":[24.21,24.21],\"prvniLeden2026\":[24.245,24.245]}",
+   "modul": "— (datový soubor, modul nepočítá)",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "V12",
+   "vstup": "POZE = min(MWh × 495; A × fáze × Kč/A × 12) – hypoteticky 8,32 Kč/A (hodnota 2025 v CV 13/2025 před změnou CV 15/2025)",
+   "muj": "1485 / 7488 / 0",
+   "modul": "1485 / 7488 / 0",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "CSV čísla",
+   "vstup": "parseNumber: české desetinné čárky a mezery",
+   "muj": "\"1 500,5\"→1500.5, \"1.500,50\"→1500.5, \"1500.50\"→1500.5, \"0,25\"→0.25, \"1 500\"→1500, \"abc\"→NaN, \"\"→NaN, \"-0,5\"→-0.5",
+   "modul": "\"1 500,5\"→1500.5, \"1.500,50\"→1500.5, \"1500.50\"→1500.5, \"0,25\"→0.25, \"1 500\"→1500, \"abc\"→NaN, \"\"→NaN, \"-0,5\"→-0.5",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "CSV čas",
+   "vstup": "parseTime: formáty; 24:00 → další den; Z → převod do Prahy (1:15)",
+   "muj": "—",
+   "modul": "\"05.01.2026 00:15\"→{\"date\":\"2026-01-05\",\"min\":15}; \"5. 1. 2026 0:15\"→{\"date\":\"2026-01-05\",\"min\":15}; \"2026-01-05 00:15\"→{\"date\":\"2026-01-05\",\"min\":15}; \"2026-01-05T00:15:00\"→{\"date\":\"2026-01-05\",\"min\":15}; \"2026-01-05T00:15:00Z\"→{\"date\":\"2026-01-05\",\"min\":75}; \"2026-01-05T24:00\"→{\"date\":\"2026-01-06\",\"min\":0}; \"5.1.2026\"→null; \"nesmysl\"→null",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "CSV čárka",
+   "vstup": "CSV se středníkem a čárkou: 0,25 / 1 000,5 / 0,5 kWh → MWh v 1.–3. čtvrthodině",
+   "muj": "0,00025 / 1,0005 / 0,0005; matched 3",
+   "modul": "0.00025 / 1.0005 / 0.0005; matched 3",
+   "shoda": true,
+   "pozn": ""
+  },
+  {
+   "id": "CSV chyby",
+   "vstup": "špatný formát / interval 10 min / mimo období → srozumitelná chyba",
+   "muj": "chyba, chyba, chyba",
+   "modul": "„V CSV jsem nenašel žádné řádky s časem a hodnotou.“ / „Nepodporovaný interval měření: 10 min (podporuji 15, 30 a 60 min).“ / „Žádný řádek CSV se nepodařilo přiřadit k období výpočtu.“",
+   "shoda": true,
+   "pozn": ""
+  }
+ ]
+}

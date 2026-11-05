@@ -281,6 +281,35 @@ const srv = await spustServer(KOREN);
   await b.zavri();
 }
 
+// === 4g. Desetinná čárka a mezera v obou lokalizacích prohlížeče (cs-CZ i en-US) ==
+vysl.cislaLokalizace = {};
+for (const lang of ['cs-CZ', 'en-US']) {
+  // Pozn.: samotné --lang (otevriProhlizec({lang})) v tomto Chromiu lokalizaci nepřepnulo (navigator.language zůstal en-US),
+  // proto se prohlížeč spouští i s proměnnými LANG/LANGUAGE – pak cs-CZ čárku přijímá.
+  const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--no-sandbox', '--disable-gpu', `--lang=${lang}`], env: { ...process.env, LANG: lang === 'cs-CZ' ? 'cs_CZ.UTF-8' : 'en_US.UTF-8', LANGUAGE: lang === 'cs-CZ' ? 'cs' : 'en' } });
+  const page = await browser.newPage();
+  await page.setViewport({ width: 360, height: 800 });
+  await page.setExtraHTTPHeaders({ 'Accept-Language': lang });
+  const b = { page, zavri: () => browser.close() };
+  await page.goto(srv.url, { waitUntil: 'networkidle0' });
+  await napis(page, '#narRok', 1985); await dalsi(page); await dalsi(page);
+  await pocetDeti(page, 1); await napis(page, '#ditRok0', 2023); await dalsi(page); // krok školka
+  const r = { navigatorLanguage: await page.evaluate(() => navigator.language) };
+  for (const [jak, text] of [['psani', '1500,50'], ['psani', '84 512,30'], ['psani', '1 500'], ['psani', '0,85'], ['vlozeni', '84 512,30'], ['vlozeni', '1 500']]) {
+    await napis(page, '#skolne0', '');
+    if (jak === 'psani') await page.type('#skolne0', text);
+    else await page.evaluate((t) => { document.querySelector('#skolne0').focus(); document.execCommand('insertText', false, t); }, text);
+    r[`${jak} „${text}“`] = await page.evaluate(() => { const el = document.querySelector('#skolne0'); return { value: el.value, badInput: el.validity.badInput }; });
+  }
+  // co uvidí uživatel na výsledku po „84 512,30“ ve školném (školka zaškrtnutá)
+  await zaskrtni(page, 'skolka0', true); await napis(page, '#skolne0', ''); await page.type('#skolne0', '84 512,30');
+  await dalsi(page); await doVysledku(page);
+  const obr = await prectiVysledek(page);
+  r.vysledekSkolkovne = obr.radky.find((x) => /umístění/.test(x.nazev))?.rocne ?? null;
+  vysl.cislaLokalizace[lang] = r;
+  await b.zavri();
+}
+
 // === 5. Zastaralý stav školky po změně roku dítěte (Zpět) ====================
 {
   const b = await otevriProhlizec({ sirka: 360, vyska: 800 });
@@ -335,7 +364,7 @@ console.log(JSON.stringify({
   seznam: { preteka: vysl.seznam360.preteka.preteka, axe: vysl.seznam360.axe.map((a) => `${a.dopad}:${a.id}×${a.pocet}`) },
   A1440: { preteka: vysl.scenarA1440.preteka.preteka, az: vysl.scenarA1440.az },
   B360: { az: vysl.scenarB360.porovnani.az, realne: vysl.scenarB360.porovnani.realne, polozkyNeshoda: vysl.scenarB360.porovnani.polozky.filter((p) => !p.shoda), info: vysl.scenarB360.porovnani.info },
-  chyby: vysl.chyby, cisla: vysl.cisla, xss: { k3: vysl.xssKrok3, k8: vysl.xssKrok8, k10: vysl.xssKrok10 },
+  chyby: vysl.chyby, cisla: vysl.cisla, cislaLokalizace: vysl.cislaLokalizace, xss: { k3: vysl.xssKrok3, k8: vysl.xssKrok8, k10: vysl.xssKrok10 },
   zastaraleSkolkovne: vysl.zastaraleSkolkovne,
   sit: { cizi: vysl.sit360.cizi, konzole: vysl.sit360.konzole, chyby: vysl.sit360.chyby, localStorage: vysl.sit360.localStorage, cookies: vysl.sit360.cookies },
   zivy: Object.fromEntries(Object.entries(vysl.zivyWeb).map(([k, z]) => [k, { stav: z.stav, preteka: z.preteka.preteka, konzole: z.konzole, chyby: z.chyby, cizi: z.cizi, overeno: z.overeno, axe: z.axe?.map((a) => `${a.dopad}:${a.id}×${a.pocet}`) }])),
