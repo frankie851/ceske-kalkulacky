@@ -1591,8 +1591,8 @@
     "reprodukce": "soukromá sféra, cesta 15. 3. 2026 20:00 – 16. 3. 2026 2:00, bez jídel, bez km → očekáváno 155 Kč: § 163 odst. 4 ZP („Při pracovní cestě, která spadá do 2 kalendářních dnů, se upustí od odděleného posuzování doby trvání pracovní cesty v kalendářním dnu, je-li to pro zaměstnance výhodnější“, https://www.zakonyprolidi.cz/cs/2006-262#p163); 4 h + 2 h = 6 h → pásmo 5–12 h → 155 Kč. Skutečnost: modul `stravneHal = 0`, obrazovka „Stravné 0,00 Kč … pod 5 h → 0 Kč; pod 5 h → 0 Kč“ (`prepocet.txt` V43, `prohlizec.json` C_pulnoc, `pulnoc-360.png`). Dále 6:00–0:30 (18 h + 0,5 h): očekáváno 370 Kč (18,5 h), skutečnost 236 Kč (V44, obrazovka); 22:00–11:00: očekáváno 236 Kč, skutečnost 155 Kč (V45). Ve veřejné sféře totéž (V48): § 176 odst. 1 vylučuje jen § 163 odst. 1–3, § 174 odkazuje na hlavu II.",
     "dopad": "zaměstnavatel podle vyúčtování vyplatí méně, než je zákonné minimum (o 155 Kč, 134 Kč nebo 81 Kč za cestu); zaměstnanec vracející se po půlnoci z celodenní cesty přijde o 134 Kč stravného, aniž by ho na to aplikace upozornila.",
     "oprava": "v `spocitejCestu` u cest s právě 2 kalendářními dny spočítat i variantu „dohromady“ (pásmo z celkové doby, všechna poskytnutá jídla, krácení podle společného pásma) a použít vyšší částku; v detailu ukázat, která varianta se použila; odstranit tvrzení v README; doplnit testy (20:00–2:00 → 155 Kč; 6:00–0:30 → 370 Kč; 19:00–10:00 → 310 Kč zůstává).",
-    "overeni": "reprodukováno 2× (dva běhy `porovnani.mjs`, dva běhy prohlížeče) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy `porovnani.mjs`, dva běhy prohlížeče) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – § 163 odst. 4 ZP citován, platí i pro veřejnou sféru (§ 174, § 176 odst. 1); spocitejCestu reprodukováno: 0 / 236 / 155 Kč místo 155 / 370 / 236 Kč)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "CES-02",
@@ -1603,8 +1603,8 @@
     "reprodukce": "100 km osobním autem s přívěsem, sazby 2026 → očekáváno základní náhrada nejméně 100 × 5,90 × 1,15 = 678,50 Kč (ZP § 157 odst. 4: „při použití přívěsu k silničnímu motorovému vozidlu zaměstnavatel sazbu základní náhrady za 1 km jízdy zvýší nejméně o 15 %“, https://www.zakonyprolidi.cz/cs/2006-262#p157; rejstřík PR-57). Skutečnost: modul vyhodí ChybaVstupu (`prepocet.txt` V32), v UI nelze přívěs vůbec zvolit; zadání přitom výslovně žádá „u přívěsu navýšení podle zákona“ a ověření „přirážku za přívěs“.",
     "dopad": "zaměstnanec s přívěsem (řemeslníci, servis) buď dostane jen 5,90 Kč/km (o 0,885 Kč/km méně, 88,50 Kč na 100 km), nebo si musí vše dopočítat ručně; text navíc tvrdí, že platný zákon pravidlo neobsahuje.",
     "oprava": "povolit zaškrtávátko, v `zakladniNahrada` násobit sazbu 1,15 (haléře z přesného součinu km × sazba × 1,15, ne z předem zaokrouhlené sazby 6,79 Kč), ukázat to v detailu („5,90 Kč/km + 15 % přívěs“), opravit texty v `index.html` i README a nahradit test 23 testem na 678,50 Kč.",
-    "overeni": "reprodukováno 2× (dva běhy `porovnani.mjs`; text v UI na obou snímcích) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy `porovnani.mjs`; text v UI na obou snímcích) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – § 157 odst. 4 ZP citován („zvýší nejméně o 15 %“); spocitejCestu s prives: true vyhodí ChybaVstupu místo ≥ 678,50 Kč; test odmítnutí přímo vynucuje)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "CES-03",
