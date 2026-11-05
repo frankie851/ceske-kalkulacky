@@ -30,6 +30,9 @@ for (const s of STRANKY) {
     behy.push({
       skore: Object.fromEntries(KATEGORIE.map((k) => [k, r.lhr.categories[k].score])),
       metriky: Object.fromEntries(METRIKY.map((m) => [m, r.lhr.audits[m]?.displayValue ?? null])),
+      cls: r.lhr.audits['cumulative-layout-shift']?.numericValue ?? 0,
+      posuny: (r.lhr.audits['layout-shifts']?.details?.items || []).slice(0, 4)
+        .map((it) => `${(it.score ?? 0).toFixed(3)} ${it.node?.selector || '?'}`),
     });
   }
   const skore = Object.fromEntries(KATEGORIE.map((k) => [k, median(behy.map((b) => b.skore[k]))]));
@@ -43,6 +46,11 @@ for (const s of STRANKY) {
   });
   const vykonBehy = behy.map((b) => pct(b.skore.performance)).join('/');
   console.log(`${spatne.length ? '✗' : '✓'} /${s}  ${Object.entries(skore).map(([k, v]) => `${k} ${pct(v)}`).join(' · ')}  (výkon v bězích: ${vykonBehy})`);
+  const clsMax = Math.max(...behy.map((b) => b.cls));
+  if (clsMax > 0.05) {
+    const b = behy.find((x) => x.cls === clsMax);
+    console.log(`    CLS ${clsMax.toFixed(3)} – posouvá se: ${b.posuny.join(' | ') || 'neuvedeno'}`);
+  }
   if (spatne.length) {
     const b = behy.find((x) => x.skore.performance === skore.performance) || behy[0];
     console.log(`    metriky běhu s mediánem: ${Object.entries(b.metriky).map(([k, v]) => `${k} ${v}`).join(' · ')}`);
