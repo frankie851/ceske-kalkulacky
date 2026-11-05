@@ -831,12 +831,190 @@
   "kod": "BYD",
   "repo": "bydlometr",
   "nazev": "Bydlometr",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Připraveno",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 0,
+   "stredni": 7,
+   "nizka": 4
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "BYD-01 (jen strop § 117 odst. 4), BYD-02, BYD-07"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "BYD-05 (výsledek i při úvěru nad LTV)"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "BYD-04 (DTI a odpočet úroků se neukazují)"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "BYD-06"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "BYD-03 (starý výsledek pod chybou)"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "BYD-01 („Poplatek nejvýš…“ není zákonné maximum), BYD-08"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "BYD-10 (jen favicon 404)"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "BYD-01",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data / Texty",
+    "nazev": "Kalkulačka poplatku ukazuje jen strop 0,25 %/rok; neuplatňuje omezení podle § 117 odst. 5 (úrok do konce fixace) ani § 117a (admin. náklady max. 1 000 Kč + úrokový rozdíl)",
+    "kde": "`js/mortgage.js:135–146` (`prepaymentFee`), `js/ui-refix.js:147` („Poplatek nejvýš …“), `rules.json:98–116` (`feePerStartedYear`, `feeCap`), zadání ř. 400–402",
+    "reprodukce": "(a) Obrazovka, výchozí kalkulačka poplatku: 300 000 Kč z úvěru 3 500 000 Kč, fixace 5. 11. 2024–5. 11. 2029, splátka 5. 11. 2026 → „Poplatek nejvýš 2 250 Kč“ (`prohlizec.json` D_poplatek.vychozi, 3 běhy, `poplatek-360.png`). Podle § 117 odst. 5 věty druhé a § 117a odst. 1 (`zdroje-a-zakony.txt`) je u účelového úvěru na bydlení náhrada navíc omezena na administrativní náklady nejvýše 1 000 Kč + kladný úrokový rozdíl proti průměru sazeb ČNB; je-li průměr ČNB vyšší nebo roven smluvní sazbě (dnes běžné u smluv z let 2024–2025), zákonné maximum je 1 000 Kč, ne 2 250 Kč. (b) Modul: 300 000 Kč měsíc před koncem fixace při 2,49 % → aplikace 750 Kč; § 117 odst. 5 (úrok do konce fixace) dává 622,50 Kč (`prepocet.txt`, jediná neshoda ze 152). Text „Banka smí účtovat jen skutečné náklady, může být méně“ to přiznává jen obecně.",
+    "dopad": "Člověk s novou smlouvou může kvůli zdánlivému poplatku (až 1 % = desítky tisíc) odložit mimořádnou splátku na okno před výročím nebo na konec fixace a platit mezitím úroky, ačkoli zákonný strop je často 1 000 Kč.",
+    "oprava": "Do kalkulačky přidat smluvní sazbu (a volitelně průměr ČNB pro srovnatelné fixace s odkazem na zveřejnění ČNB podle § 117a odst. 2) a počítat `min(strop odst. 4, úrok z předčasně splacené části do konce fixace, 1 000 Kč + max(0, úrokový rozdíl))`; minimálně v textu výsledku říct, že při sazbách ČNB ≥ smluvní sazbě je náhrada nejvýš 1 000 Kč. Zároveň jde o chybu v zadání (ř. 400–402 omezení odst. 5 a § 117a neuvádí).",
+    "overeni": "reprodukováno 2× (3 běhy prohlížeče, 2 procesy porovnání) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-02",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data",
+    "nazev": "Starší smlouvy (před 1. 9. 2024 bez nové fixace) nedostanou číslo ani v bezplatných případech; další bezplatné důvody § 117 odst. 3 nejsou zmíněny",
+    "kde": "`js/mortgage.js:121–126` (`newRulesApply === false` → `fee: null`), `js/ui-refix.js:141–145`, zadání ř. 402 („Pro starší smlouvy jen upozornění“)",
+    "reprodukce": "Kalkulačka poplatku: smlouva i fixace 1. 3. 2021, konec fixace 1. 3. 2026, splátka 1. 3. 2026 (den konce fixace) → „Zkontrolujte smlouvu. Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet.“ (`prohlizec.json` D_poplatek.starsiSmlouvaKonecFixace, 3 běhy). Očekáváno 0 Kč: § 117 odst. 3 písm. c), d) a bezplatných 25 % před výročím (dnes písm. h)) existovaly už před novelou – zákon 462/2023 Sb. čl. XIV bod 6 jen vložil písm. e), f) a bod 7 jen doplnil text písm. h) (`zdroje-a-zakony.txt`). Novela změnila jen výši náhrady (odst. 4, § 117a). Písm. a), b), e), f), g) (pojištění, převod nemovitosti a SJM po 24 měsících, úmrtí, nemoc, invalidita) aplikace nikde nezmiňuje (FD-13).",
+    "dopad": "Právě lidé z refixační vlny (fixace z let 2020–2021) jsou „starší smlouva“; aplikace jim neřekne, že ke konci fixace a do 25 % před výročím splácejí zdarma, a o dalších bezplatných důvodech se nedozví nikdo.",
+    "oprava": "U starších smluv vracet 0 Kč v případech konec fixace a 25 % před výročím a jen pro zbytek upozornění „zkontroluj smlouvu“; pod výsledek přidat výčet dalších bezplatných důvodů § 117 odst. 3 jako text. Zapsat jako chybu v zadání (ř. 402).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-03",
+    "zavaznost": "Střední",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Při chybném vstupu zůstane pod hláškou starý výsledek (věta „Nejlevněji vychází…“, tabulky, zátěžový test)",
+    "kde": "`js/ui-refix.js:44–49` a `js/ui-rentbuy.js:78–84` (`return` po zobrazení chyby, výsledky se nepřepisují ani neskryjí), `index.html:77–81`",
+    "reprodukce": "Refixace: do pole Zbývající dluh napsat „abc“ (nebo smazat, „−500000“, „2.800.000“) → červená hláška „Zkontrolujte pole: Zbývající dluh.“, ale nad ní i pod ní zůstává „Nejlevněji vychází varianta „Refinancovat jinde“ … 1 851 971 Kč“, tabulka variant i zátěžový test z předchozího vstupu (`chyba-360.png`, `prohlizec.json` C_refix_chyby.*.summaryZustal, 3 běhy). Totéž v nájem vs. koupě (plocha 0, horizont 51). Při „0“ je hláška, ale pole nemá `aria-invalid=\"true\"`.",
+    "dopad": "Čtenář (zvlášť na mobilu, kde je hláška mezi dlouhými bloky) může číst částky, které k jeho zadání nepatří; čtečka obrazovky dostane jen hlášku, ne informaci, že čísla neplatí.",
+    "oprava": "Při chybě výsledkové panely skrýt nebo označit (`aria-busy`/třída „neplatné“ s vysvětlením), případně vymazat souhrn a tabulky; u kontroly „kladné hodnoty“ nastavit `aria-invalid` na příslušná pole; chybové hlášce dát `role=\"alert\"`.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-04",
+    "zavaznost": "Střední",
+    "oblast": "Shoda se zadáním",
+    "nazev": "DTI se nepočítá ani neukazuje (vlastní bydlení informativně, investiční doporučení 7) a úspora na dani z odpočtu úroků se uživateli nikde nezobrazí",
+    "kde": "`rules.json:43–60` (`dti.*` – v `js/` nikde nepoužito, grep), `js/mortgage.js:165` (`interestDeductionSaving` – voláno jen z testů), `js/rentbuy.js:103–105,113` (`taxSaving` se počítá, `ui-rentbuy.js` ho nevypisuje), zadání ř. 404–407",
+    "reprodukce": "Zadání „DTI a DSTI pro vlastní bydlení nejsou závazné – ukazuj je jen informativně“ a „investiční nemovitost doporučeně 70 % a DTI 7“. Refixace s příjmem 75 000 Kč a dluhem 2 800 000 Kč: DTI = 3,1násobek ročního příjmu se nikde neobjeví (`vysledek-360.png`); nájem vs. koupě se zaškrtnutou investiční nemovitostí ukáže jen LTV 70 %, o DTI 7 ani slovo (příjem se tam nezadává). Úspora na dani (příklad zadání 22 500 Kč) není v UI vůbec; v simulaci je započtená skrytě. Ověřeno 3 běhy prohlížeče a grepem kódu.",
+    "dopad": "Chybí informace, kterou zadání výslovně požaduje; u investiční hypotéky uživatel nezjistí, že by ho doporučení DTI 7 mohlo omezit víc než LTV. Čísla výsledků to nemění.",
+    "oprava": "V refixaci zobrazit řádek „DTI (dluh / roční čistý příjem): 3,1 – ČNB nemá závazný limit“; v nájem vs. koupě vypsat roční úsporu na dani z `taxSaving` (a použít k tomu `interestDeductionSaving`) a při investiční nemovitosti připomenout doporučení DTI 7 (s volitelným polem příjmu).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-05",
+    "zavaznost": "Střední",
+    "oblast": "Výpočty / Texty",
+    "nazev": "Nájem vs. koupě počítá celý výsledek i s úvěrem nad limit LTV a hláška po zaokrouhlení tvrdí „LTV 80 %, ale limit je 80 %“",
+    "kde": "`js/rentbuy.js:26–33` (varování, simulace pokračuje s plným úvěrem), `js/ui-rentbuy.js:93–94`",
+    "reprodukce": "Nájem vs. koupě, Brno, 60 m², vlastní zdroje 1 500 000 Kč, věk 40 → varování „Úvěr by měl LTV 80 %, ale limit je 80 %. Na koupi chybí 11 448 Kč vlastních zdrojů – banka by takový úvěr neposkytla.“ (skutečné LTV 80,15 %), a přesto souhrn „Za 20 let: koupě 13 456 570 Kč … vychází lépe koupě o 1 971 930 Kč“ (`prohlizec.json` E_rentbuy_vek40, 3 běhy). Při vlastních zdrojích 0 Kč jde simulace s LTV 100 %.",
+    "dopad": "Výsledek se opírá o úvěr, který uživatel nedostane; varování je nad výsledkem, ale graf, tabulka i citlivost vypadají jako platné. Zaokrouhlená hláška mate.",
+    "oprava": "Při překročení limitu buď výsledek označit jako hypotetický (a graf/tabulku ztlumit), nebo přepočítat s úvěrem omezeným na limit a vypsat potřebné vlastní zdroje; v hlášce zobrazit LTV na 1 desetinné místo.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-06",
+    "zavaznost": "Střední",
+    "oblast": "Testy",
+    "nazev": "Chybí testy pro `format.js`/`form.js` (propojení formuláře) a dva „bankovní“ testy ověřují jen díky toleranci",
+    "kde": "`test/` (žádný test `parseNumber`, `formatCZK`, `readNumbers`, `sourceList`), `test/mortgage.test.js:35–43` (Hypoindex 6/2026 → 21 082 ± 5; KB → 5 899 641 ± 0,1 %)",
+    "reprodukce": "`node --test` 63/63 (`testy.txt`). Anuita 3 500 000 Kč / 5,30 % / 300 je 21 077,04 Kč – test očekává 21 082 Kč a prochází o 0,04 Kč (hodnota z článku zřejmě odpovídá jiné sazbě; 5,31 % → 21 097,75). Test KB porovnává čistou anuitu × 360 (5 898 780,41 Kč) s „celkem splaceno vč. poplatků“ 5 899 641,31 Kč – rozdíl 861 Kč schová tolerance 5 900 Kč, test tedy nic přesného neověřuje. Parsování „1 500“, „1500,50“, „2.800.000“ a `data-scale` nemá žádný test, přestože na něm stojí shoda obrazovky s modulem. Chybí test starší smlouvy v den konce fixace (BYD-02) a stropu podle § 117 odst. 5 (BYD-01).",
+    "dopad": "Nepřímý – regrese v parsování čísel nebo ve formuláři by testy nezachytily; „bankovní“ testy dávají falešnou jistotu.",
+    "oprava": "Přidat `test/format.test.js` (české zápisy, NaN, záporné, `%`, `Kč`) a test `readNumbers` v jsdom-free podobě (čistá funkce nad hodnotami); test Hypoindex opravit na skutečnou anuitu 21 077 Kč ± 1 nebo doložit sazbu; test KB nahradit porovnáním měsíční splátky z reprezentativního příkladu banky.",
+    "overeni": "reprodukováno 2× (přepočet, výstup testů) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-07",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data",
+    "nazev": "Zdroje zákonných pravidel odkazují na neúřední weby a dvě citace jsou nepřesné",
+    "kde": "`rules.json:68,77,86,95,104,125,134,143,152` (URL kb.cz, banky.cz, hyponamiru.cz, stavebky.cz), `defaults.json:181,212,243,274` (mesec.cz), `rules.json:124` („§ 15 odst. 3“), `rules.json:129` („smlouvy do 31. 12. 2020“); patička `#sources`",
+    "reprodukce": "Patička „Zdroje výchozích dat a pravidel“ vede u předčasného splacení, odpočtu úroků, sazby daně a daně z nemovitosti na komerční weby; zákon je jen jmenován v textu. Limit 150 000 Kč je v § 15 odst. 4 ZDP (odst. 3 upravuje odpočet) – FD-14; limit 300 000 Kč se váže na bytovou potřebu obstaranou před 1. 1. 2021, ne na datum smlouvy – FD-15 (zákon 386/2020 Sb. čl. IV). 15 z 22 URL nebylo z prostředí dosažitelných (`zdroje-a-zakony.txt`), takže nelze potvrdit, že stránky tvrdí to, co aplikace; 5 odkazů na ČNB a cdnjs fungují a obsah ČNB souhlasí.",
+    "dopad": "Kdo si chce pravidlo ověřit, skončí na komerčním webu; čísla to nemění.",
+    "oprava": "U zákonných pravidel uvádět URL na zakonyprolidi.cz/e-sbírku (257/2016 Sb. § 117, 586/1992 Sb. § 15 a § 16, 338/1992 Sb., 634/2004 Sb. položka 120) a ČNB; opravit citaci na § 15 odst. 4 a formulaci „bytová potřeba obstaraná před 1. 1. 2021“.",
+    "overeni": "reprodukováno 2× (2 curl běhy, obsah souborů) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-08",
+    "zavaznost": "Nízká",
+    "oblast": "Texty",
+    "nazev": "Nejednotné oslovení a drobné textové nepřesnosti",
+    "kde": "`js/mortgage.js:124` („zkontroluj smlouvu“ – tykání, jinde vykání „Zkontrolujte“), `js/mortgage.js:233` („Prodloužit splatnost o 0 let“ při prodloužení 0), `js/ui-refix.js:45` (hláška „Zbývající dluh a doba musí být kladné“ bez `aria-invalid`)",
+    "reprodukce": "D_poplatek.starsiSmlouva: „Zkontrolujte smlouvu. Smlouva i současná fixace … – zkontroluj smlouvu…“; prodloužení 0 → varianta se jmenuje „Prodloužit splatnost o 0 let“ a je totožná s přijetím nabídky (`prepocet.txt`).",
+    "dopad": "Kosmetika.",
+    "oprava": "Sjednotit na vykání; při prodloužení 0 variantu skrýt nebo přejmenovat.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-09",
+    "zavaznost": "Nízká",
+    "oblast": "Pravidla a data",
+    "nazev": "Nepoužité položky JSON v patičce a texty s čísly natvrdo",
+    "kde": "`defaults.json:16–40` (`rates.fix1y`, `fix10y`, `newLoans` – v UI nepoužité, ale v seznamu zdrojů), `rules.json:128,43–60` (`limitPre2021`, `dti.*` nepoužité), `js/mortgage.js:133,140,141` („25 %“, „0,25 %“, „1 %“ v textech odůvodnění)",
+    "reprodukce": "grep `fix1y|fix10y|newLoans|limitPre2021|dti` v `js/` → 0 výskytů mimo text; změna `feePerStartedYear` v `rules.json` by změnila výpočet, ale text „× 0,25 %“ ne.",
+    "dopad": "Žádný dnes; riziko nesouladu textu a výpočtu při příští aktualizaci pravidel.",
+    "oprava": "Texty skládat z hodnot `rules.json` (`formatPct`), nepoužité položky buď použít (např. ukázat sazby podle fixace), nebo odstranit.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-10",
+    "zavaznost": "Nízká",
+    "oblast": "Nasazení a větve",
+    "nazev": "Chybí favicon, v konzoli je 404",
+    "kde": "`index.html` (žádný `<link rel=\"icon\">`), živý web `https://frankie851.github.io/favicon.ico` 404",
+    "reprodukce": "`uvod-kontrola.json`, `prohlizec.json`, `zivy-kontrola.json`: jediná konzolová chyba „Failed to load resource: 404“ pro favicon.ico (lokálně i živě, všechny běhy).",
+    "dopad": "Žádný; jen šum v konzoli.",
+    "oprava": "Přidat `<link rel=\"icon\" href=\"data:,\">` nebo malý SVG favicon (CSP `img-src 'self' data:` to dovoluje).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "BYD-11",
+    "zavaznost": "Nízká",
+    "oblast": "Výpočty",
+    "nazev": "Záporný růst nájmů nebo výnos investic je odmítnut, záporný růst cen povolen; neúčelové úvěry na bydlení mimo rozsah",
+    "kde": "`js/ui-rentbuy.js:52–57` (jen `priceGrowth` smí být záporný), `js/form.js:46` (`v < 0` = neplatné)",
+    "reprodukce": "Růst nájmů „−1“ → „Zkontrolujte pole: Růst nájmů.“, růst cen „−2“ projde (`prohlizec.json` E_rentbuy_rustNajmuZaporny / rustCenZaporny). Pro úvěry na bydlení bez účelu (§ 2 odst. 2 písm. a) nikoli b)) platí podle § 117 odst. 4 strop 1 % / 0,5 %, aplikace to neřeší ani neříká.",
+    "dopad": "Nelze namodelovat pokles nájmů nebo záporný výnos; u „americké hypotéky“ by strop vyšel jinak (okrajový případ).",
+    "oprava": "Povolit záporné hodnoty u všech růstů/výnosu; u kalkulačky poplatku poznámku, že platí pro účelový úvěr na bydlení.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `047298597072978a58322e6484e98fa564e80a07` (5. 11. 2026) · živý web: https://frankie851.github.io/bydlometr/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 0,
+   "stredni": 7,
+   "nizka": 4
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "SLV",
@@ -1031,12 +1209,166 @@
   "kod": "INF",
   "repo": "inflacni-kalkulacka",
   "nazev": "Inflační kalkulačka",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 2,
+   "nizka": 5
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "INF-03 („10.000“ se čte jako 10 Kč)"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "INF-08 (Nízká)"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "INF-04"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "INF-01, INF-02"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "INF-05, INF-07 (Nízká)"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "INF-06 (Nízká)"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "INF-01",
+    "zavaznost": "Vysoká",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Aktivní záložka nesplňuje kontrast písma 4,5:1 (axe color‑contrast, serious)",
+    "kde": "`styles.css:105` (`.tabs [role=\"tab\"][aria-selected=\"true\"] { background: var(--accent); color: #fff; }`), `styles.css:9` (`--accent: #2a78d6`), `styles.css:29,48` (tmavý režim `#3987e5`); `index.html:25–27`",
+    "reprodukce": "otevřít stránku (360 px) → axe WCAG 2.2 A/AA hlásí 1× `color-contrast` (serious) na `#tab-convert`; po přepnutí na „Reálná mzda“ na `#tab-wage`; v tmavém režimu (`prefers-color-scheme: dark`) totéž. Očekáváno: bílé písmo 15,2 px / tloušťka 600 (není „velký text“) potřebuje kontrast ≥ 4,5:1 (WCAG 1.4.3). Skutečnost: bílá na `#2a78d6` = 4,42:1, na `#3987e5` (tmavý režim) = 3,64:1 (výpočet relativní luminance; `prohlizec.json` → `barvyZalozky`, `axe360_convert`, `axe360_wage`, `axe360_dark`; `uvod-kontrola.json`; živý web `zivy-kontrola.json`).",
+    "dopad": "slabozrací uživatelé hůř rozeznají, který ze tří nástrojů je právě zapnutý – nejdůležitější navigační prvek stránky.",
+    "oprava": "pro aktivní záložku použít tmavší pozadí (např. `var(--accent-ink)` `#1d5fae`, ≈ 6,5:1 s bílou) a v tmavém režimu tmavé písmo na světlém pozadí; nebo zvětšit písmo záložek na ≥ 18,66 px tučně. Po opravě znovu axe v obou režimech.",
+    "overeni": "reprodukováno 2× (nezávislé běhy prohlizec.mjs 1 a 2, navíc úvodní kontrola a živý web) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-02",
+    "zavaznost": "Vysoká",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Posuvná tabulka hodnot není dosažitelná klávesnicí (axe scrollable‑region‑focusable, serious)",
+    "kde": "`styles.css:194` (`.table-scroll { max-height: 360px; overflow: auto; }`), `index.html:121–128` (`<div class=\"table-scroll\">` bez `tabindex`)",
+    "reprodukce": "rozbalit „Zobrazit hodnoty v tabulce“ (při výchozím období 261 řádků) → axe hlásí `scrollable-region-focusable` (serious, WCAG 2.1.1/2.1.3) na `.table-scroll`; Tab z `summary` přeskočí rovnou na odkaz ČSÚ v patičce (`uvod-kontrola.json` → `tab`), oblast nelze zaostřit ani odrolovat šipkami. Očekáváno: každý posuvný obsah musí jít ovládat klávesnicí. Skutečnost: bez myši jsou čitelné jen první řádky (do výšky 360 px, cca 10 měsíců).",
+    "dopad": "uživatel klávesnice nebo přepínačů (a často i čtečky) se nedostane k hodnotám indexu a meziroční inflace starších měsíců, které jsou jedinou textovou alternativou grafů.",
+    "oprava": "`.table-scroll` doplnit `tabindex=\"0\"`, `role=\"region\"` a `aria-label=\"Tabulka hodnot\"` (plus viditelný `:focus-visible`), nebo tabulku nerolovat a místo toho omezit/stránkovat řádky.",
+    "overeni": "reprodukováno 2× (prohlizec.mjs běh 1 a 2: `axe360_convert`, `axe360_wage`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-03",
+    "zavaznost": "Střední",
+    "oblast": "Výpočty (propojení formuláře)",
+    "nazev": "Zápis „10.000“ se čte jako 10 Kč",
+    "kde": "`app.js:26` (`parseInput = (s) => Number(String(s).replace(/[\\s ]/g, '').replace(',', '.'))`), pole `amount`, `rate`, `wageThen`, `wageNow`",
+    "reprodukce": "do „Částka (Kč)“ napsat `10.000` (leden 2005 → září 2026) → očekáváno 10 000 Kč → 19 850 Kč, nebo odmítnutí s hláškou (tečka jako oddělovač tisíců je v českém zápisu částek běžná a zápis je nejednoznačný) → skutečnost „19,85 Kč“ a věta „10,00 Kč v lednu 2005 má stejnou kupní sílu jako 19,85 Kč“ (`prohlizec.json` P3, cs‑CZ; chování je nezávislé na lokalizaci, pole je `type=text`). Zápis `1.500.000` dá NaN a hlášku, `10.000` ne.",
+    "dopad": "výsledek je 1 000× menší; věta částku zopakuje, takže pozorný uživatel chybu odhalí – proto Střední, ne vyšší.",
+    "oprava": "tečku následovanou přesně třemi číslicemi (a bez čárky) brát jako oddělovač tisíců, jinak tečku odmítnout s hláškou „desetinná místa oddělte čárkou“; doplnit test (viz INF‑04).",
+    "overeni": "reprodukováno 2× (prohlizec.mjs běh 1 a 2; porovnani.mjs 2 běhy) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-04",
+    "zavaznost": "Střední",
+    "oblast": "Testy",
+    "nazev": "Čtení vstupu a logika směru přepočtu jsou v `app.js` a bez testu",
+    "kde": "`app.js:26` (`parseInput`), `app.js:94–96` (chronologický směr změny cen a průměrná roční inflace při obráceném přepočtu: `change = from < to ? cum : 1 / (1 + cum) - 1`), `app.js:85, 109–110, 131` (kontroly vstupu); `test/inflation.test.mjs` testuje jen `inflation.js`",
+    "reprodukce": "`node --test` 27/27, ale žádný test nepokrývá „1 500“, „1500,50“, „10.000“ (INF‑03), prázdné pole (INF‑05), záporné číslo ani větu při prohozených měsících; `app.js` nelze v Node importovat (po načtení volá `init()` nad `document`), takže se tato logika testovat ani nedá.",
+    "dopad": "regrese v propojení formuláře s výpočtem projde CI, i když vzorce zůstanou správné.",
+    "oprava": "přesunout `parseInput` a výpočet „změna cen v chronologickém směru + průměr ročně“ do `inflation.js` (nebo modulu bez DOM) a přidat testy pro uvedené vstupy a pro obrácený přepočet.",
+    "overeni": "reprodukováno 2× (statická kontrola kódu, `testy.txt` + druhý běh testů) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-05",
+    "zavaznost": "Nízká",
+    "oblast": "Texty",
+    "nazev": "Prázdná částka vrací „0,00 Kč … má stejnou kupní sílu jako 0,00 Kč“ místo výzvy",
+    "kde": "`app.js:82, 85` (`Number('') = 0`, kontrola `!(amount >= 0)` nulu propustí)",
+    "reprodukce": "smazat obsah pole „Částka (Kč)“ → očekáváno „Zadejte částku…“ → skutečnost hodnota „0,00 Kč“ a věta s dvěma nulami (`prohlizec.json` P4).",
+    "dopad": "nic škodlivého, jen nesmyslná věta.",
+    "oprava": "prázdný řetězec (po odstranění mezer) považovat za chybějící vstup a zobrazit výzvu.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-06",
+    "zavaznost": "Nízká",
+    "oblast": "Soukromí a bezpečnost",
+    "nazev": "Chart.js z cdnjs bez `integrity`/`crossorigin` a bez CSP",
+    "kde": "`index.html:10`",
+    "reprodukce": "`<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js\" defer>` bez atributu `integrity`; stránka nemá `Content-Security-Policy`. CDN je výjimka povolená zadáním, ale bez SRI by změněný soubor na CDN běžel se všemi právy stránky.",
+    "dopad": "nízký (stránka nezpracovává osobní údaje a nic neukládá), jde o zpevnění.",
+    "oprava": "doplnit `integrity=\"sha384-…\"` a `crossorigin=\"anonymous\"` pro verzi 4.4.1 a `<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; style-src 'self'\">`.",
+    "overeni": "reprodukováno 2× (zdroj + síťový záznam obou běhů) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-07",
+    "zavaznost": "Nízká",
+    "oblast": "Texty a citlivá témata",
+    "nazev": "Chybí výslovné „nejde o finanční poradenství“",
+    "kde": "`index.html:137` (patička: „Orientační výpočet. Index popisuje průměrný spotřební koš…“), `README.md:12`",
+    "reprodukce": "nástroj „Reálný výnos“ hodnotí výnos investice proti inflaci, ale nikde není věta, že nejde o investiční doporučení. Požadavek zadání („Orientační výpočet“) splněn je.",
+    "dopad": "malý; text jinak neslibuje víc, než aplikace umí.",
+    "oprava": "do patičky doplnit „Nejde o finanční ani investiční poradenství.“",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-08",
+    "zavaznost": "Nízká",
+    "oblast": "Shoda se zadáním",
+    "nazev": "Výběr měsíce nabízí i říjen–prosinec 2026, za které data nejsou",
+    "kde": "`app.js:41, 45` (měsíce vždy 1–12, roky `lastYear … 1995`)",
+    "reprodukce": "v roce 2026 zvolit „prosinec“ → aplikace správně počítá se zářím 2026 a napíše poznámku (zadání to vyžaduje). Zadání obrazovky ale říká „výběr měsíce a roku od 1995 do posledního dostupného“ – nabízené měsíce bez dat matou a poznámka se objeví až po výběru.",
+    "dopad": "jen zmatení; výsledek je správný a vysvětlený.",
+    "oprava": "u posledního roku nabídnout jen měsíce s daty (poznámku ponechat pro adresu `#hash` nebo budoucí měsíce z jiného zdroje), nebo měsíce bez dat označit v nabídce.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "INF-09",
+    "zavaznost": "Nízká",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Lámání slov uprostřed v tabulce na 360 px („červen‑ec“, „Mezir‑očně“)",
+    "kde": "`styles.css:64` (`body { overflow-wrap: anywhere; }`), tabulka `index.html:124–127`",
+    "reprodukce": "360 px, rozbalit tabulku → hlavička „Mezir očně“ a buňka „červen ec 2026“ zalomené uprostřed slova (`vysledek-360.png`). Stránka nepřetéká, jen se hůř čte.",
+    "dopad": "kosmetický.",
+    "oprava": "v tabulce `white-space: nowrap` pro první sloupec a hlavičku (nebo `hyphens: manual` a kratší popisky „Meziročně“ → „Mezi‑ročně“ s `&shy;`).",
+    "overeni": "reprodukováno 2× (snímky obou běhů shodné) · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `b9e19800fed0e0bcbf0971930208b3ff0b541903` (5. 11. 2026) · živý web: https://frankie851.github.io/inflacni-kalkulacka/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 2,
+   "nizka": 5
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "PRI",
