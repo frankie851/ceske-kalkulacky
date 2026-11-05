@@ -154,10 +154,10 @@ test('kalendář: filtry a export .ics (Blob i stažený soubor s BEGIN:VCALENDA
 test('axe během simulace a po přehrání (světlý i tmavý režim): 0 serious/critical', async () => {
   const { page, chyby } = await otevri(CESTA, { sirka: 1440, vyska: 900 });
   const zkontroluj = async (kdy) => {
-    // počkej, až doběhne animace příchodu (450 ms) – během ní je čip průhledný
-    await new Promise((r) => setTimeout(r, 600));
     for (const rezim of ['light', 'dark']) {
       await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: rezim }]);
+      // počkej, až doběhnou animace a přechody barev (čip přichází 450 ms)
+      await new Promise((r) => setTimeout(r, 600));
       const r = await new AxePuppeteer(page).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
       const vazne = r.violations.filter((x) => x.impact === 'serious' || x.impact === 'critical')
         .map((x) => `${x.id}: ${x.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
@@ -186,7 +186,8 @@ test('bez JavaScriptu: ukázkový výsledek, celý kalendář a odkaz na .ics', 
   const odkaz = await page.$eval('[data-ics-odkaz]', (a) => ({ href: a.getAttribute('href'), hidden: a.hidden }));
   assert.equal(odkaz.hidden, false);
   assert.match(odkaz.href, /prijimacky-2027\.ics$/);
-  const odpoved = await page.goto(new URL(odkaz.href, page.url()).href);
+  const odpoved = await fetch(new URL(odkaz.href, page.url()));
+  assert.match(odpoved.headers.get('content-type'), /^text\/calendar/);
   assert.ok((await odpoved.text()).startsWith('BEGIN:VCALENDAR\r\n'));
   await page.close();
 });

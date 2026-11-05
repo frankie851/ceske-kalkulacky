@@ -19,7 +19,7 @@ const PISMA = [
 // Klientské moduly nástrojů: jen *.js, ne testy, ne data šablon (*.11tydata.js)
 export function jeKlientskyModul(relCesta) {
   const p = relCesta.split(path.sep).join('/');
-  if (p.split('/').includes('test')) return false;
+  if (p.split('/').some((c) => c === 'test' || c === 'tests')) return false;
   const soubor = p.split('/').pop();
   if (!soubor.includes('.')) return true; // složka
   return (soubor.endsWith('.js') || soubor.endsWith('.css')) && !soubor.endsWith('.11tydata.js') && !soubor.endsWith('.test.js');
