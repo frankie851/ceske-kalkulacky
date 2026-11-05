@@ -121,7 +121,7 @@ Skript `dukazy/skripty/slevy-2027-prepocet.mjs` (bez kódu aplikace) a `slevy-20
 - **Reprodukce:** dítě nar. 3/2001, v domácnosti 1–12 → očekáváno 3 × 1 267 = 3 801 Kč (§ 35c odst. 6 písm. b) – vyživované je zletilé dítě „až do dovršení věku 26 let“; 1/12 za měsíc, na jehož počátku jsou podmínky splněny, § 35c odst. 10; na počátku dubna už 26 let má) → skutečnost 15 204 Kč (`prepocet.txt` V16). Obdobně dítě 2009 (18 let v roce 2027), které nestuduje, dostane 12/12.
 - **Dopad na uživatele:** rodič staršího studenta počítá s 15 204 Kč, nárok je 3 801 Kč (rozdíl 11 403 Kč); u ZTP/P dvojnásobek.
 - **Doporučená oprava:** v `zvyhodneniDeti()` započítat jen měsíce, na jejichž počátku dítě nedovršilo 26 let (modul zná rok i měsíc narození, stejně jako u manžela `mladsiNez(d.narozeni, 3, …)`); u dětí 18+ se zeptat, zda se soustavně připravují (jinak hranice 18 let); doplnit test.
-- **Ověření:** reprodukováno 2× (dva běhy `slevy-2027-porovnani.mjs`) · skeptik:
+- **Ověření:** reprodukováno 2× (dva běhy `slevy-2027-porovnani.mjs`) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – zvyhodneniDeti() reprodukováno: dítě 3/2001 i 6/2009 → 12 měsíců a 15 204 Kč; § 35c odst. 6 písm. b) a odst. 10 ZDP potvrzeny, nárok 3 × 1 267 = 3 801 Kč)
 
 ### SLV-03 · Střední · 5 Mobil a přístupnost · Desetinná čárka v číselném poli se v prohlížeči s jinou než českou lokalizací zahodí
 - **Kde:** `app.js` `cisloPole()` – `<input type="number" step="1">`, `num()`; chování závisí na lokalizaci prohlížeče, ne na stránce (`<html lang="cs">` nestačí).
