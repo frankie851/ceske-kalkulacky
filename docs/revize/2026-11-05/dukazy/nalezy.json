@@ -1957,8 +1957,8 @@
     "reprodukce": "porod 15. 3. 2026, rodičovská 8 000 Kč od 6. měsíce → očekáváno: RP náleží za měsíce září 2026 – **březen 2029** (31 měsíců), tj. 248 000 Kč vyčerpáno a 102 000 Kč propadne, protože podle ZSSP § 30b odst. 1 písm. d) se podmínka celodenní péče po celý měsíc považuje za splněnou „i v kalendářním měsíci, v němž dítě dosáhlo věku 3 let“ (https://www.zakonyprolidi.cz/cs/1995-117#p30b; MPSV „Rodičovský příspěvek“: „dítě dovršilo věk 3 (4) let, do kterého náleží rodičovský příspěvek“) → skutečnost: modul i obrazovka 240 000 / 110 000 Kč, „30 měsíců čerpání“, osa končí únorem 2029, checklist „Do 28. 2. 2029“ (`prepocet.txt` Z4, V7; `vysledek-360.png`). Stejný vstup bez PPM s 9 000 Kč/měs.: zákon 37 měsíců, modul 36.",
     "dopad": "každému, kdo rodičovskou nevyčerpá dřív, aplikace ukáže o jednu měsíční částku vyšší „propadlou“ částku, o měsíc kratší čerpání a chybný poslední den; návrh „vyčerpat přesně do 3 let“ je o jeden měsíc přísnější (11 700 místo 11 300 Kč). Směr chyby je konzervativní, rozhodnutí podle ní nevede k přímé ztrátě, ale částka i termín jsou špatně.",
     "oprava": "počítat měsíce 0 až `vekMesicu` včetně (měsíc 3. narozenin), prodloužit horizont osy do konce měsíce 3. narozenin, použít `vekMesicu` z `rules.json` místo konstanty, opravit checklist („poslední měsíc = měsíc 3. narozenin“), upravit test i příklad v zadání (248 000 / 102 000 Kč).",
-    "overeni": "reprodukováno 2× (dva běhy modulu, dva běhy v prohlížeči) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy modulu, dva běhy v prohlížeči) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – § 30b odst. 1 písm. d) ZSSP ověřen; cerpaniRp(350 000, 8 000, od 6, 36) → 240 000 / 110 000 při 30 měsících, podle zákona 31 měsíců a 248 000 / 102 000 Kč)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "ROD-02",
@@ -1969,8 +1969,8 @@
     "reprodukce": "(a) porod 15. 3. 2026, matka 15 000 Kč (PPM 346 Kč/den), RP 15 000 Kč → očekáváno podle ZSSP § 30b odst. 3 („rodičovský příspěvek náleží, jen je-li vyšší, a to ve výši rozdílu“) a § 30b odst. 1 písm. a), b) (měsíc narození a měsíc s PPM se počítají celé; ÚP ČR: „rodičovský příspěvek náleží od měsíce narození dítěte, pouze je-li vyšší než dávky nemocenského pojištění … doplácen rozdíl“): RP březen 4 274 Kč, duben 4 620 Kč, …, srpen 9 810 Kč → skutečnost: 0 Kč v březnu až srpnu, RP až od září (`prepocet.txt` V5; obrazovka scénář C: řádky bře–srp 2026 jen 10 726 / 10 380 / 5 190 Kč). (b) matka bez nároku, PPM čerpá otec od 7. týdne (50 000 Kč), RP 34 440 Kč → očekáváno březen 34 440 Kč, duben 28 700 Kč → skutečnost 0 a 0, první RP až v říjnu (V6f–h).",
     "dopad": "rodiny s nízkou mateřskou (příjem zhruba do 21 000 Kč) nebo s mateřskou otce vidí v prvních měsících o tisíce až desetitisíce korun nižší příjem a dřívější vyčerpání o několik měsíců (V5: měsíc 26 vs. 29); kontrolní seznam radí žádat o RP až po skončení mateřské, přičemž nárok na výplatu zaniká 3 měsíce zpětně (ZSSP § 54 odst. 2) – ve většině případů jde jen o posun peněz v čase, při nízkém stropu a pozdní žádosti může část celkové částky propadnout.",
     "oprava": "počítat RP od měsíce narození jako `max(0, výše − PPM v měsíci)` (u PPM matky i otce), opravit text v „Jak jsme počítali“ a v kontrolním seznamu („žádost o RP lze podat hned po narození, nárok se uplatňuje nejvýš 3 měsíce zpětně“), přidat test.",
-    "overeni": "reprodukováno 2× (dva běhy modulu; obrazovka scénář C) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy modulu; obrazovka scénář C) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – § 30b odst. 1 písm. a), b) a odst. 3 ZSSP ověřeny; planRodiny reprodukováno pro oba scénáře (příspěvek 0 Kč až do konce PPM místo rozdílu); README souběh přiznává jako zjednodušení, ale text app.js:155 je věcně nepravdivý)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "ROD-03",
@@ -1981,8 +1981,8 @@
     "reprodukce": "porod 20. 1. 2027, matka 80 000 Kč, nástup 9. 12. 2026 → očekáváno podle ZNP § 22 odst. 2 („Výše dávek, na které vznikl nárok před 1. lednem … a tento nárok trvá ještě tohoto dne, se upraví bez žádosti od tohoto dne podle nové výše denního vyměřovacího základu stanoveného podle částek redukčních hranic platných od 1. ledna“; https://www.zakonyprolidi.cz/cs/2006-187#p22; MPSV příklady přechodu 2008/2009 popisují tentýž přepočet): prosinec 1 524 Kč/den (red. DVZ 2 177), od 1. 1. 2027 **1 578 Kč/den** (red. DVZ 2 254), celkem 23 × 1 524 + 173 × 1 578 = **308 046 Kč**; strop RP podle DVZ k datu narození (§ 30 odst. 3 písm. b) ZSSP, hranice 2027) 21 × 2 254 = **47 334 Kč** → skutečnost: 1 524 Kč/den po celých 196 dní = 298 704 Kč (o 9 342 Kč méně), strop 45 717 Kč (`prepocet.txt` V4a–e). Test aplikace s příjmem 200 000 Kč zakonzervovává 2 000 Kč/den po celou dobu, zákon od 1. 1. 2027 2 111 Kč/den (V4f–g). Otcovská 28. 12. 2026 – 10. 1. 2027 z 80 000 Kč: 21 876 vs. 21 336 Kč (V8e).",
     "dopad": "týká se porodů zhruba od srpna do února s příjmem nad 1. redukční hranicí (nad cca 49 700 Kč měsíčně); mateřská je podhodnocena o jednotky tisíc až přes 19 000 Kč a maximální volitelná výše rodičovské je nižší, než na jakou má rodina nárok – uživatel si může zvolit nižší měsíční částku, než by mohl.",
     "oprava": "v `planRodiny` počítat denní dávku po dnech podle roku, do kterého den spadá (DVZ zůstává, mění se jen redukce), pro strop RP použít redukci podle hranic roku narození, opravit test a README.",
-    "overeni": "reprodukováno 2× (dva běhy modulu) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy modulu) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – planRodiny reprodukováno (1 524 Kč/den po celých 196 dní = 298 704 Kč vs. 308 046 Kč; strop 45 717 vs. 47 334 Kč); § 22 odst. 2 ZNP a § 30 odst. 3 písm. b) ZSSP ověřeny)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "ROD-04",
@@ -1993,8 +1993,8 @@
     "reprodukce": "porod 10. 5. 2026, návrat do práce od 10. měsíce → očekáváno „nejvýše 120 hodin v kalendářním měsíci“ (ZSSP § 31 odst. 3 písm. a) ve znění zákona č. 84/2025 Sb., účinnost 1. 5. 2025, https://www.zakonyprolidi.cz/cs/1995-117#p31; ÚP ČR a MPSV „Státní sociální podpora“: „v rozsahu do 120 hodin v kalendářním měsíci“) → skutečnost: „dítě mladší 2 let smí být v jeslích nebo školce nejvýš 92 hodin měsíčně“ (výstup modulu 5. 11. 2026; rejstřík PR-50).",
     "dopad": "rodič plánující dřívější návrat do práce si zbytečně omezí docházku dítěte (nebo odmítne úvazek) kvůli limitu, který už 18 měsíců neplatí; výpočet částek to neovlivní.",
     "oprava": "`jesleHodinMesicne: 120` se zdrojem (84/2025 Sb., § 31 odst. 3 ZSSP) a test na hodnotu v textu upozornění.",
-    "overeni": "reprodukováno 2× (zákon + ÚP ČR + MPSV; modul dvakrát) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (zákon + ÚP ČR + MPSV; modul dvakrát) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – rules.json:69 = 92; § 31 odst. 3 písm. a) ZSSP v aktuálním znění (verze 96) „nepřevyšujícím 120 hodin v kalendářním měsíci“; řetězec 92 hodin v zákoně není)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "ROD-05",
@@ -2142,11 +2142,177 @@
   "kod": "DLU",
   "repo": "kalkulator-dluhu",
   "nazev": "Dluhy – exekuce, nebo oddlužení?",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Připraveno",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 0,
+   "stredni": 6,
+   "nizka": 4
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "🟡",
+    "nalez": "DLU-02"
+   },
+   "2 Výpočty": {
+    "stav": "🟡",
+    "nalez": "DLU-04"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "🟢",
+    "nalez": "—"
+   },
+   "4 Testy": {
+    "stav": "🟡",
+    "nalez": "DLU-06"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "🟡",
+    "nalez": "DLU-05"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "🟡",
+    "nalez": "DLU-01, DLU-03"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "🟢",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "🟢",
+    "nalez": "DLU-10 (Nízká)"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "DLU-01",
+    "zavaznost": "Střední",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Výchozí úrok 11,75 % se nabízí jako „zákonná sazba“ bez vazby na dobu vzniku prodlení",
+    "kde": "`index.html:91` („Zákonná sazba pro druhou polovinu roku 2026 je 11,75 % ročně. Ve smlouvě můžete mít jinou.“), `index.html:94` (`value=\"11,75\"`), `rules.json` `urokZProdleniProcenta`",
+    "reprodukce": "NV 351/2013 Sb. § 2 odst. 1: výše úroku z prodlení odpovídá repo sazbě ČNB „pro první den kalendářního pololetí, v němž došlo k prodlení“, + 8 bodů – sazba je tedy daná okamžikem vzniku prodlení a po celou dobu se nemění. Podle ČNB (vyvoj_repo_historie.txt) je pro prodlení vzniklé v roce 2023 sazba 15,00 %, 1. pol. 2024 14,75 %, 2. pol. 2024 12,75 %, 1. pol. 2025 12,00 %, 2. pol. 2025 11,50 %; 11,75 % platí jen pro prodlení od 1. 7. 2026 (`prepocet.txt` U1, `zdroje.txt`). Uživatel s dluhem po splatnosti od roku 2023 zaškrtne „Počítat i s úrokem“ a nechá předvyplněných 11,75 %: pro 100 000 Kč a 2 916 Kč měsíčně aplikace ukáže „3 roky a 6 měsíců“ a úroky 22 445 Kč, správně při 15 % 46 měsíců a 31 403 Kč (`prepocet.txt` D2, D3; obrazovka „sazba 11,75“ v `prohlizec.json`). Reprodukováno 2× (modul i obrazovka, 3 běhy).",
+    "dopad": "u starších dluhů (typický případ člověka v exekuci) podhodnocená doba splácení a úroky o desítky procent; text navíc naznačuje, že 11,75 % je „ta zákonná sazba“, ačkoli pro většinu existujících dluhů neplatí.",
+    "oprava": "v nápovědě vysvětlit, že zákonná sazba se určuje podle pololetí, kdy přestal splácet (a pak se nemění), přidat krátkou tabulku 2022–2026 nebo výběr „od kdy nesplácíte“ s dosazením sazby z `rules.json` (přidat historii repo sazeb), výchozí pole nechat prázdné nebo označit jako „pro nové prodlení od 1. 7. 2026“.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-02",
+    "zavaznost": "Střední",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Životní minimum se cituje ze zrušeného nařízení 436/2022 Sb. (i v patičce)",
+    "kde": "`rules.json:7–13` (`zdroj` „Nařízení vlády č. 436/2022 Sb., § 1“, `odkaz` e-sbirka.gov.cz/sb/2022/436, `ucinnostOd` 2023-01-01), `index.html:242` („Nařízení vlády o životním minimu, číslo 436/2022“), README krok 1",
+    "reprodukce": "zakonyprolidi.cz/cs/2022-436: „Zrušeno k 01.10.2025 (152/2025 Sb.)“; e-Sbírka na odkazu aplikace zobrazí „436/2022 Sb., 1. 1. 2023 – 30. 9. 2025, minulé znění, zrušeno“ (`prohlizec.json` → `esbirka`, 2 pokusy). Hodnota 4 860 Kč k 1. 1. 2026 plyne z NV 361/2025 Sb. § 1 (účinnost 1. 10. 2025; samo zrušeno k 1. 10. 2026, od kdy je 5 500 Kč přímo v § 2 zákona 110/2006 Sb.) – tak ji cituje i exekuce.justice.cz (`zdroje.txt`). Číslo v aplikaci je správné (DS-06), citace, odkaz i datum účinnosti ne.",
+    "dopad": "kdo si zdroj ověří, najde zrušený předpis a ztratí důvěru ve zbytek čísel; při příští aktualizaci (README krok 1) správce zkontroluje špatný předpis.",
+    "oprava": "`zdroj` „NV 361/2025 Sb., § 1 (hodnota k 1. 1. 2026; NV 595/2006 § 4)“, `odkaz` https://e-sbirka.gov.cz/sb/2025/361, `ucinnostOd` 2025-10-01; v patičce totéž; v README poznámku, že od 1. 10. 2026 je ŽM v zákoně 110/2006 § 2.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-03",
+    "zavaznost": "Střední",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Odkazované úřední kalkulačky dnes ukazují jiná čísla a aplikace na to neupozorní",
+    "kde": "`index.html:216–221` (odkazy „Úřední kalkulačka srážek ze mzdy“, „Úřední informace o oddlužení … s kalkulačkou splátek“), `app.js:177` (rok podle data)",
+    "reprodukce": "(a) exekuce.justice.cz/vypocet-srazek-ze-mzdy/ má jako první (výchozí) volbu „2026 výpočet od 1. 10.“ se skrytým ŽM 5 500 Kč; POST se stejnými vstupy 5. 11. 2026 (2 běhy): 23 000 Kč běžný → **2 784 Kč** (aplikace 2 966 Kč), 50 000 Kč přednostní → 24 441 Kč (25 391), 50 000 Kč běžný → 13 529 Kč (14 884), 23 000 Kč se 4 exekucemi → 2 784 Kč (5 932; varianta neuplatňuje ani pravidlo 4+ exekucí, ani náhradu plátce). Varianta „od 1. 1.“ dává přesně čísla aplikace (`uredni-kalkulacky.txt` A, A2). NV 595/2006 § 4 (znění od 1. 1. 2026) ukládá použít hodnoty „ve výši k 1. lednu kalendářního roku, do kterého spadá výplata mzdy“, text úřední stránky mluví jen o úpravě od 1. 1. 2026 (14 101,50 / 31 521 Kč) a žádná novela NV k 1. 10. 2026 neexistuje (ZPL: aktuální znění verze 7, bez budoucího znění) – aplikace počítá správně, úřední výchozí varianta zákon nereflektuje. (b) insolvence.justice.cz/kalkulator-splatek/ počítá v `kalkul.js` s hranicí `puvodni_vypocet_nasobeni012026 = 1` (1 × 16 590 Kč místo 1,9 ×): 50 000 Kč → **30 368 Kč** (aplikace i IZ § 398 odst. 3 + NV § 2: 25 391 Kč), 35 000 Kč → 15 368 Kč (13 932 Kč); do mzdy 30 692 Kč shoda (`uredni-kalkulacky.txt` B, B2 – jejich skript spuštěný v jejich stránce).",
+    "dopad": "člověk si výsledek „ověří“ na úřadem doporučené kalkulačce, dostane o 182–3 148 Kč měsíčně jiné číslo (nebo o 5 000 Kč vyšší splátku v oddlužení) a neví, komu věřit; může se rozhodnout podle špatného čísla úřadu, které aplikace mohla předem vysvětlit.",
+    "oprava": "u odkazů doplnit větu typu „Úřední kalkulačka nabízí i variantu ‚od 1. 10. 2026‘ s vyšším životním minimem; nařízení vlády ale ukládá počítat celý rok 2026 s částkami k 1. lednu, proto se čísla mohou lišit“ a u kalkulátoru splátek „u mezd nad asi 30 700 Kč ukáže vyšší splátku“; do README zapsat, že srovnání bylo provedeno s variantou „od 1. 1.“.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-04",
+    "zavaznost": "Střední",
+    "oblast": "2 Výpočty",
+    "nazev": "Tečka v částce se čte jako desetinná: „23.000“ = 23 Kč, „150.000“ = 150 Kč",
+    "kde": "`app.js:33–37` (`cislo()` – odstraní mezery a „Kč“, čárku převede na tečku, tečku ponechá), `index.html:44, 78` (pole mzda a dluh jsou textová s `inputmode=numeric`)",
+    "reprodukce": "mzda „23.000“, dluh „100 000“ → očekáváno 23 000 Kč (nebo hláška) → obrazovka „Z výplaty vám zůstane 23 Kč“, „Strhne se 0 Kč“, „Vaše výplata je nižší než částka, kterou vám musí nechat“, oddlužení „Měsíční splátka 0 Kč“, „Zbytek asi 100 000 Kč vám soud odpustí“ + varování o minimu. Mzda 23 000, dluh „150.000“ → „Odhad doby splácení: 1 měsíc“, oddlužení „Jak dlouho: 1 měsíc“, „Dluhy byste splatili celé dřív než za 3 roky“ (`fokus-a-okraje.json` `mzda23tecka`, `dluh150tecka`, 2 běhy; `prohlizec.json` formáty „23.000“, 3 běhy, cs-CZ i en-US). „23 000“, „23000,50“, „23000.50“ i „23 000 Kč“ se čtou správně.",
+    "dopad": "zápis s tečkou jako oddělovačem tisíců je u částek v Kč běžný; výsledek je nesmyslný, ale u dluhu („1 měsíc“) ho méně pozorný člověk může brát vážně.",
+    "oprava": "v `cislo()` chápat tečku následovanou právě třemi číslicemi (a bez další desetinné části) jako oddělovač tisíců, případně částky pod 1 000 Kč u mzdy odmítnout hláškou „Napište celou měsíční mzdu, třeba 23 000“; přidat test.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-05",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Po odeslání formuláře se fokus ztratí (nadpis výsledku se zaostřuje dřív, než je zobrazen)",
+    "kde": "`app.js:198–200` (`location.hash = 'vysledek'` a hned `$('vysledek-nadpis').focus()`; obrazovku zobrazí až asynchronní `hashchange` → `navigace()`)",
+    "reprodukce": "vyplnit 23 000 / 100 000 a odeslat Enterem i klikem na „Spočítat“ → očekáváno fokus na `h1#vysledek-nadpis` (jak kód zamýšlí) → skutečnost `document.activeElement === body` ihned, po 100 ms i po 600 ms; další Tab přenese fokus na první odkaz v liště nahoře (`fokus-a-okraje.json`, 2 běhy; `prohlizec.json` `aktivni: \"BODY\"`, 3 běhy). Chybový stav funguje správně (fokus na `#mzda`).",
+    "dopad": "uživatel čtečky nebo klávesnice po odeslání neví, že se něco stalo, a musí projít celou stránku od začátku (WCAG 2.4.3); vidící uživatel vidí výsledek, protože stránka skočí nahoru.",
+    "oprava": "zaostřit nadpis až po zobrazení obrazovky – např. volat `ukaz('vysledek')` přímo a pak `focus()`, nebo fokus přesunout v `navigace()` po `ukaz()` (a `aria-live` na nadpis). Přidat test/scénář v `scripts/mobil.mjs`.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-06",
+    "zavaznost": "Střední",
+    "oblast": "4 Testy",
+    "nazev": "Chybí testy u propojení formuláře, u pevně zapsané sazby a u větví doby splácení",
+    "kde": "`test/dluhy.test.js`, `test/obsah.test.js`, `test/rules.test.js`; `scripts/mobil.mjs` (mimo `node --test`, vyžaduje globální Playwright)",
+    "reprodukce": "35 testů prochází a pokrývají všech 5 příkladů ze zadání, zaokrouhlení, 4+ exekucí, důchodce, náhradu plátce, úrok i oddlužení (žádný test nefixuje špatnou hodnotu – každou hodnotu v testech jsem nezávisle potvrdil). Netestuje se: `cislo()` a `nactiFormular()` v `app.js` (DLU-04 by test odhalil), shoda textu „11,75“ v `index.html:91, 94` s `rules.json` (při změně repo sazby se rozjedou), větev `prilis-dlouho` (`dluhy.js:155`), `duvod: 'zadna-srazka'` při nenulové srážce (text „déle než 50 let“, DLU-07), rovnost třetiny a 1 089 Kč u důchodce (17 369 Kč → 2/3), `delkaSlovy` (0 měsíců, 1 rok, 5 let), `nejnovejsiPlatnyRok` pro rok bez platných pravidel, fokus po odeslání (DLU-05). `scripts/mobil.mjs` sice formulář zkouší, ale v CI neběží.",
+    "dopad": "nepřímý – budoucí úprava (nová sazba, nový rok, změna parsování) může projít testy a rozbít formulář nebo texty.",
+    "oprava": "vyčlenit `cislo()` do modulu a otestovat („23 000“, „23.000“, „1500,50“, „Kč“, záporné), test shody `rules.json` ↔ `index.html` pro sazbu, testy větví `prilis-dlouho`/`zadna-srazka`/`delkaSlovy`, případně `scripts/mobil.mjs` zapojit do workflow.",
+    "overeni": "reprodukováno 2× (čtení testů, `testy.txt`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-07",
+    "zavaznost": "Nízká",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Texty v okrajových případech: dluh 0, srážka 1 Kč, „úředník“",
+    "kde": "`app.js:123, 125` (`v-doba`), `app.js:158` („Je to úředník, který na oddlužení dohlíží.“), `app.js:164–166`",
+    "reprodukce": "dluh 0 → „Odhad doby splácení: 0 měsíců.“ a v oddlužení „Jak dlouho: 3 roky“, „Dluhy byste splatili celé dřív než za 3 roky“; mzda 14 105 Kč → srážka 1 Kč, věřitelům 0 Kč a text „Splácení by trvalo déle než 50 let.“ (ve skutečnosti věřitelé nedostanou nic, protože celou srážku pohltí náhrada plátce – větev `zadna-srazka` sdílí text s `prilis-dlouho`); oddlužení „Měsíční splátka 2 Kč“ (`fokus-a-okraje.json`, 2 běhy). Insolvenční správce není úředník, ale soukromá osoba s povolením ministerstva (zákon č. 312/2006 Sb., o insolvenčních správcích).",
+    "dopad": "matoucí formulace v nereálných vstupech; „úředník“ může vést k mylné představě o nestrannosti a bezplatnosti.",
+    "oprava": "dluh 0 → „Nezadali jste žádný dluh“; `zadna-srazka` → „Věřitelům z této srážky nic nezbude“; „Je to odborník s licencí ministerstva, který na oddlužení dohlíží.“",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-08",
+    "zavaznost": "Nízká",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "V prohlížeči s jinou než českou lokalizací se „1,5“ v počtu osob změní na 15 bez hlášky",
+    "kde": "`index.html:51` (`#osoby` `type=number`), `app.js:69` (kontrola čte už upravenou hodnotu pole)",
+    "reprodukce": "Chromium `--lang=en-US`: napsat do „Kolika lidem platíte výživné?“ „1,5“ → hodnota pole „15“, `validity.valid = true`, výsledek „Musí vám zůstat aspoň 66 983 Kč“, srážka 0 Kč. V `--lang=cs-CZ` prohlížeč čárku přijme („1.5“) a aplikace správně hlásí „Napište celé číslo od 0 do 15.“ (`prohlizec.json` formáty „osoby 1,5“, běh 3 vs. běhy 1–2). Pole sazby je textové, čárku přijímá v obou lokalizacích.",
+    "dopad": "jen v neczeské lokalizaci a při nesmyslném vstupu (osoby nejsou desetinné); výsledek je zjevně absurdní.",
+    "oprava": "u `#osoby` a `#exekuce` číst `validity.badInput`/`stepMismatch` nebo použít textové pole s vlastním parsováním jako u mzdy.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-09",
+    "zavaznost": "Nízká",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Neúplnosti u pomoci a náhrady plátce",
+    "kde": "`index.html:228` (4 000 Kč), `index.html:220` (odkaz na insolvence.justice.cz), `index.html:224–225` (ochrance.cz „letáky o srážkách ze mzdy“), `app.js:109–111` + `dluhy.js:94` (náhrada 50 Kč vždy)",
+    "reprodukce": "IZ § 390a odst. 3: 4 000 Kč bez DPH, „v případě společného oddlužení manželů 6 000 Kč“ – aplikace uvádí jen 4 000 Kč (DS-26). Kalkulátor splátek má vlastní adresu /kalkulator-splatek/, odkaz vede na hlavní stránku (DS-32). Na ochrance.cz/letaky/ je leták „Exekuce“, leták výslovně o srážkách ze mzdy nenalezen (DS-36). Paušální náhrada plátci náleží podle exekuce.justice.cz jen „v exekučních řízeních, ve kterých byl exekuční příkaz vydán dne 1. ledna 2022 nebo později“ – aplikace ji odečítá vždy (rozdíl 50 Kč měsíčně u starších exekucí).",
+    "dopad": "drobné nepřesnosti bez vlivu na hlavní čísla.",
+    "oprava": "doplnit „u manželů 6 000 Kč“, odkaz přímo na kalkulátor, formulaci „letáky o exekuci“, u náhrady větu „u exekucí nařízených před rokem 2022 se neplatí“.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "DLU-10",
+    "zavaznost": "Nízká",
+    "oblast": "8 Nasazení a větve",
+    "nazev": "Chybějící favicon (404 v konzoli) a kontrola mobilu mimo CI",
+    "kde": "`index.html` `<head>`; `.github/workflows/pages.yml` (kopíruje jen 6 souborů); README „node scripts/mobil.mjs“",
+    "reprodukce": "lokálně i na https://frankie851.github.io/kalkulator-dluhu/ jediná chyba v konzoli: `favicon.ico` 404 (`uvod-kontrola.json`, `zivy-kontrola.json`, 2 běhy). `scripts/mobil.mjs` vyžaduje globálně nainstalovaný Playwright a v workflow neběží.",
+    "dopad": "žádný funkční; šum v konzoli, slabší ochrana proti regresi na mobilu.",
+    "oprava": "`<link rel=\"icon\" href=\"data:,\">` nebo malá ikona (CSP `img-src 'self' data:` to dovolí); zvážit spuštění `scripts/mobil.mjs` v CI.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `abb6c1c48d1d0703aa02058e012d6f57156b6e9f` (5. 11. 2026) · živý web: https://frankie851.github.io/kalkulator-dluhu/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 0,
+   "stredni": 6,
+   "nizka": 4
+  },
+  "shodaPoctu": true
  }
 ]

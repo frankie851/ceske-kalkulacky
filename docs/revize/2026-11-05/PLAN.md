@@ -49,7 +49,7 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 | CES | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V2 S4 N6) |
 | VYP | ☑ | ☑ | ☑ | Opravit před sloučením (K1 V1 S3 N4) |
 | ROD | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V4 S7 N4) |
-| DLU | ☐ | ☐ | ☐ | |
+| DLU | ☑ | ☑ (bez K/V) | ☐ | Připraveno (K0 V0 S6 N4) |
 
 ## Fáze 5–6
 - ☐ `SOUHRN.md`
