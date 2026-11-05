@@ -1,0 +1,106 @@
+/* Mám EET? a OSVČ 2027 – styly jen pro tento nástroj (načítá je front matter `styly`).
+   Barvy jen z tokenů v main.css. Vrstva „stranky“: přebije komponenty, tisk ji přebije. */
+@layer stranky {
+  /* ---------- Úvod a dotazník ---------- */
+  .eet-uvod { max-width: 46rem; margin-bottom: var(--sp-5); }
+  .eet-uvod > p:first-child { font-size: var(--fs-lg); }
+  .eet-uvod .note { margin-top: 0; }
+  .eet-krok { padding: 0 0 var(--sp-4); }
+  .eet .quiz legend { width: 100%; }
+  .eet .quiz legend .quiz-q { margin: 0 0 var(--sp-2); }
+  .eet .quiz-q:focus { outline: none; }
+  .eet .quiz-q:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+  .eet .quiz .hint { font-size: var(--fs-md); margin-top: 0; }
+  .eet .quiz .error-msg { margin: 0 0 var(--sp-4); }
+  .eet .quiz .options + .error-msg { margin-top: calc(-1 * var(--sp-3)); }
+  .eet .quiz.is-error .opt label { border-color: var(--c-error); }
+  .eet .quiz-actions .btn-primary { margin-left: auto; }
+  .eet-cislo { margin: var(--sp-4) 0 var(--sp-5); max-width: 22rem; }
+  .eet .done-steps li { max-width: 100%; }
+
+  /* ---------- Výsledek ---------- */
+  .eet-hotovo .bar-progress { margin-bottom: var(--sp-4); }
+  .eet-vysledek-not { border-color: var(--c-sage); }
+  .eet .verdict:focus { outline: none; }
+  .eet .verdict:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+  .eet-vysledek-obsah > .card, .eet-ukazka > .card { margin-top: var(--sp-5); }
+  .eet .split > .stack > .card + .card { margin-top: var(--sp-5); }
+  .eet .reasons li > div { min-width: 0; }
+  .eet .card > h2 { font-size: var(--fs-xl); }
+  .eet-zdroje { display: grid; gap: var(--sp-1); margin-top: var(--sp-3); }
+  .eet .src, .osvc .src { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; font-size: var(--fs-sm); color: var(--c-text-muted); }
+  .eet .src .ikona, .osvc .src .ikona { width: 16px; height: 16px; align-self: center; }
+  .eet .src a, .osvc .src a { font-weight: 700; }
+  .eet-kalk-ovladani { display: grid; gap: 0 var(--sp-5); align-items: start; }
+  @media (min-width: 760px) { .eet-kalk-ovladani { grid-template-columns: auto minmax(0, 22rem); } }
+  .eet-kalk-ovladani .field { margin-bottom: var(--sp-3); }
+  .eet-kalk-veta { margin: var(--sp-4) 0 0; font-size: var(--fs-lg); }
+  .eet-akce { margin-top: var(--sp-5); }
+
+  /* Kontrolní seznam s termíny a popisem */
+  .eet-seznam h3 { margin: var(--sp-5) 0 var(--sp-3); }
+  .eet-kdy { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); }
+  .eet .checklist .src, .osvc .checklist .src { display: flex; }
+  .eet-ukol-text { margin: var(--sp-2) 0 0; padding-left: calc(32px + var(--sp-3) + var(--sp-4)); font-size: var(--fs-sm); color: var(--c-text-muted); }
+  @media (max-width: 559px) {
+    .eet-ukol-text, .eet .checklist .src, .osvc .checklist .src { padding-left: var(--sp-4); }
+  }
+
+  /* Bez JavaScriptu: přehled otázek */
+  .eet-bez-js > .notice { margin-bottom: var(--sp-5); }
+  .eet-prehled > summary { cursor: pointer; font-weight: 800; list-style-position: outside; }
+  .eet-prehled > summary .h-lg { font-family: var(--font-display); font-weight: 600; }
+  .eet-prehled[open] > summary { margin-bottom: var(--sp-4); }
+  .eet-otazky { margin: 0; padding-left: 1.5rem; display: grid; gap: var(--sp-4); }
+  .eet-otazky h3 { margin-bottom: var(--sp-1); }
+  .eet-otazky .hint { margin: 0 0 var(--sp-2); }
+  .eet-moznosti { margin: 0; padding-left: 1.1rem; font-size: var(--fs-sm); }
+  @media (min-width: 760px) { .eet-moznosti { columns: 2; column-gap: var(--sp-6); } }
+  .eet-ukazkova-odpoved { margin: var(--sp-2) 0 0; }
+
+  /* ---------- OSVČ 2027 ---------- */
+  .osvc .calc-side .card > h2 { font-size: var(--fs-xl); }
+  .osvc .calc-side .options { grid-template-columns: 1fr; margin: var(--sp-2) 0 var(--sp-4); }
+  .osvc .calc-side .opt label { min-height: 52px; }
+  .osvc .calc-side fieldset.volby { margin-bottom: var(--sp-2); }
+  .osvc-varianty .badge { margin-left: 4px; vertical-align: middle; }
+  .osvc-varianty td[colspan] { color: var(--c-text-muted); white-space: normal; }
+  .osvc-varianty tr.osvc-nedostupne th { color: var(--c-text-muted); }
+  .osvc-pasma { margin: 0; padding-left: 1.25rem; }
+  .osvc-rozpis, .osvc-tabulka-grafu { margin-top: var(--sp-4); }
+  .osvc-rozpis > summary, .osvc-tabulka-grafu > summary { cursor: pointer; font-weight: 800; color: var(--c-link); min-height: 32px; }
+  .osvc-rozpis ul { margin: var(--sp-3) 0; }
+  .osvc-rozpis .eet-zdroje { margin-top: 0; }
+  .osvc .graf-legenda { margin: 0 0 var(--sp-3); }
+  .osvc-plot { position: relative; min-width: 0; }
+  .osvc-svg { width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+  .osvc-ty { stroke: var(--c-text-muted); stroke-width: 2; stroke-dasharray: 4 5; }
+  .osvc-zlom { fill: var(--c-surface); stroke: var(--c-text); stroke-width: 2.5; }
+  .osvc-zamerovac { stroke: var(--c-border-strong); stroke-width: 1.5; }
+  .osvc-overlay { fill: transparent; cursor: crosshair; }
+  .osvc-overlay:focus { outline: none; }
+  .osvc-overlay:focus-visible { outline: none; stroke: var(--c-focus); stroke-width: 3; }
+  .osvc-tooltip {
+    position: absolute; z-index: 2; pointer-events: none; min-width: 11rem;
+    background: var(--c-surface); border: 2px solid var(--c-border-strong); border-radius: var(--r-md);
+    padding: var(--sp-2) var(--sp-3); box-shadow: var(--shadow-md); font-size: var(--fs-sm);
+  }
+  .osvc-tooltip[hidden] { display: none; }
+  .osvc-tooltip p { margin: 0; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .osvc-tooltip-hlava { font-weight: 800; }
+  .osvc-stavy { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); }
+  .osvc-stavy li { padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md); background: var(--c-bg-alt); }
+  .osvc-stavy .src { display: flex; margin-top: 4px; }
+  .osvc-stavy .hint { margin-top: 4px; }
+  .osvc-stav-text { font-weight: 700; }
+  .osvc-stav-official { background: var(--c-sage-soft); color: var(--c-sage-ink); }
+  .osvc-stav-derived { background: var(--c-draft-bg); color: var(--c-draft-ink); }
+  .osvc #osvc-actual-pole[hidden] { display: none; }
+}
+
+@layer tisk {
+  @media print {
+    .osvc-overlay, .osvc-tooltip, .osvc-zamerovac { display: none !important; }
+    .eet-ukol-text, .eet .checklist .src { padding-left: 0; }
+  }
+}
