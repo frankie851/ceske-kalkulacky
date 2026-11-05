@@ -1,0 +1,1792 @@
+{
+ "datum": "2026-11-05T08:48:52.077Z",
+ "commit": "e9dd0d3",
+ "behy": [
+  {
+   "cislo": 1,
+   "pripady": {
+    "A_Z3_360": {
+     "pred": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     },
+     "po": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "X (90 b.): přijat(a) – Průmyslovka",
+       "Z (85 b.): přijat(a) – Gymnázium",
+       "Y (80 b.): v 1. kole nepřijat(a)"
+      ],
+      "kol": 2,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka1/1 míst"
+      ],
+      "sloupce": [
+       [
+        "Z · 2. priorita85 b."
+       ],
+       [
+        "X · 1. priorita90 b."
+       ]
+      ]
+     },
+     "ui": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "modul": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "muj": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "chyby": [],
+     "cizi": [],
+     "axe": [
+      {
+       "id": "color-contrast",
+       "dopad": "serious",
+       "popis": "Elements must meet minimum color contrast ratio thresholds",
+       "pocet": 1,
+       "uzly": [
+        ".new > span:nth-child(1) > .tag"
+       ],
+       "tags": [
+        "wcag2aa",
+        "wcag143"
+       ]
+      }
+     ],
+     "poResetu": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     },
+     "prehrat": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "X (90 b.): přijat(a) – Průmyslovka",
+       "Z (85 b.): přijat(a) – Gymnázium",
+       "Y (80 b.): v 1. kole nepřijat(a)"
+      ],
+      "kol": 2,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka1/1 míst"
+      ],
+      "sloupce": [
+       [
+        "Z · 2. priorita85 b."
+       ],
+       [
+        "X · 1. priorita90 b."
+       ]
+      ]
+     },
+     "prehratTrvaniMs": 3236,
+     "prehratShoda": true,
+     "klavesniceKrok": "Kolo 1 z 2",
+     "zamichani": "Pořadí v tabulce se změnilo, výsledek zůstal stejný. Na pořadí zápisu nezáleží."
+    },
+    "A_Z3_1440": {
+     "pred": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     },
+     "po": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "X (90 b.): přijat(a) – Průmyslovka",
+       "Z (85 b.): přijat(a) – Gymnázium",
+       "Y (80 b.): v 1. kole nepřijat(a)"
+      ],
+      "kol": 2,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka1/1 míst"
+      ],
+      "sloupce": [
+       [
+        "Z · 2. priorita85 b."
+       ],
+       [
+        "X · 1. priorita90 b."
+       ]
+      ]
+     },
+     "ui": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "modul": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "muj": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "preteka": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     },
+     "konzole": [],
+     "chyby": [],
+     "cizi": [],
+     "poResetu": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     }
+    },
+    "B_pokusy": {
+     "rezimPokusy": true,
+     "zapocte": [
+      {
+       "jmeno": "Hana",
+       "pokusy": [
+        "40",
+        "",
+        "35",
+        ""
+       ],
+       "zapocte": "Započte se: 75 b."
+      },
+      {
+       "jmeno": "Tomáš",
+       "pokusy": [
+        "22",
+        "38",
+        "15",
+        "30"
+       ],
+       "zapocte": "Započte se: 68 b."
+      },
+      {
+       "jmeno": "Věra",
+       "pokusy": [
+        "33",
+        "34",
+        "29",
+        "31"
+       ],
+       "zapocte": "Započte se: 65 b."
+      },
+      {
+       "jmeno": "Zuzka",
+       "pokusy": [
+        "30",
+        "35",
+        "28",
+        "20"
+       ],
+       "zapocte": "Započte se: 63 b."
+      }
+     ],
+     "zuzka63": true,
+     "po": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "Hana (75 b.): přijat(a) – Gymnázium",
+       "Tomáš (68 b.): přijat(a) – Průmyslovka",
+       "Věra (65 b.): přijat(a) – Průmyslovka",
+       "Zuzka (63 b.): přijat(a) – Obchodní akademie"
+      ],
+      "kol": 3,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka2/2 míst",
+       "Obchodní akademie1/2 míst"
+      ],
+      "sloupce": [
+       [
+        "Hana · 1. priorita75 b."
+       ],
+       [
+        "Tomáš · 2. priorita68 b.",
+        "Věra · 1. priorita65 b."
+       ],
+       [
+        "Zuzka · 2. priorita63 b.",
+        "volné místo"
+       ]
+      ]
+     },
+     "ui": {
+      "Hana": "Gymnázium",
+      "Tomáš": "Průmyslovka",
+      "Věra": "Průmyslovka",
+      "Zuzka": "Obchodní akademie"
+     },
+     "modul": {
+      "Hana": "Gymnázium",
+      "Tomáš": "Průmyslovka",
+      "Věra": "Průmyslovka",
+      "Zuzka": "Obchodní akademie"
+     },
+     "muj": {
+      "Hana": "Gymnázium",
+      "Tomáš": "Průmyslovka",
+      "Věra": "Průmyslovka",
+      "Zuzka": "Obchodní akademie"
+     },
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "shodaExpected": true,
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "poPrepnutiNaBody": [
+      {
+       "jmeno": "Hana",
+       "body": "75"
+      },
+      {
+       "jmeno": "Tomáš",
+       "body": "68"
+      },
+      {
+       "jmeno": "Věra",
+       "body": "65"
+      },
+      {
+       "jmeno": "Zuzka",
+       "body": "63"
+      }
+     ]
+    },
+    "C_shoda": {
+     "chyba": {
+      "label": "",
+      "chyba": "Shoda pořadí: Bára a Cyril mají stejný počet bodů. Škola musí stanovit jednoznačné pořadí (doplňte rozhodovací kritérium).",
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": true,
+      "prehratDisabled": true,
+      "prehratText": "Přehrát",
+      "skoly": [],
+      "sloupce": []
+     },
+     "modulChyba": "TieError: Shoda pořadí: a2 a a3 mají stejný počet bodů. Škola musí stanovit jednoznačné pořadí (doplňte rozhodovací kritérium).",
+     "chybaZobrazena": true,
+     "tlacitkaVypnuta": true,
+     "poKriteriu": {
+      "chyba": null,
+      "ui": {
+       "Eva": "Průmyslovka",
+       "Adam": "Gymnázium",
+       "Cyril": "Obchodní akademie",
+       "Bára": "Gymnázium",
+       "Dana": "Obchodní akademie",
+       "Filip": "Obchodní akademie"
+      }
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "nesmyslneBody": {
+      "prazdne": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka0 b."
+       ],
+       "validita": {
+        "valid": true,
+        "rangeOverflow": false,
+        "rangeUnderflow": false
+       }
+      },
+      "zaporne": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka-10 b."
+       ],
+       "validita": {
+        "valid": false,
+        "rangeOverflow": false,
+        "rangeUnderflow": true
+       }
+      },
+      "nad100": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka150 b."
+       ],
+       "validita": {
+        "valid": false,
+        "rangeOverflow": true,
+        "rangeUnderflow": false
+       }
+      },
+      "desetinne": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka85.5 b."
+       ],
+       "validita": {
+        "valid": false,
+        "rangeOverflow": false,
+        "rangeUnderflow": false
+       }
+      }
+     }
+    },
+    "D_xss": {
+     "vlozenyImg": false,
+     "dialogy": [],
+     "textVeVysledku": "<img src=x onerror=alert(1)> (92 b.): ",
+     "textVeStrategii": true,
+     "konzole": []
+    },
+    "E_strategie": {
+     "pouzeBody": {
+      "radky": [
+       "1. Škola 1Chybí údaje",
+       "2. Škola 2Chybí údaje",
+       "3. Škola 3Chybí údaje"
+      ],
+      "hlasky": [
+       "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+       "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+      ]
+     },
+     "ui": {
+      "radky": [
+       "1. Gympl – o 15 b. pod loňským minimemRiziko",
+       "2. Průmyslovka – o 2 b. pod loňským minimemRiziko",
+       "3. Obchodka – o 2 b. nad loňským minimemTěsné"
+      ],
+      "hlasky": [
+       "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+       "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+      ]
+     },
+     "modulKategorie": [
+      "Riziko",
+      "Riziko",
+      "Těsné"
+     ],
+     "mujKategorie": [
+      "Riziko",
+      "Riziko",
+      "Těsné"
+     ],
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "varovaniNoSafe": true,
+     "modulNoSafe": true,
+     "mujNoSafe": true,
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "axe": [],
+     "rezerva10": {
+      "radky": [
+       "1. Gympl – o 10 b. nad loňským minimemSpíš jistota",
+       "2. Průmyslovka – o 2 b. pod loňským minimemRiziko",
+       "3. Obchodka – o 2 b. nad loňským minimemTěsné"
+      ],
+      "hlasky": [
+       "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+      ]
+     }
+    },
+    "F_cisla_cs-CZ": {
+     "150": {
+      "pole": {
+       "value": "150",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 90 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62,5": {
+      "pole": {
+       "value": "62.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 2.5 b. nad loňským minimemTěsné",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62.5": {
+      "pole": {
+       "value": "62.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 2.5 b. nad loňským minimemTěsné",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "1 500": {
+      "pole": {
+       "value": "1500",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 1440 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "-5": {
+      "pole": {
+       "value": "-5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 65 b. pod loňským minimemRiziko",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "abc": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "prazdne": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "simulator_85_5": {
+      "pole": {
+       "value": "85.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "adam": [
+       "Adam · 1. Průmyslovka85.5 b."
+      ]
+     }
+    },
+    "F_cisla_en-US": {
+     "150": {
+      "pole": {
+       "value": "150",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 90 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62,5": {
+      "pole": {
+       "value": "625",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 565 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62.5": {
+      "pole": {
+       "value": "62.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 2.5 b. nad loňským minimemTěsné",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "1 500": {
+      "pole": {
+       "value": "1500",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 1440 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "-5": {
+      "pole": {
+       "value": "-5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 65 b. pod loňským minimemRiziko",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "abc": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "prazdne": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "simulator_85_5": {
+      "pole": {
+       "value": "855",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "adam": [
+       "Adam · 1. Průmyslovka855 b."
+      ]
+     }
+    },
+    "G_ics": {
+     "pocetVKalendari": 22,
+     "soubor": "prijimacky-2027.ics",
+     "cizi": [],
+     "odeslano": 0,
+     "kontrolaRFC": {
+      "chyby": [],
+      "pocetUdalosti": 22,
+      "ocekavanoUdalosti": 22
+     },
+     "crlf": true,
+     "hlavicka": [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Prijimacky bez paniky//CS",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "X-WR-CALNAME:Přijímačky 2027"
+     ],
+     "prvniUdalost": {
+      "UID": "kons-prihlasky-2027@prijimacky-bez-paniky",
+      "DTSTAMP": "20261105T084929Z",
+      "DTSTART": "VALUE=DATE:20261101",
+      "DTEND": "VALUE=DATE:20261201",
+      "SUMMARY": "Konzervatoře: podání přihlášek (nejvýše 2 obory)",
+      "DESCRIPTION": "Informativní pomůcka – závazné jsou informace CERMAT a škol.\\nZdroj: https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf",
+      "URL": "https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf",
+      "TRANSP": "TRANSPARENT"
+     },
+     "dtendDenPoKonci": true,
+     "bajtu": 12253
+    },
+    "H_ulozeni": {
+     "checklistPoReloadu": false,
+     "localStorage": 0,
+     "sessionStorage": 0,
+     "cookies": 0
+    }
+   }
+  },
+  {
+   "cislo": 2,
+   "pripady": {
+    "A_Z3_360": {
+     "pred": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     },
+     "po": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "X (90 b.): přijat(a) – Průmyslovka",
+       "Z (85 b.): přijat(a) – Gymnázium",
+       "Y (80 b.): v 1. kole nepřijat(a)"
+      ],
+      "kol": 2,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka1/1 míst"
+      ],
+      "sloupce": [
+       [
+        "Z · 2. priorita85 b."
+       ],
+       [
+        "X · 1. priorita90 b."
+       ]
+      ]
+     },
+     "ui": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "modul": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "muj": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "chyby": [],
+     "cizi": [],
+     "axe": [
+      {
+       "id": "color-contrast",
+       "dopad": "serious",
+       "popis": "Elements must meet minimum color contrast ratio thresholds",
+       "pocet": 1,
+       "uzly": [
+        ".new > span:nth-child(1) > .tag"
+       ],
+       "tags": [
+        "wcag2aa",
+        "wcag143"
+       ]
+      }
+     ],
+     "poResetu": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     },
+     "prehrat": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "X (90 b.): přijat(a) – Průmyslovka",
+       "Z (85 b.): přijat(a) – Gymnázium",
+       "Y (80 b.): v 1. kole nepřijat(a)"
+      ],
+      "kol": 2,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka1/1 míst"
+      ],
+      "sloupce": [
+       [
+        "Z · 2. priorita85 b."
+       ],
+       [
+        "X · 1. priorita90 b."
+       ]
+      ]
+     },
+     "prehratTrvaniMs": 3236,
+     "prehratShoda": true,
+     "klavesniceKrok": "Kolo 1 z 2",
+     "zamichani": "Pořadí v tabulce se změnilo, výsledek zůstal stejný. Na pořadí zápisu nezáleží."
+    },
+    "A_Z3_1440": {
+     "pred": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     },
+     "po": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "X (90 b.): přijat(a) – Průmyslovka",
+       "Z (85 b.): přijat(a) – Gymnázium",
+       "Y (80 b.): v 1. kole nepřijat(a)"
+      ],
+      "kol": 2,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka1/1 míst"
+      ],
+      "sloupce": [
+       [
+        "Z · 2. priorita85 b."
+       ],
+       [
+        "X · 1. priorita90 b."
+       ]
+      ]
+     },
+     "ui": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "modul": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "muj": {
+      "X": "Průmyslovka",
+      "Z": "Gymnázium",
+      "Y": null
+     },
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "preteka": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     },
+     "konzole": [],
+     "chyby": [],
+     "cizi": [],
+     "poResetu": {
+      "label": "Připraveno (2 kola)",
+      "chyba": null,
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": false,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium0/1 míst",
+       "Průmyslovka0/1 míst"
+      ],
+      "sloupce": [
+       [
+        "volné místo"
+       ],
+       [
+        "volné místo"
+       ]
+      ]
+     }
+    },
+    "B_pokusy": {
+     "rezimPokusy": true,
+     "zapocte": [
+      {
+       "jmeno": "Hana",
+       "pokusy": [
+        "40",
+        "",
+        "35",
+        ""
+       ],
+       "zapocte": "Započte se: 75 b."
+      },
+      {
+       "jmeno": "Tomáš",
+       "pokusy": [
+        "22",
+        "38",
+        "15",
+        "30"
+       ],
+       "zapocte": "Započte se: 68 b."
+      },
+      {
+       "jmeno": "Věra",
+       "pokusy": [
+        "33",
+        "34",
+        "29",
+        "31"
+       ],
+       "zapocte": "Započte se: 65 b."
+      },
+      {
+       "jmeno": "Zuzka",
+       "pokusy": [
+        "30",
+        "35",
+        "28",
+        "20"
+       ],
+       "zapocte": "Započte se: 63 b."
+      }
+     ],
+     "zuzka63": true,
+     "po": {
+      "label": "Hotovo – výsledek se už nemění",
+      "chyba": null,
+      "vysledky": [
+       "Hana (75 b.): přijat(a) – Gymnázium",
+       "Tomáš (68 b.): přijat(a) – Průmyslovka",
+       "Věra (65 b.): přijat(a) – Průmyslovka",
+       "Zuzka (63 b.): přijat(a) – Obchodní akademie"
+      ],
+      "kol": 3,
+      "krokDisabled": true,
+      "prehratDisabled": false,
+      "prehratText": "Přehrát",
+      "skoly": [
+       "Gymnázium1/1 míst",
+       "Průmyslovka2/2 míst",
+       "Obchodní akademie1/2 míst"
+      ],
+      "sloupce": [
+       [
+        "Hana · 1. priorita75 b."
+       ],
+       [
+        "Tomáš · 2. priorita68 b.",
+        "Věra · 1. priorita65 b."
+       ],
+       [
+        "Zuzka · 2. priorita63 b.",
+        "volné místo"
+       ]
+      ]
+     },
+     "ui": {
+      "Hana": "Gymnázium",
+      "Tomáš": "Průmyslovka",
+      "Věra": "Průmyslovka",
+      "Zuzka": "Obchodní akademie"
+     },
+     "modul": {
+      "Hana": "Gymnázium",
+      "Tomáš": "Průmyslovka",
+      "Věra": "Průmyslovka",
+      "Zuzka": "Obchodní akademie"
+     },
+     "muj": {
+      "Hana": "Gymnázium",
+      "Tomáš": "Průmyslovka",
+      "Věra": "Průmyslovka",
+      "Zuzka": "Obchodní akademie"
+     },
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "shodaExpected": true,
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "poPrepnutiNaBody": [
+      {
+       "jmeno": "Hana",
+       "body": "75"
+      },
+      {
+       "jmeno": "Tomáš",
+       "body": "68"
+      },
+      {
+       "jmeno": "Věra",
+       "body": "65"
+      },
+      {
+       "jmeno": "Zuzka",
+       "body": "63"
+      }
+     ]
+    },
+    "C_shoda": {
+     "chyba": {
+      "label": "",
+      "chyba": "Shoda pořadí: Bára a Cyril mají stejný počet bodů. Škola musí stanovit jednoznačné pořadí (doplňte rozhodovací kritérium).",
+      "vysledky": [],
+      "kol": 0,
+      "krokDisabled": true,
+      "prehratDisabled": true,
+      "prehratText": "Přehrát",
+      "skoly": [],
+      "sloupce": []
+     },
+     "modulChyba": "TieError: Shoda pořadí: a2 a a3 mají stejný počet bodů. Škola musí stanovit jednoznačné pořadí (doplňte rozhodovací kritérium).",
+     "chybaZobrazena": true,
+     "tlacitkaVypnuta": true,
+     "poKriteriu": {
+      "chyba": null,
+      "ui": {
+       "Eva": "Průmyslovka",
+       "Adam": "Gymnázium",
+       "Cyril": "Obchodní akademie",
+       "Bára": "Gymnázium",
+       "Dana": "Obchodní akademie",
+       "Filip": "Obchodní akademie"
+      }
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "nesmyslneBody": {
+      "prazdne": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka0 b."
+       ],
+       "validita": {
+        "valid": true,
+        "rangeOverflow": false,
+        "rangeUnderflow": false
+       }
+      },
+      "zaporne": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka-10 b."
+       ],
+       "validita": {
+        "valid": false,
+        "rangeOverflow": false,
+        "rangeUnderflow": true
+       }
+      },
+      "nad100": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka150 b."
+       ],
+       "validita": {
+        "valid": false,
+        "rangeOverflow": true,
+        "rangeUnderflow": false
+       }
+      },
+      "desetinne": {
+       "chyba": null,
+       "adamVPoolu": [
+        "Adam · 1. Průmyslovka85.5 b."
+       ],
+       "validita": {
+        "valid": false,
+        "rangeOverflow": false,
+        "rangeUnderflow": false
+       }
+      }
+     }
+    },
+    "D_xss": {
+     "vlozenyImg": false,
+     "dialogy": [],
+     "textVeVysledku": "<img src=x onerror=alert(1)> (92 b.): ",
+     "textVeStrategii": true,
+     "konzole": []
+    },
+    "E_strategie": {
+     "pouzeBody": {
+      "radky": [
+       "1. Škola 1Chybí údaje",
+       "2. Škola 2Chybí údaje",
+       "3. Škola 3Chybí údaje"
+      ],
+      "hlasky": [
+       "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+       "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+      ]
+     },
+     "ui": {
+      "radky": [
+       "1. Gympl – o 15 b. pod loňským minimemRiziko",
+       "2. Průmyslovka – o 2 b. pod loňským minimemRiziko",
+       "3. Obchodka – o 2 b. nad loňským minimemTěsné"
+      ],
+      "hlasky": [
+       "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+       "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+      ]
+     },
+     "modulKategorie": [
+      "Riziko",
+      "Riziko",
+      "Těsné"
+     ],
+     "mujKategorie": [
+      "Riziko",
+      "Riziko",
+      "Těsné"
+     ],
+     "shodaUiModul": true,
+     "shodaUiMuj": true,
+     "varovaniNoSafe": true,
+     "modulNoSafe": true,
+     "mujNoSafe": true,
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "axe": [],
+     "rezerva10": {
+      "radky": [
+       "1. Gympl – o 10 b. nad loňským minimemSpíš jistota",
+       "2. Průmyslovka – o 2 b. pod loňským minimemRiziko",
+       "3. Obchodka – o 2 b. nad loňským minimemTěsné"
+      ],
+      "hlasky": [
+       "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+      ]
+     }
+    },
+    "F_cisla_cs-CZ": {
+     "150": {
+      "pole": {
+       "value": "150",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 90 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62,5": {
+      "pole": {
+       "value": "62.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 2.5 b. nad loňským minimemTěsné",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62.5": {
+      "pole": {
+       "value": "62.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 2.5 b. nad loňským minimemTěsné",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "1 500": {
+      "pole": {
+       "value": "1500",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 1440 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "-5": {
+      "pole": {
+       "value": "-5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 65 b. pod loňským minimemRiziko",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "abc": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "prazdne": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "simulator_85_5": {
+      "pole": {
+       "value": "85.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "adam": [
+       "Adam · 1. Průmyslovka85.5 b."
+      ]
+     }
+    },
+    "F_cisla_en-US": {
+     "150": {
+      "pole": {
+       "value": "150",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 90 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62,5": {
+      "pole": {
+       "value": "625",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 565 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "62.5": {
+      "pole": {
+       "value": "62.5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": true
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 2.5 b. nad loňským minimemTěsné",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "1 500": {
+      "pole": {
+       "value": "1500",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 1440 b. nad loňským minimemSpíš jistota",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "-5": {
+      "pole": {
+       "value": "-5",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. A – o 65 b. pod loňským minimemRiziko",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Žádná škola nemá rezervu aspoň 5 b. nad loňským minimem. Zvažte přidat školu, kam se dostanete s velkou pravděpodobností – nejlépe na poslední místo. Na šance u vyšších priorit to nemá vliv.",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "abc": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "prazdne": {
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false,
+       "rangeOverflow": false,
+       "stepMismatch": false
+      },
+      "ui": {
+       "radky": [
+        "1. AChybí údaje",
+        "2. Škola 2Chybí údaje",
+        "3. Škola 3Chybí údaje"
+       ],
+       "hlasky": [
+        "Doplňte, kolik bodů zhruba čekáte (např. z testů nanečisto nebo ze školy).",
+        "U některé školy chybí loňské minimum. Najdete ho obvykle na webu školy (výsledky přijímacího řízení).",
+        "Pořadí na přihlášce dejte podle toho, kam chcete nejvíc. Algoritmus vám nižší prioritou šanci na vyšší nevezme."
+       ]
+      }
+     },
+     "simulator_85_5": {
+      "pole": {
+       "value": "855",
+       "valid": false,
+       "badInput": false,
+       "rangeOverflow": true,
+       "stepMismatch": false
+      },
+      "adam": [
+       "Adam · 1. Průmyslovka855 b."
+      ]
+     }
+    },
+    "G_ics": {
+     "pocetVKalendari": 22,
+     "soubor": "prijimacky-2027.ics",
+     "cizi": [],
+     "odeslano": 0,
+     "kontrolaRFC": {
+      "chyby": [],
+      "pocetUdalosti": 22,
+      "ocekavanoUdalosti": 22
+     },
+     "crlf": true,
+     "hlavicka": [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Prijimacky bez paniky//CS",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "X-WR-CALNAME:Přijímačky 2027"
+     ],
+     "prvniUdalost": {
+      "UID": "kons-prihlasky-2027@prijimacky-bez-paniky",
+      "DTSTAMP": "20261105T085005Z",
+      "DTSTART": "VALUE=DATE:20261101",
+      "DTEND": "VALUE=DATE:20261201",
+      "SUMMARY": "Konzervatoře: podání přihlášek (nejvýše 2 obory)",
+      "DESCRIPTION": "Informativní pomůcka – závazné jsou informace CERMAT a škol.\\nZdroj: https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf",
+      "URL": "https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf",
+      "TRANSP": "TRANSPARENT"
+     },
+     "dtendDenPoKonci": true,
+     "bajtu": 12253
+    },
+    "H_ulozeni": {
+     "checklistPoReloadu": false,
+     "localStorage": 0,
+     "sessionStorage": 0,
+     "cookies": 0
+    }
+   }
+  }
+ ],
+ "zivyWeb": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "cizi": [],
+   "konzole": [],
+   "chyby": [],
+   "axe": [],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "pozadavku": 8
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "cizi": [],
+   "konzole": [],
+   "chyby": [],
+   "pozadavku": 8
+  }
+ },
+ "shrnuti": {
+  "A_Z3_ui_modul_beh1": true,
+  "A_Z3_ui_modul_beh2": true,
+  "A_Z3_ui": {
+   "X": "Průmyslovka",
+   "Z": "Gymnázium",
+   "Y": null
+  },
+  "A_Z3_prehrat": true,
+  "B_pokusy_ui_modul": true,
+  "B_zuzka63": true,
+  "C_chyba_zobrazena": true,
+  "D_xss_img": false,
+  "D_dialogy": 0,
+  "E_strategie_ui_modul": true,
+  "F_cs_62_5": {
+   "value": "62.5",
+   "valid": false,
+   "badInput": false,
+   "rangeOverflow": false,
+   "stepMismatch": true
+  },
+  "F_en_62_5": {
+   "value": "625",
+   "valid": false,
+   "badInput": false,
+   "rangeOverflow": true,
+   "stepMismatch": false
+  },
+  "G_ics_chyb": [
+   0,
+   0
+  ],
+  "preteka360": [
+   false,
+   false,
+   false,
+   false
+  ],
+  "axeSeriousCritical": [
+   "color-contrast"
+  ]
+ }
+}

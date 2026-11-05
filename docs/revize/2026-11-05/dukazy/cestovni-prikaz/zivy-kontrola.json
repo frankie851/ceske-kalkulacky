@@ -1,0 +1,363 @@
+{
+ "url": "https://frankie851.github.io/cestovni-prikaz/",
+ "datum": "2026-11-05T08:56:27.120Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Firma (zaměstnavatel)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Zaměstnanec",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Soukromá (§ 163 ZP)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "5–12 h",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "12–18 h",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "nad 18 h",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "SPZ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Druh vozidla\n              \n                Osobní automobil\n                Jednostopé vozidlo / tříkolka",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Palivo\n              \n                Benzin 95\n                Benzin 98\n                Motorová nafta\n                Elektřina",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Spotřeba z technického průkazu\n              \n                \n                l/100 km",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Jsem OSVČ a jezdím za sebe",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Odjezd",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Odjezd",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Odjezd",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Odjezd",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Odjezd",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Odjezd",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Návrat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Návrat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Návrat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Návrat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Návrat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "datetime-local",
+     "popisek": "Návrat",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Odkud",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Kam",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Zpět do",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Ujeté km vlastním vozidlem (celkem)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Účel cesty",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Cena PHM z dokladu (volitelné)\n            \n              \n              Kč/l",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btn-ulozit",
+     "typ": "submit",
+     "popisek": "Přidat cestu",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {
+    "cestovni-prikaz-v1": "{\"hlavicka\":{\"firma\":\"<img src=x onerror=alert(1)>\",\"zamestnanec\":\"<img src=x onerror=alert(1)>\",\"sfera\":\"soukroma\",\"kraceniPct\":[70,35,25],\"stravneVerejna\":[null,null,null],\"vozidlo\":{\"spz\":\"<IMG SRC=X ONERROR=ALERT(1)>\",\"druh\":\"osobni\",\"palivo\":\"benzin95\",\"spotreba\":\"\"}},\"cesty\":[]}"
+   },
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/style.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/cesty.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/style.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/cesty.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/cestovni-prikaz/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

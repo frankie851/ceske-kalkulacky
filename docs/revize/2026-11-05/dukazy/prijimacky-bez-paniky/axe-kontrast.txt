@@ -1,0 +1,6 @@
+běh 1: porušení 0, incomplete 1
+  incomplete color-contrast: 22 uzlů, např. text[y="23.5"] {"contrastRatio":0,"fontSize":"4.5pt (6px)","fontWeight":"bold","messageKey":"shortTextContent","expectedContrastRatio":"4.5:1"} ; text[y="34.5"] {"contrastRatio":0,"fontSize":"4.5pt (6px)","fontWeight":"bold","messageKey":"shortTextContent","expectedContrastRatio":"4.5:1"}
+  styl .tag: {"color":"rgb(90, 102, 117)","fontSize":"12px","pupilBg":"rgb(220, 235, 247)","pupilClass":"pupil new"}
+běh 2: porušení 0, incomplete 1
+  incomplete color-contrast: 22 uzlů, např. text[y="23.5"] {"contrastRatio":0,"fontSize":"4.5pt (6px)","fontWeight":"bold","messageKey":"shortTextContent","expectedContrastRatio":"4.5:1"} ; text[y="34.5"] {"contrastRatio":0,"fontSize":"4.5pt (6px)","fontWeight":"bold","messageKey":"shortTextContent","expectedContrastRatio":"4.5:1"}
+  styl .tag: {"color":"rgb(90, 102, 117)","fontSize":"12px","pupilBg":"rgb(220, 235, 247)","pupilClass":"pupil new"}

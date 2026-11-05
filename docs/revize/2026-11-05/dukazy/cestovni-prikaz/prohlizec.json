@@ -1,0 +1,854 @@
+{
+ "datum": "2026-11-05T08:55:15.878Z",
+ "behy": [
+  {
+   "cislo": 1,
+   "pripady": {
+    "A_zadani": {
+     "ui": {
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "100",
+        "590,00 Kč",
+        "208,20 Kč",
+        "236,00 Kč",
+        "1 034,20 Kč"
+       ]
+      ],
+      "detaily": [
+       "Základní náhrada: 100 km × 5,90 Kč/km = 590,00 KčPHM: 100 km × 6 l/100 km × 34,70 Kč/l (průměrná cena dle vyhlášky, platí od 1. 1. 2026) = 208,20 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ],
+      "paticka": [
+       "Součet (1 cesta)",
+       "100",
+       "590,00 Kč",
+       "208,20 Kč",
+       "236,00 Kč",
+       "1 034,20 Kč"
+      ],
+      "kVyplate": "1 035 Kč",
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 100 km",
+        "suma": "1 034,20 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "chybaFormulare": null,
+      "upozorneni": "Sazby pro rok 2027 zatím nejsou. Vyhláška MPSV o sazbách cestovních náhrad pro rok 2027 dosud nevyšla (stav k ověření 5. 11. 2026). Cesty od 1. 1. 2027 aplikace nespočítá, dokud se sazby nedoplní do rules.json.",
+      "patickaWeb": "Orientační výpočet 2026: vyhláška MPSV č. 573/2025 Sb. ve znění 78/2026 Sb. (od 1. 6. 2026: motorová nafta 44,50 Kč/l), 175/2026 Sb. (od 1. 10. 2026: benzin 95 41,80 Kč/l); ověřeno 5. 11. 2026.2027: vyhláška zatím nevyšla – výpočet není možný. Zákoník práce § 157, § 158, § 163, § 176. Výsledek nenahrazuje právní ani daňové poradenství; před použitím ověřte aktuální znění předpisů ve Sbírce zákonů. Data se ukládají jen v tomto prohlížeči.",
+      "jidlaDny": "Nejdřív vyplňte odjezd a návrat.",
+      "tiskDisabled": false,
+      "imgX": false
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "axe": [],
+     "pdfStrany1": 1,
+     "pdfStrany3": 1,
+     "ui3cesty": {
+      "paticka": [
+       "Součet (3 cesty)",
+       "720",
+       "4 248,00 Kč",
+       "1 499,04 Kč",
+       "1 038,50 Kč",
+       "6 785,54 Kč"
+      ],
+      "kVyplate": "6 786 Kč",
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "100",
+        "590,00 Kč",
+        "208,20 Kč",
+        "236,00 Kč",
+        "1 034,20 Kč"
+       ],
+       [
+        "20. 3. 2026 07:30–16:00",
+        "Brno – Ostrava – BrnoŠkolení",
+        "240",
+        "1 416,00 Kč",
+        "499,68 Kč",
+        "155,00 Kč",
+        "2 070,68 Kč"
+       ],
+       [
+        "25. 3. 2026 05:00 – 26. 3. 2026 21:00",
+        "Brno – Plzeň – BrnoMontáž",
+        "380",
+        "2 242,00 Kč",
+        "791,16 Kč",
+        "647,50 Kč",
+        "3 680,66 Kč"
+       ]
+      ]
+     },
+     "localStorage": {
+      "cestovni-prikaz-v1": "{\"hlavicka\":{\"firma\":\"Testovací s.r.o.\",\"zamestnanec\":\"Jan Testovací\",\"sfera\":\"soukroma\",\"kraceniPct\":[70,35,25],\"stravneVerejna\":[null,null,null],\"vozidlo\":{\"spz\":\"1AB 2345\",\"druh\":\"osobni\",\"palivo\":\"benzin95\",\"spotreba\":\"6\"}},\"cesty\":[{\"id\":\"1793868919324\",\"odjezd\":\"2026-03-15T06:00\",\"navrat\":\"202"
+     },
+     "sit": [
+      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4="
+     ],
+     "konzole": [
+      {
+       "typ": "error",
+       "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+     ],
+     "dialogy": []
+    },
+    "A_zadani_1440": {
+     "kVyplate": "1 035 Kč",
+     "radky": [
+      [
+       "15. 3. 2026 06:00–19:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "100",
+       "590,00 Kč",
+       "208,20 Kč",
+       "236,00 Kč",
+       "1 034,20 Kč"
+      ]
+     ],
+     "preteka": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "B_chyby": {
+     "prazdny": "Vyplňte: Odjezd, Návrat, Odkud, Kam, Účel cesty.",
+     "navratDriv": "Návrat musí být později než odjezd.",
+     "zaporne": {
+      "chyba": "Počet km musí být nezáporné číslo.",
+      "pole": {
+       "value": "-5",
+       "badInput": false,
+       "valid": false
+      }
+     },
+     "rok2027": {
+      "seznam": [
+       {
+        "text": "10. 1. 2027 07:00–15:00 Brno – Praha – Brno Jednání s klientem · 100 km Vyhláška MPSV se sazbami cestovních náhrad pro rok 2027 zatím nevyšla ve Sbírce zákonů (nebo ještě nebyla doplněna do aplikace). Sazbu za km, stravné ani průměrné ceny PHM pro rok 2027 proto nelze určit a výpočet se neprovede. Sazby z předchozího roku se nepoužijí, protože by výsledek mohl být nesprávný.",
+        "suma": null,
+        "chyba": "Vyhláška MPSV se sazbami cestovních náhrad pro rok 2027 zatím nevyšla ve Sbírce zákonů (nebo ještě nebyla doplněna do aplikace). Sazbu za km, stravné ani průměrné ceny PHM pro rok 2027 proto nelze určit a výpočet se neprovede. Sazby z předchozího roku se nepoužijí, protože by výsledek mohl být nesprávný.",
+        "bad": true
+       }
+      ],
+      "upozorneni": "Sazby pro rok 2027 zatím nejsou. Vyhláška MPSV o sazbách cestovních náhrad pro rok 2027 dosud nevyšla (stav k ověření 5. 11. 2026). Cesty od 1. 1. 2027 aplikace nespočítá, dokud se sazby nedoplní do rules.json.1 cestu nelze spočítat – důvod je uveden u cesty v seznamu. Do souhrnu ani tisku se nezapočítává.",
+      "tiskDisabled": true,
+      "chybaFormulare": null
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "axe": []
+    },
+    "C_pulnoc": {
+     "radky": [
+      [
+       "15. 3. 2026 20:00 – 16. 3. 2026 02:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč"
+      ],
+      [
+       "10. 4. 2026 06:00 – 11. 4. 2026 00:30",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "236,00 Kč",
+       "236,00 Kč"
+      ]
+     ],
+     "detaily": [
+      "Stravné: 15. 3. 2026 4:00 h: pod 5 h → 0 Kč; 16. 3. 2026 2:00 h: pod 5 h → 0 Kč",
+      "Stravné: 10. 4. 2026 18:00 h (12–18 h): 236 Kč → 236,00 Kč; 11. 4. 2026 0:30 h: pod 5 h → 0 Kč"
+     ],
+     "kVyplate": "236 Kč",
+     "jidlaDnyNaposled": "Nejdřív vyplňte odjezd a návrat."
+    },
+    "D_verejna": {
+     "radky": [
+      [
+       "15. 3. 2026 02:00–22:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "331,50 Kč",
+       "331,50 Kč"
+      ],
+      [
+       "16. 3. 2026 08:00–14:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč"
+      ]
+     ],
+     "detaily": [
+      "Stravné: 15. 3. 2026 20:00 h (nad 18 h): 442 Kč, 1 jídlo × −25 % → 331,50 Kč",
+      "Stravné: 16. 3. 2026 6:00 h (5–12 h): 185 Kč, 2 jídla × −70 % → 0,00 Kč"
+     ],
+     "kVyplate": "332 Kč",
+     "seznam": [
+      {
+       "text": "15. 3. 2026 02:00–22:00 Brno – Praha – Brno Jednání s klientem · bez vozidla",
+       "suma": "331,50 Kč",
+       "chyba": null,
+       "bad": false
+      },
+      {
+       "text": "16. 3. 2026 08:00–14:00 Brno – Praha – Brno Jednání s klientem · bez vozidla",
+       "suma": "0,00 Kč",
+       "chyba": null,
+       "bad": false
+      }
+     ]
+    },
+    "E_cisla_cs-CZ": {
+     "spotreba": {
+      "value": "6.5",
+      "badInput": false,
+      "valid": true
+     },
+     "cesta1": {
+      "pole": {
+       "km": {
+        "value": "100.5",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "38.90",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 100,5 km",
+        "suma": "1 083,06 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "detaily": [
+       "Základní náhrada: 100,5 km × 5,90 Kč/km = 592,95 KčPHM: 100,5 km × 6,5 l/100 km × 38,90 Kč/l (cena z dokladu) = 254,11 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ]
+     },
+     "cesta2": {
+      "pole": {
+       "km": {
+        "value": "1500",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 100,5 km",
+        "suma": "1 083,06 Kč",
+        "chyba": null,
+        "bad": false
+       },
+       {
+        "text": "16. 3. 2026 06:00–19:00 Brno – Ostrava – Brno Jednání s klientem · 1500 km",
+        "suma": "12 469,25 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "100,5",
+        "592,95 Kč",
+        "254,11 Kč",
+        "236,00 Kč",
+        "1 083,06 Kč"
+       ],
+       [
+        "16. 3. 2026 06:00–19:00",
+        "Brno – Ostrava – BrnoJednání s klientem",
+        "1500",
+        "8 850,00 Kč",
+        "3 383,25 Kč",
+        "236,00 Kč",
+        "12 469,25 Kč"
+       ]
+      ],
+      "detaily": [
+       "Základní náhrada: 100,5 km × 5,90 Kč/km = 592,95 KčPHM: 100,5 km × 6,5 l/100 km × 38,90 Kč/l (cena z dokladu) = 254,11 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč",
+       "Základní náhrada: 1500 km × 5,90 Kč/km = 8 850,00 KčPHM: 1500 km × 6,5 l/100 km × 34,70 Kč/l (průměrná cena dle vyhlášky, platí od 1. 1. 2026) = 3 383,25 KčStravné: 16. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ],
+      "kVyplate": "13 553 Kč"
+     }
+    },
+    "E_cisla_en-US": {
+     "spotreba": {
+      "value": "65",
+      "badInput": false,
+      "valid": true
+     },
+     "cesta1": {
+      "pole": {
+       "km": {
+        "value": "1005",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "3890",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 1005 km",
+        "suma": "2 547 308,00 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "detaily": [
+       "Základní náhrada: 1005 km × 5,90 Kč/km = 5 929,50 KčPHM: 1005 km × 65 l/100 km × 3 890,00 Kč/l (cena z dokladu) = 2 541 142,50 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ]
+     },
+     "cesta2": {
+      "pole": {
+       "km": {
+        "value": "1500",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 1005 km",
+        "suma": "2 547 308,00 Kč",
+        "chyba": null,
+        "bad": false
+       },
+       {
+        "text": "16. 3. 2026 06:00–19:00 Brno – Ostrava – Brno Jednání s klientem · 1500 km",
+        "suma": "42 918,50 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "1005",
+        "5 929,50 Kč",
+        "2 541 142,50 Kč",
+        "236,00 Kč",
+        "2 547 308,00 Kč"
+       ],
+       [
+        "16. 3. 2026 06:00–19:00",
+        "Brno – Ostrava – BrnoJednání s klientem",
+        "1500",
+        "8 850,00 Kč",
+        "33 832,50 Kč",
+        "236,00 Kč",
+        "42 918,50 Kč"
+       ]
+      ],
+      "detaily": [
+       "Základní náhrada: 1005 km × 5,90 Kč/km = 5 929,50 KčPHM: 1005 km × 65 l/100 km × 3 890,00 Kč/l (cena z dokladu) = 2 541 142,50 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč",
+       "Základní náhrada: 1500 km × 5,90 Kč/km = 8 850,00 KčPHM: 1500 km × 65 l/100 km × 34,70 Kč/l (průměrná cena dle vyhlášky, platí od 1. 1. 2026) = 33 832,50 KčStravné: 16. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ],
+      "kVyplate": "2 590 227 Kč"
+     }
+    },
+    "F_xss": {
+     "imgX": false,
+     "dialogy": [],
+     "seznam": [
+      "15. 3. 2026 06:00–19:00 <img src=x onerror=alert(1)> – <img src=x onerror=alert(1)> – <img src=x onerror=alert(1)> <img src=x onerror=alert(1)> · 10 km",
+      "16. 3. 2026 06:00–19:00 A – B – <img src=x onerror=alert(1)> <img src=x onerror=alert(1)> · 10 km"
+     ],
+     "pageerror": []
+    }
+   }
+  },
+  {
+   "cislo": 2,
+   "pripady": {
+    "A_zadani": {
+     "ui": {
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "100",
+        "590,00 Kč",
+        "208,20 Kč",
+        "236,00 Kč",
+        "1 034,20 Kč"
+       ]
+      ],
+      "detaily": [
+       "Základní náhrada: 100 km × 5,90 Kč/km = 590,00 KčPHM: 100 km × 6 l/100 km × 34,70 Kč/l (průměrná cena dle vyhlášky, platí od 1. 1. 2026) = 208,20 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ],
+      "paticka": [
+       "Součet (1 cesta)",
+       "100",
+       "590,00 Kč",
+       "208,20 Kč",
+       "236,00 Kč",
+       "1 034,20 Kč"
+      ],
+      "kVyplate": "1 035 Kč",
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 100 km",
+        "suma": "1 034,20 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "chybaFormulare": null,
+      "upozorneni": "Sazby pro rok 2027 zatím nejsou. Vyhláška MPSV o sazbách cestovních náhrad pro rok 2027 dosud nevyšla (stav k ověření 5. 11. 2026). Cesty od 1. 1. 2027 aplikace nespočítá, dokud se sazby nedoplní do rules.json.",
+      "patickaWeb": "Orientační výpočet 2026: vyhláška MPSV č. 573/2025 Sb. ve znění 78/2026 Sb. (od 1. 6. 2026: motorová nafta 44,50 Kč/l), 175/2026 Sb. (od 1. 10. 2026: benzin 95 41,80 Kč/l); ověřeno 5. 11. 2026.2027: vyhláška zatím nevyšla – výpočet není možný. Zákoník práce § 157, § 158, § 163, § 176. Výsledek nenahrazuje právní ani daňové poradenství; před použitím ověřte aktuální znění předpisů ve Sbírce zákonů. Data se ukládají jen v tomto prohlížeči.",
+      "jidlaDny": "Nejdřív vyplňte odjezd a návrat.",
+      "tiskDisabled": false,
+      "imgX": false
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "pdfStrany1": 1,
+     "pdfStrany3": 1,
+     "ui3cesty": {
+      "paticka": [
+       "Součet (3 cesty)",
+       "720",
+       "4 248,00 Kč",
+       "1 499,04 Kč",
+       "1 038,50 Kč",
+       "6 785,54 Kč"
+      ],
+      "kVyplate": "6 786 Kč",
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "100",
+        "590,00 Kč",
+        "208,20 Kč",
+        "236,00 Kč",
+        "1 034,20 Kč"
+       ],
+       [
+        "20. 3. 2026 07:30–16:00",
+        "Brno – Ostrava – BrnoŠkolení",
+        "240",
+        "1 416,00 Kč",
+        "499,68 Kč",
+        "155,00 Kč",
+        "2 070,68 Kč"
+       ],
+       [
+        "25. 3. 2026 05:00 – 26. 3. 2026 21:00",
+        "Brno – Plzeň – BrnoMontáž",
+        "380",
+        "2 242,00 Kč",
+        "791,16 Kč",
+        "647,50 Kč",
+        "3 680,66 Kč"
+       ]
+      ]
+     },
+     "localStorage": {
+      "cestovni-prikaz-v1": "{\"hlavicka\":{\"firma\":\"Testovací s.r.o.\",\"zamestnanec\":\"Jan Testovací\",\"sfera\":\"soukroma\",\"kraceniPct\":[70,35,25],\"stravneVerejna\":[null,null,null],\"vozidlo\":{\"spz\":\"1AB 2345\",\"druh\":\"osobni\",\"palivo\":\"benzin95\",\"spotreba\":\"6\"}},\"cesty\":[{\"id\":\"1793868957698\",\"odjezd\":\"2026-03-15T06:00\",\"navrat\":\"202"
+     },
+     "sit": [
+      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4="
+     ],
+     "konzole": [
+      {
+       "typ": "error",
+       "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+     ],
+     "dialogy": []
+    },
+    "B_chyby": {
+     "prazdny": "Vyplňte: Odjezd, Návrat, Odkud, Kam, Účel cesty.",
+     "navratDriv": "Návrat musí být později než odjezd.",
+     "zaporne": {
+      "chyba": "Počet km musí být nezáporné číslo.",
+      "pole": {
+       "value": "-5",
+       "badInput": false,
+       "valid": false
+      }
+     },
+     "rok2027": {
+      "seznam": [
+       {
+        "text": "10. 1. 2027 07:00–15:00 Brno – Praha – Brno Jednání s klientem · 100 km Vyhláška MPSV se sazbami cestovních náhrad pro rok 2027 zatím nevyšla ve Sbírce zákonů (nebo ještě nebyla doplněna do aplikace). Sazbu za km, stravné ani průměrné ceny PHM pro rok 2027 proto nelze určit a výpočet se neprovede. Sazby z předchozího roku se nepoužijí, protože by výsledek mohl být nesprávný.",
+        "suma": null,
+        "chyba": "Vyhláška MPSV se sazbami cestovních náhrad pro rok 2027 zatím nevyšla ve Sbírce zákonů (nebo ještě nebyla doplněna do aplikace). Sazbu za km, stravné ani průměrné ceny PHM pro rok 2027 proto nelze určit a výpočet se neprovede. Sazby z předchozího roku se nepoužijí, protože by výsledek mohl být nesprávný.",
+        "bad": true
+       }
+      ],
+      "upozorneni": "Sazby pro rok 2027 zatím nejsou. Vyhláška MPSV o sazbách cestovních náhrad pro rok 2027 dosud nevyšla (stav k ověření 5. 11. 2026). Cesty od 1. 1. 2027 aplikace nespočítá, dokud se sazby nedoplní do rules.json.1 cestu nelze spočítat – důvod je uveden u cesty v seznamu. Do souhrnu ani tisku se nezapočítává.",
+      "tiskDisabled": true,
+      "chybaFormulare": null
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     }
+    },
+    "C_pulnoc": {
+     "radky": [
+      [
+       "15. 3. 2026 20:00 – 16. 3. 2026 02:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč"
+      ],
+      [
+       "10. 4. 2026 06:00 – 11. 4. 2026 00:30",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "236,00 Kč",
+       "236,00 Kč"
+      ]
+     ],
+     "detaily": [
+      "Stravné: 15. 3. 2026 4:00 h: pod 5 h → 0 Kč; 16. 3. 2026 2:00 h: pod 5 h → 0 Kč",
+      "Stravné: 10. 4. 2026 18:00 h (12–18 h): 236 Kč → 236,00 Kč; 11. 4. 2026 0:30 h: pod 5 h → 0 Kč"
+     ],
+     "kVyplate": "236 Kč",
+     "jidlaDnyNaposled": "Nejdřív vyplňte odjezd a návrat."
+    },
+    "D_verejna": {
+     "radky": [
+      [
+       "15. 3. 2026 02:00–22:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "331,50 Kč",
+       "331,50 Kč"
+      ],
+      [
+       "16. 3. 2026 08:00–14:00",
+       "Brno – Praha – BrnoJednání s klientem",
+       "—",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč",
+       "0,00 Kč"
+      ]
+     ],
+     "detaily": [
+      "Stravné: 15. 3. 2026 20:00 h (nad 18 h): 442 Kč, 1 jídlo × −25 % → 331,50 Kč",
+      "Stravné: 16. 3. 2026 6:00 h (5–12 h): 185 Kč, 2 jídla × −70 % → 0,00 Kč"
+     ],
+     "kVyplate": "332 Kč",
+     "seznam": [
+      {
+       "text": "15. 3. 2026 02:00–22:00 Brno – Praha – Brno Jednání s klientem · bez vozidla",
+       "suma": "331,50 Kč",
+       "chyba": null,
+       "bad": false
+      },
+      {
+       "text": "16. 3. 2026 08:00–14:00 Brno – Praha – Brno Jednání s klientem · bez vozidla",
+       "suma": "0,00 Kč",
+       "chyba": null,
+       "bad": false
+      }
+     ]
+    },
+    "E_cisla_cs-CZ": {
+     "spotreba": {
+      "value": "6.5",
+      "badInput": false,
+      "valid": true
+     },
+     "cesta1": {
+      "pole": {
+       "km": {
+        "value": "100.5",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "38.90",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 100,5 km",
+        "suma": "1 083,06 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "detaily": [
+       "Základní náhrada: 100,5 km × 5,90 Kč/km = 592,95 KčPHM: 100,5 km × 6,5 l/100 km × 38,90 Kč/l (cena z dokladu) = 254,11 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ]
+     },
+     "cesta2": {
+      "pole": {
+       "km": {
+        "value": "1500",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 100,5 km",
+        "suma": "1 083,06 Kč",
+        "chyba": null,
+        "bad": false
+       },
+       {
+        "text": "16. 3. 2026 06:00–19:00 Brno – Ostrava – Brno Jednání s klientem · 1500 km",
+        "suma": "12 469,25 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "100,5",
+        "592,95 Kč",
+        "254,11 Kč",
+        "236,00 Kč",
+        "1 083,06 Kč"
+       ],
+       [
+        "16. 3. 2026 06:00–19:00",
+        "Brno – Ostrava – BrnoJednání s klientem",
+        "1500",
+        "8 850,00 Kč",
+        "3 383,25 Kč",
+        "236,00 Kč",
+        "12 469,25 Kč"
+       ]
+      ],
+      "detaily": [
+       "Základní náhrada: 100,5 km × 5,90 Kč/km = 592,95 KčPHM: 100,5 km × 6,5 l/100 km × 38,90 Kč/l (cena z dokladu) = 254,11 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč",
+       "Základní náhrada: 1500 km × 5,90 Kč/km = 8 850,00 KčPHM: 1500 km × 6,5 l/100 km × 34,70 Kč/l (průměrná cena dle vyhlášky, platí od 1. 1. 2026) = 3 383,25 KčStravné: 16. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ],
+      "kVyplate": "13 553 Kč"
+     }
+    },
+    "E_cisla_en-US": {
+     "spotreba": {
+      "value": "65",
+      "badInput": false,
+      "valid": true
+     },
+     "cesta1": {
+      "pole": {
+       "km": {
+        "value": "1005",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "3890",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 1005 km",
+        "suma": "2 547 308,00 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "detaily": [
+       "Základní náhrada: 1005 km × 5,90 Kč/km = 5 929,50 KčPHM: 1005 km × 65 l/100 km × 3 890,00 Kč/l (cena z dokladu) = 2 541 142,50 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ]
+     },
+     "cesta2": {
+      "pole": {
+       "km": {
+        "value": "1500",
+        "badInput": false,
+        "valid": true
+       },
+       "cenaDoklad": {
+        "value": "",
+        "badInput": false,
+        "valid": true
+       }
+      },
+      "chyba": null,
+      "seznam": [
+       {
+        "text": "15. 3. 2026 06:00–19:00 Brno – Praha – Brno Jednání s klientem · 1005 km",
+        "suma": "2 547 308,00 Kč",
+        "chyba": null,
+        "bad": false
+       },
+       {
+        "text": "16. 3. 2026 06:00–19:00 Brno – Ostrava – Brno Jednání s klientem · 1500 km",
+        "suma": "42 918,50 Kč",
+        "chyba": null,
+        "bad": false
+       }
+      ],
+      "radky": [
+       [
+        "15. 3. 2026 06:00–19:00",
+        "Brno – Praha – BrnoJednání s klientem",
+        "1005",
+        "5 929,50 Kč",
+        "2 541 142,50 Kč",
+        "236,00 Kč",
+        "2 547 308,00 Kč"
+       ],
+       [
+        "16. 3. 2026 06:00–19:00",
+        "Brno – Ostrava – BrnoJednání s klientem",
+        "1500",
+        "8 850,00 Kč",
+        "33 832,50 Kč",
+        "236,00 Kč",
+        "42 918,50 Kč"
+       ]
+      ],
+      "detaily": [
+       "Základní náhrada: 1005 km × 5,90 Kč/km = 5 929,50 KčPHM: 1005 km × 65 l/100 km × 3 890,00 Kč/l (cena z dokladu) = 2 541 142,50 KčStravné: 15. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč",
+       "Základní náhrada: 1500 km × 5,90 Kč/km = 8 850,00 KčPHM: 1500 km × 65 l/100 km × 34,70 Kč/l (průměrná cena dle vyhlášky, platí od 1. 1. 2026) = 33 832,50 KčStravné: 16. 3. 2026 13:00 h (12–18 h): 236 Kč → 236,00 Kč"
+      ],
+      "kVyplate": "2 590 227 Kč"
+     }
+    },
+    "F_xss": {
+     "imgX": false,
+     "dialogy": [],
+     "seznam": [
+      "15. 3. 2026 06:00–19:00 <img src=x onerror=alert(1)> – <img src=x onerror=alert(1)> – <img src=x onerror=alert(1)> <img src=x onerror=alert(1)> · 10 km",
+      "16. 3. 2026 06:00–19:00 A – B – <img src=x onerror=alert(1)> <img src=x onerror=alert(1)> · 10 km"
+     ],
+     "pageerror": []
+    }
+   }
+  }
+ ],
+ "zivyWeb": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    "https://frankie851.github.io/favicon.ico"
+   ],
+   "xss": {
+    "vlozenyImg": false
+   }
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    "https://frankie851.github.io/favicon.ico"
+   ]
+  }
+ }
+}

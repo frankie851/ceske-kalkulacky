@@ -45,7 +45,7 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 | BYD | ☑ | ☑ (bez K/V) | ☐ | Připraveno (K0 V0 S7 N4) |
 | SLV | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V2 S5 N4) |
 | INF | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V1 S2 N6; INF-02 vyvráceno → Nízká) |
-| PRI | ☐ | ☐ | ☐ | |
+| PRI | ☑ | ☑ (bez K/V) | ☐ | Připraveno (K0 V0 S5 N4) |
 | CES | ☐ | ☐ | ☐ | |
 | VYP | ☐ | ☐ | ☐ | |
 | ROD | ☐ | ☐ | ☐ | |

@@ -1,0 +1,302 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Prijimacky bez paniky//CS
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Přijímačky 2027
+BEGIN:VEVENT
+UID:kons-prihlasky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261201
+SUMMARY:Konzervatoře: podání přihlášek (nejvýše 2 obory)
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijima
+ cim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf
+URL:https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni
+ -do-SS-od-1.-9.-2026-dopis-MSMT.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kons-zkousky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270104
+DTEND;VALUE=DATE:20270116
+SUMMARY:Konzervatoře: řádný termín talentových zkoušek
+DESCRIPTION:Konkrétní dny určí konzervatoř v kritériích.\nInformativ
+ ní pomůcka – závazné jsou informace CERMAT a škol.\nZdroj: https://
+ edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1
+ .-9.-2026-dopis-MSMT.pdf
+URL:https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni
+ -do-SS-od-1.-9.-2026-dopis-MSMT.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ss-kriteria-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270201
+SUMMARY:Školy zveřejní kritéria přijímacího řízení
+DESCRIPTION:Na webu a ve škole. V DiPSy jsou kritéria od 1. 2.\nInformati
+ vní pomůcka – závazné jsou informace CERMAT a škol.\nZdroj: https:/
+ /prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027.pdf
+URL:https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027
+ .pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kons-nahradni-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270130
+SUMMARY:Konzervatoře: náhradní termín talentových zkoušek
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijima
+ cim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf
+URL:https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni
+ -do-SS-od-1.-9.-2026-dopis-MSMT.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ss-prihlasky-start-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:Začátek podávání přihlášek na SŠ (1. kolo)
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-h
+ armonogram_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kons-vysledky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270209
+SUMMARY:Konzervatoře: zveřejnění výsledků
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uch
+ azece_2027.pdf
+URL:https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027
+ .pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ss-prihlasky-konec-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270222
+DTEND;VALUE=DATE:20270223
+SUMMARY:Konec lhůty pro podání přihlášek (1. kolo)
+DESCRIPTION:Běžně je konec lhůty 20. 2. V roce 2027 připadá na sobotu
+ \, proto se posouvá na pondělí 22. 2.\nInformativní pomůcka – záva
+ zné jsou informace CERMAT a škol.\nZdroj: https://msmt.gov.cz/media/wp-c
+ ontent/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ss-skolni-zkousky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270315
+DTEND;VALUE=DATE:20270424
+SUMMARY:Řádný termín školních a talentových zkoušek
+DESCRIPTION:Jen pokud je škola koná. Konkrétní dny najdete v kritérií
+ ch školy\, pozvánka přijde nejpozději 14 dní předem.\nInformativní 
+ pomůcka – závazné jsou informace CERMAT a škol.\nZdroj: https://msmt
+ .gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:jpz-1-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270412
+DTEND;VALUE=DATE:20270413
+SUMMARY:Jednotná zkouška – 1. řádný termín (4leté obory)
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-
+ o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:jpz-2-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270413
+DTEND;VALUE=DATE:20270414
+SUMMARY:Jednotná zkouška – 2. řádný termín (4leté obory)
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-
+ o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:vg-1-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270414
+DTEND;VALUE=DATE:20270415
+SUMMARY:Jednotná zkouška – 1. řádný termín (víceletá gymnázia)
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-
+ o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:vg-2-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270415
+DTEND;VALUE=DATE:20270416
+SUMMARY:Jednotná zkouška – 2. řádný termín (víceletá gymnázia)
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-
+ o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:skolni-nahradni-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270426
+DTEND;VALUE=DATE:20270506
+SUMMARY:Náhradní termín školních a talentových zkoušek
+DESCRIPTION:Jen pro omluvené. Období začíná 24. 4.\, to je ale sobota.
+ \nInformativní pomůcka – závazné jsou informace CERMAT a škol.\nZdr
+ oj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogra
+ m_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:jpz-nahr-1-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270429
+DTEND;VALUE=DATE:20270430
+SUMMARY:Jednotná zkouška – 1. náhradní termín
+DESCRIPTION:Jen pro omluvené. Omluvu je třeba poslat řediteli školy pí
+ semně do 3 pracovních dnů od zmeškaného termínu.\nInformativní pom
+ ůcka – závazné jsou informace CERMAT a škol.\nZdroj: https://msmt.go
+ v.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:jpz-nahr-2-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:Jednotná zkouška – 2. náhradní termín
+DESCRIPTION:Jen pro omluvené.\nInformativní pomůcka – závazné jsou i
+ nformace CERMAT a škol.\nZdroj: https://msmt.gov.cz/media/wp-content/uplo
+ ads/2026/08/Sdeleni-o-terminech_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminec
+ h_2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:zpetvzeti-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270504
+DTEND;VALUE=DATE:20270505
+SUMMARY:Poslední den pro vzetí přihlášky zpět
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-h
+ armonogram_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:rozrazeni-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270511
+DTEND;VALUE=DATE:20270512
+SUMMARY:Rozřazení uchazečů algoritmem v DiPSy
+DESCRIPTION:Školy předtím do DiPSy zadají pořadí uchazečů. Výsledk
+ y zatím nejsou veřejné.\nInformativní pomůcka – závazné jsou info
+ rmace CERMAT a škol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads
+ /2026/08/Casovy-harmonogram_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:vysledky-1-kolo-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270514
+DTEND;VALUE=DATE:20270515
+SUMMARY:Zveřejnění výsledků 1. kola
+DESCRIPTION:V DiPSy a ve škole. Odvolání do 3 pracovních dnů od oznám
+ ení.\nInformativní pomůcka – závazné jsou informace CERMAT a škol.
+ \nZdroj: https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazec
+ e_2027.pdf
+URL:https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027
+ .pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kolo2-prihlasky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270519
+DTEND;VALUE=DATE:20270525
+SUMMARY:2. kolo: podání přihlášek
+DESCRIPTION:Kritéria 2. kola zveřejní školy 14.–18. 5.\nInformativní
+  pomůcka – závazné jsou informace CERMAT a škol.\nZdroj: https://msm
+ t.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kolo2-zkousky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270608
+DTEND;VALUE=DATE:20270615
+SUMMARY:2. kolo: školní a talentové zkoušky
+DESCRIPTION:Jen pokud je škola koná. Náhradní termín ve 2. kole není.
+ \nInformativní pomůcka – závazné jsou informace CERMAT a škol.\nZdr
+ oj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogra
+ m_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kolo2-vysledky-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270622
+DTEND;VALUE=DATE:20270623
+SUMMARY:2. kolo: zveřejnění výsledků
+DESCRIPTION:Informativní pomůcka – závazné jsou informace CERMAT a š
+ kol.\nZdroj: https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-h
+ armonogram_2026-2027.pdf
+URL:https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram
+ _2026-2027.pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kolo3-2027@prijimacky-bez-paniky
+DTSTAMP:20261105T084929Z
+DTSTART;VALUE=DATE:20270623
+DTEND;VALUE=DATE:20270624
+SUMMARY:3. a další kola: školy zveřejňují kritéria
+DESCRIPTION:Přihlášky jen na papíře a bez priorit\, termíny si určuj
+ e každá škola.\nInformativní pomůcka – závazné jsou informace CER
+ MAT a škol.\nZdroj: https://prijimacky.cermat.gov.cz/files/files/Pruvodce
+ _pro_uchazece_2027.pdf
+URL:https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027
+ .pdf
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
