@@ -13,35 +13,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "P48-01 (metoda krácení DPS, DP-12); dále P48-05"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "P48-01"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "P48-04 (podmínka 10 let / 60 let z „Hlídat v pravidlech“ chybí)"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "P48-02"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "P48-03"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "P48-04"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    }
   },
@@ -178,35 +178,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "PEN-01"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "PEN-02"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PEN-04"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PEN-07"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "PEN-03"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PEN-05"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "PEN-11 (Nízká)"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    }
   },
@@ -391,35 +391,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "EET-03"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "EET-01"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "EET-01 (chybí 25 % pro začínající – zadání ji ale samo neuvádí), EET-09"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "EET-03 (test zakonzervoval vzorec 5 281 × 1,15)"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "EET-02"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "EET-06"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    }
   },
@@ -616,35 +616,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "SPOT-01"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "SPOT-10 (nízká; výpočet sám se shoduje, chyby jsou v pravidlech – SPOT-01/02)"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SPOT-07"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SPOT-06"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SPOT-04"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SPOT-03"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "SPOT-11 (nízká)"
    }
   },
@@ -841,35 +841,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "BYD-01 (jen strop § 117 odst. 4), BYD-02, BYD-07"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "BYD-05 (výsledek i při úvěru nad LTV)"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "BYD-04 (DTI a odpočet úroků se neukazují)"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "BYD-06"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "BYD-03 (starý výsledek pod chybou)"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "BYD-01 („Poplatek nejvýš…“ není zákonné maximum), BYD-08"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "BYD-10 (jen favicon 404)"
    }
   },
@@ -1030,35 +1030,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SLV-04"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "SLV-01, SLV-02"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SLV-06"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "SLV-03, SLV-07"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    }
   },
@@ -1219,35 +1219,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "INF-03 („10.000“ se čte jako 10 Kč)"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "INF-08 (Nízká)"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "INF-04"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "INF-01 (INF-02 po skeptikovi sníženo na Nízkou)"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "INF-05, INF-07 (Nízká)"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "INF-06 (Nízká)"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    }
   },
@@ -1384,35 +1384,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "PRI-09"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PRI-01"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "— (import .ics do Google/iPhone neověřen, viz závěr)"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PRI-05"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PRI-02, PRI-03"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "PRI-04"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "—"
    }
   },
@@ -1549,35 +1549,35 @@
   },
   "semafor": {
    "1 Pravidla a data": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "CES-02"
    },
    "2 Výpočty": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "CES-01"
    },
    "3 Shoda se zadáním": {
-    "stav": "\ud83d",
+    "stav": "🔴",
     "nalez": "CES-02"
    },
    "4 Testy": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "CES-06"
    },
    "5 Mobil a přístupnost": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "CES-03"
    },
    "6 Texty a citlivá témata": {
-    "stav": "\ud83d",
+    "stav": "🟡",
     "nalez": "CES-04, CES-05"
    },
    "7 Soukromí a bezpečnost": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "CES-07 (Nízká)"
    },
    "8 Nasazení a větve": {
-    "stav": "\ud83d",
+    "stav": "🟢",
     "nalez": "CES-09 (Nízká)"
    }
   },

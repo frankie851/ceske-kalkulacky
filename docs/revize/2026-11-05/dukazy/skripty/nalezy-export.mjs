@@ -22,7 +22,7 @@ for (const [kod, repo, nazev] of APLIKACE) {
     if (p) z.pocty = { kriticka: +p[1], vysoka: +p[2], stredni: +p[3], nizka: +p[4] };
     for (const o of OBLASTI) {
       const m = t.match(new RegExp('^\\|\\s*' + o.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\|\\s*([^|]*)\\|\\s*([^|]*)\\|', 'm'));
-      if (m) z.semafor[o] = { stav: (m[1].match(/[🟢🟡🔴⚪]/) || ['?'])[0], nalez: m[2].trim() };
+      if (m) z.semafor[o] = { stav: (m[1].match(/(🟢|🟡|🔴|⚪)/u) || ['?'])[0], nalez: m[2].trim() };
     }
     const re = /^### ([A-Z0-9]+-\d+)\s*·\s*([^·\n]+?)\s*·\s*([^·\n]+?)\s*·\s*(.+)$/gm;
     let m; const idx = [];
