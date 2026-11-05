@@ -361,9 +361,10 @@ strong { font-weight: 800; }
 .bar-steps li.current { background: var(--c-primary); }
 
 /* ---------- Rozvržení kalkulačky ---------- */
-.calc-layout { display: grid; gap: var(--sp-6); padding-bottom: var(--sp-7); }
+.calc-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-6); padding-bottom: var(--sp-7); }
+.calc-side { min-width: 0; }
 @media (min-width: 1040px) {
-  .calc-layout { grid-template-columns: 400px 1fr; gap: var(--sp-6); align-items: start; }
+  .calc-layout { grid-template-columns: 400px minmax(0, 1fr); gap: var(--sp-6); align-items: start; }
   .calc-side { position: sticky; top: var(--sp-4); }
 }
 .calc-side h2, .calc-main > section > h2 { font-size: var(--fs-xl); }
@@ -407,7 +408,7 @@ fieldset.field { border: 0; margin: 0 0 var(--sp-4); padding: 0; min-width: 0; }
 }
 .input:focus-within { outline: 3px solid var(--c-focus); outline-offset: 2px; }
 .input input, .input select {
-  flex: 1; min-width: 0; border: 0; background: transparent; color: var(--c-text);
+  flex: 1; min-width: 0; width: 100%; border: 0; background: transparent; color: var(--c-text);
   font: inherit; font-weight: 700; font-size: var(--fs-lg); padding: 10px 14px; min-height: 50px;
   font-variant-numeric: tabular-nums;
 }
@@ -466,7 +467,7 @@ fieldset.field { border: 0; margin: 0 0 var(--sp-4); padding: 0; min-width: 0; }
 @media (min-width: 560px) { .stats { grid-template-columns: repeat(3, 1fr); } }
 .stat { background: var(--c-surface-2); border-radius: var(--r-md); padding: var(--sp-4); }
 .stat b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.1; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.stat span { display: block; font-size: var(--fs-sm); color: var(--c-text-muted); margin-top: 4px; line-height: 1.4; }
+.stat > span { display: block; font-size: var(--fs-sm); color: var(--c-text-muted); margin-top: 4px; line-height: 1.4; }
 .stat.sage { background: var(--c-sage-soft); }
 .stat.sage b { color: var(--c-sage-ink); }
 
@@ -505,9 +506,9 @@ fieldset.field { border: 0; margin: 0 0 var(--sp-4); padding: 0; min-width: 0; }
 .ink-text { fill: var(--c-text); }
 .ink-muted { fill: var(--c-text-muted); }
 .line-muted { stroke: var(--c-text-muted); stroke-width: 2; fill: none; stroke-linecap: round; }
-.legend { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: grid; gap: var(--sp-2); }
-@media (min-width: 640px) { .legend { grid-template-columns: repeat(3, auto); justify-content: start; gap: var(--sp-2) var(--sp-5); } }
+.legend { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5); }
 .legend li { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); }
+.legend li span:not(.sw) { white-space: nowrap; }
 .legend .sw { width: 18px; height: 18px; border-radius: 6px; flex: none; }
 .legend .sw-1 { background: var(--c-chart-1); }
 .legend .sw-2 { background: var(--c-chart-2); }
@@ -705,3 +706,8 @@ tr.hl th, tr.hl td { background: var(--c-accent-soft); }
   .site-footer .print-note { display: block; }
   .badge { border: 1px solid #000 !important; }
 }
+
+/* Přechod mezi krokem dotazníku a výsledkem */
+.jump { display: flex; align-items: center; gap: var(--sp-4); margin: var(--sp-5) 0 var(--sp-3); color: var(--c-text-muted); font-weight: 700; font-size: var(--fs-sm); }
+.jump::before, .jump::after { content: ""; flex: 1; border-top: 4px dotted var(--c-border-strong); }
+@media print { .jump { display: none; } }

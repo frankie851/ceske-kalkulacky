@@ -40,16 +40,16 @@
   --font-ui: "Inter", "Helvetica Neue", Arial, sans-serif;
 
   /* --- Typografická škála --- */
-  --fs-body: clamp(1.125rem, 1.02rem + 0.35vw, 1.25rem);   /* 18 → 20 px */
+  --fs-body: 1.125rem;      /* 18 px, od 900 px šířky 20 px */
   --fs-small: 0.9375rem;
   --fs-ui: 0.875rem;
   --fs-micro: 0.75rem;
-  --fs-h4: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  --fs-h3: clamp(1.5rem, 1.25rem + 0.9vw, 2.125rem);
-  --fs-h2: clamp(1.875rem, 1.5rem + 1.5vw, 2.875rem);
-  --fs-h1: clamp(2.375rem, 1.6rem + 3.6vw, 4.75rem);
-  --fs-masthead: clamp(3.25rem, 1.5rem + 8vw, 8.5rem);
-  --fs-huge: clamp(3rem, 2rem + 4vw, 6rem);
+  --fs-h4: clamp(1.25rem, 1.1rem + 0.5cqi, 1.5rem);
+  --fs-h3: clamp(1.5rem, 1.25rem + 0.9cqi, 2.125rem);
+  --fs-h2: clamp(1.875rem, 1.5rem + 1.5cqi, 2.875rem);
+  --fs-h1: clamp(2.375rem, 1.6rem + 3.6cqi, 4.75rem);
+  --fs-masthead: clamp(3.25rem, 1.5rem + 8cqi, 8.5rem);
+  --fs-huge: clamp(3rem, 2rem + 4cqi, 6rem);
   --lh-body: 1.6;
   --lh-tight: 1.08;
   --measure: 38rem;
@@ -63,8 +63,8 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4.5rem;
-  --gutter: clamp(16px, 4.5vw, 64px);
-  --col-gap: clamp(16px, 2.2vw, 32px);
+  --gutter: clamp(16px, 4.5cqi, 64px);
+  --col-gap: clamp(16px, 2.2cqi, 32px);
   --page-max: 1320px;
 
   /* --- Zaoblení a stíny: tisk je hranatý --- */
@@ -76,6 +76,10 @@
 
   --line-thin: 1px;
   --line-bold: 3px;
+}
+
+@media (min-width: 900px) {
+  :root { --fs-body: 1.25rem; }
 }
 
 /* --- Noční vydání: tmavý režim (platí i v režimu Auto) --- */
