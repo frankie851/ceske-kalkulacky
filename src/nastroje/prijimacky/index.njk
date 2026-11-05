@@ -1,0 +1,259 @@
+---
+layout: layouty/nastroj.njk
+nastroj: prijimacky
+title: Přijímačky bez paniky
+description: Jak DiPSy rozřazuje uchazeče na střední školy podle bodů a priorit. Simulátor na modelové třídě, termíny přijímacího řízení 2027 s exportem do kalendáře a kontrolní seznam.
+permalink: /prace-rodina/prijimacky/
+uvod: Jak systém rozřadí uchazeče podle bodů a priorit, simulátor na modelové třídě, termíny na jaro 2027 a co udělat před podáním přihlášky.
+stitkyNavic: ['Přijímačky na jaře 2027, nástup v září 2027']
+skripty: ['/nastroje/prijimacky/ui.js']
+styly: ['/nastroje/prijimacky/prijimacky.css']
+---
+{%- from "komponenty/formular.njk" import pole, segmenty, volby -%}
+{%- from "komponenty/vysledky.njk" import vysledek, kontrolni_seznam -%}
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set sprite = '/img/sprite.svg' | url -%}
+{%- set p = prij -%}
+<div class="prij" id="prij" data-sprite="{{ sprite }}">
+
+  <nav class="prij-obsah" aria-label="Na této stránce">
+    <ul>
+      <li><a href="#jak">Jak to funguje</a></li>
+      <li><a href="#simulator">Simulátor</a></li>
+      <li><a href="#strategie">Strategie přihlášky</a></li>
+      <li><a href="#terminy">Termíny 2027</a></li>
+      <li><a href="#seznam">Před přihláškou</a></li>
+    </ul>
+  </nav>
+
+  <div class="prij-bez-js" data-bez-js>
+    {% call upozorneni({ typ: 'info', titulek: 'Simulátor, strategie a export do kalendáře potřebují JavaScript' }) %}
+    <p>Bez něj tu najdeš vysvětlení, ukázkový výsledek simulace, ukázku strategie a všechny termíny. Nic se nikam neodesílá.</p>
+    {% endcall %}
+  </div>
+
+  {#- ========== 1. Jak to funguje ========== #}
+  <section id="jak" class="prij-sekce" aria-labelledby="jak-nadpis">
+    <h2 id="jak-nadpis">Jak to funguje</h2>
+    <p class="prij-perex">Na přihlášku se píšou až tři školy podle toho, kam dítě chce nejvíc. Po přijímačkách systém DiPSy všechny uchazeče rozřadí podle bodů a priorit. Tady je, jak přesně.</p>
+    <ol class="prij-kroky">
+      <li class="prij-krok">
+        <svg class="prij-krok-ikona" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="31" class="il-bg"/>
+          <rect x="17" y="9" width="30" height="46" rx="4" class="il-paper"/>
+          <rect x="21" y="16" width="7" height="7" rx="2" class="il-terra"/><rect x="31" y="17.5" width="12" height="4" rx="2" class="il-sage"/>
+          <rect x="21" y="28" width="7" height="7" rx="2" class="il-apricot"/><rect x="31" y="29.5" width="10" height="4" rx="2" class="il-sage"/>
+          <rect x="21" y="40" width="7" height="7" rx="2" class="il-gold"/><rect x="31" y="41.5" width="8" height="4" rx="2" class="il-sage"/>
+        </svg>
+        <div>
+          <h3>Přihláška: až 3 školy seřazené podle přání</h3>
+          <p>Pořadí na přihlášce je <strong>priorita</strong>. Na první místo patří škola, kam dítě chce nejvíc. Po konci lhůty pro podání přihlášek ({{ p.data.prihlasky }}) se pořadí změnit nedá.</p>
+        </div>
+      </li>
+      <li class="prij-krok">
+        <svg class="prij-krok-ikona" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="31" class="il-bg"/>
+          <rect x="8" y="18" width="22" height="32" rx="4" class="il-paper"/>
+          <rect x="34" y="18" width="22" height="32" rx="4" class="il-sage"/>
+          <text x="19" y="39" text-anchor="middle" font-size="13" class="il-text">31</text>
+          <text x="45" y="39" text-anchor="middle" font-size="13" class="il-text">38</text>
+          <path d="M39 10l6 5 8-9" class="st-terra" stroke-width="3.5"/>
+        </svg>
+        <div>
+          <h3>Jednotná zkouška dvakrát, počítá se lepší</h3>
+          <p>Češtinu i matematiku jde psát dvakrát ({{ p.data.jpz }}). Z <strong>každého předmětu zvlášť</strong> se počítá lepší pokus.</p>
+        </div>
+      </li>
+      <li class="prij-krok">
+        <svg class="prij-krok-ikona" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="31" class="il-bg"/>
+          <rect x="12" y="15" width="40" height="9" rx="4.5" class="il-terra prij-pruh"/>
+          <rect x="12" y="28" width="31" height="9" rx="4.5" class="il-apricot prij-pruh prij-pruh-2"/>
+          <rect x="12" y="41" width="22" height="9" rx="4.5" class="il-gold prij-pruh prij-pruh-3"/>
+        </svg>
+        <div>
+          <h3>Každá škola seřadí uchazeče podle bodů</h3>
+          <p>Pořadí na škole určují body a kritéria školy, ne to, kolikátá je škola v přihlášce. Dva uchazeči nemůžou mít stejné místo, při shodě rozhodují pomocná kritéria školy.</p>
+        </div>
+      </li>
+      <li class="prij-krok">
+        <svg class="prij-krok-ikona" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="31" class="il-bg"/>
+          <rect x="7" y="12" width="22" height="14" rx="4" class="il-sage-d"/>
+          <rect x="35" y="38" width="22" height="14" rx="4" class="il-sage-d"/>
+          <path d="M22 30 Q 30 40 36 38" class="st-ink prij-cesta" stroke-width="2.5"/>
+          <circle cx="18" cy="38" r="6" class="il-terra prij-tecka"/>
+        </svg>
+        <div>
+          <h3>Algoritmus: hlásit se, držet, odmítat</h3>
+          <p>Každý se „přihlásí“ na svou 1. prioritu. Škola si <em>dočasně</em> drží nejlepší uchazeče do kapacity a ostatní odmítne. Odmítnutí zkusí další prioritu. Když přijde někdo lepší, dočasně drženého vytlačí. Opakuje se to, dokud se nic nemění.</p>
+        </div>
+      </li>
+      <li class="prij-krok">
+        <svg class="prij-krok-ikona" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="31" class="il-bg"/>
+          <circle cx="32" cy="32" r="20" class="il-sage-d"/>
+          <path d="M23 33l7 7 12-14" class="st-cream prij-fajfka" stroke-width="5"/>
+        </svg>
+        <div>
+          <h3>Výsledek: nejvyšší priorita, kam stačí body</h3>
+          <p>Uchazeč skončí na nejvyšší prioritě, kde se podle pořadí vejde do kapacity. Nikdo s horším pořadím ho nepředběhne jen proto, že má školu výš. Výsledky 1. kola budou {{ p.data.vysledky1 }}. Kdo neuspěje, může do 2. kola.</p>
+        </div>
+      </li>
+    </ol>
+
+    <figure class="card prij-animace" aria-labelledby="animace-popis">
+      <svg viewBox="0 0 320 170" role="img" aria-labelledby="animace-titulek">
+        <title id="animace-titulek">Animace: tři uchazeči se hlásí na dvě školy, jeden je odmítnut a jde na svou 2. prioritu</title>
+        <g class="prij-anim-skola"><rect x="200" y="12" width="108" height="60" rx="10"/><text x="254" y="31">Škola A</text><text x="254" y="47" class="prij-anim-mala">1 místo</text></g>
+        <g class="prij-anim-skola"><rect x="200" y="98" width="108" height="60" rx="10"/><text x="254" y="117">Škola B</text><text x="254" y="133" class="prij-anim-mala">1 místo</text></g>
+        <g class="prij-anim-zak prij-z1"><circle r="15"/><text dy="4.5">90</text></g>
+        <g class="prij-anim-zak prij-z2"><circle r="15"/><text dy="4.5">85</text></g>
+        <g class="prij-anim-zak prij-z3"><circle r="15"/><text dy="4.5">80</text></g>
+        <text x="14" y="22" class="prij-anim-popisek prij-l1">Kolo 1: všichni na 1. prioritu</text>
+        <text x="14" y="22" class="prij-anim-popisek prij-l2">Kolo 2: odmítnutý zkusí 2. prioritu</text>
+      </svg>
+      <figcaption id="animace-popis">X (90 b.) a Z (85 b.) chtějí nejvíc na školu A, Y (80 b.) na školu B. Škola A má jedno místo: drží X a Z odmítne. Z zkusí svou 2. prioritu B. Má víc bodů než Y, a tak Y z B vytlačí.</figcaption>
+    </figure>
+
+    <h3 class="prij-pravidla-nadpis">Klíčová pravidla pro přijímačky 2027</h3>
+    <ul class="prij-pravidla">
+      {%- for r in p.pravidlaWeb %}
+      <li class="prij-pravidlo" data-pravidlo="{{ r.id }}">
+        <h4>{{ r.nadpis }}</h4>
+        <p>{{ r.text }}</p>
+        <p class="prij-pravidlo-pata">
+          {%- if r.overeno %}{{ stitek({ typ: 'schvaleno', text: 'Ověřeno' }) }}{% else %}{{ stitek({ typ: 'navrh', text: 'Neověřeno' }) }}{% endif %}
+          <span class="small">Zdroj: <a href="{{ r.zdroj.url }}">{{ r.zdroj.nazev }}</a></span>
+        </p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  {#- ========== 2. Simulátor ========== #}
+  <section id="simulator" class="prij-sekce" aria-labelledby="simulator-nadpis">
+    <h2 id="simulator-nadpis">Simulátor rozřazení</h2>
+    {% call upozorneni({ typ: 'info', titulek: 'Simulace na modelové třídě, ne předpověď' }) %}
+    <p>Simulátor neříká, jestli se dítě dostane na konkrétní školu. To předem neví nikdo, protože nikdo nemá data o ostatních uchazečích.</p>
+    {% endcall %}
+
+    <fieldset class="prij-zamek" data-zamek disabled>
+      {{ volby({ id: 'scenar', nazev: 'scenar', legenda: 'Vyber scénář', typ: 'radio', moznosti: p.scenare }) }}
+
+      <div class="card prij-scenar" data-scenar-info>{{ p.ukazka.info | safe }}</div>
+
+      <details class="card prij-editor" open>
+        <summary><span class="h-lg">Školy a děti ve třídě</span> <span class="small muted">(dají se upravit)</span></summary>
+        <div data-editor-skol>{{ p.ukazka.editorSkol | safe }}</div>
+        <div class="form-actions prij-editor-akce">
+          <button type="button" class="btn btn-ghost" data-pridat-skolu>Přidat školu</button>
+        </div>
+        <label class="prij-prepinac" for="rezim-pokusy">
+          <input type="checkbox" id="rezim-pokusy" data-rezim>
+          <span>Zadat dva pokusy z češtiny a matematiky</span>
+        </label>
+        <div data-editor-deti>{{ p.ukazka.editorDeti | safe }}</div>
+        <p class="hint">„Při shodě bodů“: když mají dva uchazeči stejně bodů, vyhraje vyšší číslo (třeba body ze školní zkoušky).</p>
+        <div class="form-actions prij-editor-akce">
+          <button type="button" class="btn btn-ghost" data-pridat-dite>Přidat dítě</button>
+          <button type="button" class="btn btn-ghost" data-zamichat>Zamíchat pořadí v tabulce</button>
+        </div>
+        <p class="small prij-zamichat-poznamka" data-zamichat-poznamka aria-live="polite"></p>
+      </details>
+
+      <div class="prij-ovladani" role="group" aria-label="Ovládání simulace">
+        <button type="button" class="btn btn-primary" data-prehrat>Přehrát</button>
+        <button type="button" class="btn btn-ghost" data-krok>Krok</button>
+        <button type="button" class="btn btn-ghost" data-znovu>Začít znovu</button>
+      </div>
+    </fieldset>
+    <p class="prij-stav" data-stav-kola role="status">{{ p.ukazka.stavKola }}</p>
+    <div class="notice prij-chyba" data-sim-chyba role="alert" hidden></div>
+
+    <h3 class="prij-podnadpis">Přehled kola</h3>
+    <div class="prij-tabule-obal" data-tabule>{{ p.ukazka.tabule | safe }}</div>
+
+    <h3 class="prij-podnadpis">Kolo po kole</h3>
+    <div class="prij-kola" data-kola>{{ p.ukazka.kola | safe }}</div>
+    <p class="small muted" data-kola-prazdne hidden>Zatím neproběhlo žádné kolo. Spusť Přehrát nebo Krok.</p>
+
+    <div class="prij-vysledek-obal">
+      {%- set skola -%}
+      <svg class="result-art" viewBox="0 0 140 140" aria-hidden="true" focusable="false">
+        <circle cx="70" cy="70" r="66" class="il-bg"/>
+        <path d="M30 62 L70 36 L110 62 Z" class="il-terra"/>
+        <rect x="36" y="62" width="68" height="44" rx="4" class="il-cream"/>
+        <rect x="46" y="72" width="12" height="12" rx="2" class="il-sage"/>
+        <rect x="82" y="72" width="12" height="12" rx="2" class="il-sage"/>
+        <rect x="62" y="82" width="16" height="24" rx="3" class="il-apricot-d"/>
+        <circle cx="106" cy="38" r="16" class="il-sage-d"/>
+        <path d="M98 38l6 6 10-11" class="st-cream" stroke-width="4"/>
+      </svg>
+      {%- endset %}
+      {%- call vysledek({ id: 'vysledek', kicker: p.ukazka.kicker, nadpis: 'Výsledek rozřazení', cislo: p.ukazka.souhrn.cislo, popis: p.ukazka.souhrn.popis, ilustraceSvg: skola, ukazka: true }) %}
+        <div data-vysledek-obsah>{{ p.ukazka.vysledek | safe }}</div>
+      {%- endcall %}
+      <p class="card prij-vysledek-ceka" data-vysledek-ceka hidden>Výsledek s vysvětlením pro každé dítě se ukáže po posledním kole.</p>
+    </div>
+  </section>
+
+  {#- ========== 3. Strategie ========== #}
+  <section id="strategie" class="prij-sekce" aria-labelledby="strategie-nadpis">
+    <h2 id="strategie-nadpis">Strategie přihlášky</h2>
+    <p class="prij-perex">Napiš tři školy v pořadí, jak je chceš dát na přihlášku, a k nim loňské minimum bodů (bývá na webu školy u výsledků přijímacího řízení). Pomůcka upozorní, když mezi nimi není žádná jistota.</p>
+    <div class="split prij-strategie-obal">
+      <form class="card" id="strategie-formular" action="#strategie" method="get" novalidate autocomplete="off">
+        <h3 class="h-lg">Zadání</h3>
+        <p class="small muted">Vyplněné hodnoty jsou ukázka. Přepiš je svými, nic se neukládá ani neodesílá.</p>
+        {{ pole({ id: 'str-ocekavane', label: 'Kolik bodů dítě zhruba čeká (ze 100)', hodnota: p.strategie.vstup.expected, jednotka: 'b.', napoveda: 'Třeba z testů nanečisto. Jde jen o odhad.' }) }}
+        {{ segmenty({ id: 'str-rezerva', legenda: 'Jistota je, když je rezerva nad loňským minimem aspoň', moznosti: p.strategie.rezervy }) }}
+        {%- for s in p.strategie.vstup.schools %}
+        <fieldset class="prij-str-skola">
+          <legend>{{ loop.index }}. priorita</legend>
+          {{ pole({ id: 'str-nazev-' + loop.index, label: 'Škola nebo obor', hodnota: s.name, typ: 'text', inputmode: 'text' }) }}
+          {{ pole({ id: 'str-min-' + loop.index, label: 'Loňské minimum', hodnota: s.lastMin, jednotka: 'b.' }) }}
+        </fieldset>
+        {%- endfor %}
+      </form>
+      <section class="card prij-strategie-vysledek" aria-labelledby="strategie-vysledek-nadpis" data-ukazka-strategie>
+        <h3 id="strategie-vysledek-nadpis" class="h-lg">Jak to vychází</h3>
+        <div data-strategie-vystup aria-live="polite">{{ p.strategie.html(sprite) | safe }}</div>
+        <p class="note">{{ ikona('ikona-info') }}<span>Loňské minimum je jen orientační. Letos může být jiné – podle toho, kolik lidí se přihlásí a jak dopadnou.</span></p>
+      </section>
+    </div>
+  </section>
+
+  {#- ========== 4. Termíny ========== #}
+  <section id="terminy" class="prij-sekce" aria-labelledby="terminy-nadpis">
+    <h2 id="terminy-nadpis">Kalendář termínů 2027</h2>
+    <p class="prij-perex">Přijímací řízení pro nástup v září 2027 podle harmonogramu MŠMT a průvodce CERMAT. Konkrétní dny školních a talentových zkoušek jsou v kritériích každé školy.</p>
+    <div class="prij-kalendar-ovladani">
+      <fieldset class="prij-filtry" data-filtry hidden>
+        <legend>Kromě čtyřletých oborů ukázat i</legend>
+        <label class="prij-prepinac" for="filtr-vg"><input type="checkbox" id="filtr-vg" value="vg" data-filtr><span>Víceletá gymnázia</span></label>
+        <label class="prij-prepinac" for="filtr-kons"><input type="checkbox" id="filtr-kons" value="kons" data-filtr><span>Konzervatoře</span></label>
+      </fieldset>
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary" data-ics hidden>{{ ikona('ikona-kalendar') }}Stáhnout termíny do kalendáře (.ics)</button>
+        <a class="btn btn-primary" href="{{ '/prace-rodina/prijimacky/prijimacky-2027.ics' | url }}" download="prijimacky-2027.ics" data-ics-odkaz>{{ ikona('ikona-kalendar') }}Stáhnout všechny termíny (.ics)</a>
+      </div>
+      <p class="small muted">Soubor vznikne přímo v prohlížeči a obsahuje jen zobrazené termíny. Na iPhonu ho po stažení otevři a zvol „Přidat vše“. V Google Kalendáři: Nastavení → Import a export → Importovat.</p>
+    </div>
+    <p class="sr-only" role="status" data-kalendar-stav></p>
+    <div class="prij-kalendar" data-kalendar>{{ p.kalendar | safe }}</div>
+  </section>
+
+  {#- ========== 5. Kontrolní seznam ========== #}
+  <section id="seznam" class="prij-sekce" aria-labelledby="seznam-nadpis">
+    <h2 id="seznam-nadpis">Před podáním přihlášky</h2>
+    <p class="small muted">Zaškrtnutí slouží jen tobě a po zavření stránky zmizí.</p>
+    {{ kontrolni_seznam({ id: 'pred-prihlaskou', polozky: p.seznam }) }}
+  </section>
+
+  {% call upozorneni({ typ: 'info', titulek: 'Informativní pomůcka, závazné jsou informace CERMAT a škol' }) %}
+  <p>Simulátor nepředpovídá přijetí na konkrétní školu. Stránka nic neukládá ani neodesílá.</p>
+  {% endcall %}
+</div>

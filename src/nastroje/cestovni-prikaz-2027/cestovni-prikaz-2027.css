@@ -118,6 +118,8 @@
     .cp-vyuctovani { border: 0 !important; padding: 0 !important; }
     .cp-vyuctovani h2 { font-size: 16pt; margin-bottom: 6pt; }
     .cp-hlavicka-dokladu { grid-template-columns: 1fr 1fr; gap: 2pt 16pt; font-size: 10pt; }
+    .cp-hlavicka-dokladu dt { font-size: 8pt; font-weight: 400; }
+    .cp-hlavicka-dokladu dd { font-size: 10pt; }
     .cp-tabulka { font-size: 9pt; }
     .cp-tabulka caption { padding: 4pt 0; font-size: 10pt; }
     .cp-tabulka th, .cp-tabulka td { padding: 4pt 5pt; }
