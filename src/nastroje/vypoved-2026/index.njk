@@ -23,7 +23,7 @@ uvod: Vyplň datum doručení a pár údajů z výplatní pásky. Hned uvidíš 
         {{ segmenty({ id: 'kdo', legenda: 'Jak pracovní poměr končí', moznosti: v.kdo }) }}
         {{ pole({ id: 'doruceni', typ: 'date', label: 'Den doručení výpovědi', hodnota: v.pole.doruceni, napoveda: 'Den, kdy výpověď převzala druhá strana. U dohody den jejího uzavření.', chybaMisto: true }) }}
         <div data-pro="zamestnavatel dohoda">
-          {{ pole({ id: 'duvod', label: 'Důvod podle výpovědi nebo dohody', moznosti: v.duvody, napoveda: 'Důvod je přímo ve výpovědi. Podle něj se řídí délka výpovědní doby a odstupné.' }) }}
+          {{ pole({ id: 'duvod', label: 'Důvod podle výpovědi nebo dohody', moznosti: v.duvody, napoveda: 'Písmeno z § 52 zákoníku práce najdeš přímo ve výpovědi. Podle něj se řídí výpovědní doba a odstupné.' }) }}
         </div>
         <div data-pro="dohoda" hidden>
           {{ pole({ id: 'konecDohody', typ: 'date', label: 'Sjednaný den skončení podle dohody', hodnota: v.pole.konecDohody, chybaMisto: true }) }}

@@ -143,8 +143,8 @@ export function tabuleHtml(stav, beh, kolo) {
       return zak(a, { trida: 'prij-zak-nic', stitek: 'žádná další priorita' });
     }).join('')}</ul>`
     : '<p class="small muted">Všichni mají aspoň dočasné místo.</p>';
-  sloupce.push(`<li class="prij-sloupec prij-sloupec-trida"><h4>${kolo < 0 ? 'Třída před rozřazením' : 'Zatím bez místa'}</h4>${bezMista}</li>`);
-  return `<ul class="prij-tabule">${sloupce.join('')}</ul>`;
+  const trida = `<div class="prij-sloupec prij-sloupec-trida"><h4>${kolo < 0 ? 'Třída před rozřazením' : 'Zatím bez místa'}</h4>${bezMista}</div>`;
+  return `<ul class="prij-tabule">${sloupce.join('')}</ul>${trida}`;
 }
 
 /** Tabulka za každé proběhlé kolo: kdo se hlásí, koho škola drží a koho odmítá. */

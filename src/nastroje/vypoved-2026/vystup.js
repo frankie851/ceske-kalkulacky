@@ -2,20 +2,20 @@
 // ukázka bez JavaScriptu) i prohlížeč (app.js), takže obě podoby vypadají stejně.
 // Žádný DOM a žádné částky natvrdo: čísla jdou z rules.json přes vypoved.js.
 import { konecPomeru, vypovedniDoba, odstupne, podpora, kontrolniSeznam, denVTydnu } from './vypoved.js';
-import { kc, procenta, datum } from '../../js/format.js';
+import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { esc, sloupcovyGraf } from '../../js/graf.js';
 
 /** Důvody výpovědi (§ 52 písm. a–h) a „jiný“ jen pro dohodu. Popisy rodově neutrálně. */
 export const DUVODY = [
-  { hodnota: 'a', text: 'Zaměstnavatel nebo jeho část se ruší – § 52 písm. a)' },
-  { hodnota: 'b', text: 'Zaměstnavatel nebo jeho část se stěhuje – § 52 písm. b)' },
-  { hodnota: 'c', text: 'Nadbytečnost kvůli organizační změně – § 52 písm. c)' },
-  { hodnota: 'd', text: 'Zdraví: pracovní úraz nebo nemoc z povolání – § 52 písm. d)' },
-  { hodnota: 'e', text: 'Zdraví: dlouhodobá nezpůsobilost k práci z jiných důvodů – § 52 písm. e)' },
-  { hodnota: 'f', text: 'Nesplněné požadavky nebo neuspokojivé výsledky – § 52 písm. f)' },
-  { hodnota: 'g', text: 'Porušení pracovních povinností – § 52 písm. g)' },
-  { hodnota: 'h', text: 'Hrubé porušení režimu dočasně práce neschopného – § 52 písm. h)' },
-  { hodnota: 'jiny', text: 'Jiný důvod (dohoda bez organizačního nebo zdravotního důvodu)' },
+  { hodnota: 'a', text: 'a) Zrušení zaměstnavatele nebo jeho části' },
+  { hodnota: 'b', text: 'b) Přemístění zaměstnavatele nebo jeho části' },
+  { hodnota: 'c', text: 'c) Nadbytečnost (organizační změna)' },
+  { hodnota: 'd', text: 'd) Pracovní úraz nebo nemoc z povolání' },
+  { hodnota: 'e', text: 'e) Zdravotní nezpůsobilost z jiných důvodů' },
+  { hodnota: 'f', text: 'f) Nesplněné požadavky, slabé výsledky' },
+  { hodnota: 'g', text: 'g) Porušení pracovních povinností' },
+  { hodnota: 'h', text: 'h) Porušení režimu při pracovní neschopnosti' },
+  { hodnota: 'jiny', text: 'Jiný důvod (dohoda bez organizačního či zdravotního důvodu)' },
 ];
 
 export const KDO = [
@@ -130,7 +130,7 @@ function castkaBunka(mesic, label) {
 }
 
 /** Odstupné, podpora (graf + tabulka), poznámky. */
-export function detailyHtml(m, rules, { sprite } = {}) {
+export function detailyHtml(m, rules, { sprite, sirkaGrafu = 640 } = {}) {
   const p = m.p;
   const navrhStitek = '<span class="badge badge-draft">' + ikona('ikona-tuzka', sprite) + 'Návrh, zatím neschváleno</span>';
   const hlavniNazev = `Platný zákon ${p.rok}${p.hlavni.predbezne ? ' (předběžně)' : ''}`;
@@ -141,7 +141,10 @@ export function detailyHtml(m, rules, { sprite } = {}) {
     titulek: `Podpora po měsících (${hlavniNazev.toLowerCase()})`,
     id: 'vypoved-podpora',
     polozky: p.hlavni.mesice.map((mes) => ({ nazev: `${mes.poradi}.`, hodnota: mes.castka, trida: mes.procento === p.hlavni.mesice[0].procento ? 'graf-rada-1' : 'graf-rada-2' })),
-    osaY: { format: (n) => kc(n) },
+    osaY: { format: (n) => cislo(n / 1000, n % 1000 ? 1 : 0), popisek: 'Tisíce Kč za měsíc' },
+    popis: `${p.hlavni.mesice.map((mes) => `${mes.poradi}. měsíc ${kc(mes.castka)}`).join(', ')}.`,
+    sirka: sirkaGrafu,
+    vyska: Math.round(Math.min(300, Math.max(220, sirkaGrafu * 0.55))),
   });
 
   return `<section class="card" aria-labelledby="odstupne-nadpis">
@@ -158,7 +161,7 @@ export function detailyHtml(m, rules, { sprite } = {}) {
   ${graf}
   ${p.navrh ? `<p class="vyp-navrh">${navrhStitek}<span>Sloupec „Pokud projde návrh“ počítá s vládním návrhem pro rok ${esc(p.rok)}.</span></p>` : ''}
   <div class="table-wrap" role="region" aria-label="Tabulka: podpora po měsících" tabindex="0">
-    <table class="stack-table vyp-podpora">
+    <table class="vyp-podpora">
       <caption>Podpora po měsících</caption>
       <thead><tr>${sloupce.map((s, i) => `<th scope="col"${i ? ' class="r"' : ''}>${esc(s)}</th>`).join('')}</tr></thead>
       <tbody>${radky}${soucet}</tbody>

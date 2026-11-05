@@ -36,7 +36,7 @@
 
   .prij-animace { margin: 0 0 var(--sp-6); display: grid; gap: var(--sp-4); align-items: center; }
   @media (min-width: 760px) { .prij-animace { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
-  .prij-animace svg { display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; }
+  .prij-animace svg { display: block; width: 100%; max-width: 460px; height: auto; margin: 0 auto; }
   .prij-animace figcaption { color: var(--c-text-muted); font-size: var(--fs-sm); }
   .prij-anim-skola rect { fill: var(--c-surface-2); stroke: var(--c-border-strong); stroke-width: 2; }
   .prij-anim-skola text { text-anchor: middle; font-family: var(--font-body); font-size: 13px; font-weight: 800; fill: var(--c-text); }
@@ -47,10 +47,10 @@
   .prij-z2 text { fill: var(--c-chart-2-ink); }
   .prij-z3 circle { fill: var(--c-chart-4); }
   .prij-z3 text { fill: var(--c-chart-4-ink); }
-  .prij-anim-popisek { font-family: var(--font-body); font-size: 12px; font-weight: 700; fill: var(--c-text-muted); }
+  .prij-anim-popisek { font-family: var(--font-body); font-size: 11px; font-weight: 700; fill: var(--c-text-muted); }
   /* Výchozí stav (i při omezení pohybu) = konečný stav po 2. kole */
-  .prij-z1 { transform: translate(230px, 52px); }
-  .prij-z2 { transform: translate(230px, 134px); }
+  .prij-z1 { transform: translate(228px, 47px); }
+  .prij-z2 { transform: translate(228px, 131px); }
   .prij-z3 { transform: translate(150px, 150px); opacity: 0.5; }
   .prij-l1 { opacity: 0; }
 
@@ -97,7 +97,8 @@
     color: var(--c-text); background: var(--c-surface); border: 2px solid var(--c-border-strong); border-radius: var(--r-sm);
     font-variant-numeric: tabular-nums;
   }
-  .prij-edit select { cursor: pointer; }
+  .prij-edit select { cursor: pointer; min-width: 9.5rem; }
+  @media (min-width: 760px) { .prij-edit-skoly td:first-child { width: 60%; } }
   .prij-edit input[type="number"] { max-width: 6.5rem; }
   .prij-edit input[type="text"] { min-width: 8rem; }
   .prij-edit input:disabled, .prij-edit select:disabled, .prij-odebrat:disabled { opacity: 0.65; cursor: default; }
@@ -125,7 +126,7 @@
     .prij-edit-skoly tr { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
     .prij-edit-skoly td:first-child { grid-column: 1 / -1; }
     .prij-edit .prij-lbl { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: block; font-size: var(--fs-xs); font-weight: 800; margin-bottom: 2px; }
-    .prij-edit input[type="number"], .prij-edit input[type="text"] { max-width: none; min-width: 0; }
+    .prij-edit input[type="number"], .prij-edit input[type="text"], .prij-edit select { max-width: none; min-width: 0; }
     .prij-akce-bunka { grid-column: 1 / -1; text-align: left; }
     .prij-edit-skoly .prij-akce-bunka { grid-column: auto; }
     .prij-zapocte { align-self: end; padding-bottom: 10px !important; }
@@ -142,7 +143,7 @@
   .prij-sloupec { background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-md); padding: var(--sp-3); min-width: 0; }
   .prij-sloupec h4 { font-size: var(--fs-md); font-weight: 800; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-1) var(--sp-2); margin-bottom: var(--sp-2); }
   .prij-obsazeno { font-size: var(--fs-xs); font-weight: 700; color: var(--c-text-muted); }
-  .prij-sloupec-trida { grid-column: 1 / -1; background: var(--c-bg-alt); border-style: dashed; }
+  .prij-sloupec-trida { margin-top: var(--sp-3); background: var(--c-bg-alt); border-style: dashed; }
   .prij-sloupec-trida .prij-mista { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
   .prij-mista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
   .prij-zak {
@@ -184,9 +185,10 @@
   /* ---------- 3. Strategie ---------- */
   .prij-strategie-obal { margin-top: var(--sp-4); }
   .prij-strategie-obal > .card > h3 { margin-bottom: var(--sp-2); }
-  .prij-str-skola { border: 0; border-top: 2px dashed var(--c-border); margin: 0; padding: var(--sp-3) 0 0; min-width: 0; display: grid; gap: 0 var(--sp-3); }
-  @media (min-width: 560px) { .prij-str-skola { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+  .prij-str-skola { border: 0; border-top: 2px dashed var(--c-border); margin: 0; padding: var(--sp-3) 0 0; min-width: 0; }
   .prij-str-skola legend { float: left; width: 100%; padding: 0; margin-bottom: var(--sp-2); font-weight: 800; color: var(--c-sage-ink); }
+  .prij-str-pole { clear: both; display: grid; gap: 0 var(--sp-3); }
+  @media (min-width: 560px) { .prij-str-pole { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
   .prij-str-skola .field { margin-bottom: var(--sp-3); }
   .prij-strategie { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
   .prij-str { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: var(--sp-1) var(--sp-3); align-items: start; padding: var(--sp-3) var(--sp-4); border: 2px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface); }
@@ -223,7 +225,7 @@
   .prij-mesic { background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-lg); padding: var(--sp-4); box-shadow: var(--shadow-sm); min-width: 0; }
   .prij-mesic h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xl); margin-bottom: var(--sp-3); }
   .prij-terminy { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
-  .prij-termin { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: var(--sp-3); align-items: start; }
+  .prij-termin { display: grid; grid-template-columns: 5.75rem minmax(0, 1fr); gap: var(--sp-3); align-items: start; }
   .prij-termin + .prij-termin { border-top: 2px dashed var(--c-border); padding-top: var(--sp-3); }
   .prij-termin-datum { margin: 0; display: grid; justify-items: center; text-align: center; padding: 6px 4px; border-radius: var(--r-sm); background: var(--c-accent-soft); line-height: 1.2; }
   .prij-termin-den { font-weight: 800; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
@@ -254,16 +256,16 @@
   @keyframes prij-pruh { from { transform: scaleX(0.6); } to { transform: scaleX(1); } }
   @keyframes prij-tecka { 0%, 30% { transform: translate(0, 0); } 60%, 100% { transform: translate(28px, 6px); } }
   @keyframes prij-fajfka { 0% { stroke-dashoffset: 40; } 40%, 100% { stroke-dashoffset: 0; } }
-  @keyframes prij-z1 { 0%, 8% { transform: translate(40px, 55px); } 25%, 100% { transform: translate(230px, 52px); } }
+  @keyframes prij-z1 { 0%, 8% { transform: translate(40px, 55px); } 25%, 100% { transform: translate(228px, 47px); } }
   @keyframes prij-z2 {
     0%, 8% { transform: translate(40px, 95px); }
-    25%, 33% { transform: translate(282px, 52px); }
+    25%, 33% { transform: translate(280px, 47px); }
     45% { transform: translate(165px, 85px); }
-    60%, 100% { transform: translate(230px, 134px); }
+    60%, 100% { transform: translate(228px, 131px); }
   }
   @keyframes prij-z3 {
     0%, 8% { transform: translate(40px, 135px); opacity: 1; }
-    25%, 62% { transform: translate(230px, 134px); opacity: 1; }
+    25%, 62% { transform: translate(228px, 131px); opacity: 1; }
     78%, 100% { transform: translate(150px, 150px); opacity: 0.5; }
   }
   @keyframes prij-l1 { 0% { opacity: 1; } 42% { opacity: 0; } }

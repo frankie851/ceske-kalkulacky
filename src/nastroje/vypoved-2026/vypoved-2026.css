@@ -25,13 +25,20 @@
   .vyp-dluhy { margin: var(--sp-5) 0 0; }
   @media (max-width: 559px) {
     .vyp-ukol-text { padding-left: var(--sp-4); }
-    .vyp-podpora td { white-space: normal; }
-    .vyp-sazba { display: inline; margin-left: var(--sp-2); }
   }
 }
 
 @layer tisk {
   @media print {
     .vyp-ukol-text { padding-left: 0; }
+  }
+}
+
+@layer stranky {
+  .vyp-podpora thead th { white-space: normal; }
+  @media (max-width: 559px) {
+    .vyp-podpora th, .vyp-podpora td { padding: 10px 8px; }
+    .vyp-podpora td { white-space: nowrap; }
+    .vyp-sazba { display: block; margin-left: 0; }
   }
 }

@@ -97,13 +97,21 @@ function navrhniDatumZadosti() {
 
 /* ---------- Výsledek ---------- */
 
+/** Šířka grafu podle místa v kartě, aby text grafu byl čitelný i na mobilu. */
+function sirkaGrafu() {
+  const karta = vysledky.querySelector('.card') ?? vysledky;
+  const styl = getComputedStyle(karta);
+  const w = karta.clientWidth - parseFloat(styl.paddingLeft) - parseFloat(styl.paddingRight);
+  return Math.round(Math.min(640, Math.max(280, w || 640)));
+}
+
 function vykresli({ fokus = false } = {}) {
   const { vstup, chyby } = precti();
   if (!Object.keys(chyby).length) {
     try {
       const m = spocitej(vstup, rules);
       const zaskrtnute = [...vysledky.querySelectorAll('.checklist input:checked')].map((i) => i.id);
-      vysledky.innerHTML = kartaHtml(m, { sprite }) + detailyHtml(m, rules, { sprite }) + seznamHtml(m, { sprite, idPrefix: 'ukol', dluhy });
+      vysledky.innerHTML = kartaHtml(m, { sprite }) + detailyHtml(m, rules, { sprite, sirkaGrafu: sirkaGrafu() }) + seznamHtml(m, { sprite, idPrefix: 'ukol', dluhy });
       for (const id of zaskrtnute) { const i = $(id); if (i) i.checked = true; }
       const lista = document.querySelector('[data-lista-cislo]');
       if (lista) lista.textContent = datum(m.konec);
@@ -139,6 +147,12 @@ form.addEventListener('input', (e) => {
 form.addEventListener('change', (e) => {
   if (e.target.id === 'datumZadosti') zadostUpravena = Boolean(e.target.value);
   else { aktualizujPole(); navrhniDatumZadosti(); }
+  vykresli();
+});
+let sirkaPred = window.innerWidth;
+window.addEventListener('resize', () => {
+  if (Math.abs(window.innerWidth - sirkaPred) < 40) return;
+  sirkaPred = window.innerWidth;
   vykresli();
 });
 form.addEventListener('submit', (e) => { e.preventDefault(); vykresli({ fokus: true }); });
