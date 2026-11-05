@@ -10,10 +10,12 @@ src/nastroje/<id>/
   nastroj.json          metadata pro karty, kategorie, vyhledávání a „Souvisí“
   rules.json            pravidla s obalem { "meta": { … }, … }
   index.njk             stránka nástroje (další stránky/záložky = další .njk)
-  index.11tydata.js     ukázkový výsledek spočítaný při buildu (data pro index.njk)
+  <id>.11tydata.js      ukázkový výsledek spočítaný při buildu (datový soubor složky – platí pro všechny
+                        stránky nástroje; pro jednu stránku lze přidat <stranka>.11tydata.js)
   calc.js …             čisté výpočetní moduly (ES moduly, bez DOM)
   ui.js                 klientský modul: čte formulář, volá výpočet, aktualizuje stránku
-test/<id>/*.test.js     původní testy (node:test); spouští je `npm test`
+  test/*.test.js        původní testy beze změny (relativní cesty ../calc.js, ../rules.json sedí);
+                        spouští je `npm test` (glob src/**/*.test.js)
 ```
 
 Do `_site/nastroje/<id>/` se zkopírují jen `*.js` kromě `*.11tydata.js`, `*.test.js` a složek
@@ -89,10 +91,10 @@ const pravidla = JSON.parse(document.getElementById('pravidla').textContent);
 ## 3. Ukázkový výsledek při buildu (povinné)
 
 Stránka musí bez JS ukázat formulář s výchozími hodnotami a spočítaný výsledek. Spočítej ho
-v `index.11tydata.js` stejným modulem jako v prohlížeči:
+v `<id>.11tydata.js` stejným modulem jako v prohlížeči:
 
 ```js
-// src/nastroje/plan48/index.11tydata.js
+// src/nastroje/plan48/plan48.11tydata.js
 import fs from 'node:fs';
 import { spocitej } from './calc.js';
 import { kc } from '../../js/format.js';
