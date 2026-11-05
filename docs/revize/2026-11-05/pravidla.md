@@ -554,3 +554,15 @@ Legenda stavu: **platí (od kdy)** · **schváleno, platí od …** · **návrh*
 6. **Spot/fix, „TDD pro maloodběr má 8 tříd“, „96 čtvrthodinových hodnot“, „15minutový interval“:** souhlasí s metodikou OTE 2026 a TZ OTE 30. 9. 2025. Odkaz na TZ v zadání (`ote-cr.cz/../o-spolecnosti/...`) je zapsaný s `..`, ale cílový soubor existuje.
 7. **Inflační kalkulačka, „meziroční inflace v září 2026 2,5 %, průměrná roční inflace 2025 2,5 %“:** souhlasí s ČSÚ. Tvrzení, že starý produkt ve Veřejné databázi se od roku 2026 neaktualizuje, ČSÚ potvrzuje („Z důvodu ukončování provozu Veřejné databáze ČSÚ nebude tento produkt od roku 2026 už dále aktualizován“).
 8. **Zadání nikde neuvádí**, že náhrada za předčasné splacení je navíc omezena úrokem do konce fixace a účelně vynaloženými náklady podle § 117a (odst. 5) ani ostatní bezplatné důvody § 117 odst. 3 – aplikace to proto také jen částečně pokrývá (viz Rozdíly 3 a 4).
+
+---
+
+## Doplnění z fáze 2 (pravidla, která v rejstříku chyběla; ověřili revizoři aplikací)
+
+| ID | Pravidlo | V aplikaci | Úřední hodnota | Předpis a § | URL | Ověřeno | Stav |
+|---|---|---|---|---|---|---|---|
+| DP-74 | Stropy úplaty účastnických fondů | PEN: 0,4 % / 1 % správa, 10 % / 15 % ze zhodnocení vedeno jako „typické“ sazby | úplata za obhospodařování nejvýše 0,4 % (povinný konzervativní fond) a 1 % (ostatní), za zhodnocení nejvýše 10 % / 15 % | zákon č. 427/2011 Sb. § 60 odst. 3 a 4 | https://www.zakonyprolidi.cz/cs/2011-427 | 5. 11. 2026 | platí (zákonné stropy, ne tržní údaj) |
+| DP-75 | Úplata transformovaného fondu | PEN: 0,8 % + 10 % | nejvýše 0,8 % z průměrné roční bilanční sumy a 10 % ze zisku | zákon č. 427/2011 Sb. § 192 odst. 3 | https://www.zakonyprolidi.cz/cs/2011-427 | 5. 11. 2026 | platí |
+| DP-76 | Poplatek za převod k jiné penzijní společnosti | PEN: 800 Kč, zdarma po 5 letech (zdroj „sazebník“) | nejvýše 800 Kč (§ 61 odst. 3); neúčtuje se po více než 60 měsících trvání spořicí doby u téže společnosti (§ 62 odst. 3); změna strategie nejvýše 500 Kč, jednou za kalendářní rok zdarma (§ 61 odst. 2, § 62 odst. 4) | zákon č. 427/2011 Sb. § 61–62 | https://www.zakonyprolidi.cz/cs/2011-427 | 5. 11. 2026 | platí (zadání to mylně uvádí jako údaj ze sazebníku) |
+| DP-77 | Převod z transformovaného do účastnického fondu téže společnosti | PEN: krok 1 „přejít“ | bezplatně | zákon č. 427/2011 Sb. § 191 odst. 3 | https://www.zakonyprolidi.cz/cs/2011-427 | 5. 11. 2026 | platí |
+| DP-78 | Zaokrouhlení příspěvku účastníka pro státní příspěvek | P48 `Math.round` výsledku, PEN nezaokrouhluje | příspěvek účastníka se zaokrouhluje na celé koruny dolů | zákon č. 427/2011 Sb. § 14 odst. 4 | https://www.zakonyprolidi.cz/cs/2011-427 | 5. 11. 2026 | platí (rozdíl ≤ 0,50 Kč) |

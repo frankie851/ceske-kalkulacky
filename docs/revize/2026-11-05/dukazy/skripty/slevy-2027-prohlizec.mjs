@@ -49,6 +49,16 @@ async function dalsi(page) {
   const chyba = await page.evaluate(() => document.querySelector('#dotaznik .chyba')?.textContent.trim() ?? null);
   return { pred, po, chyba };
 }
+/** Kliká „Další“, dokud se neobjeví výsledek; vrací průchod kroky. */
+async function doVysledku(page, max = 12) {
+  const pruchod = [];
+  for (let i = 0; i < max; i += 1) {
+    const n = await nadpis(page);
+    if (n === 'VÝSLEDEK') return pruchod;
+    pruchod.push(await dalsi(page));
+  }
+  return pruchod;
+}
 async function pocetDeti(page, n) {
   await napis(page, '#pocetDeti', n);
   await cekej(150);
@@ -226,6 +236,8 @@ const srv = await spustServer(KOREN);
   await page.evaluate((p) => { document.querySelectorAll('#dotaznik input[type=number]').forEach((el) => { el.value = p; el.dispatchEvent(new Event('input', { bubbles: true })); }); }, XSS);
   await page.click('#dotaznik button[type="submit"]'); await cekej(300);
   vysl.xssKrok3 = { po: await nadpis(page), chyba: await page.evaluate(() => document.querySelector('#dotaznik .chyba')?.textContent ?? null), vlozenyImg: await page.evaluate(() => !!document.querySelector('img[src="x"]')), dialogy: b.zaznam.dialogy.length };
+  // payload v „Počet dětí“ se přečte jako 0 dětí → dotazník postoupí; vrátit se na krok 3
+  if ((await nadpis(page)) !== 'Máte děti?') { await page.click('[data-akce="zpet"]'); await cekej(200); }
   // dítě bez roku → chyba; dítě 2000 (27 let) → chyba?; 2001 → projde
   await pocetDeti(page, 1); vysl.chyby.diteBezRoku = await dalsi(page);
   await napis(page, '#ditRok0', 2000); vysl.chyby.dite2000 = await dalsi(page);
@@ -253,7 +265,7 @@ const srv = await spustServer(KOREN);
   await page.screenshot({ path: path.join(VYSTUP, 'cisla-360.png'), fullPage: true });
   const poOdeslaniCisel = await dalsi(page);
   // dojít na výsledek (ostatní kroky prázdné)
-  for (let i = 0; i < 6; i += 1) { if ((await nadpis(page)) === 'VÝSLEDEK') break; await dalsi(page); }
+  vysl.cisla.pruchod = await doVysledku(page);
   const obr = await prectiVysledek(page);
   vysl.cisla.poOdeslani = { krok: poOdeslaniCisel, skolkovneNaVysledku: obr.radky.find((r) => /umístění/.test(r.nazev)) ?? '(řádek školkovného chybí)', az: obr.az };
   // XSS v kroku 8 (stáří) přes „Upravit odpovědi“ → krok 10 → Zpět → 9 → Zpět → 8
@@ -261,7 +273,7 @@ const srv = await spustServer(KOREN);
   await page.click('[data-akce="zpet"]'); await cekej(200); await page.click('[data-akce="zpet"]'); await cekej(200);
   vysl.xssKrok8 = { nadpis: await nadpis(page) };
   await page.evaluate((p) => { document.querySelectorAll('#dotaznik input[type=number]').forEach((el) => { el.value = p; el.dispatchEvent(new Event('input', { bubbles: true })); }); }, XSS);
-  for (let i = 0; i < 4; i += 1) { if ((await nadpis(page)) === 'VÝSLEDEK') break; await dalsi(page); }
+  vysl.xssKrok8.pruchod = await doVysledku(page);
   vysl.xssKrok8.po = await nadpis(page);
   vysl.xssKrok8.vlozenyImg = await page.evaluate(() => !!document.querySelector('img[src="x"]'));
   vysl.xssKrok8.dialogy = b.zaznam.dialogy.length;
@@ -281,9 +293,9 @@ const srv = await spustServer(KOREN);
   await napis(page, '#ditRok0', 2012); // dítě už školní
   await dalsi(page); // školka – „žádné dítě v předškolním věku“
   const textSkolka = await page.evaluate(() => document.querySelector('#dotaznik .info')?.textContent ?? null);
-  for (let i = 0; i < 8; i += 1) { if ((await nadpis(page)) === 'VÝSLEDEK') break; await dalsi(page); }
+  const pruchod = await doVysledku(page);
   const obr = await prectiVysledek(page);
-  vysl.zastaraleSkolkovne = { textSkolka, skolkovneNaVysledku: obr.radky.find((r) => /umístění/.test(r.nazev)) ?? null, az: obr.az };
+  vysl.zastaraleSkolkovne = { pruchod, textSkolka, skolkovneNaVysledku: obr.radky.find((r) => /umístění/.test(r.nazev)) ?? null, az: obr.az };
   await b.zavri();
 }
 await srv.zavri();
