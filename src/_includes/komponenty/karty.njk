@@ -93,7 +93,7 @@
 {%- set uroven = p.uroven or 2 -%}
 {%- if idcka and idcka.length %}
 <section class="section-tight" aria-labelledby="souvisi-nadpis">
-  <h{{ uroven }} id="souvisi-nadpis" class="h-xl">{{ p.nadpis or 'Co dál? Mohlo by se ti hodit' }}</h{{ uroven }}>
+  <h{{ uroven }} id="souvisi-nadpis" class="h-xl">{{ p.nadpis or ('Co dál? Mohlo by se vám hodit' if p.vykani else 'Co dál? Mohlo by se ti hodit') }}</h{{ uroven }}>
   <ul class="tool-grid">
     {%- for id in idcka %}
     {%- set n = nastroje | najdiNastroj(id) %}

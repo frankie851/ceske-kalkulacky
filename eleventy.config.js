@@ -4,6 +4,7 @@
 import crypto from 'node:crypto';
 import path from 'node:path';
 import { kc, cislo, procenta, datum } from './src/js/format.js';
+import { skryteNastroje } from './src/_lib/nastroje.js';
 
 // Jediný inline skript webu: nastaví režim (světlý/tmavý) ještě před vykreslením.
 // CSP ho povoluje přes sha256 (globální data cspHash). Při změně textu se hash přepočítá sám.
@@ -35,6 +36,12 @@ export function bezpecnyJson(hodnota) {
 }
 
 export default function (eleventyConfig) {
+  // Stránky skrytých (nezveřejněných) nástrojů se bez ZOBRAZIT_SKRYTE=1 nevytvoří.
+  const skryte = skryteNastroje();
+  eleventyConfig.addPreprocessor('skryte-nastroje', 'njk,md,html', (data) => {
+    if (data.nastroj && skryte.has(data.nastroj)) return false;
+  });
+
   // ---------- Statické soubory ----------
   eleventyConfig.addPassthroughCopy('src/css');
   eleventyConfig.addPassthroughCopy('src/js');

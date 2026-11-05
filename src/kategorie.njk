@@ -40,8 +40,9 @@ eleventyComputed:
 
   <section class="section-tight" aria-labelledby="nastroje-nadpis">
     <div class="section-head">
-      <h2 id="nastroje-nadpis">Průvodce, který připravujeme</h2>
-      <p class="muted">Klidný výpočet, kolik vám zůstane z výplaty a jak by vypadalo oddlužení. Zatím na něm pracujeme.</p>
+      {%- set dluhyAktivni = (vKat | aktivni | length) > 0 %}
+      <h2 id="nastroje-nadpis">{{ 'Spočítejte si to v klidu' if dluhyAktivni else 'Průvodce, který připravujeme' }}</h2>
+      <p class="muted">{{ 'Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. Orientačně, nic neukládáme.' if dluhyAktivni else 'Klidný výpočet, kolik vám zůstane z výplaty a jak by vypadalo oddlužení. Zatím na něm pracujeme.' }}</p>
     </div>
     <ul class="tool-grid">
       {%- for n in vKat %}
