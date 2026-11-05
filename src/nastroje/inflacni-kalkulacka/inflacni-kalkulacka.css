@@ -1,0 +1,48 @@
+/* Inflační kalkulačka – styly jen pro tento nástroj. Barvy jen z tokenů. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
+  .inflace [hidden] { display: none !important; }
+
+  /* Záložky nástroje (role tablist) – stejný vzhled jako sdílené .tabs */
+  .inflace-zalozky {
+    display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; margin: 0 0 var(--sp-5);
+    background: var(--c-surface-2); border-radius: var(--r-lg);
+  }
+  .inflace-zalozky [role="tab"] {
+    flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 0 var(--sp-4); border: 0; border-radius: var(--r-pill);
+    background: transparent; color: var(--c-text); font: inherit; font-weight: 800; cursor: pointer;
+  }
+  @media (max-width: 559px) { .inflace-zalozky [role="tab"] { padding: 0 var(--sp-3); font-size: var(--fs-sm); } }
+  .inflace-zalozky [role="tab"]:hover { background: var(--c-surface); }
+  .inflace-zalozky [role="tab"][aria-selected="true"] { background: var(--c-primary); color: var(--c-on-primary); box-shadow: var(--shadow-sm); }
+  .inflace-zalozky [role="tab"]:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+
+  .inflace-panel > h3 { font-size: var(--fs-lg); margin: 0 0 var(--sp-1); }
+  .inflace-panel > p.muted { margin: 0 0 var(--sp-4); }
+  .inflace-panel:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; border-radius: var(--r-sm); }
+
+  /* Výběr měsíce a roku vedle sebe */
+  .inflace-mesic-pole { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 0 var(--sp-3); }
+  .inflace-mesic-pole .field { margin-bottom: 0; }
+  .inflace-mesic-pole .field > label { font-weight: 600; font-size: var(--fs-sm); color: var(--c-text-muted); margin-bottom: 4px; }
+
+  .inflace-prohodit { margin: calc(-1 * var(--sp-2)) 0 var(--sp-3); }
+  .inflace-prohodit .btn { min-height: 44px; }
+  .inflace-prohodit .ikona { width: 20px; height: 20px; transform: rotate(90deg); }
+
+  /* Výsledek: ztráta hodnoty jinou barvou (vždy i se znaménkem a slovy, ne jen barvou) */
+  .inflace .big-num.inflace-ztrata { color: var(--c-error); }
+
+  /* Grafy */
+  .inflace-graf { margin-top: var(--sp-3); }
+  .inflace-graf .graf-svg { max-width: 100%; height: auto; }
+  .inflace-graf-nadpis { font-size: var(--fs-lg); margin: var(--sp-6) 0 var(--sp-1); }
+
+  .inflace-tabulka { margin-top: var(--sp-4); }
+  .inflace-tabulka > summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .inflace-tabulka[open] > summary { margin-bottom: var(--sp-2); }
+}

@@ -1,0 +1,97 @@
+name: Aktualizace dat ČSÚ (inflace)
+
+# ČSÚ zveřejňuje index spotřebitelských cen obvykle kolem 10. dne měsíce.
+# Běh 11.–15. den v měsíci pokryje i posunutí kvůli svátkům. Když se data změní,
+# vznikne větev automat/cpi-RRRR-MM a pull request s novými daty (nic se necommituje do main).
+# V repozitáři musí být zapnuté Settings → Actions → General →
+# „Allow GitHub Actions to create and approve pull requests“.
+on:
+  schedule:
+    - cron: '17 7 11-15 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: aktualizace-cpi
+  cancel-in-progress: false
+
+env:
+  NASTROJ: src/nastroje/inflacni-kalkulacka
+
+jobs:
+  aktualizace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Stáhnout data z ČSÚ
+        # bez --out zapíše skript do $NASTROJ/data/cpi.json (cesta relativní ke složce scripts/)
+        run: node "$NASTROJ/scripts/update-cpi.mjs"
+
+      - name: Zapsat poslední měsíc a datum ověření do rules.json
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const dir = process.env.NASTROJ;
+            const cpi = JSON.parse(fs.readFileSync(`${dir}/data/cpi.json`, "utf8"));
+            const posledni = Object.keys(cpi).sort().at(-1);
+            const soubor = `${dir}/rules.json`;
+            const pravidla = JSON.parse(fs.readFileSync(soubor, "utf8"));
+            if (pravidla.data.posledniMesic !== posledni) {
+              pravidla.data.posledniMesic = posledni;
+              pravidla.meta.overeno = new Date().toISOString().slice(0, 10);
+              fs.writeFileSync(soubor, JSON.stringify(pravidla, null, 2) + "\n");
+            }
+            fs.appendFileSync(process.env.GITHUB_ENV, `POSLEDNI=${posledni}\n`);
+          '
+
+      - name: Testy inflace (s povinnými daty)
+        env:
+          REQUIRE_CPI_DATA: '1'
+        run: node --test "$NASTROJ/test/*.test.mjs"
+
+      - name: Kontrola sestavení webu
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+        run: |
+          npm ci
+          npx eleventy --quiet
+
+      - name: Otevřít pull request s novými daty
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- "$NASTROJ/data/cpi.json"; then
+            echo "Data se nezměnila (poslední měsíc $POSLEDNI)."
+            exit 0
+          fi
+          vetev="automat/cpi-${POSLEDNI}"
+          if git ls-remote --exit-code --heads origin "$vetev" >/dev/null; then
+            echo "Větev $vetev už existuje, pull request s těmito daty už čeká na sloučení."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$vetev"
+          git add "$NASTROJ/data/cpi.json" "$NASTROJ/rules.json"
+          git commit -m "Data ČSÚ: index spotřebitelských cen do ${POSLEDNI}"
+          git push origin "$vetev"
+          gh pr create \
+            --base "${GITHUB_REF_NAME}" \
+            --head "$vetev" \
+            --title "Data ČSÚ: inflace do ${POSLEDNI}" \
+            --body "Automatická aktualizace bazického indexu spotřebitelských cen (úhrn, průměr 2015 = 100) z otevřených dat ČSÚ.
+
+          - Poslední měsíc v datech: **${POSLEDNI}**
+          - Testy inflační kalkulačky prošly s REQUIRE_CPI_DATA=1, web se sestavil.
+          - Před sloučením porovnej meziroční inflaci za poslední měsíc s tiskovou zprávou ČSÚ (výpis kroku „Stáhnout data z ČSÚ“).
+
+          Pull request otevřený tokenem GITHUB_TOKEN nespouští workflow Web; pusť ho ručně (Actions → Web → Run workflow) nebo PR zavři a znovu otevři."

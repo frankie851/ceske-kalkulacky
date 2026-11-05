@@ -1,0 +1,99 @@
+---
+layout: layouty/nastroj.njk
+nastroj: inflacni-kalkulacka
+title: Inflační kalkulačka
+description: Kolik mají dnes peníze z minulosti, jestli spořicí účet porazil inflaci a o kolik reálně vzrostla mzda. Podle indexu spotřebitelských cen ČSÚ.
+permalink: /penize/inflacni-kalkulacka/
+uvod: Vyber, co chceš spočítat. Počítáme z oficiálního indexu spotřebitelských cen ČSÚ.
+skripty: ['/nastroje/inflacni-kalkulacka/ui.js']
+styly: ['/nastroje/inflacni-kalkulacka/inflacni-kalkulacka.css']
+---
+{%- from "komponenty/formular.njk" import pole, segmenty -%}
+{%- from "komponenty/vysledky.njk" import vysledek, statistiky, lepiva_lista -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set p = inflace -%}
+{%- set u = p.ukazka -%}
+
+{%- macro mesic(id, legenda) -%}
+<fieldset class="field inflace-mesic" data-mesic="{{ id }}">
+  <legend>{{ legenda }}</legend>
+  <div class="inflace-mesic-pole">
+    {{ pole({ id: id + '-mesic', nazev: id + '-mesic', label: 'Měsíc', moznosti: p.mesice[id].mesice }) }}
+    {{ pole({ id: id + '-rok', nazev: id + '-rok', label: 'Rok', moznosti: p.mesice[id].roky }) }}
+  </div>
+</fieldset>
+{%- endmacro -%}
+
+<div class="calc-layout inflace">
+  <section class="calc-side" aria-labelledby="inflace-udaje">
+    <h2 id="inflace-udaje">Co chceš spočítat</h2>
+    <div class="inflace-zalozky" role="tablist" aria-label="Co chceš spočítat" data-zalozky hidden>
+      <button type="button" role="tab" id="zalozka-prepocet" aria-controls="panel-prepocet" aria-selected="true" data-zalozka="prepocet">Přepočet peněz</button>
+      <button type="button" role="tab" id="zalozka-vynos" aria-controls="panel-vynos" aria-selected="false" tabindex="-1" data-zalozka="vynos">Reálný výnos</button>
+      <button type="button" role="tab" id="zalozka-mzda" aria-controls="panel-mzda" aria-selected="false" tabindex="-1" data-zalozka="mzda">Mzda</button>
+    </div>
+
+    <section class="inflace-panel" id="panel-prepocet" aria-labelledby="panel-prepocet-nadpis" data-panel="prepocet">
+      <h3 id="panel-prepocet-nadpis">Přepočet peněz v čase</h3>
+      <p class="muted small">Kolik dnes odpovídá částce z minulosti. Nebo naopak, když měsíce prohodíš.</p>
+      <form id="form-prepocet" action="#vysledek" method="get" novalidate>
+        {{ pole({ id: 'castka', label: 'Částka', hodnota: p.pole.castka, jednotka: 'Kč', inputmode: 'decimal', chybaMisto: true }) }}
+        {{ mesic('prepocet-od', 'Z měsíce') }}
+        <p class="inflace-prohodit" data-prohodit-obal hidden>
+          <button type="button" class="btn btn-ghost" data-prohodit>{{ ikona('ikona-sipka') }}<span>Prohodit měsíce</span></button>
+        </p>
+        {{ mesic('prepocet-do', 'Na měsíc') }}
+      </form>
+    </section>
+
+    <section class="inflace-panel" id="panel-vynos" aria-labelledby="panel-vynos-nadpis" data-panel="vynos" hidden>
+      <h3 id="panel-vynos-nadpis">Reálný výnos</h3>
+      <p class="muted small">Poráží úrok spořicího účtu nebo výnos investice inflaci?</p>
+      <form id="form-vynos" action="#vysledek" method="get" novalidate>
+        {{ pole({ id: 'urok', label: 'Úrok nebo výnos', hodnota: p.pole.urok, jednotka: '%', inputmode: 'decimal', napoveda: 'Nominální výnos před odečtením inflace, například 4 nebo 3,5.', chybaMisto: true }) }}
+        {{ segmenty({ id: 'typ', legenda: 'Výnos je', moznosti: p.typy }) }}
+        {{ mesic('vynos-od', 'Od') }}
+        {{ mesic('vynos-do', 'Do') }}
+        <p class="error-msg" id="vynos-do-chyba" hidden>{{ ikona('ikona-vystraha') }}<span><span class="sr-only">Chyba: </span><span class="error-text"></span></span></p>
+      </form>
+    </section>
+
+    <section class="inflace-panel" id="panel-mzda" aria-labelledby="panel-mzda-nadpis" data-panel="mzda" hidden>
+      <h3 id="panel-mzda-nadpis">Mzda a inflace</h3>
+      <p class="muted small">Zadej mzdu tehdy a teď. Hned uvidíš, jestli si reálně polepšuješ.</p>
+      <form id="form-mzda" action="#vysledek" method="get" novalidate>
+        {{ pole({ id: 'mzda-tehdy', label: 'Mzda tehdy', hodnota: p.pole.mzdaTehdy, jednotka: 'Kč', inputmode: 'decimal', napoveda: 'Hrubou, nebo čistou. Hlavně v obou polích stejně.', chybaMisto: true }) }}
+        {{ mesic('mzda-od', 'Kdy tehdy') }}
+        {{ pole({ id: 'mzda-ted', label: 'Mzda teď', hodnota: p.pole.mzdaTed, jednotka: 'Kč', inputmode: 'decimal', chybaMisto: true }) }}
+        {{ mesic('mzda-do', 'Kdy teď') }}
+      </form>
+    </section>
+  </section>
+
+  <div class="calc-main">
+    {%- call vysledek({ id: 'vysledek', kicker: u.kicker, nadpis: u.nadpis, cislo: u.cislo, popis: u.popis, vysvetleni: u.vysvetleni, ilustrace: 'nastroj-inflace', ukazka: true }) %}
+      <p class="note" data-poznamka-obal{% if not u.poznamky.length %} hidden{% endif %}>{{ ikona('ikona-info') }}<span data-poznamka>{{ u.poznamky | join(' ') }}</span></p>
+      {{ statistiky(u.statistiky) }}
+      <p class="sr-only" aria-live="polite" data-oznameni></p>
+    {%- endcall %}
+
+    <section class="card" aria-labelledby="hladina-nadpis">
+      <h2 id="hladina-nadpis">Jak rostly ceny</h2>
+      <p class="muted" data-popis-hladiny>{{ p.grafy.popisHladiny }}</p>
+      <div class="inflace-graf" data-graf-hladiny>{{ p.grafy.grafHladiny | safe }}</div>
+
+      <h3 class="inflace-graf-nadpis" id="mezirocne-nadpis">Meziroční inflace po měsících</h3>
+      <p class="muted" data-popis-inflace>{{ p.grafy.popisInflace }}</p>
+      <div class="inflace-graf" data-graf-inflace>{{ p.grafy.grafInflace | safe }}</div>
+
+      <details class="inflace-tabulka">
+        <summary>Zobrazit hodnoty v tabulce</summary>
+        <div data-tabulka>{{ p.grafy.tabulka | safe }}</div>
+      </details>
+      <p class="note">{{ ikona('ikona-info') }}<span>Data do {{ p.dataDoGen }}, zdroj <a href="https://csu.gov.cz/produkty/isc_cr">ČSÚ</a>: bazický index spotřebitelských cen, úhrn, průměr 2015 = 100. Orientační výpočet.</span></p>
+    </section>
+  </div>
+</div>
+
+{{ lepiva_lista({ cislo: u.lista.cislo, popis: u.lista.popis, cil: '#vysledek' }) }}
+<script type="application/json" id="data-cpi">{{ p.cpi | json | safe }}</script>
