@@ -38,12 +38,12 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 
 | Kód | 2 Revize | 3 Skeptik | 4 Oprava | Verdikt |
 |---|---|---|---|---|
-| P48 | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V1 S5 N3) |
-| PEN | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V3 S4 N6) |
-| EET | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V2 S7 N5) |
+| P48 | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V1 S5 N3) |
+| PEN | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V3 S4 N6) |
+| EET | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V2 S7 N5) |
 | SPOT | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V2 S6 N6) |
 | BYD | ☑ | ☑ (bez K/V) | ☑ | Připraveno (K0 V0 S7 N4) |
-| SLV | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V2 S5 N4) |
+| SLV | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V2 S5 N4) |
 | INF | ☑ | ☑ | ☑ | Opravit před sloučením (K0 V1 S2 N6; INF-02 vyvráceno → Nízká) |
 | PRI | ☑ | ☑ (bez K/V) | ☑ | Připraveno (K0 V0 S5 N4) |
 | CES | ☑ | ☑ | ☐ | Opravit před sloučením (K0 V2 S4 N6) |
