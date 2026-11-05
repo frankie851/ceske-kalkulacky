@@ -1,0 +1,95 @@
+{#
+  Výsledky, čísla, tabulky, kontrolní seznam, lepivá lišta.
+
+  vysledek({ id = 'vysledek', kicker, nadpis, verdikt = false, cislo, popis, vysvetleni, ilustrace, ilustraceSvg, ukazka = false })
+           + volitelně {% call %} = obsah pod vysvětlením (statistiky, krok do konce roku…)
+    cislo        – hlavní číslo už naformátované (např. 45600 | kc)
+    verdikt      – true: nadpis jako velký verdikt průvodce (Mám EET?)
+    ilustrace    – id symbolu ve spritu (96×96), nebo ilustraceSvg = vlastní inline <svg class="result-art">…
+    ukazka       – true: přidá data-ukazka (POVINNÉ pro ukázkový výsledek spočítaný při buildu)
+    Prvky pro živou aktualizaci z JS: [data-vysledek-cislo], [data-vysledek-popis], [data-vysledek-vysvetleni].
+
+  statistiky(polozky)
+    polozky – pole { hodnota, popis, zvyraznit } (hodnota už naformátovaná)
+
+  tabulka({ caption, popisek, sloupce, radky, vpravo = [], stack = false, zvyraznit = -1, poznamka, id })
+    sloupce  – texty záhlaví; radky – pole polí buněk (první buňka = záhlaví řádku <th scope="row">)
+    vpravo   – indexy sloupců zarovnaných vpravo (čísla)
+    stack    – true: na mobilu se řádky skládají pod sebe (td dostanou data-label)
+    zvyraznit – index řádku se zvýrazněním (tr.hl)
+
+  kontrolni_seznam({ id, polozky: [{ ukol, termin, typ = 'hard' | 'doporuceny', zdroj: { nazev, url } }] })
+
+  lepiva_lista({ cislo, popis, cil = '#vysledek', text = 'Zobrazit výsledek' })
+    Mobilní lišta dole s hlavním číslem; na šířce ≥ 1040 px skrytá. JS aktualizuje [data-lista-cislo].
+#}
+{% from "komponenty/ikona.njk" import ikona %}
+
+{% macro vysledek(p) %}
+{%- set id = p.id or 'vysledek' -%}
+<section class="result" id="{{ id }}" aria-labelledby="{{ id }}-nadpis"{% if p.ukazka %} data-ukazka{% endif %}>
+  <div class="result-top">
+    <div>
+      {% if p.kicker %}<p class="result-kicker">{{ p.kicker }}</p>{% endif %}
+      <h2 id="{{ id }}-nadpis"{% if p.verdikt %} class="verdict"{% endif %}>{{ p.nadpis or 'Tvůj výsledek' }}</h2>
+      {% if p.cislo %}<p class="big-num" data-vysledek-cislo>{{ p.cislo }}</p>{% endif %}
+      {% if p.popis %}<p class="big-num-label" data-vysledek-popis>{{ p.popis }}</p>{% endif %}
+    </div>
+    {%- if p.ilustraceSvg %}{{ p.ilustraceSvg | safe }}
+    {%- elif p.ilustrace %}
+    <svg class="result-art" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><use href="{{ ('/img/sprite.svg#' + p.ilustrace) | url }}"/></svg>
+    {%- endif %}
+  </div>
+  {% if p.vysvetleni %}<p class="result-expl" data-vysledek-vysvetleni>{{ p.vysvetleni }}</p>{% endif %}
+  {% if caller %}{{ caller() }}{% endif %}
+</section>
+{% endmacro %}
+
+{% macro statistiky(polozky) %}
+<ul class="stats">
+  {%- for s in polozky %}
+  <li class="stat{% if s.zvyraznit %} sage{% endif %}"><b>{{ s.hodnota }}</b><span>{{ s.popis }}</span></li>
+  {%- endfor %}
+</ul>
+{% endmacro %}
+
+{% macro tabulka(p) %}
+{%- set vpravo = p.vpravo or [] -%}
+<div class="table-wrap" role="region" aria-label="Tabulka: {{ p.popisek or p.caption }}" tabindex="0"{% if p.id %} id="{{ p.id }}"{% endif %}>
+  <table{% if p.stack %} class="stack-table"{% endif %}>
+    <caption>{{ p.caption }}</caption>
+    <thead><tr>{% for s in p.sloupce %}<th scope="col"{% if loop.index0 in vpravo %} class="r"{% endif %}>{{ s }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {%- for radek in p.radky %}
+      {%- set ri = loop.index0 %}
+      <tr{% if ri == p.zvyraznit %} class="hl"{% endif %}>
+        {%- for bunka in radek %}
+        {%- if loop.first %}<th scope="row">{{ bunka }}</th>
+        {%- else %}<td{% if loop.index0 in vpravo %} class="r"{% endif %}{% if p.stack %} data-label="{{ p.sloupce[loop.index0] }}"{% endif %}>{{ bunka }}</td>{% endif %}
+        {%- endfor %}
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+{% if p.poznamka %}<p class="table-note">{{ p.poznamka }}</p>{% endif %}
+{% endmacro %}
+
+{% macro kontrolni_seznam(p) %}
+{%- set id = p.id or 'ukol' -%}
+<ul class="checklist">
+  {%- for u in p.polozky %}
+  <li><input type="checkbox" id="{{ id }}-{{ loop.index }}"><label for="{{ id }}-{{ loop.index }}"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span><span class="task">{{ u.ukol }}</span>{% if u.termin %}<span class="when{% if u.typ == 'hard' %} firm{% endif %}">{{ ikona('ikona-kalendar') }}<span class="sr-only">{{ 'Pevný termín: ' if u.typ == 'hard' else 'Doporučený termín: ' }}</span>{{ u.termin }}</span>{% endif %}</span></label>{% if u.zdroj %}<span class="src">Zdroj: {% if u.zdroj.url %}<a href="{{ u.zdroj.url }}">{{ u.zdroj.nazev }}</a>{% else %}{{ u.zdroj.nazev }}{% endif %}</span>{% endif %}</li>
+  {%- endfor %}
+</ul>
+{% endmacro %}
+
+{% macro lepiva_lista(p) %}
+<aside class="lepiva-lista" aria-label="Rychlý přehled výsledku">
+  <span class="lepiva-lista-text">
+    <span class="lepiva-lista-popis" data-lista-popis>{{ p.popis }}</span>
+    <span class="lepiva-lista-cislo" data-lista-cislo>{{ p.cislo }}</span>
+  </span>
+  <a class="btn btn-primary" href="{{ p.cil or '#vysledek' }}">{{ p.text or 'Zobrazit výsledek' }}</a>
+</aside>
+{% endmacro %}

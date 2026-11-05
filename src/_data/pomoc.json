@@ -1,0 +1,18 @@
+{
+  "overeno": "2026-11-05",
+  "poznamka": "Odkazy uvádí příručka MPSV Dluhové poradenství pro obce; přímé ověření stránek je třeba udělat ručně.",
+  "odkazy": [
+    {
+      "nazev": "Najít bezplatnou poradnu",
+      "popis": "Registr poskytovatelů sociálních služeb (MPSV). Hledejte službu „odborné sociální poradenství“ ve vašem okolí – je bezplatná.",
+      "url": "https://iregistr.mpsv.cz/",
+      "provozovatel": "Ministerstvo práce a sociálních věcí"
+    },
+    {
+      "nazev": "Kdo vám zdarma sepíše návrh na oddlužení",
+      "popis": "Seznam akreditovaných osob Ministerstva spravedlnosti. Akreditované osoby pomáhají s návrhem na oddlužení bezplatně.",
+      "url": "https://sako.justice.cz/",
+      "provozovatel": "Ministerstvo spravedlnosti"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "plan48",
+  "nazev": "Plán48",
+  "typ": "kalkulačka",
+  "kategorie": "penize",
+  "url": "/penize/plan48/",
+  "poradi": 1,
+  "perex": "Kolik ti stát přidá na penzijko a kolik ušetříš na daních z odpočtu 48 000 Kč (penzijko + DIP + životní pojištění). A co udělat do 31. 12.",
+  "otazka": "Kolik peněz nechávám státu na stole a co s tím mám udělat do konce roku?",
+  "stitky": ["penzijko", "DIP", "odpočet", "životní pojištění"],
+  "termin": "Vklady do 31. 12. 2026",
+  "novinka2027": true,
+  "ilustrace": "nastroj-plan48",
+  "cta": "Pojďme na to",
+  "souvisi": ["penzijko-kompas", "zdanim-to", "slevy-2027"]
+}

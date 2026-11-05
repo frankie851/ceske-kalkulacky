@@ -1,0 +1,137 @@
+{#
+  Rozvržení stránky: hlavička, patička, drobečky, hlavička stránky, záložky.
+
+  hlavicka({ site, navigace, url })
+    site     – data site.json (název, podtitul)
+    navigace – pole { nazev, url } (navigace.json)
+    url      – page.url aktuální stránky; přesná shoda = aria-current="page", podsekce = aria-current="true"
+    Obsahuje logo, vyhledávání (form role=search → /hledat/?q=), přepínač režimu (#t-auto/#t-light/#t-dark).
+
+  paticka({ site, navigace, nastroje, overeno })
+    overeno – ISO datum poslední kontroly pravidel (filtr posledniOvereni)
+    Odkaz na bezplatnou dluhovou pomoc (/dluhy/, data-pomoc) je v patičce vždy.
+
+  drobecky(polozky)
+    polozky – pole { nazev, url }; poslední položka je aktuální stránka (url se ignoruje)
+
+  hlavicka_stranky({ eyebrow, nadpis, otazka, lead, stitky, ilustrace, idNadpisu })  + volitelně {% call %}
+    otazka    – věta v bublině (class "question")
+    lead      – úvodní odstavec
+    stitky    – pole parametrů pro stitek() (vykreslí se jako <ul class="badges">)
+    ilustrace – id symbolu ve spritu (ilustraceViewBox, výchozí "0 0 96 96"); místo něj lze přes {% call %} vložit vlastní inline SVG
+               s třídou "page-head-art"
+
+  zalozky({ polozky, url, popisek })
+    polozky – pole { nazev, url }; aktivní je ta, jejíž url = url
+#}
+{% from "komponenty/ikona.njk" import ikona %}
+{% from "komponenty/stitky.njk" import stitek %}
+
+{% macro hlavicka(p) %}
+<header class="site-header">
+  <div class="wrap header-top">
+    <a class="logo" href="{{ '/' | url }}"{% if p.url == '/' %} aria-current="page"{% endif %}>
+      {{ ikona('logo') }}
+      <span>{{ p.site.nazev }}<small>{{ p.site.podtitul }}</small></span>
+    </a>
+    <div class="header-tools">
+      <form class="search" role="search" aria-label="Hledat na webu" action="{{ '/hledat/' | url }}" method="get">
+        <label class="sr-only" for="hledat">Hledat na webu</label>
+        <div class="search-field">
+          {{ ikona('ikona-lupa') }}
+          <input type="search" id="hledat" name="q" placeholder="Hledat kalkulačku, např. penzijko, EET, výpověď" autocomplete="off">
+          <button type="submit">Hledat</button>
+        </div>
+      </form>
+      <fieldset class="theme-switch"><legend>Barevný režim</legend>
+        <input type="radio" name="rezim" value="auto" id="t-auto" checked><label for="t-auto">Auto</label>
+        <input type="radio" name="rezim" value="light" id="t-light"><label for="t-light">Světlý</label>
+        <input type="radio" name="rezim" value="dark" id="t-dark"><label for="t-dark">Tmavý</label>
+      </fieldset>
+    </div>
+  </div>
+  <nav class="main-nav wrap" aria-label="Hlavní navigace">
+    <ul>
+      {%- for polozka in p.navigace %}
+      <li><a href="{{ polozka.url | url }}"{% if p.url == polozka.url %} aria-current="page"{% elif p.url and p.url.startsWith(polozka.url) %} aria-current="true"{% endif %}><span class="dot"></span>{{ polozka.nazev }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+</header>
+{% endmacro %}
+
+{% macro paticka(p) %}
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>{{ p.site.nazev }}</h2>
+      {% if p.overeno %}<ul class="badges">{{ stitek({ typ: 'overeno', text: 'Poslední kontrola pravidel ' + (p.overeno | datum), li: true }) }}</ul>{% endif %}
+      <p><strong>{{ p.site.poradenstvi }}</strong></p>
+      <p>{{ p.site.soukromi }}</p>
+      <p><a class="footer-help" href="{{ '/dluhy/' | url }}" data-pomoc>{{ ikona('ikona-srdce') }}Bezplatná pomoc s dluhy</a></p>
+      <p class="print-note">Vytištěno z webu {{ p.site.nazev }}. Datum ověření pravidel je u každého nástroje.</p>
+    </div>
+    <nav aria-label="Témata v patičce">
+      <h2>Témata</h2>
+      <ul>
+        {%- for polozka in p.navigace %}
+        <li><a href="{{ polozka.url | url }}">{{ polozka.nazev }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    <nav aria-label="O webu">
+      <h2>O webu</h2>
+      <ul>
+        <li><a href="{{ '/o-webu/' | url }}">O webu</a></li>
+        <li><a href="{{ '/jak-pocitame/' | url }}">Jak počítáme a odkud bereme pravidla</a></li>
+        <li><a href="{{ '/zdroje/' | url }}">Všechny zdroje</a></li>
+        <li><a href="{{ '/soukromi/' | url }}">Soukromí</a></li>
+        <li><a href="{{ '/hledat/' | url }}">Všechny nástroje</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+{% endmacro %}
+
+{% macro drobecky(polozky) %}
+<nav class="crumbs" aria-label="Drobečková navigace">
+  <ol>
+    {%- for polozka in polozky %}
+    {%- if loop.last %}
+    <li><span aria-current="page">{{ polozka.nazev }}</span></li>
+    {%- else %}
+    <li><a href="{{ polozka.url | url }}">{{ polozka.nazev }}</a></li>
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+</nav>
+{% endmacro %}
+
+{% macro hlavicka_stranky(p) %}
+<div class="page-head">
+  <div>
+    {% if p.eyebrow %}<p class="eyebrow">{{ p.eyebrow }}</p>{% endif %}
+    <h1{% if p.idNadpisu %} id="{{ p.idNadpisu }}"{% endif %}>{{ p.nadpis }}</h1>
+    {% if p.otazka %}<p class="question">„{{ p.otazka }}“</p>{% endif %}
+    {% if p.lead %}<p class="lead">{{ p.lead }}</p>{% endif %}
+    {% if p.stitky and p.stitky.length %}
+    <ul class="badges">
+      {%- for s in p.stitky %}{{ stitek({ typ: s.typ, text: s.text, datum: s.datum, li: true }) }}{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {%- if caller %}{{ caller() }}{% elif p.ilustrace %}
+  <svg class="page-head-art" viewBox="{{ p.ilustraceViewBox or '0 0 96 96' }}" aria-hidden="true" focusable="false"><use href="{{ ('/img/sprite.svg#' + p.ilustrace) | url }}"/></svg>
+  {%- endif %}
+</div>
+{% endmacro %}
+
+{% macro zalozky(p) %}
+<nav class="tabs" aria-label="{{ p.popisek or 'Části nástroje' }}">
+  <ul>
+    {%- for z in p.polozky %}
+    <li><a href="{{ z.url | url }}"{% if z.url == p.url %} aria-current="page"{% endif %}>{{ z.nazev }}</a></li>
+    {%- endfor %}
+  </ul>
+</nav>
+{% endmacro %}

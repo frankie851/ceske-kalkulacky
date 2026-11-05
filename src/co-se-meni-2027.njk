@@ -1,0 +1,39 @@
+---
+permalink: /co-se-meni-2027/
+title: Co se mění v roce 2027
+description: EET 2.0, Lepší penzijko, paušální daň, sleva na studenta a školkovné, svátky. U každé změny zdroj a stav.
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
+{%- from "komponenty/karty.njk" import zmena_2027 -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: 'Co se mění v roce 2027' }]) }}
+  {{ hlavicka_stranky({
+    eyebrow: 'Ať tě nic nepřekvapí',
+    nadpis: 'Co se mění v roce 2027',
+    lead: 'Pět změn, o kterých je dobré vědět. U každé najdeš zdroj, odkaz do nástroje a jestli už platí, nebo je to zatím jen návrh.',
+    ilustrace: 'kategorie-2027',
+    ilustraceViewBox: '0 0 64 64'
+  }) }}
+
+  <section class="card" aria-labelledby="stavy-nadpis">
+    <h2 id="stavy-nadpis" class="h-lg">Jak číst štítky</h2>
+    <ul class="watch">
+      <li>{{ stitek({ typ: 'schvaleno' }) }}<span>Změna je ve schváleném zákoně nebo vyhlášce.</span></li>
+      <li>{{ stitek({ typ: 'navrh' }) }}<span>Zatím jen návrh. Může se ještě změnit nebo vůbec neprojít.</span></li>
+      <li>{{ stitek({ typ: 'kalendar' }) }}<span>Nejde o zákon, jen o to, jak padnou dny v kalendáři.</span></li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="zmeny-nadpis">
+    <h2 id="zmeny-nadpis" class="sr-only">Seznam změn</h2>
+    <ul class="changes">
+      {%- for z in zmeny2027 %}
+      {{ zmena_2027(z, nastroje, { uroven: 3 }) }}
+      {%- endfor %}
+    </ul>
+  </section>
+
+  {{ upozorneni() }}
+</div>

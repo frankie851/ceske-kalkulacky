@@ -1,0 +1,27 @@
+{
+  "id": "mam-eet",
+  "nazev": "Mám EET?",
+  "typ": "průvodce",
+  "kategorie": "dane-podnikani",
+  "url": "/dane-podnikani/mam-eet/",
+  "poradi": 1,
+  "perex": "Za dvě minuty zjistíš, jestli se tě EET 2.0 od 1. 1. 2027 týká, jestli se vyplatí EET OFF a co udělat do kdy.",
+  "otazka": "Týká se mě EET 2.0 od 1. 1. 2027 a co mám udělat do kdy?",
+  "stitky": ["EET 2.0", "EET OFF", "pokladna", "MOJE EET"],
+  "termin": "Start 1. 1. 2027",
+  "novinka2027": true,
+  "ilustrace": "nastroj-mam-eet",
+  "cta": "Projít otázky",
+  "souvisi": ["osvc-2027", "slevy-2027", "cestovni-prikaz-2027"],
+  "zalozky": [
+    {
+      "id": "osvc-2027",
+      "nazev": "OSVČ 2027",
+      "typ": "kalkulačka",
+      "url": "/dane-podnikani/mam-eet/osvc-2027/",
+      "perex": "Paušální daň, přiznání s výdajovým paušálem, nebo EET OFF? Porovnání tří cest pro živnostníky.",
+      "stitky": ["paušální daň", "výdajový paušál", "zálohy", "OSVČ"],
+      "termin": "Přihláška k paušální dani do 11. 1. 2027"
+    }
+  ]
+}

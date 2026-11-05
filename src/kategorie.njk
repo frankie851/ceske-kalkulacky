@@ -1,0 +1,115 @@
+---
+pagination:
+  data: kategorie
+  size: 1
+  alias: k
+permalink: "/{{ k.slug }}/"
+eleventyComputed:
+  title: "{{ k.nazev }}"
+  description: "{{ k.popis }}"
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
+{%- from "komponenty/karty.njk" import karta_nastroje -%}
+{%- from "komponenty/obsah.njk" import upozorneni, pomoc_dluhy -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set vKat = nastroje | vKategorii(k.slug) -%}
+{%- set overeno = vKat | posledniOvereni -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: k.nazev }]) }}
+
+{%- if k.citlive %}
+  {#- Sekce Dluhy: vyká, pomoc hned nahoře, bez propagace jiných nástrojů -#}
+  <div class="section-tight">
+    {% call pomoc_dluhy({ pomoc: pomoc, uroven: 1, eyebrow: 'Dluhy', nadpis: 'Nejste v tom sami', tlacitkoNahore: true, ilustrace: true, id: 'pomoc' }) %}
+    {% if pomoc.overeno %}<p class="small muted">Odkazy na bezplatnou pomoc jsme naposledy zkontrolovali {{ pomoc.overeno | datum }}.</p>{% endif %}
+    {% endcall %}
+  </div>
+
+  <section class="section-tight" aria-labelledby="kroky-nadpis">
+    <div class="section-head">
+      <h2 id="kroky-nadpis">Co můžete udělat hned teď</h2>
+      <p class="lead">Krátce a v klidu. Nic z toho nemusíte zvládnout naráz.</p>
+    </div>
+    <ol class="reasons">
+      <li><div><p>Obraťte se na bezplatnou dluhovou poradnu.</p><span class="src">Pomůže vám sepsat dluhy, projde s vámi dopisy a poradí, co dál. Je to zdarma a bez závazků.</span></div></li>
+      <li><div><p>Otevřete dopisy od věřitelů, exekutora i soudu.</p><span class="src">Sepište si, komu a kolik dlužíte a do kdy na co odpovědět. Lhůty běží, i když dopis neotevřete.</span></div></li>
+      <li><div><p>Když dluhy nejde splácet, zeptejte se na oddlužení.</p><span class="src">Oddlužení (osobní bankrot) schvaluje insolvenční soud. Návrh vám zdarma sepíše akreditovaná osoba nebo poradna.</span></div></li>
+      <li><div><p>Pozor na rychlé půjčky na splacení jiných dluhů.</p><span class="src">Než něco podepíšete, poraďte se v poradně. Pomoc s dluhy nemusí nic stát.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="section-tight" aria-labelledby="nastroje-nadpis">
+    <div class="section-head">
+      <h2 id="nastroje-nadpis">Průvodce, který připravujeme</h2>
+      <p class="muted">Klidný výpočet, kolik vám zůstane z výplaty a jak by vypadalo oddlužení. Zatím na něm pracujeme.</p>
+    </div>
+    <ul class="tool-grid">
+      {%- for n in vKat %}
+      <li>{{ karta_nastroje(n) }}</li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section class="section-tight" aria-labelledby="pravidla-nadpis">
+    <h2 id="pravidla-nadpis" class="h-xl">Pravidla této sekce</h2>
+    <ul class="debt-rules debt-rules-page">
+      <li>{{ ikona('ikona-overeno') }}Žádné reklamy ani affiliate odkazy</li>
+      <li>{{ ikona('ikona-overeno') }}Žádné nabídky půjček ani placení zprostředkovatelé</li>
+      <li>{{ ikona('ikona-overeno') }}Žádné sbírání kontaktů</li>
+      <li>{{ ikona('ikona-overeno') }}Nic, co zadáte, neukládáme ani neodesíláme</li>
+    </ul>
+  </section>
+
+  {{ upozorneni({ typ: 'info', titulek: 'Orientační informace', text: 'Nejde o právní poradenství. Vaši situaci závazně posoudí poradna, exekutor nebo insolvenční soud.' }) }}
+{%- else %}
+  {{ hlavicka_stranky({
+    eyebrow: 'Kategorie',
+    nadpis: k.nazev,
+    lead: k.uvod,
+    stitky: ([{ typ: 'overeno', datum: overeno }] if overeno else []).concat([{ typ: 'plain', text: vKat.length | mnozne('nástroj', 'nástroje', 'nástrojů') }]),
+    ilustrace: k.ilustrace,
+    ilustraceViewBox: '0 0 64 64'
+  }) }}
+
+  {%- set volby = [] %}
+  {%- for v in k.pomocnik %}
+  {%- set cil = nastroje | najdiNastroj(v.nastroj) %}
+  {%- if cil and cil.stav == 'aktivni' %}{% set volby = volby.concat([{ text: v.text, url: cil.url }]) %}{% endif %}
+  {%- endfor %}
+  {%- if volby.length %}
+  <section class="helper" aria-labelledby="pomocnik-nadpis">
+    <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+      <circle cx="60" cy="60" r="58" class="il-paper"/>
+      <circle cx="60" cy="60" r="40" class="st-sage" stroke-width="6"/>
+      <path d="M60 26v8M60 86v8M26 60h8M86 60h8" class="st-ink" stroke-width="4"/>
+      <path d="M60 36l11 24H49z" class="il-terra"/>
+      <path d="M60 84L49 60h22z" class="il-sage-d"/>
+      <circle cx="60" cy="60" r="5" class="il-ink"/>
+    </svg>
+    <div>
+      <h2 id="pomocnik-nadpis">Nevíš, co vybrat? Řekni, co tě trápí.</h2>
+      <p class="muted">Klikni na větu, která sedí nejvíc. Ostatní dořešíme po cestě.</p>
+      <ul class="helper-choices">
+        {%- for v in volby %}
+        <li><a href="{{ v.url | url }}">{{ v.text }}<b aria-hidden="true">→</b></a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+  {%- endif %}
+
+  <section class="section" aria-labelledby="nastroje-nadpis">
+    <div class="section-head">
+      <h2 id="nastroje-nadpis">Všechny nástroje v téhle kategorii</h2>
+      {% if not (vKat | aktivni).length %}<p class="muted">Nástroje z tohoto tématu sem právě přenášíme. Brzy tu budou.</p>{% endif %}
+    </div>
+    <ul class="tool-grid">
+      {%- for n in vKat %}
+      <li>{{ karta_nastroje(n, { stitky: true }) }}</li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  {{ upozorneni() }}
+{%- endif %}
+</div>

@@ -1,0 +1,18 @@
+---
+permalink: /404.html
+title: Stránka nenalezena
+description: Tahle stránka tu není. Zkus hledání nebo vyber téma.
+eleventyExcludeFromCollections: true
+---
+{%- from "komponenty/karty.njk" import kategorie_dlazdice -%}
+<div class="wrap section">
+  <p class="err-code" aria-hidden="true">404</p>
+  <h1>Tahle stránka tu není</h1>
+  <p class="lead">Možná se přesunula, nebo je v adrese překlep. Zkus hledání nahoře, nebo vyber téma.</p>
+  <p><a class="btn btn-primary" href="{{ '/' | url }}">Zpět na úvod</a></p>
+  <ul class="cat-grid mt-6">
+    {%- for k in kategorie %}
+    <li>{{ kategorie_dlazdice({ nazev: k.nazev, popis: k.kratce, url: '/' + k.slug + '/', ikona: k.ilustrace }) }}</li>
+    {%- endfor %}
+  </ul>
+</div>

@@ -1,0 +1,24 @@
+---
+permalink: /jak-pocitame/
+title: Jak počítáme
+description: Odkud bereme pravidla, jak je ověřujeme a co dělat, když najdeš chybu.
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: 'Jak počítáme' }]) }}
+  {{ hlavicka_stranky({ eyebrow: 'Jak počítáme', nadpis: 'Jak počítáme a odkud bereme pravidla', lead: 'Krátce o tom, z čeho výpočty vycházejí a jak poznáš, jestli jsou aktuální.' }) }}
+  <div class="text">
+    <h2>Pravidla v jednom souboru</h2>
+    <p>Každý nástroj má svá pravidla (sazby, limity, termíny) v samostatném souboru. V kódu nejsou žádné natvrdo zapsané částky. Když se změní zákon, upravíme pravidla na jednom místě a všechny výpočty se přepočítají.</p>
+    <h2>Datum ověření a zdroje</h2>
+    <p>U každého nástroje najdeš štítek „Pravidla ověřena k …“ a seznam zdrojů. Všechny zdroje pohromadě jsou na stránce <a href="{{ '/zdroje/' | url }}">Všechny zdroje</a>.</p>
+    <h2>Návrhy zákonů</h2>
+    <p>Některé změny pro rok 2027 jsou zatím jen návrh. Ukazujeme je pro srovnání a vždy se štítkem „Návrh, zatím neschváleno“. Výchozí výpočet počítá s platnými pravidly.</p>
+    <h2>Co nepočítáme</h2>
+    <p>Nástroje počítají běžné situace. Výjimky a pravidla, která se nám zatím nepodařilo ověřit, vypisujeme u nástroje v části „Co zatím neověřujeme a nepočítáme“.</p>
+    <h2>Testy</h2>
+    <p>Každý výpočet má automatické testy s kontrolními příklady ze zadání a z ověřených zdrojů. Web se nezveřejní, když některý test neprojde.</p>
+    <h2>Našli jste chybu?</h2>
+    <p>Pravidla se mění a chyba se může vloudit. Když narazíš na nesoulad se zákonem nebo s oficiálním zdrojem, dej nám prosím vědět přes repozitář projektu.</p>
+  </div>
+</div>

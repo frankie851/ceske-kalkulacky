@@ -1,0 +1,52 @@
+[
+  {
+    "id": "eet-2",
+    "titulek": "Vrací se EET – jako EET 2.0",
+    "datum": "od 1. 1. 2027",
+    "text": "Evidovat se budou kontaktní platby včetně karty a QR kódu na místě. Drobní živnostníci v 1. pásmu paušální daně mohou zvolit EET OFF za přirážku 1 400 Kč měsíčně.",
+    "nastroj": "mam-eet",
+    "akce": "Projít Mám EET?",
+    "stav": "schvaleno",
+    "zdroj": { "nazev": "epravo – EET 2.0 je na světě", "kratce": "epravo", "url": "https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1" }
+  },
+  {
+    "id": "lepsi-penzijko",
+    "titulek": "Lepší penzijko: 40 % pro mladé",
+    "datum": "od 2027, pokud projde",
+    "text": "Lidé do 30 let mají dostat státní příspěvek až 680 Kč měsíčně (8 160 Kč ročně), děti už od vkladu 100 Kč, poplatek za správu se zastropuje na 0,5 %.",
+    "nastroj": "plan48",
+    "akce": "Spočítat v Plán48",
+    "stav": "navrh",
+    "zdroj": { "nazev": "Echo24 – Vláda schválila změnu pravidel penzijního spoření", "kratce": "Echo24", "url": "https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni" }
+  },
+  {
+    "id": "pausalni-dan",
+    "titulek": "Paušální daň v 1. pásmu stoupá",
+    "datum": "přihláška do 11. 1. 2027",
+    "text": "1. pásmo paušální daně stoupá na 9 662 Kč měsíčně.",
+    "nastroj": "osvc-2027",
+    "akce": "Porovnat v OSVČ 2027",
+    "stav": "schvaleno",
+    "zdroj": { "nazev": "Pohoda – paušální daň 2027", "kratce": "Pohoda", "url": "https://portal.pohoda.cz/?p=45627" }
+  },
+  {
+    "id": "sleva-student-skolkovne",
+    "titulek": "Vrací se sleva na studenta a školkovné",
+    "datum": "2027",
+    "text": "Sleva na studenta 4 020 Kč ročně a školkovné do výše minimální mzdy.",
+    "nastroj": "slevy-2027",
+    "akce": "Slevy 2027",
+    "stav": "schvaleno",
+    "zdroj": { "nazev": "Práce a mzda – Podtrženo, sečteno", "kratce": "Práce a mzda", "url": "https://www.praceamzda.cz/tydenik/253/podtrzeno-secteno-c-26-30-2026" }
+  },
+  {
+    "id": "svatky-2027",
+    "titulek": "Svátky 2027 a prodloužené víkendy",
+    "datum": "celý rok",
+    "text": "1. 5., 8. 5. a oba vánoční svátky připadnou na víkend, zato 5.–6. 7. dají čtyři dny volna bez dovolené.",
+    "nastroj": "volno-2027",
+    "akce": "Volno 2027",
+    "stav": "kalendar",
+    "zdroj": { "nazev": "vlastní výpočet z kalendáře", "kratce": "vlastní výpočet z kalendáře", "url": null }
+  }
+]

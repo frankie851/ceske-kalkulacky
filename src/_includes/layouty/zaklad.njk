@@ -1,0 +1,33 @@
+{#- Základní layout všech stránek.
+    Front matter stránky: title, description, skripty: ['/js/…', '/nastroje/<id>/ui.js'] (ES moduly). -#}
+{%- from "komponenty/rozvrzeni.njk" import hlavicka, paticka -%}
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-{{ cspHash }}'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>{% if title %}{{ title }} – {{ site.nazev }}{% else %}{{ site.nazev }} – {{ site.podtitul }}{% endif %}</title>
+<meta name="description" content="{{ description or site.popis }}">
+<meta name="color-scheme" content="light dark">
+<script>{{ temaSkript | safe }}</script>
+<link rel="preload" href="{{ '/fonts/nunito-latin-400-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/fonts/nunito-latin-ext-400-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/fonts/fredoka-latin-600-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+<link rel="icon" href="{{ '/img/favicon.svg' | url }}" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+{{ hlavicka({ site: site, navigace: navigace, url: page.url }) }}
+<main id="obsah">
+{{ content | safe }}
+</main>
+{{ paticka({ site: site, navigace: navigace, overeno: nastroje | posledniOvereni }) }}
+<script type="module" src="{{ '/js/tema.js' | url }}"></script>
+{%- for s in skripty %}
+<script type="module" src="{{ s | url }}"></script>
+{%- endfor %}
+</body>
+</html>

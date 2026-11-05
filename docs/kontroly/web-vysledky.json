@@ -1,0 +1,84 @@
+{
+  "datum": "2026-11-05T08:23:36.343Z",
+  "prefix": "/",
+  "stranek": 17,
+  "chyb": 4,
+  "stranky": [
+    {
+      "stranka": "/",
+      "chyby": []
+    },
+    {
+      "stranka": "/404.html",
+      "chyby": []
+    },
+    {
+      "stranka": "/bydleni-energie/",
+      "chyby": []
+    },
+    {
+      "stranka": "/co-se-meni-2027/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dane-podnikani/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dane-podnikani/mam-eet/",
+      "chyby": [
+        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
+      ]
+    },
+    {
+      "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
+      "chyby": [
+        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
+      ]
+    },
+    {
+      "stranka": "/dluhy/",
+      "chyby": []
+    },
+    {
+      "stranka": "/hledat/",
+      "chyby": []
+    },
+    {
+      "stranka": "/jak-pocitame/",
+      "chyby": []
+    },
+    {
+      "stranka": "/o-webu/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/penzijko-kompas/",
+      "chyby": [
+        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
+      ]
+    },
+    {
+      "stranka": "/penize/plan48/",
+      "chyby": [
+        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
+      ]
+    },
+    {
+      "stranka": "/prace-rodina/",
+      "chyby": []
+    },
+    {
+      "stranka": "/soukromi/",
+      "chyby": []
+    },
+    {
+      "stranka": "/zdroje/",
+      "chyby": []
+    }
+  ]
+}
