@@ -220,8 +220,8 @@
     "reprodukce": "výchozí formulář (35 let, 1 000 Kč, 150 000 Kč, transformovaný fond 0,8 % + 10 %, přepínač „Pravidla 2026“) → očekáváno: podle platného ZDPS žádný konec TF není (§ 194 zná jen zánik povolení), datum 31. 12. 2036 je jen v tisku 285 (DP-09); projekce „zůstat“ by měla běžet v TF (1,5 %) až do 65 let → 655 378 Kč nominálně / 312 447 Kč reálně, nebo musí být u čísla štítek „návrh, zatím neschváleno“ → skutečnost: aplikace přepne v roce 2037 do konzervativního fondu (3 %) a ukáže 852 538 Kč / 406 441 Kč se štítkem „platí“; karta TF i patička uvádějí konec 2036 bez štítku. Přínosy kroků se tím mění (fond +218 394 místo +312 389 Kč; „navyš vklad“ +22 494 Kč, podle zákona −19 405 Kč, tj. krok by neměl být nabídnut). Reprodukováno v přepočtu (ř. 38–39, 47) a ve dvou nezávislých načteních stránky (360 a 1440 px) i na živém webu.",
     "dopad": "účastník transformovaného fondu vidí pod štítkem „platí“ o 30 % (94 000 Kč reálně) vyšší odhad majetku v 65 letech a podhodnocený přínos přechodu; projekce stojí na neschváleném zákoně, který může být změněn nebo neprojít.",
     "oprava": "přesunout `konci`/`nastupce` do sady `navrh2027` (nebo přidat `fondy.transformovany.stav: \"navrh\"`) a v `projekce()` uplatnit nástupce jen když zvolená sada parametr obsahuje; v sadě 2026 počítat TF do konce horizontu; na kartě TF a v patičce doplnit štítek `stitek` návrhu u věty o roce 2036; upravit test 17 tak, aby pro sadu `2026` očekával `mesicePoNastupci === 0`.",
-    "overeni": "reprodukováno 2× · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× · skeptik: Potvrzeno (Opus, 5. 11. 2026 – projekce() reprodukována: 852 538 / 406 441 Kč vs. 655 378 / 312 447 Kč bez nástupce; zákon č. 427/2011 Sb. žádný konec TF nestanoví)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "PEN-02",
@@ -232,8 +232,8 @@
     "reprodukce": "do pole „Za správu“ napsat na klávesnici `0,85` → očekáváno 0,85 % za správu (projekce 405 631 Kč reálně), nebo chybová hláška → skutečnost: hodnota pole „085“ = 85 %, hlavní číslo 185 451 Kč reálně, karta poplatků „85 % za správu“, přínos stropu +513 561 Kč, bez jakékoli hlášky. Do pole „Tvůj měsíční vklad“ napsat `1500,50` → očekáváno 1 500,50 Kč a příspěvek 300 Kč → skutečnost: pole „150050“, příspěvek 340 Kč, projekce 35 983 679 Kč reálně. `1.500` (česky 1 500) → 1,5 Kč, příspěvek 0 Kč. Reprodukováno ve dvou nezávislých bězích prohlížeče (Chromium, locale en-US; chování v česky lokalizovaném prohlížeči se nepodařilo ověřit – viz Neověřeno).",
     "dopad": "kdo přepíše poplatek nebo vklad po česku s čárkou, dostane bez varování zcela jiný odhad majetku, poplatků i doporučení (u poplatku 85 % je výsledek na pohled uvěřitelný: 185 451 Kč).",
     "oprava": "použít `type=\"text\"` s `inputmode=\"decimal\"` a vlastní parsování (odstranit mezery včetně pevných, čárku převést na tečku, tečku jako oddělovač tisíců ošetřit) s viditelnou chybovou hláškou při nečitelném vstupu; nebo aspoň validovat `validity.stepMismatch`/rozsah (`max` u poplatku je 5 %) a hlásit hodnotu mimo rozsah místo tichého přijetí 85 %.",
-    "overeni": "reprodukováno 2× · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× · skeptik: Nejisté (Opus, 5. 11. 2026 – v Chromiu s --lang=cs-CZ se čárka přijme jako desetinná a hodnoty jsou správné; posun 100×/1 000× nastává jen v anglicky lokalizovaném prohlížeči; trvá, že se nečte validity a chybí hláška. Ponecháno jako Vysoká · nejisté)",
+    "skeptik": "Nejisté"
    },
    {
     "id": "PEN-03",
@@ -244,8 +244,8 @@
     "reprodukce": "načíst stránku ve světlém režimu, spustit axe-core (WCAG 2.2 A/AA) → očekáváno 0 „serious/critical“ → skutečnost: `color-contrast` serious, 4 uzly (texty „0,8 % za správu + 10 % ze zhodnocení / zaplatíš 93 228 Kč“ a „v 65 letech, dnešní peníze“); vypočtený poměr #6f6e69 na #f0efec = 4,44:1 (limit 4,5:1). Reprodukováno v `uvod-kontrola.json` (základní kontrola), `prohlizec.json` (scénář A, 4 uzly; scénář B 2 uzly, protože karta TF je skrytá) a `prohlizec-carka.json` (druhý běh). V tmavém režimu 0 nálezů (5,71:1).",
     "dopad": "hůře čitelné údaje o výši poplatků a o tom, že částky jsou v dnešních penězích; porušení AA.",
     "oprava": "pro `.srovnani small` použít `--text-2` (6,9:1) nebo ztmavit `--text-3` ve světlém režimu aspoň na `#6a6964` (4,78:1 na `--surface-2`, 5,36:1 na `--surface`).",
-    "overeni": "reprodukováno 2× · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× · skeptik: Potvrzeno (Opus, 5. 11. 2026 – poměr 4,443:1 na 12,5px textu, axe serious na 4 uzlech reprodukován; skeptik dodává, že závažnost Vysoká je hraniční, do limitu chybí 0,06)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "PEN-04",
@@ -381,12 +381,226 @@
   "kod": "EET",
   "repo": "mam-eet",
   "nazev": "Mám EET? + OSVČ 2027",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 7,
+   "nizka": 5
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "EET-03"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "EET-01"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "EET-01 (chybí 25 % pro začínající – zadání ji ale samo neuvádí), EET-09"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "EET-03 (test zakonzervoval vzorec 5 281 × 1,15)"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "EET-02"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "EET-06"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "EET-01",
+    "zavaznost": "Vysoká",
+    "oblast": "2 Výpočty",
+    "nazev": "Chybí snížené minimum 25 % průměrné mzdy pro začínající OSVČ",
+    "kde": "`osvc.js:105–116` (`socialIns`: minimum vždy `socialMinBaseMain` = 35 % PM), `rules.json:613` (`minBaseShareMain 0.35`, žádný parametr pro začínající), formulář `osvc-app.js:147–149` (jen hlavní / vedlejší)",
+    "reprodukce": "vstup 800 000 Kč, 60% paušál, hlavní činnost, OSVČ v roce zahájení nebo ve 2 následujících letech (bez podnikání v předchozích 20 letech) → očekáváno podle § 14 odst. 5 věty druhé a § 5b odst. 2 písm. a) ZPSZ (znění od 1. 1. 2027, https://www.zakonyprolidi.cz/cs/1992-589/zneni-20270101; ČSSZ pro 2026 uvádí 25 % PM = 12 242 Kč, https://www.cssz.gov.cz/zalohy-na-pojistne-na-duchodove-pojisteni): min. roční VZ 12 × 12 916 = 154 992 Kč < 55 % × 320 000 = 176 000 Kč → sociální 51 392 Kč, přiznání 110 400 Kč, **přiznání levnější než paušál** (115 932 Kč) o 5 532 Kč → skutečnost: aplikace počítá minimum 216 996 Kč, sociální 63 363 Kč, přiznání 122 371 Kč a doporučí paušál („Nejlevněji vychází Paušální daň… Ušetříš 6 427 Kč“). Pro zisk do 394 537 Kč nadhodnocuje sociální pojistné až o 18 105 Kč/rok (`prepocet.txt` O18, O19). Paušál 1. pásma se u začínajících nemění (§ 14 odst. 3 písm. a) odkazuje jen na větu první).",
+    "dopad": "začínající živnostník s nízkým ziskem dostane obrácené doporučení (paušál místo přiznání) a přeplatí tisíce korun ročně; aplikace o tomto zjednodušení nikde neinformuje.",
+    "oprava": "přidat do formuláře přepínač „podnikám 1.–3. rokem (a 20 let předtím jsem nepodnikal)“, do `rules.json` `minBaseShareStarting 0.25` se zdrojem § 14 odst. 5 ZPSZ a v `socialIns` použít 12 × ceil(0,25 × PM) = 154 992 Kč; doplnit test; do textu poznámek uvést, že paušál 1. pásma se tím nemění.",
+    "overeni": "reprodukováno 2× (zákon § 5b odst. 2 + § 14 odst. 5 a ČSSZ; dva běhy `mam-eet-porovnani.mjs`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-02",
+    "zavaznost": "Vysoká",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "axe „serious“: `aria-label` na `<rect>` bez role (WCAG 4.1.2)",
+    "kde": "`osvc-app.js:433–436` (`s('rect', { … tabindex: 0, 'aria-label': tx.chartHelp })`), obrazovka výsledku OSVČ 2027 s grafem",
+    "reprodukce": "otevřít `#osvc`, zadat příjmy 800 000 Kč → axe-core (WCAG 2.2 A/AA) hlásí `aria-prohibited-attr`, dopad **serious**, uzel `rect` (`prohlizec-scenare.json` → `osvc.360.axeVysledek` i `axeChyba`; úvodní stránka bez grafu je čistá). Prvek `<rect>` má generickou roli, na které je `aria-label` zakázán, čtečka proto nápovědu „Najetím nebo šipkami na grafu…“ nepřečte, přestože je prvek fokusovatelný.",
+    "dopad": "uživatel čtečky dostane neoznačený fokusovatelný prvek bez vysvětlení, co s ním dělat (hodnoty grafu jsou naštěstí dostupné i v tabulce pod grafem).",
+    "oprava": "dát překryvu `role=\"application\"` nebo `role=\"img\"` (případně nahradit `<rect>` tlačítkem/`<g role=\"group\">`), nebo text přesunout do `<title>`/`aria-describedby` na `<svg>`; ověřit axe = 0 serious.",
+    "overeni": "reprodukováno 2× (dva běhy `mam-eet-prohlizec.mjs`, obě analýzy) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-03",
+    "zavaznost": "Střední",
+    "oblast": "1 Pravidla a data",
+    "nazev": "1. pásmo paušální daně 2027 je 9 662 Kč, podle zákonného vzorce vychází 9 661 Kč",
+    "kde": "`rules.json:726–741` (`band1.monthly 9662`, `social 6074`, `socialFromMinAdvanceMultiple 1.15`, note „minimální záloha × 1,15“), test `test/osvc.test.js:98–103` a `:37–50` (115 944 / 132 744), obrazovka „Tvoje měsíční záloha: 9 662 Kč“",
+    "reprodukce": "§ 14 odst. 3 písm. a) ZPSZ: měsíční VZ 1. pásma = nejnižší měsíční VZ (35 % × 51 663 = 18 082,05 → 18 083 Kč, § 14 odst. 13) zvýšený o 15 % = 20 795,45 → 20 796 Kč; pojistné 29,2 % = 6 072,43 → **6 073 Kč** (§ 7 odst. 3) → 1. pásmo 100 + 6 073 + 3 488 = **9 661 Kč** (https://www.zakonyprolidi.cz/cs/1992-589/zneni-20270101; postup FS na roce 2026: 17 139 × 1,15 → 5 756 Kč souhlasí s tabulkou FS od 7/2026, https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace) → skutečnost: aplikace násobí 1,15 až zaokrouhlenou zálohu (5 281 × 1,15 = 6 073,15 → 6 074), tj. 9 662 Kč, 115 944 Kč/rok, EET OFF 132 744 Kč. Úřední tabulka FS pro 2027 k 5. 11. 2026 nevyšla (ověřeno na stránce FS – jen 2026), aplikace stav „derived“ přiznává v patičce i v poznámce výsledku. Zadání (ř. 497+) uvádí stejnou chybnou hodnotu z médií; test ji zakonzervoval, včetně zdroje „FS, tisková zpráva 19. 1. 2026 (výpočet 1. pásma 2026)“, která žádný výpočet neobsahuje, jen tabulku.",
+    "dopad": "rozdíl 1 Kč měsíčně (12 Kč ročně) u paušálu i EET OFF a v doporučené výši trvalého příkazu; na pořadí variant nemá vliv. Závažnost zůstává Střední, dokud FS tabulku nezveřejní; pokud FS potvrdí 9 662 Kč, nález padá, pokud 9 661 Kč, jde o nepřesnou částku zálohy.",
+    "oprava": "v `rules.json` počítat 1. pásmo z VZ (`ceil(ceil(0,35 × PM) × 1,15) × 0,292`, nahoru) → 6 073 / 9 661 Kč, upravit test a očekávané hodnoty 115 932 / 132 732 Kč, opravit popis zdroje; po zveřejnění tabulky FS pro 2027 nastavit `status: official`.",
+    "overeni": "reprodukováno 2× (zákon + tabulka FS 2026; dva běhy porovnání) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-04",
+    "zavaznost": "Střední",
+    "oblast": "2 Výpočty",
+    "nazev": "Kalkulačka EET OFF tiše bere neplatnou cenu pokladny jako 0 Kč a „20.000“ jako 20 Kč",
+    "kde": "`app.js:205` (`Number(costInput.value.replace(/\\s/g, ''))`), `rules.js:223` (`ownCostAnnual > 0 ? ownCostAnnual : 0`), pole „Roční náklady na vlastní pokladnu“",
+    "reprodukce": "výsledek Z5 → „Budu evidovat ve vlastní pokladně“ → zadat „20 000,50“ nebo „−5000“ → očekáváno chybová hláška (jako u ostatních číselných polí) → skutečnost „Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.“; zadat „20.000“ → „Evidence vychází levněji: **20 Kč** ročně …, ušetříš 16 780 Kč“ (správně: EET OFF levnější o 3 200 Kč). `prohlizec-scenare.json` → `eet.360.kalkulacka`; `prepocet.txt` K4, K6.",
+    "dopad": "při českém zápisu s tečkou nebo desetinnou čárkou dostane opačné doporučení; částka 0/20 Kč je ve větě vidět, takže pozorný uživatel chybu odhalí, ale bez varování.",
+    "oprava": "použít stejnou validaci jako v dotazníku (celé číslo ≥ 0, jinak hláška a bez věty), odmítnout tečku jako oddělovač tisíců nebo ji odstranit stejně jako mezery; v `compareCosts` vracet pro NaN/záporné `null` místo 0.",
+    "overeni": "reprodukováno 2× (dva běhy prohlížeče) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-05",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "OSVČ 2027: při neplatném vstupu zůstává na obrazovce starý výsledek",
+    "kde": "`osvc-app.js:194–212` (`update`: při chybě bez odeslání nic nehlásí, `lastResult` nechá zobrazený; po odeslání ukáže hlášku, ale tabulku neskryje)",
+    "reprodukce": "zadat 1 200 000 Kč (výsledek se přepočítá živě) → dopsat „,50“ nebo pole smazat → očekáváno: hláška a skrytý/označený neplatný výsledek → skutečnost: žádná hláška, tabulka dál ukazuje výsledek pro 1 200 000 Kč (resp. pro poslední platný mezistav, při psaní „1.200.000“ pro 1 Kč); po „Spočítat“ přibude hláška „Zadej roční příjmy jako celé číslo, nejméně 1.“, ale tabulka, graf a „Tvoje měsíční záloha“ zůstanou (`chyba-osvc-360.png`, `prohlizec-scenare.json` → `osvc.360.desetinne`, `prazdne`, `tecky`).",
+    "dopad": "uživatel může číst částky, které nepatří k číslu ve formuláři; chyba se projeví jen po stisku tlačítka.",
+    "oprava": "při neplatném vstupu výsledek skrýt nebo označit („výsledek platí pro …“) a hlášku zobrazovat i bez odeslání (po opuštění pole).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-06",
+    "zavaznost": "Střední",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Pásmo paušálu se určuje z jediné činnosti, podmínka „alespoň 75 % příjmů“ a zjednodušení nejsou zmíněny",
+    "kde": "`osvc.js:151–157` (`flatTaxBands`: limit podle `flatRateId`), `rules.json:731–736`, formulář „Druh činnosti (výdajový paušál)“ `osvc-app.js:133–135`, texty `rules.json:937–939`",
+    "reprodukce": "OSVČ s příjmy 1 200 000 Kč napůl ze živnosti (60 %) a z autorských honorářů (40 %) zvolí „60 %“ → očekáváno podle § 2a odst. 5 písm. a) ZDP: podmínka 75 % příjmů s 80/60% paušálem nesplněna → limit 1. pásma 1 000 000 Kč → 2. pásmo (200 940 Kč), EET OFF nelze → skutečnost: „1. pásmo: ano (limit 1 500 000 Kč)“, paušál 115 944 Kč (`prepocet.txt` O29). Nikde není uvedeno, že se předpokládají všechny příjmy z jedné činnosti.",
+    "dopad": "u kombinovaných příjmů nabídne pásmo bez nároku; při skutečném podání by FÚ oznámení zamítl nebo by vznikla jiná výše paušální daně.",
+    "oprava": "doplnit k poli nápovědu „platí, pokud aspoň 75 % příjmů spadá pod zvolený paušál“ nebo doplňkovou otázku na podíl příjmů, případně do poznámek výsledku.",
+    "overeni": "reprodukováno 2× (zákon § 2a odst. 5; dva běhy porovnání) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-07",
+    "zavaznost": "Střední",
+    "oblast": "2 Výpočty",
+    "nazev": "Vedlejší činnost: při zisku přesně 123 991 Kč aplikace nepočítá sociální pojištění",
+    "kde": "`osvc.js:110` (`zisk <= p.sideThreshold` → bez pojistného)",
+    "reprodukce": "vedlejší činnost (student/důchodce), příjmy 300 000 Kč, skutečné výdaje 176 009 Kč (zisk 123 991 Kč) → očekáváno podle § 10 odst. 2 ZDPoj („pokud její příjem … dosáhl … aspoň rozhodné částky“ – https://www.zakonyprolidi.cz/cs/1995-155/zneni-20270101; DP-68): účast vzniká, sociální = max(68 196; 12 × 5 683) × 29,2 % = 19 914 Kč, celkem 28 284 Kč → skutečnost: sociální 0 Kč, celkem 8 370 Kč; při 123 992 Kč už správně 19 914 Kč (`prepocet.txt` O14–O16).",
+    "dopad": "jen při zisku rovném rozhodné částce (hranice široká 1 Kč) chybí 19 914 Kč; prakticky vzácné, ale podmínka je obrácená.",
+    "oprava": "`zisk < p.sideThreshold`; doplnit test hranice.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-08",
+    "zavaznost": "Střední",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Zdroj minimální mzdy odkazuje na NV 164/2026 Sb., které částku neobsahuje",
+    "kde": "`rules.json:659–661` (`minimumWage 24900`, `minimumWageSource https://e-sbirka.gov.cz/sb/2026/164`, titulek „Nařízení vlády č. 164/2026 Sb. (minimální mzda 2027)“)",
+    "reprodukce": "NV 164/2026 Sb. stanoví jen koeficienty pro výpočet (https://www.zakonyprolidi.cz/cs/2026-164, § 1); částku 24 900 Kč vyhlašuje sdělení MPSV č. 171/2026 Sb., bod 1 (https://www.zakonyprolidi.cz/cs/2026-171) → aplikace uvádí správnou hodnotu s nesprávným předpisem (DP-24).",
+    "dopad": "čísla se nemění; kdo si zdroj otevře, částku tam nenajde.",
+    "oprava": "změnit zdroj na sdělení č. 171/2026 Sb. (e-sbirka.gov.cz/sb/2026/171), NV 164/2026 Sb. ponechat jako druhý odkaz.",
+    "overeni": "reprodukováno 2× (oba předpisy přečteny) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-09",
+    "zavaznost": "Střední",
+    "oblast": "3 Shoda se zadáním",
+    "nazev": "Chyby v zadání (`docs/zadani.md`) proti úředním zdrojům",
+    "kde": "`docs/zadani.md` ř. 497–571 (OSVČ 2027) a 221–299 (Mám EET?)",
+    "reprodukce": "(a) „1. pásmo 9 662 Kč (daň 100, sociální 6 074…)“ a kritéria „115 944 Kč“, „132 744 Kč“ – podle § 14 odst. 3 písm. a) ZPSZ 9 661 / 115 932 / 132 732 Kč (viz EET-03; zdrojem zadání jsou média); (b) „Minimální zálohy 2027 (návrh): sociální 5 281 Kč“ – sazba 35 % PM je v § 14 odst. 5 ZPSZ (účinné od 1. 7. 2026, novela 90/2026 Sb.), nejde o návrh; (c) zadání neuvádí sníženou sazbu 25 % PM pro začínající OSVČ, proto ji aplikace nemá (EET-01); (d) výjimka „podnikatelé se ZTP/P bez zaměstnanců“ – § 11 odst. 4 ZoET ji dává jen při průkazu kvůli nevidomosti, těžké ztrátě zraku nebo hluchoslepotě; (e) „MOJE EET … max. 2 zaměstnanci“ – eet.gov.cz uvádí jen 2 evidenční jednotky. Body (d) a (e) má aplikace správně (odchýlila se od zadání oprávněně).",
+    "dopad": "kritérium hotovo „115 944 Kč“ nutí autora k hodnotě, která se pravděpodobně rozejde s tabulkou FS; chybějící pravidlo (c) vedlo k nálezu EET-01.",
+    "oprava": "opravit zadání: 1. pásmo „podle vzorce § 14 odst. 3 ZPSZ, do zveřejnění tabulky FS orientačně 9 661 Kč“, doplnit sazbu 25 % PM pro začínající, upřesnit (d) a (e).",
+    "overeni": "reprodukováno 2× (rejstřík + vlastní čtení předpisů) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-10",
+    "zavaznost": "Nízká",
+    "oblast": "2 Výpočty",
+    "nazev": "Roční minimální VZ zdravotního pojištění 309 984 Kč místo 309 978 Kč",
+    "kde": "`osvc.js:39, 124` (`healthMinBase = ceil(51 663 × 0,5) = 25 832` × 12), rozpis výpočtu na obrazovce („minimum 309 984 Kč“)",
+    "reprodukce": "§ 3a odst. 2 ZPZP: minimum = dvanáctinásobek 50 % PM = 12 × 25 831,5 = 309 978 Kč (měsíční část se nezaokrouhluje) → pojistné 41 847,03 → 41 848 Kč, aplikace 41 847,84 → 41 848 Kč: pro 2027 bez rozdílu, v jiném roce může dát 1 Kč.",
+    "dopad": "žádný v roce 2027; nepřesný mezivýsledek v rozpisu.",
+    "oprava": "počítat roční minimum jako `12 × PM × 0,5` bez zaokrouhlení měsíční části (měsíční zálohu zaokrouhlit zvlášť).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-11",
+    "zavaznost": "Nízká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Rozhodná částka počítaná jako floor(2,4 × PM)",
+    "kde": "`osvc.js:47` (`Math.floor(avg × 2.4 + EPS)`), `rules.json:616, 625`",
+    "reprodukce": "§ 10 odst. 2 ZDPoj: 2,4 × (VVZ × koeficient) = 2,4 × 51 662,85 = 123 990,84 → zaokrouhlení nahoru 123 991 Kč; aplikace floor(2,4 × 51 663 = 123 991,2) = 123 991 Kč – shoda jen náhodou (DP-68).",
+    "dopad": "pro 2027 žádný; v jiném roce odchylka 1 Kč.",
+    "oprava": "počítat z nezaokrouhleného součinu VVZ × koeficient a zaokrouhlit nahoru (uložit VVZ a koeficient do `rules.json`).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-12",
+    "zavaznost": "Nízká",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Obrazovky dotazníku nemají nadpis úrovně 1",
+    "kde": "`app.js:63–107` (otázka je `<legend>`, `h1` je jen na úvodu a výsledku)",
+    "reprodukce": "během dotazníku axe hlásí `page-has-heading-one` (moderate, best-practice) – `prohlizec-scenare.json` → `eet.360.axeChyba`; žádný nález A/AA.",
+    "dopad": "horší orientace čtečkou; funkčnost beze změny.",
+    "oprava": "vykreslit otázku jako `h1` (nebo ponechat skrytý `h1` s názvem průvodce).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-13",
+    "zavaznost": "Nízká",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Popis zdroje 1. pásma a odkazy na e-Sbírku",
+    "kde": "`rules.json:739–740` (`sourceTitle` „FS, tisková zpráva 19. 1. 2026 (výpočet 1. pásma 2026)“), `rules.json:606, 627, 630, 642, 660, 664, 694` (e-sbirka.gov.cz)",
+    "reprodukce": "tisková zpráva FS obsahuje jen tabulku záloh 2026 (9 984 / 16 745 / 27 139 Kč), žádný „výpočet“; odkazy na e-sbirka.gov.cz vrací přes curl jen 1 040 B JS kostru (v prohlížeči se skládají), takže zdroj nelze strojově ověřit – uživateli fungují.",
+    "dopad": "zavádějící název zdroje; jinak kosmetika.",
+    "oprava": "přejmenovat zdroj („tabulka záloh 2026“), vzorec doložit § 14 odst. 3 ZPSZ; u e-Sbírky doplnit paragraf do titulku.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "EET-14",
+    "zavaznost": "Nízká",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Pole přijímají zápis „1e6“ jako číslo",
+    "kde": "`app.js:116–118`, `osvc-app.js:81–86` (`Number(raw)` po odstranění mezer)",
+    "reprodukce": "příjmy „1e6“ → přijato jako 1 000 000 Kč bez hlášky (`prohlizec-scenare.json` → `osvc.360.exponent`); „1.200.000“ a „1500,50“ jsou správně odmítnuty.",
+    "dopad": "prakticky žádný.",
+    "oprava": "validovat regulárním výrazem `^\\d+$` po odstranění mezer.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `e5bf47f97e1389606957ac2a02d66ecf02440b93` (5. 11. 2026) · živý web: https://frankie851.github.io/mam-eet/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 7,
+   "nizka": 5
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "SPOT",
