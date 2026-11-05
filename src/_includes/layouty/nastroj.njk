@@ -3,7 +3,7 @@ layout: layouty/zaklad.njk
 ---
 {#- Layout stránky nástroje.
     Front matter: nastroj: <id> (povinné), zalozka: <id záložky> (např. osvc-2027), title, description,
-    skripty: [...], uvod: krátká věta pod otázkou, stitkyNavic: ['8 krátkých otázek'], ilustrace: <id ve spritu>.
+    skripty: [...], vykani: true (výchozí texty layoutu vykají – sekce Dluhy), uvod: krátká věta pod otázkou, stitkyNavic: ['8 krátkých otázek'], ilustrace: <id ve spritu>.
     Vykreslí drobečky, hlavičku se štítkem „Pravidla ověřena k …“, záložky, obsah stránky, zdroje,
     neověřená pravidla, upozornění, Souvisí a pravidla jako <script type="application/json" id="pravidla">. -#}
 {%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky, zalozky -%}
@@ -47,7 +47,7 @@ layout: layouty/zaklad.njk
 
     {%- if meta.neovereno and meta.neovereno.length %}
     <section class="card" aria-labelledby="neovereno-nadpis">
-      <h2 id="neovereno-nadpis" class="h-xl">Co zatím neověřujeme a nepočítáme</h2>
+      <h2 id="neovereno-nadpis" class="h-xl">{{ 'Co zatím neověřujeme a nepočítáme' }}</h2>
       <ul class="watch">
         {%- for u in meta.neovereno %}
         <li>{{ ikona('ikona-vystraha') }}<span>{{ u.text or u }}</span></li>
@@ -56,9 +56,9 @@ layout: layouty/zaklad.njk
     </section>
     {%- endif %}
 
-    {{ upozorneni() }}
+    {{ upozorneni({ vykani: vykani }) }}
   </div>
 
-  {{ souvisi(n.souvisi, nastroje) }}
+  {{ souvisi(n.souvisi, nastroje, { vykani: vykani }) }}
 </div>
 <script type="application/json" id="pravidla">{{ pravidla | json | safe }}</script>

@@ -1,0 +1,60 @@
+/* Rodičovská pro celou rodinu – styly jen pro tento nástroj. Barvy jen z tokenů. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
+  .rodicovska [hidden] { display: none !important; }
+
+  /* Formulář je delší než okno – na širokých obrazovkách proto nelepí */
+  @media (min-width: 1040px) { .rodicovska .calc-side { position: static; } }
+
+  /* Posuvník výše rodičovského příspěvku */
+  .rodicovska-vyse { margin: 0 0 var(--sp-2); font-weight: 700; }
+  .rodicovska-vyse output { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; color: var(--c-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rodicovska-posuvnik input[type="range"] {
+    display: block; width: 100%; min-height: 40px; margin: 0; cursor: pointer;
+    accent-color: var(--c-primary);
+  }
+  .rodicovska-posuvnik input[type="range"]:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; border-radius: var(--r-sm); }
+  .rodicovska-tlacitka { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-3); }
+  .rodicovska-tlacitka .btn { min-height: var(--tap); }
+  .rodicovska-tlacitka .btn[aria-pressed="true"] { background: var(--c-sage-soft); border-color: var(--c-sage-ink); color: var(--c-text); }
+
+  /* Čtyři statistiky 2 × 2 */
+  @media (min-width: 560px) { .rodicovska .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  /* Štítek 400 000 Kč (schváleno, ne ve Sbírce) */
+  .rodicovska-novela { margin: var(--sp-3) 0 0; }
+
+  /* Varování ve výsledku */
+  .rodicovska-varovani { display: grid; gap: var(--sp-3); margin-top: var(--sp-4); }
+  .rodicovska-varovani:empty { display: none; }
+
+  /* Legenda a časová osa */
+  .seg-ppm-matka { --seg: var(--c-chart-1); }
+  .seg-ppm-otec { --seg: var(--c-chart-4); }
+  .seg-otcovska { --seg: var(--c-chart-3); }
+  .seg-rp { --seg: var(--c-chart-2); }
+  .seg-mzda { --seg: var(--c-chart-track); }
+  .rodicovska-vzorek { background: var(--seg); }
+  .rodicovska-vzorek.seg-mzda { border: 2px solid var(--c-border-strong); }
+
+  .rodicovska-osa { margin-top: var(--sp-4); min-width: 0; }
+  .rodicovska-osa .osa { display: block; max-width: 100%; height: auto; font-family: var(--font-body); }
+  .osa .pozadi { fill: transparent; }
+  .osa .radek-sudy .pozadi { fill: var(--c-surface-2); }
+  .osa .radek-pred .pozadi { fill: var(--c-bg-alt); }
+  .osa .radek-vycerpano .pozadi { stroke: var(--c-sage-ink); stroke-width: 2; }
+  .osa .popisek { font-size: 12px; font-weight: 700; fill: var(--c-text-muted); }
+  .osa .radek-porod .popisek, .osa .znacka { fill: var(--c-text); font-weight: 800; }
+  .osa .castka { font-size: 12px; font-weight: 800; fill: var(--c-text); font-variant-numeric: tabular-nums; }
+  .osa .seg { fill: var(--seg); stroke: var(--c-surface); stroke-width: 1; }
+  .osa .seg-mzda { stroke: var(--c-border-strong); stroke-width: 1; }
+
+  /* Tabulky a postup výpočtu */
+  .rodicovska-tabulka { margin-top: var(--sp-4); }
+  .rodicovska-tabulka > summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .rodicovska-tabulka[open] > summary { margin-bottom: var(--sp-2); }
+  .rodicovska-postup { margin: var(--sp-2) 0 0; padding-left: var(--sp-5); display: grid; gap: var(--sp-2); font-size: var(--fs-sm); }
+}

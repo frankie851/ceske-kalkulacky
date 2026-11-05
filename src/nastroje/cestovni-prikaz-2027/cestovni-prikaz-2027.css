@@ -1,0 +1,134 @@
+/* Cestovní příkaz 2027 – styly jen pro tento nástroj. Barvy jen z tokenů. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
+  .cp [hidden] { display: none !important; }
+
+  .cp-bez-sazeb { margin: 0 0 var(--sp-5); }
+  .cp-dole > section > h2 { font-size: var(--fs-xl); }
+
+  /* Formulář je delší než okno – na širokých obrazovkách nelepí */
+  @media (min-width: 1040px) { .cp .calc-side { position: static; } }
+
+  /* Tři pásma (krácení, veřejná sféra) a dvojice polí */
+  .cp-trojice, .cp-jidla-obal { border: 0; padding: 0; margin: 0 0 var(--sp-4); min-width: 0; }
+  .cp-trojice > legend, .cp-jidla-obal > legend { font-weight: 800; padding: 0; margin-bottom: 4px; }
+  .cp-trojice > .hint, .cp-jidla-obal > .hint { margin: 0 0 var(--sp-3); }
+  .cp-trojice-pole { display: grid; gap: 0 var(--sp-3); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .cp-trojice-pole .field > label { font-weight: 700; font-size: var(--fs-sm); }
+  .cp-trojice-pole .input input { min-width: 0; }
+  .cp-trojice-pole .input .unit { padding: 0 8px; }
+  @media (max-width: 389px) { .cp-trojice-pole { grid-template-columns: minmax(0, 1fr); } }
+  .cp-dvojice { display: grid; gap: 0 var(--sp-3); }
+  @media (min-width: 560px) and (max-width: 1039px) { .cp-dvojice { grid-template-columns: 1fr 1fr; } }
+  .cp-dvojice .input input { min-width: 0; }
+
+  /* OSVČ – vysvětlivka */
+  .cp-osvc { margin-top: var(--sp-2); border-top: 2px dashed var(--c-border); padding-top: var(--sp-3); }
+  .cp-osvc > summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .cp-osvc > p { margin: var(--sp-2) 0 0; }
+
+  /* Jídla po dnech */
+  .cp-dny { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); }
+  .cp-den { background: var(--c-surface-2); border-radius: var(--r-md); padding: var(--sp-3); }
+  .cp-den fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .cp-den legend { padding: 0; margin-bottom: var(--sp-2); }
+  .cp-jidla { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .cp-jidlo { position: relative; }
+  .cp-jidlo input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .cp-jidlo label {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 var(--sp-4);
+    border: 2px solid var(--c-border-strong); border-radius: var(--r-pill); background: var(--c-surface);
+    font-weight: 700; cursor: pointer;
+  }
+  .cp-jidlo label::before {
+    content: ""; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--c-border-strong);
+    background: var(--c-surface); flex: none;
+  }
+  .cp-jidlo input:checked + label { border-color: var(--c-primary); background: var(--c-accent-soft); }
+  .cp-jidlo input:checked + label::before {
+    background: var(--c-primary); border-color: var(--c-primary);
+    box-shadow: inset 0 0 0 3px var(--c-surface);
+  }
+  .cp-jidlo input:focus-visible + label { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+
+  /* Hlavička karty s tlačítkem */
+  .cp-hlava-karty { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+  .cp-hlava-karty h2 { margin: 0; font-size: var(--fs-xl); }
+  #cp-seznam-nadpis:focus { outline: none; }
+  #cp-seznam-nadpis:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 3px; }
+
+  /* Seznam cest */
+  .cp-seznam { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); }
+  .cp-cesta {
+    display: grid; gap: var(--sp-3); padding: var(--sp-4); border: 2px solid var(--c-border);
+    border-radius: var(--r-md); background: var(--c-surface);
+  }
+  @media (min-width: 560px) { .cp-cesta { grid-template-columns: minmax(0, 1fr) auto; align-items: start; } }
+  .cp-cesta-chyba { border-color: var(--c-error); background: var(--c-error-soft); }
+  .cp-cesta p { margin: 0; }
+  .cp-cesta-kdy { font-weight: 800; }
+  .cp-cesta-kam { font-weight: 700; }
+  .cp-cesta .error-msg { margin-top: var(--sp-2); }
+  .cp-cesta-strana { display: grid; gap: var(--sp-2); justify-items: start; }
+  @media (min-width: 560px) { .cp-cesta-strana { justify-items: end; text-align: right; } }
+  .cp-cesta-suma { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xl); white-space: nowrap; }
+  .cp-cesta-akce { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .cp-cesta-akce .btn { min-height: 44px; padding: 0 var(--sp-4); font-size: var(--fs-sm); }
+  .cp-prazdno { margin: 0; color: var(--c-text-muted); }
+
+  /* Vyúčtování */
+  .cp-hlavicka-dokladu { display: grid; gap: var(--sp-2) var(--sp-5); margin: 0 0 var(--sp-4); }
+  @media (min-width: 760px) { .cp-hlavicka-dokladu { grid-template-columns: 1fr 1fr; } }
+  .cp-hlavicka-dokladu dt { font-size: var(--fs-sm); color: var(--c-text-muted); font-weight: 700; }
+  .cp-hlavicka-dokladu dd { margin: 0; font-weight: 700; }
+  .cp-tabulka tbody th { font-weight: 800; }
+  .cp-ucel { display: block; color: var(--c-text-muted); }
+  .cp-tabulka tr.cp-rozpis td { border-top: 0; padding-top: 0; font-size: var(--fs-xs); color: var(--c-text-muted); }
+  .cp-tabulka tr.cp-rozpis ul { margin: 0; padding-left: 1.1em; }
+  .cp-tabulka tfoot th, .cp-tabulka tfoot td { font-weight: 800; background: var(--c-surface-2); }
+  @media (max-width: 559px) {
+    .cp-tabulka tr.cp-rozpis { border-top: 0; padding-top: 0; }
+    .cp-tabulka td:empty { display: none; }
+    .cp-tabulka tfoot { display: block; width: 100%; }
+    .cp-tabulka tfoot tr { background: var(--c-surface-2); }
+  }
+  .cp-k-vyplate {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--sp-2);
+    margin: var(--sp-4) 0 var(--sp-2); padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md);
+    background: var(--c-accent-soft); font-weight: 800;
+  }
+  .cp-k-vyplate strong { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2xl); }
+  .cp-podpisy { display: grid; gap: var(--sp-4); margin-top: var(--sp-5); }
+  @media (min-width: 560px) { .cp-podpisy { grid-template-columns: 1fr 1fr; } }
+  .cp-podpisy p { margin: 0 0 var(--sp-2); font-weight: 700; }
+  .cp-podpisy .cp-linka { font-weight: 400; border-bottom: 2px dotted var(--c-border-strong); padding-top: var(--sp-4); }
+  .cp-tisk-poznamka { margin: var(--sp-4) 0 0; }
+}
+
+@layer tisk {
+  @media print {
+    /* Tiskne se jen vyúčtování (jedna cesta se vejde na A4) */
+    .site-header, .site-footer, .crumbs, .page-head, .zalozky, .lepiva-lista,
+    .cp-bez-sazeb, .cp .calc-layout, .cp-dole > :not(#vyuctovani),
+    .nastroj-obsah ~ *, .wrap > .stack, .wrap > section { display: none !important; }
+    main, .wrap { padding: 0 !important; margin: 0 !important; max-width: none !important; }
+    .cp-vyuctovani { border: 0 !important; padding: 0 !important; }
+    .cp-vyuctovani h2 { font-size: 16pt; margin-bottom: 6pt; }
+    .cp-hlavicka-dokladu { grid-template-columns: 1fr 1fr; gap: 2pt 16pt; font-size: 10pt; }
+    .cp-hlavicka-dokladu dt { font-size: 8pt; font-weight: 400; }
+    .cp-hlavicka-dokladu dd { font-size: 10pt; }
+    .cp-tabulka { font-size: 9pt; }
+    .cp-tabulka caption { padding: 4pt 0; font-size: 10pt; }
+    .cp-tabulka th, .cp-tabulka td { padding: 4pt 5pt; }
+    .cp .table-wrap { overflow: visible; border: 0 !important; }
+    .cp-tabulka tr.cp-rozpis td { font-size: 8pt; }
+    .cp-k-vyplate { border: 1px solid #000; }
+    .cp-k-vyplate strong { font-size: 14pt; }
+    .cp-podpisy { grid-template-columns: 1fr 1fr; break-inside: avoid; }
+    .cp-tisk-poznamka { font-size: 8pt; }
+    @page { size: A4; margin: 14mm; }
+  }
+}

@@ -192,3 +192,87 @@ Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`, stejně jako v CI.
   nástrojů. Podrobnosti jsou v `docs/kontroly/`.
 - Snímky: `docs/snimky/vlna-1/` (desktop 1440 px a mobil 390 px; úvod a nástroje
   i v tmavém režimu).
+
+# 2. fáze – vlna 2 (5. 11. 2026)
+
+## Rozhodnutí
+
+1. **Exekuce, nebo oddlužení? je postavená, ale nezveřejněná** (rozhodnutí uživatele).
+   - `nastroj.json` má `"skryty": true`. Bez `ZOBRAZIT_SKRYTE=1` se stránka nevytvoří a JS
+     ani CSS nástroje se nekopírují. Na webu je karta „Připravujeme“ a rozcestník pomoci
+     na `/dluhy/`.
+   - CI sestaví i `_site-vse` (se skrytými nástroji) a otestuje je, nasazuje se ale jen `_site`.
+   - **Zveřejnění:** ručně ověřit odkazy v `rules.json` → `pomoc` a v `meta.zdroje`, smazat
+     `"skryty": true` a příslušný bod z `meta.neovereno`.
+2. **Dluhy: test obsahu stránky převeden na test nad hotovým webem.** Původní
+   `test/obsah.test.js` četl `index.html` a `app.js`, které na webu nejsou. Jeho kontroly
+   jsou teď v `test/e2e/skryte/dluhy-obsah.test.js`. Kontroluje se:
+   - pomoc nad nadpisem,
+   - povinná věta v obou kartách,
+   - povolené domény,
+   - žádné úložiště ani reklamní slova,
+   - čtivost přes převzatý `scripts/ctenost.mjs`.
+3. **Dluhy používají `layouty/zaklad.njk`, ne `nastroj.njk`.** Odkaz na pomoc musí být nad
+   `h1` a layout nástroje dává `h1` na začátek. Bloky (zdroje, neověřené, upozornění,
+   pravidla) proto stránka skládá sama. Výchozí texty layoutu umí vykat (`vykani: true`).
+4. **Ukládání jen na kliknutí** (rozhodnutí uživatele). Cestovní příkaz a Rodičovská
+   ukládají zadané údaje do `localStorage` (klíče `spocitano-…`) jen po kliknutí
+   „Uložit v tomto prohlížeči“ a mají tlačítka Načíst uložené a Smazat uložené
+   (`src/js/uloziste.js`, makro `ulozeni`). Stránka Soukromí to popisuje. Dluhy neukládají nic,
+   ani do URL.
+5. **Testy zůstaly tam, kde je mají původní repozitáře.** Výpověď a Cestovní příkaz mají test
+   v kořeni složky nástroje, Přijímačky ve `tests/`, Inflace má `*.test.mjs`. `npm test`
+   hledá `src/**/*.test.js` i `*.test.mjs`. Složky `test/` a `tests/` se do webu nekopírují.
+6. **Oprava v `ics.js` (Přijímačky).** `escapeText` měl `'\;'`, což je v JS jen `;`, takže se
+   středník v kalendáři neescapoval (RFC 5545 vyžaduje `\;`). Opraveno na `'\;'` a test
+   upraven. Je to jediná změna převzatých modulů ve vlně 2.
+7. **Texty převzatých modulů, které vykají nebo mají rodové tvary**, se na webu upravují
+   ve `vystup.js` nebo `texty.js` daného nástroje a moduly zůstávají beze změny.
+   Při aktualizaci modulu je potřeba úpravy zkontrolovat (Přijímačky při změně znění
+   vypíšou varování při buildu).
+8. **Inflační kalkulačka** dostala nový `rules.json` (jen `meta` a údaje o datech). Data ČSÚ
+   (`data/cpi.json`) se vkládají do stránky při buildu. Akce
+   `.github/workflows/aktualizace-cpi.yml` jednou měsíčně stáhne nová data, spustí testy
+   a otevře PR.
+   - V repozitáři je potřeba povolit Settings → Actions → General → „Allow GitHub Actions
+     to create and approve pull requests“.
+   - PR vytvořený akcí sám nespustí `web.yml`, kontroly je třeba pustit ručně
+     (workflow_dispatch nebo zavřít a znovu otevřít PR).
+9. **Cestovní příkaz:** `rules.json` je klíčovaný rokem a UI bere jen klíče `RRRR`. Sazby 2027
+   jsou `null`, web proto u cest v roce 2027 řekne, že vyhláška vyjde koncem prosince.
+   Po vydání stačí doplnit `rules.json["2027"]`.
+10. **Volno 2027 je nový nástroj.** Zadání je v `docs/zadani-volno-2027.md`.
+    - Svátky jsou podle zákona č. 245/2000 Sb. a zavřené obchody podle zákona č. 223/2016 Sb.
+    - Velikonoce se počítají algoritmem.
+    - `test/sdilene/volno-vypoved.test.js` hlídá shodu svátků s Výpovědí 2026
+      v letech 2026–2030.
+11. Rodičovská počítá ukázku při buildu s termínem porodu `meta.overeno` + 150 dní.
+    V prohlížeči je výchozí termín dnešek + 150 dní.
+
+## Výsledky kontrol vlny 2
+
+Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`.
+
+- `npm test`: **365/365**. Převzaté testy:
+  - Slevy 30, Výpověď 24, Cestovní příkaz 26, Přijímačky 25, Rodičovská 29, Inflace 27
+  - Dluhy 26
+  - Volno 2027 má 14 nových testů a test shody s Výpovědí.
+- `npm run test:e2e`: **81/81** (vlna 1 i 2). `npm run test:e2e:skryte` (Dluhy): **20/20**.
+- `npm run kontrola`: **24 stránek** a k tomu 2 skryté stránky Dluhů nad `_site-vse`.
+  - 0 chyb axe serious/critical ve světlém i tmavém režimu
+  - 0 přetečení na 360 px
+  - 0 cizích požadavků a 0 chyb konzole
+  - ukázka funguje bez JS
+  - pomoc je na `/dluhy/` vidět bez posouvání
+- Lighthouse (mobil) na úvodu a 7 nových nástrojích: přístupnost 100, výkon 98–100.
+- Snímky: `docs/snimky/vlna-2/`, nezveřejněné Dluhy v `docs/snimky/vlna-2/nezverejneno/`.
+12. **Variabilní písma.** Na sdíleném CI stroji ukázal Lighthouse posun rozvržení (CLS ~0,22)
+    na Penzijko kompasu, Inflaci, Cestovním příkazu a Přijímačkách. Příčina byla
+    „Web font loaded“: přednačtený byl jen řez Nunito 400, tučné řezy 600, 700 a 800 se
+    načítaly později a text se přelil. Řešení:
+    - statické řezy jsou nahrazené variabilními (`@fontsource-variable/nunito` a `/fredoka`),
+      tedy jedním souborem pro latin a jedním pro latin-ext s celou škálou tlouštěk,
+    - všechny čtyři soubory se přednačítají,
+    - písma jsou celkem menší (asi 109 kB místo 176 kB).
+    
+    Lighthouse navíc měří každou stránku třikrát, bere medián a vypisuje CLS a jeho příčiny.

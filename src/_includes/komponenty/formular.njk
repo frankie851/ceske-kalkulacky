@@ -22,6 +22,10 @@
 
   krok({ cislo, titulek, shrnuti, otevreny = false, hotovo = true, id })  + {% call %} = obsah kroku
     Sbalitelný krok (details.step) se shrnutím vyplněných hodnot.
+
+  ulozeni({ id, popis })
+    Ukládání v tomto prohlížeči JEN na kliknutí (Uložit / Načíst uložené / Smazat). Bez JS skryté.
+    Napoj v JS: pripojUlozeni({ id, ziskej, obnov }) z /js/uloziste.js. V sekci Dluhy nepoužívat.
 #}
 {% from "komponenty/ikona.njk" import ikona %}
 
@@ -116,4 +120,17 @@
     {% if caller %}{{ caller() }}{% endif %}
   </div>
 </details>
+{% endmacro %}
+
+{% macro ulozeni(p) %}
+<section class="card ulozeni" data-ulozeni="{{ p.id }}" aria-labelledby="{{ p.id }}-ulozeni-nadpis" hidden>
+  <h2 id="{{ p.id }}-ulozeni-nadpis" class="h-xl">Uložit na později</h2>
+  <p class="small">{{ p.popis or 'Uloží zadané údaje jen v tomto prohlížeči (localStorage). Nikam je neposíláme. Bez kliknutí se nic neukládá.' }}</p>
+  <div class="form-actions">
+    <button type="button" class="btn btn-primary" data-ulozeni-ulozit>Uložit v tomto prohlížeči</button>
+    <button type="button" class="btn btn-ghost" data-ulozeni-nacist hidden>Načíst uložené</button>
+    <button type="button" class="btn btn-ghost" data-ulozeni-smazat hidden>Smazat uložené</button>
+  </div>
+  <p class="small muted" data-ulozeni-stav role="status" aria-live="polite"></p>
+</section>
 {% endmacro %}

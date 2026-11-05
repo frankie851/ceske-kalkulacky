@@ -6,6 +6,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const KOREN = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+// Složka sestaveného webu: výchozí _site, pro build se skrytými nástroji SITE_DIR=_site-vse.
+export const SITE = path.resolve(KOREN, process.env.SITE_DIR || '_site');
 const TYPY = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml',
@@ -13,7 +15,7 @@ const TYPY = {
   '.ics': 'text/calendar; charset=utf-8', '.xml': 'application/xml',
 };
 
-export function spustitServer({ adresar = path.join(KOREN, '_site'), prefix = '/', port = 0 } = {}) {
+export function spustitServer({ adresar = SITE, prefix = '/', port = 0 } = {}) {
   const pre = prefix.endsWith('/') ? prefix : prefix + '/';
   const server = http.createServer((req, res) => {
     let url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -35,7 +37,7 @@ export function spustitServer({ adresar = path.join(KOREN, '_site'), prefix = '/
 }
 
 // Všechny HTML stránky v _site jako cesty relativní k prefixu (složka/ místo složka/index.html)
-export function seznamStranek(adresar = path.join(KOREN, '_site')) {
+export function seznamStranek(adresar = SITE) {
   const vysledek = [];
   const projdi = (d) => {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {

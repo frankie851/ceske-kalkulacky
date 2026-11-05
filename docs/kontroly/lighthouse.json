@@ -1,50 +1,110 @@
 {
-  "datum": "2026-11-05T08:46:02.730Z",
+  "datum": "2026-11-05T10:44:43.817Z",
+  "behu": 1,
   "vysledky": [
     {
-      "stranka": "/",
-      "skore": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      }
-    },
-    {
-      "stranka": "/penize/plan48/",
-      "skore": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      }
-    },
-    {
       "stranka": "/penize/penzijko-kompas/",
-      "skore": {
+      "median": {
+        "performance": 95,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "behy": [
+        {
+          "skore": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metriky": {
+            "first-contentful-paint": "1.5 s",
+            "largest-contentful-paint": "2.9 s",
+            "total-blocking-time": "0 ms",
+            "cumulative-layout-shift": "0",
+            "speed-index": "1.5 s"
+          }
+        }
+      ]
+    },
+    {
+      "stranka": "/penize/inflacni-kalkulacka/",
+      "median": {
         "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
-      }
+      },
+      "behy": [
+        {
+          "skore": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metriky": {
+            "first-contentful-paint": "1.7 s",
+            "largest-contentful-paint": "1.7 s",
+            "total-blocking-time": "20 ms",
+            "cumulative-layout-shift": "0",
+            "speed-index": "1.7 s"
+          }
+        }
+      ]
     },
     {
-      "stranka": "/dane-podnikani/mam-eet/",
-      "skore": {
+      "stranka": "/dane-podnikani/cestovni-prikaz-2027/",
+      "median": {
+        "performance": 95,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "behy": [
+        {
+          "skore": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metriky": {
+            "first-contentful-paint": "1.5 s",
+            "largest-contentful-paint": "2.9 s",
+            "total-blocking-time": "0 ms",
+            "cumulative-layout-shift": "0",
+            "speed-index": "1.5 s"
+          }
+        }
+      ]
+    },
+    {
+      "stranka": "/prace-rodina/prijimacky/",
+      "median": {
         "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
-      }
-    },
-    {
-      "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
-      "skore": {
-        "performance": 92,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      }
+      },
+      "behy": [
+        {
+          "skore": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "metriky": {
+            "first-contentful-paint": "1.7 s",
+            "largest-contentful-paint": "1.7 s",
+            "total-blocking-time": "0 ms",
+            "cumulative-layout-shift": "0",
+            "speed-index": "1.7 s"
+          }
+        }
+      ]
     }
   ]
 }

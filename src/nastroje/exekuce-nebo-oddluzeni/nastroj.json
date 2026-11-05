@@ -1,0 +1,17 @@
+{
+  "id": "exekuce-nebo-oddluzeni",
+  "nazev": "Exekuce, nebo oddlužení?",
+  "typ": "průvodce",
+  "kategorie": "dluhy",
+  "url": "/dluhy/exekuce-nebo-oddluzeni/",
+  "poradi": 1,
+  "skryty": true,
+  "perex": "Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. A kde najít bezplatnou pomoc.",
+  "otazka": null,
+  "stitky": ["exekuce", "oddlužení", "nezabavitelná částka"],
+  "termin": null,
+  "novinka2027": false,
+  "ilustrace": "kategorie-dluhy",
+  "cta": "Spočítat v klidu",
+  "souvisi": []
+}

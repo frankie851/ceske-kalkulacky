@@ -4,21 +4,21 @@
 import crypto from 'node:crypto';
 import path from 'node:path';
 import { kc, cislo, procenta, datum } from './src/js/format.js';
+import { skryteNastroje } from './src/_lib/nastroje.js';
 
 // Jediný inline skript webu: nastaví režim (světlý/tmavý) ještě před vykreslením.
 // CSP ho povoluje přes sha256 (globální data cspHash). Při změně textu se hash přepočítá sám.
 export const TEMA_SKRIPT =
   'try{var r=localStorage.getItem("spocitano-rezim");if(r==="light"||r==="dark")document.documentElement.dataset.theme=r}catch(e){}';
 
-const PISMA = [
-  ['nunito', [400, 600, 700, 800]],
-  ['fredoka', [500, 600]],
-];
+// Variabilní písma: jeden soubor na znakovou sadu pokryje všechny tloušťky, takže se dají celá
+// přednačíst a po načtení se text nepřelévá (dřív posun rozvržení u řezů 600/800, které se načítaly pozdě).
+const PISMA = ['nunito', 'fredoka'];
 
 // Klientské moduly nástrojů: jen *.js, ne testy, ne data šablon (*.11tydata.js)
 export function jeKlientskyModul(relCesta) {
   const p = relCesta.split(path.sep).join('/');
-  if (p.split('/').includes('test')) return false;
+  if (p.split('/').some((c) => c === 'test' || c === 'tests')) return false;
   const soubor = p.split('/').pop();
   if (!soubor.includes('.')) return true; // složka
   return (soubor.endsWith('.js') || soubor.endsWith('.css')) && !soubor.endsWith('.11tydata.js') && !soubor.endsWith('.test.js');
@@ -35,19 +35,26 @@ export function bezpecnyJson(hodnota) {
 }
 
 export default function (eleventyConfig) {
+  // Stránky skrytých (nezveřejněných) nástrojů se bez ZOBRAZIT_SKRYTE=1 nevytvoří.
+  const skryte = skryteNastroje();
+  eleventyConfig.addPreprocessor('skryte-nastroje', 'njk,md,html', (data) => {
+    if (data.nastroj && skryte.has(data.nastroj)) return false;
+  });
+
   // ---------- Statické soubory ----------
   eleventyConfig.addPassthroughCopy('src/css');
   eleventyConfig.addPassthroughCopy('src/js');
   eleventyConfig.addPassthroughCopy('src/img');
-  eleventyConfig.addPassthroughCopy({ 'src/nastroje': 'nastroje' }, { filter: jeKlientskyModul });
+  // Skryté nástroje: ani jejich JS a CSS se do veřejného webu nekopírují.
+  eleventyConfig.addPassthroughCopy({ 'src/nastroje': 'nastroje' }, {
+    filter: (rel) => jeKlientskyModul(rel) && !skryte.has(rel.split(path.sep).join('/').split('/')[0]),
+  });
 
   const pisma = {};
-  for (const [rodina, rezy] of PISMA) {
-    for (const rez of rezy) {
-      for (const sada of ['latin', 'latin-ext']) {
-        const soubor = `${rodina}-${sada}-${rez}-normal.woff2`;
-        pisma[`node_modules/@fontsource/${rodina}/files/${soubor}`] = `fonts/${soubor}`;
-      }
+  for (const rodina of PISMA) {
+    for (const sada of ['latin', 'latin-ext']) {
+      const soubor = `${rodina}-${sada}-wght-normal.woff2`;
+      pisma[`node_modules/@fontsource-variable/${rodina}/files/${soubor}`] = `fonts/${soubor}`;
     }
   }
   eleventyConfig.addPassthroughCopy(pisma);

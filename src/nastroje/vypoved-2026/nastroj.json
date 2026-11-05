@@ -1,0 +1,16 @@
+{
+  "id": "vypoved-2026",
+  "nazev": "Výpověď 2026",
+  "typ": "průvodce",
+  "kategorie": "prace-rodina",
+  "url": "/prace-rodina/vypoved-2026/",
+  "poradi": 1,
+  "perex": "Kdy přesně pracovní poměr končí, kolik je odstupné, jaká bude podpora v nezaměstnanosti a co vyřídit do kdy.",
+  "otazka": "Kdy mi končí pracovní poměr a co mi náleží?",
+  "stitky": ["výpovědní doba", "odstupné", "podpora v nezaměstnanosti", "úřad práce"],
+  "termin": null,
+  "novinka2027": false,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Spočítat",
+  "souvisi": ["rodicovska", "slevy-2027"]
+}

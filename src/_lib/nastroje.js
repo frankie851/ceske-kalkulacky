@@ -12,6 +12,24 @@ const NASTROJE = path.join(DATA, '..', 'nastroje');
 
 const cti = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 
+// Nástroj s "skryty": true v nastroj.json je hotový, ale nezveřejněný (např. čeká na ruční ověření
+// odkazů). Bez proměnné ZOBRAZIT_SKRYTE=1 se chová jako „Připravujeme“ a jeho stránky se negenerují.
+export const zobrazitSkryte = () => process.env.ZOBRAZIT_SKRYTE === '1';
+
+// Id nástrojů, které jsou v aktuálním sestavení skryté (jejich stránky se nevytvoří).
+export function skryteNastroje() {
+  const ids = new Set();
+  if (zobrazitSkryte() || !fs.existsSync(NASTROJE)) return ids;
+  for (const slozka of fs.readdirSync(NASTROJE, { withFileTypes: true })) {
+    const soubor = path.join(NASTROJE, slozka.name, 'nastroj.json');
+    if (slozka.isDirectory() && fs.existsSync(soubor)) {
+      const n = cti(soubor);
+      if (n.skryty) ids.add(n.id);
+    }
+  }
+  return ids;
+}
+
 export function nactiNastroje() {
   const kategorie = cti(path.join(DATA, 'kategorie.json')).map((k) => k.slug);
   const aktivni = [];
@@ -21,6 +39,7 @@ export function nactiNastroje() {
       const soubor = path.join(NASTROJE, slozka.name, 'nastroj.json');
       if (!fs.existsSync(soubor)) continue;
       const nastroj = cti(soubor);
+      if (nastroj.skryty && !zobrazitSkryte()) continue;
       const rulesSoubor = path.join(NASTROJE, slozka.name, 'rules.json');
       const pravidla = fs.existsSync(rulesSoubor) ? cti(rulesSoubor) : {};
       if (!pravidla.meta || !pravidla.meta.overeno) {

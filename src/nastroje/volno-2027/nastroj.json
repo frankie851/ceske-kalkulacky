@@ -1,0 +1,16 @@
+{
+  "id": "volno-2027",
+  "nazev": "Volno 2027",
+  "typ": "kalkulačka",
+  "kategorie": "prace-rodina",
+  "url": "/prace-rodina/volno-2027/",
+  "poradi": 4,
+  "perex": "Kdy si vzít dovolenou, aby vyšlo co nejvíc volných dní v kuse, a kdy jsou zavřené obchody.",
+  "otazka": "Kdy si v roce 2027 vzít dovolenou, aby bylo volna co nejvíc?",
+  "stitky": ["dovolená", "svátky", "prodloužené víkendy", "zavřené obchody"],
+  "termin": null,
+  "novinka2027": true,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Naplánovat volno",
+  "souvisi": ["rodicovska", "vypoved-2026", "slevy-2027"]
+}

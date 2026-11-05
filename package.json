@@ -9,18 +9,20 @@
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
-    "test": "node --test \"src/**/*.test.js\" \"test/sdilene/**/*.test.js\"",
-    "test:e2e": "node --test --test-concurrency=1 \"test/e2e/**/*.test.js\"",
+    "test": "node --test \"src/**/*.test.js\" \"src/**/*.test.mjs\" \"test/sdilene/**/*.test.js\"",
+    "test:e2e": "node --test --test-concurrency=1 \"test/e2e/*.test.js\"",
     "kontrola": "node tools/kontroly/kontrola-webu.mjs",
     "kontrola:navrhy": "node tools/kontroly/kontrola.mjs",
     "snimky": "node tools/kontroly/snimky-webu.mjs",
-    "lighthouse": "node tools/kontroly/lighthouse.mjs"
+    "lighthouse": "node tools/kontroly/lighthouse.mjs",
+    "build:vse": "ZOBRAZIT_SKRYTE=1 eleventy --output=_site-vse",
+    "test:e2e:skryte": "SITE_DIR=_site-vse node --test --test-concurrency=1 \"test/e2e/skryte/*.test.js\""
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",
     "@axe-core/puppeteer": "^4.14.0",
-    "@fontsource/fredoka": "^5.3.0",
-    "@fontsource/nunito": "^5.3.0",
+    "@fontsource-variable/fredoka": "^5.3.0",
+    "@fontsource-variable/nunito": "^5.3.0",
     "lighthouse": "^13.6.0",
     "puppeteer": "^25.16.0"
   }

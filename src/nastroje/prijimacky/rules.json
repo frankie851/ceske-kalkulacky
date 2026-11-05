@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "title": "Přijímací řízení na SŠ konané ve školním roce 2026/2027 (nástup 2027/2028)",
+    "checked": "2026-11-05",
+    "overeno": "2026-11-05",
+    "zdroje": [
+      { "nazev": "MŠMT – Časový harmonogram přijímacího řízení 2026/2027 (1. a 2. kolo)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf" },
+      { "nazev": "MŠMT – Metodický materiál k přijímacímu řízení 2026/2027", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Metodika_prijimaci-rizeni_2026-2027.pdf" },
+      { "nazev": "MŠMT – Sdělení o termínech jednotné přijímací zkoušky 2026/2027 (č. j. MSMT-525/2026-13)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminech_2026-2027.pdf" },
+      { "nazev": "MŠMT – Změny v přijímacím řízení do SŠ od 1. 9. 2026 (č. j. MSMT-525/2026-17)", "url": "https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf" },
+      { "nazev": "CERMAT – Průvodce pro uchazeče k DiPSy 2027", "url": "https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027.pdf" },
+      { "nazev": "CERMAT – Jednotná přijímací zkouška", "url": "https://prijimacky.cermat.gov.cz/menu/jednotna-prijimaci-zkouska.html" }
+    ],
+    "neovereno": [
+      "Skutečné přijetí na konkrétní školu. Simulátor ho nepředpovídá, jen ukazuje, jak pravidla rozřazení fungují na modelové třídě. O ostatních uchazečích ani o letošních výsledcích nic nevíme.",
+      "Připravovanou reformu „nejdřív testy, pak přihlášky“. Pro přijímačky 2027 podle MŠMT neplatí, a proto s ní nepočítáme. Kdy by mohla začít platit, zatím neověřujeme."
+    ],
+    "statusLegend": {
+      "confirmed": "Ověřeno v oficiálním zdroji",
+      "unverified": "Neověřeno – sledujte CERMAT a web školy",
+      "tip": "Doporučení této pomůcky, nejde o úřední termín"
+    }
+  },
+  "sources": {
+    "msmt-harmonogram": { "name": "MŠMT – Časový harmonogram přijímacího řízení 2026/2027 (1. a 2. kolo)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf", "date": "2026-08" },
+    "msmt-metodika": { "name": "MŠMT – Metodický materiál k přijímacímu řízení 2026/2027", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Metodika_prijimaci-rizeni_2026-2027.pdf", "date": "2026-08-18" },
+    "msmt-terminy": { "name": "MŠMT – Sdělení o termínech jednotné přijímací zkoušky 2026/2027 (č. j. MSMT-525/2026-13)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminech_2026-2027.pdf", "date": "2026-08-10" },
+    "msmt-zmeny": { "name": "MŠMT – Změny v přijímacím řízení do SŠ od 1. 9. 2026 (č. j. MSMT-525/2026-17)", "url": "https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf", "date": "2026-08-31" },
+    "cermat-pruvodce": { "name": "CERMAT – Průvodce pro uchazeče k DiPSy 2027", "url": "https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027.pdf", "date": "2026" },
+    "cermat-jpz": { "name": "CERMAT – Jednotná přijímací zkouška", "url": "https://prijimacky.cermat.gov.cz/menu/jednotna-prijimaci-zkouska.html", "date": "2026" }
+  },
+  "rules": [
+    { "id": "pocet", "title": "Až 3 + 2 přihlášky", "text": "V 1. kole se můžete přihlásit až na 3 obory bez talentové zkoušky a až na 2 obory s talentovou zkouškou. Konzervatoře podané v listopadu se do těch 2 talentových oborů počítají. Celkem tedy nejvýše 5 oborů.", "status": "confirmed", "source": "cermat-pruvodce" },
+    { "id": "priorita", "title": "Pořadí = priorita a po termínu nejde změnit", "text": "Obory řadíte od nejvíce po nejméně žádaný. Po konci lhůty pro podání přihlášek nejde změnit pořadí ani obory. Na papírových přihláškách musí být pořadí všude stejné.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "dva-pokusy", "title": "Dva pokusy, počítá se lepší", "text": "Jednotnou zkoušku (čeština 60 min, matematika 70 min, každý test max. 50 bodů) můžete psát dvakrát. Z každého předmětu zvlášť se započítá lepší výsledek.", "status": "confirmed", "source": "cermat-jpz" },
+    { "id": "podil", "title": "Jednotná zkouška tvoří aspoň 60 %", "text": "Hodnocení jednotné zkoušky se na celkovém hodnocení podílí nejméně 60 % (u oboru Gymnázium se sportovní přípravou nejméně 40 %). Zbytek tvoří další kritéria školy, např. školní zkouška nebo vysvědčení.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "hranice", "title": "Minimum si určuje škola", "text": "Celostátní minimum bodů neexistuje. Škola si ale může stanovit hranici úspěšnosti (v jednotné zkoušce, školní zkoušce nebo celkem). Kdo ji nesplní, přijat být nemůže. Kdo se přihlásí a na jednotnou zkoušku nepřijde, dostane za ni 0 bodů.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "algoritmus", "title": "Rozřazení algoritmem odloženého přijetí", "text": "Budete přijati na obor s nejvyšší prioritou, na který vás opravňují výsledky. Uchazeč s horšími výsledky vás nepředběhne jen proto, že má obor na vyšší prioritě. Podle MŠMT algoritmus „nenutí žáky a rodiče ke strategizování“: můžete se hlásit tam, kam opravdu chcete, a šance jinde se tím nesníží.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "shoda", "title": "Žádné dělené místo", "text": "Pořadí na škole musí být jednoznačné, dva uchazeči nemůžou sdílet stejné místo. Při shodě bodů rozhodují pomocná kritéria školy. Škola smí jako pomocné kritérium použít i to, kolikátý je obor ve vaší přihlášce. V krajním případě rozhodne los.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "podani", "title": "Jak podat přihlášku", "text": "Elektronicky přes DiPSy (s eObčankou, bankovní identitou nebo datovou schránkou), nebo na papírovém tiskopisu. Podání „výpisem“ je zrušené. Doporučení ze školského poradenského zařízení musí mít registrační identifikátor z DiPSy.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "vysledky", "title": "Výsledky a potvrzení", "text": "Výsledky 1. a 2. kola najdete v DiPSy a ve škole. Písemné rozhodnutí se nezasílá a přijetí v 1. ani 2. kole se nepotvrzuje. Pokud se přijetí vzdáte, nezískáte tím místo jinde, jen možnost hlásit se do dalšího kola.", "status": "confirmed", "source": "cermat-pruvodce" },
+    { "id": "odvolani", "title": "Odvolání do 3 pracovních dnů", "text": "Odvolání se podává do 3 pracovních dnů od oznámení rozhodnutí, a to podle správního řádu, ne přes DiPSy. Pokud vás přijali na vyšší prioritu, odvolání proti nepřijetí na nižší prioritu nemůže uspět.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "druhe-kolo", "title": "2. kolo: zase s prioritami", "text": "Do 2. kola se může hlásit, kdo nebyl v 1. kole přijat nebo se přijetí vzdal. Platí stejná pravidla: až 3 + 2 obory seřazené podle priority. Ve 3. a dalších kolech se přihlášky podávají jen na papíře, bez omezení počtu a bez priorit.", "status": "confirmed", "source": "msmt-metodika" },
+    { "id": "reforma", "title": "„Nejdřív testy, pak přihlášky“ v roce 2027 neplatí", "text": "Podle harmonogramu MŠMT pro 2026/2027 se přihlášky podávají v únoru a jednotná zkouška se píše až v dubnu. Oficiální dokumenty k přijímačkám 2027 o žádné změně tohoto pořadí nemluví.", "status": "confirmed", "source": "msmt-harmonogram" }
+  ],
+  "events": [
+    { "id": "kons-prihlasky", "group": "kons", "title": "Konzervatoře: podání přihlášek (nejvýše 2 obory)", "start": "2026-11-01", "end": "2026-11-30", "status": "confirmed", "source": "msmt-zmeny" },
+    { "id": "kons-zkousky", "group": "kons", "title": "Konzervatoře: řádný termín talentových zkoušek", "start": "2027-01-04", "end": "2027-01-15", "status": "confirmed", "note": "Konkrétní dny určí konzervatoř v kritériích.", "source": "msmt-zmeny" },
+    { "id": "kons-nahradni", "group": "kons", "title": "Konzervatoře: náhradní termín talentových zkoušek", "start": "2027-01-18", "end": "2027-01-29", "status": "confirmed", "source": "msmt-zmeny" },
+    { "id": "kons-vysledky", "group": "kons", "title": "Konzervatoře: zveřejnění výsledků", "start": "2027-02-08", "status": "confirmed", "source": "cermat-pruvodce" },
+    { "id": "ss-kriteria", "group": "ss", "title": "Školy zveřejní kritéria přijímacího řízení", "start": "2027-01-15", "end": "2027-01-31", "status": "confirmed", "note": "Na webu a ve škole. V DiPSy jsou kritéria od 1. 2.", "source": "cermat-pruvodce" },
+    { "id": "ss-prihlasky-start", "group": "ss", "title": "Začátek podávání přihlášek na SŠ (1. kolo)", "start": "2027-02-01", "status": "confirmed", "source": "msmt-harmonogram" },
+    { "id": "ss-prihlasky-konec", "group": "ss", "title": "Konec lhůty pro podání přihlášek (1. kolo)", "start": "2027-02-22", "status": "confirmed", "note": "Běžně je konec lhůty 20. 2. V roce 2027 připadá na sobotu, proto se posouvá na pondělí 22. 2.", "source": "msmt-harmonogram" },
+    { "id": "ss-skolni-zkousky", "group": "ss", "title": "Řádný termín školních a talentových zkoušek", "start": "2027-03-15", "end": "2027-04-23", "status": "confirmed", "note": "Jen pokud je škola koná. Konkrétní dny najdete v kritériích školy, pozvánka přijde nejpozději 14 dní předem.", "source": "msmt-terminy" },
+    { "id": "jpz-1", "group": "ss", "title": "Jednotná zkouška – 1. řádný termín (4leté obory)", "start": "2027-04-12", "status": "confirmed", "source": "msmt-terminy" },
+    { "id": "jpz-2", "group": "ss", "title": "Jednotná zkouška – 2. řádný termín (4leté obory)", "start": "2027-04-13", "status": "confirmed", "source": "msmt-terminy" },
+    { "id": "vg-1", "group": "vg", "title": "Jednotná zkouška – 1. řádný termín (víceletá gymnázia)", "start": "2027-04-14", "status": "confirmed", "source": "msmt-terminy" },
+    { "id": "vg-2", "group": "vg", "title": "Jednotná zkouška – 2. řádný termín (víceletá gymnázia)", "start": "2027-04-15", "status": "confirmed", "source": "msmt-terminy" },
+    { "id": "skolni-nahradni", "group": "ss", "title": "Náhradní termín školních a talentových zkoušek", "start": "2027-04-26", "end": "2027-05-05", "status": "confirmed", "note": "Jen pro omluvené. Období začíná 24. 4., to je ale sobota.", "source": "msmt-harmonogram" },
+    { "id": "jpz-nahr-1", "group": "ss", "title": "Jednotná zkouška – 1. náhradní termín", "start": "2027-04-29", "status": "confirmed", "note": "Jen pro omluvené. Omluvu je třeba poslat řediteli školy písemně do 3 pracovních dnů od zmeškaného termínu.", "source": "msmt-terminy" },
+    { "id": "jpz-nahr-2", "group": "ss", "title": "Jednotná zkouška – 2. náhradní termín", "start": "2027-04-30", "status": "confirmed", "note": "Jen pro omluvené.", "source": "msmt-terminy" },
+    { "id": "zpetvzeti", "group": "ss", "title": "Poslední den pro vzetí přihlášky zpět", "start": "2027-05-04", "status": "confirmed", "source": "msmt-harmonogram" },
+    { "id": "rozrazeni", "group": "ss", "title": "Rozřazení uchazečů algoritmem v DiPSy", "start": "2027-05-11", "status": "confirmed", "note": "Školy předtím do DiPSy zadají pořadí uchazečů. Výsledky zatím nejsou veřejné.", "source": "msmt-harmonogram" },
+    { "id": "vysledky-1-kolo", "group": "ss", "title": "Zveřejnění výsledků 1. kola", "start": "2027-05-14", "status": "confirmed", "note": "V DiPSy a ve škole. Odvolání do 3 pracovních dnů od oznámení.", "source": "cermat-pruvodce" },
+    { "id": "kolo2-prihlasky", "group": "ss", "title": "2. kolo: podání přihlášek", "start": "2027-05-19", "end": "2027-05-24", "status": "confirmed", "note": "Kritéria 2. kola zveřejní školy 14.–18. 5.", "source": "msmt-harmonogram" },
+    { "id": "kolo2-zkousky", "group": "ss", "title": "2. kolo: školní a talentové zkoušky", "start": "2027-06-08", "end": "2027-06-14", "status": "confirmed", "note": "Jen pokud je škola koná. Náhradní termín ve 2. kole není.", "source": "msmt-harmonogram" },
+    { "id": "kolo2-vysledky", "group": "ss", "title": "2. kolo: zveřejnění výsledků", "start": "2027-06-22", "status": "confirmed", "source": "msmt-harmonogram" },
+    { "id": "kolo3", "group": "ss", "title": "3. a další kola: školy zveřejňují kritéria", "start": "2027-06-23", "status": "confirmed", "note": "Přihlášky jen na papíře a bez priorit, termíny si určuje každá škola.", "source": "cermat-pruvodce" }
+  ]
+}

@@ -1,13 +1,75 @@
 [
-  { "id": "zdanim-to", "nazev": "Zdaním to?", "typ": "průvodce", "kategorie": "penize", "url": "/penize/zdanim-to/", "perex": "Ke každému prodeji akcií, ETF nebo krypta řekne, jestli je osvobozený, a připraví dividendy ze zahraničí do přiznání.", "stitky": ["akcie", "krypto", "dividendy", "W-8BEN"], "termin": "Přiznání za rok 2026 na jaře 2027", "novinka2027": false, "ilustrace": "nastroj-zdanim-to", "poradi": 3, "vlna": 3 },
-  { "id": "inflacni-kalkulacka", "nazev": "Inflační kalkulačka", "typ": "kalkulačka", "kategorie": "penize", "url": "/penize/inflacni-kalkulacka/", "perex": "Kolik mají dnes reálnou hodnotu tvoje peníze, mzda nebo úspory a jaký je reálný výnos spořicího účtu.", "stitky": ["inflace", "ČSÚ", "reálný výnos"], "termin": null, "novinka2027": false, "ilustrace": "nastroj-inflace", "poradi": 4, "vlna": 2 },
-  { "id": "slevy-2027", "nazev": "Slevy 2027", "typ": "průvodce", "kategorie": "dane-podnikani", "url": "/dane-podnikani/slevy-2027/", "perex": "Projde tvoji situaci a řekne, které slevy a odpočty si říct u zaměstnavatele.", "stitky": ["sleva na studenta", "školkovné", "prohlášení poplatníka"], "termin": null, "novinka2027": true, "ilustrace": "nastroj-obecny", "poradi": 2, "vlna": 2 },
-  { "id": "cestovni-prikaz-2027", "nazev": "Cestovní příkaz 2027", "typ": "kalkulačka", "kategorie": "dane-podnikani", "url": "/dane-podnikani/cestovni-prikaz-2027/", "perex": "Náhrada za auto, pohonné hmoty a stravné na tuzemské cestě a cestovní příkaz k tisku.", "stitky": ["stravné", "náhrada za km", "vyhláška"], "termin": "Nová vyhláška obvykle koncem prosince", "novinka2027": true, "ilustrace": "nastroj-obecny", "poradi": 3, "vlna": 2 },
-  { "id": "bydlometr", "nazev": "Bydlometr", "typ": "kalkulačka", "kategorie": "bydleni-energie", "url": "/bydleni-energie/bydlometr/", "perex": "Co s hypotékou při refixaci a jestli se víc vyplatí nájem, nebo koupě.", "stitky": ["hypotéka", "refixace", "nájem"], "termin": null, "novinka2027": false, "ilustrace": "nastroj-obecny", "poradi": 1, "vlna": 3 },
-  { "id": "spot-nebo-fix", "nazev": "Spot, nebo fix?", "typ": "kalkulačka", "kategorie": "bydleni-energie", "url": "/bydleni-energie/spot-nebo-fix/", "perex": "Kolik by domácnost zaplatila za elektřinu na spotu, na fixu a na dynamickém tarifu.", "stitky": ["elektřina", "spot", "dynamický tarif"], "termin": null, "novinka2027": false, "ilustrace": "nastroj-obecny", "poradi": 2, "vlna": 3 },
-  { "id": "vypoved-2026", "nazev": "Výpověď 2026", "typ": "průvodce", "kategorie": "prace-rodina", "url": "/prace-rodina/vypoved-2026/", "perex": "Kdy přesně pracovní poměr končí, kolik je odstupné a poměrná dovolená a co dál s podporou v nezaměstnanosti.", "stitky": ["výpovědní doba", "odstupné"], "termin": null, "novinka2027": false, "ilustrace": "nastroj-obecny", "poradi": 1, "vlna": 2 },
-  { "id": "rodicovska", "nazev": "Rodičovská pro celou rodinu", "typ": "kalkulačka", "kategorie": "prace-rodina", "url": "/prace-rodina/rodicovska/", "perex": "Rozvrhne mateřskou, otcovskou a rodičovský příspěvek pro oba rodiče a ukáže, kdy se peníze vyčerpají.", "stitky": ["mateřská", "otcovská", "rodičovský příspěvek"], "termin": null, "novinka2027": false, "ilustrace": "nastroj-obecny", "poradi": 2, "vlna": 2 },
-  { "id": "prijimacky", "nazev": "Přijímačky bez paniky", "typ": "průvodce", "kategorie": "prace-rodina", "url": "/prace-rodina/prijimacky/", "perex": "Jak systém rozřazuje uchazeče na střední školy a co dělá pořadí škol na přihlášce.", "stitky": ["přihláška", "priority", "CERMAT"], "termin": null, "novinka2027": false, "ilustrace": "nastroj-obecny", "poradi": 3, "vlna": 2 },
-  { "id": "volno-2027", "nazev": "Volno 2027", "typ": "kalkulačka", "kategorie": "prace-rodina", "url": "/prace-rodina/volno-2027/", "perex": "Kdy si vzít dovolenou, aby vyšlo co nejvíc volných dní v kuse, a kdy jsou zavřené obchody.", "stitky": ["dovolená", "svátky"], "termin": null, "novinka2027": true, "ilustrace": "nastroj-obecny", "poradi": 4, "vlna": 2 },
-  { "id": "exekuce-nebo-oddluzeni", "nazev": "Exekuce, nebo oddlužení?", "typ": "průvodce", "kategorie": "dluhy", "url": "/dluhy/exekuce-nebo-oddluzeni/", "perex": "Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. A kde najít bezplatnou pomoc.", "stitky": ["exekuce", "oddlužení", "nezabavitelná částka"], "termin": null, "novinka2027": false, "ilustrace": "kategorie-dluhy", "poradi": 1, "vlna": 2 }
+  {
+    "id": "zdanim-to",
+    "nazev": "Zdaním to?",
+    "typ": "průvodce",
+    "kategorie": "penize",
+    "url": "/penize/zdanim-to/",
+    "perex": "Ke každému prodeji akcií, ETF nebo krypta řekne, jestli je osvobozený, a připraví dividendy ze zahraničí do přiznání.",
+    "stitky": [
+      "akcie",
+      "krypto",
+      "dividendy",
+      "W-8BEN"
+    ],
+    "termin": "Přiznání za rok 2026 na jaře 2027",
+    "novinka2027": false,
+    "ilustrace": "nastroj-zdanim-to",
+    "poradi": 3,
+    "vlna": 3
+  },
+  {
+    "id": "bydlometr",
+    "nazev": "Bydlometr",
+    "typ": "kalkulačka",
+    "kategorie": "bydleni-energie",
+    "url": "/bydleni-energie/bydlometr/",
+    "perex": "Co s hypotékou při refixaci a jestli se víc vyplatí nájem, nebo koupě.",
+    "stitky": [
+      "hypotéka",
+      "refixace",
+      "nájem"
+    ],
+    "termin": null,
+    "novinka2027": false,
+    "ilustrace": "nastroj-obecny",
+    "poradi": 1,
+    "vlna": 3
+  },
+  {
+    "id": "spot-nebo-fix",
+    "nazev": "Spot, nebo fix?",
+    "typ": "kalkulačka",
+    "kategorie": "bydleni-energie",
+    "url": "/bydleni-energie/spot-nebo-fix/",
+    "perex": "Kolik by domácnost zaplatila za elektřinu na spotu, na fixu a na dynamickém tarifu.",
+    "stitky": [
+      "elektřina",
+      "spot",
+      "dynamický tarif"
+    ],
+    "termin": null,
+    "novinka2027": false,
+    "ilustrace": "nastroj-obecny",
+    "poradi": 2,
+    "vlna": 3
+  },
+  {
+    "id": "exekuce-nebo-oddluzeni",
+    "nazev": "Exekuce, nebo oddlužení?",
+    "typ": "průvodce",
+    "kategorie": "dluhy",
+    "url": "/dluhy/exekuce-nebo-oddluzeni/",
+    "perex": "Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. A kde najít bezplatnou pomoc.",
+    "stitky": [
+      "exekuce",
+      "oddlužení",
+      "nezabavitelná částka"
+    ],
+    "termin": null,
+    "novinka2027": false,
+    "ilustrace": "kategorie-dluhy",
+    "poradi": 1,
+    "vlna": 2
+  }
 ]

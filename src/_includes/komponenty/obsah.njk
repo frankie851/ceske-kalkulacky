@@ -4,7 +4,7 @@
   zdroje({ zdroje, nadpis = 'Odkud to víme', overeno, uroven = 2, id = 'zdroje-nadpis' })
     zdroje – pole { nazev, url, poznamka? } (meta.zdroje z rules.json); prázdné pole = věta „Zdroje doplníme.“
 
-  upozorneni({ typ = 'poradenstvi', titulek, text })  + volitelně {% call %} pro vlastní obsah
+  upozorneni({ typ = 'poradenstvi', titulek, text, vykani = false })  + volitelně {% call %} pro vlastní obsah
     typ 'poradenstvi' – výchozí text „Nejde o investiční, daňové ani právní poradenství…“
         'info' | 'navrh' | 'varovani'
 
@@ -44,7 +44,7 @@
   <div>
     {%- if typ == 'poradenstvi' and not p.titulek %}
     <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
-    <p class="small">Spočítáme to s tebou, ale rozhodnutí je vždycky na tobě.</p>
+    <p class="small">{{ 'Spočítáme to s vámi, ale rozhodnutí je vždycky na vás.' if p.vykani else 'Spočítáme to s tebou, ale rozhodnutí je vždycky na tobě.' }}</p>
     {%- else %}
     {% if p.titulek %}<p><strong>{{ p.titulek }}</strong></p>{% endif %}
     {% if p.text %}<p>{{ p.text }}</p>{% endif %}

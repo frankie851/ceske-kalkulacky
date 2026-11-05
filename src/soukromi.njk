@@ -1,7 +1,7 @@
 ---
 permalink: /soukromi/
 title: Soukromí
-description: Nic neukládáme ani neodesíláme. Žádné cookies, žádné měření návštěvnosti, písma hostujeme sami.
+description: Nic neodesíláme. V prohlížeči se ukládá jen volba režimu a to, co sám uložíš tlačítkem. Žádné cookies, žádné měření návštěvnosti, písma hostujeme sami.
 ---
 {%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
 <div class="wrap">
@@ -11,7 +11,14 @@ description: Nic neukládáme ani neodesíláme. Žádné cookies, žádné mě�
     <h2>Výpočty běží jen u tebe</h2>
     <p>Kalkulačky a průvodci počítají přímo v prohlížeči. Zadané hodnoty nikam neposíláme a na žádném serveru je neukládáme.</p>
     <h2>Co si prohlížeč pamatuje</h2>
-    <p>Jedinou věc: tvoji volbu světlého nebo tmavého režimu. Ukládá se v úložišti prohlížeče (localStorage) pod klíčem <code>spocitano-rezim</code>. Když zvolíš „Auto“, smažeme ji. Smazat ji můžeš i vymazáním dat webu v prohlížeči.</p>
+    <p>Sám od sebe jen jednu věc: tvoji volbu světlého nebo tmavého režimu. Ukládá se v úložišti prohlížeče (localStorage) pod klíčem <code>spocitano-rezim</code>. Když zvolíš „Auto“, smažeme ji.</p>
+    <p>Některé nástroje umí uložit zadané údaje na později, ale <strong>jen když klikneš na „Uložit v tomto prohlížeči“</strong>. Data zůstanou jen v tvém prohlížeči (klíče začínají <code>spocitano-</code>) a tlačítkem „Smazat uložené“ je kdykoli odstraníš:</p>
+    <ul>
+      <li>Cestovní příkaz 2027 – seznam cest a údaje do hlavičky příkazu,</li>
+      <li>Rodičovská pro celou rodinu – plán mateřské, otcovské a rodičovské.</li>
+    </ul>
+    <p>Sekce Dluhy si nepamatuje nic – ani v prohlížeči, ani v adrese stránky.</p>
+    <p>Všechno smažeš i vymazáním dat webu v nastavení prohlížeče.</p>
     <h2>Žádné cookies a žádné měření</h2>
     <p>Nepoužíváme cookies, analytické nástroje ani reklamní sítě. Nevíme, kdo web navštěvuje ani co do kalkulaček zadává.</p>
     <h2>Písma hostujeme sami</h2>

@@ -1,0 +1,110 @@
+/* Exekuce, nebo oddlužení? – styly jen pro tento nástroj (sekce Dluhy). Barvy jen z tokenů.
+   Klidný vzhled: šalvějová pro pomoc, žádná křiklavá červená, výrazné odkazy na bezplatnou pomoc. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
+  .dluhy [hidden] { display: none !important; }
+
+  /* ---------- Pruh s pomocí nad každým nadpisem ---------- */
+  .dluhy-pruh {
+    display: flex; align-items: flex-start; gap: var(--sp-2);
+    margin: 0 0 var(--sp-3); padding: var(--sp-2) var(--sp-4);
+    background: var(--c-sage-soft); border-radius: var(--r-md);
+    font-size: var(--fs-sm); font-weight: 700; color: var(--c-text); max-width: 100%; width: fit-content;
+  }
+  .dluhy-pruh .ikona { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--c-sage-ink); }
+  .dluhy-pruh a { color: var(--c-sage-ink); font-weight: 800; text-underline-offset: 3px; }
+  .dluhy-pruh-hlavni { margin-top: var(--sp-4); font-size: var(--fs-md); padding: var(--sp-3) var(--sp-4); border: 2px solid var(--c-sage); }
+  .dluhy-hlava .page-head { padding-top: var(--sp-3); }
+  .dluhy-hlava .page-head-art { width: 180px; }
+  @media (max-width: 559px) { .dluhy-hlava .page-head-art { display: none; } }
+
+  .dluhy .debt { margin-top: var(--sp-4); }
+  @media (max-width: 759px) { .dluhy .debt-art { width: 120px; } }
+
+  /* ---------- Části stránky ---------- */
+  .dluhy-sekce { padding: var(--sp-6) 0 0; scroll-margin-top: var(--sp-4); }
+  .dluhy-sekce > h2 { font-size: var(--fs-2xl); }
+
+  /* Formulář: na širších obrazovkách pole ve dvou sloupcích */
+  .dluhy-formular { display: grid; gap: var(--sp-2) var(--sp-6); }
+  @media (min-width: 760px) {
+    .dluhy-formular { grid-template-columns: 1fr 1fr; }
+    .dluhy-pole { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--sp-6); }
+    .dluhy-formular > .dluhy-volby:last-of-type, .dluhy-akce { grid-column: 1 / -1; }
+  }
+  .dluhy-volby .options { margin: var(--sp-2) 0 0; grid-template-columns: 1fr; }
+  .dluhy-formular > .dluhy-volby:last-of-type .options { grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .dluhy-formular > .dluhy-volby:last-of-type .options { grid-template-columns: 1fr 1fr; } }
+  .dluhy-volby .opt label { align-items: flex-start; min-height: 56px; }
+  .dluhy-volby .opt .box { margin-top: 2px; }
+  .dluhy-opt-popis { display: block; font-weight: 600; font-size: var(--fs-sm); color: var(--c-text-muted); margin-top: 2px; line-height: 1.45; }
+  .dluhy-sazba { margin-top: var(--sp-4); max-width: 20rem; }
+  .dluhy-akce { margin-top: var(--sp-2); }
+
+  /* ---------- Výsledek: dvě karty vedle sebe ---------- */
+  .dluhy-karty { display: grid; gap: var(--sp-5); margin-top: var(--sp-4); }
+  @media (min-width: 760px) { .dluhy-karty { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .dluhy-karta { border: 3px solid var(--c-accent); box-shadow: var(--shadow-md); }
+  .dluhy-karta-oddluzeni { border-color: var(--c-sage); }
+  .dluhy-karta > h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xl); margin: 0 0 var(--sp-3); }
+  .dluhy-hlavni { margin: 0 0 var(--sp-4); }
+  .dluhy-hlavni span { display: block; font-weight: 800; }
+  .dluhy-hlavni b {
+    display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(2.2rem, 1.8rem + 2vw, 3.2rem);
+    line-height: 1.1; color: var(--c-primary); font-variant-numeric: tabular-nums;
+  }
+  .dluhy-karta-oddluzeni .dluhy-hlavni b { color: var(--c-sage-ink); }
+  .dluhy-cisla { margin: 0 0 var(--sp-4); display: grid; gap: 0; }
+  .dluhy-cisla > div {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px var(--sp-3);
+    padding: var(--sp-2) 0; border-top: 2px solid var(--c-border);
+  }
+  .dluhy-cisla dt { color: var(--c-text-muted); font-weight: 700; }
+  .dluhy-cisla dd { margin: 0; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .dluhy-doba { font-weight: 800; font-size: var(--fs-lg); }
+  .dluhy-pozor, .dluhy-varovani {
+    display: flex; gap: var(--sp-2); align-items: flex-start;
+    padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md);
+    background: var(--c-draft-bg); color: var(--c-draft-ink); font-weight: 700; font-size: var(--fs-sm);
+  }
+  .dluhy-pozor .ikona, .dluhy-varovani .ikona { width: 20px; height: 20px; flex: none; margin-top: 1px; color: var(--c-draft-ink); --ikona-pozadi: var(--c-draft-bg); }
+  p.dluhy-varovani.small { display: block; }
+  .dluhy-vyhrada {
+    margin: var(--sp-4) 0 0; padding-top: var(--sp-3); border-top: 2px dashed var(--c-border);
+    font-weight: 800; font-size: var(--fs-sm); color: var(--c-text);
+  }
+  .dluhy-details { margin: var(--sp-3) 0; }
+  .dluhy-details > summary, .dluhy-jak > summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .dluhy-details ul { margin: var(--sp-2) 0 0; }
+  .dluhy-jak { margin-top: var(--sp-5); }
+  .dluhy-jak > summary { font-size: var(--fs-lg); }
+  .dluhy-jak h3 { font-size: var(--fs-md); margin: var(--sp-4) 0 var(--sp-2); }
+  .dluhy-neplatne .dluhy-karty { opacity: .45; }
+
+  /* ---------- Další kroky ---------- */
+  .dluhy-kroky { list-style: none; padding: 0; margin: var(--sp-4) 0 0; display: grid; gap: var(--sp-4); counter-reset: krok; }
+  @media (min-width: 760px) { .dluhy-kroky { grid-template-columns: 1fr 1fr; } }
+  .dluhy-kroky > li { counter-increment: krok; }
+  .dluhy-kroky h3 { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-lg); margin: 0 0 var(--sp-3); }
+  .dluhy-kroky h3::before {
+    content: counter(krok); flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--c-sage-soft); color: var(--c-sage-ink); font-family: var(--font-display); font-weight: 600;
+  }
+  .dluhy-kroky a { font-weight: 800; }
+
+  /* ---------- Bezplatná pomoc (seznam) ---------- */
+  .dluhy-pomoc { margin-top: var(--sp-7); scroll-margin-top: var(--sp-4); }
+  .dluhy-pomoc:focus { outline: none; }
+  .dluhy-pomoc:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 3px; }
+  .dluhy-pomoc-seznam { gap: var(--sp-4); }
+  @media (min-width: 760px) { .dluhy-pomoc-seznam { grid-template-columns: 1fr 1fr; } }
+  .dluhy-pomoc-seznam li { background: var(--c-surface); border-radius: var(--r-md); padding: var(--sp-4); }
+  .dluhy-pomoc-seznam .help-secondary { font-size: var(--fs-lg); color: var(--c-sage-ink); text-underline-offset: 3px; }
+
+  /* Mobilní lišta: částka a výrazné tlačítko Bezplatná pomoc */
+  .dluhy-lista { border-top-color: var(--c-sage); }
+  .dluhy-lista .btn { display: inline-flex; align-items: center; gap: var(--sp-2); }
+}

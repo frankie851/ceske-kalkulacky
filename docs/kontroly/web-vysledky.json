@@ -1,7 +1,7 @@
 {
-  "datum": "2026-11-05T08:45:28.413Z",
+  "datum": "2026-11-05T10:42:12.780Z",
   "prefix": "/ceske-kalkulacky/",
-  "stranek": 17,
+  "stranek": 24,
   "chyb": 0,
   "stranky": [
     {
@@ -25,11 +25,19 @@
       "chyby": []
     },
     {
+      "stranka": "/dane-podnikani/cestovni-prikaz-2027/",
+      "chyby": []
+    },
+    {
       "stranka": "/dane-podnikani/mam-eet/",
       "chyby": []
     },
     {
       "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dane-podnikani/slevy-2027/",
       "chyby": []
     },
     {
@@ -53,6 +61,10 @@
       "chyby": []
     },
     {
+      "stranka": "/penize/inflacni-kalkulacka/",
+      "chyby": []
+    },
+    {
       "stranka": "/penize/penzijko-kompas/",
       "chyby": []
     },
@@ -62,6 +74,22 @@
     },
     {
       "stranka": "/prace-rodina/",
+      "chyby": []
+    },
+    {
+      "stranka": "/prace-rodina/prijimacky/",
+      "chyby": []
+    },
+    {
+      "stranka": "/prace-rodina/rodicovska/",
+      "chyby": []
+    },
+    {
+      "stranka": "/prace-rodina/volno-2027/",
+      "chyby": []
+    },
+    {
+      "stranka": "/prace-rodina/vypoved-2026/",
       "chyby": []
     },
     {

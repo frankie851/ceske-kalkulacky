@@ -1,10 +1,10 @@
 {
   "overeno": "2026-11-05",
-  "poznamka": "Odkazy uvádí příručka MPSV Dluhové poradenství pro obce; přímé ověření stránek je třeba udělat ručně.",
+  "poznamka": "Odkazy uvádí příručka Ministerstva práce a sociálních věcí „Dluhové poradenství pro obce“; přímé ověření stránek je třeba udělat ručně.",
   "odkazy": [
     {
       "nazev": "Najít bezplatnou poradnu",
-      "popis": "Registr poskytovatelů sociálních služeb (MPSV). Hledejte službu „odborné sociální poradenství“ ve vašem okolí – je bezplatná.",
+      "popis": "Registr poskytovatelů sociálních služeb Ministerstva práce a sociálních věcí. Hledejte službu „odborné sociální poradenství“ ve vašem okolí – je bezplatná.",
       "url": "https://iregistr.mpsv.cz/",
       "provozovatel": "Ministerstvo práce a sociálních věcí"
     },

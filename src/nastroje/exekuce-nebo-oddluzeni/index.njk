@@ -1,0 +1,251 @@
+---
+layout: layouty/zaklad.njk
+nastroj: exekuce-nebo-oddluzeni
+title: Exekuce, nebo oddlužení?
+description: Spočítejte si, kolik vám při exekuci zůstane z výplaty a jak by vypadalo oddlužení. Najděte bezplatnou dluhovou poradnu.
+permalink: /dluhy/exekuce-nebo-oddluzeni/
+vykani: true
+skripty: ['/nastroje/exekuce-nebo-oddluzeni/ui.js']
+styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
+---
+{#- Sekce Dluhy vyká (rozhodnutí 7) a odkaz na bezplatnou pomoc ([data-pomoc]) má nad nadpisem
+    každé části stránky i v hlavičce. Proto stránka nepoužívá layout nastroj.njk (ten dává h1 jako první),
+    ale skládá stejné bloky sama: drobečky, hlavičku se štítkem ověření, zdroje, neověřené, upozornění
+    a pravidla jako <script type="application/json" id="pravidla">. Nic se neukládá ani nedává do URL. -#}
+{%- from "komponenty/rozvrzeni.njk" import drobecky -%}
+{%- from "komponenty/obsah.njk" import zdroje, upozorneni, pomoc_dluhy -%}
+{%- from "komponenty/formular.njk" import pole -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set n = nastroje | najdiNastroj(nastroj) -%}
+{%- set kat = kategorie | najdiKategorii(n.kategorie) -%}
+{%- set meta = n.meta -%}
+{%- set d = dluhy -%}
+{%- set VYHRADA = 'Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.' -%}
+<div class="wrap dluhy">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: kat.nazev, url: '/' + kat.slug + '/' }, { nazev: n.nazev }]) }}
+
+  <header class="dluhy-hlava">
+    <p class="dluhy-pruh dluhy-pruh-hlavni">{{ ikona('ikona-srdce') }}<span>Nemusíte na to být sami. <a href="#pomoc" data-pomoc>Bezplatná pomoc s dluhy</a></span></p>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">{{ n.typ | capitalize }} · {{ n.stitky | join(', ') }}</p>
+        <h1 id="dluhy-nadpis">{{ n.nazev }}</h1>
+        <p class="lead">Spočítáte si, kolik vám zůstane z výplaty a jak dlouho byste spláceli v exekuci. Vedle toho uvidíte, jak by vypadalo oddlužení.</p>
+        <ul class="badges">
+          <li class="badge badge-ok">{{ ikona('ikona-overeno') }}<span>Pravidla ověřena k <time datetime="{{ meta.overeno }}">{{ meta.overeno | datum }}</time></span></li>
+          <li class="badge badge-plain">Pravidla pro rok {{ d.rok.rok }}</li>
+          <li class="badge badge-plain">Nic neukládáme</li>
+        </ul>
+      </div>
+      <svg class="page-head-art" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="{{ ('/img/sprite.svg#' + n.ilustrace) | url }}"/></svg>
+    </div>
+  </header>
+
+  {% call pomoc_dluhy({ pomoc: pomoc, nadpis: 'Nejste v tom sami', eyebrow: 'Bezplatná pomoc s dluhy', ilustrace: true, id: 'pomoc-nahore' }) %}
+    <p class="small">Dluhy má hodně lidí. Dá se to řešit. Oddlužení je soudní řízení. Splácíte podle svých možností nejvýš {{ d.delkaRoky }}. Pak vám soud zbytek dluhů většinou odpustí.</p>
+  {% endcall %}
+
+  <section class="dluhy-sekce" id="udaje" data-sekce aria-labelledby="udaje-nadpis">
+    <p class="dluhy-pruh">{{ ikona('ikona-srdce') }}<span>Nevíte si rady s údaji? <a href="#pomoc" data-pomoc>Poradna vám pomůže zdarma</a>.</span></p>
+    <h2 id="udaje-nadpis">Vaše údaje</h2>
+    <p class="muted">Stačí přibližná čísla. Výsledek se přepočítá hned. Nic se nikam neposílá.</p>
+    <form id="dluhy-formular" class="card dluhy-formular" novalidate aria-labelledby="udaje-nadpis">
+      <div class="dluhy-pole">
+        {{ pole({ id: 'mzda', label: 'Čistá mzda za měsíc', hodnota: d.pole.mzda, jednotka: 'Kč', napoveda: 'Je to částka po odečtení daně a pojištění. Najdete ji na výplatní pásce.', chybaMisto: true }) }}
+        {{ pole({ id: 'dluh', label: 'Kolik dlužíte celkem?', hodnota: d.pole.dluh, jednotka: 'Kč', napoveda: 'Sečtěte všechny dluhy. Stačí odhad.', chybaMisto: true }) }}
+        {{ pole({ id: 'osoby', label: 'Kolika lidem platíte výživné?', hodnota: d.pole.osoby, napoveda: 'Počítejte děti a další lidi, které podle zákona živíte. Nepočítejte toho, kdo po vás výživné vymáhá exekucí. Manžela nebo manželku započtěte, jen když jeden z vás pobírá důchod.', chybaMisto: true }) }}
+        {{ pole({ id: 'exekuce', label: 'Kolik exekucí vám strhávají z výplaty?', hodnota: d.pole.exekuce, napoveda: 'Při ' + d.ctyriExekuce + ' a více exekucích se strhávají dvě třetiny, i u běžných dluhů. Když nevíte, napište odhad.', chybaMisto: true }) }}
+      </div>
+
+      <fieldset class="field dluhy-volby">
+        <legend>Jaké dluhy máte?</legend>
+        <ul class="options">
+          <li class="opt"><input type="radio" name="druh" id="druh-bezne" value="bezne" checked><label for="druh-bezne"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Běžné dluhy<span class="dluhy-opt-popis">Třeba nesplacený úvěr, telefon, energie nebo nájem.</span></span></label></li>
+          <li class="opt"><input type="radio" name="druh" id="druh-prednostni" value="prednostni"><label for="druh-prednostni"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Přednostní dluhy (nebo obojí)<span class="dluhy-opt-popis">Dlužné výživné, daně, sociální nebo zdravotní pojištění. Z výplaty se jim strhává víc.</span></span></label></li>
+        </ul>
+      </fieldset>
+
+      <fieldset class="field dluhy-volby">
+        <legend>Odpustil vám už soud někdy dluhy v oddlužení?</legend>
+        <ul class="options">
+          <li class="opt"><input type="radio" name="odpusteni" id="odpusteni-ne" value="ne" checked><label for="odpusteni-ne"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Ne, nebo před víc než 20 lety</span></label></li>
+          <li class="opt"><input type="radio" name="odpusteni" id="odpusteni-12az20" value="12az20"><label for="odpusteni-12az20"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Ano, před {{ d.zakazLet }} až 20 lety</span></label></li>
+          <li class="opt"><input type="radio" name="odpusteni" id="odpusteni-do12" value="do12"><label for="odpusteni-do12"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Ano, v posledních {{ d.zakazLet }} letech</span></label></li>
+        </ul>
+      </fieldset>
+
+      <fieldset class="field dluhy-volby">
+        <legend>Doplňující údaje</legend>
+        <ul class="options">
+          <li class="opt"><input type="checkbox" name="duchod" id="duchod" value="ano" aria-describedby="duchod-napoveda"><label for="duchod"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Pobírám důchod<span class="dluhy-opt-popis" id="duchod-napoveda">Starobní, sirotčí nebo invalidní druhého či třetího stupně. Při {{ d.ctyriExekuce }} a více exekucích pro vás platí výjimka.</span></span></label></li>
+          <li class="opt"><input type="checkbox" name="urok" id="urok" value="ano" aria-describedby="urok-napoveda" aria-controls="urok-pole"><label for="urok"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Počítat i s úrokem z prodlení<span class="dluhy-opt-popis" id="urok-napoveda">{{ d.urokNapoveda }}</span></span></label></li>
+        </ul>
+        <div class="dluhy-sazba" id="urok-pole" hidden>
+          {{ pole({ id: 'sazba', label: 'Roční sazba úroku', hodnota: d.pole.sazba, jednotka: '%', inputmode: 'decimal', chybaMisto: true }) }}
+        </div>
+      </fieldset>
+
+      <div class="form-actions dluhy-akce" data-jen-js hidden>
+        <button class="btn btn-primary" type="button" data-ukaz-vysledek>Ukázat výsledek</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="dluhy-sekce dluhy-vysledek" id="vysledek" data-sekce data-ukazka aria-labelledby="vysledek-nadpis">
+    <p class="dluhy-pruh">{{ ikona('ikona-srdce') }}<span>S výsledkem vám pomůže poradna. <a href="#pomoc" data-pomoc>Bezplatná pomoc je tady</a>.</span></p>
+    <h2 id="vysledek-nadpis" tabindex="-1">Váš výsledek</h2>
+    <p class="muted" data-rok>{{ d.rok.poznamka }} Ukázka pro hodnoty ve formuláři.</p>
+    <p class="dluhy-varovani" data-chyby role="status" hidden>{{ ikona('ikona-vystraha') }}<span>Opravte prosím označené údaje. Pak se výsledek přepočítá.</span></p>
+    <div class="dluhy-karty">
+      <article class="card dluhy-karta" aria-labelledby="exekuce-nadpis">
+        <h3 id="exekuce-nadpis">Při exekuci</h3>
+        <p class="dluhy-hlavni"><span>Z výplaty vám zůstane</span><b class="num" data-ex-zustane>{{ d.ex.zustane }}</b></p>
+        <dl class="dluhy-cisla">
+          <div><dt>Strhne se</dt><dd class="num" data-ex-srazka>{{ d.ex.srazka }}</dd></div>
+          <div><dt>Z toho dostanou věřitelé</dt><dd class="num" data-ex-vericum>{{ d.ex.vericum }}</dd></div>
+          <div><dt>Musí vám zůstat aspoň</dt><dd class="num" data-ex-nezabavitelna>{{ d.ex.nezabavitelna }}</dd></div>
+        </dl>
+        <p class="small" data-ex-nahrada{% if not d.ex.nahrada %} hidden{% endif %}>{{ d.ex.nahrada }}</p>
+        <p class="dluhy-doba" data-ex-doba>{{ d.ex.doba }}</p>
+        <p class="dluhy-pozor">{{ ikona('ikona-vystraha') }}<span data-ex-upozorneni>{{ d.ex.upozorneni }}</span></p>
+        <p class="dluhy-vyhrada">{{ VYHRADA }}</p>
+      </article>
+
+      <article class="card dluhy-karta dluhy-karta-oddluzeni" aria-labelledby="oddluzeni-nadpis">
+        <h3 id="oddluzeni-nadpis">Jak by to vypadalo v oddlužení</h3>
+        <p class="dluhy-varovani" data-od-nelze{% if not d.od.nelze %} hidden{% endif %}>{{ ikona('ikona-vystraha') }}<span data-od-nelze-text>{{ d.od.nelze }}</span></p>
+        <p class="dluhy-hlavni"><span>Měsíční splátka</span><b class="num" data-od-splatka>{{ d.od.splatka }}</b></p>
+        <dl class="dluhy-cisla">
+          <div><dt>Z výplaty vám zůstane</dt><dd class="num" data-od-zustane>{{ d.od.zustane }}</dd></div>
+          <div><dt>Jak dlouho</dt><dd data-od-delka>{{ d.od.delka }}</dd></div>
+          <div><dt>Odměna správce měsíčně</dt><dd class="num" data-od-spravce>{{ d.od.spravce }}</dd></div>
+          <div><dt>Věřitelé dostanou celkem</dt><dd class="num" data-od-celkem>{{ d.od.zaplacenoCelkem }}</dd></div>
+          <div><dt>Nejnižší možná splátka</dt><dd class="num" data-od-minimum>{{ d.od.minimum }}</dd></div>
+        </dl>
+        <p class="small" data-od-spravce-text>{{ d.od.spravceText }}</p>
+        <p class="small" data-od-srovnani{% if not d.od.srovnani %} hidden{% endif %}>{{ d.od.srovnani }}</p>
+        <p data-od-zaplaceno>{{ d.od.zaplaceno }}</p>
+        <p class="dluhy-doba" data-od-zbytek>{{ d.od.zbytek }}</p>
+        <p class="small{% if not d.od.splnujeMinimum %} dluhy-varovani{% endif %}" data-od-minimum-text>{{ d.od.minimumText }}</p>
+        <p class="small muted">{{ d.delkaPravidlo }} Během oddlužení se exekuce zastaví. Úroky přestanou růst.</p>
+        <details class="dluhy-details">
+          <summary>Co se neodpouští</summary>
+          <ul>
+            <li>Výživné, které ze zákona platíte.</li>
+            <li>Náhrada škody na zdraví.</li>
+            <li>Náhrada škody, kterou jste způsobili úmyslně.</li>
+            <li>Peněžitý trest za úmyslný trestný čin.</li>
+            <li>Nové dluhy, které vzniknou během oddlužení.</li>
+          </ul>
+        </details>
+        <p class="dluhy-vyhrada">{{ VYHRADA }}</p>
+      </article>
+    </div>
+
+    <details class="card dluhy-jak">
+      <summary>Jak jsme to spočítali</summary>
+      <h3>Exekuce</h3>
+      <ul data-rozpis>
+        {%- for r in d.rozpis %}
+        <li>{{ r }}</li>
+        {%- endfor %}
+      </ul>
+      <h3>Oddlužení</h3>
+      <ul>
+        <li>Splátka se počítá stejně jako srážka u přednostních dluhů. Strhávají se tedy dvě třetiny.</li>
+        <li>Ze splátky se nejdřív platí odměna insolvenčního správce. Zbytek dostanou věřitelé.</li>
+        <li>Splátka musí pokrýt odměnu správce a věřitelům musí jít aspoň stejná částka.</li>
+        <li>Počítáme s tím, že vám návrh zdarma sepíše akreditovaná organizace.</li>
+      </ul>
+      <p class="small muted">Náklady exekuce a další poplatky nepočítáme. Úrok z prodlení počítáme jen z dlužné částky.</p>
+    </details>
+    <p class="sr-only" aria-live="polite" data-oznameni></p>
+  </section>
+
+  <section class="dluhy-sekce" id="dalsi-kroky" data-sekce aria-labelledby="kroky-nadpis">
+    <p class="dluhy-pruh">{{ ikona('ikona-srdce') }}<span>Nejdůležitější krok: <a href="#pomoc" data-pomoc>ozvěte se do bezplatné poradny</a>.</span></p>
+    <h2 id="kroky-nadpis">Co udělat dál</h2>
+    <ol class="dluhy-kroky">
+      <li class="card">
+        <h3>Zjistěte, jaké exekuce máte</h3>
+        <p>Seznam exekucí vede Exekutorská komora. Jmenuje se Centrální evidence exekucí. Výpis je za poplatek. Dostanete ho na webu komory nebo na poště s Czech POINTem.</p>
+        <p><a href="https://www.ceecr.cz/">Centrální evidence exekucí</a></p>
+        <p>Jestli u vás už běží insolvence, zjistíte v insolvenčním rejstříku. Je zdarma.</p>
+        <p><a href="https://isir.justice.cz/">Insolvenční rejstřík</a></p>
+      </li>
+      <li class="card">
+        <h3>Najděte poradnu</h3>
+        <p>Dluhové poradny jsou zdarma. Najdete je v seznamu ministerstva práce. Hledejte „odborné sociální poradenství“ ve vašem kraji.</p>
+        <p>Návrh na oddlužení za vás zdarma sepíše akreditovaná organizace. Seznam vede ministerstvo spravedlnosti.</p>
+        <p><a href="#pomoc" data-pomoc>Odkazy najdete níže v části Bezplatná pomoc</a></p>
+      </li>
+      <li class="card">
+        <h3>Co si připravit na první schůzku</h3>
+        <ul>
+          <li>Občanský průkaz.</li>
+          <li>Výplatní pásky za poslední půlrok.</li>
+          <li>Dopisy od věřitelů, exekutorů a soudů.</li>
+          <li>Smlouvy o dluzích a splátkách.</li>
+          <li>Rozhodnutí soudu o výživném, pokud ho platíte.</li>
+          <li>Přehled, kolik měsíčně platíte za bydlení a energie.</li>
+        </ul>
+        <p>Nemusíte mít všechno. Přijďte i tak.</p>
+      </li>
+      <li class="card">
+        <h3>Na co si dát pozor</h3>
+        <p>Neplaťte nikomu za sepis návrhu na oddlužení. Akreditované organizace to dělají zdarma.</p>
+        <p>Další půjčku na splacení starých dluhů si raději neberte. Situaci většinou zhorší.</p>
+        <p>Dopisy od soudu a exekutora otevírejte. Lhůty běží, i když dopis neotevřete.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="debt dluhy-pomoc" id="pomoc" tabindex="-1" aria-labelledby="pomoc-nadpis">
+    <div>
+      <p class="eyebrow">Zdarma a bez závazků</p>
+      <h2 id="pomoc-nadpis">Bezplatná pomoc</h2>
+      <p>Poradny a akreditované organizace vám pomohou zdarma. Ozvat se můžete kdykoli.</p>
+      <ul class="help-links dluhy-pomoc-seznam">
+        {%- for o in n.pravidla.pomoc %}
+        <li>
+          <a class="help-secondary" href="{{ o.url }}" data-pomoc>{{ o.nazev }}</a>
+          <p class="help-desc">{{ o.popis }}</p>
+          <span class="help-who">Provozuje: {{ o.provozovatel }}</span>
+        </li>
+        {%- endfor %}
+      </ul>
+      <ul class="debt-rules">
+        <li>{{ ikona('ikona-overeno') }}Bez reklam</li>
+        <li>{{ ikona('ikona-overeno') }}Nabídky půjček nedáváme</li>
+        <li>{{ ikona('ikona-overeno') }}Nesbíráme kontakty</li>
+        <li>{{ ikona('ikona-overeno') }}Nic, co zadáte, neukládáme ani neodesíláme</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="stack mt-6">
+    {{ zdroje({ zdroje: meta.zdroje, overeno: meta.overeno, id: 'zdroje-nastroje' }) }}
+
+    {%- if meta.neovereno and meta.neovereno.length %}
+    <section class="card" aria-labelledby="neovereno-nadpis">
+      <h2 id="neovereno-nadpis" class="h-xl">Co zatím neověřujeme a nepočítáme</h2>
+      <ul class="watch">
+        {%- for u in meta.neovereno %}
+        <li>{{ ikona('ikona-vystraha') }}<span>{{ u.text or u }}</span></li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {{ upozorneni({ typ: 'info', titulek: 'Orientační informace', text: 'Nejde o právní poradenství. Vaši situaci závazně posoudí poradna, exekutor nebo insolvenční soud.' }) }}
+  </div>
+</div>
+
+<aside class="lepiva-lista dluhy-lista" aria-label="Rychlý přehled a pomoc">
+  <span class="lepiva-lista-text">
+    <span class="lepiva-lista-popis">Zůstane vám</span>
+    <span class="lepiva-lista-cislo" data-lista-cislo>{{ d.ex.zustane }}</span>
+  </span>
+  <a class="btn btn-primary" href="#pomoc" data-pomoc>{{ ikona('ikona-srdce') }}Bezplatná pomoc</a>
+</aside>
+<script type="application/json" id="pravidla">{{ n.pravidla | json | safe }}</script>

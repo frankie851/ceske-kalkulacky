@@ -1,0 +1,16 @@
+{
+  "id": "inflacni-kalkulacka",
+  "nazev": "Inflační kalkulačka",
+  "typ": "kalkulačka",
+  "kategorie": "penize",
+  "url": "/penize/inflacni-kalkulacka/",
+  "poradi": 4,
+  "perex": "Kolik mají dnes reálnou hodnotu tvoje peníze, mzda nebo úspory a jaký je reálný výnos spořicího účtu.",
+  "otazka": "Kolik mi sežrala inflace a poráží můj spořák růst cen?",
+  "stitky": ["inflace", "ČSÚ", "reálný výnos"],
+  "termin": null,
+  "novinka2027": false,
+  "ilustrace": "nastroj-inflace",
+  "cta": "Spočítat",
+  "souvisi": ["plan48", "penzijko-kompas", "zdanim-to"]
+}

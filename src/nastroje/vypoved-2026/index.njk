@@ -1,0 +1,54 @@
+---
+layout: layouty/nastroj.njk
+nastroj: vypoved-2026
+title: Výpověď 2026
+description: Z data doručení výpovědi spočítá poslední den pracovního poměru, odstupné a podporu v nezaměstnanosti po měsících. A co vyřídit do kdy.
+permalink: /prace-rodina/vypoved-2026/
+skripty: ['/nastroje/vypoved-2026/app.js']
+styly: ['/nastroje/vypoved-2026/vypoved-2026.css']
+uvod: Vyplň datum doručení a pár údajů z výplatní pásky. Hned uvidíš poslední den, odstupné a podporu.
+---
+{%- from "komponenty/formular.njk" import pole, segmenty -%}
+{%- from "komponenty/vysledky.njk" import lepiva_lista -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set sprite = '/img/sprite.svg' | url -%}
+{%- set dluhy = '/dluhy/' | url -%}
+{%- set v = vypoved -%}
+<div class="calc-layout vypoved" id="vypoved" data-sprite="{{ sprite }}" data-dluhy="{{ dluhy }}">
+  <section class="calc-side" aria-labelledby="vypoved-udaje">
+    <div class="card">
+      <h2 id="vypoved-udaje">Tvoje údaje</h2>
+      <p class="muted small">Cokoli změň a výsledek se hned přepočítá. Nic se neukládá ani neodesílá.</p>
+      <form id="vypoved-formular" action="#vysledek" method="get" novalidate>
+        {{ segmenty({ id: 'kdo', legenda: 'Jak pracovní poměr končí', moznosti: v.kdo }) }}
+        {{ pole({ id: 'doruceni', typ: 'date', label: 'Den doručení výpovědi', hodnota: v.pole.doruceni, napoveda: 'Den, kdy výpověď převzala druhá strana. U dohody den jejího uzavření.', chybaMisto: true }) }}
+        <div data-pro="zamestnavatel dohoda">
+          {{ pole({ id: 'duvod', label: 'Důvod podle výpovědi nebo dohody', moznosti: v.duvody, napoveda: 'Písmeno z § 52 zákoníku práce najdeš přímo ve výpovědi. Podle něj se řídí výpovědní doba a odstupné.' }) }}
+        </div>
+        <div data-pro="dohoda" hidden>
+          {{ pole({ id: 'konecDohody', typ: 'date', label: 'Sjednaný den skončení podle dohody', hodnota: v.pole.konecDohody, chybaMisto: true }) }}
+        </div>
+        <div data-pro="zamestnavatel zamestnanec">
+          {{ segmenty({ id: 'zkusebni', legenda: 'Ruší se pracovní poměr ve zkušební době?', moznosti: v.zkusebni, napoveda: 'Ve zkušební době výpovědní doba neběží a poměr končí dnem doručení (§ 66 ZP).' }) }}
+        </div>
+        {{ pole({ id: 'delka', label: 'Jak dlouho pracovní poměr trvá', hodnota: v.pole.delka, jednotka: 'let', inputmode: 'decimal', napoveda: 'Ke dni skončení. Půl roku = 0,5.', chybaMisto: true }) }}
+        {{ pole({ id: 'hruby', label: 'Průměrný hrubý měsíční výdělek', hodnota: v.pole.hruby, jednotka: 'Kč', napoveda: 'Pro odstupné. Sdělí ho mzdová účetní.', chybaMisto: true }) }}
+        {{ pole({ id: 'cisty', label: 'Průměrný čistý měsíční výdělek', hodnota: v.pole.cisty, jednotka: 'Kč', napoveda: 'Pro podporu. Úřad práce ho vezme ze zápočtového listu.', chybaMisto: true }) }}
+        {{ pole({ id: 'vek', label: 'Věk v den podání žádosti o podporu', hodnota: v.pole.vek, jednotka: 'let', napoveda: 'Podle věku se řídí, jak dlouho podpora trvá.', chybaMisto: true }) }}
+        {{ pole({ id: 'datumZadosti', typ: 'date', label: 'Den podání žádosti o podporu', hodnota: v.pole.datumZadosti, napoveda: 'Předvyplněný je den po skončení pracovního poměru. Podle tohoto data se volí pravidla podpory.', chybaMisto: true }) }}
+        <div class="form-actions" data-tlacitko hidden>
+          <button class="btn btn-primary" type="submit">Ukázat výsledek</button>
+        </div>
+        <p class="sr-only" aria-live="polite" data-oznameni></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="calc-main" id="vypoved-vysledky">
+    {{ v.karta(sprite) | safe }}
+    {{ v.detaily(sprite) | safe }}
+    {{ v.seznam(sprite, dluhy) | safe }}
+  </div>
+</div>
+
+{{ lepiva_lista({ cislo: v.konec | datum, popis: 'Poslední den pracovního poměru', cil: '#vysledek' }) }}

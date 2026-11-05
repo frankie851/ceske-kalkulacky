@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "overeno": "2026-11-05",
+    "zdroje": [
+      {
+        "nazev": "ČSÚ – Indexy spotřebitelských cen, otevřená data (sada CEN0101E, od roku 2026)",
+        "url": "https://csu.gov.cz/produkty/isc_cr",
+        "poznamka": "Bazický index, úhrn spotřebního koše, průměr 2015 = 100. Aktualizuje se jednou měsíčně."
+      },
+      {
+        "nazev": "ČSÚ – Indexy spotřebitelských cen, datová sada 010022-25 (1995–2025)",
+        "url": "https://csu.gov.cz/produkty/indexy-spotrebitelskych-cen",
+        "poznamka": "Historická řada, od roku 2026 se neaktualizuje."
+      },
+      {
+        "nazev": "ČSÚ – dokumentace datové sady indexů spotřebitelských cen",
+        "url": "https://csu.gov.cz/docs/107508/5bc19b9e-1d32-50d4-8b7c-a3bcd4fbf4d2/010022-23dds.htm"
+      },
+      {
+        "nazev": "ČSÚ – Inflace, spotřebitelské ceny (meziroční inflace pro kontrolu)",
+        "url": "https://csu.gov.cz/csu/czso/inflace-spotrebitelske-ceny"
+      }
+    ],
+    "neovereno": [
+      "Index popisuje průměrný spotřební koš domácností, ne tvoje osobní výdaje.",
+      "Nepočítáme daně, poplatky ani daň z úroků. Reálný výnos je před zdaněním.",
+      "ČSÚ zveřejňuje bazický index na jedno desetinné místo. Meziroční inflace spočtená z něj se od oficiální může lišit o desetinu procentního bodu, kolem roku 2000 až o 0,3 p. b.",
+      "Když zvolíš měsíc, za který ještě nejsou data, počítáme s posledním dostupným měsícem a napíšeme to u výsledku.",
+      "Výnos zadaný ročně (p. a.) přepočítáváme na období s ročním složeným úročením."
+    ]
+  },
+  "data": {
+    "zakladni": "průměr 2015 = 100",
+    "posledniMesic": "2026-09"
+  },
+  "vychozi": {
+    "prepocet": {
+      "castka": 10000,
+      "od": "2005-01"
+    },
+    "vynos": {
+      "urok": 4,
+      "typ": "pa",
+      "letZpet": 5
+    },
+    "mzda": {
+      "mzdaTehdy": 30000,
+      "mzdaTed": 45000,
+      "letZpet": 10
+    },
+    "prvniRok": 1995
+  }
+}

@@ -1,0 +1,125 @@
+---
+layout: layouty/nastroj.njk
+nastroj: rodicovska
+title: Rodičovská pro celou rodinu
+description: Plánovač mateřské, otcovské a rodičovského příspěvku po měsících do 3 let dítěte. Kolik rodina dostane a kdy se peníze vyčerpají.
+permalink: /prace-rodina/rodicovska/
+uvod: Zadej termín porodu a příjmy obou rodičů. Uvidíš, kolik rodina dostane každý měsíc a kdy se rodičovský příspěvek vyčerpá.
+skripty: ['/nastroje/rodicovska/app.js']
+styly: ['/nastroje/rodicovska/rodicovska.css']
+---
+{%- from "komponenty/formular.njk" import pole, segmenty, krok, ulozeni -%}
+{%- from "komponenty/vysledky.njk" import vysledek, statistiky, tabulka, kontrolni_seznam, lepiva_lista -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set r = rodicovska -%}
+
+<div class="calc-layout rodicovska">
+  <section class="calc-side" aria-labelledby="rodicovska-udaje">
+    <h2 id="rodicovska-udaje">Údaje o rodině</h2>
+    <p class="muted small">Cokoli změň a plán se hned přepočítá. Počítáme se zaměstnanci, ne s OSVČ.</p>
+    <form id="rodicovska-formular" action="#vysledek" method="get" novalidate>
+      {%- call krok({ cislo: 1, titulek: 'O dítěti', shrnuti: r.shrnuti.dite, otevreny: true, id: 'krok-dite' }) %}
+        {{ pole({ id: 'termin', label: 'Termín porodu', hodnota: r.pole.termin, typ: 'date', napoveda: 'Počítáme s porodem v den termínu.', chybaMisto: true }) }}
+        {{ segmenty({ id: 'vicercata', legenda: 'Jedno dítě, nebo vícerčata?', moznosti: r.moznosti.vicercata, napoveda: 'U vícerčat je mateřská delší a rodičovský příspěvek dvojnásobný.' }) }}
+      {%- endcall %}
+
+      {%- call krok({ cislo: 2, titulek: 'Příjmy', shrnuti: r.shrnuti.prijmy, otevreny: true, id: 'krok-prijmy' }) %}
+        {{ pole({ id: 'prijem-matka', label: 'Hrubá mzda – matka', hodnota: r.pole.prijemMatka, jednotka: 'Kč', napoveda: r.napovedy.prijemMatka, chybaMisto: true }) }}
+        {{ segmenty({ id: 'narok-matka', legenda: 'Má matka nárok na mateřskou?', moznosti: r.moznosti.narokMatka, napoveda: r.napovedy.narokMatka }) }}
+        {{ pole({ id: 'prijem-otec', label: 'Hrubá mzda – otec', hodnota: r.pole.prijemOtec, jednotka: 'Kč', napoveda: r.napovedy.prijemOtec, chybaMisto: true }) }}
+        {{ segmenty({ id: 'narok-otec', legenda: 'Je otec nemocensky pojištěný zaměstnanec?', moznosti: r.moznosti.narokOtec, napoveda: 'Podle toho počítáme otcovskou a případné převzetí mateřské.' }) }}
+      {%- endcall %}
+
+      {%- call krok({ cislo: 3, titulek: 'Mateřská', shrnuti: r.shrnuti.materska, otevreny: true, id: 'krok-materska' }) %}
+        {{ segmenty({ id: 'kdo-ppm', legenda: 'Kdo nastoupí na mateřskou?', moznosti: r.moznosti.kdoPpm, napoveda: r.napovedy.kdoPpm }) }}
+        <div data-zavisi="ppm-matka">
+          {{ pole({ id: 'ppm-tydnu', label: 'Kdy matka nastoupí', moznosti: r.moznosti.tydnu }) }}
+        </div>
+      {%- endcall %}
+
+      {%- call krok({ cislo: 4, titulek: 'Otcovská', shrnuti: r.shrnuti.otcovska, otevreny: true, id: 'krok-otcovska' }) %}
+        {{ segmenty({ id: 'otcovska', legenda: 'Bude otec čerpat otcovskou?', moznosti: r.moznosti.otcovska }) }}
+        <div data-zavisi="otcovska">
+          {{ pole({ id: 'otcovska-od', label: 'Kolik dní po porodu otec nastoupí', hodnota: r.pole.otcovskaOd, jednotka: 'dní', napoveda: r.napovedy.otcovskaOd, chybaMisto: true }) }}
+        </div>
+      {%- endcall %}
+
+      {%- call krok({ cislo: 5, titulek: 'Rodičovský příspěvek', shrnuti: r.shrnuti.rp, otevreny: true, id: 'krok-rp' }) %}
+        <div class="field rodicovska-posuvnik">
+          <label for="rp-vyse">Kolik měsíčně čerpat</label>
+          <p class="rodicovska-vyse" aria-hidden="true"><output id="rp-vyse-text" for="rp-vyse" data-rp-text>{{ r.rp.text }}</output> měsíčně</p>
+          <input type="range" id="rp-vyse" name="rp-vyse" min="{{ r.rp.min }}" max="{{ r.rp.max }}" step="{{ r.rp.krok }}" value="{{ r.rp.hodnota }}" aria-valuetext="{{ r.rp.text }} měsíčně" aria-describedby="rp-vyse-napoveda">
+          <span class="hint" id="rp-vyse-napoveda" data-rp-napoveda>{{ r.rp.napoveda }}</span>
+          <div class="rodicovska-tlacitka" data-rp-tlacitka hidden>
+            <button type="button" class="btn btn-ghost" data-rp-navrh aria-pressed="true">Vyčerpat do 3 let</button>
+            <button type="button" class="btn btn-ghost" data-rp-max aria-pressed="false">Maximum</button>
+          </div>
+        </div>
+        {{ segmenty({ id: 'stridani', legenda: 'Střídání rodičů v péči o dítě', moznosti: r.moznosti.stridani, napoveda: 'Druhý rodič převezme péči a rodičovský příspěvek.' }) }}
+        <div data-zavisi="stridani">
+          {{ pole({ id: 'stridani-od', label: 'Druhý rodič přebírá péči od měsíce dítěte', hodnota: r.pole.stridaniOd, jednotka: 'měsíc', napoveda: r.napovedy.stridaniOd, chybaMisto: true }) }}
+        </div>
+        {{ segmenty({ id: 'navrat', legenda: 'Vrátí se rodič, který je doma, dřív do práce?', moznosti: r.moznosti.navrat }) }}
+        <div data-zavisi="navrat">
+          {{ pole({ id: 'navrat-od', label: 'Návrat do práce od měsíce dítěte', hodnota: r.pole.navratOd, jednotka: 'měsíc', napoveda: r.napovedy.navratOd, chybaMisto: true }) }}
+        </div>
+        <div class="form-actions rodicovska-akce-formulare" hidden>
+          <button class="btn btn-primary" type="submit">Ukázat plán</button>
+        </div>
+      {%- endcall %}
+    </form>
+  </section>
+
+  <div class="calc-main">
+    {%- call vysledek({ id: 'vysledek', kicker: 'Plán do 3 let dítěte', nadpis: 'Tady je plán pro tvoji rodinu', cislo: r.vysledek.cislo, popis: r.vysledek.popis, vysvetleni: r.vysledek.vysvetleni, ilustrace: 'situace-rodina', ukazka: true }) %}
+      <p class="rodicovska-novela" data-novela{% if not r.rp.novela %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: r.rp.novela or 'Schváleno, zatím ne ve Sbírce' }) }}</p>
+      {{ statistiky(r.vysledek.statistiky) }}
+      <div class="rodicovska-varovani" data-varovani>
+        {%- for w in r.varovani %}
+        <div class="notice{% if w.uroven == 'info' %} notice-info{% endif %}">{{ ikona('ikona-info' if w.uroven == 'info' else 'ikona-vystraha') }}<div>{% if w.titulek %}<p><strong>{{ w.titulek }}</strong></p>{% endif %}<p>{{ w.text }}</p></div></div>
+        {%- endfor %}
+      </div>
+      <p class="sr-only" aria-live="polite" data-oznameni></p>
+    {%- endcall %}
+
+    <section class="card" aria-labelledby="osa-karta-nadpis">
+      <h2 id="osa-karta-nadpis">Časová osa po měsících</h2>
+      <p class="muted">Kolik rodina dostane každý měsíc: dávky a orientační čisté mzdy toho, kdo zrovna pracuje. ★ je měsíc porodu, ✓ měsíc, kdy se rodičovský příspěvek vyčerpá.</p>
+      <ul class="graf-legenda rodicovska-legenda" aria-label="Legenda časové osy">
+        {%- for l in r.legenda %}
+        <li><span class="graf-vzorek rodicovska-vzorek seg-{{ l.klic }}" aria-hidden="true"></span>{{ l.nazev }}</li>
+        {%- endfor %}
+      </ul>
+      <div class="rodicovska-osa" data-osa>{{ r.osa | safe }}</div>
+      <details class="rodicovska-tabulka">
+        <summary>Zobrazit jako tabulku po měsících</summary>
+        {{ tabulka({ caption: 'Příjem rodiny po měsících', popisek: 'příjem rodiny po měsících', sloupce: r.sloupceMesicu, radky: r.radkyMesicu, vpravo: [1, 2, 3], stack: true, id: 'tabulka-mesicu' }) }}
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="souhrn-nadpis">
+      <h2 id="souhrn-nadpis">Souhrn</h2>
+      {{ tabulka({ caption: 'Kolik rodina dostane do 3 let dítěte', popisek: 'souhrn', sloupce: r.sloupceSouhrnu, radky: r.radkySouhrnu, vpravo: [1], stack: true, zvyraznit: r.zvyraznitSouhrn, id: 'tabulka-souhrnu' }) }}
+      <details class="rodicovska-tabulka">
+        <summary>Jak jsme počítali</summary>
+        <ul class="rodicovska-postup" data-jak-pocitame>
+          {%- for t in r.jakPocitame %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+      </details>
+      <p class="note">{{ ikona('ikona-info') }}<span>Orientační výpočet, nejde o rozhodnutí úřadu. O mateřské a otcovské rozhoduje ČSSZ, o rodičovském příspěvku Úřad práce ČR.</span></p>
+    </section>
+
+    <section class="card" aria-labelledby="seznam-nadpis">
+      <h2 id="seznam-nadpis">Kontrolní seznam: kdy a kde požádat</h2>
+      <p class="muted">Termíny podle zadaného plánu. Odškrtnutí se nikam neukládá.</p>
+      <div data-kontrolni-seznam>
+        {{ kontrolni_seznam({ id: 'ukol', polozky: r.kontrolniSeznam }) }}
+      </div>
+    </section>
+
+    {{ ulozeni({ id: 'rodicovska', popis: 'Uloží zadaný plán (termín, příjmy a volby) jen v tomto prohlížeči (localStorage). Nikam ho neposíláme. Bez kliknutí se nic neukládá.' }) }}
+  </div>
+</div>
+
+{{ lepiva_lista({ cislo: r.vysledek.lista, popis: 'Rodina dostane na dávkách', cil: '#vysledek' }) }}

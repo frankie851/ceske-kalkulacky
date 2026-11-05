@@ -36,6 +36,12 @@ jobs:
         run: npm run test:e2e
       - name: Lighthouse
         run: npm run lighthouse
+      - name: Sestavení včetně nezveřejněných nástrojů (jen pro testy)
+        run: ZOBRAZIT_SKRYTE=1 npx eleventy --output=_site-vse
+      - name: Kontrola a e2e nezveřejněných nástrojů
+        run: |
+          SITE_DIR=_site-vse npm run kontrola -- dluhy/ dluhy/exekuce-nebo-oddluzeni/
+          npm run test:e2e:skryte
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:

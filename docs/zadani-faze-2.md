@@ -178,6 +178,8 @@ repozitářů.
 
 ## Vlna 2: Slevy, Cestovní příkaz, Výpověď, Přijímačky, Rodičovská, Inflace, Dluhy, Volno 2027
 
+> **Stav (5. 11. 2026):** vlna 2 je hotová. Exekuce, nebo oddlužení? je postavená, ale nezveřejněná, dokud uživatel ručně neověří odkazy na bezplatnou pomoc (viz `docs/rozhodnuti.md`, vlna 2).
+
 ```markdown
 # Úkol: Spočítáno – 2. fáze, vlna 2: přenos dalších nástrojů a Volno 2027
 

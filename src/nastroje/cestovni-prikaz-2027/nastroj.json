@@ -1,0 +1,16 @@
+{
+  "id": "cestovni-prikaz-2027",
+  "nazev": "Cestovní příkaz 2027",
+  "typ": "kalkulačka",
+  "kategorie": "dane-podnikani",
+  "url": "/dane-podnikani/cestovni-prikaz-2027/",
+  "poradi": 3,
+  "perex": "Náhrada za auto, pohonné hmoty a stravné na tuzemské cestě a cestovní příkaz k tisku.",
+  "otazka": "Kolik se proplácí za služební cestu vlastním autem a kolik je stravné?",
+  "stitky": ["stravné", "náhrada za km", "vyhláška"],
+  "termin": "Nová vyhláška obvykle koncem prosince",
+  "novinka2027": true,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Spočítat cestu",
+  "souvisi": ["osvc-2027", "mam-eet", "slevy-2027"]
+}

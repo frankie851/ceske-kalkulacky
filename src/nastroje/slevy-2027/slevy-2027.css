@@ -1,0 +1,72 @@
+/* Slevy 2027 – styly jen pro tento nástroj (načítá je front matter `styly`).
+   Barvy jen z tokenů v main.css. Vrstva „stranky“: přebije komponenty, tisk ji přebije. */
+@layer stranky {
+  .slevy [hidden] { display: none !important; }
+  .slevy-soukromi { margin: 0 0 var(--sp-5); }
+
+  /* ---------- Průvodce ---------- */
+  .slevy-krok { max-width: 52rem; }
+  .slevy .quiz-q:focus { outline: none; }
+  .slevy .quiz-q:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+  .slevy .slevy-napoveda { font-size: var(--fs-md); margin: 0 0 var(--sp-5); max-width: 44rem; }
+  .slevy .quiz-actions { margin-top: var(--sp-5); }
+  .slevy .quiz-actions .btn-primary { margin-left: auto; }
+  .slevy fieldset.volby { margin: 0 0 var(--sp-2); }
+  .slevy fieldset.volby > legend { font-weight: 800; margin-bottom: 0; }
+  .slevy .options { margin: var(--sp-3) 0 var(--sp-4); }
+  @media (min-width: 560px) { .slevy fieldset.volby .options { grid-template-columns: repeat(2, minmax(0, 14rem)); } }
+  .slevy-mrizka { display: grid; gap: 0 var(--sp-4); }
+  @media (min-width: 560px) { .slevy-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .slevy-mrizka .field { min-width: 0; }
+
+  /* Dítě v dynamickém seznamu */
+  .slevy-deti { display: grid; gap: var(--sp-4); }
+  .slevy-dite { border: 2px solid var(--c-border); border-radius: var(--r-lg); padding: var(--sp-4); margin: 0 0 var(--sp-4); min-width: 0; background: var(--c-bg-alt); }
+  .slevy-deti .slevy-dite { margin: 0; }
+  .slevy-dite > legend { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); padding: 0 var(--sp-2); }
+  .slevy-dite .options { margin-bottom: var(--sp-3); }
+  .slevy-pridat { margin: var(--sp-4) 0 0; }
+  .slevy-zadne { margin: 0; }
+
+  /* ---------- Výsledek ---------- */
+  .slevy-hotovo > * + *, .slevy-ukazka > * + * { margin-top: var(--sp-5); }
+  .slevy-hotovo > .scenario, .slevy-ukazka > .scenario { margin-top: 0; }
+  .slevy .result h2:focus { outline: none; }
+  .slevy .result h2:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+  .slevy .slevy-cislo { white-space: normal; }
+  .slevy .result .stats { margin-top: var(--sp-4); }
+  @media (min-width: 760px) { .slevy .result .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .slevy .card > h2, .slevy .card-head h2 { font-size: var(--fs-xl); margin: 0; }
+  .slevy .card > h2 { margin-bottom: var(--sp-3); }
+  .slevy .table-wrap { position: relative; }
+  .slevy-naroky th[scope="row"] { min-width: 14rem; }
+  .slevy-nazev { display: block; }
+  .slevy-stitky { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 0; }
+  .slevy-stitky .badge { font-size: var(--fs-xs); padding: 2px 10px; min-height: 0; }
+  .slevy-pozn { display: block; font-weight: 400; font-size: var(--fs-xs); color: var(--c-text-muted); margin-top: 4px; white-space: normal; }
+  .slevy-zruseno th, .slevy-zruseno td { color: var(--c-text-muted); }
+  .slevy-novinky { margin: 0; padding-left: 1.2rem; display: grid; gap: var(--sp-2); }
+  .slevy .split .btn .ikona { width: 20px; height: 20px; }
+  .slevy-seznam h3 { margin: var(--sp-5) 0 var(--sp-3); }
+  .slevy-akce { margin-top: var(--sp-6); }
+  @media (max-width: 559px) {
+    .slevy-naroky th[scope="row"] { min-width: 0; }
+    .slevy .stack-table td[data-label] { padding: 3px 0; }
+  }
+
+  /* ---------- Bez JavaScriptu ---------- */
+  .slevy-bez-js > .notice { margin-bottom: var(--sp-5); }
+  .slevy-prehled { margin-bottom: var(--sp-6); }
+  .slevy-prehled > summary { cursor: pointer; font-weight: 800; min-height: 32px; }
+  .slevy-prehled > summary .h-lg { font-family: var(--font-display); font-weight: 600; }
+  .slevy-prehled[open] > summary { margin-bottom: var(--sp-4); }
+  .slevy-otazky { margin: 0; padding-left: 1.5rem; display: grid; gap: var(--sp-4); }
+  .slevy-otazky h3 { margin-bottom: var(--sp-1); }
+  .slevy-otazky .hint { margin: 0; }
+}
+
+@layer tisk {
+  @media print {
+    .slevy-akce, .slevy-prehled { display: none !important; }
+  }
+}
