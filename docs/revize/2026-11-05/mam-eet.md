@@ -95,6 +95,7 @@ Referenční výpočet: `dukazy/skripty/mam-eet-prepocet.mjs` (bez kódu aplikac
 | UI vlastní | OSVČ: „800 000“, „1 200 000“, „300 000“ s mezerou | přijato | — | přijato, výsledek správný | ano |
 | UI vlastní | OSVČ: „1500000,50“, prázdné, „1.200.000“, −100, 0, děti −1 | chyba | — | chyba až po „Spočítat“, **tabulka se starým výsledkem zůstává** (`chyba-osvc-360.png`) | EET-05 |
 | UI vlastní | EET dotazník: prázdné, „800000,50“, −1, „abc“, XSS | chyba | — | „Zadej celé číslo, nejméně 0.“; „1 500“ přijato | ano |
+| UI vlastní | desetinná čárka „1500,50“, „0,85“ ve všech 4 číselných polích, prohlížeč cs-CZ i en-US (`mam-eet-carka.mjs` → `carka-lokalizace.txt`) | chyba (celé Kč) | — | pole jsou `type="text" inputmode="numeric"`, hodnota zůstane v poli beze změny v obou lokalizacích; dotazník a OSVČ formulář hlásí „Zadej … celé číslo“; kalkulačka EET OFF bez hlášky bere 0 Kč (EET-04) | ano / EET-04 |
 
 ## Shoda se zadáním
 ### Mám EET?
@@ -165,7 +166,7 @@ Referenční výpočet: `dukazy/skripty/mam-eet-prepocet.mjs` (bez kódu aplikac
 - **Reprodukce:** otevřít `#osvc`, zadat příjmy 800 000 Kč → axe-core (WCAG 2.2 A/AA) hlásí `aria-prohibited-attr`, dopad **serious**, uzel `rect` (`prohlizec-scenare.json` → `osvc.360.axeVysledek` i `axeChyba`; úvodní stránka bez grafu je čistá). Prvek `<rect>` má generickou roli, na které je `aria-label` zakázán, čtečka proto nápovědu „Najetím nebo šipkami na grafu…“ nepřečte, přestože je prvek fokusovatelný.
 - **Dopad na uživatele:** uživatel čtečky dostane neoznačený fokusovatelný prvek bez vysvětlení, co s ním dělat (hodnoty grafu jsou naštěstí dostupné i v tabulce pod grafem).
 - **Doporučená oprava:** dát překryvu `role="application"` nebo `role="img"` (případně nahradit `<rect>` tlačítkem/`<g role="group">`), nebo text přesunout do `<title>`/`aria-describedby` na `<svg>`; ověřit axe = 0 serious.
-- **Ověření:** reprodukováno 2× (dva běhy `mam-eet-prohlizec.mjs`, obě analýzy) · skeptik:
+- **Ověření:** reprodukováno 2× (dva běhy `mam-eet-prohlizec.mjs`, obě analýzy) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – axe 4.14 reprodukoval aria-prohibited-attr serious na rect.overlay při 1280×900 i 390×844; rodičovské svg má role=img, popisek fokusovatelného prvku se nezpřístupní)
 
 ### EET-03 · Střední · 1 Pravidla a data · 1. pásmo paušální daně 2027 je 9 662 Kč, podle zákonného vzorce vychází 9 661 Kč
 - **Kde:** `rules.json:726–741` (`band1.monthly 9662`, `social 6074`, `socialFromMinAdvanceMultiple 1.15`, note „minimální záloha × 1,15“), test `test/osvc.test.js:98–103` a `:37–50` (115 944 / 132 744), obrazovka „Tvoje měsíční záloha: 9 662 Kč“
@@ -176,7 +177,7 @@ Referenční výpočet: `dukazy/skripty/mam-eet-prepocet.mjs` (bez kódu aplikac
 
 ### EET-04 · Střední · 2 Výpočty · Kalkulačka EET OFF tiše bere neplatnou cenu pokladny jako 0 Kč a „20.000“ jako 20 Kč
 - **Kde:** `app.js:205` (`Number(costInput.value.replace(/\s/g, ''))`), `rules.js:223` (`ownCostAnnual > 0 ? ownCostAnnual : 0`), pole „Roční náklady na vlastní pokladnu“
-- **Reprodukce:** výsledek Z5 → „Budu evidovat ve vlastní pokladně“ → zadat „20 000,50“ nebo „−5000“ → očekáváno chybová hláška (jako u ostatních číselných polí) → skutečnost „Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.“; zadat „20.000“ → „Evidence vychází levněji: **20 Kč** ročně …, ušetříš 16 780 Kč“ (správně: EET OFF levnější o 3 200 Kč). `prohlizec-scenare.json` → `eet.360.kalkulacka`; `prepocet.txt` K4, K6.
+- **Reprodukce:** výsledek Z5 → „Budu evidovat ve vlastní pokladně“ → zadat „20 000,50“ nebo „−5000“ → očekáváno chybová hláška (jako u ostatních číselných polí) → skutečnost „Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.“; zadat „20.000“ → „Evidence vychází levněji: **20 Kč** ročně …, ušetříš 16 780 Kč“ (správně: EET OFF levnější o 3 200 Kč). `prohlizec-scenare.json` → `eet.360.kalkulacka`; `prepocet.txt` K4, K6. Chování je stejné v prohlížeči cs-CZ i en-US (`carka-lokalizace.txt`): pole je `type="text"`, takže prohlížeč čárku nezahazuje a chyba je čistě v parsování `Number()` v aplikaci; ostatní tři číselná pole čárku správně odmítnou hláškou.
 - **Dopad na uživatele:** při českém zápisu s tečkou nebo desetinnou čárkou dostane opačné doporučení; částka 0/20 Kč je ve větě vidět, takže pozorný uživatel chybu odhalí, ale bez varování.
 - **Doporučená oprava:** použít stejnou validaci jako v dotazníku (celé číslo ≥ 0, jinak hláška a bez věty), odmítnout tečku jako oddělovač tisíců nebo ji odstranit stejně jako mezery; v `compareCosts` vracet pro NaN/záporné `null` místo 0.
 - **Ověření:** reprodukováno 2× (dva běhy prohlížeče) · skeptik:
@@ -261,4 +262,5 @@ Referenční výpočet: `dukazy/skripty/mam-eet-prepocet.mjs` (bez kódu aplikac
 - **Postup podle zadání** (tabulka ověřených hodnot a schválení před kódem, ruční průchod 7 scénářů) nelze zpětně ověřit; v repozitáři je volitelný Playwright skript, který jsem nespouštěl (nahrazen vlastním puppeteer scénářem).
 - **Rozhodná částka u vedlejší činnosti** – posuzuji „příjem“ jako daňový základ (zisk) stejně jako aplikace a rejstřík DP-68; dílčí příjmy ze zaměstnání aplikace neřeší (mimo rozsah zadání).
 - **Předpoklady:** OSVČ s daňovým zvýhodněním má nárok na celý rok; dítě bez ZTP/P; výdajový paušál platí pro 100 % příjmů (aplikace i můj výpočet mimo případ O29); EET OFF v kalkulačce OSVČ se posuzuje podle zadaných příjmů jako příjmů roku 2026 (aplikace to uvádí v poznámce).
+- **Lokalizace prohlížeče:** test desetinné čárky běžel s `--lang=cs-CZ` i `en-US`; headless Chromium v obou hlásil `navigator.language = en-US`, pro tuto aplikaci to ale nerozhoduje – žádné pole není `type="number"` (všechna `type="text" inputmode="numeric"`, `app.js:74, 197`, `osvc-app.js:104`), hodnota v poli zůstala v obou bězích přesně taková, jak byla zadána.
 - Testovací vstupy jsou smyšlené; do repozitáře aplikace jsem nic nezapisoval, skripty běžely z `docs/revize/.../skripty/` a `/tmp/revize/scratch/mam-eet/`.
