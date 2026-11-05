@@ -110,3 +110,9 @@ node tools/kontroly/snimky.mjs --webp       # snímky + WebP výřezy pro porovn
 node tools/kontroly/rozcestnik.mjs          # designs/index.html z designs/_obsah/varianty.json
 node tools/kontroly/porovnani.mjs           # designs/porovnani.html (jeden soubor s vloženými snímky)
 ```
+
+## Výběr varianty
+
+5. 11. 2026 byla vybrána **varianta B „Přátelský průvodce“**. Zadání 2. fáze je
+v `docs/zadani-faze-2.md`. Sestavení webu je rozdělené do tří vln podle termínů a převezme
+výpočty a testy z 12 existujících repozitářů aplikací.
