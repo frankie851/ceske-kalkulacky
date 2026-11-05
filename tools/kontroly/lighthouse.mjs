@@ -6,7 +6,9 @@ import lighthouse from 'lighthouse';
 import { spustitProhlizec } from './prohlizec.mjs';
 import { spustitServer, KOREN } from './server.mjs';
 
-const STRANKY = process.argv.slice(2).length ? process.argv.slice(2) : ['', 'penize/plan48/', 'penize/penzijko-kompas/', 'dane-podnikani/mam-eet/', 'dane-podnikani/mam-eet/osvc-2027/'];
+const STRANKY = process.argv.slice(2).length ? process.argv.slice(2) : ['', 'penize/plan48/', 'penize/penzijko-kompas/', 'penize/inflacni-kalkulacka/', 'dane-podnikani/mam-eet/', 'dane-podnikani/mam-eet/osvc-2027/',
+  'dane-podnikani/slevy-2027/', 'dane-podnikani/cestovni-prikaz-2027/', 'prace-rodina/vypoved-2026/', 'prace-rodina/prijimacky/',
+  'prace-rodina/rodicovska/', 'prace-rodina/volno-2027/'];
 const LIMITY = { performance: 0.9, accessibility: 1 };
 
 const { zaklad, zavrit } = await spustitServer({ prefix: process.env.PATH_PREFIX || '/' });

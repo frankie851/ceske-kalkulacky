@@ -1,5 +1,5 @@
 {
-  "datum": "2026-11-05T08:46:02.730Z",
+  "datum": "2026-11-05T09:50:38.585Z",
   "vysledky": [
     {
       "stranka": "/",
@@ -11,7 +11,16 @@
       }
     },
     {
-      "stranka": "/penize/plan48/",
+      "stranka": "/penize/inflacni-kalkulacka/",
+      "skore": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/dane-podnikani/slevy-2027/",
       "skore": {
         "performance": 100,
         "accessibility": 100,
@@ -20,7 +29,34 @@
       }
     },
     {
-      "stranka": "/penize/penzijko-kompas/",
+      "stranka": "/dane-podnikani/cestovni-prikaz-2027/",
+      "skore": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/prace-rodina/vypoved-2026/",
+      "skore": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/prace-rodina/prijimacky/",
+      "skore": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/prace-rodina/rodicovska/",
       "skore": {
         "performance": 99,
         "accessibility": 100,
@@ -29,18 +65,9 @@
       }
     },
     {
-      "stranka": "/dane-podnikani/mam-eet/",
+      "stranka": "/prace-rodina/volno-2027/",
       "skore": {
         "performance": 99,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      }
-    },
-    {
-      "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
-      "skore": {
-        "performance": 92,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
