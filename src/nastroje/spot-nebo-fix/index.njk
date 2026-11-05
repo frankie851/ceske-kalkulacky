@@ -1,0 +1,160 @@
+---
+layout: layouty/nastroj.njk
+nastroj: spot-nebo-fix
+title: Spot, nebo fix?
+description: Kolik by domácnost zaplatila za elektřinu na spotu, na fixu a na dynamickém tarifu. Spočítáno na skutečných cenách z burzy OTE za posledních 12 měsíců.
+permalink: /bydleni-energie/spot-nebo-fix/
+uvod: Vyber typ domácnosti a nabídky, které zvažuješ. Spočítáme to na skutečných cenách z burzy za posledních 12 měsíců.
+skripty: ['/nastroje/spot-nebo-fix/ui.js']
+styly: ['/nastroje/spot-nebo-fix/spot-nebo-fix.css']
+---
+{%- from "komponenty/formular.njk" import pole, volby -%}
+{%- from "komponenty/vysledky.njk" import vysledek, lepiva_lista -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set s = spot -%}
+{%- set u = s.ukazka -%}
+
+<div class="calc-layout spot">
+  <section class="calc-side" aria-labelledby="spot-udaje">
+    <h2 id="spot-udaje">Tvoje odběrné místo</h2>
+    <p class="muted small">Cokoli změň a výsledek se hned přepočítá. Ceny zadávej včetně DPH.</p>
+    <form id="spot-formular" action="#vysledek" method="get" novalidate>
+      {{ volby({ id: 'predvolba', typ: 'radio', legenda: 'Typ domácnosti', moznosti: s.predvolby, napoveda: s.napovedaPredvolby }) }}
+
+      {{ pole({ id: 'distributor', label: 'Distributor', moznosti: s.distributori, napoveda: 'Firma, která vlastní síť ve tvém regionu (ne dodavatel).' }) }}
+      {{ pole({ id: 'sazba', label: 'Distribuční sazba', moznosti: s.sazby, napoveda: 'Najdeš ji na faktuře za elektřinu. Podle ní volíme průběh spotřeby během dne.' }) }}
+      <div data-region{% if s.regionSkryty %} hidden{% endif %}>
+        {{ pole({ id: 'region', label: 'Region (průběh spotřeby u akumulace)', moznosti: s.regiony }) }}
+      </div>
+      <div class="spot-dvojice spot-dvojice-vzdy">
+        {{ pole({ id: 'mwh', label: 'Roční spotřeba', hodnota: s.pole.mwh, jednotka: 'MWh', inputmode: 'decimal', chybaMisto: true }) }}
+        {{ pole({ id: 'jistic', label: 'Hlavní jistič', moznosti: s.jistice }) }}
+      </div>
+      <p class="hint spot-hint-pod">Spotřebu za rok najdeš na vyúčtování. 1 MWh = 1 000 kWh.</p>
+
+      <fieldset class="spot-nabidka">
+        <legend>Fixní cena</legend>
+        <div class="spot-dvojice">
+          {{ pole({ id: 'fix-cena', label: 'Cena elektřiny', hodnota: s.pole.fixCena, jednotka: 'Kč/MWh', inputmode: 'decimal', chybaMisto: true }) }}
+          {{ pole({ id: 'fix-plat', label: 'Stálý plat', hodnota: s.pole.fixPlat, jednotka: 'Kč/měs.', inputmode: 'decimal', chybaMisto: true }) }}
+        </div>
+        <p class="hint">Z nabídky dodavatele, vč. DPH. 3 500 Kč/MWh je 3,50 Kč/kWh.</p>
+      </fieldset>
+
+      <fieldset class="spot-nabidka">
+        <legend>Spot</legend>
+        <div class="spot-dvojice">
+          {{ pole({ id: 'spot-prirazka', label: 'Přirážka k burze', hodnota: s.pole.spotPrirazka, jednotka: 'Kč/MWh', inputmode: 'decimal', chybaMisto: true }) }}
+          {{ pole({ id: 'spot-plat', label: 'Stálý plat', hodnota: s.pole.spotPlat, jednotka: 'Kč/měs.', inputmode: 'decimal', chybaMisto: true }) }}
+        </div>
+        <p class="hint">Marže dodavatele, kterou přičte ke každé MWh za cenu z burzy. Vč. DPH.</p>
+      </fieldset>
+
+      <fieldset class="spot-nabidka">
+        <legend>Dynamický tarif</legend>
+        {{ pole({ id: 'dyn-produkt', label: 'Ceník', moznosti: s.produkty }) }}
+        <div class="spot-dvojice">
+          {{ pole({ id: 'dyn-zaklad', label: 'Základní cena', hodnota: s.pole.dynZaklad, jednotka: 'Kč/MWh', inputmode: 'decimal', chybaMisto: true }) }}
+          {{ pole({ id: 'dyn-plat', label: 'Stálý plat', hodnota: s.pole.dynPlat, jednotka: 'Kč/měs.', inputmode: 'decimal', chybaMisto: true }) }}
+        </div>
+        <p class="hint">Pevná pásma podle hodiny dne: od −50 % do +25 % základní ceny. Ceník od {{ s.produkt.validFrom | datum }}, vč. DPH.</p>
+      </fieldset>
+
+      <details class="spot-csv">
+        <summary>Nahrát vlastní měření (CSV)</summary>
+        <p class="small">Máš chytrý elektroměr? Stáhni si průběhové měření ze zákaznického portálu distributora (čtvrthodinová nebo hodinová data) a spočítáme to přesně podle tvé spotřeby.</p>
+        <p class="note spot-soukromi">{{ ikona('ikona-overeno') }}<span>Soubor zpracujeme jen v tvém prohlížeči. Nikam ho neposíláme a neukládáme.</span></p>
+        <noscript><p class="small"><strong>Nahrání souboru funguje jen se zapnutým JavaScriptem.</strong></p></noscript>
+        <div class="field">
+          <label for="csv-soubor">Soubor CSV</label>
+          <input type="file" id="csv-soubor" name="csv-soubor" accept=".csv,.txt,text/csv">
+        </div>
+        <div data-csv-mapovani hidden>
+          <div class="spot-dvojice">
+            {{ pole({ id: 'csv-cas', label: 'Sloupec s časem', moznosti: [] }) }}
+            {{ pole({ id: 'csv-hodnota', label: 'Sloupec se spotřebou', moznosti: [] }) }}
+          </div>
+          <div class="spot-dvojice">
+            {{ pole({ id: 'csv-jednotka', label: 'Jednotka', moznosti: [{ hodnota: 'kWh', text: 'kWh za interval', vybrano: true }, { hodnota: 'kW', text: 'kW (průměrný výkon)' }] }) }}
+            {{ pole({ id: 'csv-konec', label: 'Čas v souboru je', moznosti: [{ hodnota: '1', text: 'konec intervalu', vybrano: true }, { hodnota: '0', text: 'začátek intervalu' }] }) }}
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" data-csv-pouzit>Použít měření</button>
+            <button type="button" class="btn btn-ghost" data-csv-zrusit>Zpět na typový profil</button>
+          </div>
+        </div>
+        <p class="small spot-csv-stav" role="status" data-csv-stav></p>
+      </details>
+    </form>
+  </section>
+
+  <div class="calc-main">
+    {%- call vysledek({ id: 'vysledek', kicker: u.kicker, nadpis: u.nadpis, cislo: u.cislo, popis: u.popis, vysvetleni: u.vysvetleni, ukazka: true }) %}
+      <ul class="spot-varianty" aria-label="Roční náklady ve třech variantách">
+        {%- for k in u.karty %}
+        <li class="spot-varianta{% if k.nejlevnejsi %} is-best{% endif %}" data-varianta="{{ k.klic }}">
+          <h3 class="spot-varianta-nazev"><span class="spot-tecka graf-rada-{{ loop.index }}" aria-hidden="true"></span>{{ k.nazev }}</h3>
+          <p class="spot-odznak" data-odznak{% if not k.nejlevnejsi %} hidden{% endif %}>Nejlevnější</p>
+          <p class="spot-castka" data-castka>{{ k.castka }}</p>
+          <p class="spot-kwh" data-zakwh>{{ k.zaKwh }}</p>
+          <p class="spot-rozdil" data-rozdil>{{ k.rozdil }}</p>
+          <dl class="spot-slozky">
+            {%- for p in k.polozky %}
+            <div><dt>{{ p.nazev }}</dt><dd data-polozka="{{ loop.index0 }}">{{ p.hodnota }}</dd></div>
+            {%- endfor %}
+          </dl>
+          <p class="spot-posun-efekt" data-posun-efekt{% if not k.posun %} hidden{% endif %}>{{ k.posun }}</p>
+        </li>
+        {%- endfor %}
+      </ul>
+
+      <div class="spot-posun">
+        <label for="posun">Přesun spotřeby do nejlevnějších hodin dne</label>
+        <p class="spot-posun-hodnota" aria-hidden="true"><output id="posun-text" for="posun" data-posun-text>{{ s.posun.hodnota }} %</output> denní spotřeby</p>
+        <input type="range" id="posun" name="posun" min="{{ s.posun.min }}" max="{{ s.posun.max }}" step="{{ s.posun.krok }}" value="{{ s.posun.hodnota }}" aria-valuetext="{{ s.posun.hodnota }} % denní spotřeby" aria-describedby="posun-napoveda">
+        <span class="hint" id="posun-napoveda">Platí pro spot a dynamický tarif. Třeba pračka, myčka, ohřev vody nebo nabíjení auta v levných hodinách. Roční spotřeba se nemění.</span>
+      </div>
+      <p class="note">{{ ikona('ikona-info') }}<span>Ceny z burzy do {{ s.posledniDen }} (OTE, {{ s.obdobi }}), kurzy ČNB. Data aktualizujeme jednou týdně. Orientační výpočet, nejde o nabídku dodavatele.</span></p>
+      <p class="note spot-chyba" data-chyba-vypoctu hidden>{{ ikona('ikona-vystraha') }}<span data-chyba-text></span></p>
+      <p class="sr-only" aria-live="polite" data-oznameni></p>
+    {%- endcall %}
+
+    <section class="card" aria-labelledby="mesice-nadpis">
+      <h2 id="mesice-nadpis">Náklady po měsících</h2>
+      <p class="muted">Měsíční náklady včetně distribuce, poplatků a DPH. V zimě je spotřeba i cena na burze vyšší.</p>
+      <div class="spot-graf spot-graf-uzky" data-graf-mesice="uzky">{{ u.grafMesice.uzky | safe }}</div>
+      <div class="spot-graf spot-graf-siroky" data-graf-mesice="siroky">{{ u.grafMesice.siroky | safe }}</div>
+      <div class="spot-tabulka" data-tabulka-mesice>{{ u.tabulkaMesice | safe }}</div>
+    </section>
+
+    <section class="card" aria-labelledby="hodiny-nadpis">
+      <h2 id="hodiny-nadpis">Kdy je elektřina levná a kdy ji bereš</h2>
+      <p class="muted">Průměrná cena na burze podle hodiny dne a tvůj průběh spotřeby. Obě křivky jsou v procentech průměru dne: 150 % znamená o polovinu víc než průměr.</p>
+      <div class="spot-graf spot-graf-uzky" data-graf-hodiny="uzky">{{ u.grafHodiny.uzky | safe }}</div>
+      <div class="spot-graf spot-graf-siroky" data-graf-hodiny="siroky">{{ u.grafHodiny.siroky | safe }}</div>
+      <p class="spot-shrnuti" data-hodiny-shrnuti>{{ u.hodinyShrnuti }}</p>
+      <details class="spot-detaily">
+        <summary>Zobrazit hodnoty v tabulce</summary>
+        <div data-tabulka-hodiny>{{ u.tabulkaHodiny | safe }}</div>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="predpoklady-nadpis">
+      <h2 id="predpoklady-nadpis">Předpoklady výpočtu</h2>
+      <p class="muted">Ke všem třem variantám připočítáváme stejné regulované složky podle tvého distributora, sazby a jističe. Ceny jsou vč. DPH, regulované ceny z roku {{ s.tarifyRok }}.</p>
+      <dl class="spot-predpoklady" data-predpoklady>
+        {%- for p in u.predpoklady %}
+        <div><dt>{{ p.nazev }}</dt><dd>{{ p.hodnota }}</dd></div>
+        {%- endfor %}
+      </dl>
+      <p class="note">{{ ikona('ikona-info') }}<span>Zjednodušení, se kterými počítáme, najdeš níž v části „Co zatím neověřujeme a nepočítáme“.</span></p>
+    </section>
+  </div>
+</div>
+
+{{ lepiva_lista({ cislo: u.lista.cislo, popis: u.lista.popis, cil: '#vysledek' }) }}
+<script type="application/json" id="data-meta">{{ s.data.meta | json | safe }}</script>
+<script type="application/json" id="data-tarify">{{ s.data.tarify | json | safe }}</script>
+<script type="application/json" id="data-dynamicky">{{ s.data.dynamicky | json | safe }}</script>
+<script type="application/json" id="data-kurzy">{{ s.data.kurzy | json | safe }}</script>
+<script type="application/json" id="data-ceny">{{ s.data.ceny | json | safe }}</script>

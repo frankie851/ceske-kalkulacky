@@ -276,3 +276,49 @@ Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`.
     - písma jsou celkem menší (asi 109 kB místo 176 kB).
     
     Lighthouse navíc měří každou stránku třikrát, bere medián a vypisuje CLS a jeho příčiny.
+
+# 2. fáze – vlna 3 (5. 11. 2026)
+
+## Rozhodnutí
+
+1. **Zdaním to? je postavené, ale nezveřejněné** (rozhodnutí uživatele, stejně jako Dluhy).
+   - Oficiální weby finanční správy se z cloudové relace nedaly otevřít a sekundární zdroje se
+     v několika bodech rozcházejí.
+   - Tabulka 18 pravidel (zdroj, stav, co s tím nástroj dělá) je v `docs/zadani-zdanim-to.md`.
+   - Sporné body nástroj nepočítá, jen na ně upozorní: limit 40 mil. Kč u kryptoaktiv, umístění
+     zahraničních dividend (§ 8 + příloha 3, nebo § 16a + příloha 4), smluvní sazby mimo USA,
+     limity pro přiznání od 2027.
+   - Jednotný kurz GFŘ za 2026 zatím nevyšel, kurz se zadává ručně.
+   - **Zveřejnění:** schválit tabulku, doplnit nebo opravit pravidla v `rules.json`, nastavit
+     `meta.stav` a smazat `"skryty": true`.
+2. **Štítek „Neověřeno“ místo „Pravidla ověřena“.** Když má `rules.json` `meta.stav: "neovereno"`,
+   layout nástroje ukáže varovný štítek s `meta.stavText`.
+3. **Velká data na vyžádání.** `nastroj.json` → `verejneSoubory` zkopíruje vybraná data
+   do webu. Spot, nebo fix? tak načítá jen vybraný profil spotřeby TDD (asi 175 kB) z vlastního
+   webu, ne všech 11 (1,9 MB). Ceny z burzy jsou ve stránce bezeztrátově zakódované
+   (88 kB místo 224 kB) a build ověří, že po dekódování dají přesně původní data.
+4. **Spot, nebo fix?** má týdenní aktualizaci dat z OTE a ČNB
+   (`.github/workflows/aktualizace-spot.yml`), která otevře PR. Ceníky (`tariffs.json`,
+   `dynamic.json`) platí pro 2026 a na rok 2027 je potřeba je přepsat ručně.
+5. **Bydlometr** vkládá do stránky zeštíhlený `defaults.json` (jen hodnoty a zdroje).
+   Bez JavaScriptu jsou vidět obě záložky pod sebou (`<noscript>` styl). Výsledek převzatého
+   modelu, že se při výchozích hodnotách pro Prahu koupě vyplatí už v 1. roce, není chyba
+   převodu. Stojí ale za kontrolu výchozích předpokladů.
+6. Grafy se vykreslují tak, aby po načtení skriptu stránka neposkočila (pevný poměr stran,
+   výsledky z buildu se jen aktualizují). CLS je na všech nových stránkách pod 0,01.
+
+## Výsledky kontrol vlny 3
+
+Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`.
+
+- `npm test`: **474/474**. Nové testy vlny 3:
+  - Bydlometr 62, Spot, nebo fix? 17 (převzaté)
+  - Zdaním to? 30 (nové)
+- `npm run test:e2e`: **94/94**. `npm run test:e2e:skryte` (Dluhy + Zdaním to?): **35/35**.
+- `npm run kontrola`: **26 stránek** a k tomu 4 skryté nad `_site-vse`.
+  - 0 chyb axe serious/critical ve světlém i tmavém režimu
+  - 0 přetečení na 360 px
+  - 0 cizích požadavků a 0 chyb konzole
+  - ukázka funguje bez JS
+- Lighthouse (mobil, medián ze 3 běhů) na úvodu a 13 nástrojích: přístupnost 100, výkon 97–100.
+- Snímky: `docs/snimky/vlna-3/`, nezveřejněné Zdaním to? v `docs/snimky/vlna-3/nezverejneno/`.

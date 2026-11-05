@@ -1,0 +1,425 @@
+{
+  "meta": {
+    "description": "Výchozí hodnoty formulářů. Uprav value, source, url a date. Položky se source „předpoklad“ nejsou měřená data, ale rozumný odhad.",
+    "updated": "2026-11-05"
+  },
+  "rates": {
+    "averageOffer": {
+      "value": 5.79,
+      "unit": "% p. a.",
+      "label": "Průměrná nabídková sazba hypoték",
+      "source": "Swiss Life Hypoindex, říjen 2026",
+      "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
+      "date": "2026-10-07",
+      "note": "Nabídkové sazby bank, ne skutečně sjednané."
+    },
+    "fix1y": {
+      "value": 5.42,
+      "unit": "% p. a.",
+      "label": "Průměrná sazba, fixace 1 rok (LTV do 80 %)",
+      "source": "Swiss Life Hypoindex, říjen 2026",
+      "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
+      "date": "2026-10-07",
+      "note": ""
+    },
+    "fix10y": {
+      "value": 6.35,
+      "unit": "% p. a.",
+      "label": "Průměrná sazba, fixace 10 let (LTV do 80 %)",
+      "source": "Swiss Life Hypoindex, říjen 2026",
+      "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
+      "date": "2026-10-07",
+      "note": ""
+    },
+    "newLoans": {
+      "value": 5.1,
+      "unit": "% p. a.",
+      "label": "Průměrná sazba nově sjednaných hypoték",
+      "source": "ČBA Hypomonitor, září 2026 (převzato z banky.cz)",
+      "url": "https://www.banky.cz/clanky/hypomonitor-za-zari-2026-sazba-51-a-splatka-prumerne-hypoteky/",
+      "date": "2026-10-15",
+      "note": ""
+    },
+    "refinance": {
+      "value": 5.05,
+      "unit": "% p. a.",
+      "label": "Průměrná sazba refinancovaných hypoték (výchozí „sazba konkurence“)",
+      "source": "ČBA Hypomonitor, září 2026 (převzato z banky.cz)",
+      "url": "https://www.banky.cz/clanky/hypomonitor-za-zari-2026-sazba-51-a-splatka-prumerne-hypoteky/",
+      "date": "2026-10-15",
+      "note": ""
+    }
+  },
+  "refinanceCosts": {
+    "cadastreFee": {
+      "value": 4000,
+      "unit": "Kč",
+      "label": "Katastr: vklad nového zástavního práva + výmaz starého (2 × 2 000 Kč)",
+      "source": "banky.cz – poradna „Refinancování hypotéky a přepis zástavy na KN“ (správní poplatek 2 000 Kč od 1. 1. 2020)",
+      "url": "https://www.banky.cz/poradna/refinancovani-hypoteky-a-prepis-zastavy-na-kn/",
+      "date": "2020-01-01",
+      "note": "Ověř aktuální sazebník správních poplatků (ČÚZK)."
+    },
+    "valuation": {
+      "value": 5000,
+      "unit": "Kč",
+      "label": "Odhad nemovitosti",
+      "source": "předpoklad",
+      "url": "",
+      "date": "2026-11-05",
+      "note": "Banky při refinancování odhad často platí. Přepiš podle nabídky."
+    },
+    "other": {
+      "value": 0,
+      "unit": "Kč",
+      "label": "Ostatní poplatky (zpracování, čerpání…)",
+      "source": "předpoklad",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    }
+  },
+  "refixExample": {
+    "balance": {
+      "value": 2800000,
+      "unit": "Kč",
+      "label": "Zbývající dluh",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "remainingYears": {
+      "value": 22,
+      "unit": "let",
+      "label": "Zbývající doba splácení",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "currentRate": {
+      "value": 2.49,
+      "unit": "% p. a.",
+      "label": "Dosavadní sazba",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": "Např. fixace sjednaná v roce 2021."
+    },
+    "originalLoan": {
+      "value": 3500000,
+      "unit": "Kč",
+      "label": "Původní výše úvěru",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "fixYears": {
+      "value": 5,
+      "unit": "let",
+      "label": "Délka nové fixace",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "savings": {
+      "value": 300000,
+      "unit": "Kč",
+      "label": "Úspory na mimořádnou splátku",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "extendYears": {
+      "value": 5,
+      "unit": "let",
+      "label": "Prodloužení splatnosti",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "income": {
+      "value": 75000,
+      "unit": "Kč/měs.",
+      "label": "Čistý měsíční příjem domácnosti",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    }
+  },
+  "cities": {
+    "praha": {
+      "name": "Praha",
+      "pricePerM2": {
+        "value": 154112,
+        "unit": "Kč/m²",
+        "label": "Průměrná nabídková cena bytu – Praha",
+        "source": "RealityMIX – Statistika nemovitostí, průměrná cena za 1 m² bytu",
+        "url": "https://realitymix.cz/statistika-nemovitosti/",
+        "date": "2026-10-31",
+        "note": "Nabídkové ceny z inzerce; skutečné prodejní bývají o několik % nižší."
+      },
+      "rentPerM2": {
+        "value": 462,
+        "unit": "Kč/m²/měs.",
+        "label": "Průměrné nájemné – Praha",
+        "source": "Deloitte Rent Index, 2. čtvrtletí 2026",
+        "url": "https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/",
+        "date": "2026-08-17",
+        "note": "Bez služeb a energií."
+      },
+      "propertyTaxPerM2Year": {
+        "value": 38.43,
+        "unit": "Kč/m²/rok",
+        "label": "Daň z nemovitosti (byt) – Praha",
+        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 (upravená plocha) × koeficient 4,5 × místní koeficient 2; inflační koeficient 2026 = 1,0 (mesec.cz)",
+        "short": "odhad dle zák. 338/1992 Sb.",
+        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
+        "date": "2026-01-01",
+        "note": "Odhad. Ověř obecně závaznou vyhlášku své obce."
+      }
+    },
+    "brno": {
+      "name": "Brno",
+      "pricePerM2": {
+        "value": 124954,
+        "unit": "Kč/m²",
+        "label": "Průměrná nabídková cena bytu – Brno",
+        "source": "RealityMIX – Statistika nemovitostí, průměrná cena za 1 m² bytu",
+        "url": "https://realitymix.cz/statistika-nemovitosti/",
+        "date": "2026-10-31",
+        "note": "Nabídkové ceny z inzerce."
+      },
+      "rentPerM2": {
+        "value": 390,
+        "unit": "Kč/m²/měs.",
+        "label": "Průměrné nájemné – Brno",
+        "source": "Deloitte Rent Index, 2. čtvrtletí 2026",
+        "url": "https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/",
+        "date": "2026-08-17",
+        "note": ""
+      },
+      "propertyTaxPerM2Year": {
+        "value": 14.95,
+        "unit": "Kč/m²/rok",
+        "label": "Daň z nemovitosti (byt) – Brno",
+        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 × koeficient 3,5 (obec nad 50 000 obyv.) × místní koeficient 1 (předpoklad)",
+        "short": "odhad dle zák. 338/1992 Sb.",
+        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
+        "date": "2026-01-01",
+        "note": "Místní koeficient pro rok 2026 neověřen."
+      }
+    },
+    "ostrava": {
+      "name": "Ostrava",
+      "pricePerM2": {
+        "value": 70276,
+        "unit": "Kč/m²",
+        "label": "Průměrná nabídková cena bytu – Ostrava",
+        "source": "RealityMIX – Statistika nemovitostí, průměrná cena za 1 m² bytu",
+        "url": "https://realitymix.cz/statistika-nemovitosti/",
+        "date": "2026-10-31",
+        "note": "Nabídkové ceny z inzerce."
+      },
+      "rentPerM2": {
+        "value": 254,
+        "unit": "Kč/m²/měs.",
+        "label": "Průměrné nájemné – Ostrava",
+        "source": "Deloitte Rent Index, 2. čtvrtletí 2026",
+        "url": "https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/",
+        "date": "2026-08-17",
+        "note": ""
+      },
+      "propertyTaxPerM2Year": {
+        "value": 14.95,
+        "unit": "Kč/m²/rok",
+        "label": "Daň z nemovitosti (byt) – Ostrava",
+        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 × koeficient 3,5 (obec nad 50 000 obyv.) × místní koeficient 1 (předpoklad)",
+        "short": "odhad dle zák. 338/1992 Sb.",
+        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
+        "date": "2026-01-01",
+        "note": "Místní koeficient pro rok 2026 neověřen."
+      }
+    },
+    "cr": {
+      "name": "Průměr ČR",
+      "pricePerM2": {
+        "value": 99206,
+        "unit": "Kč/m²",
+        "label": "Medián nabídkových cen bytů – ČR",
+        "source": "Housi.cz – Ceny bytů v ČR (data Sreality, Bezrealitky, iDnes)",
+        "url": "https://www.housi.cz/trh-nemovitosti",
+        "date": "2026-07-31",
+        "note": "Medián, ne průměr – jiná metodika než u měst."
+      },
+      "rentPerM2": {
+        "value": 343,
+        "unit": "Kč/m²/měs.",
+        "label": "Průměrné nájemné – ČR",
+        "source": "Deloitte Rent Index, 2. čtvrtletí 2026",
+        "url": "https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/",
+        "date": "2026-08-17",
+        "note": ""
+      },
+      "propertyTaxPerM2Year": {
+        "value": 8.54,
+        "unit": "Kč/m²/rok",
+        "label": "Daň z nemovitosti (byt) – typická obec",
+        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 × koeficient 2,0 (obec 10–25 tis. obyv.) × místní koeficient 1 (předpoklad)",
+        "short": "odhad dle zák. 338/1992 Sb.",
+        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
+        "date": "2026-01-01",
+        "note": "Hrubý odhad."
+      }
+    }
+  },
+  "ownership": {
+    "repairFundPerM2Month": {
+      "value": 20,
+      "unit": "Kč/m²/měs.",
+      "label": "Fond oprav",
+      "source": "rulecalc.com – Fond oprav (běžně 10–50 Kč/m²/měs.)",
+      "url": "https://rulecalc.com/cs/najem/fond-oprav",
+      "date": "2026-11-05",
+      "note": "Orientační; schvaluje shromáždění SVJ."
+    },
+    "insuranceYear": {
+      "value": 2500,
+      "unit": "Kč/rok",
+      "label": "Pojištění nemovitosti",
+      "source": "předpoklad",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "maintenancePct": {
+      "value": 1,
+      "unit": "% ceny/rok",
+      "label": "Údržba a opravy uvnitř bytu",
+      "source": "předpoklad (běžné pravidlo 1 % ceny ročně)",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "purchaseCosts": {
+      "value": 12000,
+      "unit": "Kč",
+      "label": "Jednorázové náklady koupě (vklad do KN 2 × 2 000 Kč, odhad, ověření podpisů)",
+      "source": "předpoklad; správní poplatek za vklad 2 000 Kč (banky.cz)",
+      "url": "https://www.banky.cz/poradna/refinancovani-hypoteky-a-prepis-zastavy-na-kn/",
+      "date": "2026-11-05",
+      "note": "Bez provize realitní kanceláře."
+    }
+  },
+  "assumptions": {
+    "priceGrowth": {
+      "value": 4,
+      "unit": "% p. a.",
+      "label": "Růst cen nemovitostí",
+      "source": "předpoklad; pro srovnání ČSOB Index bydlení Q1 2010–Q2 2026 ≈ 5,8 % p. a., ČSÚ Q2 2026 +8,6 % r/r",
+      "short": "předpoklad (ČSOB index 2010–2026 ≈ 5,8 % ročně)",
+      "url": "https://zpravy.kurzy.cz/870972-csob-index-bydleni-nemovitosti-v-cesku-ve-2-ctvrtleti-stouply-na-nove-rekordy/",
+      "date": "2026-09-29",
+      "note": ""
+    },
+    "rentGrowth": {
+      "value": 3,
+      "unit": "% p. a.",
+      "label": "Růst nájmů",
+      "source": "předpoklad; Deloitte Rent Index Q2 2026: +1,2 % mezičtvrtletně",
+      "url": "https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/",
+      "date": "2026-08-17",
+      "note": ""
+    },
+    "investReturn": {
+      "value": 6,
+      "unit": "% p. a.",
+      "label": "Výnos investic",
+      "source": "předpoklad (dlouhodobě diverzifikované akciové portfolio, nominálně, před daněmi)",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "costGrowth": {
+      "value": 2,
+      "unit": "% p. a.",
+      "label": "Růst nákladů vlastnictví (fond oprav, pojištění, daň)",
+      "source": "ČNB – inflační cíl 2 %",
+      "short": "ČNB – inflační cíl 2 %",
+      "url": "https://www.cnb.cz/cs/menova-politika/inflacni-cil/",
+      "date": "2010-01-01",
+      "note": ""
+    }
+  },
+  "rentbuyExample": {
+    "city": {
+      "value": "praha",
+      "unit": "",
+      "label": "Město",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "area": {
+      "value": 60,
+      "unit": "m²",
+      "label": "Plocha",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "ownFunds": {
+      "value": 1500000,
+      "unit": "Kč",
+      "label": "Vlastní zdroje",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "age": {
+      "value": 32,
+      "unit": "let",
+      "label": "Věk žadatele",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "loanYears": {
+      "value": 30,
+      "unit": "let",
+      "label": "Splatnost hypotéky",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "fixYears": {
+      "value": 5,
+      "unit": "let",
+      "label": "Fixace",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    },
+    "horizonYears": {
+      "value": 20,
+      "unit": "let",
+      "label": "Horizont",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    }
+  }
+}

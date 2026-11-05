@@ -19,42 +19,6 @@
     "vlna": 3
   },
   {
-    "id": "bydlometr",
-    "nazev": "Bydlometr",
-    "typ": "kalkulačka",
-    "kategorie": "bydleni-energie",
-    "url": "/bydleni-energie/bydlometr/",
-    "perex": "Co s hypotékou při refixaci a jestli se víc vyplatí nájem, nebo koupě.",
-    "stitky": [
-      "hypotéka",
-      "refixace",
-      "nájem"
-    ],
-    "termin": null,
-    "novinka2027": false,
-    "ilustrace": "nastroj-obecny",
-    "poradi": 1,
-    "vlna": 3
-  },
-  {
-    "id": "spot-nebo-fix",
-    "nazev": "Spot, nebo fix?",
-    "typ": "kalkulačka",
-    "kategorie": "bydleni-energie",
-    "url": "/bydleni-energie/spot-nebo-fix/",
-    "perex": "Kolik by domácnost zaplatila za elektřinu na spotu, na fixu a na dynamickém tarifu.",
-    "stitky": [
-      "elektřina",
-      "spot",
-      "dynamický tarif"
-    ],
-    "termin": null,
-    "novinka2027": false,
-    "ilustrace": "nastroj-obecny",
-    "poradi": 2,
-    "vlna": 3
-  },
-  {
     "id": "exekuce-nebo-oddluzeni",
     "nazev": "Exekuce, nebo oddlužení?",
     "typ": "průvodce",

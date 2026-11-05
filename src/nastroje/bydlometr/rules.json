@@ -1,0 +1,294 @@
+{
+  "meta": {
+    "description": "Pravidla pro výpočty Bydlometru. Každá položka má hodnotu, zdroj a datum. Při změně pravidel uprav value, source, url a date.",
+    "checked": "2026-11-05",
+    "overeno": "2026-11-05",
+    "zdroje": [
+      {
+        "nazev": "ČNB – Stanovení horní hranice úvěrových ukazatelů (LTV); rozhodnutí bankovní rady ponechat limity beze změny",
+        "url": "https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/ltv/index.html",
+        "poznamka": "Údaj k 4. 6. 2026"
+      },
+      {
+        "nazev": "ČNB – tisková zpráva „ČNB doporučuje přísnější limity pro investiční hypotéky. Kapitálové rezervy se nemění“",
+        "url": "https://www.cnb.cz/cs/cnb-news/tiskove-zpravy/CNB-doporucuje-prisnejsi-limity-pro-investicni-hypoteky.-Kapitalove-rezervy-se-nemeni/",
+        "poznamka": "Údaj k 1. 4. 2026"
+      },
+      {
+        "nazev": "ČNB – Stanovení horní hranice úvěrových ukazatelů LTV, DSTI a DTI",
+        "url": "https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/",
+        "poznamka": "Údaj k 4. 6. 2026"
+      },
+      {
+        "nazev": "Zákon č. 257/2016 Sb., o spotřebitelském úvěru, § 117 a § 117a ve znění novely účinné od 1. 9. 2024; KB – Mimořádná splátka hypotéky",
+        "url": "https://www.kb.cz/cs/podpora/pujcky-a-hypoteky/mimoradna-splatka-hypoteky",
+        "poznamka": "Údaj k 1. 9. 2024"
+      },
+      {
+        "nazev": "Zákon č. 257/2016 Sb., § 117; KB – Mimořádná splátka hypotéky; banky.cz",
+        "url": "https://www.banky.cz/clanky/predcasne-splaceni-hypoteky/",
+        "poznamka": "Údaj k 1. 9. 2024"
+      },
+      {
+        "nazev": "Zákon č. 257/2016 Sb., § 117; hyponamiru.cz – Předčasné splacení hypotéky",
+        "url": "https://www.hyponamiru.cz/predcasne-splaceni-hypoteky/",
+        "poznamka": "Údaj k 1. 9. 2024"
+      },
+      {
+        "nazev": "KB – Mimořádná splátka hypotéky; moneyspot.cz (příklad ČSOB); stavebky.cz – kalkulátor náhrady",
+        "url": "https://www.stavebky.cz/vypocet-nahrady-za-predcasne-splaceni-uveru-na-bydleni/",
+        "poznamka": "Údaj k 1. 9. 2024"
+      },
+      {
+        "nazev": "Zákon č. 257/2016 Sb., § 117; ČNB – stanovisko RS2019-07",
+        "url": "https://www.cnb.cz/cs/dohled-financni-trh/legislativni-zakladna/stanoviska-k-regulaci-financniho-trhu/RS2019-07/",
+        "poznamka": "Údaj k 1. 9. 2024"
+      },
+      {
+        "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů, § 15 odst. 3; hyponamiru.cz – Odpočet úroků hypotéky z daní 2026",
+        "url": "https://www.hyponamiru.cz/odpocet-uroku-hypoteky-z-dani/",
+        "poznamka": "Údaj k 1. 1. 2026"
+      },
+      {
+        "nazev": "Zákon č. 586/1992 Sb., § 16",
+        "url": "https://www.banky.cz/clanky/odpocet-uroku-z-hypoteky/",
+        "poznamka": "Údaj k 1. 1. 2026"
+      },
+      {
+        "nazev": "Swiss Life Hypoindex, říjen 2026",
+        "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
+        "poznamka": "Údaj k 7. 10. 2026"
+      },
+      {
+        "nazev": "ČBA Hypomonitor, září 2026 (převzato z banky.cz)",
+        "url": "https://www.banky.cz/clanky/hypomonitor-za-zari-2026-sazba-51-a-splatka-prumerne-hypoteky/",
+        "poznamka": "Údaj k 15. 10. 2026"
+      },
+      {
+        "nazev": "banky.cz – poradna „Refinancování hypotéky a přepis zástavy na KN“ (správní poplatek 2 000 Kč od 1. 1. 2020)",
+        "url": "https://www.banky.cz/poradna/refinancovani-hypoteky-a-prepis-zastavy-na-kn/",
+        "poznamka": "Údaj k 1. 1. 2020"
+      },
+      {
+        "nazev": "RealityMIX – Statistika nemovitostí, průměrná cena za 1 m² bytu",
+        "url": "https://realitymix.cz/statistika-nemovitosti/",
+        "poznamka": "Údaj k 31. 10. 2026"
+      },
+      {
+        "nazev": "Deloitte Rent Index, 2. čtvrtletí 2026",
+        "url": "https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/",
+        "poznamka": "Údaj k 17. 8. 2026"
+      },
+      {
+        "nazev": "Zákon č. 338/1992 Sb., o dani z nemovitých věcí – výpočet daně z bytu (mesec.cz)",
+        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
+        "poznamka": "Odhad podle koeficientů obce. Údaj k 1. 1. 2026"
+      },
+      {
+        "nazev": "Housi.cz – Ceny bytů v ČR (data Sreality, Bezrealitky, iDnes)",
+        "url": "https://www.housi.cz/trh-nemovitosti",
+        "poznamka": "Údaj k 31. 7. 2026"
+      },
+      {
+        "nazev": "rulecalc.com – Fond oprav (běžně 10–50 Kč/m²/měs.)",
+        "url": "https://rulecalc.com/cs/najem/fond-oprav",
+        "poznamka": "Údaj k 5. 11. 2026"
+      },
+      {
+        "nazev": "ČNB – inflační cíl 2 %",
+        "url": "https://www.cnb.cz/cs/menova-politika/inflacni-cil/",
+        "poznamka": "Údaj k 1. 1. 2010"
+      },
+      {
+        "nazev": "ČSOB Index bydlení Q1 2010–Q2 2026 ≈ 5,8 % p. a., ČSÚ Q2 2026 +8,6 % r/r",
+        "url": "https://zpravy.kurzy.cz/870972-csob-index-bydleni-nemovitosti-v-cesku-ve-2-ctvrtleti-stouply-na-nove-rekordy/",
+        "poznamka": "Údaj k 29. 9. 2026"
+      }
+    ],
+    "neovereno": [
+      "Ukazatele DTI a DSTI jsou pro vlastní bydlení deaktivované. Podíl splátky na příjmu proto ukazujeme jen orientačně.",
+      "Hranice zátěže 40 % příjmu je náš předpoklad, ne limit ČNB. Ve formuláři ji můžeš změnit.",
+      "Pravidla mimořádné splátky (zdarma do 25 % původní výše úvěru jednou ročně a ke konci fixace, jinak nejvýš 0,25 % za každý započatý rok do konce fixace a nejvýš 1 %) počítáme jen pro smlouvy uzavřené od 1. 9. 2024 a pro fixace začaté od tohoto data. U starších smluv rozhoduje smlouva.",
+      "Poplatek za mimořádnou splátku je zákonný strop. Banka smí účtovat jen skutečné náklady, takže může chtít méně.",
+      "Úroky do konce splácení počítají s tím, že sazba vydrží až do konce. Ve skutečnosti se po každé fixaci mění.",
+      "Nájem vs. koupě počítá v nominálních korunách bez přepočtu na inflaci, bez daně z výnosů investic, bez nákladů na prodej bytu a bez provize realitní kanceláře.",
+      "Daň z nemovitosti je odhad podle zákona č. 338/1992 Sb. Místní koeficienty pro Brno, Ostravu a typickou obec jsme neověřili. Platí vyhláška tvé obce.",
+      "Ceny bytů jsou nabídkové ceny z inzerce, skutečné prodejní bývají o několik procent nižší. Průměr ČR je medián, ne průměr jako u měst.",
+      "Růst cen nemovitostí a nájmů, výnos investic, pojištění, údržba a odhad nemovitosti jsou předpoklady, ne naměřená data.",
+      "Správní poplatek za zápis do katastru (2 000 Kč) je podle sazebníku platného od 1. 1. 2020. Aktuální sazebník ČÚZK jsme znovu neověřili."
+    ]
+  },
+  "ltv": {
+    "ownHousing": {
+      "value": 0.8,
+      "unit": "podíl",
+      "label": "Max. LTV – vlastní bydlení",
+      "source": "ČNB – Stanovení horní hranice úvěrových ukazatelů (LTV); rozhodnutí bankovní rady ponechat limity beze změny",
+      "url": "https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/ltv/index.html",
+      "date": "2026-06-04",
+      "note": "Závazný limit."
+    },
+    "youngApplicant": {
+      "value": 0.9,
+      "unit": "podíl",
+      "label": "Max. LTV – žadatel mladší 36 let",
+      "source": "ČNB – Stanovení horní hranice úvěrových ukazatelů (LTV)",
+      "url": "https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/ltv/index.html",
+      "date": "2026-06-04",
+      "note": "Výjimka pro žadatele mladší 36 let a úvěr na vlastní bydlení."
+    },
+    "youngAgeLimit": {
+      "value": 36,
+      "unit": "let",
+      "label": "Věková hranice pro LTV 90 %",
+      "source": "ČNB – Stanovení horní hranice úvěrových ukazatelů (LTV)",
+      "url": "https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/ltv/index.html",
+      "date": "2026-06-04",
+      "note": "Platí pro žadatele mladší než tato hranice (tj. do 35 let včetně)."
+    },
+    "investment": {
+      "value": 0.7,
+      "unit": "podíl",
+      "label": "Doporučené max. LTV – investiční nemovitost",
+      "source": "ČNB – tisková zpráva „ČNB doporučuje přísnější limity pro investiční hypotéky. Kapitálové rezervy se nemění“",
+      "url": "https://www.cnb.cz/cs/cnb-news/tiskove-zpravy/CNB-doporucuje-prisnejsi-limity-pro-investicni-hypoteky.-Kapitalove-rezervy-se-nemeni/",
+      "date": "2026-04-01",
+      "note": "Doporučení (ne závazný limit) od 1. 4. 2026 pro třetí a další obytnou nemovitost nebo nemovitost k pronájmu."
+    }
+  },
+  "dti": {
+    "investment": {
+      "value": 7,
+      "unit": "násobek ročního čistého příjmu",
+      "label": "Doporučené max. DTI – investiční nemovitost",
+      "source": "ČNB – tisková zpráva „ČNB doporučuje přísnější limity pro investiční hypotéky. Kapitálové rezervy se nemění“",
+      "url": "https://www.cnb.cz/cs/cnb-news/tiskove-zpravy/CNB-doporucuje-prisnejsi-limity-pro-investicni-hypoteky.-Kapitalove-rezervy-se-nemeni/",
+      "date": "2026-04-01",
+      "note": "Doporučení od 1. 4. 2026."
+    },
+    "ownHousing": {
+      "value": null,
+      "unit": "—",
+      "label": "DTI a DSTI – vlastní bydlení",
+      "source": "ČNB – Stanovení horní hranice úvěrových ukazatelů LTV, DSTI a DTI",
+      "url": "https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/",
+      "date": "2026-06-04",
+      "note": "Deaktivováno. Kalkulačka je ukazuje jen informativně."
+    }
+  },
+  "prepayment": {
+    "lawChangeDate": {
+      "value": "2024-09-01",
+      "unit": "datum",
+      "label": "Účinnost nových pravidel předčasného splacení",
+      "source": "Zákon č. 257/2016 Sb., o spotřebitelském úvěru, § 117 a § 117a ve znění novely účinné od 1. 9. 2024; KB – Mimořádná splátka hypotéky",
+      "url": "https://www.kb.cz/cs/podpora/pujcky-a-hypoteky/mimoradna-splatka-hypoteky",
+      "date": "2024-09-01",
+      "note": "Platí pro smlouvy uzavřené od 1. 9. 2024 a pro starší smlouvy, u kterých po tomto datu začala nová fixace."
+    },
+    "freeShareOfOriginalLoan": {
+      "value": 0.25,
+      "unit": "podíl celkové (původní) výše úvěru",
+      "label": "Bezplatná mimořádná splátka 1× ročně",
+      "source": "Zákon č. 257/2016 Sb., § 117; KB – Mimořádná splátka hypotéky; banky.cz",
+      "url": "https://www.banky.cz/clanky/predcasne-splaceni-hypoteky/",
+      "date": "2024-09-01",
+      "note": "Do 25 % celkové výše úvěru v období 1 měsíce před výročím uzavření smlouvy."
+    },
+    "anniversaryWindowMonths": {
+      "value": 1,
+      "unit": "měsíc",
+      "label": "Okno pro bezplatnou splátku před výročím smlouvy",
+      "source": "Zákon č. 257/2016 Sb., § 117",
+      "url": "https://www.banky.cz/clanky/predcasne-splaceni-hypoteky/",
+      "date": "2024-09-01",
+      "note": "Měsíc před dnem výročí uzavření smlouvy."
+    },
+    "freeAtFixEnd": {
+      "value": true,
+      "unit": "ano/ne",
+      "label": "Mimořádná splátka ke konci fixace zdarma",
+      "source": "Zákon č. 257/2016 Sb., § 117; hyponamiru.cz – Předčasné splacení hypotéky",
+      "url": "https://www.hyponamiru.cz/predcasne-splaceni-hypoteky/",
+      "date": "2024-09-01",
+      "note": "Ke dni skončení doby stálé zápůjční úrokové sazby."
+    },
+    "feePerStartedYear": {
+      "value": 0.0025,
+      "unit": "podíl z předčasně splacené částky za každý i započatý rok do konce fixace",
+      "label": "Strop náhrady nákladů za rok",
+      "source": "KB – Mimořádná splátka hypotéky; moneyspot.cz (příklad ČSOB); stavebky.cz – kalkulátor náhrady",
+      "url": "https://www.stavebky.cz/vypocet-nahrady-za-predcasne-splaceni-uveru-na-bydleni/",
+      "date": "2024-09-01",
+      "note": "Jde o strop. Banka smí požadovat jen účelně vynaložené náklady (§ 117a), skutečná náhrada může být nižší."
+    },
+    "feeCap": {
+      "value": 0.01,
+      "unit": "podíl z předčasně splacené částky",
+      "label": "Celkový strop náhrady",
+      "source": "Zákon č. 257/2016 Sb., § 117; ČNB – stanovisko RS2019-07",
+      "url": "https://www.cnb.cz/cs/dohled-financni-trh/legislativni-zakladna/stanoviska-k-regulaci-financniho-trhu/RS2019-07/",
+      "date": "2024-09-01",
+      "note": "Max. 1 % z předčasně splacené částky."
+    }
+  },
+  "interestDeduction": {
+    "limit": {
+      "value": 150000,
+      "unit": "Kč/rok na domácnost",
+      "label": "Limit odpočtu úroků (smlouvy od 2021)",
+      "source": "Zákon č. 586/1992 Sb., o daních z příjmů, § 15 odst. 3; hyponamiru.cz – Odpočet úroků hypotéky z daní 2026",
+      "url": "https://www.hyponamiru.cz/odpocet-uroku-hypoteky-z-dani/",
+      "date": "2026-01-01",
+      "note": "Jen úvěr na vlastní bydlení."
+    },
+    "limitPre2021": {
+      "value": 300000,
+      "unit": "Kč/rok na domácnost",
+      "label": "Limit odpočtu úroků (smlouvy do 31. 12. 2020)",
+      "source": "Zákon č. 586/1992 Sb., § 15 odst. 3; hyponamiru.cz",
+      "url": "https://www.hyponamiru.cz/odpocet-uroku-hypoteky-z-dani/",
+      "date": "2026-01-01",
+      "note": ""
+    },
+    "taxRate": {
+      "value": 0.15,
+      "unit": "podíl",
+      "label": "Základní sazba daně z příjmů",
+      "source": "Zákon č. 586/1992 Sb., § 16",
+      "url": "https://www.banky.cz/clanky/odpocet-uroku-z-hypoteky/",
+      "date": "2026-01-01",
+      "note": "Nad limit příjmů 23 %."
+    },
+    "taxRateHigh": {
+      "value": 0.23,
+      "unit": "podíl",
+      "label": "Zvýšená sazba daně z příjmů",
+      "source": "Zákon č. 586/1992 Sb., § 16",
+      "url": "https://www.banky.cz/clanky/odpocet-uroku-z-hypoteky/",
+      "date": "2026-01-01",
+      "note": ""
+    }
+  },
+  "burden": {
+    "threshold": {
+      "value": 0.4,
+      "unit": "podíl splátky na čistém příjmu",
+      "label": "Orientační práh zátěže rozpočtu",
+      "source": "Zadání projektu (orientační hodnota, NE limit ČNB – DSTI je deaktivované)",
+      "short": "orientační, není to limit ČNB",
+      "url": "",
+      "date": "2026-11-05",
+      "note": "Nastavitelné ve formuláři."
+    },
+    "warnMargin": {
+      "value": 0.1,
+      "unit": "podíl",
+      "label": "Žluté varování od (práh − tato hodnota)",
+      "source": "Návrh aplikace",
+      "url": "",
+      "date": "2026-11-05",
+      "note": ""
+    }
+  }
+}

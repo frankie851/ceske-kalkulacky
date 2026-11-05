@@ -1,0 +1,77 @@
+/* Zdaním to? – styly jen pro tento nástroj (načítá je front matter `styly`).
+   Barvy jen z tokenů v main.css. Vrstva „stranky“: přebije komponenty, tisk ji přebije. */
+@layer stranky {
+  .zt { display: grid; gap: var(--sp-6); }
+  .zt [hidden] { display: none !important; }
+  .zt .card > h2 { font-size: var(--fs-xl); }
+  .zt > .notice a { font-weight: 800; }
+
+  /* ---------- Řádky formuláře (prodeje, výplaty) ---------- */
+  .zt-radky { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-4); }
+  .zt-radek-pole {
+    margin: 0; min-width: 0; padding: var(--sp-4); border: 2px solid var(--c-border); border-radius: var(--r-md);
+    background: var(--c-bg); display: grid; gap: 0 var(--sp-3); grid-template-columns: minmax(0, 1fr); align-items: end;
+  }
+  .zt-radek-pole > legend { padding: 0 var(--sp-2); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); }
+  .zt-radek-pole .field { margin-bottom: var(--sp-3); min-width: 0; }
+  .zt-radek-pole input[type="date"] { min-width: 0; }
+  .zt-pole-cele, .zt-radek-akce { grid-column: 1 / -1; }
+  .zt-radek-akce { display: flex; align-items: flex-end; padding-bottom: var(--sp-3); }
+  .zt-odebrat { min-height: 48px; }
+  .zt-odebrat:disabled { opacity: 0.55; cursor: not-allowed; }
+  .zt-pridat { margin-top: var(--sp-4); }
+  .zt-chyba { margin-top: var(--sp-4); }
+  .zt-jednotny-stav { margin: 0 0 var(--sp-2); }
+
+  /* Mobil: pole pod sebou. Od 560 px: druh přes celou šířku, ostatní po dvou; od 1040 px tři sloupce ve dvou řádcích */
+  @media (min-width: 560px) {
+    .zt-radek-pole { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .zt-pole-cele { grid-column: auto; }
+    .zt-pole-typ, .zt-radek-akce { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1040px) {
+    .zt-radek-pole { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .zt-pole-typ, .zt-radek-akce { grid-column: auto; }
+  }
+
+  /* ---------- Výsledek ---------- */
+  .zt-polozky-nadpis { margin: var(--sp-6) 0 var(--sp-3); font-size: var(--fs-lg); }
+  .zt-polozky { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+  .zt-polozka {
+    display: grid; gap: var(--sp-1); padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md);
+    border: 2px solid var(--c-border); border-left-width: 8px; background: var(--c-bg);
+  }
+  .zt-polozka-casovy, .zt-polozka-hodnotovy { border-left-color: var(--c-sage); }
+  .zt-polozka-zdanitelne { border-left-color: var(--c-accent); }
+  .zt-polozka-neuplne { border-left-color: var(--c-error); }
+  .zt-polozka-hlava { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); }
+  .zt-polozka-nazev { font-weight: 800; }
+  .zt-duvod { font-size: var(--fs-md); }
+  .zt-castky { font-size: var(--fs-sm); color: var(--c-text-muted); }
+  .zt .tag { font-size: var(--fs-sm); }
+  .zt-tag-casovy, .zt-tag-hodnotovy { background: var(--c-sage-soft); color: var(--c-sage-ink); }
+  .zt-tag-zdanitelne { background: var(--c-accent-soft); color: var(--c-text); }
+  .zt-tag-neuplne { background: var(--c-error-soft); color: var(--c-error); }
+  .zt-prazdne { margin: 0; }
+
+  .zt-upozorneni { list-style: none; margin: var(--sp-5) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
+  .zt-upozorneni li { padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md); background: var(--c-surface-2); }
+  .zt-stav { margin-right: var(--sp-2); vertical-align: 0.05em; }
+
+  .zt .result .table-wrap { margin-top: var(--sp-5); }
+  .zt .result tfoot th, .zt .result tfoot td { font-weight: 800; }
+
+  /* ---------- Sporné body, limity, návod ---------- */
+  .zt-sporne { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+  .zt-sporne li { display: grid; gap: var(--sp-2); align-items: start; padding-bottom: var(--sp-3); border-bottom: 2px solid var(--c-border); }
+  .zt-sporne li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .zt-sporne .badge { justify-self: start; }
+  @media (min-width: 760px) { .zt-sporne li { grid-template-columns: 11rem minmax(0, 1fr); } }
+
+  .zt-varianty { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-4); }
+  @media (min-width: 1040px) { .zt-varianty { grid-template-columns: 1fr 1fr; } }
+  .zt-varianta { padding: var(--sp-4); border: 2px dashed var(--c-draft-line); border-radius: var(--r-md); background: var(--c-bg); }
+  .zt-varianta h3 { margin: 0 0 var(--sp-1); }
+  .zt-varianta > p { margin: 0 0 var(--sp-3); }
+  .zt-kroky { margin: 0; padding-left: 1.25rem; display: grid; gap: var(--sp-2); }
+}

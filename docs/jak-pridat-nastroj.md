@@ -18,7 +18,11 @@ src/nastroje/<id>/
                         spouští je `npm test` (glob src/**/*.test.js)
 ```
 
-Do `_site/nastroje/<id>/` se zkopírují jen `*.js` kromě `*.11tydata.js`, `*.test.js` a složek
+Velká data, která stránka načítá až na vyžádání ze svého webu (ne z cizí domény), uveď v `nastroj.json`
+jako `"verejneSoubory": ["data/tdd/*.json"]` – zkopírují se do `_site/nastroje/<id>/…`. Malá data a pravidla
+vkládej do stránky při buildu.
+
+Do `_site/nastroje/<id>/` se jinak zkopírují jen `*.js` kromě `*.11tydata.js`, `*.test.js` a složek
 `test/`. Moduly z prohlížeče importuj relativně (`import { spocitej } from './calc.js'`),
 sdílené moduly cestou `../../js/format.js`.
 

@@ -1,0 +1,183 @@
+---
+layout: layouty/nastroj.njk
+nastroj: bydlometr
+title: Bydlometr
+description: Končí ti fixace? Porovnej nabídku banky, refinancování, mimořádnou splátku a prodloužení splatnosti. A spočítej, jestli se víc vyplatí koupit byt na hypotéku, nebo bydlet v nájmu a investovat.
+permalink: /bydleni-energie/bydlometr/
+uvod: Dvě kalkulačky v jedné. Refixace porovná, co udělat s hypotékou. Nájem vs. koupě ukáže, kdy se koupě začne vyplácet.
+skripty: ['/nastroje/bydlometr/ui.js']
+styly: ['/nastroje/bydlometr/bydlometr.css']
+---
+{%- from "komponenty/formular.njk" import pole, volby, krok -%}
+{%- from "komponenty/vysledky.njk" import vysledek, statistiky, lepiva_lista -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set r = bydlometr.refixace -%}
+{%- set pp = bydlometr.poplatek -%}
+{%- set n = bydlometr.najem -%}
+
+{%- set obrazekRefixace -%}
+<svg class="result-art" viewBox="0 0 140 140" aria-hidden="true" focusable="false">
+  <circle cx="70" cy="70" r="66" class="il-bg"/>
+  <path d="M26 72 70 34l44 38z" class="il-terra"/>
+  <rect x="38" y="70" width="64" height="44" rx="5" class="il-apricot"/>
+  <rect x="62" y="86" width="16" height="28" rx="4" class="il-apricot-d"/>
+  <rect x="44" y="78" width="12" height="12" rx="3" class="il-cream"/>
+  <circle cx="106" cy="36" r="19" class="il-sage-d"/>
+  <circle cx="100" cy="30" r="3.5" class="il-cream"/>
+  <circle cx="112" cy="42" r="3.5" class="il-cream"/>
+  <path d="M99 44 113 28" class="st-cream" stroke-width="3.5"/>
+  <path d="M24 26q2 6 8 8q-6 2-8 8q-2-6-8-8q6-2 8-8z" class="il-gold"/>
+</svg>
+{%- endset -%}
+{%- set obrazekNajmu -%}
+<svg class="result-art" viewBox="0 0 140 140" aria-hidden="true" focusable="false">
+  <circle cx="70" cy="70" r="66" class="il-bg"/>
+  <path d="M18 74 52 44l34 30z" class="il-terra"/>
+  <rect x="26" y="72" width="52" height="40" rx="5" class="il-apricot"/>
+  <rect x="45" y="88" width="14" height="24" rx="4" class="il-apricot-d"/>
+  <rect x="88" y="100" width="34" height="11" rx="5.5" class="il-gold-d"/>
+  <rect x="91" y="89" width="34" height="11" rx="5.5" class="il-gold"/>
+  <rect x="88" y="78" width="34" height="11" rx="5.5" class="il-gold-d"/>
+  <path d="M105 66V40m-9 9 9-9 9 9" class="st-ink" stroke-width="4.5"/>
+</svg>
+{%- endset -%}
+
+<noscript><link rel="stylesheet" href="{{ '/nastroje/bydlometr/bez-js.css' | url }}"></noscript>
+<div class="bydlometr" data-bydlometr>
+  <span class="bm-kotva" id="refixace"></span><span class="bm-kotva" id="najem-vs-koupe"></span>
+  <div class="bm-zalozky" role="tablist" aria-label="Části Bydlometru" data-zalozky>
+    <button type="button" role="tab" id="zalozka-refixace" aria-controls="panel-refixace" aria-selected="true" data-zalozka="refixace">Refixace</button>
+    <button type="button" role="tab" id="zalozka-najem" aria-controls="panel-najem" aria-selected="false" tabindex="-1" data-zalozka="najem">Nájem vs. koupě</button>
+  </div>
+
+  {#- ===================== Refixace ===================== #}
+  <section class="bm-panel" id="panel-refixace" data-panel="refixace" aria-labelledby="rf-udaje">
+    <p class="bm-panel-uvod">Končí ti fixace? Porovnáme přijetí nabídky banky, refinancování jinde, mimořádnou splátku z úspor a prodloužení splatnosti.</p>
+    <div class="calc-layout">
+      <section class="calc-side" aria-labelledby="rf-udaje">
+        <h2 id="rf-udaje">Refixace: tvoje hypotéka</h2>
+        <p class="muted small">Cokoli změň a výsledek se hned přepočítá.</p>
+        <form id="form-refixace" action="#vysledek" method="get" novalidate>
+          {%- call krok({ cislo: 1, titulek: 'Hypotéka teď', shrnuti: r.shrnuti[1], otevreny: true, id: 'rf-krok-1' }) %}
+            {%- for f in r.kroky[1] %}{{ pole(f) }}{% endfor %}
+          {%- endcall %}
+          {%- call krok({ cislo: 2, titulek: 'Nabídky a refinancování', shrnuti: r.shrnuti[2], otevreny: true, id: 'rf-krok-2' }) %}
+            {%- for f in r.kroky[2] %}{{ pole(f) }}{% endfor %}
+          {%- endcall %}
+          {%- call krok({ cislo: 3, titulek: 'Další možnosti', shrnuti: r.shrnuti[3], otevreny: true, id: 'rf-krok-3' }) %}
+            {%- for f in r.kroky[3] %}{{ pole(f) }}{% endfor %}
+          {%- endcall %}
+        </form>
+      </section>
+
+      <div class="calc-main">
+        {%- call vysledek({ id: 'vysledek', kicker: r.vysledek.kicker, nadpis: r.vysledek.nadpis, cislo: r.vysledek.cislo, popis: r.vysledek.popis, vysvetleni: r.vysledek.vysvetleni, ilustraceSvg: obrazekRefixace, ukazka: true }) %}
+          {{ statistiky(r.vysledek.statistiky) }}
+          <p class="sr-only" aria-live="polite" data-oznameni></p>
+        {%- endcall %}
+
+        <section class="card" aria-labelledby="rf-varianty-nadpis">
+          <h2 id="rf-varianty-nadpis">Porovnání variant</h2>
+          <p class="muted">Splátka, úroky a poplatky do konce splácení pro každou variantu. Nejlevnější je zvýrazněná.</p>
+          <div data-tabulka-variant>{{ r.tabulkaVariant | safe }}</div>
+          <ul class="bm-poznamky" data-poznamky>
+            {%- for t in r.poznamky %}<li>{{ t }}</li>{% endfor %}
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="rf-stres-nadpis">
+          <h2 id="rf-stres-nadpis">Zátěžový test sazby</h2>
+          <p class="muted" data-uvod-stresu>{{ r.uvodStresu }}</p>
+          <div data-tabulka-stresu>{{ r.tabulkaStresu | safe }}</div>
+          <p class="note">{{ ikona('ikona-info') }}<span data-poznamka-zateze>{{ r.poznamkaZateze }}</span></p>
+        </section>
+
+        <section class="card" aria-labelledby="pp-nadpis">
+          <h2 id="pp-nadpis">Poplatek za mimořádnou splátku během fixace</h2>
+          <p class="muted">Kolik nejvýš smí banka chtít, když splatíš část dluhu před koncem fixace. Pravidla platí pro smlouvy a fixace od {{ pp.platnost }}.</p>
+          <form id="form-poplatek" class="bm-poplatek-formular" action="#pp-vysledek" method="get" novalidate>
+            <div class="bm-dvojice">
+              {%- for f in pp.pole %}{{ pole(f) }}{% endfor %}
+            </div>
+            <div class="bm-dvojice">
+              {%- for f in pp.data %}{{ pole(f) }}{% endfor %}
+            </div>
+            {{ volby({ id: 'pp-volby', legenda: 'Bezplatná splátka', moznosti: pp.vyuzito }) }}
+          </form>
+          <div class="bm-poplatek" id="pp-vysledek" data-ukazka>
+            <p class="bm-poplatek-hlavni"><span data-poplatek-popis>{{ pp.popis }}</span> <b class="num" data-poplatek-cislo>{{ pp.cislo }}</b></p>
+            <p class="muted" data-poplatek-duvod>{{ pp.duvod }}</p>
+            <p class="sr-only" aria-live="polite" data-poplatek-oznameni></p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  {#- ===================== Nájem vs. koupě ===================== #}
+  <section class="bm-panel" id="panel-najem" data-panel="najem" aria-labelledby="nk-udaje">
+    <p class="bm-panel-uvod">Koupit byt na hypotéku, nebo bydlet v nájmu a vlastní zdroje i měsíční rozdíl investovat? Porovnáme čisté jmění po letech.</p>
+    <div class="calc-layout">
+      <section class="calc-side" aria-labelledby="nk-udaje">
+        <h2 id="nk-udaje">Nájem vs. koupě: tvoje zadání</h2>
+        <p class="muted small">Město předvyplní ceny bytů a nájmů. Cokoli můžeš přepsat.</p>
+        <form id="form-najem" action="#vysledek-najem" method="get" novalidate>
+          {%- call krok({ cislo: 1, titulek: 'Byt', shrnuti: n.shrnuti[1], otevreny: true, id: 'nk-krok-1' }) %}
+            {{ pole({ id: 'nk-mesto', label: 'Město', moznosti: n.mesta, napoveda: 'Předvyplní cenu a nájem za m² a odhad daně z nemovitosti.' }) }}
+            {%- for f in n.kroky[1] %}{{ pole(f) }}{% endfor %}
+          {%- endcall %}
+          {%- call krok({ cislo: 2, titulek: 'Financování', shrnuti: n.shrnuti[2], otevreny: true, id: 'nk-krok-2' }) %}
+            {%- for f in n.kroky[2] %}{{ pole(f) }}{% endfor %}
+            {{ pole({ id: 'nk-sazba-dane', label: 'Sazba daně z příjmů', moznosti: n.sazbyDane, napoveda: n.napovedaDane }) }}
+            {{ volby({ id: 'nk-volby', legenda: 'Daně a typ bytu', moznosti: n.volby, napoveda: n.napovedaVoleb }) }}
+          {%- endcall %}
+          {%- call krok({ cislo: 3, titulek: 'Náklady vlastnictví', shrnuti: n.shrnuti[3], otevreny: false, id: 'nk-krok-3' }) %}
+            {%- for f in n.kroky[3] %}{{ pole(f) }}{% endfor %}
+          {%- endcall %}
+          {%- call krok({ cislo: 4, titulek: 'Předpoklady', shrnuti: n.shrnuti[4], otevreny: false, id: 'nk-krok-4' }) %}
+            {%- for f in n.kroky[4] %}{{ pole(f) }}{% endfor %}
+          {%- endcall %}
+        </form>
+      </section>
+
+      <div class="calc-main">
+        {%- call vysledek({ id: 'vysledek-najem', kicker: n.vysledek.kicker, nadpis: n.vysledek.nadpis, cislo: n.vysledek.cislo, popis: n.vysledek.popis, vysvetleni: n.vysledek.vysvetleni, ilustraceSvg: obrazekNajmu, ukazka: true }) %}
+          <ul class="bm-varovani" data-varovani{% if not n.varovani.length %} hidden{% endif %}>
+            {%- for t in n.varovani %}<li>{{ ikona('ikona-vystraha') }}<span>{{ t }}</span></li>{% endfor %}
+          </ul>
+          {{ statistiky(n.vysledek.statistiky) }}
+          <p class="sr-only" aria-live="polite" data-oznameni></p>
+        {%- endcall %}
+
+        <section class="card" aria-labelledby="nk-graf-nadpis">
+          <h2 id="nk-graf-nadpis">Čisté jmění v čase</h2>
+          <p class="muted">Koupě: hodnota bytu minus zbývající dluh plus investice kupujícího. Nájem: investované vlastní zdroje a měsíční rozdíl.</p>
+          <div class="bm-graf" data-graf>{{ n.graf | safe }}</div>
+          <details class="bm-tabulka">
+            <summary>Zobrazit hodnoty po letech</summary>
+            <div data-tabulka-let>{{ n.tabulkaLet | safe }}</div>
+          </details>
+        </section>
+
+        <section class="card" aria-labelledby="nk-citlivost-nadpis">
+          <h2 id="nk-citlivost-nadpis">Citlivost na předpoklady</h2>
+          <p class="muted" data-uvod-citlivosti>{{ n.uvodCitlivosti }}</p>
+          <div data-tabulka-citlivosti>{{ n.tabulkaCitlivosti | safe }}</div>
+        </section>
+
+        <section class="card" aria-labelledby="nk-jak-nadpis">
+          <h2 id="nk-jak-nadpis">Jak počítáme</h2>
+          <ul class="bm-poznamky">
+            <li>Simulace běží po měsících. Kupující platí splátku a náklady vlastnictví, nájemník nájem. Kdo má v daném měsíci nižší výdaj, rozdíl investuje.</li>
+            <li>Nájemník investuje vlastní zdroje od prvního dne. Kupující je dá do bytu a do nákladů koupě.</li>
+            <li>Odpočet úroků z daní se projeví jednou ročně. Nájem roste jednou ročně, cena bytu a investice každý měsíc.</li>
+            <li>Zjednodušení: nominální koruny bez přepočtu na inflaci, bez daně z výnosů, bez nákladů na prodej bytu a bez provize realitní kanceláře. Sazba po konci fixace platí do konce splácení.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+
+{{ lepiva_lista({ cislo: r.lista.cislo, popis: r.lista.popis, cil: '#vysledek' }) }}
+<script type="application/json" id="data-bydlometr">{{ bydlometr.defaults | json | safe }}</script>

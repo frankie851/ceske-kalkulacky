@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "overeno": "2026-11-05",
+    "zdroje": [
+      {
+        "nazev": "OTE – výsledky denního trhu s elektřinou",
+        "url": "https://www.ote-cr.cz/cs/kratkodobe-trhy/elektrina/denni-trh",
+        "poznamka": "15minutové ceny v EUR/MWh (do 30. 9. 2025 hodinové). Stahujeme jednou týdně."
+      },
+      {
+        "nazev": "ČNB – kurzy devizového trhu",
+        "url": "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/",
+        "poznamka": "Kurz EUR/CZK pro den dodávky. O víkendu a ve svátek poslední vyhlášený."
+      },
+      {
+        "nazev": "OTE – normalizované typové diagramy dodávek (TDD)",
+        "url": "https://www.ote-cr.cz/cs/statistika/typove-diagramy-dodavek-elektriny/normalizovane-tdd",
+        "poznamka": "Průběh spotřeby domácností po čtvrthodinách (třídy TDD4 až TDD7)."
+      },
+      {
+        "nazev": "ERÚ – cenový výměr č. 13/2025 (systémové služby, nesíťová infrastruktura)",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv172025.pdf",
+        "poznamka": "Energetický regulační věstník 17/2025."
+      },
+      {
+        "nazev": "ERÚ – cenový výměr č. 15/2025 (podpora obnovitelných zdrojů, POZE)",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv192025.pdf",
+        "poznamka": "Energetický regulační věstník 19/2025."
+      },
+      {
+        "nazev": "ČEZ Prodej – ceník Dynamický tarif, území ČEZ Distribuce",
+        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_cez_dynamicky_tarif_01062026_012026.pdf",
+        "poznamka": "Pásma dynamického tarifu a distribuční část ceny 2026 (ř. 3–12)."
+      },
+      {
+        "nazev": "ČEZ Prodej – ceník Dynamický tarif, území EG.D",
+        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_egd_dynamicky_tarif_01062026_012026.pdf",
+        "poznamka": "Distribuční část ceny 2026."
+      },
+      {
+        "nazev": "ČEZ Prodej – ceník Dynamický tarif, území PREdistribuce",
+        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_pre_dynamicky_tarif_01062026_012026.pdf",
+        "poznamka": "Distribuční část ceny 2026."
+      }
+    ],
+    "neovereno": [
+      "Spotřebu po čtvrthodinách odhadujeme z typového diagramu dodávky (TDD) OTE pro tvoji sazbu, bez teplotního přepočtu. Skutečná zima nebo léto se může lišit.",
+      "Časy nízkého tarifu (HDO) určuje distributor pro každé odběrné místo jinak. Počítáme s typickými okny podle sazby.",
+      "Distribuci, poplatky a ceník dynamického tarifu z roku 2026 používáme na celé období, i na listopad a prosinec 2025.",
+      "Spot počítáme z 15minutové ceny denního trhu a kurzu ČNB. Dodavatelé ho můžou účtovat jinak, například hodinovým průměrem nebo s poplatkem za odchylky.",
+      "Posun spotřeby: zvolený podíl spotřeby každého dne přesuneme rovným dílem do 16 nejlevnějších čtvrthodin téhož dne (u spotu podle ceny na burze, u dynamického tarifu podle pásma).",
+      "Fotovoltaiku nemodelujeme. U domu s FVE zadej jen elektřinu odebranou ze sítě, výroba ani prodej přetoků se nepočítají.",
+      "Nepočítáme slevy a bonusy dodavatelů ani jističe nad 3 × 63 A. Dynamický tarif ČEZ vyžaduje průběhové měření (chytrý elektroměr)."
+    ]
+  },
+  "data": {
+    "od": "2025-11-01",
+    "do": "2026-10-31",
+    "posledniDen": "2026-10-31"
+  },
+  "vychozi": {
+    "predvolba": "dum",
+    "distributor": "cez",
+    "fix": { "cena": 3500, "stalyPlat": 163.35 },
+    "spot": { "prirazka": 400, "stalyPlat": 163.35 },
+    "posun": { "hodnota": 0, "min": 0, "max": 30, "krok": 5 },
+    "poznamka": "Ceny fixu a spotu jsou orientační, vč. DPH (Kč/MWh a Kč/měsíc). Základní cenu a stálý plat dynamického tarifu bereme z dynamic.json."
+  },
+  "predvolby": [
+    { "id": "byt", "nazev": "Byt", "sazba": "D02d", "mwh": 1.8, "jistic": "3x25", "napoveda": "Byt: typicky sazba D02d a 1 až 2,5 MWh za rok." },
+    { "id": "dum", "nazev": "Rodinný dům", "sazba": "D02d", "mwh": 3.5, "jistic": "3x25", "napoveda": "Rodinný dům bez elektrického vytápění: typicky sazba D02d." },
+    { "id": "tc", "nazev": "Dům s tepelným čerpadlem", "sazba": "D56d", "mwh": 9, "jistic": "3x25", "napoveda": "Tepelné čerpadlo: sazba D56d (22 hodin nízkého tarifu) nebo D57d." },
+    { "id": "fve", "nazev": "Dům s fotovoltaikou", "sazba": "D02d", "mwh": 2.5, "jistic": "3x25", "napoveda": "Zadej jen spotřebu odebranou ze sítě. Výrobu FVE nemodelujeme, profil je stejný jako bez FVE (TDD4)." }
+  ]
+}

@@ -2,6 +2,7 @@
 // Vstup src/, výstup _site/. Do prohlížeče Eleventy nic nepřidává; vlastní JS je v src/js/
 // a v klientských modulech nástrojů (src/nastroje/<id>/*.js).
 import crypto from 'node:crypto';
+import fs from 'node:fs';
 import path from 'node:path';
 import { kc, cislo, procenta, datum } from './src/js/format.js';
 import { skryteNastroje } from './src/_lib/nastroje.js';
@@ -49,6 +50,16 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/nastroje': 'nastroje' }, {
     filter: (rel) => jeKlientskyModul(rel) && !skryte.has(rel.split(path.sep).join('/').split('/')[0]),
   });
+
+  // Veřejné datové soubory nástroje (např. velké profily spotřeby), které stránka načítá ze svého
+  // webu až na vyžádání: nastroj.json → "verejneSoubory": ["data/tdd/*.json"] (cesty relativně ke složce).
+  for (const slozka of fs.readdirSync('src/nastroje', { withFileTypes: true })) {
+    const soubor = path.join('src/nastroje', slozka.name, 'nastroj.json');
+    if (!slozka.isDirectory() || !fs.existsSync(soubor) || skryte.has(slozka.name)) continue;
+    for (const vzor of JSON.parse(fs.readFileSync(soubor, 'utf8')).verejneSoubory || []) {
+      eleventyConfig.addPassthroughCopy({ [`src/nastroje/${slozka.name}/${vzor}`]: `nastroje/${slozka.name}/${path.posix.dirname(vzor)}` });
+    }
+  }
 
   const pisma = {};
   for (const rodina of PISMA) {

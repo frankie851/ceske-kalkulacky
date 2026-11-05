@@ -1,7 +1,7 @@
 {
-  "datum": "2026-11-05T10:42:12.780Z",
+  "datum": "2026-11-05T11:00:08.198Z",
   "prefix": "/ceske-kalkulacky/",
-  "stranek": 24,
+  "stranek": 26,
   "chyb": 0,
   "stranky": [
     {
@@ -14,6 +14,14 @@
     },
     {
       "stranka": "/bydleni-energie/",
+      "chyby": []
+    },
+    {
+      "stranka": "/bydleni-energie/bydlometr/",
+      "chyby": []
+    },
+    {
+      "stranka": "/bydleni-energie/spot-nebo-fix/",
       "chyby": []
     },
     {

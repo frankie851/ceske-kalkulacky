@@ -1,0 +1,4 @@
+/* Bydlometr bez JavaScriptu (načítá se jen přes <noscript>): obě části pod sebou, bez záložek. */
+.bydlometr .bm-zalozky { display: none; }
+.bydlometr .bm-panel { display: block; }
+.bydlometr .bm-panel + .bm-panel { margin-top: var(--sp-7); padding-top: var(--sp-6); border-top: 4px dotted var(--c-border-strong); }
