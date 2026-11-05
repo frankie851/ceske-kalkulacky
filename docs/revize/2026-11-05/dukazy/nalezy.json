@@ -606,12 +606,226 @@
   "kod": "SPOT",
   "repo": "spot-nebo-fix",
   "nazev": "Spot, nebo fix?",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 6,
+   "nizka": 6
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-01"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-10 (nízká; výpočet sám se shoduje, chyby jsou v pravidlech – SPOT-01/02)"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-07"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-06"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-04"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-03"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "SPOT-11 (nízká)"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "SPOT-01",
+    "zavaznost": "Vysoká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Sazby D45d/D56d/D57d počítají s TDD6 místo TDD7, D61d s TDD7 místo TDD4",
+    "kde": "`tariffs.json:305–324` (`sazbyInfo.D45d/D56d/D57d.tdd = \"TDD6\"`, `D61d.tdd = \"TDD7\"`), komentář `scripts/update-data.mjs:31`, `README.md` Zjednodušení („D35d/D45d/D56d/D57d → TDD6, D61d → TDD7“)",
+    "reprodukce": "předvolba „Dům s tepelným čerpadlem“ (D56d, 9 MWh), EG.D, fix 3 500, marže 400 → očekáváno podle přílohy č. 6 vyhlášky č. 408/2015 Sb. (třída 7 = „D45d; D57d“ a „D56d“, třída 4 = „D01d; D02d; D61d“, třída 6 = „D35d“; zakonyprolidi.cz znění od 1. 9. 2026, potvrzeno e-sbirka.gov.cz) profil TDD7: spot 49 207 Kč, dyn 48 933 Kč, fix 45 596 Kč → skutečnost (načten `TDD6.json`, `prohlizec.json` V2-360): spot 48 710 Kč, dyn 48 476 Kč, fix 45 527 Kč. Spot a dynamický tarif podhodnocené o 497 a 457 Kč/rok, rozdíl spot − fix 3 183 místo 3 611 Kč (ČEZ D57d: +494 / +453 Kč). Stejné pro D45d; D61d dostává profil přímotopů místo profilu domácnosti bez vytápění.",
+    "dopad": "domácnosti s tepelným čerpadlem a přímotopem (jedna ze čtyř předvoleb) vidí spot a dynamický tarif o ~1 % levnější, než by podle úředního profilu vyšly; při těsném srovnání to může převážit volbu.",
+    "oprava": "v `sazbyInfo` nastavit D45d/D56d/D57d → TDD7, D61d → TDD4 (D35d zůstává TDD6), opravit komentář v `update-data.mjs`, README a nápovědu; přidat test, který mapování porovná s přílohou 6 (D01d/D02d/D61d → 4, D25d/D26d/D27d → 5, D35d → 6, D45d/D56d/D57d → 7).",
+    "overeni": "reprodukováno 2× (zakonyprolidi + e-Sbírka; přepočet `prepocet.txt` V2/V2z a obrazovka `prohlizec.json`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-02",
+    "zavaznost": "Vysoká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Víkendová sazba D61d má nízký tarif i ve všední dny, úředně platí jen pátek 12:00 – neděle 22:00",
+    "kde": "`tariffs.json:554–571` (`ntHours.D61d`: workday `[0,6],[22,24]`, weekend `[0,24]`), `calc.js:182–185` (`ntMaskFor` + víkend = i svátek)",
+    "reprodukce": "ČEZ Distribuce, D61d, 2 MWh, 3×25 A, fix 3 000 → očekáváno podle CV ERÚ 14/2025 „Sazba D 61d – Podmínky uplatnění: Doba platnosti nízkého tarifu je stanovena celoročně od pátku 12.00 hodin do neděle 22.00 hodin“ (erv182025.pdf; VT 3 306,67, NT 116,50 Kč/MWh bez DPH) → regulované složky 5 448,80 Kč, celkem fix 16 848 Kč, spot 18 669 Kč, dyn 18 599 Kč → skutečnost modulu (NT 54,7 % čtvrthodin místo 34,7 %, ve všední den 8 h NT, v neděli večer i o svátcích NT): regulované 4 375,87 Kč, fix 15 775 Kč, spot 17 578 Kč, dyn 17 517 Kč (`prepocet.txt` V4). Podhodnocení 1 073 Kč/rok u všech tří variant (nemění pořadí).",
+    "dopad": "uživatel s víkendovou sazbou (chaty, chalupy) dostane roční náklady o ~6 % nižší, než zaplatí; patička to kryje jen obecnou větou o HDO, ale u D61d okno neurčuje HDO, nýbrž cenový výměr.",
+    "oprava": "okno D61d odvodit z dne v týdnu (pá od 12:00, so celý den, ne do 22:00, svátky bez vlivu) – `ntHours` dnes umí jen „pracovní den / víkend“, takže buď rozšířit formát o den v týdnu, nebo D61d řešit zvláštní větví v `ntMaskFor`; přidat test.",
+    "overeni": "reprodukováno 2× (přepočet ve dvou procesech – `prepocet.mjs` a `porovnani.mjs`; úřední text CV 14/2025) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-03",
+    "zavaznost": "Střední",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Chybí datum ověření regulovaných cen, odkaz na CV ERÚ 14/2025 a vysvětlení nulového POZE",
+    "kde": "`index.html:155, 166–175` (patička: „Regulované ceny: 2026“, zdroje), `tariffs.json:593–598, 748–753, 902–907` (`source` jen ceník ČEZ Prodej), `README.md` „Zdroje dat“",
+    "reprodukce": "patička → očekáváno viditelné datum, ke kterému byly distribuční ceny a pásma ověřeny, odkaz na cenový výměr ERÚ č. 14/2025 (ERV 18/2025), z něhož ceny pocházejí, a poznámka, že platba POZE je v roce 2026 0 Kč (CV 15/2025) → skutečnost: jen rok 2026 a datum aktualizace dat OTE; distribuce se opírá výhradně o ceník dodavatele ČEZ Prodej; karta „Distribuce, daň a poplatky“ POZE nerozepisuje a uživatel s cenou 495 Kč/MWh nic nenajde.",
+    "dopad": "nelze poznat, zda jsou regulované ceny aktuální, a laik může nulové POZE považovat za chybu nebo naopak nečekat jeho návrat v roce 2027.",
+    "oprava": "do `tariffs.json` přidat `verifiedAt` a zobrazit v patičce; k distribuci doplnit zdroj CV ERÚ 14/2025 s URL; do Zjednodušení větu „POZE je podle CV ERÚ 15/2025 v roce 2026 0 Kč“.",
+    "overeni": "reprodukováno 2× (soubor i živý web) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-04",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Žádná kontrola platnosti vstupu ani chybová hláška: prázdná či záporná cena dává 0 Kč a „fix nejlevnější“, spotřeba nad maximem se přijme",
+    "kde": "`app.js:47–50` (`num()` vrací 0 pro NaN i záporné), `app.js:141` (`Math.max(0.1, …)`), `index.html:54, 66, 70` (`min`/`max`/`step`, formulář `novalidate`, žádný prvek pro hlášky)",
+    "reprodukce": "V1, pak smazat fixní cenu nebo zadat −500 → očekáváno upozornění „zadejte cenu“ a pozastavení výsledku → skutečnost: karta Fixní cena 14 108 Kč, „Silová elektřina 0 Kč“, zvýrazněno „Nejlevnější“, souhrn „Nejlevněji vychází fixní cena“; spotřeba 250 MWh (max 100) i prázdná spotřeba (→ 0,1 MWh, 6 439 Kč) projdou bez hlášky; `chyboveHlasky: []` (`prohlizec.json` vstup-cs-CZ).",
+    "dopad": "překlep nebo nedopsaná hodnota okamžitě vyrobí sebejisté doporučení s nesmyslnou částkou, bez jakéhokoli varování.",
+    "oprava": "po každé změně ověřit `validity` (badInput, rangeUnderflow/Overflow, valueMissing) a prázdnou/zápornou cenu; při chybě zobrazit hlášku u pole (`aria-describedby`) a karty neaktualizovat nebo označit „neúplné zadání“.",
+    "overeni": "reprodukováno 2× (cs-CZ i en-US běh) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-05",
+    "zavaznost": "Střední",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Délky nízkého tarifu D35d (16 h) a D56d (22 h) a okno D27d neodpovídají podmínkám 2026",
+    "kde": "`tariffs.json:305–315` (popisky „D35d – akumulace 16 h“, „D56d – tepelné čerpadlo 22 h“), `tariffs.json:372–393, 394–431, 478–507` (`ntHours.D27d` 0–6 + 13–15 h, `D35d` 16 h, `D56d` 22 h), `app.js:26` (nápověda „D56d (22 h nízkého tarifu)“)",
+    "reprodukce": "CV ERÚ 14/2025: D35d „nízkého tarifu po dobu 20 hodin“ (16 h jen přechodně, je-li změna „podmíněna technickými úpravami elektroměru“), D56d „po dobu 20 hodin“ a odůvodnění „snížení počtu hodin nízkého tarifu z 22 hodin na 20 hodin u sazeb C 56d a D 56d“, D27d „minimálně 8 hodin denně v době od 18.00 hodin do 8.00 hodin“ → aplikace: D35d 16 h, D56d 22 h, D27d 2 h NT v 13–15 h, což podmínky vylučují. Při 9 MWh D56d jde o řádově stovky Kč/rok na regulovaných složkách (shodně u všech variant).",
+    "dopad": "popisky sazeb jsou pro rok 2026 nepravdivé a regulovaná část je u D56d podhodnocená, u D35d nadhodnocená; pořadí variant se nemění.",
+    "oprava": "D35d a D56d převést na 20 h (sjednotit s D45d/D57d), D27d okno posunout do 18–8 h, přepsat popisky a nápovědu; ve Zjednodušení uvést, že délky odpovídají CV ERÚ 14/2025.",
+    "overeni": "reprodukováno 2× (text CV 14/2025 na dvou místech – podmínky sazby a odůvodnění) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-06",
+    "zavaznost": "Střední",
+    "oblast": "4 Testy",
+    "nazev": "Chybí testy pravidel, která se v revizi ukázala chybná, a propojení formuláře",
+    "kde": "`test/calc.test.js` (17 testů)",
+    "reprodukce": "testy pokrývají všech pět příkladů zadání, DST, svátky, posun, CSV a shodu dyn. tarifu s ceníkem (D02d, D25d). Netestuje se: přiřazení sazeb k třídám TDD (SPOT-01 by test odhalil), okna NT proti podmínkám CV (SPOT-02/05), `regulatedFor` pro pásma jističe a `1x25`, parsování vstupů v `app.js` (`num()`), extrapolace CSV z krátkého období, chování při prázdném/záporném vstupu. Žádný test nekonzervuje špatnou hodnotu.",
+    "dopad": "nepřímý – chyby v datových pravidlech se do výsledku dostanou bez varování.",
+    "oprava": "test mapování TDD podle přílohy 6, test D61d (pá 12:00 NT, čt 3:00 VT, ne 23:00 VT), test počtu hodin NT za den pro každou sazbu, test `regulatedFor` pro všech 9 jističů, a jednoduchý test parsování čísel vyčleněný z `app.js`.",
+    "overeni": "reprodukováno 2× (čtení testů, `testy.txt`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-07",
+    "zavaznost": "Střední",
+    "oblast": "3 Shoda se zadáním",
+    "nazev": "Zdroj distribučních cen je jen ceník dodavatele, zadání žádá položky se zdrojem",
+    "kde": "`tariffs.json:593–598` a dále (`distributors.*.source` = ceník ČEZ Prodej), `README.md` tabulka „Zdroje dat“ (jen CV 13/2025 a 15/2025)",
+    "reprodukce": "zadání: „každá položka se zdrojem a rokem“ → hodnoty se shodují s CV ERÚ 14/2025 (rejstřík FD-35–37), ale výměr není nikde uveden; při změně ceníku ČEZ (např. 1. 6. 2026 se měnila obchodní část) se ztrácí stopa k úřední ceně distribuce.",
+    "dopad": "zdroj v patičce odkazuje na dodavatele, ne na regulátora – nelze si regulované ceny ověřit.",
+    "oprava": "doplnit `source`/`url` na CV ERÚ 14/2025 (ERV 18/2025) a nechat ceník ČEZ jako sekundární kontrolu.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-08",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "V prohlížeči s jinou než českou lokalizací se desetinná čárka zahodí a výsledek se tiše zvětší stokrát",
+    "kde": "`index.html:54, 66, 70` (`<input type=\"number\">`), `app.js:47–50`",
+    "reprodukce": "Chromium `--lang=en-US`, pole „Fixní cena“ napsat `3000,50` → očekáváno 3 000,50 nebo hláška → skutečnost hodnota `300050`, karta Fixní cena 914 258 Kč, „o 888 525 Kč dráž“ (`vstup-carka-360.png`); `0,85` → `085`; spotřeba `3,5` → 35 MWh (207 046 Kč). V Chromiu `--lang=cs-CZ` prohlížeč čárku přijme (3000.50 → 23 110 Kč) a mezera v „3 000“ se zahodí v obou lokalizacích. Chyba se tedy projeví jen u uživatelů s anglickým (ne-českým) prohlížečem; `calc.js` přitom má `parseNumber()`, který českou čárku umí.",
+    "dopad": "Čech s anglickým prohlížečem (běžné u firemních notebooků a telefonů) dostane bez varování absurdní srovnání.",
+    "oprava": "buď `type=\"text\" inputmode=\"decimal\"` a `parseNumber()` z `calc.js`, nebo u `type=\"number\"` kontrolovat `validity.badInput` a zobrazit hlášku (viz SPOT-04).",
+    "overeni": "reprodukováno 2× (samostatný test lokalizací a hlavní scénář) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-09",
+    "zavaznost": "Nízká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Regulované ceny 2026 a nulové POZE se používají i na listopad a prosinec 2025",
+    "kde": "`README.md` Zjednodušení, `index.html:160`",
+    "reprodukce": "data 1. 11. 2025 – 31. 10. 2026, ceny distribuce a POZE 0 Kč podle CV 2026 → pro 11–12/2025 platily jiné ceny (rejstřík FD-38, Rozdíly 9). Dokumentované; dopad stejný u všech tří variant, pořadí se nemění.",
+    "dopad": "absolutní roční částka neodpovídá tomu, co by za 12 měsíců skutečně zaplatil; uživatel je upozorněn.",
+    "oprava": "ponechat, případně v patičce doplnit „zejména POZE bylo v roce 2025 nenulové“.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-10",
+    "zavaznost": "Nízká",
+    "oblast": "2 Výpočty",
+    "nazev": "Krátké CSV se extrapoluje na celý rok a přepíše roční spotřebu nereálnou hodnotou",
+    "kde": "`calc.js:433–437` (`scale = measured / tddCovered`), `app.js:139, 312–316`",
+    "reprodukce": "CSV se dvěma lednovými dny (1,02 MWh) → pole „Roční spotřeba“ se uzamkne na 168,60 MWh, karty 974 966 / 1 127 287 / 1 121 973 Kč; stav hlásí „pokrývá 1 % čtvrthodin … výsledek je jen hrubý odhad“ (`prohlizec.json` csv). Po „Zpět na TDD“ se do spotřeby vrátí předvolba 3,5 místo uživatelových 3 MWh (`chyba-360.png`).",
+    "dopad": "matoucí částky u částečných exportů; varování existuje, ale číslo v poli vypadá jako údaj.",
+    "oprava": "pod určité pokrytí (např. < 10 %) měření nepoužít a říct proč; „Zpět na TDD“ vrátit poslední hodnotu zadanou uživatelem.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-11",
+    "zavaznost": "Nízká",
+    "oblast": "8 Nasazení a větve",
+    "nazev": "Denní workflow zatím běžel jen ručně; plánovaný běh a nasazení po commitu bota neověřeno",
+    "kde": "`.github/workflows/update-data.yml`, GitHub Actions",
+    "reprodukce": "`git log -- data/` → jediný commit 4557a8e (5. 11. 2026 00:38 UTC); stránka Actions ukazuje 3 běhy „Aktualizace dat“ spuštěné ručně (14 s, 17 s, 56 s) a 3 „pages build and deployment“, stav běhů stránka bez přihlášení neukazuje; plánovaný běh (15:37 UTC) do doby revize neproběhl. GitHub plánované workflow po 60 dnech bez aktivity v repozitáři vypne.",
+    "dopad": "riziko, že se data po skončení měsíce nestáhnou a web zůstane u října 2026, aniž by to kdo poznal (patička datum ukazuje, takže ne tiše).",
+    "oprava": "po prvním plánovaném běhu zkontrolovat stav a to, že se po commitu bota spustí nasazení Pages; zvážit odznak stavu workflow v README.",
+    "overeni": "reprodukováno 2× (git log, stránka Actions) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-12",
+    "zavaznost": "Nízká",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Popis posunu „do 4 nejlevnějších hodin“ vs. „16 nejlevnějších čtvrthodin“",
+    "kde": "`index.html:162`, `README.md` Zjednodušení, `calc.js:203–221`",
+    "reprodukce": "kód přesouvá do 16 nejlevnějších čtvrthodin dne (nemusí tvořit 4 celé hodiny, u spotu se vybírají zpětně podle skutečných cen); patička říká „4 nejlevnějších hodin“.",
+    "dopad": "drobná nepřesnost; úspora je navíc optimistická (znalost cen dopředu), což patička neříká.",
+    "oprava": "sjednotit text („16 nejlevnějších čtvrthodin“) a doplnit „při znalosti cen daného dne“.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-13",
+    "zavaznost": "Nízká",
+    "oblast": "8 Nasazení a větve",
+    "nazev": "Chybějící favicon (404 v konzoli lokálně i na živém webu)",
+    "kde": "`index.html` (bez `<link rel=\"icon\">`), živý web `https://frankie851.github.io/favicon.ico` → 404",
+    "reprodukce": "každé načtení stránky → jediná chyba v konzoli „Failed to load resource: 404“ (`uvod-kontrola.json`, `zivy-kontrola.json`).",
+    "dopad": "žádný funkční, jen šum v konzoli.",
+    "oprava": "přidat `<link rel=\"icon\" href=\"data:,\">` nebo SVG ikonu.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "SPOT-14",
+    "zavaznost": "Nízká",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Pořadí Tab po výpočtu začíná u rozbalovačů a odkazů, fokus je ale všude vidět",
+    "kde": "`index.html` (pořadí prvků), `styles.css` (`:focus-visible`)",
+    "reprodukce": "360 px, po vyplnění formuláře Tab projde: Další nastavení → CSV → posuvník → 7 odkazů v patičce → formulář (`prohlizec.json` V1-360.tab); všech 17 prvků má viditelný fokus; axe 0 nálezů ve všech stavech (úvod, výsledek, živý web).",
+    "dopad": "klávesnicový uživatel se k výsledkovým kartám dostane jen čtečkou (karty nejsou fokusovatelné, mají `aria-live`), funkčně bez ztráty.",
+    "oprava": "není nutná; případně přidat přeskakovací odkaz na výsledek.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `1c1f7b2613e0a5a37fdf9bfee426749a2f31c36e` (5. 11. 2026) · živý web: https://frankie851.github.io/spot-nebo-fix/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 6,
+   "nizka": 6
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "BYD",
@@ -680,8 +894,8 @@
     "reprodukce": "1 dítě nar. 2023 → krok školka: zaškrtnout, školné 20 000 → Další → 2× Zpět → změnit rok dítěte na 2012 → Další: krok 4 říká „Nezadali jste žádné dítě v předškolním věku“ → projít na výsledek. Očekáváno: žádné školkovné (dítě 15 let není v předškolním zařízení, § 35bd odst. 1 a 6). Skutečnost: řádek „Sleva za umístění dítěte (školkovné) 20 000 Kč“, součet „Až 66 044 Kč ročně“ místo 46 044 Kč; totéž v kontrolním seznamu (`prohlizec.json.zastaraleSkolkovne`, `cisla-lokalizace.txt`).",
     "dopad": "po opravě překlepu v roce narození počítá s neexistující slevou 20 000 Kč (až 24 900 Kč) a odnese si špatný kontrolní seznam.",
     "oprava": "v `cti` kroku školky vynulovat `skolka`, `skolne`, `dveDomacnosti`, `dohodaStrop` u dětí, pro které se pole nevykreslila (nebo to udělat v `odpovedi()` podle věku); v `slevy.js` navíc hlídat věk dítěte (předškolní zařízení).",
-    "overeni": "reprodukováno 2× (nový proces, en-US i cs-CZ) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (nový proces, en-US i cs-CZ) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – reprodukováno v prohlížeči (dítě 2023 → 2012, výsledek stále 20 000 Kč školkovné, „Až 66 044 Kč“); § 35bd odst. 1 ZDP ve znění 180/2026 Sb. potvrzen)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "SLV-02",
@@ -692,8 +906,8 @@
     "reprodukce": "dítě nar. 3/2001, v domácnosti 1–12 → očekáváno 3 × 1 267 = 3 801 Kč (§ 35c odst. 6 písm. b) – vyživované je zletilé dítě „až do dovršení věku 26 let“; 1/12 za měsíc, na jehož počátku jsou podmínky splněny, § 35c odst. 10; na počátku dubna už 26 let má) → skutečnost 15 204 Kč (`prepocet.txt` V16). Obdobně dítě 2009 (18 let v roce 2027), které nestuduje, dostane 12/12.",
     "dopad": "rodič staršího studenta počítá s 15 204 Kč, nárok je 3 801 Kč (rozdíl 11 403 Kč); u ZTP/P dvojnásobek.",
     "oprava": "v `zvyhodneniDeti()` započítat jen měsíce, na jejichž počátku dítě nedovršilo 26 let (modul zná rok i měsíc narození, stejně jako u manžela `mladsiNez(d.narozeni, 3, …)`); u dětí 18+ se zeptat, zda se soustavně připravují (jinak hranice 18 let); doplnit test.",
-    "overeni": "reprodukováno 2× (dva běhy `slevy-2027-porovnani.mjs`) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (dva běhy `slevy-2027-porovnani.mjs`) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – zvyhodneniDeti() reprodukováno: dítě 3/2001 i 6/2009 → 12 měsíců a 15 204 Kč; § 35c odst. 6 písm. b) a odst. 10 ZDP potvrzeny, nárok 3 × 1 267 = 3 801 Kč)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "SLV-03",

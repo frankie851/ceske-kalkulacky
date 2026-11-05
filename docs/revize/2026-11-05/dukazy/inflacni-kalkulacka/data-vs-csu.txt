@@ -1,0 +1,33 @@
+# data/cpi.json vs. ČSÚ · 2026-11-05T08:39:27.339Z · cpi.json 381 měsíců
+
+## 010022-25 (bazický index Z, úhrn, průměr 2015 = 100): 1995-01 … 2025-12, 372 měsíců
+shoda s cpi.json: 372/372
+  1995-01: app 50.6 · ČSÚ 50.6
+  2005-01: app 80.2 · ČSÚ 80.2
+  2015-06: app 100.5 · ČSÚ 100.5
+  2022-09: app 138.5 · ČSÚ 138.5
+  2025-12: app 155.2 · ČSÚ 155.2
+
+## Meziroční inflace z cpi.json vs. oficiální meziroční index ČSÚ (casz_kod C), 312 měsíců 2000-01 … 2025-12
+největší rozdíl: 0,317 p. b. (2000-11); po obdobích: 1996–2004: 0,317 p. b., 2005–2014: 0,137 p. b., 2015–2025: 0,106 p. b.
+měsíců s rozdílem > 0,05 p. b. (tj. po zaokrouhlení na 1 desetinné místo se může lišit): 89; > 0,15 p. b.: 9 – 2000-03 (app 3,608 %, ČSÚ 3,8 %); 2000-05 (app 3,458 %, ČSÚ 3,7 %); 2000-08 (app 3,852 %, ČSÚ 4,1 %); 2000-10 (app 4,137 %, ČSÚ 4,4 %); 2000-11 (app 3,983 %, ČSÚ 4,3 %); 2002-01 (app 3,887 %, ČSÚ 3,7 %); 2002-04 (app 3,471 %, ČSÚ 3,2 %); 2002-05 (app 2,653 %, ČSÚ 2,5 %); 2002-09 (app 1,05 %, ČSÚ 0,8 %)
+  2022-09: z cpi.json 17,973 % · ČSÚ oficiálně 18 %
+  2023-01: z cpi.json 17,496 % · ČSÚ oficiálně 17,5 %
+  2025-12: z cpi.json 2,105 % · ČSÚ oficiálně 2,1 %
+
+## CEN0101E (DataStat): typy indexu u řádků úhrn/Česko/domácnosti celkem/měsíc: IZ2025 = „Bazický index (2025 = 100)“; IZ2015 = „Bazický index (2015 = 100)“; IR = „Meziroční index“; IM = „Meziměsíční index“; TR = „Průměrné tempo růstu“; PR = „Míra inflace“; IV202512 = „Bazický index (prosinec 2025 = 100)“; RM = „Meziměsíční růst/pokles“; RR = „Meziroční růst/pokles“
+IZ2015 (bazický 2015 = 100): 2015-01 … 2026-09, 141 měsíců; shoda s cpi.json: 141/141
+měsíce v cpi.json, které nejsou ani v jednom CSV: žádné; poslední měsíc ČSÚ (IZ2015): 2026-09, v aplikaci: 2026-09
+překryv 2015-01 … 2025-12 obou sad: 132 měsíců, rozdílných hodnot: 0
+
+## Meziroční inflace 2026 (z cpi.json vs. ČSÚ IR):
+  2026-01: z cpi.json 1,623 % · ČSÚ IR 1,6 %
+  2026-02: z cpi.json 1,361 % · ČSÚ IR 1,4 %
+  2026-03: z cpi.json 1,878 % · ČSÚ IR 1,9 %
+  2026-04: z cpi.json 2,464 % · ČSÚ IR 2,5 %
+  2026-05: z cpi.json 2,129 % · ČSÚ IR 2,1 %
+  2026-06: z cpi.json 1,544 % · ČSÚ IR 1,5 %
+  2026-07: z cpi.json 1,73 % · ČSÚ IR 1,7 %
+  2026-08: z cpi.json 1,921 % · ČSÚ IR 1,9 %
+  2026-09: z cpi.json 2,511 % · ČSÚ IR 2,5 %
+průměr roku 2015 v cpi.json: 99,975

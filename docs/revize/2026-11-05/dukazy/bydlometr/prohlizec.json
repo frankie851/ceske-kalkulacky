@@ -1,0 +1,1377 @@
+{
+ "datum": "2026-11-05T08:36:59.902Z",
+ "behy": [
+  {
+   "cislo": 1,
+   "lang": "cs-CZ",
+   "pripady": {
+    "A_refix_vychozi": {
+     "ui": {
+      "summary": "Nejlevněji vychází varianta „Refinancovat jinde“: úroky a poplatky do konce splácení 1 851 971 Kč, o 305 998 Kč méně než přijetí nabídky banky.",
+      "current": "Dosavadní splátka: 13 786 Kč měsíčně (sazba 2,49 %).",
+      "radky": [
+       [
+        "Přijmout nabídku banky",
+        "5,79 %",
+        "18 780 Kč",
+        "+4 994 Kč",
+        "2 157 969 Kč",
+        "0 Kč",
+        "2 157 969 Kč",
+        "25 % (v pořádku)",
+        ""
+       ],
+       [
+        "Refinancovat jinde",
+        "5,05 %",
+        "17 587 Kč",
+        "+3 801 Kč",
+        "1 842 971 Kč",
+        "9 000 Kč",
+        "1 851 971 Kč",
+        "23 % (v pořádku)",
+        "best"
+       ],
+       [
+        "Mimořádná splátka + nabídka banky",
+        "5,79 %",
+        "16 768 Kč",
+        "+2 982 Kč",
+        "1 926 758 Kč",
+        "0 Kč",
+        "1 926 758 Kč",
+        "22 % (v pořádku)",
+        ""
+       ],
+       [
+        "Prodloužit splatnost o 5 let",
+        "5,79 %",
+        "17 106 Kč",
+        "+3 321 Kč",
+        "2 742 442 Kč",
+        "0 Kč",
+        "2 742 442 Kč",
+        "23 % (v pořádku)",
+        ""
+       ]
+      ],
+      "stres": [
+       [
+        "Přijmout nabídku banky",
+        "18 780 Kč",
+        "20 146 Kč 27 % (v pořádku)",
+        "21 563 Kč 29 % (v pořádku)"
+       ],
+       [
+        "Refinancovat jinde",
+        "17 587 Kč",
+        "18 899 Kč 25 % (v pořádku)",
+        "20 262 Kč 27 % (v pořádku)"
+       ],
+       [
+        "Mimořádná splátka + nabídka banky",
+        "16 768 Kč",
+        "17 988 Kč 24 % (v pořádku)",
+        "19 252 Kč 26 % (v pořádku)"
+       ],
+       [
+        "Prodloužit splatnost o 5 let",
+        "17 106 Kč",
+        "18 632 Kč 25 % (v pořádku)",
+        "20 220 Kč 27 % (v pořádku)"
+       ]
+      ],
+      "chyba": null,
+      "poznamky": [
+       "Úroky do konce počítají s tím, že sazba vydrží až do konce splácení. Ve skutečnosti se po každé fixaci mění.",
+       "Refinancovat jinde: Včetně nákladů refinancování 9 000 Kč.",
+       "Mimořádná splátka + nabídka banky: Splatí 300 000 Kč z úspor ke konci fixace (zdarma). Úspory pak chybí v rezervě a nevydělávají.",
+       "Prodloužit splatnost o 5 let: Nižší splátka za cenu vyšších úroků. Banka prodloužení posuzuje podle věku a příjmu."
+      ]
+     },
+     "modul": {
+      "current": "13 786 Kč",
+      "cheapest": "refinance",
+      "options": [
+       {
+        "id": "accept",
+        "splatka": "18 780 Kč",
+        "uroky": "2 157 969 Kč",
+        "celkem": "2 157 969 Kč",
+        "stres": [
+         "20 146 Kč",
+         "21 563 Kč"
+        ]
+       },
+       {
+        "id": "refinance",
+        "splatka": "17 587 Kč",
+        "uroky": "1 842 971 Kč",
+        "celkem": "1 851 971 Kč",
+        "stres": [
+         "18 899 Kč",
+         "20 262 Kč"
+        ]
+       },
+       {
+        "id": "prepay",
+        "splatka": "16 768 Kč",
+        "uroky": "1 926 758 Kč",
+        "celkem": "1 926 758 Kč",
+        "stres": [
+         "17 988 Kč",
+         "19 252 Kč"
+        ]
+       },
+       {
+        "id": "extend",
+        "splatka": "17 106 Kč",
+        "uroky": "2 742 442 Kč",
+        "celkem": "2 742 442 Kč",
+        "stres": [
+         "18 632 Kč",
+         "20 220 Kč"
+        ]
+       }
+      ]
+     },
+     "preteka360": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "fokus": {
+      "tag": "input",
+      "name": "balance",
+      "outlineInput": false,
+      "boxShadowInput": false,
+      "obalBoxShadow": true,
+      "obalBorder": "rgb(31, 111, 80)"
+     },
+     "axe360": [],
+     "localStorage": {},
+     "konzole": [
+      {
+       "typ": "error",
+       "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+     ],
+     "chyby": [
+      {
+       "url": "http://127.0.0.1:34635/favicon.ico",
+       "stav": 404
+      }
+     ],
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "B_refix_zadani_cesky": {
+     "vstupy": {
+      "balance": "3 500 000",
+      "offeredRate": "4,94",
+      "competitorRate": "4.94"
+     },
+     "acceptSplatkaUI": "20 338 Kč",
+     "refinanceSplatkaUI": "20 338 Kč",
+     "ocekavano": "20 338 Kč",
+     "ocekavanoPresne": 20338.48668978891,
+     "chyba": null,
+     "doba22_5": {
+      "pole": "22,5",
+      "acceptSplatkaUI": "21 499 Kč",
+      "ocekavano": "21 499 Kč",
+      "chyba": null
+     },
+     "prijem75000_50": {
+      "pole": "75 000,50",
+      "podilUI": "29 % (v pořádku)",
+      "ocekavano": "29 %",
+      "chyba": null
+     },
+     "nulovaSazba": {
+      "acceptSplatkaUI": "10 000 Kč",
+      "ocekavano": "10 000 Kč",
+      "chyba": null
+     }
+    },
+    "C_refix_chyby": {
+     "prazdne": {
+      "pole": "",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "text": {
+      "pole": "abc",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova",
+      "axe360": []
+     },
+     "zaporne": {
+      "pole": "-500000",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "tecky": {
+      "pole": "2.800.000",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "nula": {
+      "pole": "0",
+      "chyba": "Zkontrolujte pole: Zbývající dluh a doba musí být kladné.",
+      "ariaInvalid": "false",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "dvojita_carka": {
+      "pole": "2,,49",
+      "chyba": "Zkontrolujte pole: Dosavadní sazba.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "doba0": {
+      "chyba": "Zkontrolujte pole: Zbývající dluh a doba musí být kladné."
+     }
+    },
+    "D_poplatek": {
+     "vychozi": {
+      "data": {
+       "contractDate": "2024-11-05",
+       "fixStartDate": "2024-11-05",
+       "fixEndDate": "2029-11-05",
+       "paymentDate": "2026-11-05"
+      },
+      "ui": {
+       "vysledek": "Poplatek nejvýš 2 250 Kč",
+       "duvod": "Strop náhrady: 3 × 0,25 % = 0,75 %. Banka smí účtovat jen skutečné náklady, může být méně."
+      },
+      "modul": "2 250 Kč"
+     },
+     "konecFixace": {
+      "vysledek": "Poplatek: 0 Kč",
+      "duvod": "Splátka ke konci fixace je zdarma."
+     },
+     "ctvrtinaPredVyrocim": {
+      "vysledek": "Poplatek: 0 Kč",
+      "duvod": "Do 25 % původní výše úvěru v měsíci před výročím smlouvy je splátka zdarma."
+     },
+     "nadCtvrtinu": {
+      "vysledek": "Poplatek nejvýš 2 500 Kč",
+      "duvod": "Strop náhrady: zdarma 750 000 Kč (25 % původní výše úvěru), zbytek 250 000 Kč; 5 × 0,25 % = 1,25 %, strop 1 %. Banka smí účtovat jen skutečné náklady, může být méně.",
+      "modul": "2 500 Kč"
+     },
+     "bezplatnaVyuzita": {
+      "vysledek": "Poplatek nejvýš 10 000 Kč",
+      "duvod": "Strop náhrady: 5 × 0,25 % = 1,25 %, strop 1 %. Banka smí účtovat jen skutečné náklady, může být méně."
+     },
+     "poKonciFixace": {
+      "vysledek": "Datum splátky je po konci fixace.",
+      "duvod": "Po konci fixace začíná nová fixace – zadejte její začátek a konec."
+     },
+     "starsiSmlouva": {
+      "vysledek": "Zkontrolujte smlouvu.",
+      "duvod": "Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet."
+     },
+     "starsiSmlouvaKonecFixace": {
+      "vysledek": "Zkontrolujte smlouvu.",
+      "duvod": "Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet."
+     },
+     "prazdnaCastka": {
+      "vysledek": "Vyplňte částku, původní výši úvěru a všechna data.",
+      "duvod": ""
+     }
+    },
+    "E_rentbuy_praha": {
+     "ui": {
+      "summary": "Za 20 let: koupě 16 166 072 Kč, nájem 14 447 621 Kč čistého jmění – vychází lépe koupě o 1 718 451 Kč. Koupě se začne vyplácet v 1. roce.",
+      "chyba": null,
+      "varovani": [],
+      "kpi": [
+       "9 246 720 Kč – cena bytu (60 m²)",
+       "7 758 720 Kč – úvěr, LTV 84 % (max. 90 %)",
+       "45 475 Kč / 27 720 Kč – splátka vs. nájem v 1. měsíci"
+      ],
+      "sens": [
+       [
+        "2,0 %",
+        "−556 635 Kč – lépe vychází nájem",
+        "−4 014 035 Kč – lépe vychází nájem",
+        "−8 721 511 Kč – lépe vychází nájem"
+       ],
+       [
+        "4,0 %",
+        "+5 274 745 Kč – lépe vychází koupě",
+        "+1 718 451 Kč – lépe vychází koupě",
+        "−3 107 384 Kč – lépe vychází nájem"
+       ],
+       [
+        "6,0 %",
+        "+13 796 328 Kč – lépe vychází koupě",
+        "+10 122 983 Kč – lépe vychází koupě",
+        "+5 158 058 Kč – lépe vychází koupě"
+       ]
+      ],
+      "posledniRok": [
+       "20. rok",
+       "20 260 702 Kč",
+       "4 135 273 Kč",
+       "16 166 072 Kč",
+       "14 447 621 Kč",
+       "+1 718 451 Kč"
+      ],
+      "graf": {
+       "chartJs": true,
+       "canvasViditelny": true,
+       "fallback": false,
+       "sirka": 294,
+       "vyska": 260
+      },
+      "dan": "2 306",
+      "cena": "154 112",
+      "najem": "462"
+     },
+     "modul": {
+      "cena": "9 246 720 Kč",
+      "uver": "7 758 720 Kč",
+      "ltv": 0.839078073089701,
+      "splatka": "45 475 Kč",
+      "najem": "27 720 Kč",
+      "koupe20": "16 166 072 Kč",
+      "najem20": "14 447 621 Kč",
+      "rozdil": "1 718 451 Kč",
+      "zlom": 1,
+      "stredCitlivosti": "1 718 451 Kč"
+     },
+     "preteka360": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "axe360": [],
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "E_rentbuy_brno": {
+     "cena": "124 954",
+     "najem": "390",
+     "dan": "897",
+     "ocekavanaDan": 897,
+     "kpi": [
+      "7 497 240 Kč – cena bytu (60 m²)",
+      "6 009 240 Kč – úvěr, LTV 80 % (max. 90 %)",
+      "35 221 Kč / 23 400 Kč – splátka vs. nájem v 1. měsíci"
+     ]
+    },
+    "E_rentbuy_vek40": {
+     "varovani": [
+      "Úvěr by měl LTV 80 %, ale limit je 80 %. Na koupi chybí 11 448 Kč vlastních zdrojů – banka by takový úvěr neposkytla."
+     ],
+     "kpi": [
+      "7 497 240 Kč – cena bytu (60 m²)",
+      "6 009 240 Kč – úvěr, LTV 80 % (max. 80 %)",
+      "35 221 Kč / 23 400 Kč – splátka vs. nájem v 1. měsíci"
+     ],
+     "summary": "Za 20 let: koupě 13 456 570 Kč, nájem 11 484 640 Kč čistého jmění – vychází lépe koupě o 1 971 930 Kč. Koupě se začne vyplácet v 1. roce."
+    },
+    "E_rentbuy_plocha0": {
+     "chyba": "Zkontrolujte pole: Plocha musí být kladná."
+    },
+    "E_rentbuy_plocha65_5": {
+     "chyba": null,
+     "dan": "979",
+     "ocekavanaDan": 979,
+     "kpi": [
+      "8 184 487 Kč – cena bytu (65,5 m²)",
+      "6 696 487 Kč – úvěr, LTV 82 % (max. 80 %)",
+      "39 249 Kč / 25 545 Kč – splátka vs. nájem v 1. měsíci"
+     ]
+    },
+    "E_rentbuy_horizont51": {
+     "chyba": "Zkontrolujte pole: Horizont 1–50 let."
+    },
+    "E_rentbuy_rustNajmuZaporny": {
+     "chyba": "Zkontrolujte pole: Růst nájmů."
+    },
+    "E_rentbuy_rustCenZaporny": {
+     "chyba": null,
+     "summary": "Za 20 let: koupě 2 190 373 Kč, nájem 10 863 492 Kč čistého jmění – vychází lépe nájem o 8 673 119 Kč. Koupě se v tomto horizontu nevyplatí."
+    },
+    "E_rentbuy_localStorage": {},
+    "E_rentbuy_konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+     }
+    ],
+    "E_rentbuy_chyby": [
+     {
+      "url": "http://127.0.0.1:34635/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "E_rentbuy_cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "F_xss": {
+     "refix": {
+      "img": false,
+      "chybaRefix": "Zkontrolujte pole: Zbývající dluh, Zbývající doba splácení, Dosavadní sazba, Čistý měsíční příjem domácnosti, Sazba nabí",
+      "fee": "Vyplňte částku, původní výši úvěru a všechna data."
+     },
+     "rentbuy": {
+      "img": false,
+      "chybaRb": "Zkontrolujte pole: Plocha, Cena za m², Nájem za m² měsíčně, Vlastní zdroje, Jednorázové náklady koupě, Věk žadatele, Splatnost hypotéky, Úroková sazba, Fixace, ",
+      "html": false
+     },
+     "dialogy": [],
+     "klavesniceZalozky": {
+      "aktivni": "tab-refix",
+      "hash": "#refix",
+      "refixViditelny": true
+     }
+    },
+    "G_chybejici_json": {
+     "hlaska": "Nepodařilo se načíst výchozí data (Nelze načíst rules.json (404)). Otevřete stránku přes webový server, ne jako soubor – viz README.",
+     "skryto": false,
+     "summary": ""
+    }
+   }
+  },
+  {
+   "cislo": 2,
+   "lang": "cs-CZ",
+   "pripady": {
+    "A_refix_vychozi": {
+     "ui": {
+      "summary": "Nejlevněji vychází varianta „Refinancovat jinde“: úroky a poplatky do konce splácení 1 851 971 Kč, o 305 998 Kč méně než přijetí nabídky banky.",
+      "current": "Dosavadní splátka: 13 786 Kč měsíčně (sazba 2,49 %).",
+      "radky": [
+       [
+        "Přijmout nabídku banky",
+        "5,79 %",
+        "18 780 Kč",
+        "+4 994 Kč",
+        "2 157 969 Kč",
+        "0 Kč",
+        "2 157 969 Kč",
+        "25 % (v pořádku)",
+        ""
+       ],
+       [
+        "Refinancovat jinde",
+        "5,05 %",
+        "17 587 Kč",
+        "+3 801 Kč",
+        "1 842 971 Kč",
+        "9 000 Kč",
+        "1 851 971 Kč",
+        "23 % (v pořádku)",
+        "best"
+       ],
+       [
+        "Mimořádná splátka + nabídka banky",
+        "5,79 %",
+        "16 768 Kč",
+        "+2 982 Kč",
+        "1 926 758 Kč",
+        "0 Kč",
+        "1 926 758 Kč",
+        "22 % (v pořádku)",
+        ""
+       ],
+       [
+        "Prodloužit splatnost o 5 let",
+        "5,79 %",
+        "17 106 Kč",
+        "+3 321 Kč",
+        "2 742 442 Kč",
+        "0 Kč",
+        "2 742 442 Kč",
+        "23 % (v pořádku)",
+        ""
+       ]
+      ],
+      "stres": [
+       [
+        "Přijmout nabídku banky",
+        "18 780 Kč",
+        "20 146 Kč 27 % (v pořádku)",
+        "21 563 Kč 29 % (v pořádku)"
+       ],
+       [
+        "Refinancovat jinde",
+        "17 587 Kč",
+        "18 899 Kč 25 % (v pořádku)",
+        "20 262 Kč 27 % (v pořádku)"
+       ],
+       [
+        "Mimořádná splátka + nabídka banky",
+        "16 768 Kč",
+        "17 988 Kč 24 % (v pořádku)",
+        "19 252 Kč 26 % (v pořádku)"
+       ],
+       [
+        "Prodloužit splatnost o 5 let",
+        "17 106 Kč",
+        "18 632 Kč 25 % (v pořádku)",
+        "20 220 Kč 27 % (v pořádku)"
+       ]
+      ],
+      "chyba": null,
+      "poznamky": [
+       "Úroky do konce počítají s tím, že sazba vydrží až do konce splácení. Ve skutečnosti se po každé fixaci mění.",
+       "Refinancovat jinde: Včetně nákladů refinancování 9 000 Kč.",
+       "Mimořádná splátka + nabídka banky: Splatí 300 000 Kč z úspor ke konci fixace (zdarma). Úspory pak chybí v rezervě a nevydělávají.",
+       "Prodloužit splatnost o 5 let: Nižší splátka za cenu vyšších úroků. Banka prodloužení posuzuje podle věku a příjmu."
+      ]
+     },
+     "modul": {
+      "current": "13 786 Kč",
+      "cheapest": "refinance",
+      "options": [
+       {
+        "id": "accept",
+        "splatka": "18 780 Kč",
+        "uroky": "2 157 969 Kč",
+        "celkem": "2 157 969 Kč",
+        "stres": [
+         "20 146 Kč",
+         "21 563 Kč"
+        ]
+       },
+       {
+        "id": "refinance",
+        "splatka": "17 587 Kč",
+        "uroky": "1 842 971 Kč",
+        "celkem": "1 851 971 Kč",
+        "stres": [
+         "18 899 Kč",
+         "20 262 Kč"
+        ]
+       },
+       {
+        "id": "prepay",
+        "splatka": "16 768 Kč",
+        "uroky": "1 926 758 Kč",
+        "celkem": "1 926 758 Kč",
+        "stres": [
+         "17 988 Kč",
+         "19 252 Kč"
+        ]
+       },
+       {
+        "id": "extend",
+        "splatka": "17 106 Kč",
+        "uroky": "2 742 442 Kč",
+        "celkem": "2 742 442 Kč",
+        "stres": [
+         "18 632 Kč",
+         "20 220 Kč"
+        ]
+       }
+      ]
+     },
+     "preteka360": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "fokus": {
+      "tag": "input",
+      "name": "balance",
+      "outlineInput": false,
+      "boxShadowInput": false,
+      "obalBoxShadow": true,
+      "obalBorder": "rgb(31, 111, 80)"
+     },
+     "localStorage": {},
+     "konzole": [
+      {
+       "typ": "error",
+       "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+     ],
+     "chyby": [
+      {
+       "url": "http://127.0.0.1:42521/favicon.ico",
+       "stav": 404
+      }
+     ],
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "B_refix_zadani_cesky": {
+     "vstupy": {
+      "balance": "3 500 000",
+      "offeredRate": "4,94",
+      "competitorRate": "4.94"
+     },
+     "acceptSplatkaUI": "20 338 Kč",
+     "refinanceSplatkaUI": "20 338 Kč",
+     "ocekavano": "20 338 Kč",
+     "ocekavanoPresne": 20338.48668978891,
+     "chyba": null,
+     "doba22_5": {
+      "pole": "22,5",
+      "acceptSplatkaUI": "21 499 Kč",
+      "ocekavano": "21 499 Kč",
+      "chyba": null
+     },
+     "prijem75000_50": {
+      "pole": "75 000,50",
+      "podilUI": "29 % (v pořádku)",
+      "ocekavano": "29 %",
+      "chyba": null
+     },
+     "nulovaSazba": {
+      "acceptSplatkaUI": "10 000 Kč",
+      "ocekavano": "10 000 Kč",
+      "chyba": null
+     }
+    },
+    "C_refix_chyby": {
+     "prazdne": {
+      "pole": "",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "text": {
+      "pole": "abc",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "zaporne": {
+      "pole": "-500000",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "tecky": {
+      "pole": "2.800.000",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "nula": {
+      "pole": "0",
+      "chyba": "Zkontrolujte pole: Zbývající dluh a doba musí být kladné.",
+      "ariaInvalid": "false",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "dvojita_carka": {
+      "pole": "2,,49",
+      "chyba": "Zkontrolujte pole: Dosavadní sazba.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "doba0": {
+      "chyba": "Zkontrolujte pole: Zbývající dluh a doba musí být kladné."
+     }
+    },
+    "D_poplatek": {
+     "vychozi": {
+      "data": {
+       "contractDate": "2024-11-05",
+       "fixStartDate": "2024-11-05",
+       "fixEndDate": "2029-11-05",
+       "paymentDate": "2026-11-05"
+      },
+      "ui": {
+       "vysledek": "Poplatek nejvýš 2 250 Kč",
+       "duvod": "Strop náhrady: 3 × 0,25 % = 0,75 %. Banka smí účtovat jen skutečné náklady, může být méně."
+      },
+      "modul": "2 250 Kč"
+     },
+     "konecFixace": {
+      "vysledek": "Poplatek: 0 Kč",
+      "duvod": "Splátka ke konci fixace je zdarma."
+     },
+     "ctvrtinaPredVyrocim": {
+      "vysledek": "Poplatek: 0 Kč",
+      "duvod": "Do 25 % původní výše úvěru v měsíci před výročím smlouvy je splátka zdarma."
+     },
+     "nadCtvrtinu": {
+      "vysledek": "Poplatek nejvýš 2 500 Kč",
+      "duvod": "Strop náhrady: zdarma 750 000 Kč (25 % původní výše úvěru), zbytek 250 000 Kč; 5 × 0,25 % = 1,25 %, strop 1 %. Banka smí účtovat jen skutečné náklady, může být méně.",
+      "modul": "2 500 Kč"
+     },
+     "bezplatnaVyuzita": {
+      "vysledek": "Poplatek nejvýš 10 000 Kč",
+      "duvod": "Strop náhrady: 5 × 0,25 % = 1,25 %, strop 1 %. Banka smí účtovat jen skutečné náklady, může být méně."
+     },
+     "poKonciFixace": {
+      "vysledek": "Datum splátky je po konci fixace.",
+      "duvod": "Po konci fixace začíná nová fixace – zadejte její začátek a konec."
+     },
+     "starsiSmlouva": {
+      "vysledek": "Zkontrolujte smlouvu.",
+      "duvod": "Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet."
+     },
+     "starsiSmlouvaKonecFixace": {
+      "vysledek": "Zkontrolujte smlouvu.",
+      "duvod": "Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet."
+     },
+     "prazdnaCastka": {
+      "vysledek": "Vyplňte částku, původní výši úvěru a všechna data.",
+      "duvod": ""
+     }
+    },
+    "E_rentbuy_praha": {
+     "ui": {
+      "summary": "Za 20 let: koupě 16 166 072 Kč, nájem 14 447 621 Kč čistého jmění – vychází lépe koupě o 1 718 451 Kč. Koupě se začne vyplácet v 1. roce.",
+      "chyba": null,
+      "varovani": [],
+      "kpi": [
+       "9 246 720 Kč – cena bytu (60 m²)",
+       "7 758 720 Kč – úvěr, LTV 84 % (max. 90 %)",
+       "45 475 Kč / 27 720 Kč – splátka vs. nájem v 1. měsíci"
+      ],
+      "sens": [
+       [
+        "2,0 %",
+        "−556 635 Kč – lépe vychází nájem",
+        "−4 014 035 Kč – lépe vychází nájem",
+        "−8 721 511 Kč – lépe vychází nájem"
+       ],
+       [
+        "4,0 %",
+        "+5 274 745 Kč – lépe vychází koupě",
+        "+1 718 451 Kč – lépe vychází koupě",
+        "−3 107 384 Kč – lépe vychází nájem"
+       ],
+       [
+        "6,0 %",
+        "+13 796 328 Kč – lépe vychází koupě",
+        "+10 122 983 Kč – lépe vychází koupě",
+        "+5 158 058 Kč – lépe vychází koupě"
+       ]
+      ],
+      "posledniRok": [
+       "20. rok",
+       "20 260 702 Kč",
+       "4 135 273 Kč",
+       "16 166 072 Kč",
+       "14 447 621 Kč",
+       "+1 718 451 Kč"
+      ],
+      "graf": {
+       "chartJs": true,
+       "canvasViditelny": true,
+       "fallback": false,
+       "sirka": 294,
+       "vyska": 260
+      },
+      "dan": "2 306",
+      "cena": "154 112",
+      "najem": "462"
+     },
+     "modul": {
+      "cena": "9 246 720 Kč",
+      "uver": "7 758 720 Kč",
+      "ltv": 0.839078073089701,
+      "splatka": "45 475 Kč",
+      "najem": "27 720 Kč",
+      "koupe20": "16 166 072 Kč",
+      "najem20": "14 447 621 Kč",
+      "rozdil": "1 718 451 Kč",
+      "zlom": 1,
+      "stredCitlivosti": "1 718 451 Kč"
+     },
+     "preteka360": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "E_rentbuy_brno": {
+     "cena": "124 954",
+     "najem": "390",
+     "dan": "897",
+     "ocekavanaDan": 897,
+     "kpi": [
+      "7 497 240 Kč – cena bytu (60 m²)",
+      "6 009 240 Kč – úvěr, LTV 80 % (max. 90 %)",
+      "35 221 Kč / 23 400 Kč – splátka vs. nájem v 1. měsíci"
+     ]
+    },
+    "E_rentbuy_vek40": {
+     "varovani": [
+      "Úvěr by měl LTV 80 %, ale limit je 80 %. Na koupi chybí 11 448 Kč vlastních zdrojů – banka by takový úvěr neposkytla."
+     ],
+     "kpi": [
+      "7 497 240 Kč – cena bytu (60 m²)",
+      "6 009 240 Kč – úvěr, LTV 80 % (max. 80 %)",
+      "35 221 Kč / 23 400 Kč – splátka vs. nájem v 1. měsíci"
+     ],
+     "summary": "Za 20 let: koupě 13 456 570 Kč, nájem 11 484 640 Kč čistého jmění – vychází lépe koupě o 1 971 930 Kč. Koupě se začne vyplácet v 1. roce."
+    },
+    "E_rentbuy_plocha0": {
+     "chyba": "Zkontrolujte pole: Plocha musí být kladná."
+    },
+    "E_rentbuy_plocha65_5": {
+     "chyba": null,
+     "dan": "979",
+     "ocekavanaDan": 979,
+     "kpi": [
+      "8 184 487 Kč – cena bytu (65,5 m²)",
+      "6 696 487 Kč – úvěr, LTV 82 % (max. 80 %)",
+      "39 249 Kč / 25 545 Kč – splátka vs. nájem v 1. měsíci"
+     ]
+    },
+    "E_rentbuy_horizont51": {
+     "chyba": "Zkontrolujte pole: Horizont 1–50 let."
+    },
+    "E_rentbuy_rustNajmuZaporny": {
+     "chyba": "Zkontrolujte pole: Růst nájmů."
+    },
+    "E_rentbuy_rustCenZaporny": {
+     "chyba": null,
+     "summary": "Za 20 let: koupě 2 190 373 Kč, nájem 10 863 492 Kč čistého jmění – vychází lépe nájem o 8 673 119 Kč. Koupě se v tomto horizontu nevyplatí."
+    },
+    "E_rentbuy_localStorage": {},
+    "E_rentbuy_konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+     }
+    ],
+    "E_rentbuy_chyby": [
+     {
+      "url": "http://127.0.0.1:42521/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "E_rentbuy_cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "F_xss": {
+     "refix": {
+      "img": false,
+      "chybaRefix": "Zkontrolujte pole: Zbývající dluh, Zbývající doba splácení, Dosavadní sazba, Čistý měsíční příjem domácnosti, Sazba nabí",
+      "fee": "Vyplňte částku, původní výši úvěru a všechna data."
+     },
+     "rentbuy": {
+      "img": false,
+      "chybaRb": "Zkontrolujte pole: Plocha, Cena za m², Nájem za m² měsíčně, Vlastní zdroje, Jednorázové náklady koupě, Věk žadatele, Splatnost hypotéky, Úroková sazba, Fixace, ",
+      "html": false
+     },
+     "dialogy": [],
+     "klavesniceZalozky": {
+      "aktivni": "tab-refix",
+      "hash": "#refix",
+      "refixViditelny": true
+     }
+    }
+   }
+  },
+  {
+   "cislo": 3,
+   "lang": "en-US",
+   "pripady": {
+    "A_refix_vychozi": {
+     "ui": {
+      "summary": "Nejlevněji vychází varianta „Refinancovat jinde“: úroky a poplatky do konce splácení 1 851 971 Kč, o 305 998 Kč méně než přijetí nabídky banky.",
+      "current": "Dosavadní splátka: 13 786 Kč měsíčně (sazba 2,49 %).",
+      "radky": [
+       [
+        "Přijmout nabídku banky",
+        "5,79 %",
+        "18 780 Kč",
+        "+4 994 Kč",
+        "2 157 969 Kč",
+        "0 Kč",
+        "2 157 969 Kč",
+        "25 % (v pořádku)",
+        ""
+       ],
+       [
+        "Refinancovat jinde",
+        "5,05 %",
+        "17 587 Kč",
+        "+3 801 Kč",
+        "1 842 971 Kč",
+        "9 000 Kč",
+        "1 851 971 Kč",
+        "23 % (v pořádku)",
+        "best"
+       ],
+       [
+        "Mimořádná splátka + nabídka banky",
+        "5,79 %",
+        "16 768 Kč",
+        "+2 982 Kč",
+        "1 926 758 Kč",
+        "0 Kč",
+        "1 926 758 Kč",
+        "22 % (v pořádku)",
+        ""
+       ],
+       [
+        "Prodloužit splatnost o 5 let",
+        "5,79 %",
+        "17 106 Kč",
+        "+3 321 Kč",
+        "2 742 442 Kč",
+        "0 Kč",
+        "2 742 442 Kč",
+        "23 % (v pořádku)",
+        ""
+       ]
+      ],
+      "stres": [
+       [
+        "Přijmout nabídku banky",
+        "18 780 Kč",
+        "20 146 Kč 27 % (v pořádku)",
+        "21 563 Kč 29 % (v pořádku)"
+       ],
+       [
+        "Refinancovat jinde",
+        "17 587 Kč",
+        "18 899 Kč 25 % (v pořádku)",
+        "20 262 Kč 27 % (v pořádku)"
+       ],
+       [
+        "Mimořádná splátka + nabídka banky",
+        "16 768 Kč",
+        "17 988 Kč 24 % (v pořádku)",
+        "19 252 Kč 26 % (v pořádku)"
+       ],
+       [
+        "Prodloužit splatnost o 5 let",
+        "17 106 Kč",
+        "18 632 Kč 25 % (v pořádku)",
+        "20 220 Kč 27 % (v pořádku)"
+       ]
+      ],
+      "chyba": null,
+      "poznamky": [
+       "Úroky do konce počítají s tím, že sazba vydrží až do konce splácení. Ve skutečnosti se po každé fixaci mění.",
+       "Refinancovat jinde: Včetně nákladů refinancování 9 000 Kč.",
+       "Mimořádná splátka + nabídka banky: Splatí 300 000 Kč z úspor ke konci fixace (zdarma). Úspory pak chybí v rezervě a nevydělávají.",
+       "Prodloužit splatnost o 5 let: Nižší splátka za cenu vyšších úroků. Banka prodloužení posuzuje podle věku a příjmu."
+      ]
+     },
+     "modul": {
+      "current": "13 786 Kč",
+      "cheapest": "refinance",
+      "options": [
+       {
+        "id": "accept",
+        "splatka": "18 780 Kč",
+        "uroky": "2 157 969 Kč",
+        "celkem": "2 157 969 Kč",
+        "stres": [
+         "20 146 Kč",
+         "21 563 Kč"
+        ]
+       },
+       {
+        "id": "refinance",
+        "splatka": "17 587 Kč",
+        "uroky": "1 842 971 Kč",
+        "celkem": "1 851 971 Kč",
+        "stres": [
+         "18 899 Kč",
+         "20 262 Kč"
+        ]
+       },
+       {
+        "id": "prepay",
+        "splatka": "16 768 Kč",
+        "uroky": "1 926 758 Kč",
+        "celkem": "1 926 758 Kč",
+        "stres": [
+         "17 988 Kč",
+         "19 252 Kč"
+        ]
+       },
+       {
+        "id": "extend",
+        "splatka": "17 106 Kč",
+        "uroky": "2 742 442 Kč",
+        "celkem": "2 742 442 Kč",
+        "stres": [
+         "18 632 Kč",
+         "20 220 Kč"
+        ]
+       }
+      ]
+     },
+     "preteka360": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "fokus": {
+      "tag": "input",
+      "name": "balance",
+      "outlineInput": false,
+      "boxShadowInput": false,
+      "obalBoxShadow": true,
+      "obalBorder": "rgb(31, 111, 80)"
+     },
+     "localStorage": {},
+     "konzole": [
+      {
+       "typ": "error",
+       "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      }
+     ],
+     "chyby": [
+      {
+       "url": "http://127.0.0.1:46337/favicon.ico",
+       "stav": 404
+      }
+     ],
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "B_refix_zadani_cesky": {
+     "vstupy": {
+      "balance": "3 500 000",
+      "offeredRate": "4,94",
+      "competitorRate": "4.94"
+     },
+     "acceptSplatkaUI": "20 338 Kč",
+     "refinanceSplatkaUI": "20 338 Kč",
+     "ocekavano": "20 338 Kč",
+     "ocekavanoPresne": 20338.48668978891,
+     "chyba": null,
+     "doba22_5": {
+      "pole": "22,5",
+      "acceptSplatkaUI": "21 499 Kč",
+      "ocekavano": "21 499 Kč",
+      "chyba": null
+     },
+     "prijem75000_50": {
+      "pole": "75 000,50",
+      "podilUI": "29 % (v pořádku)",
+      "ocekavano": "29 %",
+      "chyba": null
+     },
+     "nulovaSazba": {
+      "acceptSplatkaUI": "10 000 Kč",
+      "ocekavano": "10 000 Kč",
+      "chyba": null
+     }
+    },
+    "C_refix_chyby": {
+     "prazdne": {
+      "pole": "",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "text": {
+      "pole": "abc",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "zaporne": {
+      "pole": "-500000",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "tecky": {
+      "pole": "2.800.000",
+      "chyba": "Zkontrolujte pole: Zbývající dluh.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "nula": {
+      "pole": "0",
+      "chyba": "Zkontrolujte pole: Zbývající dluh a doba musí být kladné.",
+      "ariaInvalid": "false",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "dvojita_carka": {
+      "pole": "2,,49",
+      "chyba": "Zkontrolujte pole: Dosavadní sazba.",
+      "ariaInvalid": "true",
+      "summaryZustal": "Nejlevněji vychází varianta „Refinancova"
+     },
+     "doba0": {
+      "chyba": "Zkontrolujte pole: Zbývající dluh a doba musí být kladné."
+     }
+    },
+    "D_poplatek": {
+     "vychozi": {
+      "data": {
+       "contractDate": "2024-11-05",
+       "fixStartDate": "2024-11-05",
+       "fixEndDate": "2029-11-05",
+       "paymentDate": "2026-11-05"
+      },
+      "ui": {
+       "vysledek": "Poplatek nejvýš 2 250 Kč",
+       "duvod": "Strop náhrady: 3 × 0,25 % = 0,75 %. Banka smí účtovat jen skutečné náklady, může být méně."
+      },
+      "modul": "2 250 Kč"
+     },
+     "konecFixace": {
+      "vysledek": "Poplatek: 0 Kč",
+      "duvod": "Splátka ke konci fixace je zdarma."
+     },
+     "ctvrtinaPredVyrocim": {
+      "vysledek": "Poplatek: 0 Kč",
+      "duvod": "Do 25 % původní výše úvěru v měsíci před výročím smlouvy je splátka zdarma."
+     },
+     "nadCtvrtinu": {
+      "vysledek": "Poplatek nejvýš 2 500 Kč",
+      "duvod": "Strop náhrady: zdarma 750 000 Kč (25 % původní výše úvěru), zbytek 250 000 Kč; 5 × 0,25 % = 1,25 %, strop 1 %. Banka smí účtovat jen skutečné náklady, může být méně.",
+      "modul": "2 500 Kč"
+     },
+     "bezplatnaVyuzita": {
+      "vysledek": "Poplatek nejvýš 10 000 Kč",
+      "duvod": "Strop náhrady: 5 × 0,25 % = 1,25 %, strop 1 %. Banka smí účtovat jen skutečné náklady, může být méně."
+     },
+     "poKonciFixace": {
+      "vysledek": "Datum splátky je po konci fixace.",
+      "duvod": "Po konci fixace začíná nová fixace – zadejte její začátek a konec."
+     },
+     "starsiSmlouva": {
+      "vysledek": "Zkontrolujte smlouvu.",
+      "duvod": "Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet."
+     },
+     "starsiSmlouvaKonecFixace": {
+      "vysledek": "Zkontrolujte smlouvu.",
+      "duvod": "Smlouva i současná fixace jsou starší než 1. 9. 2024 – zkontroluj smlouvu, může platit jiný výpočet."
+     },
+     "prazdnaCastka": {
+      "vysledek": "Vyplňte částku, původní výši úvěru a všechna data.",
+      "duvod": ""
+     }
+    },
+    "E_rentbuy_praha": {
+     "ui": {
+      "summary": "Za 20 let: koupě 16 166 072 Kč, nájem 14 447 621 Kč čistého jmění – vychází lépe koupě o 1 718 451 Kč. Koupě se začne vyplácet v 1. roce.",
+      "chyba": null,
+      "varovani": [],
+      "kpi": [
+       "9 246 720 Kč – cena bytu (60 m²)",
+       "7 758 720 Kč – úvěr, LTV 84 % (max. 90 %)",
+       "45 475 Kč / 27 720 Kč – splátka vs. nájem v 1. měsíci"
+      ],
+      "sens": [
+       [
+        "2,0 %",
+        "−556 635 Kč – lépe vychází nájem",
+        "−4 014 035 Kč – lépe vychází nájem",
+        "−8 721 511 Kč – lépe vychází nájem"
+       ],
+       [
+        "4,0 %",
+        "+5 274 745 Kč – lépe vychází koupě",
+        "+1 718 451 Kč – lépe vychází koupě",
+        "−3 107 384 Kč – lépe vychází nájem"
+       ],
+       [
+        "6,0 %",
+        "+13 796 328 Kč – lépe vychází koupě",
+        "+10 122 983 Kč – lépe vychází koupě",
+        "+5 158 058 Kč – lépe vychází koupě"
+       ]
+      ],
+      "posledniRok": [
+       "20. rok",
+       "20 260 702 Kč",
+       "4 135 273 Kč",
+       "16 166 072 Kč",
+       "14 447 621 Kč",
+       "+1 718 451 Kč"
+      ],
+      "graf": {
+       "chartJs": true,
+       "canvasViditelny": true,
+       "fallback": false,
+       "sirka": 294,
+       "vyska": 260
+      },
+      "dan": "2 306",
+      "cena": "154 112",
+      "najem": "462"
+     },
+     "modul": {
+      "cena": "9 246 720 Kč",
+      "uver": "7 758 720 Kč",
+      "ltv": 0.839078073089701,
+      "splatka": "45 475 Kč",
+      "najem": "27 720 Kč",
+      "koupe20": "16 166 072 Kč",
+      "najem20": "14 447 621 Kč",
+      "rozdil": "1 718 451 Kč",
+      "zlom": 1,
+      "stredCitlivosti": "1 718 451 Kč"
+     },
+     "preteka360": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "E_rentbuy_brno": {
+     "cena": "124 954",
+     "najem": "390",
+     "dan": "897",
+     "ocekavanaDan": 897,
+     "kpi": [
+      "7 497 240 Kč – cena bytu (60 m²)",
+      "6 009 240 Kč – úvěr, LTV 80 % (max. 90 %)",
+      "35 221 Kč / 23 400 Kč – splátka vs. nájem v 1. měsíci"
+     ]
+    },
+    "E_rentbuy_vek40": {
+     "varovani": [
+      "Úvěr by měl LTV 80 %, ale limit je 80 %. Na koupi chybí 11 448 Kč vlastních zdrojů – banka by takový úvěr neposkytla."
+     ],
+     "kpi": [
+      "7 497 240 Kč – cena bytu (60 m²)",
+      "6 009 240 Kč – úvěr, LTV 80 % (max. 80 %)",
+      "35 221 Kč / 23 400 Kč – splátka vs. nájem v 1. měsíci"
+     ],
+     "summary": "Za 20 let: koupě 13 456 570 Kč, nájem 11 484 640 Kč čistého jmění – vychází lépe koupě o 1 971 930 Kč. Koupě se začne vyplácet v 1. roce."
+    },
+    "E_rentbuy_plocha0": {
+     "chyba": "Zkontrolujte pole: Plocha musí být kladná."
+    },
+    "E_rentbuy_plocha65_5": {
+     "chyba": null,
+     "dan": "979",
+     "ocekavanaDan": 979,
+     "kpi": [
+      "8 184 487 Kč – cena bytu (65,5 m²)",
+      "6 696 487 Kč – úvěr, LTV 82 % (max. 80 %)",
+      "39 249 Kč / 25 545 Kč – splátka vs. nájem v 1. měsíci"
+     ]
+    },
+    "E_rentbuy_horizont51": {
+     "chyba": "Zkontrolujte pole: Horizont 1–50 let."
+    },
+    "E_rentbuy_rustNajmuZaporny": {
+     "chyba": "Zkontrolujte pole: Růst nájmů."
+    },
+    "E_rentbuy_rustCenZaporny": {
+     "chyba": null,
+     "summary": "Za 20 let: koupě 2 190 373 Kč, nájem 10 863 492 Kč čistého jmění – vychází lépe nájem o 8 673 119 Kč. Koupě se v tomto horizontu nevyplatí."
+    },
+    "E_rentbuy_localStorage": {},
+    "E_rentbuy_konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+     }
+    ],
+    "E_rentbuy_chyby": [
+     {
+      "url": "http://127.0.0.1:46337/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "E_rentbuy_cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "F_xss": {
+     "refix": {
+      "img": false,
+      "chybaRefix": "Zkontrolujte pole: Zbývající dluh, Zbývající doba splácení, Dosavadní sazba, Čistý měsíční příjem domácnosti, Sazba nabí",
+      "fee": "Vyplňte částku, původní výši úvěru a všechna data."
+     },
+     "rentbuy": {
+      "img": false,
+      "chybaRb": "Zkontrolujte pole: Plocha, Cena za m², Nájem za m² měsíčně, Vlastní zdroje, Jednorázové náklady koupě, Věk žadatele, Splatnost hypotéky, Úroková sazba, Fixace, ",
+      "html": false
+     },
+     "dialogy": [],
+     "klavesniceZalozky": {
+      "aktivni": "tab-refix",
+      "hash": "#refix",
+      "refixViditelny": true
+     }
+    }
+   }
+  }
+ ],
+ "zivy": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "cizi": [
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+    "https://frankie851.github.io/favicon.ico"
+   ],
+   "axe": [],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {}
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "cizi": [
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+    "https://frankie851.github.io/favicon.ico"
+   ]
+  }
+ }
+}

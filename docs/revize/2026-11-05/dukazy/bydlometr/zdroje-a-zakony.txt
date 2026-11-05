@@ -1,0 +1,54 @@
+# Bydlometr – kontrola zdrojů, SRI a textu zákona · 5. 11. 2026 · curl přes proxy sezení (-L, UA Mozilla, max 25 s)
+
+## HTTP stav URL uvedených v rules.json / defaults.json / index.html (000 = spojení přes proxy sezení nenavázáno → neověřeno)
+200  https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/ltv/index.html
+200  https://www.cnb.cz/cs/financni-stabilita/makroobezretnostni-politika/stanoveni-horni-hranice-uverovych-ukazatelu/
+200  https://www.cnb.cz/cs/cnb-news/tiskove-zpravy/CNB-doporucuje-prisnejsi-limity-pro-investicni-hypoteky.-Kapitalove-rezervy-se-nemeni/
+200  https://www.cnb.cz/cs/dohled-financni-trh/legislativni-zakladna/stanoviska-k-regulaci-financniho-trhu/RS2019-07/
+200  https://www.cnb.cz/cs/menova-politika/inflacni-cil/
+000  https://www.kb.cz/cs/podpora/pujcky-a-hypoteky/mimoradna-splatka-hypoteky
+000  https://www.banky.cz/clanky/predcasne-splaceni-hypoteky/
+000  https://www.hyponamiru.cz/predcasne-splaceni-hypoteky/
+000  https://www.stavebky.cz/vypocet-nahrady-za-predcasne-splaceni-uveru-na-bydleni/
+000  https://www.hyponamiru.cz/odpocet-uroku-hypoteky-z-dani/
+000  https://www.banky.cz/clanky/odpocet-uroku-z-hypoteky/
+000  https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/
+000  https://www.banky.cz/clanky/hypomonitor-za-zari-2026-sazba-51-a-splatka-prumerne-hypoteky/
+000  https://www.banky.cz/poradna/refinancovani-hypoteky-a-prepis-zastavy-na-kn/
+000  https://realitymix.cz/statistika-nemovitosti/
+000  https://www.tvbydleni.cz/clanek/rust-najmu-v-cesku-zpomalil-praha-i-vetsina-krajskych-mest-ve-druhem-ctvrtleti-zlevnily/
+000  https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/
+000  https://www.housi.cz/trh-nemovitosti
+000  https://rulecalc.com/cs/najem/fond-oprav
+000  https://zpravy.kurzy.cz/870972-csob-index-bydleni-nemovitosti-v-cesku-ve-2-ctvrtleti-stouply-na-nove-rekordy/
+200  https://frankie851.github.io/bydlometr/
+200  https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js
+
+## Obsah stránky ČNB LTV (2. zdroj k FD-01/FD-02/FD-03), staženo 5. 11. 2026
+„Aktuálně nastavená horní hranice ukazatele LTV činí 80 % (90 % pro žadatele mladší 36 let pořizující si vlastní bydlení). Nad touto hranicí mohou banky poskytovat úvěry pouze na výjimku.“
+
+## SRI Chart.js 4.4.1 (cdnjs) – vlastní výpočet vs. index.html
+vlastní:    sha384-bs/nf9FbdNouRbMiFcrcZfLXYPKiPaGVGplVbv7dLGECccEXDW+S3zjqSKR5ZEaD
+index.html: sha384-bs/nf9FbdNouRbMiFcrcZfLXYPKiPaGVGplVbv7dLGECccEXDW+S3zjqSKR5ZEaD   → shoda
+
+## Zákon č. 257/2016 Sb., § 117 (konsolidované znění, https://www.zakonyprolidi.cz/cs/2016-257#p117, staženo 5. 11. 2026) – výňatky
+odst. 3 písm. c) „v období, pro které není stanovena pevná zápůjční úroková sazba,“
+odst. 3 písm. d) „u spotřebitelského úvěru na bydlení do 3 měsíců poté, co poskytovatel spotřebiteli sdělil novou výši zápůjční úrokové sazby podle § 102 odst. 3,“
+odst. 3 písm. h) „u spotřebitelského úvěru na bydlení do 25 % celkové výše spotřebitelského úvěru během 1 měsíce přede dnem výročí uzavření smlouvy o spotřebitelském úvěru na bydlení; přesahuje-li předčasně splacená část spotřebitelského úvěru 25 % celkové výše spotřebitelského úvěru, nesmí věřitel požadovat náhradu nákladů za předčasné splacení podle odstavce 2 z té části předčasně splacené části spotřebitelského úvěru, která nepřesahuje 25 % celkové výše spotřebitelského úvěru.“
+odst. 4 (věta 1–2, úvěry jiné než účelové na bydlení) „… přesáhnout 1 % z předčasně splacené části celkové výše spotřebitelského úvěru, přesahuje-li doba mezi předčasným splacením a sjednaným koncem spotřebitelského úvěru 1 rok. Není-li tato doba delší než jeden rok, nesmí výše náhrady nákladů přesáhnout 0,5 % …“
+odst. 4 (věta 3) „U spotřebitelského úvěru na bydlení podle § 2 odst. 2 písm. b) nebo c) nesmí výše náhrady nákladů podle odstavce 2 přesáhnout 0,25 % z předčasně splacené části celkové výše spotřebitelského úvěru za každý započatý rok zbývající do konce období, pro které je sjednána pevná zápůjční úroková sazba, nejvýše však 1 % z předčasně splacené části celkové výše spotřebitelského úvěru.“
+odst. 5 „Výše náhrady nákladů nesmí dále přesáhnout částku úroku, kterou by spotřebitel zaplatil za dobu od předčasného splacení do skončení spotřebitelského úvěru, a v případě spotřebitelského úvěru na bydlení za dobu od předčasného splacení do konce období, pro které je stanovena pevná zápůjční úroková sazba. U spotřebitelského úvěru na bydlení podle § 2 odst. 2 písm. b) nebo c) nesmí výše náhrady nákladů podle odstavce 2 dále přesáhnout výši účelně vynaložených nákladů určených podle § 117a.“
+§ 117a odst. 1 písm. a) „účelně vynaloženými náklady … částka odpovídající kladnému součtu nezbytných administrativních nákladů na předčasné splacení, jejichž výše nesmí přesáhnout částku 1000 Kč, a úrokového rozdílu,“ b) „úrokovým rozdílem rozdíl mezi smluvním úrokem a referenčním úrokem,“ d) referenční úrok = úrok při průměru zápůjčních sazeb ČNB za měsíc před splacením pro skupinu srovnatelných úvěrů.
+
+## Zákon č. 462/2023 Sb., čl. XIV (https://www.zakonyprolidi.cz/cs/2023-462, staženo 5. 11. 2026) – co novela v § 117 změnila
+bod 6: do § 117 odst. 3 vložena nová písm. e) a f) (převod nemovitosti, vypořádání SJM po 24 měsících); dosavadní e) a f) přeznačena na g) a h).
+bod 7: na konec písm. h) doplněna slova „; přesahuje-li … 25 % …“ (náhrada jen z přesahu) – tj. bezplatných 25 % v měsíci před výročím existovalo už před novelou.
+bod 8–9: v odst. 4 rozlišení úvěrů; poslední věta nahrazena „0,25 % … za každý započatý rok … nejvýše 1 %“.
+bod 10: do odst. 5 doplněna věta o § 117a.  bod 13–14: vložen § 117a.
+Písm. c) a d) odst. 3 (konec fixace / 3 měsíce po sdělení nové sazby) novela neměnila → platila i pro starší smlouvy.
+Historická znění na zakonyprolidi.cz (zneni-20240101) nejsou bez JavaScriptu/předplatného přístupná („Přístup k předpisu odmítnut“), proto odvozeno z textu novely.
+
+## Testy a příklady
+node --test: 63/63 (dukazy/bydlometr/testy.txt, 5. 11. 2026)
+anuita 3 200 000 Kč / 4,59 % / 360: splátka 16 385,50 Kč, celkem 5 898 780,41 Kč; test KB očekává 5 899 641,31 ± 5 899,64 (rozdíl −860,90 Kč, prochází díky toleranci 0,1 %)
+anuita 3 500 000 Kč / 5,30 % / 300: 21 077,04 Kč; test očekává 21 082 ± 5 (rozdíl 4,96 Kč – prochází o 0,04 Kč)
