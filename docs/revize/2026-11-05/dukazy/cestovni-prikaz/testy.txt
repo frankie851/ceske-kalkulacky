@@ -1,0 +1,173 @@
+# cestovni-prikaz @ bb4e580 · 2026-11-05T07:41:15+00:00 · node v22.23.4
+$ npm test
+
+> cestovni-prikaz@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: 100 km × 5,90 Kč = 590 Kč základní náhrady
+ok 1 - 100 km × 5,90 Kč = 590 Kč základní náhrady
+  ---
+  duration_ms: 1.294887
+  type: 'test'
+  ...
+# Subtest: PHM: 100 km, 6 l/100 km, benzin 95 bez dokladu (před 1. 10. 2026) → 208,20 Kč
+ok 2 - PHM: 100 km, 6 l/100 km, benzin 95 bez dokladu (před 1. 10. 2026) → 208,20 Kč
+  ---
+  duration_ms: 0.901066
+  type: 'test'
+  ...
+# Subtest: cesta 13 hodin bez jídla, soukromá sféra → 236 Kč
+ok 3 - cesta 13 hodin bez jídla, soukromá sféra → 236 Kč
+  ---
+  duration_ms: 0.888369
+  type: 'test'
+  ...
+# Subtest: cesta 20 hodin → 370 Kč
+ok 4 - cesta 20 hodin → 370 Kč
+  ---
+  duration_ms: 0.13821
+  type: 'test'
+  ...
+# Subtest: cesta 4 hodiny → 0 Kč
+ok 5 - cesta 4 hodiny → 0 Kč
+  ---
+  duration_ms: 0.111461
+  type: 'test'
+  ...
+# Subtest: elektromobil 100 km, 18 kWh/100 km bez dokladu → 129,60 Kč
+ok 6 - elektromobil 100 km, 18 kWh/100 km bez dokladu → 129,60 Kč
+  ---
+  duration_ms: 0.105918
+  type: 'test'
+  ...
+# Subtest: cesta v roce 2027 bez vydané vyhlášky → výpočet se nepustí a vysvětlí proč
+ok 7 - cesta v roce 2027 bez vydané vyhlášky → výpočet se nepustí a vysvětlí proč
+  ---
+  duration_ms: 0.693275
+  type: 'test'
+  ...
+# Subtest: benzin 95 od 1. 10. 2026 (vyhl. 175/2026 Sb.) → 41,80 Kč/l
+ok 8 - benzin 95 od 1. 10. 2026 (vyhl. 175/2026 Sb.) → 41,80 Kč/l
+  ---
+  duration_ms: 0.136569
+  type: 'test'
+  ...
+# Subtest: nafta od 1. 6. 2026 (vyhl. 78/2026 Sb.) → 44,50 Kč/l
+ok 9 - nafta od 1. 6. 2026 (vyhl. 78/2026 Sb.) → 44,50 Kč/l
+  ---
+  duration_ms: 0.390172
+  type: 'test'
+  ...
+# Subtest: cena z dokladu má přednost před vyhláškovou
+ok 10 - cena z dokladu má přednost před vyhláškovou
+  ---
+  duration_ms: 0.38352
+  type: 'test'
+  ...
+# Subtest: rok bez záznamu v rules.json → ChybaSazby
+ok 11 - rok bez záznamu v rules.json → ChybaSazby
+  ---
+  duration_ms: 0.214219
+  type: 'test'
+  ...
+# Subtest: hranice pásem: 5:00 h → 155 Kč, 12:00 h → 155 Kč, 12:01 → 236, 18:00 → 236, 18:01 → 370, 4:59 → 0
+ok 12 - hranice pásem: 5:00 h → 155 Kč, 12:00 h → 155 Kč, 12:01 → 236, 18:00 → 236, 18:01 → 370, 4:59 → 0
+  ---
+  duration_ms: 0.184655
+  type: 'test'
+  ...
+# Subtest: krácení, soukromá sféra: 13 h + 1 oběd → 236 × 0,65 = 153,40 Kč
+ok 13 - krácení, soukromá sféra: 13 h + 1 oběd → 236 × 0,65 = 153,40 Kč
+  ---
+  duration_ms: 0.077105
+  type: 'test'
+  ...
+# Subtest: krácení nesmí jít pod nulu: 6 h + 2 jídla (2 × 70 %) → 0 Kč
+ok 14 - krácení nesmí jít pod nulu: 6 h + 2 jídla (2 × 70 %) → 0 Kč
+  ---
+  duration_ms: 0.104369
+  type: 'test'
+  ...
+# Subtest: soukromá sféra: nižší krácení určené předem (např. 50 %)
+ok 15 - soukromá sféra: nižší krácení určené předem (např. 50 %)
+  ---
+  duration_ms: 0.193253
+  type: 'test'
+  ...
+# Subtest: soukromá sféra: krácení nad zákonné maximum se odmítne
+ok 16 - soukromá sféra: krácení nad zákonné maximum se odmítne
+  ---
+  duration_ms: 0.200425
+  type: 'test'
+  ...
+# Subtest: veřejná sféra: bez určení se použije dolní hranice, krácení je pevné
+ok 17 - veřejná sféra: bez určení se použije dolní hranice, krácení je pevné
+  ---
+  duration_ms: 0.088912
+  type: 'test'
+  ...
+# Subtest: veřejná sféra: určená částka v rozpětí, mimo rozpětí chyba
+ok 18 - veřejná sféra: určená částka v rozpětí, mimo rozpětí chyba
+  ---
+  duration_ms: 0.126133
+  type: 'test'
+  ...
+# Subtest: hodiny po kalendářních dnech u vícedenní cesty
+ok 19 - hodiny po kalendářních dnech u vícedenní cesty
+  ---
+  duration_ms: 0.19781
+  type: 'test'
+  ...
+# Subtest: návrat před odjezdem → ChybaVstupu
+ok 20 - návrat před odjezdem → ChybaVstupu
+  ---
+  duration_ms: 0.088694
+  type: 'test'
+  ...
+# Subtest: vícedenní cesta: stravné za každý den zvlášť, jídla po dnech
+ok 21 - vícedenní cesta: stravné za každý den zvlášť, jídla po dnech
+  ---
+  duration_ms: 0.193632
+  type: 'test'
+  ...
+# Subtest: celá cesta: základ + PHM + stravné; jednostopé vozidlo 1,60 Kč/km
+ok 22 - celá cesta: základ + PHM + stravné; jednostopé vozidlo 1,60 Kč/km
+  ---
+  duration_ms: 0.204996
+  type: 'test'
+  ...
+# Subtest: přívěs není ověřený → výpočet ho odmítne
+ok 23 - přívěs není ověřený → výpočet ho odmítne
+  ---
+  duration_ms: 0.097914
+  type: 'test'
+  ...
+# Subtest: desetinné km a haléřové zaokrouhlení
+ok 24 - desetinné km a haléřové zaokrouhlení
+  ---
+  duration_ms: 0.123287
+  type: 'test'
+  ...
+# Subtest: souhrn sčítá položky a celkovou částku zaokrouhlí nahoru na koruny
+ok 25 - souhrn sčítá položky a celkovou částku zaokrouhlí nahoru na koruny
+  ---
+  duration_ms: 0.1407
+  type: 'test'
+  ...
+# Subtest: formatKc
+ok 26 - formatKc
+  ---
+  duration_ms: 0.126971
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 98.068186
+exit: 0

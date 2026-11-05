@@ -1,0 +1,394 @@
+{
+ "url": "http://127.0.0.1:41589/",
+ "datum": "2026-11-05T07:43:00.311Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "select",
+     "id": "household",
+     "typ": "select-one",
+     "popisek": "Typ domácnosti\n        \n          Byt\n          Rodinný dům\n          Dům s tepelným čerpadlem\n          Dům s fotovoltaikou\n        \n        Rodinný dům bez elektrického vytápění: typicky D02d.",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "distributor",
+     "typ": "select-one",
+     "popisek": "Distributor\n          ČEZ DistribuceEG.DPREdistribuce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "sazba",
+     "typ": "select-one",
+     "popisek": "Distribuční sazba\n          D01d – jednotarif, malá spotřebaD02d – jednotarif, střední spotřebaD25d – dvoutarif, akumulace 8 hD26d – dvoutarif, akumulace 8 h (vyšší příkon)D27d – dvoutarif, elektromobilitaD35d – akumulace 16 hD45d – přímotop 20 hD56d – tepelné čerpadlo 22 hD57d – elektrické topení 20 hD61d – víkendová",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mwh",
+     "typ": "number",
+     "popisek": "Roční spotřeba (MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "breaker",
+     "typ": "select-one",
+     "popisek": "Hlavní jistič\n          1× 25 A3× 10 A3× 16 A3× 20 A3× 25 A3× 32 A3× 40 A3× 50 A3× 63 A",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "fixPrice",
+     "typ": "number",
+     "popisek": "Fixní cena silové elektřiny (Kč/MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "spotMargin",
+     "typ": "number",
+     "popisek": "Marže spotu (Kč/MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Další nastavení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Vlastní průběhové měření (CSV)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "shift",
+     "typ": "range",
+     "popisek": "Přesun spotřeby do nejlevnějších hodin dne: 0 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "OTE – výsledky denního trhu s elektřinou",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "OTE – normalizované typové diagramy dodá",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "ČNB – kurzy devizového trhu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "ERÚ – cenové výměry (systémové služby, P",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "ČEZ Prodej – ceník Dynamický tarif (pásm",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "území EG.D",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "území PREdistribuce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "household",
+     "typ": "select-one",
+     "popisek": "Typ domácnosti\n        \n          Byt\n          Rodinný dům\n          Dům s tepelným čerpadlem\n          Dům s fotovoltaikou\n        \n        Rodinný dům bez elektrického vytápění: typicky D02d.",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "distributor",
+     "typ": "select-one",
+     "popisek": "Distributor\n          ČEZ DistribuceEG.DPREdistribuce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "sazba",
+     "typ": "select-one",
+     "popisek": "Distribuční sazba\n          D01d – jednotarif, malá spotřebaD02d – jednotarif, střední spotřebaD25d – dvoutarif, akumulace 8 hD26d – dvoutarif, akumulace 8 h (vyšší příkon)D27d – dvoutarif, elektromobilitaD35d – akumulace 16 hD45d – přímotop 20 hD56d – tepelné čerpadlo 22 hD57d – elektrické topení 20 hD61d – víkendová",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mwh",
+     "typ": "number",
+     "popisek": "Roční spotřeba (MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "breaker",
+     "typ": "select-one",
+     "popisek": "Hlavní jistič\n          1× 25 A3× 10 A3× 16 A3× 20 A3× 25 A3× 32 A3× 40 A3× 50 A3× 63 A",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "fixPrice",
+     "typ": "number",
+     "popisek": "Fixní cena silové elektřiny (Kč/MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "spotMargin",
+     "typ": "number",
+     "popisek": "Marže spotu (Kč/MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Další nastavení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Vlastní průběhové měření (CSV)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "shift",
+     "typ": "range",
+     "popisek": "Přesun spotřeby do nejlevnějších hodin dne: 0 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "OTE – výsledky denního trhu s elektřinou",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "OTE – normalizované typové diagramy dodá",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:41589/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/calc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/meta.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/prices.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/fx.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/tariffs.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/dynamic.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/tdd/TDD4.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:41589/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:41589/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/calc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/meta.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/prices.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/fx.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/tariffs.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/dynamic.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:41589/data/tdd/TDD4.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:41589/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

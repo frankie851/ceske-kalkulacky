@@ -1,0 +1,179 @@
+# inflacni-kalkulacka @ b9e1980 · 2026-11-05T07:41:15+00:00 · node v22.23.4
+$ npm test
+
+> inflacni-kalkulacka@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: data/cpi.json: od 1995-01, bez děr, kladné hodnoty, ne v budoucnosti
+ok 1 - data/cpi.json: od 1995-01, bez děr, kladné hodnoty, ne v budoucnosti
+  ---
+  duration_ms: 2.245844
+  type: 'test'
+  ...
+# Subtest: data/cpi.json: průměr roku 2015 ≈ 100
+ok 2 - data/cpi.json: průměr roku 2015 ≈ 100
+  ---
+  duration_ms: 0.579083
+  type: 'test'
+  ...
+# Subtest: parseCsv: uvozovky, "" uvnitř, CRLF, BOM, středník
+ok 3 - parseCsv: uvozovky, "" uvnitř, CRLF, BOM, středník
+  ---
+  duration_ms: 2.003947
+  type: 'test'
+  ...
+# Subtest: parseNumber: čárka i tečka
+ok 4 - parseNumber: čárka i tečka
+  ---
+  duration_ms: 0.325287
+  type: 'test'
+  ...
+# Subtest: selectBaseIndex vybere jen bazický index (Z), úhrn, ISC 6134, základ 2015
+ok 5 - selectBaseIndex vybere jen bazický index (Z), úhrn, ISC 6134, základ 2015
+  ---
+  duration_ms: 12.148382
+  type: 'test'
+  ...
+# Subtest: selectBaseIndex: bez preferovaného základu vezme nejnovější
+ok 6 - selectBaseIndex: bez preferovaného základu vezme nejnovější
+  ---
+  duration_ms: 0.335554
+  type: 'test'
+  ...
+# Subtest: selectBaseIndex selže, když filtr není jednoznačný
+ok 7 - selectBaseIndex selže, když filtr není jednoznačný
+  ---
+  duration_ms: 1.018656
+  type: 'test'
+  ...
+# Subtest: chainSeries naváže novější řadu s jiným základem
+ok 8 - chainSeries naváže novější řadu s jiným základem
+  ---
+  duration_ms: 0.464874
+  type: 'test'
+  ...
+# Subtest: rebaseToYearAverage: průměr roku = 100
+ok 9 - rebaseToYearAverage: průměr roku = 100
+  ---
+  duration_ms: 0.623276
+  type: 'test'
+  ...
+# Subtest: combine: navazuje řady a převádí na 2015 = 100
+ok 10 - combine: navazuje řady a převádí na 2015 = 100
+  ---
+  duration_ms: 0.355088
+  type: 'test'
+  ...
+# Subtest: validateSeries hlásí díry, špatný začátek a budoucnost
+ok 11 - validateSeries hlásí díry, špatný začátek a budoucnost
+  ---
+  duration_ms: 1.001703
+  type: 'test'
+  ...
+# Subtest: findCsvLinks najde odkazy na CSV
+ok 12 - findCsvLinks najde odkazy na CSV
+  ---
+  duration_ms: 1.03638
+  type: 'test'
+  ...
+# Subtest: skutečný formát ČSÚ 010022-25 (výřez): Z, prázdný ucel_kod, základ z bazobdobiod/do
+ok 13 - skutečný formát ČSÚ 010022-25 (výřez): Z, prázdný ucel_kod, základ z bazobdobiod/do
+  ---
+  duration_ms: 5.916914
+  type: 'test'
+  ...
+# Subtest: findCsvLinks: odkaz na distribuci data.csu.gov.cz ano, technické schéma ne
+ok 14 - findCsvLinks: odkaz na distribuci data.csu.gov.cz ano, technické schéma ne
+  ---
+  duration_ms: 0.246692
+  type: 'test'
+  ...
+# Subtest: validateSeries s maxAgeMonths hlásí zastaralá data
+ok 15 - validateSeries s maxAgeMonths hlásí zastaralá data
+  ---
+  duration_ms: 0.183255
+  type: 'test'
+  ...
+# Subtest: skutečný formát DataStat CEN0101E (výřez): IZ2015, úhrn, Česko, domácnosti celkem, jen měsíce
+ok 16 - skutečný formát DataStat CEN0101E (výřez): IZ2015, úhrn, Česko, domácnosti celkem, jen měsíce
+  ---
+  duration_ms: 2.578507
+  type: 'test'
+  ...
+# Subtest: combine: řada 010022 (1995–2025) + CEN0101E (2015–2026) se spojí bez změny hodnot
+ok 17 - combine: řada 010022 (1995–2025) + CEN0101E (2015–2026) se spojí bez změny hodnot
+  ---
+  duration_ms: 6.010073
+  type: 'test'
+  ...
+# Subtest: index 100 → 125: 100 Kč → 125 Kč, kumulativní inflace 25 %
+ok 18 - index 100 → 125: 100 Kč → 125 Kč, kumulativní inflace 25 %
+  ---
+  duration_ms: 0.978759
+  type: 'test'
+  ...
+# Subtest: obrácený přepočet 125 Kč → 100 Kč
+ok 19 - obrácený přepočet 125 Kč → 100 Kč
+  ---
+  duration_ms: 0.213283
+  type: 'test'
+  ...
+# Subtest: nominální výnos 4 %, inflace 2,5 % → reálný výnos ≈ 1,46 %
+ok 20 - nominální výnos 4 %, inflace 2,5 % → reálný výnos ≈ 1,46 %
+  ---
+  duration_ms: 1.292517
+  type: 'test'
+  ...
+# Subtest: mzda 40 000 → 50 000 Kč při růstu indexu o 20 % → reálně +4,17 %
+ok 21 - mzda 40 000 → 50 000 Kč při růstu indexu o 20 % → reálně +4,17 %
+  ---
+  duration_ms: 0.167195
+  type: 'test'
+  ...
+# Subtest: 24 měsíců, index 100 → 110,25 → průměrná roční inflace 5 %
+ok 22 - 24 měsíců, index 100 → 110,25 → průměrná roční inflace 5 %
+  ---
+  duration_ms: 0.138204
+  type: 'test'
+  ...
+# Subtest: výnos p.a. ↔ za období
+ok 23 - výnos p.a. ↔ za období
+  ---
+  duration_ms: 0.160508
+  type: 'test'
+  ...
+# Subtest: createSeries odmítne díru v řadě a neplatnou hodnotu
+ok 24 - createSeries odmítne díru v řadě a neplatnou hodnotu
+  ---
+  duration_ms: 0.711781
+  type: 'test'
+  ...
+# Subtest: měsíc bez dat se nahradí posledním (prvním) dostupným
+ok 25 - měsíc bez dat se nahradí posledním (prvním) dostupným
+  ---
+  duration_ms: 0.804872
+  type: 'test'
+  ...
+# Subtest: monthsBetween přes přelom roku
+ok 26 - monthsBetween přes přelom roku
+  ---
+  duration_ms: 0.345178
+  type: 'test'
+  ...
+# Subtest: levelSeries začíná na 100, yoySeries počítá meziroční změnu
+ok 27 - levelSeries začíná na 100, yoySeries počítá meziroční změnu
+  ---
+  duration_ms: 0.673912
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 126.833773
+exit: 0

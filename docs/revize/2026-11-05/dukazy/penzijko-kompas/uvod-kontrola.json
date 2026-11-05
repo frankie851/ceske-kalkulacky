@@ -1,0 +1,330 @@
+{
+ "url": "http://127.0.0.1:40161/",
+ "datum": "2026-11-05T07:42:48.093Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 4,
+     "uzly": [
+      "#poplatky-obsah > .srovnani > div:nth-child(1) > small",
+      "#poplatky-obsah > .srovnani > div:nth-child(2) > small",
+      "#tf-obsah > .srovnani > div:nth-child(1) > small"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Věk\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Délka smlouvy\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Tvůj měsíční vklad\n          Kč",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Příspěvek zaměstnavatele\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Dosavadní zůstatek\n          Kč",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "select",
+     "id": "fond",
+     "typ": "select-one",
+     "popisek": "Typ fondu\n          TransformovanýKonzervativníVyváženýAkciovýŽivotní cyklus (strategie)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Za správu\n              % ročně",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Ze zhodnocení\n              %",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Pobírám starobní důchod",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Pravidla 2026",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Reálně",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Nominálně",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Zákon č. 427/2011 Sb., o doplňkovém penz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Zákon č. 586/1992 Sb., o daních z příjmů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MF ČR – Státní podpora penzijního spořen",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MF ČR – prezentace Lepší penzijko (3. 6.",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Finance.cz – Penzijní spoření čeká revol",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "KB Penzijní společnost – sazebník (typic",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Finex – Transformované vs. účastnické fo",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Věk\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Délka smlouvy\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Tvůj měsíční vklad\n          Kč",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Příspěvek zaměstnavatele\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Dosavadní zůstatek\n          Kč",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "select",
+     "id": "fond",
+     "typ": "select-one",
+     "popisek": "Typ fondu\n          TransformovanýKonzervativníVyváženýAkciovýŽivotní cyklus (strategie)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Za správu\n              % ročně",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Ze zhodnocení\n              %",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Pobírám starobní důchod",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Pravidla 2026",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:40161/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/calc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:40161/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/calc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:40161/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

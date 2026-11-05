@@ -1,0 +1,167 @@
+# penzijko-kompas @ 7381900 · 2026-11-05T07:41:16+00:00 · node v22.23.4
+$ npm test
+
+> test
+> node --test
+
+TAP version 13
+# Subtest: věk 35, pravidla 2026, vklad 1 700 Kč → 340 Kč/měs, 4 080 Kč/rok
+ok 1 - věk 35, pravidla 2026, vklad 1 700 Kč → 340 Kč/měs, 4 080 Kč/rok
+  ---
+  duration_ms: 1.339737
+  type: 'test'
+  ...
+# Subtest: věk 35, pravidla 2026, vklad 400 Kč → 0
+ok 2 - věk 35, pravidla 2026, vklad 400 Kč → 0
+  ---
+  duration_ms: 0.256026
+  type: 'test'
+  ...
+# Subtest: věk 25, návrh 2027, vklad 1 700 Kč → 680 Kč/měs, 8 160 Kč/rok
+ok 3 - věk 25, návrh 2027, vklad 1 700 Kč → 680 Kč/měs, 8 160 Kč/rok
+  ---
+  duration_ms: 0.140654
+  type: 'test'
+  ...
+# Subtest: věk 10, návrh 2027, vklad 100 Kč → 40 Kč/měs
+ok 4 - věk 10, návrh 2027, vklad 100 Kč → 40 Kč/měs
+  ---
+  duration_ms: 0.18359
+  type: 'test'
+  ...
+# Subtest: věk 35, vklad 3 000 Kč/měs → odpočet 15 600 Kč/rok
+ok 5 - věk 35, vklad 3 000 Kč/měs → odpočet 15 600 Kč/rok
+  ---
+  duration_ms: 0.282676
+  type: 'test'
+  ...
+# Subtest: zůstatek 100 000, výnos 0 %, poplatek 1 %, bez vkladů, 10 let → cca 90 438 Kč
+ok 6 - zůstatek 100 000, výnos 0 %, poplatek 1 %, bez vkladů, 10 let → cca 90 438 Kč
+  ---
+  duration_ms: 1.026025
+  type: 'test'
+  ...
+# Subtest: 2026: hranice 500 Kč a pásmo 20 %
+ok 7 - 2026: hranice 500 Kč a pásmo 20 %
+  ---
+  duration_ms: 0.228695
+  type: 'test'
+  ...
+# Subtest: poživatel starobního důchodu nemá nárok
+ok 8 - poživatel starobního důchodu nemá nárok
+  ---
+  duration_ms: 0.164549
+  type: 'test'
+  ...
+# Subtest: návrh 2027: 29 let má 40 %, 30 let už 20 %
+ok 9 - návrh 2027: 29 let má 40 %, 30 let už 20 %
+  ---
+  duration_ms: 0.344776
+  type: 'test'
+  ...
+# Subtest: návrh 2027: dospělý pod 500 Kč nemá nárok, nezletilý pod 100 Kč také ne
+ok 10 - návrh 2027: dospělý pod 500 Kč nemá nárok, nezletilý pod 100 Kč také ne
+  ---
+  duration_ms: 0.478819
+  type: 'test'
+  ...
+# Subtest: odpočet: do 1 700 Kč nic, strop 48 000 Kč, úspora 15 %
+ok 11 - odpočet: do 1 700 Kč nic, strop 48 000 Kč, úspora 15 %
+  ---
+  duration_ms: 0.443231
+  type: 'test'
+  ...
+# Subtest: životní cyklus: 100 % akcií do 45, lineárně na 20 % v 65
+ok 12 - životní cyklus: 100 % akcií do 45, lineárně na 20 % v 65
+  ---
+  duration_ms: 0.221772
+  type: 'test'
+  ...
+# Subtest: projekce: vklady bez výnosu a poplatků se jen sčítají, státní příspěvek se připisuje
+ok 13 - projekce: vklady bez výnosu a poplatků se jen sčítají, státní příspěvek se připisuje
+  ---
+  duration_ms: 0.151881
+  type: 'test'
+  ...
+# Subtest: projekce: v návrhu 2027 se po 30. narozeninách příspěvek sníží
+ok 14 - projekce: v návrhu 2027 se po 30. narozeninách příspěvek sníží
+  ---
+  duration_ms: 0.12419
+  type: 'test'
+  ...
+# Subtest: projekce: poplatek ze zhodnocení jen z kladného ročního výnosu
+ok 15 - projekce: poplatek ze zhodnocení jen z kladného ročního výnosu
+  ---
+  duration_ms: 0.266813
+  type: 'test'
+  ...
+# Subtest: projekce: strop poplatků z návrhu 2027 se uplatní
+ok 16 - projekce: strop poplatků z návrhu 2027 se uplatní
+  ---
+  duration_ms: 0.310887
+  type: 'test'
+  ...
+# Subtest: projekce: transformovaný fond po roce 2036 přejde do konzervativního
+ok 17 - projekce: transformovaný fond po roce 2036 přejde do konzervativního
+  ---
+  duration_ms: 0.410896
+  type: 'test'
+  ...
+# Subtest: projekce: řada po letech začíná dnešním věkem a končí v 65
+ok 18 - projekce: řada po letech začíná dnešním věkem a končí v 65
+  ---
+  duration_ms: 0.179261
+  type: 'test'
+  ...
+# Subtest: projekce: kdo je v 65 a víc, nemá co projektovat
+ok 19 - projekce: kdo je v 65 a víc, nemá co projektovat
+  ---
+  duration_ms: 0.085136
+  type: 'test'
+  ...
+# Subtest: srovnání fondů vrací všech pět typů
+ok 20 - srovnání fondů vrací všech pět typů
+  ---
+  duration_ms: 4.279851
+  type: 'test'
+  ...
+# Subtest: dopad poplatků: se stropem 0,5 % je v 65 víc peněz
+ok 21 - dopad poplatků: se stropem 0,5 % je v 65 víc peněz
+  ---
+  duration_ms: 1.424127
+  type: 'test'
+  ...
+# Subtest: transformovaný fond: srovnání a poplatek 800 Kč u konkurence do 5 let
+ok 22 - transformovaný fond: srovnání a poplatek 800 Kč u konkurence do 5 let
+  ---
+  duration_ms: 1.811098
+  type: 'test'
+  ...
+# Subtest: doporučení: max. 3 kroky, seřazené podle přínosu, všechny kladné
+ok 23 - doporučení: max. 3 kroky, seřazené podle přínosu, všechny kladné
+  ---
+  duration_ms: 2.528511
+  type: 'test'
+  ...
+# Subtest: doporučení: kdo už má vše nastavené, nedostane zbytečné kroky
+ok 24 - doporučení: kdo už má vše nastavené, nedostane zbytečné kroky
+  ---
+  duration_ms: 0.437611
+  type: 'test'
+  ...
+# Subtest: calc.js neobsahuje natvrdo částky ani sazby z pravidel
+ok 25 - calc.js neobsahuje natvrdo částky ani sazby z pravidel
+  ---
+  duration_ms: 0.577833
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 113.297223
+exit: 0

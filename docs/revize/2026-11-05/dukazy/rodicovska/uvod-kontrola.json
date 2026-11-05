@@ -1,0 +1,394 @@
+{
+ "url": "http://127.0.0.1:37477/",
+ "datum": "2026-11-05T07:43:48.759Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Čekáme dvojčata nebo vícerčata",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Matka (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Otec (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Matka byla nemocensky pojištěna aspoň 270 dní za poslední 2 roky",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Otec je zaměstnaný a nemocensky pojištěný",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Kdo nastoupí na mateřskou\n              \n                Matka (6–8 týdnů před porodem)\n                Otec (nejdříve od 7. týdne po porodu)\n                Nikdo (bez nároku)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Nástup matky před termínem\n              \n                6 týdnů\n                7 týdnů\n                8 týdnů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Otec čerpá otcovskou (14 dní)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Otcovská od (dní po porodu)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "rpVyse",
+     "typ": "range",
+     "popisek": "Výše rodičovského příspěvku: 13 400 Kč měsíčně",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnNavrh",
+     "typ": "button",
+     "popisek": "Vyčerpat přesně do 3 let",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnMax",
+     "typ": "button",
+     "popisek": "Maximum",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Střídání rodičů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Dřívější návrat do práce (oba rodiče pracují)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Tabulka po měsících",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Jak jsme počítali",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnUlozit",
+     "typ": "button",
+     "popisek": "Uložit plán v tomto prohlížeči",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnSmazat",
+     "typ": "button",
+     "popisek": "Smazat uložený plán",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Čekáme dvojčata nebo vícerčata",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Matka (Kč)",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:37477/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/rodina.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/timeline.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/?terminPorodu=&prijemMatka=&prijemOtec=&narokMatka=on&narokOtec=on&kdoPpm=matka&ppmTydnuPred=6&otcovska=on&otcovskaOdDne=",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/rodina.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/timeline.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:37477/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:37477/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/rodina.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/timeline.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:37477/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:37477/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

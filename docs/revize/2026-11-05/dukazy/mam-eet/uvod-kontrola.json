@@ -1,0 +1,304 @@
+{
+ "url": "http://127.0.0.1:35777/",
+ "datum": "2026-11-05T07:42:54.649Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:35777/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/osvc-app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/rules.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/dom.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/osvc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:35777/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/osvc-app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/rules.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/dom.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/osvc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:35777/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  }
+ }
+}

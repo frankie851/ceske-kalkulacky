@@ -1,0 +1,161 @@
+# vypoved-2026 @ e5c7b54 · 2026-11-05T07:41:18+00:00 · node v22.23.4
+$ npm test
+
+> vypoved-2026@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: doručení 10. 7. 2026, 2 měsíce → konec 10. 9. 2026
+ok 1 - doručení 10. 7. 2026, 2 měsíce → konec 10. 9. 2026
+  ---
+  duration_ms: 1.635946
+  type: 'test'
+  ...
+# Subtest: doručení 31. 12. 2026, 2 měsíce → konec 28. 2. 2027
+ok 2 - doručení 31. 12. 2026, 2 měsíce → konec 28. 2. 2027
+  ---
+  duration_ms: 0.281904
+  type: 'test'
+  ...
+# Subtest: konec v přestupném roce a na konci kratšího měsíce
+ok 3 - konec v přestupném roce a na konci kratšího měsíce
+  ---
+  duration_ms: 0.224922
+  type: 'test'
+  ...
+# Subtest: výpověď podle § 52 písm. g) → výpovědní doba 1 měsíc
+ok 4 - výpověď podle § 52 písm. g) → výpovědní doba 1 měsíc
+  ---
+  duration_ms: 0.15259
+  type: 'test'
+  ...
+# Subtest: § 52 písm. f) a h) také 1 měsíc, ostatní důvody 2 měsíce
+ok 5 - § 52 písm. f) a h) také 1 měsíc, ostatní důvody 2 měsíce
+  ---
+  duration_ms: 0.236711
+  type: 'test'
+  ...
+# Subtest: zrušení ve zkušební době → konec dnem doručení
+ok 6 - zrušení ve zkušební době → konec dnem doručení
+  ---
+  duration_ms: 0.117387
+  type: 'test'
+  ...
+# Subtest: dohoda → konec sjednaným dnem
+ok 7 - dohoda → konec sjednaným dnem
+  ---
+  duration_ms: 0.355731
+  type: 'test'
+  ...
+# Subtest: neplatné datum vyhodí chybu
+ok 8 - neplatné datum vyhodí chybu
+  ---
+  duration_ms: 0.178593
+  type: 'test'
+  ...
+# Subtest: PP 1,5 roku, průměrný výdělek 40 000 Kč, § 52 písm. c) → odstupné 80 000 Kč
+ok 9 - PP 1,5 roku, průměrný výdělek 40 000 Kč, § 52 písm. c) → odstupné 80 000 Kč
+  ---
+  duration_ms: 0.38623
+  type: 'test'
+  ...
+# Subtest: výpověď ze strany zaměstnance → odstupné 0
+ok 10 - výpověď ze strany zaměstnance → odstupné 0
+  ---
+  duration_ms: 0.401515
+  type: 'test'
+  ...
+# Subtest: násobky odstupného podle délky PP
+ok 11 - násobky odstupného podle délky PP
+  ---
+  duration_ms: 0.184168
+  type: 'test'
+  ...
+# Subtest: dohoda z organizačních důvodů → odstupné, dohoda z jiného důvodu → 0
+ok 12 - dohoda z organizačních důvodů → odstupné, dohoda z jiného důvodu → 0
+  ---
+  duration_ms: 0.102083
+  type: 'test'
+  ...
+# Subtest: § 52 písm. d) (pracovní úraz) → 12× průměrný výdělek
+ok 13 - § 52 písm. d) (pracovní úraz) → 12× průměrný výdělek
+  ---
+  duration_ms: 0.077787
+  type: 'test'
+  ...
+# Subtest: § 52 písm. e) až h) a zkušební doba → odstupné 0
+ok 14 - § 52 písm. e) až h) a zkušební doba → odstupné 0
+  ---
+  duration_ms: 0.117602
+  type: 'test'
+  ...
+# Subtest: věk 40, čistý výdělek 30 000 Kč, žádost 2026 → 24 000, 24 000, 15 000, 15 000, 12 000
+ok 15 - věk 40, čistý výdělek 30 000 Kč, žádost 2026 → 24 000, 24 000, 15 000, 15 000, 12 000
+  ---
+  duration_ms: 1.107612
+  type: 'test'
+  ...
+# Subtest: věk 40, čistý výdělek 60 000 Kč → první měsíce omezeny stropem 38 537 Kč
+ok 16 - věk 40, čistý výdělek 60 000 Kč → první měsíce omezeny stropem 38 537 Kč
+  ---
+  duration_ms: 0.188607
+  type: 'test'
+  ...
+# Subtest: věk 52 → 8 měsíců (3 × 80 %, 3 × 50 %, 2 × 40 %)
+ok 17 - věk 52 → 8 měsíců (3 × 80 %, 3 × 50 %, 2 × 40 %)
+  ---
+  duration_ms: 0.263447
+  type: 'test'
+  ...
+# Subtest: věk 57 → 11 měsíců (3 × 80 %, 3 × 50 %, 5 × 40 %)
+ok 18 - věk 57 → 11 měsíců (3 × 80 %, 3 × 50 %, 5 × 40 %)
+  ---
+  duration_ms: 0.119156
+  type: 'test'
+  ...
+# Subtest: zaokrouhlení podpory na celé koruny nahoru
+ok 19 - zaokrouhlení podpory na celé koruny nahoru
+  ---
+  duration_ms: 0.069626
+  type: 'test'
+  ...
+# Subtest: žádost v roce 2027 → platný zákon + vládní návrh (tisk 300)
+ok 20 - žádost v roce 2027 → platný zákon + vládní návrh (tisk 300)
+  ---
+  duration_ms: 0.19772
+  type: 'test'
+  ...
+# Subtest: výběr pravidel podle data podání žádosti
+ok 21 - výběr pravidel podle data podání žádosti
+  ---
+  duration_ms: 0.219023
+  type: 'test'
+  ...
+# Subtest: chybné vstupy podpory
+ok 22 - chybné vstupy podpory
+  ---
+  duration_ms: 0.112398
+  type: 'test'
+  ...
+# Subtest: pracovní dny přeskakují víkendy a svátky
+ok 23 - pracovní dny přeskakují víkendy a svátky
+  ---
+  duration_ms: 0.408775
+  type: 'test'
+  ...
+# Subtest: kontrolní seznam obsahuje povinné položky s termíny
+ok 24 - kontrolní seznam obsahuje povinné položky s termíny
+  ---
+  duration_ms: 0.24351
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 102.98395
+exit: 0

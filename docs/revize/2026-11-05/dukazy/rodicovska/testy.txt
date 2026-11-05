@@ -1,0 +1,191 @@
+# rodicovska @ 9ff80c3 · 2026-11-05T07:41:17+00:00 · node v22.23.4
+$ npm test
+
+> rodicovska-pro-celou-rodinu@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: shoda s kalkulačkou MPSV 2026: příjem 30000 Kč
+ok 1 - shoda s kalkulačkou MPSV 2026: příjem 30000 Kč
+  ---
+  duration_ms: 2.104915
+  type: 'test'
+  ...
+# Subtest: shoda s kalkulačkou MPSV 2026: příjem 50000 Kč
+ok 2 - shoda s kalkulačkou MPSV 2026: příjem 50000 Kč
+  ---
+  duration_ms: 0.142975
+  type: 'test'
+  ...
+# Subtest: shoda s kalkulačkou MPSV 2026: příjem 50279 Kč
+ok 3 - shoda s kalkulačkou MPSV 2026: příjem 50279 Kč
+  ---
+  duration_ms: 0.157815
+  type: 'test'
+  ...
+# Subtest: shoda s kalkulačkou MPSV 2026: příjem 80000 Kč
+ok 4 - shoda s kalkulačkou MPSV 2026: příjem 80000 Kč
+  ---
+  duration_ms: 0.107071
+  type: 'test'
+  ...
+# Subtest: shoda s kalkulačkou MPSV 2026: příjem 150000 Kč
+ok 5 - shoda s kalkulačkou MPSV 2026: příjem 150000 Kč
+  ---
+  duration_ms: 0.134607
+  type: 'test'
+  ...
+# Subtest: příjem 30 000 Kč měsíčně → DVZ 986,30 Kč, redukovaný DVZ 987 Kč
+ok 6 - příjem 30 000 Kč měsíčně → DVZ 986,30 Kč, redukovaný DVZ 987 Kč
+  ---
+  duration_ms: 1.165359
+  type: 'test'
+  ...
+# Subtest: DVZ 1 000 Kč → strop rodičovské 21 000 Kč měsíčně
+ok 7 - DVZ 1 000 Kč → strop rodičovské 21 000 Kč měsíčně
+  ---
+  duration_ms: 0.322669
+  type: 'test'
+  ...
+# Subtest: bez DVZ, 15 000 Kč měsíčně → 350 000 Kč vyčerpáno za 24 měsíců (23 × 15 000 + 5 000)
+ok 8 - bez DVZ, 15 000 Kč měsíčně → 350 000 Kč vyčerpáno za 24 měsíců (23 × 15 000 + 5 000)
+  ---
+  duration_ms: 0.279465
+  type: 'test'
+  ...
+# Subtest: rodičovská od 6. měsíce po 8 000 Kč → do 3 let 240 000 Kč, propadne 110 000 Kč a aplikace upozorní
+ok 9 - rodičovská od 6. měsíce po 8 000 Kč → do 3 let 240 000 Kč, propadne 110 000 Kč a aplikace upozorní
+  ---
+  duration_ms: 27.663671
+  type: 'test'
+  ...
+# Subtest: vícerčata bez DVZ → strop 30 000 Kč, celkem 700 000 Kč
+ok 10 - vícerčata bez DVZ → strop 30 000 Kč, celkem 700 000 Kč
+  ---
+  duration_ms: 5.217327
+  type: 'test'
+  ...
+# Subtest: mateřská z příjmu 30 000 Kč = 691 Kč denně (70 % z 987, nahoru)
+ok 11 - mateřská z příjmu 30 000 Kč = 691 Kč denně (70 % z 987, nahoru)
+  ---
+  duration_ms: 0.136472
+  type: 'test'
+  ...
+# Subtest: redukce po pásmech 2026: 100 % / 60 % / 30 % a nic nad 3. hranicí
+ok 12 - redukce po pásmech 2026: 100 % / 60 % / 30 % a nic nad 3. hranicí
+  ---
+  duration_ms: 0.242114
+  type: 'test'
+  ...
+# Subtest: maximální strop RP 2026 = 59 997 Kč (0,7 × 30 × 2 857)
+ok 13 - maximální strop RP 2026 = 59 997 Kč (0,7 × 30 × 2 857)
+  ---
+  duration_ms: 0.148024
+  type: 'test'
+  ...
+# Subtest: počet dní rozhodného období (12 kalendářních měsíců před měsícem nároku)
+ok 14 - počet dní rozhodného období (12 kalendářních měsíců před měsícem nároku)
+  ---
+  duration_ms: 0.356969
+  type: 'test'
+  ...
+# Subtest: redukční hranice podle roku nástupu, neznámý rok → poslední známé s příznakem odhadu
+ok 15 - redukční hranice podle roku nástupu, neznámý rok → poslední známé s příznakem odhadu
+  ---
+  duration_ms: 0.531222
+  type: 'test'
+  ...
+# Subtest: porod v lednu 2027 s nástupem v prosinci 2026 → mateřská podle hranic 2026, RP 400 000
+ok 16 - porod v lednu 2027 s nástupem v prosinci 2026 → mateřská podle hranic 2026, RP 400 000
+  ---
+  duration_ms: 6.219409
+  type: 'test'
+  ...
+# Subtest: narození od 1. 1. 2027 → 400 000 Kč, stejný scénář 8 000 Kč od 6. měsíce → propadne 160 000 Kč
+ok 17 - narození od 1. 1. 2027 → 400 000 Kč, stejný scénář 8 000 Kč od 6. měsíce → propadne 160 000 Kč
+  ---
+  duration_ms: 5.351105
+  type: 'test'
+  ...
+# Subtest: vícerčata 2027 → 800 000 Kč
+ok 18 - vícerčata 2027 → 800 000 Kč
+  ---
+  duration_ms: 0.135758
+  type: 'test'
+  ...
+# Subtest: návrh výše pro vyčerpání do 3 let
+ok 19 - návrh výše pro vyčerpání do 3 let
+  ---
+  duration_ms: 0.098968
+  type: 'test'
+  ...
+# Subtest: orientační čistá mzda zaměstnance 2026 z 30 000 Kč = 24 590 Kč
+ok 20 - orientační čistá mzda zaměstnance 2026 z 30 000 Kč = 24 590 Kč
+  ---
+  duration_ms: 0.062601
+  type: 'test'
+  ...
+# Subtest: mateřská se rozpadne do kalendářních měsíců: 196 dní celkem
+ok 21 - mateřská se rozpadne do kalendářních měsíců: 196 dní celkem
+  ---
+  duration_ms: 3.844816
+  type: 'test'
+  ...
+# Subtest: vícerčata: mateřská 37 týdnů
+ok 22 - vícerčata: mateřská 37 týdnů
+  ---
+  duration_ms: 4.567219
+  type: 'test'
+  ...
+# Subtest: otcovská 14 dní, 70 % redukovaného DVZ otce
+ok 23 - otcovská 14 dní, 70 % redukovaného DVZ otce
+  ---
+  duration_ms: 5.651111
+  type: 'test'
+  ...
+# Subtest: střídání: otec převezme mateřskou nejdříve od 7. týdne a RP pak pobírá on
+ok 24 - střídání: otec převezme mateřskou nejdříve od 7. týdne a RP pak pobírá on
+  ---
+  duration_ms: 3.905622
+  type: 'test'
+  ...
+# Subtest: výše nad stropem se omezí a aplikace upozorní
+ok 25 - výše nad stropem se omezí a aplikace upozorní
+  ---
+  duration_ms: 3.225731
+  type: 'test'
+  ...
+# Subtest: bez mateřské začíná RP v měsíci narození a mzda otce se počítá
+ok 26 - bez mateřské začíná RP v měsíci narození a mzda otce se počítá
+  ---
+  duration_ms: 3.21054
+  type: 'test'
+  ...
+# Subtest: dřívější návrat do práce do 2 let → upozornění na limit jeslí
+ok 27 - dřívější návrat do práce do 2 let → upozornění na limit jeslí
+  ---
+  duration_ms: 3.687607
+  type: 'test'
+  ...
+# Subtest: SVG osa: jeden řádek na měsíc a nic nepřesahuje šířku 360 px
+ok 28 - SVG osa: jeden řádek na měsíc a nic nepřesahuje šířku 360 px
+  ---
+  duration_ms: 22.399645
+  type: 'test'
+  ...
+# Subtest: SVG osa escapuje text
+ok 29 - SVG osa escapuje text
+  ---
+  duration_ms: 6.553934
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 166.867447
+exit: 0

@@ -1,0 +1,271 @@
+{
+ "url": "http://127.0.0.1:34665/",
+ "datum": "2026-11-05T07:43:15.922Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "narRok",
+     "typ": "number",
+     "popisek": "Rok narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "narMesic",
+     "typ": "select-one",
+     "popisek": "Měsíc narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzda",
+     "typ": "number",
+     "popisek": "Hrubá měsíční mzda (nepovinné)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzdaMesice",
+     "typ": "number",
+     "popisek": "Kolik měsíců v roce 2027 pracujete?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Další →",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "narRok",
+     "typ": "number",
+     "popisek": "Rok narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "narMesic",
+     "typ": "select-one",
+     "popisek": "Měsíc narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzda",
+     "typ": "number",
+     "popisek": "Hrubá měsíční mzda (nepovinné)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzdaMesice",
+     "typ": "number",
+     "popisek": "Kolik měsíců v roce 2027 pracujete?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Další →",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "narRok",
+     "typ": "number",
+     "popisek": "Rok narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "narMesic",
+     "typ": "select-one",
+     "popisek": "Měsíc narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzda",
+     "typ": "number",
+     "popisek": "Hrubá měsíční mzda (nepovinné)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzdaMesice",
+     "typ": "number",
+     "popisek": "Kolik měsíců v roce 2027 pracujete?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Další →",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "narRok",
+     "typ": "number",
+     "popisek": "Rok narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "narMesic",
+     "typ": "select-one",
+     "popisek": "Měsíc narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzda",
+     "typ": "number",
+     "popisek": "Hrubá měsíční mzda (nepovinné)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mzdaMesice",
+     "typ": "number",
+     "popisek": "Kolik měsíců v roce 2027 pracujete?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Další →",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "narRok",
+     "typ": "number",
+     "popisek": "Rok narození",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "narMesic",
+     "typ": "select-one",
+     "popisek": "Měsíc narození",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:34665/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/slevy.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:34665/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/slevy.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:34665/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  }
+ }
+}

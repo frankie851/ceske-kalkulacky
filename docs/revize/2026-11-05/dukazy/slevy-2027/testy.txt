@@ -1,0 +1,197 @@
+# slevy-2027 @ d88ba42 · 2026-11-05T07:41:17+00:00 · node v22.23.4
+$ npm test
+
+> test
+> node --test
+
+TAP version 13
+# Subtest: student 22 let po celý rok → 4 020 Kč
+ok 1 - student 22 let po celý rok → 4 020 Kč
+  ---
+  duration_ms: 1.20027
+  type: 'test'
+  ...
+# Subtest: student jen od ledna do června → 2 010 Kč (6/12)
+ok 2 - student jen od ledna do června → 2 010 Kč (6/12)
+  ---
+  duration_ms: 0.214093
+  type: 'test'
+  ...
+# Subtest: věk 27, bakalářské studium → sleva na studenta 0
+ok 3 - věk 27, bakalářské studium → sleva na studenta 0
+  ---
+  duration_ms: 0.123144
+  type: 'test'
+  ...
+# Subtest: 2 děti po celý rok → 15 204 + 22 320 = 37 524 Kč
+ok 4 - 2 děti po celý rok → 15 204 + 22 320 = 37 524 Kč
+  ---
+  duration_ms: 0.953772
+  type: 'test'
+  ...
+# Subtest: školkovné: školné 30 000 Kč → 24 900 Kč, školné 12 000 Kč → 12 000 Kč
+ok 5 - školkovné: školné 30 000 Kč → 24 900 Kč, školné 12 000 Kč → 12 000 Kč
+  ---
+  duration_ms: 0.29146
+  type: 'test'
+  ...
+# Subtest: manželka s příjmem 50 000 Kč a dítě 2 roky → 24 840 Kč; příjem 70 000 Kč → 0
+ok 6 - manželka s příjmem 50 000 Kč a dítě 2 roky → 24 840 Kč; příjem 70 000 Kč → 0
+  ---
+  duration_ms: 0.352112
+  type: 'test'
+  ...
+# Subtest: vklady do DIP 60 000 Kč → odpočet 48 000 Kč
+ok 7 - vklady do DIP 60 000 Kč → odpočet 48 000 Kč
+  ---
+  duration_ms: 0.148995
+  type: 'test'
+  ...
+# Subtest: student dovrší 26 let v červnu → nárok leden–červen
+ok 8 - student dovrší 26 let v červnu → nárok leden–červen
+  ---
+  duration_ms: 0.111045
+  type: 'test'
+  ...
+# Subtest: doktorand v prezenčním studiu ve 27 letech → plná sleva
+ok 9 - doktorand v prezenčním studiu ve 27 letech → plná sleva
+  ---
+  duration_ms: 0.387859
+  type: 'test'
+  ...
+# Subtest: nestuduje → 0
+ok 10 - nestuduje → 0
+  ---
+  duration_ms: 0.367548
+  type: 'test'
+  ...
+# Subtest: manžel: dítě slaví 3. narozeniny v listopadu → 11/12
+ok 11 - manžel: dítě slaví 3. narozeniny v listopadu → 11/12
+  ---
+  duration_ms: 0.173468
+  type: 'test'
+  ...
+# Subtest: manžel s průkazem ZTP/P → dvojnásobek
+ok 12 - manžel s průkazem ZTP/P → dvojnásobek
+  ---
+  duration_ms: 0.094175
+  type: 'test'
+  ...
+# Subtest: manžel bez péče o dítě do 3 let → 0
+ok 13 - manžel bez péče o dítě do 3 let → 0
+  ---
+  duration_ms: 0.077468
+  type: 'test'
+  ...
+# Subtest: dítě s ZTP/P → dvojnásobek zvýhodnění
+ok 14 - dítě s ZTP/P → dvojnásobek zvýhodnění
+  ---
+  duration_ms: 0.087498
+  type: 'test'
+  ...
+# Subtest: dítě narozené v dubnu 2027 → zvýhodnění i za měsíc narození (9/12)
+ok 15 - dítě narozené v dubnu 2027 → zvýhodnění i za měsíc narození (9/12)
+  ---
+  duration_ms: 0.115871
+  type: 'test'
+  ...
+# Subtest: třetí dítě → 27 840 Kč
+ok 16 - třetí dítě → 27 840 Kč
+  ---
+  duration_ms: 0.07965
+  type: 'test'
+  ...
+# Subtest: invalidita III. stupně a ZTP/P se sčítají
+ok 17 - invalidita III. stupně a ZTP/P se sčítají
+  ---
+  duration_ms: 0.203825
+  type: 'test'
+  ...
+# Subtest: penzijko 24 000 Kč → odpočet 3 600 Kč (nad 20 400)
+ok 18 - penzijko 24 000 Kč → odpočet 3 600 Kč (nad 20 400)
+  ---
+  duration_ms: 0.062388
+  type: 'test'
+  ...
+# Subtest: součet produktů na stáří nad limit → 48 000 Kč
+ok 19 - součet produktů na stáří nad limit → 48 000 Kč
+  ---
+  duration_ms: 0.050517
+  type: 'test'
+  ...
+# Subtest: úroky z hypotéky nad limit → 150 000, stará smlouva 300 000
+ok 20 - úroky z hypotéky nad limit → 150 000, stará smlouva 300 000
+  ---
+  duration_ms: 0.089598
+  type: 'test'
+  ...
+# Subtest: dary: pod 1 000 Kč a pod 2 % → 0; strop 15 % základu daně
+ok 21 - dary: pod 1 000 Kč a pod 2 % → 0; strop 15 % základu daně
+  ---
+  duration_ms: 0.11295
+  type: 'test'
+  ...
+# Subtest: slevy sníží daň nejvýš na nulu, zbytek zvýhodnění na děti je bonus
+ok 22 - slevy sníží daň nejvýš na nulu, zbytek zvýhodnění na děti je bonus
+  ---
+  duration_ms: 0.149518
+  type: 'test'
+  ...
+# Subtest: bonus jen při příjmu aspoň 149 400 Kč
+ok 23 - bonus jen při příjmu aspoň 149 400 Kč
+  ---
+  duration_ms: 0.099553
+  type: 'test'
+  ...
+# Subtest: povinné přiznání: ostatní příjmy nad 40 000 Kč nebo souběžné zaměstnání; malá DPP ne
+ok 24 - povinné přiznání: ostatní příjmy nad 40 000 Kč nebo souběžné zaměstnání; malá DPP ne
+  ---
+  duration_ms: 0.110074
+  type: 'test'
+  ...
+# Subtest: školkovné: dítě ve dvou domácnostech → strop 12 450 Kč, písemná dohoda jinak
+ok 25 - školkovné: dítě ve dvou domácnostech → strop 12 450 Kč, písemná dohoda jinak
+  ---
+  duration_ms: 0.098077
+  type: 'test'
+  ...
+# Subtest: školkovné na dvě děti se počítá pro každé zvlášť
+ok 26 - školkovné na dvě děti se počítá pro každé zvlášť
+  ---
+  duration_ms: 0.068456
+  type: 'test'
+  ...
+# Subtest: daňový bonus pod 100 Kč se nevyplácí
+ok 27 - daňový bonus pod 100 Kč se nevyplácí
+  ---
+  duration_ms: 0.069953
+  type: 'test'
+  ...
+# Subtest: vyhodnot: student + 2 děti + DIP – součet, novinky a místo uplatnění
+ok 28 - vyhodnot: student + 2 děti + DIP – součet, novinky a místo uplatnění
+  ---
+  duration_ms: 0.819701
+  type: 'test'
+  ...
+# Subtest: vyhodnot: povinné přiznání přesune roční položky do přiznání
+ok 29 - vyhodnot: povinné přiznání přesune roční položky do přiznání
+  ---
+  duration_ms: 0.164331
+  type: 'test'
+  ...
+# Subtest: vyhodnot: se mzdou spočítá reálný efekt (daň nejvýš na nulu)
+ok 30 - vyhodnot: se mzdou spočítá reálný efekt (daň nejvýš na nulu)
+  ---
+  duration_ms: 0.183658
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 106.837808
+exit: 0
