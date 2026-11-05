@@ -240,7 +240,7 @@ styly: ['/nastroje/prijimacky/prijimacky.css']
         <button type="button" class="btn btn-primary" data-ics hidden>{{ ikona('ikona-kalendar') }}Stáhnout termíny do kalendáře (.ics)</button>
         <a class="btn btn-primary" href="{{ '/prace-rodina/prijimacky/prijimacky-2027.ics' | url }}" download="prijimacky-2027.ics" data-ics-odkaz>{{ ikona('ikona-kalendar') }}Stáhnout všechny termíny (.ics)</a>
       </div>
-      <p class="small muted">Soubor vznikne přímo v prohlížeči a obsahuje jen zobrazené termíny. Na iPhonu ho po stažení otevři a zvol „Přidat vše“. V Google Kalendáři: Nastavení → Import a export → Importovat.</p>
+      <p class="small muted">V souboru jsou zobrazené termíny, nic se při tom neodesílá. Na iPhonu ho po stažení otevři a zvol „Přidat vše“. V Google Kalendáři: Nastavení → Import a export → Importovat.</p>
     </div>
     <p class="sr-only" role="status" data-kalendar-stav></p>
     <div class="prij-kalendar" data-kalendar>{{ p.kalendar | safe }}</div>

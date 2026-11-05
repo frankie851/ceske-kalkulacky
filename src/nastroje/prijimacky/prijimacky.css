@@ -1,0 +1,278 @@
+/* Přijímačky bez paniky – styly jen pro tento nástroj (načítá je front matter `styly`).
+   Barvy jen z tokenů v main.css. Vrstva „stranky“: přebije komponenty, tisk ji přebije.
+   Animace jen při prefers-reduced-motion: no-preference; jinak se ukáže konečný stav. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display z komponent (.btn, .result…) */
+  .prij [hidden] { display: none !important; }
+
+  /* ---------- Obsah stránky a sekce ---------- */
+  .prij-obsah { margin: 0 0 var(--sp-5); }
+  .prij-obsah ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+  .prij-obsah a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--sp-4);
+    border-radius: var(--r-pill); background: var(--c-surface); border: 2px solid var(--c-border-strong);
+    color: var(--c-text); font-weight: 800; text-decoration: none;
+  }
+  .prij-obsah a:hover { border-color: var(--c-primary); background: var(--c-surface-2); }
+  .prij-bez-js { margin-bottom: var(--sp-5); }
+  .prij-sekce { padding: var(--sp-6) 0 var(--sp-5); border-top: 2px dashed var(--c-border); scroll-margin-top: var(--sp-4); }
+  .prij-sekce:first-of-type { border-top: 0; padding-top: var(--sp-3); }
+  .prij-perex { max-width: var(--maxw-text); font-size: var(--fs-lg); color: var(--c-text-muted); }
+  .prij-podnadpis { margin-top: var(--sp-6); }
+  .prij > .notice { margin-top: var(--sp-5); }
+
+  /* ---------- 1. Jak to funguje ---------- */
+  .prij-kroky { list-style: none; margin: var(--sp-5) 0; padding: 0; display: grid; gap: var(--sp-3); counter-reset: krok; }
+  @media (min-width: 760px) { .prij-kroky { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) { .prij-kroky { grid-template-columns: repeat(6, 1fr); } .prij-krok { grid-column: span 2; } .prij-krok:nth-child(4) { grid-column: 2 / span 2; } }
+  .prij-krok {
+    counter-increment: krok; display: grid; grid-template-columns: 64px 1fr; gap: var(--sp-4); align-items: start;
+    background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-lg); padding: var(--sp-4) var(--sp-5); box-shadow: var(--shadow-sm);
+  }
+  .prij-krok h3 { font-size: var(--fs-md); margin-bottom: var(--sp-2); }
+  .prij-krok h3::before { content: counter(krok) ". "; color: var(--c-primary); }
+  .prij-krok p { margin: 0; font-size: var(--fs-sm); }
+  .prij-krok-ikona { width: 64px; height: 64px; }
+
+  .prij-animace { margin: 0 0 var(--sp-6); display: grid; gap: var(--sp-4); align-items: center; }
+  @media (min-width: 760px) { .prij-animace { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+  .prij-animace svg { display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; }
+  .prij-animace figcaption { color: var(--c-text-muted); font-size: var(--fs-sm); }
+  .prij-anim-skola rect { fill: var(--c-surface-2); stroke: var(--c-border-strong); stroke-width: 2; }
+  .prij-anim-skola text { text-anchor: middle; font-family: var(--font-body); font-size: 13px; font-weight: 800; fill: var(--c-text); }
+  .prij-anim-skola .prij-anim-mala { font-size: 11px; font-weight: 700; fill: var(--c-text-muted); }
+  .prij-anim-zak circle { fill: var(--c-chart-1); }
+  .prij-anim-zak text { text-anchor: middle; font-family: var(--font-body); font-size: 12px; font-weight: 800; fill: var(--c-chart-1-ink); }
+  .prij-z2 circle { fill: var(--c-chart-2); }
+  .prij-z2 text { fill: var(--c-chart-2-ink); }
+  .prij-z3 circle { fill: var(--c-chart-4); }
+  .prij-z3 text { fill: var(--c-chart-4-ink); }
+  .prij-anim-popisek { font-family: var(--font-body); font-size: 12px; font-weight: 700; fill: var(--c-text-muted); }
+  /* Výchozí stav (i při omezení pohybu) = konečný stav po 2. kole */
+  .prij-z1 { transform: translate(230px, 52px); }
+  .prij-z2 { transform: translate(230px, 134px); }
+  .prij-z3 { transform: translate(150px, 150px); opacity: 0.5; }
+  .prij-l1 { opacity: 0; }
+
+  .prij-pravidla-nadpis { margin-top: var(--sp-5); }
+  .prij-pravidla { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+  @media (min-width: 760px) { .prij-pravidla { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) { .prij-pravidla { grid-template-columns: repeat(3, 1fr); } }
+  .prij-pravidlo { display: flex; flex-direction: column; background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-md); padding: var(--sp-4); }
+  .prij-pravidlo h4 { font-size: var(--fs-md); font-weight: 800; font-family: var(--font-body); margin-bottom: var(--sp-2); }
+  .prij-pravidlo > p { font-size: var(--fs-sm); margin: 0 0 var(--sp-3); }
+  .prij-pravidlo-pata { margin-top: auto !important; display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; color: var(--c-text-muted); }
+  .prij-pravidlo-pata .badge { font-size: var(--fs-xs); padding: 2px 10px; }
+
+  /* ---------- 2. Simulátor ---------- */
+  .prij-zamek { border: 0; margin: var(--sp-5) 0 0; padding: 0; min-width: 0; }
+  .prij-zamek > fieldset.volby > legend { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xl); }
+  .prij-zamek .options { margin: var(--sp-3) 0 var(--sp-4); }
+  @media (min-width: 760px) { .prij-zamek .options { grid-template-columns: repeat(3, 1fr); } }
+  .prij-zamek:disabled .opt label { cursor: default; }
+  .prij-scenar h3 { font-size: var(--fs-lg); }
+  .prij-scenar p:last-child { margin-bottom: 0; }
+
+  .prij-editor { margin-top: var(--sp-4); }
+  .prij-editor > summary { cursor: pointer; font-weight: 800; min-height: 32px; }
+  .prij-editor > summary .h-lg { font-family: var(--font-display); font-weight: 600; }
+  .prij-editor[open] > summary { margin-bottom: var(--sp-3); }
+  .prij-editor-akce { margin: var(--sp-3) 0 var(--sp-4); }
+  .prij-editor .hint { margin: var(--sp-2) 0 0; }
+  .prij-zamichat-poznamka { font-weight: 700; color: var(--c-sage-ink); margin: var(--sp-2) 0 0; }
+  .prij-zamichat-poznamka:empty { display: none; }
+
+  /* Přepínač (zaškrtávátko s textem) */
+  .prij-prepinac { display: inline-flex; align-items: center; gap: var(--sp-3); min-height: 44px; font-weight: 800; cursor: pointer; margin: 0 var(--sp-5) 0 0; }
+  .prij-prepinac input { width: 24px; height: 24px; accent-color: var(--c-primary); flex: none; margin: 0; }
+
+  /* Editovatelné tabulky */
+  .prij-edit-obal { margin-top: var(--sp-2); }
+  .prij-edit { font-size: var(--fs-sm); }
+  .prij-edit caption { padding-bottom: var(--sp-3); }
+  .prij-edit th, .prij-edit td { padding: 8px 10px; vertical-align: middle; }
+  .prij-edit thead th { font-size: var(--fs-xs); line-height: 1.25; }
+  .prij-edit input, .prij-edit select {
+    width: 100%; min-width: 0; min-height: 44px; padding: 6px 10px; font: inherit; font-weight: 700;
+    color: var(--c-text); background: var(--c-surface); border: 2px solid var(--c-border-strong); border-radius: var(--r-sm);
+    font-variant-numeric: tabular-nums;
+  }
+  .prij-edit select { cursor: pointer; }
+  .prij-edit input[type="number"] { max-width: 6.5rem; }
+  .prij-edit input[type="text"] { min-width: 8rem; }
+  .prij-edit input:disabled, .prij-edit select:disabled, .prij-odebrat:disabled { opacity: 0.65; cursor: default; }
+  .prij-lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .prij-pole { display: block; }
+  .prij-zapocte output { font-weight: 800; white-space: nowrap; }
+  .prij-akce-bunka { text-align: right; }
+  .prij-odebrat {
+    min-height: 40px; padding: 0 var(--sp-3); border-radius: var(--r-pill); border: 2px solid var(--c-border-strong);
+    background: transparent; color: var(--c-text); font: inherit; font-size: var(--fs-sm); font-weight: 800; cursor: pointer;
+  }
+  .prij-odebrat:hover:not(:disabled) { background: var(--c-error-soft); border-color: var(--c-error); }
+  /* Mobil: řádek tabulky jako karta s popisky */
+  @media (max-width: 759px) {
+    .prij-edit-obal { overflow: visible; border: 0; background: transparent; }
+    .prij-edit, .prij-edit tbody, .prij-edit tr, .prij-edit td, .prij-edit caption { display: block; width: 100%; }
+    .prij-edit caption { padding: 0 0 var(--sp-2); }
+    .prij-edit thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .prij-edit tr {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2) var(--sp-3);
+      padding: var(--sp-3); margin-bottom: var(--sp-3); border: 2px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface);
+    }
+    .prij-edit td { border: 0; padding: 0; min-width: 0; }
+    .prij-edit td:first-child { grid-column: 1 / -1; }
+    .prij-edit-skoly tr { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+    .prij-edit-skoly td:first-child { grid-column: 1 / -1; }
+    .prij-edit .prij-lbl { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: block; font-size: var(--fs-xs); font-weight: 800; margin-bottom: 2px; }
+    .prij-edit input[type="number"], .prij-edit input[type="text"] { max-width: none; min-width: 0; }
+    .prij-akce-bunka { grid-column: 1 / -1; text-align: left; }
+    .prij-edit-skoly .prij-akce-bunka { grid-column: auto; }
+    .prij-zapocte { align-self: end; padding-bottom: 10px !important; }
+  }
+
+  /* Ovládání a stav */
+  .prij-ovladani { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin: var(--sp-5) 0 0; }
+  .prij-ovladani .btn { min-width: 9rem; }
+  .prij-stav { margin: var(--sp-3) 0 0; font-weight: 800; font-size: var(--fs-lg); color: var(--c-sage-ink); }
+  .prij-chyba { margin-top: var(--sp-3); grid-template-columns: 1fr; border-left-color: var(--c-error); background: var(--c-error-soft); font-weight: 700; }
+
+  /* Přehled kola: sloupec za každou školu */
+  .prij-tabule { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .prij-sloupec { background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-md); padding: var(--sp-3); min-width: 0; }
+  .prij-sloupec h4 { font-size: var(--fs-md); font-weight: 800; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-1) var(--sp-2); margin-bottom: var(--sp-2); }
+  .prij-obsazeno { font-size: var(--fs-xs); font-weight: 700; color: var(--c-text-muted); }
+  .prij-sloupec-trida { grid-column: 1 / -1; background: var(--c-bg-alt); border-style: dashed; }
+  .prij-sloupec-trida .prij-mista { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+  .prij-mista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .prij-zak {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px var(--sp-2); padding: 6px 10px; border-radius: var(--r-sm);
+    background: var(--c-sage-soft); border: 2px solid transparent; font-size: var(--fs-sm); min-width: 0;
+  }
+  .prij-zak-jmeno { font-weight: 800; }
+  .prij-zak-stitek { font-size: var(--fs-xs); font-weight: 700; color: var(--c-text-muted); }
+  .prij-zak-body { margin-left: auto; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .prij-zak-novy { border-color: var(--c-sage-ink); }
+  .prij-zak-volno { background: transparent; border: 2px dashed var(--c-border-strong); color: var(--c-text-muted); font-weight: 700; justify-content: center; }
+  .prij-zak-ven { background: var(--c-error-soft); }
+  .prij-zak-ceka { background: var(--c-surface); border-color: var(--c-border); }
+  .prij-zak-nic { background: var(--c-surface); border: 2px dashed var(--c-error); }
+  .prij-odmitnuti-h { margin: var(--sp-3) 0 6px; font-size: var(--fs-xs); font-weight: 800; color: var(--c-error); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* Kolo po kole */
+  .prij-kola { display: grid; gap: var(--sp-3); }
+  .prij-kola .table-wrap + .table-wrap { margin-top: 0; }
+  .prij-kola caption { font-size: var(--fs-md); }
+  .prij-kolo-aktualni { border-color: var(--c-accent); box-shadow: var(--shadow-sm); }
+
+  /* Výsledek */
+  .prij-vysledek-obal { margin-top: var(--sp-6); }
+  .prij-vysledek-ceka { color: var(--c-text-muted); font-weight: 700; margin: 0; }
+  .prij-vysledky { list-style: none; margin: 0 0 var(--sp-4); padding: 0; display: grid; gap: var(--sp-3); }
+  @media (min-width: 1040px) { .prij-vysledky { grid-template-columns: 1fr 1fr; } }
+  .prij-vysl { background: var(--c-surface-2); border-radius: var(--r-md); padding: var(--sp-3) var(--sp-4); border-left: 6px solid var(--c-sage); }
+  .prij-vysl-nic { border-left-color: var(--c-error); }
+  .prij-vysl-hlava { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); margin: 0 0 var(--sp-2); }
+  .prij-vysl-hlava strong { font-size: var(--fs-md); }
+  .prij-vysl .badge { font-size: var(--fs-xs); padding: 2px 10px; }
+  .prij-badge-nic { background: var(--c-error-soft); color: var(--c-error); }
+  .prij-proc { margin: 0; padding-left: 1.2rem; font-size: var(--fs-sm); }
+  .prij-proc li + li { margin-top: 2px; }
+  .prij-odnest { margin: var(--sp-4) 0 0; padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md); background: var(--c-accent-soft); }
+  .result .prij-odnest + * { margin-top: var(--sp-3); }
+
+  /* ---------- 3. Strategie ---------- */
+  .prij-strategie-obal { margin-top: var(--sp-4); }
+  .prij-strategie-obal > .card > h3 { margin-bottom: var(--sp-2); }
+  .prij-str-skola { border: 0; border-top: 2px dashed var(--c-border); margin: 0; padding: var(--sp-3) 0 0; min-width: 0; display: grid; gap: 0 var(--sp-3); }
+  @media (min-width: 560px) { .prij-str-skola { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+  .prij-str-skola legend { float: left; width: 100%; padding: 0; margin-bottom: var(--sp-2); font-weight: 800; color: var(--c-sage-ink); }
+  .prij-str-skola .field { margin-bottom: var(--sp-3); }
+  .prij-strategie { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
+  .prij-str { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: var(--sp-1) var(--sp-3); align-items: start; padding: var(--sp-3) var(--sp-4); border: 2px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface); }
+  .prij-str-poradi { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--c-surface-2); font-family: var(--font-display); font-weight: 600; }
+  .prij-str-text p { margin: 0; }
+  .prij-str-nazev { font-weight: 800; }
+  .prij-str .badge { grid-column: 2; justify-self: start; }
+  @media (min-width: 560px) {
+    .prij-str { grid-template-columns: 36px minmax(0, 1fr) auto; }
+    .prij-str .badge { grid-column: 3; grid-row: 1; }
+  }
+  .prij-kat-jistota { background: var(--c-sage-soft); color: var(--c-sage-ink); }
+  .prij-kat-tesne { background: var(--c-draft-bg); color: var(--c-draft-ink); }
+  .prij-kat-riziko { background: var(--c-error-soft); color: var(--c-error); }
+  .prij-kat-nevim { background: var(--c-surface-2); color: var(--c-text); }
+  .prij-str[data-kategorie="jistota"] { border-color: var(--c-sage); }
+  .prij-str[data-kategorie="riziko"] { border-color: var(--c-error); }
+  .prij-upozorneni { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-2); }
+  .prij-upoz { display: grid; grid-template-columns: 24px 1fr; gap: var(--sp-2); align-items: start; padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md); font-size: var(--fs-sm); font-weight: 700; }
+  .prij-upoz .ikona { width: 24px; height: 24px; }
+  .prij-upoz-warn { background: var(--c-draft-bg); color: var(--c-draft-ink); --ikona-pozadi: var(--c-draft-bg); }
+  .prij-upoz-info { background: var(--c-sage-soft); color: var(--c-sage-ink); --ikona-pozadi: var(--c-sage-soft); }
+
+  /* ---------- 4. Kalendář ---------- */
+  .prij-kalendar-ovladani { display: grid; gap: var(--sp-3); margin: var(--sp-4) 0 var(--sp-5); }
+  .prij-kalendar-ovladani > p { margin: 0; max-width: var(--maxw-text); }
+  .prij-filtry { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sp-2); }
+  .prij-filtry legend { float: left; font-weight: 800; margin-right: var(--sp-4); padding: 0; }
+  .prij-filtry .prij-prepinac { padding: 0 var(--sp-4); border-radius: var(--r-pill); border: 2px solid var(--c-border-strong); background: var(--c-surface); margin: 4px var(--sp-2) 4px 0; }
+  .prij-filtry .prij-prepinac:has(input:checked) { border-color: var(--c-primary); background: var(--c-accent-soft); }
+  .prij-kalendar { display: grid; gap: var(--sp-4); align-items: start; }
+  @media (min-width: 760px) { .prij-kalendar { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) { .prij-kalendar { grid-template-columns: repeat(3, 1fr); } }
+  .prij-mesic { background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-lg); padding: var(--sp-4); box-shadow: var(--shadow-sm); min-width: 0; }
+  .prij-mesic h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xl); margin-bottom: var(--sp-3); }
+  .prij-terminy { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+  .prij-termin { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: var(--sp-3); align-items: start; }
+  .prij-termin + .prij-termin { border-top: 2px dashed var(--c-border); padding-top: var(--sp-3); }
+  .prij-termin-datum { margin: 0; display: grid; justify-items: center; text-align: center; padding: 6px 4px; border-radius: var(--r-sm); background: var(--c-accent-soft); line-height: 1.2; }
+  .prij-termin-den { font-weight: 800; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+  .prij-termin-tyden { font-size: var(--fs-xs); font-weight: 700; color: var(--c-text-muted); }
+  .prij-termin-text > p { margin: 0 0 4px; }
+  .prij-termin-nazev { font-weight: 800; }
+  .prij-termin-stitky { display: flex; flex-wrap: wrap; gap: 6px; }
+  .prij-termin-stitky .badge { font-size: var(--fs-xs); padding: 2px 10px; }
+  .prij-termin-zdroj a { font-weight: 700; }
+  .prij-termin[data-skupina="vg"] .prij-termin-datum { background: var(--c-sage-soft); }
+  .prij-termin[data-skupina="kons"] .prij-termin-datum { background: var(--c-surface-2); }
+
+  /* ---------- Animace (jen bez omezení pohybu) ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .prij-zak-novy { animation: prij-prichod 450ms var(--ease); }
+    .prij-pruh { transform-box: fill-box; transform-origin: left center; animation: prij-pruh 3s ease-in-out infinite alternate; }
+    .prij-pruh-2 { animation-delay: 0.3s; }
+    .prij-pruh-3 { animation-delay: 0.6s; }
+    .prij-tecka { animation: prij-tecka 4s ease-in-out infinite; }
+    .prij-fajfka { stroke-dasharray: 40; animation: prij-fajfka 3s ease-in-out infinite; }
+    .prij-z1 { animation: prij-z1 9s ease-in-out infinite; }
+    .prij-z2 { animation: prij-z2 9s ease-in-out infinite; }
+    .prij-z3 { animation: prij-z3 9s ease-in-out infinite; }
+    .prij-l1 { animation: prij-l1 9s step-end infinite; }
+    .prij-l2 { animation: prij-l2 9s step-end infinite; }
+  }
+  @keyframes prij-prichod { from { transform: translateY(-6px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes prij-pruh { from { transform: scaleX(0.6); } to { transform: scaleX(1); } }
+  @keyframes prij-tecka { 0%, 30% { transform: translate(0, 0); } 60%, 100% { transform: translate(28px, 6px); } }
+  @keyframes prij-fajfka { 0% { stroke-dashoffset: 40; } 40%, 100% { stroke-dashoffset: 0; } }
+  @keyframes prij-z1 { 0%, 8% { transform: translate(40px, 55px); } 25%, 100% { transform: translate(230px, 52px); } }
+  @keyframes prij-z2 {
+    0%, 8% { transform: translate(40px, 95px); }
+    25%, 33% { transform: translate(282px, 52px); }
+    45% { transform: translate(165px, 85px); }
+    60%, 100% { transform: translate(230px, 134px); }
+  }
+  @keyframes prij-z3 {
+    0%, 8% { transform: translate(40px, 135px); opacity: 1; }
+    25%, 62% { transform: translate(230px, 134px); opacity: 1; }
+    78%, 100% { transform: translate(150px, 150px); opacity: 0.5; }
+  }
+  @keyframes prij-l1 { 0% { opacity: 1; } 42% { opacity: 0; } }
+  @keyframes prij-l2 { 0% { opacity: 0; } 42% { opacity: 1; } }
+}
+
+@layer tisk {
+  @media print {
+    .prij-obsah, .prij-ovladani, .prij-editor-akce, .prij-kalendar-ovladani, .prij-animace { display: none !important; }
+    .prij-kalendar { grid-template-columns: 1fr 1fr; }
+  }
+}

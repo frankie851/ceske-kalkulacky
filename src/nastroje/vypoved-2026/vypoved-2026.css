@@ -1,0 +1,37 @@
+/* Výpověď 2026 – styly jen pro tento nástroj (načítá je front matter `styly`).
+   Barvy jen z tokenů v main.css. Vrstva „stranky“: přebije komponenty, tisk ji přebije. */
+@layer stranky {
+  .vypoved [hidden] { display: none !important; }
+  /* Formulář je delší než okno – na širokých obrazovkách proto nelepí */
+  @media (min-width: 1040px) { .vypoved .calc-side { position: static; } }
+  .vypoved .calc-side .card > h2 { font-size: var(--fs-xl); }
+  .vypoved .input input[type="date"] { min-width: 0; }
+  .vypoved .seg label { padding: 0 var(--sp-3); }
+
+  .vypoved .result h2:focus { outline: none; }
+  .vypoved .result h2:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; }
+  .vypoved .result .big-num-label::first-letter { text-transform: uppercase; }
+  .vypoved .card > h2, .vypoved .card-head h2 { font-size: var(--fs-xl); margin: 0; }
+  .vypoved .card > h2 { margin-bottom: var(--sp-3); }
+  .vyp-castka { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2xl); color: var(--c-primary); margin: 0 0 var(--sp-2); white-space: nowrap; }
+
+  .vypoved .table-wrap { position: relative; }
+  .vyp-podpora td { white-space: nowrap; }
+  .vyp-sazba { display: block; font-size: var(--fs-xs); color: var(--c-text-muted); font-weight: 400; }
+  .vyp-soucet th, .vyp-soucet td { background: var(--c-surface-2); }
+  .vyp-navrh { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); margin: var(--sp-4) 0 0; font-weight: 700; }
+
+  .vyp-ukol-text { margin: var(--sp-2) 0 0; padding-left: calc(32px + var(--sp-3) + var(--sp-4)); font-size: var(--fs-sm); color: var(--c-text-muted); }
+  .vyp-dluhy { margin: var(--sp-5) 0 0; }
+  @media (max-width: 559px) {
+    .vyp-ukol-text { padding-left: var(--sp-4); }
+    .vyp-podpora td { white-space: normal; }
+    .vyp-sazba { display: inline; margin-left: var(--sp-2); }
+  }
+}
+
+@layer tisk {
+  @media print {
+    .vyp-ukol-text { padding-left: 0; }
+  }
+}
