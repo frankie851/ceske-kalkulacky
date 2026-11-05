@@ -594,7 +594,7 @@ strong { font-weight: 650; }
 .tool h4, .tool .tool__h { font-size: 1.25rem; margin: 0 0 var(--space-1); }
 .tool h4 a, .tool .tool__h a { text-decoration: none; color: var(--ink); }
 .tool h4 a:hover, .tool .tool__h a:hover { color: var(--accent); text-decoration: underline; text-decoration-color: var(--accent); }
-.tool p { font-size: 1rem; line-height: 1.5; margin: 0 0 var(--space-1); color: var(--ink); }
+.tool p:not(.tool__type):not(.tool__term) { font-size: 1rem; line-height: 1.5; margin: 0 0 var(--space-1); color: var(--ink); }
 .tool__term { font-size: var(--fs-micro); color: var(--ink-2); font-weight: 600; display: flex; gap: 0.35rem; align-items: center; margin: 0; }
 .tool__term svg { width: 1rem; height: 1rem; color: var(--accent); flex: none; }
 
@@ -1309,7 +1309,7 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
 .sidebar-box li { border-bottom: 1px solid var(--rule-soft); }
 .sidebar-box li a { display: flex; justify-content: space-between; padding-block: var(--space-2); text-decoration: none; color: var(--ink); font-weight: 600; }
 .sidebar-box li a:hover { color: var(--accent); }
-.sidebar-box p { font-size: 1rem; line-height: 1.5; }
+.sidebar-box p:not(.source-line):not(.kicker) { font-size: 1rem; line-height: 1.5; }
 
 /* ---------- Patička ---------- */
 .footer {
@@ -1383,3 +1383,9 @@ td.wrap-ok { white-space: normal; }
 .factrow--two .factrow__item { padding: var(--space-3) var(--space-3); border-bottom: 0; border-left: 1px solid var(--rule-soft); }
 .factrow--two .factrow__item:first-child { border-left: 0; padding-left: 0; }
 .tool--plain { padding: 0; border: 0; }
+
+@media (max-width: 719px) {
+  .masthead__under { justify-content: center; text-align: center; }
+  .masthead__under > span:not(.masthead__slogan) { display: none; }
+  .ibox__bar span + span { display: none; }
+}

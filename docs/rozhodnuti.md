@@ -80,3 +80,33 @@ a důvody k nim.
 20. **`designs/porovnani.html`** obsahuje snímky vložené jako WebP data URI (výřezy stránek),
     aby byla jedním samostatným souborem bez relativních odkazů, jak zadání chce.
     Zadání zakazuje „externí obrázky“, data URI externí nejsou.
+21. **Varianty stavěli čtyři samostatní subagenti** se stejným zadáním obsahu
+    (`designs/_obsah/obsah.json`, `designs/_obsah/pravidla-variant.md`), ale s odlišným
+    směrem designu. Rozdíly od zadání, které udělali sami:
+    - B tyká i v hlavní otázce („S čím ti můžeme pomoct?“), aby se tykání a vykání nemíchalo.
+      U dluhů zůstal nadpis „Nejste v tom sami“.
+    - A a B ukazují chybový stav pole Věk v samostatném označeném rámečku, aby hlavní
+      formulář zůstal vyplněný.
+    - D má místo plynulých velikostí písma (`vw`) pevné stupně podle zlomů, protože
+      se plynulé velikosti na snímcích celé stránky vykreslovaly nespolehlivě.
+
+## Výsledek kontrol (`node tools/kontroly/kontrola.mjs`)
+
+- Prošlo 18 stránek: 4 varianty × 4 stránky, `designs/index.html` a `designs/porovnani.html`.
+- Axe (WCAG 2.2 AA + best practice): **0 chyb serious/critical** ve světlém i tmavém režimu.
+- Na šířce 360 px **nic nepřetéká**.
+- **0 požadavků** na jiné domény než Google Fonts.
+- Všechny povinné texty (čísla z obsah.json, štítky) a komponenty jsou na svém místě.
+- Podrobnosti jsou v `designs/kontrola-vysledky.json`.
+- Snímky: 32 PNG v `designs/screenshots/` (desktop 1440 px a mobil 390 px, každá stránka
+  každé varianty).
+
+## Jak to spustit znovu
+
+```bash
+cd tools/kontroly && npm ci && cd ../..
+node tools/kontroly/kontrola.mjs            # kontroly všech stránek
+node tools/kontroly/snimky.mjs --webp       # snímky + WebP výřezy pro porovnání
+node tools/kontroly/rozcestnik.mjs          # designs/index.html z designs/_obsah/varianty.json
+node tools/kontroly/porovnani.mjs           # designs/porovnani.html (jeden soubor s vloženými snímky)
+```

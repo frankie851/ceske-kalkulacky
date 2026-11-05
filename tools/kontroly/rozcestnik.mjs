@@ -82,7 +82,7 @@ h3 { font-size: 16px; margin: 0 0 6px; text-transform: uppercase; letter-spacing
 .links { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .links a { display: inline-block; padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); text-decoration: none; font-weight: 700; }
 .links a:hover { border-color: var(--accent); }
-.v-shots { margin: 0; display: grid; grid-template-columns: 1fr 140px; gap: 12px; align-items: start; min-width: 0; }
+.v-shots { margin: 0; display: grid; grid-template-columns: 1fr 140px; gap: 12px; align-items: start; align-content: start; min-width: 0; }
 .v-shots a { display: block; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--surface); }
 .shot-d { height: 420px; } .shot-m { height: 420px; }
 .v-shots img { display: block; width: 100%; height: auto; }

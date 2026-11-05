@@ -34,7 +34,7 @@ function sekce(o, i) {
         <figure class="desk">
           <div class="bar">${tecky}<span class="addr">${esc(o.url)}</span></div>
           <div class="screen" tabindex="0" role="region" aria-label="${esc(v.nazev)}, ${esc(o.nazev)}, desktop – posuvný náhled">
-            <img src="${data(v.slug, o.id, 'desktop')}" alt="${esc(v.nazev)}: ${esc(o.nazev)} na desktopu (1440 px)" width="1440" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
+            <img src="${data(v.slug, o.id, 'desktop')}" alt="${esc(v.nazev)}: ${esc(o.nazev)} na desktopu (1440 px)" width="1440">
           </div>
           <figcaption>Desktop 1440 px</figcaption>
         </figure>
@@ -42,7 +42,7 @@ function sekce(o, i) {
           <div class="handset">
             <div class="notch" aria-hidden="true"></div>
             <div class="screen" tabindex="0" role="region" aria-label="${esc(v.nazev)}, ${esc(o.nazev)}, mobil – posuvný náhled">
-              <img src="${data(v.slug, o.id, 'mobil')}" alt="${esc(v.nazev)}: ${esc(o.nazev)} na mobilu (390 px)" width="390" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
+              <img src="${data(v.slug, o.id, 'mobil')}" alt="${esc(v.nazev)}: ${esc(o.nazev)} na mobilu (390 px)" width="390">
             </div>
           </div>
           <figcaption>Mobil 390 px</figcaption>
@@ -88,7 +88,7 @@ const telo = `<title>Srovnání návrhů Spočítáno</title>
   --dot1: #D9695F; --dot2: #D9AE4F; --dot3: #6BAF6B;
   --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
-  --col: 340px;
+  --col: 316px;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #141715; --surface: #1D211E; --fg: #E8ECE8; --muted: #AEB8B0; --line: #3A413C;

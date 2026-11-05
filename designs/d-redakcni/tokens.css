@@ -142,8 +142,8 @@
     --fl-21: 1.3188rem;
     --fl-22: 1.73rem;
     --fl-23: 1.7875rem;
-  }}
-}}
+  }
+}
 @media (min-width: 1080px) {
   :root {
     --fs-h4: 1.4688rem;
@@ -177,8 +177,8 @@
     --fl-21: 1.4188rem;
     --fl-22: 1.89rem;
     --fl-23: 1.9875rem;
-  }}
-}}
+  }
+}
 @media (min-width: 1360px) {
   :root {
     --fs-h4: 1.5rem;
@@ -212,8 +212,8 @@
     --fl-21: 1.4375rem;
     --fl-22: 2.0rem;
     --fl-23: 2.125rem;
-  }}
-}}
+  }
+}
 
 /* --- Noční vydání: tmavý režim (platí i v režimu Auto) --- */
 @media (prefers-color-scheme: dark) {
