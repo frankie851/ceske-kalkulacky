@@ -40,7 +40,7 @@ jobs:
         run: ZOBRAZIT_SKRYTE=1 npx eleventy --output=_site-vse
       - name: Kontrola a e2e nezveřejněných nástrojů
         run: |
-          SITE_DIR=_site-vse npm run kontrola -- dluhy/ dluhy/exekuce-nebo-oddluzeni/
+          SITE_DIR=_site-vse npm run kontrola -- dluhy/ dluhy/exekuce-nebo-oddluzeni/ penize/zdanim-to/ penize/zdanim-to/dividendy/
           npm run test:e2e:skryte
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
