@@ -1,0 +1,612 @@
+{
+ "datum": "2026-11-05T08:18:08.060Z",
+ "eet": {
+  "360": {
+   "sirka": 360,
+   "prijmyPrijato": true,
+   "verdikt": "Můžeš zvolit EET OFF.",
+   "verdiktSub": "Pokud EET OFF nezvolíš, musíš od 1. 1. 2027 evidovat tržby.",
+   "duvody": [
+    {
+     "text": "Hotovost se eviduje vždy, i když ji přijmeš mimo provozovnu a bez osobního kontaktu.",
+     "zdroj": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334"
+    },
+    {
+     "text": "Jsi OSVČ v 1. pásmu paušální daně a tvoje příjmy ze samostatné činnosti za rok 2026 nepřesáhly 1 000 000 Kč. Můžeš si zvolit režim EET OFF: místo evidence zaplatíš přirážku 1 400 Kč měsíčně, tedy 16 800 Kč ročně. Daňová složka paušální zálohy tak bude 1 500 Kč místo 100 Kč měsíčně.",
+     "zdroj": "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off"
+    }
+   ],
+   "eetOffKarta": "Režim EET OFF\n\nK EET OFF se přihlásíš oznámením finančnímu úřadu nejpozději 11. 1. 2027. Pozdní oznámení je neúčinné a nelze ho napravit.\n\nZvolený režim nelze během roku měnit. Návrat k evidenci je možný až od dalšího kalendářního roku. Když během roku překročíš 1 000 000 Kč, přirážku platíš do konce roku a evidovat začneš od dalšího roku.\n\nZdroj: eet.gov.cz – Co je režim EET OFF\nZdroj: eet.gov.cz – Jak a kdy se přihlásit k režimu EET OFF\nZdroj: Brožura MF EET 2.0, s. 9",
+   "kalkulackaMoje": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+   "kalkulacka": {
+    "20000": "EET OFF vychází levněji: přirážka 16 800 Kč ročně proti 20 000 Kč za evidenci, ušetříš 3 200 Kč.",
+    "prazdne": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+    "20 000": "EET OFF vychází levněji: přirážka 16 800 Kč ročně proti 20 000 Kč za evidenci, ušetříš 3 200 Kč.",
+    "20 000,50": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+    "20.000": "Evidence vychází levněji: 20 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 780 Kč.",
+    "-5000": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+    "xss": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč."
+   },
+   "xssImg": false,
+   "terminy": [
+    "Termín: 11. 1. 2027",
+    "Doporučeno do: 15. 12. 2026",
+    "Doporučeno do: 15. 12. 2026",
+    "Doporučeno do: 31. 12. 2026",
+    "Doporučeno do: 31. 12. 2026",
+    "Doporučeno do: 31. 12. 2026",
+    "Termín: 1. 1. 2027"
+   ],
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "odkazy": [
+    "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334",
+    "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off",
+    "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off",
+    "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+    "https://eet.gov.cz/assets/cs/cmsmedia/pro-media/EET_v_5_krocich.pdf",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+    "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+    "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+    "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+    "https://eet.gov.cz/cs/zacinam-s-eet/nastaveni-pred-zahajenim-evidence-trzeb",
+    "https://eet.gov.cz/cs/o-eet/jaky-je-harmonogram-eet-2-0"
+   ],
+   "odkazyNeoficialni": [],
+   "axeVysledek": [],
+   "chyby": {
+    "prazdne": {
+     "hlaska": "Zadej celé číslo, nejméně 0.",
+     "legend": "Jaké máš příjmy ze samostatné činnosti za rok 2026?"
+    },
+    "800000,50": {
+     "hlaska": "Zadej celé číslo, nejméně 0.",
+     "legend": "Jaké máš příjmy ze samostatné činnosti za rok 2026?"
+    },
+    "-1": {
+     "hlaska": "Zadej celé číslo, nejméně 0.",
+     "legend": "Jaké máš příjmy ze samostatné činnosti za rok 2026?"
+    },
+    "abc": {
+     "hlaska": "Zadej celé číslo, nejméně 0.",
+     "legend": "Jaké máš příjmy ze samostatné činnosti za rok 2026?"
+    },
+    "xss": {
+     "hlaska": "Zadej celé číslo, nejméně 0.",
+     "legend": "Jaké máš příjmy ze samostatné činnosti za rok 2026?"
+    },
+    "1 500": {
+     "hlaska": "",
+     "legend": "Máš průkaz ZTP nebo ZTP/P kvůli nevidomosti, těžké ztrátě zraku nebo hluchoslepotě?"
+    }
+   },
+   "xssImgDotaznik": false,
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Ne",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Zpět",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Další",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Ne",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Zpět",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Další",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    }
+   ],
+   "localStorage": {},
+   "axeChyba": [
+    {
+     "id": "page-has-heading-one",
+     "dopad": "moderate",
+     "popis": "Page should contain a level-one heading",
+     "pocet": 1,
+     "uzly": [
+      "html"
+     ],
+     "tags": []
+    }
+   ],
+   "sit": [],
+   "konzole": [],
+   "dialogy": [],
+   "chybySite": []
+  },
+  "1440": {
+   "sirka": 1440,
+   "prijmyPrijato": true,
+   "verdikt": "Můžeš zvolit EET OFF.",
+   "verdiktSub": "Pokud EET OFF nezvolíš, musíš od 1. 1. 2027 evidovat tržby.",
+   "duvody": [
+    {
+     "text": "Hotovost se eviduje vždy, i když ji přijmeš mimo provozovnu a bez osobního kontaktu.",
+     "zdroj": "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334"
+    },
+    {
+     "text": "Jsi OSVČ v 1. pásmu paušální daně a tvoje příjmy ze samostatné činnosti za rok 2026 nepřesáhly 1 000 000 Kč. Můžeš si zvolit režim EET OFF: místo evidence zaplatíš přirážku 1 400 Kč měsíčně, tedy 16 800 Kč ročně. Daňová složka paušální zálohy tak bude 1 500 Kč místo 100 Kč měsíčně.",
+     "zdroj": "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off"
+    }
+   ],
+   "eetOffKarta": "Režim EET OFF\n\nK EET OFF se přihlásíš oznámením finančnímu úřadu nejpozději 11. 1. 2027. Pozdní oznámení je neúčinné a nelze ho napravit.\n\nZvolený režim nelze během roku měnit. Návrat k evidenci je možný až od dalšího kalendářního roku. Když během roku překročíš 1 000 000 Kč, přirážku platíš do konce roku a evidovat začneš od dalšího roku.\n\nZdroj: eet.gov.cz – Co je režim EET OFF\nZdroj: eet.gov.cz – Jak a kdy se přihlásit k režimu EET OFF\nZdroj: Brožura MF EET 2.0, s. 9",
+   "kalkulackaMoje": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+   "kalkulacka": {
+    "20000": "EET OFF vychází levněji: přirážka 16 800 Kč ročně proti 20 000 Kč za evidenci, ušetříš 3 200 Kč.",
+    "prazdne": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+    "20 000": "EET OFF vychází levněji: přirážka 16 800 Kč ročně proti 20 000 Kč za evidenci, ušetříš 3 200 Kč.",
+    "20 000,50": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+    "20.000": "Evidence vychází levněji: 20 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 780 Kč.",
+    "-5000": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč.",
+    "xss": "Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč."
+   },
+   "xssImg": false,
+   "terminy": [
+    "Termín: 11. 1. 2027",
+    "Doporučeno do: 15. 12. 2026",
+    "Doporučeno do: 15. 12. 2026",
+    "Doporučeno do: 31. 12. 2026",
+    "Doporučeno do: 31. 12. 2026",
+    "Doporučeno do: 31. 12. 2026",
+    "Termín: 1. 1. 2027"
+   ],
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "odkazy": [
+    "https://eet.gov.cz/cs/koho-se-eet-tyka/kdo-musi-evidovat-trzby#co-je-kontaktni-platba-334",
+    "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off",
+    "https://eet.gov.cz/cs/eet-off/co-je-rezim-eet-off",
+    "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+    "https://eet.gov.cz/assets/cs/cmsmedia/pro-media/EET_v_5_krocich.pdf",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://eet.gov.cz/cs/eet-off/jak-a-kdy-se-prihlasit-k-rezimu-eet-off",
+    "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf",
+    "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+    "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+    "https://eet.gov.cz/cs/zacinam-s-eet/jak-zacit-evidovat",
+    "https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace",
+    "https://eet.gov.cz/cs/zacinam-s-eet/nastaveni-pred-zahajenim-evidence-trzeb",
+    "https://eet.gov.cz/cs/o-eet/jaky-je-harmonogram-eet-2-0"
+   ],
+   "odkazyNeoficialni": [],
+   "sit": [],
+   "konzole": [],
+   "dialogy": [],
+   "chybySite": []
+  }
+ },
+ "osvc": {
+  "360": {
+   "sirka": 360,
+   "panelViditelny": true,
+   "vychoziStav": "Zadej roční příjmy a výsledek se spočítá.",
+   "o1": {
+    "tabulka": [
+     "Paušální daň (1. pásmo)Nejlevnější 115 944 Kč 9 662 Kč —",
+     "Přiznání, výdajový paušál 60 % 122 371 Kč 10 198 Kč +6 427 Kč",
+     "EET OFF (1. pásmo + přirážka) 132 744 Kč 11 062 Kč +16 800 Kč"
+    ],
+    "shrnuti": "Nejlevněji vychází varianta „Paušální daň (1. pásmo)“: 115 944 Kč ročně. Ušetříš 6 427 Kč proti variantě „Přiznání, výdajový paušál 60 %“.",
+    "zaloha": "Tvoje měsíční záloha: 9 662 Kč (Paušální daň (1. pásmo)), 11 062 Kč (EET OFF (1. pásmo + přirážka)).",
+    "bodZlomu": "Od příjmů 693 000 Kč vychází levněji paušální daň. Od příjmů 1 501 000 Kč vychází levněji přiznání. Od příjmů 1 529 000 Kč vychází levněji paušální daň.",
+    "pasma": "Na která pásma máš nárok1. pásmo: ano (limit 1 500 000 Kč), 9 662 Kč měsíčně2. pásmo: ano (limit 2 000 000 Kč), 16 745 Kč měsíčně3. pásmo: ano (limit 2 000 000 Kč), 27 139 Kč měsíčně",
+    "rozpis": [
+     "Zisk (základ daně): 800 000 Kč − výdaje 480 000 Kč = 320 000 Kč",
+     "Daň: 48 000 Kč − sleva na poplatníka 30 840 Kč = 17 160 Kč",
+     "Sociální pojištění: max(55 % zisku, minimum 216 996 Kč) = základ 216 996 Kč × 29,2 % = 63 363 Kč",
+     "Zdravotní pojištění: max(50 % zisku, minimum 309 984 Kč) = základ 309 984 Kč × 13,5 % = 41 848 Kč",
+     "1. pásmo: 9 662 Kč měsíčně = daň 100 Kč + sociální 6 074 Kč + zdravotní 3 488 Kč.",
+     "EET OFF: 9 662 Kč + přirážka 1 400 Kč měsíčně = 11 062 Kč měsíčně."
+    ]
+   },
+   "preteka1": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axeVysledek": [
+    {
+     "id": "aria-prohibited-attr",
+     "dopad": "serious",
+     "popis": "Elements must only use permitted ARIA attributes",
+     "pocet": 1,
+     "uzly": [
+      "rect"
+     ],
+     "tags": [
+      "wcag2a",
+      "wcag412"
+     ]
+    }
+   ],
+   "o4": {
+    "tabulka": [
+     "Paušální daň (1. pásmo) 115 944 Kč 9 662 Kč +48 257 Kč",
+     "Přiznání, skutečné výdajeNejlevnější 67 687 Kč 5 641 Kč —",
+     "EET OFF (1. pásmo + přirážka) 132 744 Kč 11 062 Kč +65 057 Kč"
+    ],
+    "rozpis": [
+     "Zisk (základ daně): 500 000 Kč − výdaje 300 000 Kč = 200 000 Kč",
+     "Daň: 30 000 Kč − sleva na poplatníka 30 840 Kč = 0 Kč",
+     "Daňové zvýhodnění na děti: −37 524 Kč → daň 0 Kč, daňový bonus 37 524 Kč (stát ti ho vyplatí, ve výpočtu snižuje odvody)",
+     "Sociální pojištění: max(55 % zisku, minimum 216 996 Kč) = základ 216 996 Kč × 29,2 % = 63 363 Kč",
+     "Zdravotní pojištění: max(50 % zisku, minimum 309 984 Kč) = základ 309 984 Kč × 13,5 % = 41 848 Kč",
+     "1. pásmo: 9 662 Kč měsíčně = daň 100 Kč + sociální 6 074 Kč + zdravotní 3 488 Kč.",
+     "EET OFF: 9 662 Kč + přirážka 1 400 Kč měsíčně = 11 062 Kč měsíčně."
+    ]
+   },
+   "o3": {
+    "tabulka": [
+     "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
+     "Přiznání, výdajový paušál 40 % 203 868 Kč 16 989 Kč +2 928 Kč",
+     "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 200 000 Kč, takže ti vychází 2. pásmo."
+    ]
+   },
+   "dph": {
+    "tabulka": [
+     "Paušální daň Nedostupné: Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba).",
+     "Přiznání, výdajový paušál 40 %Nejlevnější 203 868 Kč 16 989 Kč —",
+     "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro OSVČ v paušálním režimu. Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba)."
+    ]
+   },
+   "desetinne": {
+    "bezOdeslani": {
+     "chyba": "",
+     "tabulka": [
+      "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
+      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
+     ]
+    },
+    "poOdeslani": {
+     "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
+     "tabulka": [
+      "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
+      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
+     ]
+    }
+   },
+   "prazdne": {
+    "bezOdeslani": {
+     "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
+     "tabulka": [
+      "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
+      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
+     ]
+    },
+    "poOdeslani": {
+     "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
+     "tabulka": [
+      "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
+      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
+     ],
+     "fokus": "osvc-income"
+    }
+   },
+   "axeChyba": [
+    {
+     "id": "aria-prohibited-attr",
+     "dopad": "serious",
+     "popis": "Elements must only use permitted ARIA attributes",
+     "pocet": 1,
+     "uzly": [
+      "rect"
+     ],
+     "tags": [
+      "wcag2a",
+      "wcag412"
+     ]
+    }
+   ],
+   "zaporne": {
+    "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1."
+   },
+   "nula": {
+    "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1."
+   },
+   "detiZaporne": {
+    "chyba": "Zadej počet dětí jako celé číslo (0 nebo víc)."
+   },
+   "xss": {
+    "img": false,
+    "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1."
+   },
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "40 % – svobodná povolání, autorská práva, jiné podnikání",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Výdajovým paušálem",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Ne",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "osvc-children",
+     "typ": "text",
+     "popisek": "Počet vyživovaných dětí",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Hlavní činnost",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Ano",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Spočítat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Jak jsme počítali přiznání",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "rect",
+     "id": "",
+     "typ": "",
+     "popisek": "Najetím nebo šipkami na grafu zobrazíš hodnoty pro konkrétní příjmy.",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zobrazit hodnoty grafu v tabulce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroj: eet.gov.cz – Jak a kdy se přihlás",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroj: financnisprava.gov.cz – Paušální ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Tiskopis 25 5255 – Oznámení o vstupu do ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Elektronické podání oznámení o vstupu (E",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Tiskopis 25 5260 – Oznámení o změně pásm",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Jak se přihlásit k režimu EET OFF",
+     "fokusViditelny": true
+    }
+   ],
+   "localStorage": {},
+   "prepnutiZpet": {
+    "eet": true,
+    "osvc": true,
+    "hash": "#eet"
+   },
+   "sit": [],
+   "konzole": [],
+   "dialogy": [],
+   "chybySite": []
+  },
+  "1440": {
+   "sirka": 1440,
+   "panelViditelny": true,
+   "vychoziStav": "Zadej roční příjmy a výsledek se spočítá.",
+   "o1": {
+    "tabulka": [
+     "Paušální daň (1. pásmo)Nejlevnější 115 944 Kč 9 662 Kč —",
+     "Přiznání, výdajový paušál 60 % 122 371 Kč 10 198 Kč +6 427 Kč",
+     "EET OFF (1. pásmo + přirážka) 132 744 Kč 11 062 Kč +16 800 Kč"
+    ],
+    "shrnuti": "Nejlevněji vychází varianta „Paušální daň (1. pásmo)“: 115 944 Kč ročně. Ušetříš 6 427 Kč proti variantě „Přiznání, výdajový paušál 60 %“.",
+    "zaloha": "Tvoje měsíční záloha: 9 662 Kč (Paušální daň (1. pásmo)), 11 062 Kč (EET OFF (1. pásmo + přirážka)).",
+    "bodZlomu": "Od příjmů 693 000 Kč vychází levněji paušální daň. Od příjmů 1 501 000 Kč vychází levněji přiznání. Od příjmů 1 529 000 Kč vychází levněji paušální daň.",
+    "pasma": "Na která pásma máš nárok1. pásmo: ano (limit 1 500 000 Kč), 9 662 Kč měsíčně2. pásmo: ano (limit 2 000 000 Kč), 16 745 Kč měsíčně3. pásmo: ano (limit 2 000 000 Kč), 27 139 Kč měsíčně",
+    "rozpis": [
+     "Zisk (základ daně): 800 000 Kč − výdaje 480 000 Kč = 320 000 Kč",
+     "Daň: 48 000 Kč − sleva na poplatníka 30 840 Kč = 17 160 Kč",
+     "Sociální pojištění: max(55 % zisku, minimum 216 996 Kč) = základ 216 996 Kč × 29,2 % = 63 363 Kč",
+     "Zdravotní pojištění: max(50 % zisku, minimum 309 984 Kč) = základ 309 984 Kč × 13,5 % = 41 848 Kč",
+     "1. pásmo: 9 662 Kč měsíčně = daň 100 Kč + sociální 6 074 Kč + zdravotní 3 488 Kč.",
+     "EET OFF: 9 662 Kč + přirážka 1 400 Kč měsíčně = 11 062 Kč měsíčně."
+    ]
+   },
+   "preteka1": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "o4": {
+    "tabulka": [
+     "Paušální daň (1. pásmo) 115 944 Kč 9 662 Kč +48 257 Kč",
+     "Přiznání, skutečné výdajeNejlevnější 67 687 Kč 5 641 Kč —",
+     "EET OFF (1. pásmo + přirážka) 132 744 Kč 11 062 Kč +65 057 Kč"
+    ],
+    "rozpis": [
+     "Zisk (základ daně): 500 000 Kč − výdaje 300 000 Kč = 200 000 Kč",
+     "Daň: 30 000 Kč − sleva na poplatníka 30 840 Kč = 0 Kč",
+     "Daňové zvýhodnění na děti: −37 524 Kč → daň 0 Kč, daňový bonus 37 524 Kč (stát ti ho vyplatí, ve výpočtu snižuje odvody)",
+     "Sociální pojištění: max(55 % zisku, minimum 216 996 Kč) = základ 216 996 Kč × 29,2 % = 63 363 Kč",
+     "Zdravotní pojištění: max(50 % zisku, minimum 309 984 Kč) = základ 309 984 Kč × 13,5 % = 41 848 Kč",
+     "1. pásmo: 9 662 Kč měsíčně = daň 100 Kč + sociální 6 074 Kč + zdravotní 3 488 Kč.",
+     "EET OFF: 9 662 Kč + přirážka 1 400 Kč měsíčně = 11 062 Kč měsíčně."
+    ]
+   },
+   "o3": {
+    "tabulka": [
+     "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
+     "Přiznání, výdajový paušál 40 % 203 868 Kč 16 989 Kč +2 928 Kč",
+     "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 200 000 Kč, takže ti vychází 2. pásmo."
+    ]
+   },
+   "dph": {
+    "tabulka": [
+     "Paušální daň Nedostupné: Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba).",
+     "Přiznání, výdajový paušál 40 %Nejlevnější 203 868 Kč 16 989 Kč —",
+     "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro OSVČ v paušálním režimu. Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba)."
+    ]
+   },
+   "sit": [],
+   "konzole": [],
+   "dialogy": [],
+   "chybySite": []
+  }
+ },
+ "zivy": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [],
+   "chyby": [],
+   "cizi": [],
+   "axe": [],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {}
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "konzole": [],
+   "chyby": [],
+   "cizi": []
+  }
+ }
+}

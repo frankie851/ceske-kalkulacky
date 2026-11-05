@@ -1,0 +1,38 @@
+{
+ "url": "https://frankie851.github.io/penzijko-kompas/",
+ "httpStav": 200,
+ "datum": "2026-11-05T08:16:43.386Z",
+ "preteka": {
+  "scrollWidth": 360,
+  "innerWidth": 360,
+  "preteka": false
+ },
+ "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 406 441 Kč v dnešních penězích (852 538 Kč nominálně). Z toho státní příspěvky 72 000 Kč, poplatky tě budou stát 93 228 Kč. Počítáno podle: Platná pravidla 2026 platí",
+ "karty": [
+  "200 Kč",
+  "200 Kč"
+ ],
+ "zdroje": [
+  "https://www.zakonyprolidi.cz/cs/2011-427",
+  "https://www.zakonyprolidi.cz/cs/1992-586",
+  "https://mf.gov.cz/cs/financni-trh/penzijni-sporeni",
+  "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf",
+  "https://www.finance.cz/aktuality/penzijni-sporeni-ceka-revoluce-snizi-se-poplatky-a-pro-nekoho-se-zvysi-statni-prispevky/",
+  "https://www.kb.cz/getmedia/bff31c8a-0113-467a-89ed-e89a8ac41a71/sazebnik-ps.pdf",
+  "https://finex.cz/transformovane-vs-ucastnicke-fondy/"
+ ],
+ "sit": [
+  "https://frankie851.github.io/penzijko-kompas/",
+  "https://frankie851.github.io/penzijko-kompas/styles.css",
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+  "https://frankie851.github.io/penzijko-kompas/app.js",
+  "https://frankie851.github.io/penzijko-kompas/calc.js",
+  "https://frankie851.github.io/penzijko-kompas/rules.json"
+ ],
+ "cizi": [
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+ ],
+ "konzole": [],
+ "chyby": [],
+ "localStorage": {}
+}

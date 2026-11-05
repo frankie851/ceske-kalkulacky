@@ -1,0 +1,304 @@
+{
+ "url": "https://frankie851.github.io/mam-eet/",
+ "datum": "2026-11-05T08:18:44.011Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "tab-eet",
+     "typ": "",
+     "popisek": "Mám EET?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Začít",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "eet.gov.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "953 109 109",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/mam-eet/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/osvc-app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/rules.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/dom.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/osvc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/mam-eet/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/osvc-app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/rules.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/dom.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/osvc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/mam-eet/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  }
+ }
+}

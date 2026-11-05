@@ -1,0 +1,43 @@
+# Plán48 – kontrola zdrojů a výpisky z předpisů (5. 11. 2026, 08:08–08:20 UTC)
+
+## Dostupnost odkazů (curl -L -A Mozilla, HTTP stav)
+https://frankie851.github.io/plan48/                       200 (text/html)
+https://frankie851.github.io/plan48/rules.json             200
+https://frankie851.github.io/plan48/calc.js                200
+https://www.zakonyprolidi.cz/cs/2011-427                   200 (427/2011 Sb., verze 20)
+https://www.zakonyprolidi.cz/cs/1992-586                   200
+https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js  200
+  SRI sha384 spočtený z obsahu: dug+JxfBvklEQdJ4AYuBBAIScUz0bVN73xpy273gcAwHjb3qI0fXmuYNaNfdyYJG  = hodnota v index.html:14 (shoda)
+https://www.kb.cz/...poslete-si-v-prosinci-na-penzijko-mimoradny-prispevek...   NEOVĚŘENO – proxy prostředí: CONNECT 403 / ENOTFOUND
+https://www.finance.cz/novinky/nejvyssi-cas-poslat-penize-penzijko-danova-uleva/            NEOVĚŘENO – proxy 403 / ENOTFOUND
+https://www.finance.cz/aktuality/penzijni-sporeni-ceka-revoluce-...                          NEOVĚŘENO – proxy 403 / ENOTFOUND
+https://dumfinanci.cz/clanky/8882-kdo-dosahne-na-vyssi-statni-prispevek-u-dps/              NEOVĚŘENO – ENOTFOUND
+https://www.csps.cz/cs/page/reforma                                                          NEOVĚŘENO – proxy 403 / ENOTFOUND
+
+## Živý web vs. main (SHA-256, prvních 16 znaků)
+styles.css  live=74d6fa01fb715417 main=74d6fa01fb715417 (shoda; doplňuje dukazy/zivy-web-vs-main.txt, kde styles.css chybí)
+README.md   live=da156846d4a94d01 main=da156846d4a94d01 (shoda)
+.github/ workflow v repozitáři není (nasazení „Deploy from a branch“ podle README).
+
+## Zákon č. 427/2011 Sb. (ZDPS), https://www.zakonyprolidi.cz/cs/2011-427, verze 20 (staženo 5. 11. 2026)
+§ 13 (1) Nárok na státní příspěvek má účastník, a) kterému nebyl přiznán starobní důchod z důchodového pojištění a b) který má 1. trvalý pobyt na území České republiky, nebo 2. bydliště na území členského státu a je účasten důchodového pojištění …
+§ 14 (1) Na každý kalendářní měsíc náleží účastníkovi, který splňuje podmínky stanovené v § 13 odst. 1 a který ve lhůtě uvedené v § 9 odst. 2 zaplatil příspěvek ve výši alespoň 500 Kč, státní příspěvek. …
+§ 14 (2) Je-li výše měsíčního příspěvku účastníka a) 500 až 1699 Kč, činí výše měsíčního státního příspěvku 20 % z částky měsíčního příspěvku účastníka, b) 1700 a více Kč, činí výše měsíčního státního příspěvku částku 340 Kč.
+§ 14 (3) Pokud účastník platí příspěvek za delší období než za kalendářní měsíc, stanoví se výše měsíčního státního příspěvku podle průměrné výše příspěvku připadající na kalendářní měsíc …
+§ 14 (4) Pro účely stanovení výše státního příspěvku se výše příspěvku účastníka zaokrouhluje na celé koruny dolů.
+
+## Zákon č. 586/1992 Sb. (ZDP), https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101 (staženo 5. 11. 2026)
+§ 15 (7) V případě příspěvků na penzijní připojištění se státním příspěvkem … a na doplňkové penzijní spoření … lze odečíst od základu daně podle odstavce 6 pouze část měsíčního příspěvku, která převyšuje částku, od které náleží nejvyšší státní příspěvek …
+§ 15a Produkt spoření na stáří (1) Produktem spoření na stáří se pro účely daní z příjmů rozumí a) penzijní připojištění …, b) doplňkové penzijní spoření …, c) penzijní pojištění …, d) soukromé životní pojištění, e) dlouhodobý investiční produkt. (jen definice – limit ani krácení zde nejsou)
+§ 15b Daňová podpora produktu spoření na stáří (1) … výplata … pouze 1. po 120 kalendářních měsících od vzniku produktu, nejdříve však v kalendářním roce, ve kterém poplatník dosáhne 60 let věku …
+§ 15b (4) K navrácení daňové podpory produktu spoření na stáří dochází, pokud před uplynutím 120 kalendářních měsíců od jeho vzniku nebo před kalendářním rokem, ve kterém poplatník dosáhne 60 let věku, a) došlo k výplatě peněžních prostředků …
+§ 16 (1) Sazba daně činí a) 15 % pro část základu daně do 36násobku průměrné mzdy a b) 23 % pro část základu daně přesahující 36násobek průměrné mzdy.
+(Limit 48 000 Kč v § 15 odst. 6 – viz rejstřík DP-11; v textu stránky zakonyprolidi je psán jako „48 000 Kč“ s pevnou mezerou.)
+
+## Druhé zdroje
+MF – Základní informace k III. pilíři (https://mf.gov.cz/cs/financni-trh/soukrome-penzijni-systemy/iii-pilir-doplnkove-penzijni-sporeni-a-p/zakladni-informace, WebFetch 5. 11. 2026):
+  „dochází ke zvýšení spodní hranice příspěvku z 300 Kč na 500 Kč a horní hranice příspěvku z 1 000 Kč na 1 700 Kč“; „výše státního příspěvku se nastavuje jako lineární ve výši 20 % příspěvku účastníka“;
+  „státní příspěvek nebudou dostávat osoby, jimž byl přiznán starobní důchod“; důchodci se zdanitelnými příjmy „budou moci nadále využívat daňové zvýhodnění spoření na stáří, a to již od první vložené koruny“.
+psp.cz – sněmovní tisk 285 (https://www.psp.cz/sqw/historie.sqw?o=10&T=285, WebFetch 5. 11. 2026):
+  vláda předložila 25. 8. 2026; 1. čtení 24. 9. 2026 (31. schůze), přikázáno výborům; rozpočtový výbor 14. 10. 2026 (přerušení, 285/1) a 29. 10. 2026 (doporučuje schválit, 285/2); hospodářský výbor 29. 10. 2026 (285/3);
+  2. čtení: zařazeno na pořad 34. schůze „od 13. října 2026“, neproběhlo; pozměňovací návrhy podávány do 4. 11. 2026; 3. čtení, Senát, Sbírka: nic. → stále návrh.
