@@ -3,12 +3,166 @@
   "kod": "P48",
   "repo": "plan48",
   "nazev": "Plán48",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 1,
+   "stredni": 5,
+   "nizka": 3
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "P48-01 (metoda krácení DPS, DP-12); dále P48-05"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "P48-01"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "P48-04 (podmínka 10 let / 60 let z „Hlídat v pravidlech“ chybí)"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "P48-02"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "P48-03"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "P48-04"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "—"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "P48-01",
+    "zavaznost": "Vysoká",
+    "oblast": "Pravidla a data / Výpočty",
+    "nazev": "Odpočet DPS krácen paušálně 20 400 Kč ročně místo po měsících; rada „mimořádně na penzijko“ nadhodnocená",
+    "kde": "`calc.js:109–110` (`dpsCast = dpsRocne − 20 400`), `calc.js:170–173` (`doplatekDps = nevyuzity + doHranice`), `rules.json:31`, `app.js:41` (věta „případně X Kč mimořádně na penzijko“), `README.md:55–57`, `test/calc.test.js:94–97`",
+    "reprodukce": "(a) Obrazovka, Pravidla 2026: věk 40, DPS 1 000 Kč/měs, 10 měsíců proběhlo → očekáváno podle § 15 odst. 7 ZDP („pouze část **měsíčního** příspěvku, která převyšuje částku, od které náleží nejvyšší státní příspěvek“, DP-12): po navýšení listopadu a prosince na 1 700 Kč se z prosincového mimořádného vkladu započte celá částka, k vyčerpání limitu stačí 48 000 Kč → skutečnost: „případně **55 000 Kč** mimořádně na penzijko“ (`rada-360.png`, `prohlizec.json` D_rada_dps1000, oba běhy). DPS 0 Kč/měs → 65 000 Kč místo 48 000 Kč; DPS 1 000, 11 měsíců → 55 700 Kč. (b) Modul `odpocet({dpsRocne: 11×1 000 + 30 000})` → očekáváno 11 × 0 + (30 000 − 1 700) = 28 300 Kč → skutečnost 20 600 Kč (`prepocet.txt` M1–M3). README ř. 57 tvrdí „Mimořádný vklad v prosinci se ale započte celý“, kód dělá opak.",
+    "dopad": "Účastník s vkladem pod 1 700 Kč (typický případ) dostane radu poslat na penzijko o 7 000–18 700 Kč víc, než k daňové úspoře potřebuje; přebytek je zamčený do 60 let bez daňového efektu, nebo uživatele vysoká částka od kroku odradí. U nepravidelných vkladů modul podhodnocuje odpočet až o 20 400 Kč (v UI nezadatelné, ale API/testy to tvrdí jako správné).",
+    "oprava": "Počítat DPS část po měsících: `Σ max(0, vklad_m − 1 700)` z měsíčního profilu (proběhlé měsíce × původní vklad, zbývající × navýšený, prosinec + mimořádný vklad); v radě pak `doplatekDps = nevyuzity + max(0, 1 700 − prosincovýVklad)`. Přejmenovat `dpsRocniHranice` na měsíční hranici (1 700, u důchodce 0), opravit README ř. 55–57 a test ř. 94–97 na 28 300 Kč.",
+    "overeni": "reprodukováno 2× (dva běhy prohlížeče, dva procesy porovnání) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-02",
+    "zavaznost": "Střední",
+    "oblast": "Testy",
+    "nazev": "Test „mimořádný vklad v prosinci se započte celý“ zakonzervuje chybu, chybí test nepravidelného profilu a rady u vkladu < 1 700 Kč",
+    "kde": "`test/calc.test.js:94–97` (očekává 20 600 Kč), `test/calc.test.js:137–145` (očekává `doplatekDps = 48 000 + 7 000`)",
+    "reprodukce": "`node --test` → 34/34 prošlo (`testy.txt`), přestože podle § 15 odst. 7 ZDP je u 11 × 1 000 + 30 000 Kč správně 28 300 Kč a u rady „1 000 Kč/měs, 10 měsíců“ správně 48 000 Kč na DPS; testy potvrzují hodnoty modulu, ne zákona. Žádný test nekontroluje měsíční profil, zaokrouhlení 339,80 Kč ani chování prázdného věku v návrhu 2027.",
+    "dopad": "Nepřímý – chyba P48-01 se při úpravách neodhalí, test ji naopak chrání.",
+    "oprava": "Po opravě P48-01 přepsat oba testy na zákonné hodnoty (28 300; 48 000) a přidat případy: měsíční profil s prosincovým vkladem, DPS 0 Kč + 10 měsíců, věk 0 / prázdný v návrhu.",
+    "overeni": "reprodukováno 2× (výstup testů + přepočet M2, R2) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-03",
+    "zavaznost": "Střední",
+    "oblast": "Mobil a přístupnost",
+    "nazev": "Žádné chybové hlášky ani validace: desetinná čárka, záporné číslo a hodnoty mimo rozsah se tiše přepočítají",
+    "kde": "`index.html:39` (`novalidate`), `index.html:45,62,79` (`type=\"number\"`, `min`/`max` bez hlášky), `app.js:63–79` (`cisloZ` vrací 0, `Math.min(120|11, …)`)",
+    "reprodukce": "Prohlížeč (en-US Chromium): do pole DPS napsat „1500,50“ → očekáváno 1 500,50 Kč nebo hláška → skutečnost pole ukáže „150050“, dlaždice „4 080 Kč“, „48 000 Kč“, „Nic dalšího není potřeba“ (`prohlizec.json` E_cesky_zapis.carka, oba běhy). „−500“ → pole nevalidní (min 0), výsledek „0 Kč – vklad pod 500 Kč“ bez hlášky. Věk 150 → tiše 120; měsíců 15 → tiše 11 („na zbývající měsíc“). „1 500“ a „abc“ jsou v pořádku (mezera ignorována, písmena prázdný vstup).",
+    "dopad": "Překlep s čárkou dává zcela jiný výsledek bez varování; mimo-rozsahové hodnoty se mění bez vysvětlení.",
+    "oprava": "Zobrazit hlášku u pole (`aria-describedby`, `role=alert`) při `validity.rangeUnderflow/rangeOverflow/stepMismatch` a při hodnotě mimo rozsah; zvážit `type=\"text\" inputmode=\"decimal\"` s vlastním parsováním čárky/mezery (`cisloZ` už to umí), nebo aspoň `step=\"any\"` a kontrolu rozsahu s textem.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-04",
+    "zavaznost": "Střední",
+    "oblast": "Texty a citlivá témata / Shoda se zadáním",
+    "nazev": "Chybí upozornění na podmínku daňové podpory (120 měsíců a 60 let) a navrácení podpory při předčasném výběru",
+    "kde": "`index.html` (celá stránka), `README.md` – `grep -iE '120|10 let|60 let|dodan|navrácen'` najde jen projekci „do 60 let“",
+    "reprodukce": "Zadání „Hlídat v pravidlech: u DIP vzniká nárok na odpočet jen při trvání aspoň 10 let a výběru nejdřív v 60 letech“; § 15b odst. 1 a 4 ZDP (DP-15): daňová podpora jen při výplatě po 120 měsících a nejdříve v roce dosažení 60 let, jinak navrácení podpory → skutečnost: aplikace radí „pošlete ještě 48 000 Kč na DIP, životní pojištění nebo mimořádně na penzijko“ bez této podmínky.",
+    "dopad": "Kdo si podle rady založí DIP/ŽP nebo pošle mimořádný vklad a peníze vybere dřív, musí odpočty dodanit (§ 15b odst. 4) – rada bez varování u citlivého finančního rozhodnutí.",
+    "oprava": "Do poznámky pod „Co udělat do 31. 12.“ a do patičky doplnit větu o podmínce 120 měsíců / 60 let a dodanění s odkazem na § 15b ZDP; v `rules.json` přidat parametry `podporaMesicu: 120`, `podporaVek: 60` se zdrojem.",
+    "overeni": "reprodukováno 2× (grep repozitáře, prohlídka obrazovek 360/1440) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-05",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data",
+    "nazev": "Odpočet citován jako „§ 15a ZDP“ v UI, rules.json, README i kódu; správně § 15 odst. 6–7 (a § 15b podmínky)",
+    "kde": "`rules.json:16` (poznámka v patičce), `rules.json:19` (název zdroje „(§ 15a)“), `calc.js:103`, `README.md:55`",
+    "reprodukce": "Patička „odpočet podle § 15a ZDP“ a odkaz „Zákon č. 586/1992 Sb., o daních z příjmů (§ 15a)“ → podle textu zákona (`zdroje-a-zakony.txt`) § 15a jen definuje produkty, limit 48 000 Kč je v § 15 odst. 6 a krácení u DPS v § 15 odst. 7 (DP-11, DP-12). Chyba je převzata ze zadání („ověř proti § 15a“ – chyba v zadání, viz rejstřík).",
+    "dopad": "Čísla nemění; kdo si chce pravidlo ověřit, hledá ve špatném paragrafu.",
+    "oprava": "Nahradit „§ 15a“ za „§ 15 odst. 6 a 7 ZDP (podmínky § 15b)“ a odkaz vést na konsolidované znění `https://www.zakonyprolidi.cz/cs/1992-586#p15`.",
+    "overeni": "reprodukováno 2× (text zákona na zakonyprolidi.cz + rejstřík DP-11) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-06",
+    "zavaznost": "Střední",
+    "oblast": "Výpočty (UI)",
+    "nazev": "Prázdné pole Věk se v sadě Návrh 2027 bere jako věk 0 → pásmo nezletilých (40 %, nárok od 100 Kč)",
+    "kde": "`app.js:63–66, 71` (`cisloZ` → 0), `calc.js:76–81` (`najdiPasmo(0)` → pásmo 0–17), `rules.json:50`",
+    "reprodukce": "Návrh 2027, smazat obsah pole Věk, DPS 1 700 Kč → očekáváno upozornění „zadejte věk“ nebo výchozí dospělé pásmo → skutečnost „8 160 Kč“, „680 Kč měsíčně (40 %)“ (`prohlizec.json` C2_navrh_vek_prazdny, oba běhy); při DPS 100 Kč by ukázala nárok 40 Kč/měs. V sadě 2026 bez vlivu (jedno pásmo).",
+    "dopad": "Dospělý s nevyplněným věkem vidí dvojnásobný příspěvek; v projekci to zdvojnásobí státní část až do 30 let.",
+    "oprava": "Prázdný/nevalidní věk neposílat do výpočtu (hláška u pole, výsledek skrýt) nebo brát výchozí věk z `value=\"35\"`.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-07",
+    "zavaznost": "Nízká",
+    "oblast": "Pravidla a data",
+    "nazev": "Zdroje návrhu 2027 jsou jen média, bez sněmovního tisku 285 a materiálů MF; mediální odkazy neověřitelné",
+    "kde": "`rules.json:42–47` (poznámka a `zdroje` finance.cz, dumfinanci.cz, ČSPS), `rules.json:20–21` (KB, finance.cz)",
+    "reprodukce": "Patička v sadě Návrh 2027 nabízí tři mediální odkazy; úřední zdroj (tisk 285, https://www.psp.cz/sqw/historie.sqw?o=10&T=285; MF TZ 24. 8. 2026) chybí, poznámka neuvádí číslo tisku ani stav projednávání (1. čtení 24. 9. 2026, výbory 29. 10. 2026). Čtyři mediální URL z tohoto prostředí nešly načíst (proxy 403 / ENOTFOUND), jejich obsah nepotvrzen.",
+    "dopad": "Nemůže si návrh ověřit u úředního zdroje; po schválení/zamítnutí návrhu nebude jasné, co se změnilo.",
+    "oprava": "Přidat do `zdroje` tisk 285 a tiskovou zprávu MF, do poznámky „sněmovní tisk 285, po 1. čtení“ a datum stavu.",
+    "overeni": "reprodukováno 2× (curl + WebFetch) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-08",
+    "zavaznost": "Nízká",
+    "oblast": "Texty a citlivá témata",
+    "nazev": "Štítek „návrh, zatím neschváleno“ není u dlaždice státního příspěvku ani u projekce",
+    "kde": "`index.html:32, 88` (štítek jen nahoře a v boxu „Co udělat“), `index.html:93–114, 129–147` bez `[data-stitek]`",
+    "reprodukce": "Návrh 2027, věk 25, DPS 1 700 → dlaždice „8 160 Kč · 680 Kč měsíčně (40 %)“ a projekce „1 990 681 Kč“ bez štítku (`navrh-360.png`; `prohlizec.json` `stitekUDlazdic: false`, `stitekUProjekce: false`). Na 360 px je horní štítek při čtení dlaždic už odrolovaný; štítek v boxu „Co udělat“ je těsně nad nimi, proto jen Nízká.",
+    "dopad": "Při sdílení snímku dlaždice nebo grafu chybí kontext „jen návrh“.",
+    "oprava": "Přidat `<span data-stitek>` k dlaždici příspěvku a k nadpisu projekce (stejný mechanismus jako u „Co udělat“).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "P48-09",
+    "zavaznost": "Nízká",
+    "oblast": "Texty",
+    "nazev": "Drobné nepřesnosti textů",
+    "kde": "`app.js:274` („Sazba 23 % platí jen pro část příjmů nad 36násobek průměrné mzdy“ – § 16 odst. 1 ZDP mluví o části **základu daně**), `app.js:55` („obvykle musí být připsán do 20. 12.“ bez zdroje; zdroj KB v patičce neověřitelný), `README.md:154` („Ve web nejsou“ → „Na webu nejsou“), `README.md:72` („vláda ho schválila v 8/2026“ bez čísla tisku)",
+    "reprodukce": "čtení textů; obrazovka `vysledek-1440.png`.",
+    "dopad": "Nemění čísla; drobně nepřesné vysvětlení.",
+    "oprava": "„pro část základu daně nad 36násobek průměrné mzdy“; u 20. 12. doplnit „podle podmínek vaší penzijní společnosti“; opravit překlep.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `48733fea370ca096397c964ed430fa48cd8ee11c` (4. 11. 2026) · živý web: https://frankie851.github.io/plan48/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 1,
+   "stredni": 5,
+   "nizka": 3
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "PEN",

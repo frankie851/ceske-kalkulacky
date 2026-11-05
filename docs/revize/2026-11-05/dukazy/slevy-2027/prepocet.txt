@@ -1,4 +1,4 @@
-# Nezávislý přepočet vs. modul aplikace slevy-2027 @ d88ba42 · 2026-11-05T08:20:02.866Z
+# Nezávislý přepočet vs. modul aplikace slevy-2027 @ d88ba42 · 2026-11-05T08:20:52.527Z
 # Reference: slevy-2027-prepocet.mjs (bez kódu aplikace); modul: /tmp/revize/repos/slevy-2027/slevy.js + rules.json
 
 ID	Zdroj	Případ	Vstup	Můj výpočet	Modul aplikace	Shoda

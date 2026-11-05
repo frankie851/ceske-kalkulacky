@@ -2,6 +2,7 @@
 // Modul aplikace se importuje až zde, z klonu revidovaného commitu (jen čtení).
 // Spuštění: node slevy-2027-porovnani.mjs  → zapíše ../slevy-2027/prepocet.txt
 import { readFileSync, writeFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { pripady, scenare, terminy } from './slevy-2027-prepocet.mjs';
 
 const KLON = '/tmp/revize/repos/slevy-2027';
@@ -98,6 +99,10 @@ export const scenarModul = {
   },
 };
 
+const spustenoPrimo = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (spustenoPrimo) hlavni();
+
+function hlavni() {
 const fmt = (x) => (typeof x === 'number' ? new Intl.NumberFormat('cs-CZ').format(x) : String(x));
 const radky = [];
 let shod = 0, neshod = 0;
@@ -156,3 +161,4 @@ const out = new URL('../slevy-2027/prepocet.txt', import.meta.url).pathname;
 writeFileSync(out, radky.join('\n') + '\n');
 console.log(radky.join('\n'));
 console.log('→', out);
+}
