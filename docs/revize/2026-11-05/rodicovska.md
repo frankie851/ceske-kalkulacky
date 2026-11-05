@@ -132,7 +132,7 @@ Skript `dukazy/skripty/rodicovska-prepocet.mjs` (od nuly, bez kódu aplikace) a 
 - **Reprodukce:** porod 10. 5. 2026, návrat do práce od 10. měsíce → očekáváno „nejvýše 120 hodin v kalendářním měsíci“ (ZSSP § 31 odst. 3 písm. a) ve znění zákona č. 84/2025 Sb., účinnost 1. 5. 2025, https://www.zakonyprolidi.cz/cs/1995-117#p31; ÚP ČR a MPSV „Státní sociální podpora“: „v rozsahu do 120 hodin v kalendářním měsíci“) → skutečnost: „dítě mladší 2 let smí být v jeslích nebo školce nejvýš 92 hodin měsíčně“ (výstup modulu 5. 11. 2026; rejstřík PR-50).
 - **Dopad na uživatele:** rodič plánující dřívější návrat do práce si zbytečně omezí docházku dítěte (nebo odmítne úvazek) kvůli limitu, který už 18 měsíců neplatí; výpočet částek to neovlivní.
 - **Doporučená oprava:** `jesleHodinMesicne: 120` se zdrojem (84/2025 Sb., § 31 odst. 3 ZSSP) a test na hodnotu v textu upozornění.
-- **Ověření:** reprodukováno 2× (zákon + ÚP ČR + MPSV; modul dvakrát) · skeptik:
+- **Ověření:** reprodukováno 2× (zákon + ÚP ČR + MPSV; modul dvakrát) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – rules.json:69 = 92; § 31 odst. 3 písm. a) ZSSP v aktuálním znění (verze 96) „nepřevyšujícím 120 hodin v kalendářním měsíci“; řetězec 92 hodin v zákoně není)
 
 ### ROD-05 · Střední · Výpočty · Zbytek nižší než měsíční částka se vyplácí jako samostatný měsíc navíc
 - **Kde:** `rodina.js:130–135` (`cerpaniRp`), `app.js:141` („Rodičovská se vyčerpá … 24 měsíců čerpání“); zadání ř. 1074.
