@@ -10,11 +10,13 @@
     "build": "eleventy",
     "start": "eleventy --serve",
     "test": "node --test \"src/**/*.test.js\" \"test/sdilene/**/*.test.js\"",
-    "test:e2e": "node --test --test-concurrency=1 \"test/e2e/**/*.test.js\"",
+    "test:e2e": "node --test --test-concurrency=1 \"test/e2e/*.test.js\"",
     "kontrola": "node tools/kontroly/kontrola-webu.mjs",
     "kontrola:navrhy": "node tools/kontroly/kontrola.mjs",
     "snimky": "node tools/kontroly/snimky-webu.mjs",
-    "lighthouse": "node tools/kontroly/lighthouse.mjs"
+    "lighthouse": "node tools/kontroly/lighthouse.mjs",
+    "build:vse": "ZOBRAZIT_SKRYTE=1 eleventy --output=_site-vse",
+    "test:e2e:skryte": "SITE_DIR=_site-vse node --test --test-concurrency=1 \"test/e2e/skryte/*.test.js\""
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",
