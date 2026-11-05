@@ -1,0 +1,327 @@
+{
+ "url": "https://frankie851.github.io/kalkulator-dluhu/",
+ "datum": "2026-11-05T09:16:10.194Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Exekuce, nebo oddlužení?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Bezplatná pomoc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Najděte bezplatnou dluhovou poradnu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Začít výpočet",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Dluhové poradny ve vašem okolí",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Kdo zdarma sepíše návrh na oddlužení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Úřední kalkulačka srážek ze mzdy",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Úřední informace o oddlužení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Veřejný ochránce práv",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "vesta.justice.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Exekuce, nebo oddlužení?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Bezplatná pomoc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Najděte bezplatnou dluhovou poradnu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Začít výpočet",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Dluhové poradny ve vašem okolí",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Kdo zdarma sepíše návrh na oddlužení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Úřední kalkulačka srážek ze mzdy",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Úřední informace o oddlužení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Veřejný ochránce práv",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "vesta.justice.cz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Exekuce, nebo oddlužení?",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Bezplatná pomoc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Najděte bezplatnou dluhovou poradnu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Začít výpočet",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Dluhové poradny ve vašem okolí",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Kdo zdarma sepíše návrh na oddlužení",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/dluhy.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/dluhy.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/kalkulator-dluhu/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}
