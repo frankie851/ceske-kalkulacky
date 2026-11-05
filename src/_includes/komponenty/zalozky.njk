@@ -1,0 +1,16 @@
+{#
+  Záložky mezi sourozeneckými nástroji (samostatné stránky, žádný JS).
+
+  zalozky({ popisek, polozky: [{ nazev, url, aktivni }] })
+    popisek – aria-label navigace, např. „Nástroje k penzijku“
+    polozky – url bez prefixu (filtr url se použije uvnitř); aktivní položka dostane aria-current="page"
+#}
+{% macro zalozky(p) %}
+<nav class="zalozky" aria-label="{{ p.popisek }}">
+  <ul>
+    {%- for z in p.polozky %}
+    <li><a href="{{ z.url | url }}"{% if z.aktivni %} aria-current="page"{% endif %}>{{ z.nazev }}</a></li>
+    {%- endfor %}
+  </ul>
+</nav>
+{% endmacro %}
