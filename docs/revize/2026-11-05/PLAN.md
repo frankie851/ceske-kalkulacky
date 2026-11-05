@@ -53,7 +53,7 @@ Větev `revize/2026-11-05`. Revizor: Claude Fable 5.1 (čisté sezení, kód nep
 
 ## Fáze 5–6
 - ☑ `SOUHRN.md`
-- ☐ `revize.html` + artefakt
+- ☑ `revize.html` (artefakt viz PR)
 - ☐ PR do `main`
 
 ## Poznámky k prostředí

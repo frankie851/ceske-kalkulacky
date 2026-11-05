@@ -131,4 +131,13 @@ vykresli();
 </body>
 </html>`;
 fs.writeFileSync(path.join(koren, 'revize.html'), html);
+// Varianta pro publikování jako artefakt (claude.ai skládá vlastní kostru dokumentu)
+let art = html.replace(/^<!DOCTYPE html>\s*<html lang="cs">\s*<head>\s*<meta charset="utf-8">\s*<meta name="viewport"[^>]*>\s*/i, '')
+  .replace('</head>\n<body>', '').replace(/<\/body>\s*<\/html>\s*$/, '')
+  .replace('<title>Nezávislá revize 12 kalkulaček – 5. 11. 2026</title>', '<title>Nezávislá revize kalkulaček</title>\n<meta name="claude:viewport-fit-sides" content="cover">')
+  .replace('main{max-width:1100px;margin:0 auto;padding:16px}', 'main{max-width:1100px;margin:0 auto;padding-block:16px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}')
+  .replace('@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){', '@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;')
+  .replace(':root[data-theme="dark"]{', ':root[data-theme="dark"]{color-scheme:dark;');
+const artDir = process.env.ARTEFAKT_DIR;
+if (artDir) { fs.mkdirSync(artDir, { recursive: true }); fs.writeFileSync(path.join(artDir, 'revize-artefakt.html'), art); console.log('artefakt →', path.join(artDir, 'revize-artefakt.html'), (art.length/1024).toFixed(0), 'kB'); }
 console.log('revize.html', (html.length / 1024).toFixed(0), 'kB,', data.reduce((s, a) => s + a.nalezy.length, 0), 'nálezů');

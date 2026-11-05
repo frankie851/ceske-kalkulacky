@@ -1,10 +1,10 @@
 # Souhrn nezávislé revize 12 kalkulaček – 5. 11. 2026
 
-Revizor: Claude Fable 5.1 v čistém sezení (kód nepsal). Skeptik: Opus v čistém kontextu u každého kritického a vysokého nálezu. Zdroje pravdy: `docs/zadani.md` pro požadavky a výhradně úřední zdroje pro čísla (rejstřík `pravidla.md`, 290 položek). Každá aplikace má zprávu `<repo>.md`, důkazy v `dukazy/<repo>/`, nezávislý přepočet v `dukazy/skripty/<repo>-prepocet.mjs` a opravný prompt v `opravy/<repo>.md`. Souhrnná stránka: `revize.html`.
+Revizor: Claude Fable 5.1 v čistém sezení (kód nepsal). Skeptik: Opus v čistém kontextu u každého kritického a vysokého nálezu. Zdroje pravdy: `docs/zadani.md` pro požadavky a výhradně úřední zdroje pro čísla (rejstřík `pravidla.md`, 288 položek). Každá aplikace má zprávu `<repo>.md`, důkazy v `dukazy/<repo>/`, nezávislý přepočet v `dukazy/skripty/<repo>-prepocet.mjs` a opravný prompt v `opravy/<repo>.md`. Souhrnná stránka: `revize.html`.
 
 ## 1. Verdikty a semafor (12 aplikací × 8 oblastí)
 
-**Připraveno: 3** (Bydlometr, Přijímačky bez paniky, Dluhy) · **Opravit před sloučením: 9** · **Předělat: 0**. Nálezů celkem **103**: Kritická 1 · Vysoká 18 · Střední 61 · Nízká 50 (po verdiktech skeptika: 19 potvrzeno, 1 nejisté, 1 vyvráceno a sníženo).
+**Připraveno: 3** (Bydlometr, Přijímačky bez paniky, Dluhy) · **Opravit před sloučením: 9** · **Předělat: 0**. Nálezů celkem **136**: Kritická 1 · Vysoká 18 · Střední 61 · Nízká 56 (skeptik posoudil 20 nálezů: 18 potvrzeno, 1 nejisté, 1 vyvráceno a sníženo na Nízkou).
 
 Oblasti: 1 Pravidla a data · 2 Výpočty · 3 Shoda se zadáním · 4 Testy · 5 Mobil a přístupnost · 6 Texty a citlivá témata · 7 Soukromí a bezpečnost · 8 Nasazení a větve. 🟢 nic nad Nízká · 🟡 nejvýš Střední · 🔴 Kritická nebo Vysoká.
 
