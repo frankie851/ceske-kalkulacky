@@ -759,7 +759,7 @@
   .table-note { font-size: var(--fs-sm); color: var(--c-text-muted); margin: var(--sp-2) 0 0; }
   @media (max-width: 559px) {
     .stack-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-    .stack-table, .stack-table caption, .stack-table tbody, .stack-table tr, .stack-table th, .stack-table td { display: block; width: 100%; }
+    .stack-table, .stack-table caption, .stack-table tbody, .stack-table tfoot, .stack-table tr, .stack-table th, .stack-table td { display: block; width: 100%; }
     .stack-table tr { border-top: 2px solid var(--c-border); padding: var(--sp-3) var(--sp-4); }
     .stack-table th, .stack-table td { border: 0; padding: 2px 0; text-align: left; }
     .stack-table td.r { text-align: left; white-space: normal; }
