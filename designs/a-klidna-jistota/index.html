@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spočítáno&nbsp;– Kalkulačky a&nbsp;průvodci podle českých pravidel</title>
+<meta name="description" content="Česká pravidla srozumitelně. Spočítáte si to sami, v prohlížeči, bez registrace.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6" rx="6" ry="2.5"/><path d="M3 6v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V6"/><path d="M3 10v4c0 1.4 2.7 2.5 6 2.5"/><path d="M3 14v4c0 1.4 2.7 2.5 6 2.5"/><ellipse cx="16" cy="14.5" rx="5" ry="2"/><path d="M11 14.5v4c0 1.1 2.2 2 5 2s5-.9 5-2v-4"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M3 12.5h18"/></symbol>
+  <symbol id="i-lifebuoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1.5"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+</svg>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+<header class="site-header">
+  <div class="wrap header-top">
+    <a class="brand" href="index.html" aria-current="page"><span class="brand-name">Spočítáno</span><span class="brand-sub">Kalkulačky a&nbsp;průvodci podle českých pravidel</span></a>
+    
+    <fieldset class="theme-switch"><legend>Barevný režim</legend>
+      <div class="opts">
+        <input type="radio" name="theme" id="t-auto" checked><label for="t-auto">Auto</label>
+        <input type="radio" name="theme" id="t-light"><label for="t-light">Světlý</label>
+        <input type="radio" name="theme" id="t-dark"><label for="t-dark">Tmavý</label>
+      </div>
+    </fieldset>
+  </div>
+  <nav class="site-nav" aria-label="Kategorie">
+    <div class="wrap">
+      <ul>
+        <li><a href="kategorie.html">Peníze a&nbsp;investice</a></li>
+        <li><a href="#">Daně a&nbsp;podnikání</a></li>
+        <li><a href="#">Bydlení a&nbsp;energie</a></li>
+        <li><a href="#">Práce a&nbsp;rodina</a></li>
+        <li><a href="index.html#dluhy">Dluhy</a></li>
+        <li><a href="index.html#zmeny-2027">Co se mění v&nbsp;roce 2027</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<main id="obsah">
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Spočítáno</p>
+      <h1>Kalkulačky a&nbsp;průvodci podle českých pravidel</h1>
+      <p class="lead">Spočítáte si to sami, v&nbsp;prohlížeči a&nbsp;bez registrace. Nic neukládáme ani neodesíláme.</p>
+      <form class="search search-hero" role="search" action="kategorie.html" method="get">
+        <label for="q-hero">Hledat na webu</label>
+        <div class="search-row">
+          <input type="search" id="q-hero" name="q" placeholder="Např. penzijko, EET, výpověď">
+          <button type="submit"><svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-search"/></svg><span class="btn-text">Hledat</span></button>
+        </div>
+      </form>
+      <div class="meta-row"><span class="badge badge-verified"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k&nbsp;4.&nbsp;11.&nbsp;2026</span><span class="small muted">Prototyp designu&nbsp;– kalkulačky zatím nepočítají naostro.</span></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="section" id="kategorie" aria-labelledby="h-kategorie">
+      <div class="section-head">
+        <h2 id="h-kategorie">Kategorie</h2>
+        <p>Vyberte oblast. U&nbsp;každé je stručný popis a&nbsp;počet nástrojů.</p>
+      </div>
+      <div class="section-body">
+        <ul class="cat-grid">
+          <li><a class="cat-link" href="kategorie.html"><svg class="icon icon-lg" aria-hidden="true" focusable="false"><use href="#i-coins"/></svg><span class="cat-name">Peníze a&nbsp;investice</span><span class="cat-count">4 nástroje</span><span class="cat-desc">Penzijko, DIP, daňový odpočet 48&nbsp;000&nbsp;Kč, zdanění investic a&nbsp;inflace.</span></a></li>
+          <li><a class="cat-link" href="#"><svg class="icon icon-lg" aria-hidden="true" focusable="false"><use href="#i-receipt"/></svg><span class="cat-name">Daně a&nbsp;podnikání</span><span class="cat-count">4 nástroje</span><span class="cat-desc">EET 2.0, paušální daň, slevy na dani a&nbsp;cestovní náhrady.</span></a></li>
+          <li><a class="cat-link" href="#"><svg class="icon icon-lg" aria-hidden="true" focusable="false"><use href="#i-home"/></svg><span class="cat-name">Bydlení a&nbsp;energie</span><span class="cat-count">2 nástroje</span><span class="cat-desc">Refixace hypotéky, nájem vs. koupě a&nbsp;tarify elektřiny.</span></a></li>
+          <li><a class="cat-link" href="#"><svg class="icon icon-lg" aria-hidden="true" focusable="false"><use href="#i-briefcase"/></svg><span class="cat-name">Práce a&nbsp;rodina</span><span class="cat-count">4 nástroje</span><span class="cat-desc">Konec práce, rodičovská, přijímačky na střední školu a&nbsp;plánování volna.</span></a></li>
+          <li><a class="cat-link" href="index.html#dluhy"><svg class="icon icon-lg" aria-hidden="true" focusable="false"><use href="#i-lifebuoy"/></svg><span class="cat-name">Dluhy</span><span class="cat-count">1 nástroj</span><span class="cat-desc">Klidný průvodce exekucí a&nbsp;oddlužením. Bez reklam, bez nabídek půjček.</span></a></li>
+          <li><a class="cat-link" href="#zmeny-2027"><svg class="icon icon-lg" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span class="cat-name">Co se mění v&nbsp;roce 2027</span><span class="cat-count">5 změn</span><span class="cat-desc">Přehled schválených změn a&nbsp;návrhů na jednom místě.</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="vybrane" aria-labelledby="h-vybrane">
+      <div class="section-head">
+        <h2 id="h-vybrane">Vybrané nástroje</h2>
+        <p>Dva nástroje s&nbsp;termínem na přelomu roku.</p>
+      </div>
+      <div class="section-body">
+        <ul class="tool-list two">
+          <li><article class="tool-card">
+  <p class="tool-type"><svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-calc"/></svg>Kalkulačka · <span>týká se roku 2027</span></p>
+  <h3><a href="kalkulacka.html">Plán48</a></h3>
+  <p>Kolik vám stát přidá na penzijko a&nbsp;kolik ušetříte na daních z&nbsp;odpočtu 48&nbsp;000&nbsp;Kč (penzijko + DIP + životní pojištění). A&nbsp;co udělat do 31.&nbsp;12.</p>
+  <p class="tool-term"><svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Vklady do 31.&nbsp;12.&nbsp;2026</span></p>
+  <a class="more" href="kalkulacka.html" aria-label="Otevřít kalkulačku Plán48">Otevřít kalkulačku →</a>
+</article></li>
+          <li><article class="tool-card">
+  <p class="tool-type"><svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-book"/></svg>Průvodce · <span>týká se roku 2027</span></p>
+  <h3><a href="pruvodce.html">Mám EET?</a></h3>
+  <p>Za dvě minuty zjistíte, jestli se vás EET 2.0 od 1.&nbsp;1.&nbsp;2027 týká, zda se vyplatí EET OFF a&nbsp;co udělat do kdy.</p>
+  <p class="tool-term"><svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Start 1.&nbsp;1.&nbsp;2027</span></p>
+  <a class="more" href="pruvodce.html" aria-label="Otevřít průvodce Mám EET?">Otevřít průvodce →</a>
+</article></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="situace" aria-labelledby="h-situace">
+      <div class="section-head">
+        <h2 id="h-situace">Podle situace</h2>
+        <p>Vyberte, co odpovídá vaší situaci. Nástroje se mohou opakovat.</p>
+      </div>
+      <div class="section-body">
+        <dl class="situations">
+          <div class="situation"><dt>Jsem zaměstnanec</dt><dd><ul><li><a href="#">Slevy 2027</a></li><li><a href="kalkulacka.html">Plán48</a></li><li><a href="#">Výpověď 2026</a></li><li><a href="#">Inflační kalkulačka</a></li></ul></dd></div>
+          <div class="situation"><dt>Podnikám (OSVČ)</dt><dd><ul><li><a href="pruvodce.html">Mám EET?</a></li><li><a href="#">OSVČ 2027</a></li><li><a href="#">Cestovní příkaz 2027</a></li><li><a href="kalkulacka.html">Plán48</a></li></ul></dd></div>
+          <div class="situation"><dt>Investuji a&nbsp;spořím</dt><dd><ul><li><a href="kalkulacka.html">Plán48</a></li><li><a href="#">Penzijko kompas</a></li><li><a href="#">Zdaním to?</a></li><li><a href="#">Inflační kalkulačka</a></li></ul></dd></div>
+          <div class="situation"><dt>Mám rodinu a&nbsp;děti</dt><dd><ul><li><a href="#">Rodičovská pro celou rodinu</a></li><li><a href="#">Přijímačky bez paniky</a></li><li><a href="#">Slevy 2027</a></li><li><a href="#">Volno 2027</a></li></ul></dd></div>
+          <div class="situation"><dt>Mám dluhy</dt><dd><ul><li><a href="#">Exekuce, nebo oddlužení?</a></li></ul></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="zmeny-2027" aria-labelledby="h-zmeny">
+      <div class="section-head">
+        <h2 id="h-zmeny">Co se mění v&nbsp;roce 2027</h2>
+        <p>Stručný přehled. U&nbsp;každé změny je uveden stav a&nbsp;zdroj. Návrhy zatím nejsou zákonem.</p>
+      </div>
+      <div class="section-body">
+        <ol class="changes">
+          <li class="change">
+            <p class="change-date">od 1.&nbsp;1.&nbsp;2027</p>
+            <div class="change-head"><h3>Vrací se EET&nbsp;– jako EET 2.0</h3><span class="badge badge-plain">Schváleno</span></div>
+            <p>Evidovat se budou kontaktní platby včetně karty a&nbsp;QR kódu na místě. Drobní živnostníci v&nbsp;1.&nbsp;pásmu paušální daně mohou zvolit EET OFF za přirážku 1&nbsp;400&nbsp;Kč měsíčně.</p>
+            <p class="change-links"><a href="pruvodce.html">Mám EET?</a><span>Zdroj: <a href="https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1">epravo</a></span></p>
+          </li>
+          <li class="change">
+            <p class="change-date">od 2027, pokud projde</p>
+            <div class="change-head"><h3>Lepší penzijko: 40&nbsp;% pro mladé</h3><span class="badge badge-draft"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pencil"/></svg>Návrh, zatím neschváleno</span></div>
+            <p>Lidé do 30&nbsp;let mají dostat státní příspěvek až 680&nbsp;Kč měsíčně (8&nbsp;160&nbsp;Kč ročně), děti už od vkladu 100&nbsp;Kč, poplatek za správu se zastropuje na 0,5&nbsp;%.</p>
+            <p class="change-links"><a href="kalkulacka.html">Plán48</a><span>Zdroj: <a href="https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni">Echo24</a></span></p>
+          </li>
+          <li class="change">
+            <p class="change-date">přihláška do 11.&nbsp;1.&nbsp;2027</p>
+            <div class="change-head"><h3>Paušální daň v&nbsp;1.&nbsp;pásmu stoupá</h3><span class="badge badge-plain">Schváleno</span></div>
+            <p>1.&nbsp;pásmo paušální daně stoupá na 9&nbsp;662&nbsp;Kč měsíčně.</p>
+            <p class="change-links"><a href="#">OSVČ 2027</a><span>Zdroj: <a href="https://portal.pohoda.cz/?p=45627">Pohoda</a></span></p>
+          </li>
+          <li class="change">
+            <p class="change-date">2027</p>
+            <div class="change-head"><h3>Vrací se sleva na studenta a&nbsp;školkovné</h3><span class="badge badge-plain">Schváleno</span></div>
+            <p>Sleva na studenta 4&nbsp;020&nbsp;Kč ročně a&nbsp;školkovné do výše minimální mzdy.</p>
+            <p class="change-links"><a href="#">Slevy 2027</a><span>Zdroj: <a href="https://www.praceamzda.cz/tydenik/253/podtrzeno-secteno-c-26-30-2026">Práce a&nbsp;mzda</a></span></p>
+          </li>
+          <li class="change">
+            <p class="change-date">celý rok</p>
+            <div class="change-head"><h3>Svátky 2027 a&nbsp;prodloužené víkendy</h3><span class="badge badge-plain">Kalendář</span></div>
+            <p>1.&nbsp;5., 8.&nbsp;5.&nbsp;a&nbsp;oba vánoční svátky připadnou na víkend, zato 5.–6.&nbsp;7.&nbsp;dají čtyři dny volna bez dovolené.</p>
+            <p class="change-links"><a href="#">Volno 2027</a><span class="muted">Zdroj: vlastní výpočet z&nbsp;kalendáře</span></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="dluhy" aria-labelledby="h-dluhy">
+      <div class="section-head">
+        <h2 id="h-dluhy">Dluhy</h2>
+        <p>Klidný průvodce exekucí a&nbsp;oddlužením. Bez reklam, bez nabídek půjček.</p>
+      </div>
+      <div class="section-body">
+        <div class="debt-help" id="pomoc">
+          <h3>Nejste v&nbsp;tom sami</h3>
+          <p>Bezplatná dluhová poradna vám pomůže zdarma a&nbsp;bez závazků.</p>
+          <a class="button" href="#pomoc">Najít bezplatnou poradnu<svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+          <p class="small muted">Odkaz na oficiální seznam bezplatných poraden doplníme po ověření.</p>
+          <ul class="debt-rules">
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Žádné reklamy ani affiliate odkazy</span></li>
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Žádné nabídky půjček ani placení zprostředkovatelé</span></li>
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Žádné sbírání kontaktů</span></li>
+          </ul>
+        </div>
+        <div class="debt-tool"><article class="tool-card">
+  <p class="tool-type"><svg class="icon icon-sm" aria-hidden="true" focusable="false"><use href="#i-book"/></svg>Průvodce</p>
+  <h3><a href="#">Exekuce, nebo oddlužení?</a></h3>
+  <p>Kolik vám zůstane z&nbsp;výplaty, jak dlouho byste spláceli v&nbsp;exekuci a&nbsp;jak by vypadalo oddlužení. A&nbsp;kde najít bezplatnou pomoc.</p>
+  
+  <a class="more" href="#" aria-label="Otevřít průvodce Exekuce, nebo oddlužení?">Otevřít průvodce →</a>
+</article></div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">Spočítáno</p>
+      <p>Česká pravidla srozumitelně. Spočítáte si to sami, v&nbsp;prohlížeči, bez registrace.</p>
+      <div class="notice"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><p><span class="notice-title">Upozornění.</span> Nejde o&nbsp;investiční, daňové ani právní poradenství. Výpočty jsou orientační.</p></div>
+    </div>
+    <ul class="footer-list">
+      <li><strong>Pravidla ověřena k&nbsp;4.&nbsp;11.&nbsp;2026</strong></li>
+      <li>Nic neukládáme ani neodesíláme. Výpočty běží jen ve vašem prohlížeči.</li>
+      <li>Prototyp designu&nbsp;– kalkulačky zatím nepočítají naostro.</li>
+      <li>Při tisku se skryje navigace, zobrazí se adresy odkazů a&nbsp;datum ověření pravidel.</li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

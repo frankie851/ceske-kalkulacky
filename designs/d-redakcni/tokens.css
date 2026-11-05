@@ -1,0 +1,280 @@
+/* =========================================================
+   Spočítáno – varianta D „Redakční“
+   Design tokeny: papír, inkoust a jedna redakční barva.
+   Světlé „denní vydání“ a tmavé „noční vydání“.
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* --- Barvy: denní vydání --- */
+  --paper: #FBF8F3;          /* papírově teplá bílá */
+  --paper-2: #F4EEE4;        /* podklad rámečků a boxů */
+  --paper-3: #EDE5D8;        /* zvýraznění řádků, hlavičky */
+  --ink: #1B1714;            /* inkoustová černá */
+  --ink-2: #4E463E;          /* doprovodný text, popisky */
+  --ink-3: #6B6158;          /* drobné metainformace (≥ 4,5 : 1 na papíře) */
+  --rule: #1B1714;           /* silné linky */
+  --rule-soft: #CFC4B4;      /* tenké sloupkové dělítka (dekorativní) */
+  --rule-ui: #857a6e;        /* okraje ovládacích prvků (≥ 3 : 1) */
+  --accent: #8C1C13;         /* redakční vínová */
+  --accent-strong: #6E140D;
+  --accent-soft: #F5E3DE;    /* podklad štítků a výsledků */
+  --on-accent: #FFFFFF;
+  --success: #2F5D3A;        /* stav „schváleno“ */
+  --success-soft: #E4EEE3;
+  --error: #A3150B;
+  --error-soft: #FBE7E3;
+  --focus: #8C1C13;
+  --field: #FFFFFF;
+
+  /* Grafy */
+  --chart-1: #8C1C13;        /* penzijko */
+  --chart-2: #1B1714;        /* životní pojištění */
+  --chart-3: #6B6158;        /* volné místo – šrafování */
+  --chart-area: #E9D3CC;
+
+  /* --- Písma --- */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-text: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-ui: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* --- Typografická škála --- */
+  --fs-body: 1.125rem;      /* 18 px, od 900 px šířky 20 px */
+  --fs-small: 0.9375rem;
+  --fs-ui: 0.875rem;
+  --fs-micro: 0.75rem;
+  --fs-h4: 1.25rem;
+  --fs-h3: 1.5rem;
+  --fs-h2: 1.875rem;
+  --fs-h1: 2.455rem;
+  --fs-masthead: 3.4rem;
+  --fs-huge: 3.0rem;
+  --lh-body: 1.6;
+  --lh-tight: 1.08;
+  --measure: 38rem;
+
+  /* --- Mezery --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --gutter: 17px;
+  --col-gap: 16px;
+  --page-max: 1320px;
+
+  /* --- Zaoblení a stíny: tisk je hranatý --- */
+  --radius-0: 0;
+  --radius-1: 2px;
+  --radius-pill: 999px;
+  --shadow-box: 0 1px 0 var(--rule-soft);
+  --shadow-lift: 6px 6px 0 var(--paper-3);
+
+  --line-thin: 1px;
+  --line-bold: 3px;
+}
+
+@media (min-width: 900px) {
+  :root { --fs-body: 1.25rem; }
+}
+
+
+/* --- Plynulá typografie a mezery: stupně podle šířky stránky --- */
+:root {
+  --fl-1: 2.5rem;
+  --fl-2: 1.5rem;
+  --fl-3: 1.375rem;
+  --fl-4: 2.25rem;
+  --fl-5: 1.1875rem;
+  --fl-6: 1.625rem;
+  --fl-7: 2.25rem;
+  --fl-8: 1.1875rem;
+  --fl-9: 1.25rem;
+  --fl-10: 1.625rem;
+  --fl-11: 1.25rem;
+  --fl-12: 1.5rem;
+  --fl-13: 3.0rem;
+  --fl-14: 1.39rem;
+  --fl-15: 0.75rem;
+  --fl-16: 1.25rem;
+  --fl-17: 2.0rem;
+  --fl-18: 4.1875rem;
+  --fl-19: 1.1875rem;
+  --fl-20: 2.125rem;
+  --fl-21: 1.1875rem;
+  --fl-22: 1.5rem;
+  --fl-23: 1.5rem;
+}
+@media (min-width: 720px) {
+  :root {
+    --fs-h4: 1.3688rem;
+    --fs-h3: 1.7338rem;
+    --fs-h2: 2.3062rem;
+    --fs-h1: 3.535rem;
+    --fs-masthead: 5.8rem;
+    --fs-huge: 4.15rem;
+    --gutter: 39px;
+    --col-gap: 19px;
+    --fl-1: 3.535rem;
+    --fl-2: 1.845rem;
+    --fl-3: 1.5225rem;
+    --fl-4: 3.2275rem;
+    --fl-5: 1.3188rem;
+    --fl-6: 1.8375rem;
+    --fl-7: 2.445rem;
+    --fl-8: 1.3188rem;
+    --fl-9: 1.4563rem;
+    --fl-10: 1.9413rem;
+    --fl-11: 1.4563rem;
+    --fl-12: 1.7875rem;
+    --fl-13: 3.8125rem;
+    --fl-14: 1.63rem;
+    --fl-15: 0.8687rem;
+    --fl-16: 1.4225rem;
+    --fl-17: 2.69rem;
+    --fl-18: 5.6875rem;
+    --fl-19: 1.3188rem;
+    --fl-20: 2.905rem;
+    --fl-21: 1.3188rem;
+    --fl-22: 1.73rem;
+    --fl-23: 1.7875rem;
+  }
+}
+@media (min-width: 1080px) {
+  :root {
+    --fs-h4: 1.4688rem;
+    --fs-h3: 1.9137rem;
+    --fs-h2: 2.6063rem;
+    --fs-h1: 4.255rem;
+    --fs-masthead: 7.4rem;
+    --fs-huge: 4.95rem;
+    --gutter: 53px;
+    --col-gap: 26px;
+    --fl-1: 4.25rem;
+    --fl-2: 2.085rem;
+    --fl-3: 1.6425rem;
+    --fl-4: 3.9075rem;
+    --fl-5: 1.4188rem;
+    --fl-6: 2.0375rem;
+    --fl-7: 2.685rem;
+    --fl-8: 1.4188rem;
+    --fl-9: 1.5962rem;
+    --fl-10: 2.1612rem;
+    --fl-11: 1.5962rem;
+    --fl-12: 1.9875rem;
+    --fl-13: 4.4125rem;
+    --fl-14: 1.79rem;
+    --fl-15: 0.9375rem;
+    --fl-16: 1.5425rem;
+    --fl-17: 3.17rem;
+    --fl-18: 6.6875rem;
+    --fl-19: 1.4188rem;
+    --fl-20: 3.465rem;
+    --fl-21: 1.4188rem;
+    --fl-22: 1.89rem;
+    --fl-23: 1.9875rem;
+  }
+}
+@media (min-width: 1360px) {
+  :root {
+    --fs-h4: 1.5rem;
+    --fs-h3: 2.06rem;
+    --fs-h2: 2.85rem;
+    --fs-h1: 4.75rem;
+    --fs-masthead: 8.5rem;
+    --fs-huge: 5.6rem;
+    --gutter: 64px;
+    --col-gap: 32px;
+    --fl-1: 4.25rem;
+    --fl-2: 2.25rem;
+    --fl-3: 1.74rem;
+    --fl-4: 4.25rem;
+    --fl-5: 1.4375rem;
+    --fl-6: 2.2rem;
+    --fl-7: 2.88rem;
+    --fl-8: 1.4375rem;
+    --fl-9: 1.6875rem;
+    --fl-10: 2.25rem;
+    --fl-11: 1.71rem;
+    --fl-12: 2.125rem;
+    --fl-13: 4.75rem;
+    --fl-14: 1.875rem;
+    --fl-15: 0.9375rem;
+    --fl-16: 1.625rem;
+    --fl-17: 3.25rem;
+    --fl-18: 7.5rem;
+    --fl-19: 1.4375rem;
+    --fl-20: 3.75rem;
+    --fl-21: 1.4375rem;
+    --fl-22: 2.0rem;
+    --fl-23: 2.125rem;
+  }
+}
+
+/* --- Noční vydání: tmavý režim (platí i v režimu Auto) --- */
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(#t-light:checked)) {
+    color-scheme: dark;
+    --paper: #161210;
+    --paper-2: #201B18;
+    --paper-3: #2B2420;
+    --ink: #F1E8DA;
+    --ink-2: #CFC3B2;
+    --ink-3: #B3A794;
+    --rule: #F1E8DA;
+    --rule-soft: #3F3631;
+    --rule-ui: #8F8374;
+    --accent: #F0907F;
+    --accent-strong: #F6B0A3;
+    --accent-soft: #3A1F1A;
+    --on-accent: #161210;
+    --success: #9FCB9F;
+    --success-soft: #1F2C20;
+    --error: #FF9C8E;
+    --error-soft: #3B1C17;
+    --focus: #F6B0A3;
+    --field: #1C1815;
+    --chart-1: #F0907F;
+    --chart-2: #F1E8DA;
+    --chart-3: #B3A794;
+    --chart-area: #4A2A24;
+    --shadow-lift: 6px 6px 0 #0B0908;
+  }
+}
+
+/* Ruční volba přepínačem (bez JS) */
+:root:has(#t-light:checked) {
+  color-scheme: light;
+}
+
+:root:has(#t-dark:checked) {
+  color-scheme: dark;
+  --paper: #161210;
+  --paper-2: #201B18;
+  --paper-3: #2B2420;
+  --ink: #F1E8DA;
+  --ink-2: #CFC3B2;
+  --ink-3: #B3A794;
+  --rule: #F1E8DA;
+  --rule-soft: #3F3631;
+  --rule-ui: #8F8374;
+  --accent: #F0907F;
+  --accent-strong: #F6B0A3;
+  --accent-soft: #3A1F1A;
+  --on-accent: #161210;
+  --success: #9FCB9F;
+  --success-soft: #1F2C20;
+  --error: #FF9C8E;
+  --error-soft: #3B1C17;
+  --focus: #F6B0A3;
+  --field: #1C1815;
+  --chart-1: #F0907F;
+  --chart-2: #F1E8DA;
+  --chart-3: #B3A794;
+  --chart-area: #4A2A24;
+  --shadow-lift: 6px 6px 0 #0B0908;
+}

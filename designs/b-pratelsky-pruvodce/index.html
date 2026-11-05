@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spočítáno – s čím ti můžeme pomoct? (varianta B)</title>
+<meta name="description" content="Kalkulačky a průvodci podle českých pravidel. Krok za krokem, v prohlížeči, bez registrace.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=Nunito:wght@400;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+
+<header class="site-header">
+  <div class="wrap header-top">
+    <a class="logo" href="index.html" aria-current="page">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" class="il-terra"/><path d="M14 25l7 7 13-15" class="st-cream" stroke-width="5"/><circle cx="38" cy="10" r="5" class="il-gold"/></svg>
+      <span>Spočítáno<small>Kalkulačky a průvodci podle českých pravidel</small></span>
+    </a>
+    <div class="header-tools">
+      <form class="search" role="search" action="kategorie.html" method="get">
+        <label class="sr-only" for="hledat">Hledat na webu</label>
+        <div class="search-field">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" class="st-ink" stroke-width="2.4"/><path d="M13 13l4 4" class="st-ink" stroke-width="2.4"/></svg>
+          <input type="search" id="hledat" name="q" placeholder="Hledat kalkulačku, např. penzijko, EET, výpověď">
+          <button type="submit">Hledat</button>
+        </div>
+      </form>
+      <fieldset class="theme-switch"><legend>Barevný režim</legend>
+        <input type="radio" name="theme" id="t-auto" checked><label for="t-auto">Auto</label>
+        <input type="radio" name="theme" id="t-light"><label for="t-light">Světlý</label>
+        <input type="radio" name="theme" id="t-dark"><label for="t-dark">Tmavý</label>
+      </fieldset>
+    </div>
+  </div>
+  <nav class="main-nav wrap" aria-label="Hlavní navigace">
+    <ul>
+      <li><a href="kategorie.html"><span class="dot"></span>Peníze a investice</a></li>
+      <li><a href="#"><span class="dot"></span>Daně a podnikání</a></li>
+      <li><a href="#"><span class="dot"></span>Bydlení a energie</a></li>
+      <li><a href="#"><span class="dot"></span>Práce a rodina</a></li>
+      <li><a href="#dluhy"><span class="dot"></span>Dluhy</a></li>
+      <li><a href="#zmeny-2027"><span class="dot"></span>Co se mění v roce 2027</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="obsah">
+
+  <!-- Úvod: otázka a výběr situace -->
+  <section class="hero" aria-labelledby="uvod-nadpis">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Ahoj, tady Spočítáno</p>
+          <h1 id="uvod-nadpis">S čím ti můžeme <span class="hi">pomoct?</span></h1>
+          <p class="lead">Česká pravidla srozumitelně a krok za krokem. Spočítáš si to v klidu, přímo v prohlížeči a bez registrace.</p>
+          <ul class="badges">
+            <li class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pravidla ověřena k 4. 11. 2026</li>
+            <li class="badge badge-plain">Nic neukládáme ani neodesíláme</li>
+          </ul>
+        </div>
+        <div class="hero-art">
+          <svg viewBox="0 0 520 440" aria-hidden="true" focusable="false">
+            <path class="il-bg" d="M262 26c100 0 206 62 222 166 16 106-60 214-190 226C166 430 48 370 32 258 16 146 126 26 262 26z"/>
+            <ellipse class="il-bg-2" cx="282" cy="398" rx="214" ry="28"/>
+            <!-- cesta po krocích -->
+            <path class="st-cream" stroke-width="36" d="M48 412C140 406 120 336 200 324S300 300 318 286"/>
+            <path class="st-apricot" stroke-width="4" stroke-dasharray="1 14" d="M48 412C140 406 120 336 200 324S300 300 318 286"/>
+            <g>
+              <circle class="il-paper" cx="129" cy="369" r="21"/>
+              <circle class="st-terra" stroke-width="4" cx="129" cy="369" r="21"/>
+              <text class="il-text" x="129" y="377" text-anchor="middle" font-size="22">1</text>
+              <circle class="il-paper" cx="203" cy="323" r="21"/>
+              <circle class="st-terra" stroke-width="4" cx="203" cy="323" r="21"/>
+              <text class="il-text" x="203" y="331" text-anchor="middle" font-size="22">2</text>
+              <circle class="il-sage-d" cx="278" cy="305" r="21"/>
+              <path class="st-cream" stroke-width="5" d="M268 305l7 7 13-14"/>
+            </g>
+            <!-- kompas -->
+            <circle class="il-paper" cx="104" cy="132" r="46"/>
+            <circle class="st-terra" stroke-width="6" cx="104" cy="132" r="46"/>
+            <path class="st-ink" stroke-width="4" d="M104 96v8M104 160v8M68 132h8M132 132h8"/>
+            <path class="il-terra" d="M104 102l12 30h-24z"/>
+            <path class="il-sage-d" d="M104 162l-12-30h24z"/>
+            <circle class="il-ink" cx="104" cy="132" r="5"/>
+            <!-- kalendář 31. 12. -->
+            <g transform="rotate(-6 214 186)">
+              <rect class="il-paper" x="176" y="150" width="78" height="74" rx="14"/>
+              <path class="il-terra" d="M176 164a14 14 0 0 1 14-14h50a14 14 0 0 1 14 14v8h-78z"/>
+              <path class="st-ink" stroke-width="4" d="M196 142v14M234 142v14"/>
+              <text class="il-text" x="215" y="211" text-anchor="middle" font-size="30">31</text>
+            </g>
+            <!-- prasátko kasička -->
+            <path class="il-apricot-d" d="M380 128l6-30c1-6 9-7 11-1l7 31z"/>
+            <rect class="il-apricot-d" x="312" y="226" width="26" height="46" rx="12"/>
+            <rect class="il-apricot-d" x="398" y="226" width="26" height="46" rx="12"/>
+            <path class="st-apricot" stroke-width="7" d="M288 178c-18-2-24-18-12-24 10-4 14 8 4 13"/>
+            <rect class="il-apricot" x="336" y="230" width="26" height="46" rx="12"/>
+            <rect class="il-apricot" x="420" y="230" width="26" height="44" rx="12"/>
+            <ellipse class="il-apricot" cx="372" cy="190" rx="90" ry="66"/>
+            <ellipse class="il-blush" cx="356" cy="222" rx="50" ry="18"/>
+            <path class="il-apricot-d" d="M408 132l16-30c4-6 12-4 12 3l-3 36z"/>
+            <rect class="il-apricot-d" x="346" y="130" width="46" height="10" rx="5"/>
+            <ellipse class="il-blush" cx="462" cy="196" rx="20" ry="24"/>
+            <ellipse class="il-apricot-d" cx="455" cy="191" rx="3.5" ry="6"/>
+            <ellipse class="il-apricot-d" cx="468" cy="191" rx="3.5" ry="6"/>
+            <circle class="il-ink" cx="424" cy="168" r="6.5"/>
+            <circle class="il-paper" cx="426.5" cy="165.5" r="2.2"/>
+            <ellipse class="il-blush" cx="420" cy="196" rx="11" ry="7"/>
+            <path class="st-ink" stroke-width="3.5" d="M434 214c5 5 12 5 16 0"/>
+            <!-- mince -->
+            <circle class="il-gold" cx="369" cy="78" r="26"/>
+            <circle class="st-gold" stroke-width="3.5" cx="369" cy="78" r="18"/>
+            <text class="il-text" x="369" y="85" text-anchor="middle" font-size="19">Kč</text>
+            <path class="st-gold" stroke-width="4" d="M326 64v-12M412 64v-12M334 96l-6 6M404 96l6 6"/>
+            <!-- kytička -->
+            <path class="st-sage" stroke-width="5" d="M478 372v-44"/>
+            <path class="il-sage" d="M478 346c-4-16 6-28 22-30 2 16-8 28-22 30z"/>
+            <path class="il-sage-d" d="M478 356c2-16-8-26-24-26-2 16 8 26 24 26z"/>
+            <path class="il-terra" d="M458 366h40l-5 30a6 6 0 0 1-6 5h-18a6 6 0 0 1-6-5z"/>
+            <!-- jiskry -->
+            <path class="il-gold" d="M256 64q3 9 12 12q-9 3-12 12q-3-9-12-12q9-3 12-12z"/>
+            <path class="il-gold" d="M486 108q2 7 9 9q-7 2-9 9q-2-7-9-9q7-2 9-9z"/>
+            <path class="il-sage" d="M40 300q2 7 9 9q-7 2-9 9q-2-7-9-9q7-2 9-9z"/>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="sr-only">Vyber svou situaci</h2>
+      <p class="eyebrow" aria-hidden="true">Vyber, co se tě týká</p>
+      <ul class="situ-grid">
+        <li><a class="situ" href="#">
+          <svg class="situ-ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><path d="M25 22v-4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4" class="st-ink" stroke-width="3"/><rect x="13" y="22" width="38" height="27" rx="7" class="il-terra"/><rect x="13" y="31" width="38" height="5" class="il-apricot-d"/><rect x="28" y="29" width="8" height="9" rx="2.5" class="il-gold"/></svg>
+          <span><span class="situ-name">Jsem zaměstnanec</span><span class="situ-sub">Slevy 2027, Plán48, výpověď</span></span>
+          <span class="situ-go"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a></li>
+        <li><a class="situ" href="#">
+          <svg class="situ-ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><rect x="16" y="27" width="32" height="22" rx="3" class="il-paper"/><path d="M12 19h40l-2 10H14z" class="il-terra"/><path d="M22 19l-1 10M32 19v10M42 19l1 10" class="st-cream" stroke-width="3"/><rect x="28" y="35" width="10" height="14" rx="2" class="il-sage-d"/><rect x="19" y="33" width="6" height="6" rx="1.5" class="il-gold"/></svg>
+          <span><span class="situ-name">Podnikám (OSVČ)</span><span class="situ-sub">Mám EET?, paušální daň, cesťák</span></span>
+          <span class="situ-go"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a></li>
+        <li><a class="situ" href="kategorie.html">
+          <svg class="situ-ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><rect x="13" y="41" width="24" height="7" rx="3.5" class="il-gold-d"/><rect x="15" y="34" width="24" height="7" rx="3.5" class="il-gold"/><rect x="13" y="27" width="24" height="7" rx="3.5" class="il-gold-d"/><path d="M46 49V28" class="st-sage" stroke-width="3.5"/><path d="M46 34c0-7 5-12 12-12 0 7-5 12-12 12z" class="il-sage"/><path d="M46 30c0-6-4-11-10-11 0 6 4 11 10 11z" class="il-sage-d"/></svg>
+          <span><span class="situ-name">Investuji a spořím</span><span class="situ-sub">Penzijko, DIP, zdanění, inflace</span></span>
+          <span class="situ-go"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a></li>
+        <li><a class="situ" href="#">
+          <svg class="situ-ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><path d="M15 31L32 17l17 14v16a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3z" class="il-paper"/><path d="M11 32L32 14l21 18" class="st-terra" stroke-width="5"/><path d="M32 45c-7-5-10-8-10-12a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 4-3 7-10 12z" class="il-terra"/></svg>
+          <span><span class="situ-name">Mám rodinu a děti</span><span class="situ-sub">Rodičovská, přijímačky, volno</span></span>
+          <span class="situ-go"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a></li>
+        <li><a class="situ situ-debt" href="#dluhy">
+          <svg class="situ-ico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-paper"/><path d="M13 21a6 6 0 0 1 6-6h26a6 6 0 0 1 6 6v15a6 6 0 0 1-6 6H31l-9 7v-7h-3a6 6 0 0 1-6-6z" class="il-sage"/><path d="M32 37c-6-4-9-7-9-10a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 3-3 6-9 10z" class="il-paper"/></svg>
+          <span><span class="situ-name">Mám dluhy</span><span class="situ-sub">V klidu a bez reklam</span></span>
+          <span class="situ-go"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Oblíbené nástroje -->
+  <section class="section" aria-labelledby="zacni-nadpis">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Teď se hodí nejvíc</p>
+        <h2 id="zacni-nadpis">Dvě věci, které stojí za to vyřešit do konce roku</h2>
+      </div>
+      <ul class="tool-grid">
+        <li>
+          <article class="tool-card">
+            <svg class="tool-art" viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" rx="20" class="il-bg"/><rect x="28" y="62" width="11" height="16" rx="5" class="il-apricot-d"/><rect x="58" y="62" width="11" height="16" rx="5" class="il-apricot-d"/><ellipse cx="48" cy="54" rx="30" ry="23" class="il-apricot"/><path d="M60 36l6-10c1-2 4-1 4 1l-1 12z" class="il-apricot-d"/><rect x="38" y="33" width="16" height="4" rx="2" class="il-apricot-d"/><ellipse cx="78" cy="56" rx="7" ry="8" class="il-blush"/><circle cx="64" cy="48" r="2.6" class="il-ink"/><circle cx="46" cy="20" r="11" class="il-gold"/><text class="il-text" x="46" y="25" text-anchor="middle" font-size="12">48</text></svg>
+            <div>
+              <h3><a href="kalkulacka.html">Plán48</a></h3>
+              <div class="tool-meta"><span class="tag">kalkulačka</span><span class="badge badge-new">Mění se v 2027</span></div>
+              <p>Zjistíš, kolik ti stát přidá na penzijko a kolik ušetříš na daních z odpočtu <span class="num">48&nbsp;000&nbsp;Kč</span> (penzijko + DIP + životní pojištění). A co udělat do 31.&nbsp;12.</p>
+              <p class="tool-when"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="4" width="16" height="14" rx="4" class="il-apricot"/><rect x="5" y="9" width="10" height="6" rx="2" class="il-cream"/><path d="M6 2v4M14 2v4" class="st-ink" stroke-width="2"/></svg>Vklady do 31.&nbsp;12.&nbsp;2026</p>
+              <span class="tool-cta" aria-hidden="true">Pojďme na to <svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="tool-card">
+            <svg class="tool-art" viewBox="0 0 96 96" aria-hidden="true"><rect width="96" height="96" rx="20" class="il-bg-2"/><path d="M30 14h36v44l-4.5-3-4.5 3-4.5-3-4.5 3-4.5-3-4.5 3-4.5-3-4.5 3z" class="il-paper"/><path d="M37 25h22M37 33h22M37 41h14" class="st-ink" stroke-width="3"/><rect x="18" y="52" width="60" height="30" rx="9" class="il-terra"/><rect x="26" y="59" width="26" height="9" rx="3" class="il-cream"/><circle cx="62" cy="63" r="3" class="il-gold"/><circle cx="70" cy="63" r="3" class="il-gold"/><circle cx="62" cy="73" r="3" class="il-cream"/><circle cx="70" cy="73" r="3" class="il-cream"/></svg>
+            <div>
+              <h3><a href="pruvodce.html">Mám EET?</a></h3>
+              <div class="tool-meta"><span class="tag">průvodce</span><span class="badge badge-new">Mění se v 2027</span></div>
+              <p>Za dvě minuty zjistíš, jestli se tě EET&nbsp;2.0 od 1.&nbsp;1.&nbsp;2027 týká, jestli se vyplatí EET OFF a co udělat do kdy.</p>
+              <p class="tool-when"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="4" width="16" height="14" rx="4" class="il-apricot"/><rect x="5" y="9" width="10" height="6" rx="2" class="il-cream"/><path d="M6 2v4M14 2v4" class="st-ink" stroke-width="2"/></svg>Start 1.&nbsp;1.&nbsp;2027</p>
+              <span class="tool-cta" aria-hidden="true">Projít otázky <svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Kategorie -->
+  <section class="section-tight" aria-labelledby="kategorie-nadpis">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nebo podle tématu</p>
+        <h2 id="kategorie-nadpis">Vyber si téma</h2>
+      </div>
+      <ul class="cat-grid">
+        <li><a class="cat" href="kategorie.html">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><rect x="20" y="40" width="7" height="11" rx="3.5" class="il-apricot-d"/><rect x="38" y="40" width="7" height="11" rx="3.5" class="il-apricot-d"/><ellipse cx="32" cy="36" rx="19" ry="14" class="il-apricot"/><ellipse cx="51" cy="37" rx="4.5" ry="5.5" class="il-blush"/><circle cx="43" cy="31" r="2" class="il-ink"/><rect x="26" y="23" width="10" height="3" rx="1.5" class="il-apricot-d"/><circle cx="31" cy="14" r="7" class="il-gold"/></svg>
+          <span><strong>Peníze a investice</strong><span>Penzijko, DIP, odpočet 48&nbsp;000&nbsp;Kč, inflace</span></span>
+        </a></li>
+        <li><a class="cat" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><path d="M19 12h26v40l-3.25-2.5-3.25 2.5-3.25-2.5-3.25 2.5-3.25-2.5-3.25 2.5-3.25-2.5-3.25 2.5z" class="il-paper"/><path d="M25 21h14M25 28h14" class="st-ink" stroke-width="2.6"/><circle cx="27" cy="38" r="2.6" class="il-terra"/><circle cx="37" cy="44" r="2.6" class="il-terra"/><path d="M38 36l-12 10" class="st-terra" stroke-width="2.6"/></svg>
+          <span><strong>Daně a podnikání</strong><span>EET 2.0, paušální daň, slevy na dani</span></span>
+        </a></li>
+        <li><a class="cat" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><path d="M15 31L32 17l17 14v16a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3z" class="il-paper"/><path d="M11 32L32 14l21 18" class="st-terra" stroke-width="5"/><path d="M34 27l-7 10h6l-3 9 9-12h-6l3-7z" class="il-gold-d"/></svg>
+          <span><strong>Bydlení a energie</strong><span>Refixace hypotéky, nájem, elektřina</span></span>
+        </a></li>
+        <li><a class="cat" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><rect x="14" y="17" width="36" height="33" rx="8" class="il-paper"/><path d="M14 25a8 8 0 0 1 8-8h20a8 8 0 0 1 8 8v2H14z" class="il-sage-d"/><path d="M23 13v8M41 13v8" class="st-ink" stroke-width="3"/><path d="M32 45c-6-4-9-7-9-10a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 3-3 6-9 10z" class="il-terra"/></svg>
+          <span><strong>Práce a rodina</strong><span>Výpověď, rodičovská, přijímačky, volno</span></span>
+        </a></li>
+        <li><a class="cat" href="#dluhy">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg-2"/><path d="M13 21a6 6 0 0 1 6-6h26a6 6 0 0 1 6 6v15a6 6 0 0 1-6 6H31l-9 7v-7h-3a6 6 0 0 1-6-6z" class="il-sage"/><path d="M32 37c-6-4-9-7-9-10a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 3-3 6-9 10z" class="il-paper"/></svg>
+          <span><strong>Dluhy</strong><span>Exekuce a oddlužení. Bez reklam, bez půjček.</span></span>
+        </a></li>
+        <li><a class="cat" href="#zmeny-2027">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" class="il-bg"/><rect x="14" y="17" width="36" height="33" rx="8" class="il-paper"/><path d="M14 25a8 8 0 0 1 8-8h20a8 8 0 0 1 8 8v2H14z" class="il-terra"/><path d="M23 13v8M41 13v8" class="st-ink" stroke-width="3"/><text class="il-text" x="32" y="45" text-anchor="middle" font-size="15">2027</text><path d="M52 10q1.5 5 6 6q-4.5 1.5-6 6q-1.5-4.5-6-6q4.5-1 6-6z" class="il-gold"/></svg>
+          <span><strong>Co se mění v roce 2027</strong><span>Novinky a návrhy na jednom místě</span></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Co se mění v roce 2027 -->
+  <section class="section" id="zmeny-2027" aria-labelledby="zmeny-nadpis">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Ať tě nic nepřekvapí</p>
+        <h2 id="zmeny-nadpis">Co se mění v roce 2027</h2>
+        <p class="lead">Pět změn, o kterých je dobré vědět. U každé najdeš zdroj a jestli už platí, nebo je to zatím jen návrh.</p>
+      </div>
+      <ul class="changes">
+        <li class="change">
+          <p class="change-date"><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="4" width="18" height="16" rx="5" class="il-apricot"/><rect x="5" y="10" width="12" height="7" rx="2" class="il-cream"/><path d="M7 2v4M15 2v4" class="st-ink" stroke-width="2"/></svg>od 1.&nbsp;1.&nbsp;2027</p>
+          <h3>Vrací se EET – jako EET 2.0</h3>
+          <p>Evidovat se budou kontaktní platby včetně karty a QR kódu na místě. Drobní živnostníci v 1. pásmu paušální daně mohou zvolit EET OFF za přirážku <span class="num">1&nbsp;400&nbsp;Kč</span> měsíčně.</p>
+          <div class="change-foot"><span class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Schváleno</span><a href="pruvodce.html">Projít Mám EET?</a><a href="https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1">Zdroj: epravo</a></div>
+        </li>
+        <li class="change">
+          <p class="change-date"><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="4" width="18" height="16" rx="5" class="il-apricot"/><rect x="5" y="10" width="12" height="7" rx="2" class="il-cream"/><path d="M7 2v4M15 2v4" class="st-ink" stroke-width="2"/></svg>od 2027, pokud projde</p>
+          <h3>Lepší penzijko: 40 % pro mladé</h3>
+          <p>Lidé do 30 let mají dostat státní příspěvek až <span class="num">680&nbsp;Kč</span> měsíčně (<span class="num">8&nbsp;160&nbsp;Kč</span> ročně), děti už od vkladu <span class="num">100&nbsp;Kč</span>, poplatek za správu se zastropuje na 0,5&nbsp;%.</p>
+          <div class="change-foot"><span class="badge badge-draft"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16l1-4 8-8 3 3-8 8-4 1zM11 6l3 3" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>Návrh, zatím neschváleno</span><a href="kalkulacka.html">Spočítat v Plán48</a><a href="https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni">Zdroj: Echo24</a></div>
+        </li>
+        <li class="change">
+          <p class="change-date"><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="4" width="18" height="16" rx="5" class="il-apricot"/><rect x="5" y="10" width="12" height="7" rx="2" class="il-cream"/><path d="M7 2v4M15 2v4" class="st-ink" stroke-width="2"/></svg>přihláška do 11.&nbsp;1.&nbsp;2027</p>
+          <h3>Paušální daň v 1. pásmu stoupá</h3>
+          <p>1. pásmo paušální daně stoupá na <span class="num">9&nbsp;662&nbsp;Kč</span> měsíčně.</p>
+          <div class="change-foot"><span class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Schváleno</span><a href="#">OSVČ 2027</a><a href="https://portal.pohoda.cz/?p=45627">Zdroj: Pohoda</a></div>
+        </li>
+        <li class="change">
+          <p class="change-date"><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="4" width="18" height="16" rx="5" class="il-apricot"/><rect x="5" y="10" width="12" height="7" rx="2" class="il-cream"/><path d="M7 2v4M15 2v4" class="st-ink" stroke-width="2"/></svg>2027</p>
+          <h3>Vrací se sleva na studenta a školkovné</h3>
+          <p>Sleva na studenta <span class="num">4&nbsp;020&nbsp;Kč</span> ročně a školkovné do výše minimální mzdy.</p>
+          <div class="change-foot"><span class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Schváleno</span><a href="#">Slevy 2027</a><a href="https://www.praceamzda.cz/tydenik/253/podtrzeno-secteno-c-26-30-2026">Zdroj: Práce a mzda</a></div>
+        </li>
+        <li class="change">
+          <p class="change-date"><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="4" width="18" height="16" rx="5" class="il-apricot"/><rect x="5" y="10" width="12" height="7" rx="2" class="il-cream"/><path d="M7 2v4M15 2v4" class="st-ink" stroke-width="2"/></svg>celý rok</p>
+          <h3>Svátky 2027 a prodloužené víkendy</h3>
+          <p>1.&nbsp;5., 8.&nbsp;5. a oba vánoční svátky připadnou na víkend, zato 5.–6.&nbsp;7. dají čtyři dny volna bez dovolené.</p>
+          <div class="change-foot"><span class="badge badge-plain">Podle kalendáře</span><a href="#">Volno 2027</a><span class="muted">Zdroj: vlastní výpočet z kalendáře</span></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Dluhy – klidně a s respektem -->
+  <section class="section-tight" id="dluhy" aria-labelledby="dluhy-nadpis">
+    <div class="wrap">
+      <div class="debt">
+        <svg class="debt-art" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="96" class="il-paper"/>
+          <ellipse cx="96" cy="164" rx="58" ry="9" class="il-bg-2"/>
+          <path d="M128 106h8a15 15 0 0 1 0 30h-8" class="st-sage" stroke-width="10"/>
+          <rect x="54" y="90" width="76" height="72" rx="20" class="il-sage"/>
+          <path d="M92 140c-9-6-14-10-14-15.5a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 5.5-5 9.5-14 15.5z" class="il-paper"/>
+          <path d="M76 78c-9-10 9-15 0-28M100 76c-9-10 9-15 0-28" class="st-sage" stroke-width="5"/>
+          <path d="M124 64c-7-5-10-8-10-11.5a5 5 0 0 1 10-1.5 5 5 0 0 1 10 1.5c0 3.5-3 6.5-10 11.5z" class="il-terra"/>
+        </svg>
+        <div>
+          <p class="eyebrow">Dluhy</p>
+          <h2 id="dluhy-nadpis">Nejste v tom sami</h2>
+          <p>S dluhy se dá něco dělat a nemusíš na to být bez pomoci. Bezplatná dluhová poradna ti pomůže zdarma a bez závazků.</p>
+          <a class="btn btn-primary btn-big" href="#pomoc">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17c-5-3.5-7.5-6-7.5-9a3.5 3.5 0 0 1 7.5-1 3.5 3.5 0 0 1 7.5 1c0 3-2.5 5.5-7.5 9z" stroke-width="2" stroke-linejoin="round"/></svg>
+            Najít bezplatnou poradnu
+          </a>
+          <p class="small muted">Odkaz na oficiální seznam bezplatných poraden doplníme po ověření.</p>
+          <p class="small"><a class="debt-tool" href="#">Exekuce, nebo oddlužení? Klidný průvodce, kolik ti zůstane z výplaty</a></p>
+          <ul class="debt-rules">
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Žádné reklamy ani affiliate odkazy</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Žádné nabídky půjček ani placení zprostředkovatelé</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Žádné sbírání kontaktů</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>Spočítáno</h2>
+      <ul class="badges">
+        <li class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pravidla ověřena k 4. 11. 2026</li>
+      </ul>
+      <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+      <p>Nic neukládáme ani neodesíláme. Všechno se počítá jen v tvém prohlížeči.</p>
+      <p>Prototyp designu – kalkulačky zatím nepočítají naostro.</p>
+      <p class="print-note">Při tisku se skryje navigace, zobrazí se adresy odkazů a datum ověření pravidel.</p>
+    </div>
+    <nav aria-label="Kategorie v patičce">
+      <h2>Témata</h2>
+      <ul>
+        <li><a href="kategorie.html">Peníze a investice</a></li>
+        <li><a href="#">Daně a podnikání</a></li>
+        <li><a href="#">Bydlení a energie</a></li>
+        <li><a href="#">Práce a rodina</a></li>
+        <li><a href="#dluhy">Dluhy</a></li>
+        <li><a href="#zmeny-2027">Co se mění v roce 2027</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Oblíbené</h2>
+      <ul>
+        <li><a href="kalkulacka.html">Plán48</a></li>
+        <li><a href="pruvodce.html">Mám EET?</a></li>
+        <li><a href="#">Penzijko kompas</a></li>
+        <li><a href="#">Slevy 2027</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,261 @@
+/* Varianta B – Přátelský průvodce
+   Design tokeny: barvy, písma, velikosti, mezery, zaoblení, stíny.
+   Světlý režim v :root, tmavý přes prefers-color-scheme (platí v režimu Auto)
+   a ruční přepínač bez JS přes :root:has(#t-light/#t-dark:checked). */
+
+:root {
+  /* Písmo */
+  --font-body: "Nunito", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fredoka", "Nunito", ui-rounded, "Segoe UI", sans-serif;
+
+  --fs-xs: 0.8125rem;   /* 13 px */
+  --fs-sm: 0.9375rem;   /* 15 px */
+  --fs-md: 1.0625rem;   /* 17 px – základ */
+  --fs-lg: 1.25rem;     /* 20 px */
+  --fs-xl: clamp(1.4rem, 1.2rem + 0.8vw, 1.75rem);
+  --fs-2xl: clamp(1.75rem, 1.35rem + 1.8vw, 2.5rem);
+  --fs-3xl: clamp(2.1rem, 1.5rem + 3vw, 3.5rem);
+  --fs-num: clamp(2.6rem, 2rem + 3vw, 4.25rem);
+
+  --lh-tight: 1.15;
+  --lh-body: 1.6;
+
+  /* Mezery (násobky 4 px) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+
+  /* Zaoblení */
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* Rozměry */
+  --maxw: 1200px;
+  --maxw-text: 44rem;
+  --gutter: 16px;
+  --tap: 48px;
+
+  --ease: cubic-bezier(.3, .7, .4, 1);
+  --dur: 180ms;
+
+  /* ---------- Barvy: světlý režim ---------- */
+  color-scheme: light;
+  --c-bg: #FFF8F0;            /* krémová */
+  --c-bg-alt: #FDEFE2;        /* meruňkový nádech */
+  --c-surface: #FFFFFF;
+  --c-surface-2: #FFF1E4;
+  --c-text: #3A2920;          /* teplá tmavě hnědá, 13,1:1 na krémové */
+  --c-text-muted: #6A5144;    /* 6,9:1 */
+  --c-border: #EBD8C6;
+  --c-border-strong: #8A6A58; /* okraje polí, 4,9:1 */
+  --c-primary: #A4432A;       /* tmavá terakota, bílý text 6,2:1 */
+  --c-primary-hover: #8A3520;
+  --c-on-primary: #FFFFFF;
+  --c-link: #9A3D24;
+  --c-accent: #F4A261;        /* meruňková (jen dekorace a plochy s tmavým textem) */
+  --c-accent-soft: #FCDDC2;
+  --c-sage: #8FB08A;
+  --c-sage-soft: #E5EFE0;
+  --c-sage-ink: #35603F;
+  --c-error: #B42318;
+  --c-error-soft: #FDE8E4;
+  --c-draft-bg: #FFF0C7;
+  --c-draft-ink: #6B4A00;
+  --c-draft-line: #B8860B;
+  --c-focus: #2F1B12;
+  --c-focus-halo: #FFFFFF;
+
+  /* Graf */
+  --c-chart-1: #A4432A;       /* penzijko – terakota (bílý popisek) */
+  --c-chart-1-ink: #FFFFFF;
+  --c-chart-2: #F4B183;       /* životní pojištění – meruňková (tmavý popisek) */
+  --c-chart-2-ink: #3A2920;
+  --c-chart-free: #FFF8F0;
+  --c-chart-track: #F3E3D3;
+
+  /* Ilustrace */
+  --il-apricot: #F4A261;
+  --il-apricot-d: #E07F45;
+  --il-terra: #C8593A;
+  --il-sage: #8FB08A;
+  --il-sage-d: #5E8A64;
+  --il-cream: #FFF4E8;
+  --il-blush: #F7C2A2;
+  --il-gold: #F4C152;
+  --il-gold-d: #D99A2B;
+  --il-ink: #3A2920;
+  --il-bg: #FCE3CC;
+  --il-bg-2: #E5EFE0;
+  --il-paper: #FFFFFF;
+
+  /* Stíny – měkké, teplé */
+  --shadow-sm: 0 1px 2px rgb(90 50 25 / 0.06), 0 3px 10px rgb(90 50 25 / 0.06);
+  --shadow-md: 0 2px 6px rgb(90 50 25 / 0.06), 0 12px 32px rgb(90 50 25 / 0.10);
+  --shadow-lg: 0 4px 10px rgb(90 50 25 / 0.08), 0 24px 56px rgb(90 50 25 / 0.14);
+}
+
+/* ---------- Tmavý režim: teplá hnědo-lilková, ne čistě černá ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --c-bg: #261B1C;
+    --c-bg-alt: #2E2123;
+    --c-surface: #352628;
+    --c-surface-2: #3F2D2D;
+    --c-text: #FAEDE2;
+    --c-text-muted: #D7C0B2;
+    --c-border: #56403C;
+    --c-border-strong: #A88C7E;
+    --c-primary: #F2A07B;
+    --c-primary-hover: #F7B898;
+    --c-on-primary: #2A1A16;
+    --c-link: #F6B48F;
+    --c-accent: #E8945C;
+    --c-accent-soft: #4A3029;
+    --c-sage: #9DBF97;
+    --c-sage-soft: #2E3A2D;
+    --c-sage-ink: #B9D8B1;
+    --c-error: #FF9B8A;
+    --c-error-soft: #46241F;
+    --c-draft-bg: #4A3A16;
+    --c-draft-ink: #FFE29A;
+    --c-draft-line: #E0B54A;
+    --c-focus: #FFD9B8;
+    --c-focus-halo: #261B1C;
+
+    --c-chart-1: #F2A07B;
+    --c-chart-1-ink: #2A1A16;
+    --c-chart-2: #9DBF97;
+    --c-chart-2-ink: #1E2A1D;
+    --c-chart-free: #352628;
+    --c-chart-track: #4A3634;
+
+    --il-apricot: #E8945C;
+    --il-apricot-d: #C9713D;
+    --il-terra: #D9714F;
+    --il-sage: #8DAE87;
+    --il-sage-d: #6E9870;
+    --il-cream: #F3E2D2;
+    --il-blush: #E7A889;
+    --il-gold: #E9B949;
+    --il-gold-d: #C48D22;
+    --il-ink: #2A1A16;
+    --il-bg: #4A3029;
+    --il-bg-2: #34402F;
+    --il-paper: #F6E9DC;
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25), 0 3px 10px rgb(0 0 0 / 0.2);
+    --shadow-md: 0 2px 6px rgb(0 0 0 / 0.25), 0 12px 32px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 4px 10px rgb(0 0 0 / 0.3), 0 24px 56px rgb(0 0 0 / 0.35);
+  }
+}
+
+/* ---------- Ruční přepínač: Světlý ---------- */
+:root:has(#t-light:checked) {
+  color-scheme: light;
+  --c-bg: #FFF8F0;
+  --c-bg-alt: #FDEFE2;
+  --c-surface: #FFFFFF;
+  --c-surface-2: #FFF1E4;
+  --c-text: #3A2920;
+  --c-text-muted: #6A5144;
+  --c-border: #EBD8C6;
+  --c-border-strong: #8A6A58;
+  --c-primary: #A4432A;
+  --c-primary-hover: #8A3520;
+  --c-on-primary: #FFFFFF;
+  --c-link: #9A3D24;
+  --c-accent: #F4A261;
+  --c-accent-soft: #FCDDC2;
+  --c-sage: #8FB08A;
+  --c-sage-soft: #E5EFE0;
+  --c-sage-ink: #35603F;
+  --c-error: #B42318;
+  --c-error-soft: #FDE8E4;
+  --c-draft-bg: #FFF0C7;
+  --c-draft-ink: #6B4A00;
+  --c-draft-line: #B8860B;
+  --c-focus: #2F1B12;
+  --c-focus-halo: #FFFFFF;
+  --c-chart-1: #A4432A;
+  --c-chart-1-ink: #FFFFFF;
+  --c-chart-2: #F4B183;
+  --c-chart-2-ink: #3A2920;
+  --c-chart-free: #FFF8F0;
+  --c-chart-track: #F3E3D3;
+  --il-apricot: #F4A261;
+  --il-apricot-d: #E07F45;
+  --il-terra: #C8593A;
+  --il-sage: #8FB08A;
+  --il-sage-d: #5E8A64;
+  --il-cream: #FFF4E8;
+  --il-blush: #F7C2A2;
+  --il-gold: #F4C152;
+  --il-gold-d: #D99A2B;
+  --il-ink: #3A2920;
+  --il-bg: #FCE3CC;
+  --il-bg-2: #E5EFE0;
+  --il-paper: #FFFFFF;
+  --shadow-sm: 0 1px 2px rgb(90 50 25 / 0.06), 0 3px 10px rgb(90 50 25 / 0.06);
+  --shadow-md: 0 2px 6px rgb(90 50 25 / 0.06), 0 12px 32px rgb(90 50 25 / 0.10);
+  --shadow-lg: 0 4px 10px rgb(90 50 25 / 0.08), 0 24px 56px rgb(90 50 25 / 0.14);
+}
+
+/* ---------- Ruční přepínač: Tmavý ---------- */
+:root:has(#t-dark:checked) {
+  color-scheme: dark;
+  --c-bg: #261B1C;
+  --c-bg-alt: #2E2123;
+  --c-surface: #352628;
+  --c-surface-2: #3F2D2D;
+  --c-text: #FAEDE2;
+  --c-text-muted: #D7C0B2;
+  --c-border: #56403C;
+  --c-border-strong: #A88C7E;
+  --c-primary: #F2A07B;
+  --c-primary-hover: #F7B898;
+  --c-on-primary: #2A1A16;
+  --c-link: #F6B48F;
+  --c-accent: #E8945C;
+  --c-accent-soft: #4A3029;
+  --c-sage: #9DBF97;
+  --c-sage-soft: #2E3A2D;
+  --c-sage-ink: #B9D8B1;
+  --c-error: #FF9B8A;
+  --c-error-soft: #46241F;
+  --c-draft-bg: #4A3A16;
+  --c-draft-ink: #FFE29A;
+  --c-draft-line: #E0B54A;
+  --c-focus: #FFD9B8;
+  --c-focus-halo: #261B1C;
+  --c-chart-1: #F2A07B;
+  --c-chart-1-ink: #2A1A16;
+  --c-chart-2: #9DBF97;
+  --c-chart-2-ink: #1E2A1D;
+  --c-chart-free: #352628;
+  --c-chart-track: #4A3634;
+  --il-apricot: #E8945C;
+  --il-apricot-d: #C9713D;
+  --il-terra: #D9714F;
+  --il-sage: #8DAE87;
+  --il-sage-d: #6E9870;
+  --il-cream: #F3E2D2;
+  --il-blush: #E7A889;
+  --il-gold: #E9B949;
+  --il-gold-d: #C48D22;
+  --il-ink: #2A1A16;
+  --il-bg: #4A3029;
+  --il-bg-2: #34402F;
+  --il-paper: #F6E9DC;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25), 0 3px 10px rgb(0 0 0 / 0.2);
+  --shadow-md: 0 2px 6px rgb(0 0 0 / 0.25), 0 12px 32px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 4px 10px rgb(0 0 0 / 0.3), 0 24px 56px rgb(0 0 0 / 0.35);
+}

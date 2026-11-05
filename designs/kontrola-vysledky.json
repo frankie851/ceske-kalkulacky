@@ -1,0 +1,440 @@
+{
+  "datum": "2026-11-05T07:28:20.042Z",
+  "souhrn": {
+    "stranek": 18,
+    "axe_vazne": 0,
+    "pretekani_360": 0,
+    "cizi_pozadavky": 0,
+    "chyb_celkem": 0
+  },
+  "komponenty": {
+    "a-klidna-jistota": [],
+    "b-pratelsky-pruvodce": [],
+    "c-datovy-nastroj": [],
+    "d-redakcni": []
+  },
+  "stranky": [
+    {
+      "soubor": "designs/a-klidna-jistota/index.html",
+      "varianta": "a-klidna-jistota",
+      "stranka": "index.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/a-klidna-jistota/kategorie.html",
+      "varianta": "a-klidna-jistota",
+      "stranka": "kategorie.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/a-klidna-jistota/kalkulacka.html",
+      "varianta": "a-klidna-jistota",
+      "stranka": "kalkulacka.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/a-klidna-jistota/pruvodce.html",
+      "varianta": "a-klidna-jistota",
+      "stranka": "pruvodce.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/b-pratelsky-pruvodce/index.html",
+      "varianta": "b-pratelsky-pruvodce",
+      "stranka": "index.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/b-pratelsky-pruvodce/kategorie.html",
+      "varianta": "b-pratelsky-pruvodce",
+      "stranka": "kategorie.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/b-pratelsky-pruvodce/kalkulacka.html",
+      "varianta": "b-pratelsky-pruvodce",
+      "stranka": "kalkulacka.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/b-pratelsky-pruvodce/pruvodce.html",
+      "varianta": "b-pratelsky-pruvodce",
+      "stranka": "pruvodce.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/c-datovy-nastroj/index.html",
+      "varianta": "c-datovy-nastroj",
+      "stranka": "index.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/c-datovy-nastroj/kategorie.html",
+      "varianta": "c-datovy-nastroj",
+      "stranka": "kategorie.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/c-datovy-nastroj/kalkulacka.html",
+      "varianta": "c-datovy-nastroj",
+      "stranka": "kalkulacka.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/c-datovy-nastroj/pruvodce.html",
+      "varianta": "c-datovy-nastroj",
+      "stranka": "pruvodce.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/d-redakcni/index.html",
+      "varianta": "d-redakcni",
+      "stranka": "index.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/d-redakcni/kategorie.html",
+      "varianta": "d-redakcni",
+      "stranka": "kategorie.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/d-redakcni/kalkulacka.html",
+      "varianta": "d-redakcni",
+      "stranka": "kalkulacka.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/d-redakcni/pruvodce.html",
+      "varianta": "d-redakcni",
+      "stranka": "pruvodce.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": []
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": []
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/index.html",
+      "varianta": "_rozcestnik",
+      "stranka": "index.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": [
+            "landmark-unique (moderate)"
+          ]
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": [
+            "landmark-unique (moderate)"
+          ]
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    },
+    {
+      "soubor": "designs/porovnani.html",
+      "varianta": "_rozcestnik",
+      "stranka": "porovnani.html",
+      "chyby": [],
+      "axe": {
+        "light": {
+          "vazne": [],
+          "ostatni": [
+            "heading-order (moderate)"
+          ]
+        },
+        "dark": {
+          "vazne": [],
+          "ostatni": [
+            "heading-order (moderate)"
+          ]
+        }
+      },
+      "cizi": [],
+      "pretekani": {
+        "sirka": 360,
+        "scrollWidth": 360,
+        "preteka": false,
+        "viniky": []
+      }
+    }
+  ]
+}

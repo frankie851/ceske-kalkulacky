@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plán48 · Spočítáno (varianta C)</title>
+<meta name="description" content="Plán48: odpočet 48 000 Kč, daňová úspora a státní příspěvek na penzijko – ukázka s vyplněnými daty.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-term" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M4 6l2.5 2L4 10M8 10.5h4"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 16 16"><path d="M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z"/></symbol>
+  <symbol id="i-penize" viewBox="0 0 16 16"><ellipse cx="8" cy="4.5" rx="5" ry="2"/><path d="M3 4.5v3c0 1.1 2.2 2 5 2s5-.9 5-2v-3M3 7.5v3c0 1.1 2.2 2 5 2s5-.9 5-2v-3"/></symbol>
+  <symbol id="i-dane-podnikani" viewBox="0 0 16 16"><path d="M3.5 1.5h9v13l-1.5-1-1.5 1-1.5-1-1.5 1-1.5-1-1.5 1zM6 5h4M6 8h4M6 11h2"/></symbol>
+  <symbol id="i-bydleni-energie" viewBox="0 0 16 16"><path d="M2 7.5 8 2.5l6 5M3.5 6.5v7h9v-7M6.5 13.5v-4h3v4"/></symbol>
+  <symbol id="i-prace-rodina" viewBox="0 0 16 16"><circle cx="6" cy="5" r="2.5"/><path d="M1.5 14c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="11.5" cy="5.5" r="2"/><path d="M11 10c2 0 3.5 1.3 3.5 3.5"/></symbol>
+  <symbol id="i-dluhy" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/><path d="M3.8 3.8l2.4 2.4M9.8 9.8l2.4 2.4M12.2 3.8 9.8 6.2M6.2 9.8l-2.4 2.4"/></symbol>
+  <symbol id="i-co-se-meni-2027" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M2 6.5h12M5 1.5v3M11 1.5v3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 1.8 14.8 13.5H1.2z"/><path d="M8 6v3.5M8 11.2v.6"/></symbol>
+  <symbol id="i-err" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.5v4.2M8 10.8v.6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 7.2v4.3M8 4.6v.6"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 16 16"><rect x="3" y="1.5" width="10" height="13" rx="1"/><path d="M5.5 4.5h5M5.5 8h1M9.5 8h1M5.5 11h1M9.5 11h1"/></symbol>
+  <symbol id="i-guide" viewBox="0 0 16 16"><path d="M6 4h8M6 8h8M6 12h8M2 4h1M2 8h1M2 12h1"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 16 16"><path d="M4 1.5h5.5l3 3v10h-8.5zM9.5 1.5v3h3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7.5" rx="1"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
+</svg>
+<div class="app">
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="brand__mark"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-term"/></svg></span>
+    <span>Spočítáno</span>
+    <span class="brand__sub">v0.1</span>
+  </a>
+  <form class="cmd" role="search" action="kategorie.html" method="get">
+    <label class="vh" for="q">Hledat na webu</label>
+    <span class="cmd__prompt" aria-hidden="true">›</span>
+    <input type="search" id="q" name="q" placeholder="Hledat kalkulačku, např. penzijko, EET, výpověď" autocomplete="off">
+    <kbd aria-hidden="true">/</kbd>
+    <button type="submit">Hledat</button>
+  </form>
+  <span class="topbar__meta tag tag--ok"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k 4.&nbsp;11.&nbsp;2026</span>
+  <fieldset class="theme-switch"><legend>Barevný režim</legend>
+    <input type="radio" name="theme" id="t-auto" checked><label for="t-auto"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-auto"/></svg>Auto</label>
+    <input type="radio" name="theme" id="t-light"><label for="t-light"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>Světlý</label>
+    <input type="radio" name="theme" id="t-dark"><label for="t-dark"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>Tmavý</label>
+  </fieldset>
+</header>
+<nav class="side" aria-label="Kategorie a nástroje">
+  <p class="side__h">Navigace</p>
+  <ul class="tree">
+    <li><a href="index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Přehled</a></li>
+    <li><a href="kategorie.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-penize"/></svg>Peníze a investice<span class="cnt">4</span></a><ul><li><a href="kalkulacka.html" aria-current="page">Plán48<span class="t-new">2027</span></a></li><li><a href="#">Penzijko kompas<span class="t-new">2027</span></a></li><li><a href="#">Zdaním to?</a></li><li><a href="#">Inflační kalkulačka</a></li></ul></li>
+    <li><a href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dane-podnikani"/></svg>Daně a podnikání<span class="cnt">4</span></a><ul><li><a href="pruvodce.html">Mám EET?<span class="t-new">2027</span></a></li><li><a href="#">OSVČ 2027<span class="t-new">2027</span></a></li><li><a href="#">Slevy 2027<span class="t-new">2027</span></a></li><li><a href="#">Cestovní příkaz 2027<span class="t-new">2027</span></a></li></ul></li>
+    <li><a href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bydleni-energie"/></svg>Bydlení a energie<span class="cnt">2</span></a><ul><li><a href="#">Bydlometr</a></li><li><a href="#">Spot, nebo fix?</a></li></ul></li>
+    <li><a href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-prace-rodina"/></svg>Práce a rodina<span class="cnt">4</span></a><ul><li><a href="#">Výpověď 2026</a></li><li><a href="#">Rodičovská pro celou rodinu</a></li><li><a href="#">Přijímačky bez paniky</a></li><li><a href="#">Volno 2027<span class="t-new">2027</span></a></li></ul></li>
+    <li><a href="index.html#dluhy"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dluhy"/></svg>Dluhy<span class="cnt">1</span></a></li>
+    <li><a href="index.html#zmeny-2027"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-co-se-meni-2027"/></svg>Co se mění v roce 2027</a></li>
+  </ul>
+  <p class="side__foot">zdroj dat: obsah.json<br>ověřeno: 4.&nbsp;11.&nbsp;2026<br>výpočet: lokálně v prohlížeči</p>
+</nav>
+<main id="obsah" tabindex="-1">
+  <div class="pagehead">
+    <nav aria-label="Drobečková navigace"><ol class="crumbs"><li><a href="index.html">přehled</a></li><li><a href="kategorie.html">Peníze a investice</a></li><li><span aria-current="page">Plán48</span></li></ol></nav>
+    <div class="headrow"><h1>Plán48</h1><span class="panel__meta">kalkulačka · penzijko + DIP + životní pojištění</span></div>
+    <p class="lede">Kolik peněz nechávám státu na stole a co s tím mám udělat do konce roku?</p>
+    <ul class="tags">
+      <li><span class="tag tag--ok"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k 4.&nbsp;11.&nbsp;2026</span></li>
+      <li><span class="tag">pravidla: 2026</span></li>
+      <li><span class="tag tag--warn"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-co-se-meni-2027"/></svg>Vklady do 31.&nbsp;12.&nbsp;2026</span></li>
+      <li><span class="tag tag--wrap"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg>Prototyp designu – kalkulačky zatím nepočítají naostro.</span></li>
+    </ul>
+  </div>
+
+  <div class="calc">
+    <div class="stack calc__form">
+    <form class="panel form" action="kalkulacka.html" method="get" aria-labelledby="f-h">
+      <div class="panel__head"><h2 id="f-h">Vstupy</h2><span class="panel__meta">ukázková data</span></div>
+      <div class="field">
+        <label for="vek">Věk</label>
+        <div class="inp"><input id="vek" name="vek" inputmode="numeric" value="35" aria-describedby="vek-h"><span class="inp__unit">let</span></div>
+        <p class="hint" id="vek-h">Starobní důchodci státní příspěvek nedostávají.</p>
+      </div>
+      <fieldset class="field" aria-describedby="sazba-h">
+        <legend>Sazba daně</legend>
+        <div class="seg">
+          <input type="radio" name="sazba" id="sazba-15" checked><label for="sazba-15">15&nbsp;%</label>
+          <input type="radio" name="sazba" id="sazba-23"><label for="sazba-23">23&nbsp;%</label>
+        </div>
+        <p class="hint" id="sazba-h">23&nbsp;% jen pro vysoké příjmy.</p>
+      </fieldset>
+      <div class="field">
+        <label for="dps">Penzijko (DPS) měsíčně</label>
+        <div class="inp"><input id="dps" name="dps" inputmode="numeric" value="3&nbsp;000" aria-describedby="dps-h"><span class="inp__unit">Kč/měs</span></div>
+        <p class="hint" id="dps-h">Do odpočtu jde jen část nad 1&nbsp;700&nbsp;Kč měsíčně.</p>
+      </div>
+      <div class="field">
+        <label for="dip">DIP měsíčně</label>
+        <div class="inp"><input id="dip" name="dip" inputmode="numeric" value="0" aria-describedby="dip-h"><span class="inp__unit">Kč/měs</span></div>
+        <p class="hint" id="dip-h">Odečítá se od první koruny. Smlouva musí trvat aspoň 10&nbsp;let a výběr nejdřív v 60&nbsp;letech.</p>
+      </div>
+      <div class="field">
+        <label for="zp">Životní pojištění měsíčně</label>
+        <div class="inp"><input id="zp" name="zp" inputmode="numeric" value="2&nbsp;500" aria-describedby="zp-h"><span class="inp__unit">Kč/měs</span></div>
+        <p class="hint" id="zp-h">Odečítá se od první koruny.</p>
+      </div>
+      <div class="field">
+        <label for="zam">Příspěvek zaměstnavatele měsíčně</label>
+        <div class="inp"><input id="zam" name="zam" inputmode="numeric" value="0" aria-describedby="zam-h"><span class="inp__unit">Kč/měs</span></div>
+        <p class="hint" id="zam-h">Do odpočtu se nepočítá.</p>
+      </div>
+      <div class="field">
+        <label for="obdobi">Období</label>
+        <div class="inp"><select id="obdobi" name="obdobi" aria-describedby="obdobi-h"><option selected>celý rok 2026 (12 měsíců)</option></select></div>
+        <p class="hint" id="obdobi-h">Ukázka počítá s vklady po celý rok.</p>
+      </div>
+      <fieldset class="field" aria-describedby="prav-h">
+        <legend>Pravidla</legend>
+        <div class="seg">
+          <input type="radio" name="pravidla" id="prav-2026" checked><label for="prav-2026">2026</label>
+          <input type="radio" name="pravidla" id="prav-2027"><label for="prav-2027"><span class="dot" style="color:var(--draft)" aria-hidden="true"></span>Návrh 2027</label>
+        </div>
+        <p class="hint" id="prav-h">Návrh 2027 je jen návrh zákona, zatím neschválený.</p>
+      </fieldset>
+      <div class="form__actions">
+        <button class="btn" type="reset">Vymazat</button>
+        <button class="btn btn--primary" type="submit">Přepočítat</button>
+      </div>
+    </form>
+
+    <section class="panel" aria-labelledby="val-h">
+      <div class="panel__head"><h2 id="val-h">Validace</h2><span class="panel__meta tag tag--err">1 chyba</span></div>
+      <div class="field field--err">
+        <label for="vek-chyba">Věk <span class="vh">(ukázka chybového stavu)</span></label>
+        <div class="inp"><input id="vek-chyba" name="vek-chyba" inputmode="numeric" value="" aria-invalid="true" aria-describedby="vek-chyba-err vek-chyba-h"><span class="inp__unit">let</span></div>
+        <p class="err" id="vek-chyba-err"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-err"/></svg><span><strong>Chyba:</strong> pole Věk je prázdné. Bez věku nejde určit nárok na státní příspěvek.</span></p>
+        <p class="hint" id="vek-chyba-h">Starobní důchodci státní příspěvek nedostávají.</p>
+      </div>
+    </section>
+    </div>
+
+    <div class="stack">
+      <div class="res-grid">
+        <section class="panel span-all" aria-labelledby="r-h">
+          <div class="result">
+            <h2 class="result__label" id="r-h">Odpočet od základu daně za rok 2026</h2>
+            <p class="result__big"><span class="result__num">45&nbsp;600&nbsp;Kč</span><span class="result__of">/ 48&nbsp;000&nbsp;Kč</span><span class="tag tag--ok">95&nbsp;% limitu</span></p>
+            <div class="meter" aria-hidden="true"><span style="width:95%"></span></div>
+            <p class="result__text">Penzijko: 15&nbsp;600&nbsp;Kč (část nad 1&nbsp;700&nbsp;Kč měsíčně). Životní pojištění: 30&nbsp;000&nbsp;Kč. Limit: 48&nbsp;000&nbsp;Kč.</p>
+          </div>
+        </section>
+
+        <ul class="kpis span-all">
+          <li class="kpi kpi--pos"><span class="kpi__label">Daňová úspora</span><span class="kpi__value">6&nbsp;840&nbsp;Kč</span><span class="kpi__sub">daňová úspora při sazbě 15&nbsp;%</span></li>
+          <li class="kpi kpi--warn"><span class="kpi__label">Nevyužito</span><span class="kpi__value">2&nbsp;400&nbsp;Kč</span><span class="kpi__sub">nevyužitý odpočet z limitu 48&nbsp;000&nbsp;Kč</span></li>
+          <li class="kpi"><span class="kpi__label">Státní příspěvek</span><span class="kpi__value">4&nbsp;080&nbsp;Kč <span class="kpi__unit">/ rok</span></span><span class="kpi__sub">340&nbsp;Kč × 12 · státní příspěvek na penzijko (maximum 340&nbsp;Kč měsíčně)</span></li>
+        </ul>
+
+        <div class="callout span-all"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg><p><span class="callout__k">Krok do 31. 12.</span>Mimořádný vklad 2&nbsp;400&nbsp;Kč na DIP → limit 48&nbsp;000&nbsp;Kč využit celý.</p></div>
+
+        <section class="panel" aria-labelledby="g1-h">
+          <div class="panel__head"><h2 id="g1-h">Jak máte využitý limit 48 000 Kč</h2><span class="panel__meta">Kč / rok</span></div>
+          <div class="panel__body stack">
+            <svg class="chart" viewBox="0 0 480 32" preserveAspectRatio="none" style="height:32px" role="img" aria-labelledby="g1-t">
+              <title id="g1-t">Skládaný pruh limitu 48 000 Kč: penzijko 15 600 Kč, životní pojištění 30 000 Kč, volné místo 2 400 Kč</title>
+              <defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="c-warn" width="2" height="5"/></pattern></defs>
+              <rect class="c-bg" x="0" y="0" width="480" height="32"/>
+              <rect class="c-pos" x="0.0" y="0" width="155.0" height="32"/><rect class="c-b" x="156.0" y="0" width="299.0" height="32"/><rect x="456.0" y="0" width="24.0" height="32" fill="url(#hatch)"/><rect x="456.5" y="0.5" width="23.0" height="31" fill="none" class="c-warn-s" stroke-width="1"/>
+            </svg>
+            <div class="meter--scale" aria-hidden="true"><span>0</span><span>45&nbsp;600 využito</span><span>48&nbsp;000&nbsp;Kč</span></div>
+            <table class="tbl">
+              <caption class="vh">Složení limitu 48 000 Kč (textová podoba grafu)</caption>
+              <thead><tr><th scope="col">Položka</th><th scope="col" class="num">Částka</th><th scope="col" class="num">Podíl</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><span class="sw sw--a" style="display:inline-block;width:10px;height:10px;margin-right:6px" aria-hidden="true"></span>Penzijko (DPS)</th><td class="num">15&nbsp;600&nbsp;Kč</td><td class="num muted">32,5&nbsp;%</td></tr>
+                <tr><th scope="row"><span class="sw sw--b" style="display:inline-block;width:10px;height:10px;margin-right:6px" aria-hidden="true"></span>Životní pojištění</th><td class="num">30&nbsp;000&nbsp;Kč</td><td class="num muted">62,5&nbsp;%</td></tr>
+                <tr><th scope="row"><span class="sw sw--free" style="display:inline-block;width:10px;height:10px;margin-right:6px" aria-hidden="true"></span>Volné místo v limitu</th><td class="num">2&nbsp;400&nbsp;Kč</td><td class="num muted">5,0&nbsp;%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="hl-h">
+          <div class="panel__head"><h2 id="hl-h">Hlídat</h2><span class="panel__meta">3 pravidla</span></div>
+          <div class="panel__body">
+            <ul class="bullets">
+              <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>U DIP vzniká nárok na odpočet jen při trvání aspoň 10&nbsp;let a výběru nejdřív v 60&nbsp;letech.</span></li>
+              <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Starobní důchodci státní příspěvek nedostávají.</span></li>
+              <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Příspěvek zaměstnavatele se do odpočtu nepočítá.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel span-all" aria-labelledby="g2-h">
+          <div class="panel__head"><h2 id="g2-h">Projekce úspor do 60 let</h2><span class="tag"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg>náhled · bez čísel</span></div>
+          <div class="panel__body">
+            <p class="hint">Osa Y: naspořená částka, bez měřítka.</p>
+            <svg class="chart" viewBox="0 0 800 220" role="img" aria-labelledby="g2-t g2-d">
+              <title id="g2-t">Ilustrační projekce úspor od 35 do 60 let</title>
+              <desc id="g2-d">Rostoucí křivka s pásmem nejistoty. Graf je jen ilustrační tvar bez čísel; výpočet přijde v další fázi.</desc>
+              <line class="c-grid" x1="10" y1="20" x2="790" y2="20"/><line class="c-grid" x1="10" y1="70" x2="790" y2="70"/><line class="c-grid" x1="10" y1="120" x2="790" y2="120"/><line class="c-grid" x1="10" y1="170" x2="790" y2="170"/>
+              <line class="c-grid" x1="10" y1="10" x2="10" y2="210"/><line class="c-grid" x1="166" y1="10" x2="166" y2="210"/><line class="c-grid" x1="322" y1="10" x2="322" y2="210"/><line class="c-grid" x1="478" y1="10" x2="478" y2="210"/><line class="c-grid" x1="634" y1="10" x2="634" y2="210"/><line class="c-grid" x1="790" y1="10" x2="790" y2="210"/>
+              <line class="c-axis" x1="10" y1="210" x2="790" y2="210"/>
+              <line class="c-axis" x1="10" y1="10" x2="10" y2="210"/>
+              <path class="c-band" d="M10,206 C260,190 520,110 790,16 L790,96 C520,168 260,200 10,206 Z"/>
+              <path d="M10,206 C260,196 520,142 790,50" fill="none" class="c-pos-s" stroke-width="2.5"/>
+              <path d="M10,206 C260,200 520,186 790,150" fill="none" class="c-draft-s" stroke-width="1.5" stroke-dasharray="5 4"/>
+            </svg>
+            <div class="meter--scale" aria-hidden="true"><span>35&nbsp;let · dnes</span><span>věk</span><span>60&nbsp;let</span></div>
+            <ul class="tags mt-3" aria-label="Legenda">
+              <li><span class="tag"><span class="dot" style="color:var(--pos)" aria-hidden="true"></span>s vklady</span></li>
+              <li><span class="tag"><span class="dot" style="color:var(--draft)" aria-hidden="true"></span>bez mimořádných vkladů</span></li>
+            </ul>
+          </div>
+          <div class="panel__foot"><p>Náhled grafu, výpočet přijde v další fázi. Výnos a poplatek půjde nastavit.</p></div>
+        </section>
+
+        <section class="panel span-all" aria-labelledby="t1-h">
+          <h2 class="vh" id="t1-h">Kontrolní příklady</h2>
+          <div class="scroll" tabindex="0" role="region" aria-label="Kontrolní příklady, posuvná tabulka">
+            <table class="tbl">
+              <caption>Kontrolní příklady <span class="panel__meta">zdroj: money.cz</span></caption>
+              <thead><tr><th scope="col">Měsíční vklady</th><th scope="col" class="num">Odpočet za rok</th><th scope="col" class="num">Daňová úspora (15&nbsp;%)</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Penzijko 5&nbsp;700&nbsp;Kč</th><td class="num">48&nbsp;000&nbsp;Kč</td><td class="num">7&nbsp;200&nbsp;Kč</td></tr>
+                <tr class="is-current"><th scope="row">Penzijko 3&nbsp;000&nbsp;Kč + životní pojištění 2&nbsp;500&nbsp;Kč <span class="tag tag--ok">= vstupy</span></th><td class="num">45&nbsp;600&nbsp;Kč</td><td class="num">6&nbsp;840&nbsp;Kč</td></tr>
+                <tr><th scope="row">DIP 4&nbsp;000&nbsp;Kč</th><td class="num">48&nbsp;000&nbsp;Kč</td><td class="num">7&nbsp;200&nbsp;Kč</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel span-all" aria-labelledby="n27-h" style="border-color:var(--draft)">
+          <div class="panel__head"><h2 id="n27-h">Návrh 2027 · do 30 let</h2><span class="tag tag--draft"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg>Návrh, zatím neschváleno</span></div>
+          <div class="panel__body stack">
+            <p style="margin:0">Pro lidi do 30&nbsp;let má být státní příspěvek 40&nbsp;% vkladu: při vkladu 1&nbsp;700&nbsp;Kč měsíčně 680&nbsp;Kč měsíčně, tedy 8&nbsp;160&nbsp;Kč ročně. Děti mají mít nárok už od vkladu 100&nbsp;Kč.</p>
+            <dl class="kv"><dt>stav</dt><dd>Vláda návrh schválila 24.&nbsp;8.&nbsp;2026, Sněmovna ho podpořila v 1. čtení 24.&nbsp;9.&nbsp;2026. Zákonem zatím není.</dd></dl>
+          </div>
+          <div class="scroll" tabindex="0" role="region" aria-label="Státní příspěvek 2026 a návrh 2027, posuvná tabulka">
+            <table class="tbl">
+              <caption>Státní příspěvek: pravidla 2026 a návrh 2027</caption>
+              <thead><tr><th scope="col" class="num">Měsíční vklad</th><th scope="col" class="num">Pravidla 2026</th><th scope="col" class="num">Návrh 2027 (do 30 let)</th></tr></thead>
+              <tbody>
+                <tr><th scope="row" class="num">400&nbsp;Kč</th><td class="num">0&nbsp;Kč</td><td class="num" style="color:var(--draft)">–</td></tr>
+                <tr><th scope="row" class="num">1&nbsp;700&nbsp;Kč</th><td class="num">340&nbsp;Kč měsíčně</td><td class="num" style="color:var(--draft)">680&nbsp;Kč měsíčně (8&nbsp;160&nbsp;Kč ročně)</td></tr>
+                <tr><th scope="row" class="num">3&nbsp;000&nbsp;Kč</th><td class="num">340&nbsp;Kč měsíčně</td><td class="num" style="color:var(--draft)">680&nbsp;Kč měsíčně</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel__foot"><p>Pod 500&nbsp;Kč měsíčně je příspěvek podle pravidel 2026 nulový; mezi 500 a 1&nbsp;700&nbsp;Kč je to 20&nbsp;% vkladu.</p></div>
+        </section>
+
+        <section class="panel" aria-labelledby="src-h">
+          <div class="panel__head"><h2 id="src-h">Zdroje</h2><span class="panel__meta">5 odkazů</span></div>
+          <ol class="sources"><li><span><a href="https://money.cz/novinky-a-tipy/?p=15884">money.cz – Daňově podporované produkty spoření na stáří 2026</a><span class="src-host">money.cz</span></span></li><li><span><a href="https://www.e15.cz/dip-sporeni-duchod-2024">E15 – DIP: podmínky</a><span class="src-host">e15.cz</span></span></li><li><span><a href="https://energozrouti.cz/clanek/mladi-do-30-let-maji-od-statu-dostavat-8160-kc-rocne">Energozrouti – Mladí do 30 let až 8 160 Kč ročně</a><span class="src-host">energozrouti.cz</span></span></li><li><span><a href="https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni">Echo24 – Vláda schválila změnu pravidel penzijního spoření</a><span class="src-host">echo24.cz</span></span></li><li><span><a href="https://www.blesk.cz/clanek/848986">Blesk – Sněmovna podpořila změny penzijka v 1. čtení</a><span class="src-host">blesk.cz</span></span></li></ol>
+        </section>
+
+        <section class="panel" aria-labelledby="rel-h">
+          <div class="panel__head"><h2 id="rel-h">Související nástroje</h2></div>
+          <ul class="list">
+            <li><a href="#">Penzijko kompas</a> <span class="muted">· kalkulačka</span></li>
+            <li><a href="#">Zdaním to?</a> <span class="muted">· průvodce</span></li>
+            <li><a href="#">Slevy 2027</a> <span class="muted">· průvodce</span></li>
+          </ul>
+        </section>
+      </div>
+
+      <p class="disclaimer"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</span></p>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  <div>
+    <p><strong>Spočítáno</strong> · Kalkulačky a průvodci podle českých pravidel</p>
+    <p><span class="tag tag--ok"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k 4.&nbsp;11.&nbsp;2026</span></p>
+    <p><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg> Nic neukládáme ani neodesíláme. Výpočty běží jen ve vašem prohlížeči.</p>
+  </div>
+  <div>
+    <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+    <p>Prototyp designu – kalkulačky zatím nepočítají naostro.</p>
+    <p>Při tisku se skryje navigace, zobrazí se adresy odkazů a datum ověření pravidel.</p>
+  </div>
+  <div>
+    <ul class="foot__links">
+      <li><a href="kategorie.html">Peníze a investice</a></li>
+      <li><a href="#">Daně a podnikání</a></li>
+      <li><a href="#">Bydlení a energie</a></li>
+      <li><a href="#">Práce a rodina</a></li>
+      <li><a href="index.html#dluhy">Dluhy</a></li>
+      <li><a href="index.html#zmeny-2027">Co se mění v roce 2027</a></li>
+    </ul>
+  </div>
+</footer>
+</div>
+</body>
+</html>

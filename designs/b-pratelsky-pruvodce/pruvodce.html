@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mám EET? – průvodce EET 2.0 krok za krokem (varianta B)</title>
+<meta name="description" content="Zjisti, jestli se tě EET 2.0 od 1. 1. 2027 týká a jestli se vyplatí EET OFF.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=Nunito:wght@400;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+
+<header class="site-header">
+  <div class="wrap header-top">
+    <a class="logo" href="index.html">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" class="il-terra"/><path d="M14 25l7 7 13-15" class="st-cream" stroke-width="5"/><circle cx="38" cy="10" r="5" class="il-gold"/></svg>
+      <span>Spočítáno<small>Kalkulačky a průvodci podle českých pravidel</small></span>
+    </a>
+    <div class="header-tools">
+      <form class="search" role="search" action="kategorie.html" method="get">
+        <label class="sr-only" for="hledat">Hledat na webu</label>
+        <div class="search-field">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" class="st-ink" stroke-width="2.4"/><path d="M13 13l4 4" class="st-ink" stroke-width="2.4"/></svg>
+          <input type="search" id="hledat" name="q" placeholder="Hledat kalkulačku, např. penzijko, EET, výpověď">
+          <button type="submit">Hledat</button>
+        </div>
+      </form>
+      <fieldset class="theme-switch"><legend>Barevný režim</legend>
+        <input type="radio" name="theme" id="t-auto" checked><label for="t-auto">Auto</label>
+        <input type="radio" name="theme" id="t-light"><label for="t-light">Světlý</label>
+        <input type="radio" name="theme" id="t-dark"><label for="t-dark">Tmavý</label>
+      </fieldset>
+    </div>
+  </div>
+  <nav class="main-nav wrap" aria-label="Hlavní navigace">
+    <ul>
+      <li><a href="kategorie.html"><span class="dot"></span>Peníze a investice</a></li>
+      <li><a href="#"><span class="dot"></span>Daně a podnikání</a></li>
+      <li><a href="#"><span class="dot"></span>Bydlení a energie</a></li>
+      <li><a href="#"><span class="dot"></span>Práce a rodina</a></li>
+      <li><a href="index.html#dluhy"><span class="dot"></span>Dluhy</a></li>
+      <li><a href="index.html#zmeny-2027"><span class="dot"></span>Co se mění v roce 2027</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="obsah">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Drobečková navigace">
+      <ol>
+        <li><a href="index.html">Úvod</a></li>
+        <li><a href="#">Daně a podnikání</a></li>
+        <li><span aria-current="page">Mám EET?</span></li>
+      </ol>
+    </nav>
+
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Průvodce · EET 2.0</p>
+        <h1>Mám EET?</h1>
+        <p class="question">Za dvě minuty zjistíš, jestli se tě EET&nbsp;2.0 od 1.&nbsp;1.&nbsp;2027 týká, jestli se vyplatí EET OFF a co udělat do kdy.</p>
+        <ul class="badges">
+          <li class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pravidla ověřena k 4. 11. 2026</li>
+          <li class="badge badge-plain">8 krátkých otázek</li>
+        </ul>
+      </div>
+      <svg class="page-head-art" viewBox="0 0 220 200" aria-hidden="true">
+        <circle cx="110" cy="100" r="94" class="il-bg-2"/>
+        <path d="M78 22h64v86l-8-5-8 5-8-5-8 5-8-5-8 5-8-5-8 5z" class="il-paper"/>
+        <path d="M90 40h40M90 54h40M90 68h26" class="st-ink" stroke-width="5"/>
+        <path d="M116 88h14" class="st-terra" stroke-width="5"/>
+        <rect x="40" y="100" width="140" height="70" rx="20" class="il-terra"/>
+        <rect x="54" y="114" width="58" height="22" rx="7" class="il-cream"/>
+        <circle cx="132" cy="122" r="6" class="il-gold"/><circle cx="152" cy="122" r="6" class="il-gold"/>
+        <circle cx="132" cy="146" r="6" class="il-cream"/><circle cx="152" cy="146" r="6" class="il-cream"/>
+        <rect x="54" y="144" width="58" height="10" rx="5" class="il-apricot-d"/>
+        <rect x="30" y="168" width="160" height="14" rx="7" class="il-apricot-d"/>
+        <circle cx="176" cy="54" r="16" class="il-gold"/>
+        <circle cx="176" cy="54" r="10" class="st-gold" stroke-width="3"/>
+        <path d="M40 50q2 7 9 9q-7 2-9 9q-2-7-9-9q7-2 9-9z" class="il-gold"/>
+      </svg>
+    </div>
+
+    <!-- 1) Dotazník: krok 2 z 8 -->
+    <section aria-labelledby="krok-nadpis" class="section-tight">
+      <h2 id="krok-nadpis" class="sr-only">Dotazník, krok 2 z 8</h2>
+      <div class="bar-progress">
+        <p class="bar-label"><span>Krok 2 z 8 · Jak přijímáš platby</span><span class="muted">Další: Obor</span></p>
+        <ol class="bar-steps" aria-label="Kroky dotazníku">
+          <li class="done"><span class="sr-only">1. Forma podnikání – hotovo</span></li>
+          <li class="current" aria-current="step"><span class="sr-only">2. Jak přijímáte platby – právě vyplňuješ</span></li>
+          <li><span class="sr-only">3. Obor</span></li>
+          <li><span class="sr-only">4. Paušální daň a pásmo</span></li>
+          <li><span class="sr-only">5. Roční příjmy</span></li>
+          <li><span class="sr-only">6. Provozovny a pokladny</span></li>
+          <li><span class="sr-only">7. Zaměstnanci</span></li>
+          <li><span class="sr-only">8. ZTP/P</span></li>
+        </ol>
+      </div>
+      <ul class="done-steps">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>1. Forma podnikání: vyplněno</li>
+      </ul>
+
+      <form class="quiz" action="#vysledek" method="get">
+        <fieldset aria-describedby="platby-hint">
+          <legend class="quiz-q">Jak od zákazníků přijímáš platby?</legend>
+          <p class="hint" id="platby-hint">Zaškrtni všechno, co používáš. Eviduje se kontaktní platba: hotovost (vždy, i mimo provozovnu), karta na místě, QR platba na místě, stravenky, poukázky a virtuální aktiva.</p>
+          <ul class="options">
+            <li class="opt"><input type="checkbox" id="p1" name="platby" value="hotovost" checked><label for="p1"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Hotovost</label></li>
+            <li class="opt"><input type="checkbox" id="p2" name="platby" value="karta"><label for="p2"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Platební karta na provozovně</label></li>
+            <li class="opt"><input type="checkbox" id="p3" name="platby" value="qr" checked><label for="p3"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>QR platba u pultu</label></li>
+            <li class="opt"><input type="checkbox" id="p4" name="platby" value="stravenky"><label for="p4"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Stravenky nebo poukázky</label></li>
+            <li class="opt"><input type="checkbox" id="p5" name="platby" value="krypto"><label for="p5"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Virtuální aktiva (kryptoměny)</label></li>
+            <li class="opt"><input type="checkbox" id="p6" name="platby" value="faktura" checked><label for="p6"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Faktura placená převodem</label></li>
+            <li class="opt"><input type="checkbox" id="p7" name="platby" value="online"><label for="p7"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Online platba přes platební bránu e-shopu</label></li>
+          </ul>
+        </fieldset>
+        <div class="quiz-actions">
+          <a class="btn btn-ghost" href="#"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5M9 5l-5 5 5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Zpět</a>
+          <button class="btn btn-primary" type="submit">Pokračovat<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </form>
+    </section>
+
+    <div class="jump" aria-hidden="true"><span>… o šest otázek později …</span></div>
+
+    <!-- 2) Výsledek -->
+    <section id="vysledek" aria-labelledby="vysledek-nadpis" class="section-tight">
+      <div class="bar-progress">
+        <p class="bar-label"><span>Hotovo, všech 8 kroků</span><span class="muted">Odpovědi nikam neposíláme</span></p>
+        <ol class="bar-steps" aria-hidden="true"><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li></ol>
+      </div>
+      <p class="muted small">Tvoje situace:</p>
+      <ul class="scenario">
+        <li class="badge badge-plain">Paušální daň v 1. pásmu</li>
+        <li class="badge badge-plain">Roční příjmy 800&nbsp;000&nbsp;Kč</li>
+        <li class="badge badge-plain">Hotovost a QR platby u pultu</li>
+      </ul>
+
+      <div class="result">
+        <div class="result-top">
+          <div>
+            <p class="result-kicker">Výsledek</p>
+            <h2 id="vysledek-nadpis" class="verdict">Můžeš zvolit EET OFF</h2>
+            <p class="big-num">16&nbsp;800&nbsp;Kč</p>
+            <p class="big-num-label">roční přirážka k paušální dani v režimu EET OFF (<span class="num">1&nbsp;400&nbsp;Kč</span> měsíčně)</p>
+          </div>
+          <svg class="result-art" viewBox="0 0 140 140" aria-hidden="true">
+            <circle cx="70" cy="70" r="66" class="il-bg"/>
+            <path d="M42 18h56v74l-7-4.5-7 4.5-7-4.5-7 4.5-7-4.5-7 4.5-7-4.5-7 4.5z" class="il-paper"/>
+            <path d="M52 34h36M52 46h36M52 58h22" class="st-ink" stroke-width="4"/>
+            <rect x="30" y="92" width="80" height="34" rx="17" class="il-sage-d"/>
+            <circle cx="93" cy="109" r="12" class="il-paper"/>
+            <text x="58" y="115" text-anchor="middle" font-size="15" class="il-text" style="fill: var(--il-paper)">OFF</text>
+          </svg>
+        </div>
+        <p class="result-expl">Platby v hotovosti a QR kódem u pultu jsou kontaktní platby, takže je musíš evidovat. Protože jsi v 1. pásmu paušální daně s příjmy do <span class="num">1&nbsp;000&nbsp;000&nbsp;Kč</span>, můžeš místo evidence zvolit EET OFF. Daňová složka paušální daně pak bude <span class="num">1&nbsp;500&nbsp;Kč</span> měsíčně místo <span class="num">100&nbsp;Kč</span>.</p>
+      </div>
+
+      <div class="split" style="margin-top: var(--sp-6)">
+        <section class="card" aria-labelledby="proc-nadpis">
+          <h2 id="proc-nadpis" style="font-size: var(--fs-xl)">Proč to tak vychází</h2>
+          <ol class="reasons">
+            <li><div><p>Přijímáš hotovost a QR platby na místě – to jsou kontaktní platby.</p><span class="src">Zdroj: <a href="https://www.fakturoid.cz/almanach/legislativa/eet">Fakturoid – EET 2.0</a></span></div></li>
+            <li><div><p>Faktury placené převodem se neevidují.</p><span class="src">Zdroj: <a href="https://www.denik.cz/ekonomika/vlada-projednala-nove-eet/">Deník – Vláda projednala nové EET</a></span></div></li>
+            <li><div><p>EET OFF je jen pro 1. pásmo paušální daně s příjmy do <span class="num">1&nbsp;000&nbsp;000&nbsp;Kč</span> a nejde měnit během roku.</p><span class="src">Zdroj: <a href="https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf">MF – Brožura EET 2.0</a></span></div></li>
+          </ol>
+        </section>
+
+        <section class="card" aria-labelledby="srovnani-nadpis">
+          <h2 id="srovnani-nadpis" style="font-size: var(--fs-xl)">EET OFF, nebo evidence?</h2>
+          <p class="muted">Kolik tě která cesta stojí za rok.</p>
+          <div class="table-wrap" role="region" aria-label="Tabulka: EET OFF, nebo evidence" tabindex="0">
+            <table>
+              <caption>Náklady za rok podle zvolené cesty</caption>
+              <thead><tr><th scope="col">Možnost</th><th scope="col" class="r">Náklad za rok</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">EET OFF (přirážka <span class="num">1&nbsp;400&nbsp;Kč</span> měsíčně)</th><td class="r">16&nbsp;800&nbsp;Kč</td></tr>
+                <tr><th scope="row">Evidence v bezplatné aplikaci MOJE EET</th><td class="r">0&nbsp;Kč</td></tr>
+                <tr><th scope="row">Evidence ve vlastní pokladně</th><td class="r" style="white-space: normal">zadáš vlastní cenu</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">MOJE EET je pro nejvýš 2 evidenční jednotky a 2 zaměstnance.</p>
+          <p style="margin-top: var(--sp-4)"><strong>Čistě v penězích</strong> vychází levněji evidence v bezplatné aplikaci MOJE EET. EET OFF ti zase ušetří evidování.</p>
+        </section>
+      </div>
+
+      <section class="card" aria-labelledby="seznam-nadpis" style="margin-top: var(--sp-5)">
+        <div class="card-head">
+          <h2 id="seznam-nadpis">Co udělat a do kdy</h2>
+          <span class="badge badge-new">Start EET 2.0: 1.&nbsp;1.&nbsp;2027</span>
+        </div>
+        <p class="muted">Odškrtávej si to jedno po druhém. Super, tohle zvládneš do konce roku. Seznam si můžeš i vytisknout.</p>
+        <ul class="checklist">
+          <li><input type="checkbox" id="u1"><label for="u1"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="task">Vygenerovat pokladní certifikát</span><span class="when"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="3" width="14" height="12" rx="3.5" class="il-apricot"/><path d="M5 1v3M11 1v3" class="st-ink" stroke-width="1.8"/></svg>před spuštěním MOJE EET, termín ověříme</span></span></label></li>
+          <li><input type="checkbox" id="u2"><label for="u2"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="task">Zřídit Daňovou informační schránku plus</span><span class="when"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="3" width="14" height="12" rx="3.5" class="il-apricot"/><path d="M5 1v3M11 1v3" class="st-ink" stroke-width="1.8"/></svg>termín ověříme</span></span></label></li>
+          <li><input type="checkbox" id="u3"><label for="u3"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="task">Rozhodnout se pro EET OFF, nebo evidenci</span><span class="when"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="3" width="14" height="12" rx="3.5" class="il-apricot"/><path d="M5 1v3M11 1v3" class="st-ink" stroke-width="1.8"/></svg>termín ověříme; během roku režim nejde změnit</span></span></label></li>
+          <li><input type="checkbox" id="u4"><label for="u4"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="task">Nainstalovat MOJE EET, nebo připravit pokladnu</span><span class="when firm"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="3" width="14" height="12" rx="3.5" class="il-terra"/><path d="M5 1v3M11 1v3" class="st-ink" stroke-width="1.8"/></svg>MOJE EET je k dispozici od 1.&nbsp;12.&nbsp;2026</span></span></label></li>
+          <li><input type="checkbox" id="u5"><label for="u5"><span class="box"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3 3 7-7.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="task">Vyzkoušet evidenci naostro</span><span class="when firm"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="3" width="14" height="12" rx="3.5" class="il-terra"/><path d="M5 1v3M11 1v3" class="st-ink" stroke-width="1.8"/></svg>před 1.&nbsp;1.&nbsp;2027</span></span></label></li>
+        </ul>
+      </section>
+
+      <aside class="notice" aria-label="Upozornění" style="margin-top: var(--sp-5)">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16"/><path d="M16 9v9M16 23v.5" stroke-width="3.4" stroke-linecap="round"/></svg>
+        <div>
+          <p><strong>Informativní průvodce, nejde o daňové poradenství.</strong></p>
+          <p>Ověř si to na eet.gov.cz nebo na infolince finanční správy.</p>
+        </div>
+      </aside>
+
+      <section class="card" aria-labelledby="zdroje-nadpis" style="margin-top: var(--sp-5)">
+        <h2 id="zdroje-nadpis" style="font-size: var(--fs-xl)">Odkud to víme</h2>
+        <ul class="sources">
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf">MF – Brožura EET 2.0 jednoduše, moderně a přehledně</a></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.fakturoid.cz/almanach/legislativa/eet">Fakturoid – EET 2.0</a></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1">epravo – EET 2.0 je na světě</a></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.dauc.cz/aktuality/2087/moje-eet-pro-drobne-podnikatele">DAUČ – Moje EET pro drobné podnikatele</a></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.podnikatel.cz/clanky/financni-sprava-ukazala-jak-by-mela-vypadat-aplikace-zdarma-moje-eet/">Podnikatel.cz – Aplikace MOJE EET</a></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="dal-nadpis" style="margin-top: var(--sp-6)">
+        <h2 id="dal-nadpis" style="font-size: var(--fs-lg)">Co dál? Mohlo by se ti hodit</h2>
+        <ul class="helper-choices">
+          <li><a href="#">OSVČ 2027<b aria-hidden="true">→</b></a></li>
+          <li><a href="#">Slevy 2027<b aria-hidden="true">→</b></a></li>
+          <li><a href="#">Cestovní příkaz 2027<b aria-hidden="true">→</b></a></li>
+        </ul>
+      </section>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>Spočítáno</h2>
+      <ul class="badges">
+        <li class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pravidla ověřena k 4. 11. 2026</li>
+      </ul>
+      <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+      <p>Nic neukládáme ani neodesíláme. Všechno se počítá jen v tvém prohlížeči.</p>
+      <p>Prototyp designu – kalkulačky zatím nepočítají naostro.</p>
+      <p class="print-note">Při tisku se skryje navigace, zobrazí se adresy odkazů a datum ověření pravidel.</p>
+    </div>
+    <nav aria-label="Kategorie v patičce">
+      <h2>Témata</h2>
+      <ul>
+        <li><a href="kategorie.html">Peníze a investice</a></li>
+        <li><a href="#">Daně a podnikání</a></li>
+        <li><a href="#">Bydlení a energie</a></li>
+        <li><a href="#">Práce a rodina</a></li>
+        <li><a href="index.html#dluhy">Dluhy</a></li>
+        <li><a href="index.html#zmeny-2027">Co se mění v roce 2027</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Oblíbené</h2>
+      <ul>
+        <li><a href="kalkulacka.html">Plán48</a></li>
+        <li><a href="pruvodce.html">Mám EET?</a></li>
+        <li><a href="#">Penzijko kompas</a></li>
+        <li><a href="#">Slevy 2027</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plán48 – kolik ti stát přidá a kolik ušetříš (varianta B)</title>
+<meta name="description" content="Plán48: státní příspěvek na penzijko, odpočet z limitu 48 000 Kč a co udělat do 31. 12.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=Nunito:wght@400;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+
+<header class="site-header">
+  <div class="wrap header-top">
+    <a class="logo" href="index.html">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" class="il-terra"/><path d="M14 25l7 7 13-15" class="st-cream" stroke-width="5"/><circle cx="38" cy="10" r="5" class="il-gold"/></svg>
+      <span>Spočítáno<small>Kalkulačky a průvodci podle českých pravidel</small></span>
+    </a>
+    <div class="header-tools">
+      <form class="search" role="search" action="kategorie.html" method="get">
+        <label class="sr-only" for="hledat">Hledat na webu</label>
+        <div class="search-field">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" class="st-ink" stroke-width="2.4"/><path d="M13 13l4 4" class="st-ink" stroke-width="2.4"/></svg>
+          <input type="search" id="hledat" name="q" placeholder="Hledat kalkulačku, např. penzijko, EET, výpověď">
+          <button type="submit">Hledat</button>
+        </div>
+      </form>
+      <fieldset class="theme-switch"><legend>Barevný režim</legend>
+        <input type="radio" name="theme" id="t-auto" checked><label for="t-auto">Auto</label>
+        <input type="radio" name="theme" id="t-light"><label for="t-light">Světlý</label>
+        <input type="radio" name="theme" id="t-dark"><label for="t-dark">Tmavý</label>
+      </fieldset>
+    </div>
+  </div>
+  <nav class="main-nav wrap" aria-label="Hlavní navigace">
+    <ul>
+      <li><a href="kategorie.html"><span class="dot"></span>Peníze a investice</a></li>
+      <li><a href="#"><span class="dot"></span>Daně a podnikání</a></li>
+      <li><a href="#"><span class="dot"></span>Bydlení a energie</a></li>
+      <li><a href="#"><span class="dot"></span>Práce a rodina</a></li>
+      <li><a href="index.html#dluhy"><span class="dot"></span>Dluhy</a></li>
+      <li><a href="index.html#zmeny-2027"><span class="dot"></span>Co se mění v roce 2027</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="obsah">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Drobečková navigace">
+      <ol>
+        <li><a href="index.html">Úvod</a></li>
+        <li><a href="kategorie.html">Peníze a investice</a></li>
+        <li><span aria-current="page">Plán48</span></li>
+      </ol>
+    </nav>
+
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Kalkulačka · penzijko, DIP, životní pojištění</p>
+        <h1>Plán48</h1>
+        <p class="question">„Kolik peněz nechávám státu na stole a co s tím mám udělat do konce roku?“</p>
+        <p class="muted">Dva krátké kroky a máš jasno. Pojďme na to.</p>
+        <ul class="badges">
+          <li class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pravidla ověřena k 4. 11. 2026</li>
+          <li class="badge badge-plain">Počítáme podle: Pravidla 2026</li>
+        </ul>
+      </div>
+      <svg class="page-head-art" viewBox="0 0 220 210" aria-hidden="true">
+        <defs><clipPath id="ph-kruh"><circle cx="110" cy="100" r="96"/></clipPath></defs>
+        <circle cx="110" cy="100" r="96" class="il-bg"/>
+        <path clip-path="url(#ph-kruh)" d="M60 210v-34a14 14 0 0 1 14-14h56a14 14 0 0 1 14 14v34z" class="il-sage-d"/>
+        <ellipse cx="104" cy="160" rx="48" ry="26" class="il-blush"/>
+        <g transform="rotate(7 110 100)">
+          <rect x="62" y="26" width="96" height="136" rx="18" class="il-terra"/>
+          <rect x="74" y="40" width="72" height="30" rx="8" class="il-cream"/>
+          <text class="il-text" x="138" y="62" text-anchor="end" font-size="18">48 000</text>
+          <circle cx="84" cy="88" r="7" class="il-cream"/><circle cx="110" cy="88" r="7" class="il-cream"/><circle cx="136" cy="88" r="7" class="il-gold"/>
+          <circle cx="84" cy="110" r="7" class="il-cream"/><circle cx="110" cy="110" r="7" class="il-cream"/><circle cx="136" cy="110" r="7" class="il-gold"/>
+          <circle cx="84" cy="132" r="7" class="il-cream"/><circle cx="110" cy="132" r="7" class="il-cream"/><circle cx="136" cy="132" r="7" class="il-sage"/>
+          <rect x="148" y="96" width="22" height="15" rx="7.5" class="il-blush"/>
+          <rect x="150" y="114" width="22" height="15" rx="7.5" class="il-blush"/>
+          <rect x="148" y="132" width="20" height="15" rx="7.5" class="il-blush"/>
+          <rect x="50" y="108" width="20" height="38" rx="10" class="il-blush"/>
+        </g>
+        <path d="M184 40q2 7 9 9q-7 2-9 9q-2-7-9-9q7-2 9-9z" class="il-gold"/>
+        <path d="M30 60q2 6 8 8q-6 2-8 8q-2-6-8-8q6-2 8-8z" class="il-sage"/>
+      </svg>
+    </div>
+
+    <!-- Ukazatel průběhu -->
+    <nav class="progress" aria-label="Postup kalkulačkou">
+      <ol>
+        <li class="done"><span class="bubble"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5 11.5l4 4 8-9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1. O tobě<span class="state">hotovo</span></li>
+        <li class="done"><span class="bubble"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5 11.5l4 4 8-9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>2. Co si spoříš<span class="state">hotovo</span></li>
+        <li class="current" aria-current="step"><span class="bubble">3</span>3. Výsledek<span class="state">teď tady</span></li>
+      </ol>
+    </nav>
+
+    <div class="calc-layout">
+      <!-- Vyplněné kroky (sbalené se shrnutím) -->
+      <section class="calc-side" aria-labelledby="odpovedi-nadpis">
+        <h2 id="odpovedi-nadpis">Tvoje odpovědi</h2>
+        <p class="muted small">Klikni na krok a cokoli změň. Výsledek se přepočítá.</p>
+        <form action="#" method="get">
+          <details class="step">
+            <summary>
+              <span class="step-num"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7-8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><span class="step-title">1. O tobě</span><span class="step-sum">35 let · daň 15 % · Pravidla 2026</span></span>
+              <span class="step-edit"><span class="when-closed">Upravit</span><span class="when-open">Sbalit</span></span>
+            </summary>
+            <div class="step-body">
+              <div class="field">
+                <label for="vek">Kolik ti je?</label>
+                <div class="input"><input id="vek" name="vek" type="text" inputmode="numeric" value="35" aria-describedby="vek-hint"><span class="unit" aria-hidden="true">let</span></div>
+                <span class="hint" id="vek-hint">Věk v letech. Starobní důchodci státní příspěvek nedostávají.</span>
+              </div>
+              <fieldset class="field" aria-describedby="sazba-hint">
+                <legend id="sazba-l">Sazba daně</legend>
+                <div class="seg">
+                  <input type="radio" name="sazba" id="sazba-15" checked><label for="sazba-15">15 %</label>
+                  <input type="radio" name="sazba" id="sazba-23"><label for="sazba-23">23 %</label>
+                </div>
+                <span class="hint" id="sazba-hint">23 % jen pro vysoké příjmy.</span>
+              </fieldset>
+              <fieldset class="field" aria-describedby="pravidla-hint">
+                <legend id="pravidla-l">Podle jakých pravidel počítat</legend>
+                <div class="seg">
+                  <input type="radio" name="pravidla" id="pr-2026" checked><label for="pr-2026">Pravidla 2026</label>
+                  <input type="radio" name="pravidla" id="pr-2027"><label for="pr-2027">Návrh 2027</label>
+                </div>
+                <span class="hint" id="pravidla-hint">Návrh 2027 zatím není zákon, ukážeme ho jen pro srovnání.</span>
+              </fieldset>
+            </div>
+          </details>
+
+          <details class="step" open>
+            <summary>
+              <span class="step-num"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7-8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><span class="step-title">2. Co si spoříš</span><span class="step-sum">Penzijko 3&nbsp;000&nbsp;Kč · DIP 0&nbsp;Kč · životko 2&nbsp;500&nbsp;Kč měsíčně</span></span>
+              <span class="step-edit"><span class="when-closed">Upravit</span><span class="when-open">Sbalit</span></span>
+            </summary>
+            <div class="step-body">
+              <div class="field">
+                <label for="dps">Kolik si měsíčně posíláš na penzijko (DPS)?</label>
+                <div class="input"><input id="dps" name="dps" type="text" inputmode="numeric" value="3 000" aria-describedby="dps-hint"><span class="unit" aria-hidden="true">Kč</span></div>
+                <span class="hint" id="dps-hint">Do odpočtu jde jen část nad <span class="num">1&nbsp;700&nbsp;Kč</span> měsíčně.</span>
+              </div>
+              <div class="field">
+                <label for="dip">DIP měsíčně</label>
+                <div class="input"><input id="dip" name="dip" type="text" inputmode="numeric" value="0" aria-describedby="dip-hint"><span class="unit" aria-hidden="true">Kč</span></div>
+                <span class="hint" id="dip-hint">Odečítá se od první koruny. Smlouva musí trvat aspoň 10 let a výběr nejdřív v 60 letech.</span>
+              </div>
+              <div class="field">
+                <label for="zp">Životní pojištění měsíčně</label>
+                <div class="input"><input id="zp" name="zp" type="text" inputmode="numeric" value="2 500" aria-describedby="zp-hint"><span class="unit" aria-hidden="true">Kč</span></div>
+                <span class="hint" id="zp-hint">Odečítá se od první koruny.</span>
+              </div>
+              <div class="field">
+                <label for="zam">Příspěvek zaměstnavatele měsíčně</label>
+                <div class="input"><input id="zam" name="zam" type="text" inputmode="numeric" value="0" aria-describedby="zam-hint"><span class="unit" aria-hidden="true">Kč</span></div>
+                <span class="hint" id="zam-hint">Do odpočtu se nepočítá.</span>
+              </div>
+              <div class="field">
+                <label for="obdobi">Období</label>
+                <div class="input input-select"><select id="obdobi" name="obdobi" aria-describedby="obdobi-hint"><option selected>celý rok 2026 (12 měsíců)</option></select></div>
+                <span class="hint" id="obdobi-hint">Ukázka počítá s vklady po celý rok.</span>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Přepočítat</button>
+              </div>
+            </div>
+          </details>
+        </form>
+
+        <div class="demo-box">
+          <h3><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="10" class="il-apricot"/><path d="M10 5.5v5.5M10 14v.5" class="st-ink" stroke-width="2.4"/></svg>Ukázka: když něco chybí</h3>
+          <p>Takhle ti dáme vědět, že jsi pole přeskočil(a). Nic se neděje, stačí doplnit.</p>
+          <div class="field is-error">
+            <label for="vek-chyba">Kolik ti je?</label>
+            <div class="input"><input id="vek-chyba" name="vek-chyba" type="text" inputmode="numeric" value="" aria-invalid="true" aria-describedby="vek-chyba-msg vek-chyba-hint"><span class="unit" aria-hidden="true">let</span></div>
+            <p class="error-msg" id="vek-chyba-msg"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M10 5v6M10 14.2v.3" stroke-width="2.6" stroke-linecap="round"/></svg><span><span class="sr-only">Chyba: </span>Vyplň věk. Podle něj poznáme, jestli máš nárok na státní příspěvek.</span></p>
+            <span class="hint" id="vek-chyba-hint">Věk v letech. Starobní důchodci státní příspěvek nedostávají.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="calc-main">
+        <!-- Krok 3: výsledek -->
+        <section class="result" aria-labelledby="vysledek-nadpis">
+          <div class="result-top">
+            <div>
+              <p class="result-kicker">Krok 3 ze 3 · výsledek</p>
+              <h2 id="vysledek-nadpis">Super, tady je tvůj výsledek</h2>
+              <p class="big-num">45&nbsp;600&nbsp;Kč</p>
+              <p class="big-num-label">Odpočet od základu daně za rok 2026</p>
+            </div>
+            <svg class="result-art" viewBox="0 0 140 140" aria-hidden="true">
+              <circle cx="70" cy="70" r="66" class="il-bg"/>
+              <rect x="38" y="92" width="14" height="22" rx="7" class="il-apricot-d"/>
+              <rect x="82" y="92" width="14" height="22" rx="7" class="il-apricot-d"/>
+              <ellipse cx="66" cy="80" rx="40" ry="30" class="il-apricot"/>
+              <path d="M82 56l8-14c2-3 6-2 6 1l-2 16z" class="il-apricot-d"/>
+              <rect x="52" y="53" width="22" height="5" rx="2.5" class="il-apricot-d"/>
+              <ellipse cx="106" cy="82" rx="9" ry="11" class="il-blush"/>
+              <path d="M84 72q4-4 8 0" class="st-ink" stroke-width="3"/>
+              <ellipse cx="88" cy="86" rx="6" ry="4" class="il-blush"/>
+              <circle cx="108" cy="34" r="16" class="il-sage-d"/>
+              <path d="M100 34l6 6 10-11" class="st-cream" stroke-width="4"/>
+              <path d="M30 30q2 6 8 8q-6 2-8 8q-2-6-8-8q6-2 8-8z" class="il-gold"/>
+            </svg>
+          </div>
+          <p class="result-expl">Z penzijka se počítá <span class="num">15&nbsp;600&nbsp;Kč</span> (část nad <span class="num">1&nbsp;700&nbsp;Kč</span> měsíčně) a z životního pojištění <span class="num">30&nbsp;000&nbsp;Kč</span>. Limit je <span class="num">48&nbsp;000&nbsp;Kč</span>.</p>
+          <ul class="stats">
+            <li class="stat sage"><b>6&nbsp;840&nbsp;Kč</b><span>daňová úspora při sazbě 15 %</span></li>
+            <li class="stat sage"><b>4&nbsp;080&nbsp;Kč</b><span>státní příspěvek na penzijko za rok (maximum <span class="num">340&nbsp;Kč</span> měsíčně)</span></li>
+            <li class="stat"><b>2&nbsp;400&nbsp;Kč</b><span>nevyužitý odpočet z limitu <span class="num">48&nbsp;000&nbsp;Kč</span></span></li>
+          </ul>
+          <div class="todo">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="10" width="52" height="48" rx="12" class="il-paper"/><path d="M6 22a12 12 0 0 1 12-12h28a12 12 0 0 1 12 12v4H6z" class="il-terra"/><path d="M20 5v10M44 5v10" class="st-ink" stroke-width="4"/><text class="il-text" x="32" y="50" text-anchor="middle" font-size="20">31</text></svg>
+            <div>
+              <span class="todo-k">Tvůj krok do konce roku</span>
+              <p>Do 31.&nbsp;12. vlož mimořádně <span class="num">2&nbsp;400&nbsp;Kč</span> na DIP a využiješ celý limit <span class="num">48&nbsp;000&nbsp;Kč</span>. Tohle zvládneš!</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Graf: složení limitu -->
+        <section class="card" aria-labelledby="limit-nadpis">
+          <h2 id="limit-nadpis">Jak máš využitý limit 48&nbsp;000&nbsp;Kč</h2>
+          <p class="muted">Skoro plno. Zbývá jen malý kousek.</p>
+          <figure class="chart">
+            <svg role="img" aria-labelledby="limit-svg-title limit-svg-desc" width="100%" height="128">
+              <title id="limit-svg-title">Složení limitu odpočtu 48 000 Kč</title>
+              <desc id="limit-svg-desc">Penzijko 15 600 Kč, životní pojištění 30 000 Kč, volné místo v limitu 2 400 Kč.</desc>
+              <text class="chart-label-sm ink-muted" x="0" y="14">0 Kč</text>
+              <text class="chart-label-sm ink-muted" x="100%" y="14" text-anchor="end">limit 48 000 Kč</text>
+              <rect class="bar-track" x="0" y="24" width="100%" height="60" rx="22"/>
+              <rect class="bar-1" x="0" y="24" width="32%" height="60" rx="22"/>
+              <rect class="bar-2" x="32.8%" y="24" width="61.6%" height="60" rx="22"/>
+              <rect class="bar-free" x="95.2%" y="25.5" width="4.6%" height="57" rx="12"/>
+              <text class="chart-label-sm ink-1" x="3%" y="48">Penzijko</text>
+              <text class="chart-label ink-1" x="3%" y="70">15 600 Kč</text>
+              <text class="chart-label-sm ink-2" x="35.5%" y="48">Životní pojištění</text>
+              <text class="chart-label ink-2" x="35.5%" y="70">30 000 Kč</text>
+              <line class="line-muted" x1="97.5%" y1="90" x2="97.5%" y2="102"/>
+              <text class="chart-label ink-text" x="100%" y="122" text-anchor="end">volné místo 2 400 Kč</text>
+            </svg>
+            <figcaption>
+              <ul class="legend">
+                <li><span class="sw sw-1"></span><span>Penzijko (DPS):</span> <b>15&nbsp;600&nbsp;Kč</b></li>
+                <li><span class="sw sw-2"></span><span>Životní pojištění:</span> <b>30&nbsp;000&nbsp;Kč</b></li>
+                <li><span class="sw sw-free"></span><span>Volné místo v limitu:</span> <b>2&nbsp;400&nbsp;Kč</b></li>
+              </ul>
+              <p class="chart-sum">Dohromady <span class="num">45&nbsp;600&nbsp;Kč</span> z <span class="num">48&nbsp;000&nbsp;Kč</span>.</p>
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Návrh 2027 -->
+        <section class="card card-draft" aria-labelledby="navrh-nadpis">
+          <div class="card-head">
+            <h2 id="navrh-nadpis">A co návrh pro rok 2027?</h2>
+            <span class="badge badge-draft"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16l1-4 8-8 3 3-8 8-4 1zM11 6l3 3" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>Návrh, zatím neschváleno</span>
+          </div>
+          <p>Pro lidi do 30 let má být státní příspěvek 40 % vkladu: při vkladu <span class="num">1&nbsp;700&nbsp;Kč</span> měsíčně <span class="num">680&nbsp;Kč</span> měsíčně, tedy <span class="num">8&nbsp;160&nbsp;Kč</span> ročně. Děti mají mít nárok už od vkladu <span class="num">100&nbsp;Kč</span>.</p>
+          <p class="muted">Vláda návrh schválila 24.&nbsp;8.&nbsp;2026, Sněmovna ho podpořila v 1.&nbsp;čtení 24.&nbsp;9.&nbsp;2026. Zákonem zatím není.</p>
+          <p class="small"><strong>Pro tebe:</strong> je ti 35, takže by se tě zvýšený příspěvek pro lidi do 30 let netýkal. Výsledek nahoře proto počítá s pravidly 2026.</p>
+        </section>
+
+        <!-- Ilustrační projekce -->
+        <section class="card" aria-labelledby="projekce-nadpis">
+          <h2 id="projekce-nadpis">Projekce úspor do 60 let</h2>
+          <div class="proj-wrap">
+            <svg role="img" aria-labelledby="proj-title proj-desc" viewBox="0 0 600 220" preserveAspectRatio="none" width="100%" height="200">
+              <title id="proj-title">Ilustrační náhled projekce úspor</title>
+              <desc id="proj-desc">Jen tvar křivky, která stoupá s časem. Bez čísel, výpočet přijde v další fázi.</desc>
+              <line class="proj-grid" x1="10" y1="60" x2="590" y2="60" vector-effect="non-scaling-stroke"/>
+              <line class="proj-grid" x1="10" y1="120" x2="590" y2="120" vector-effect="non-scaling-stroke"/>
+              <path class="proj-area" d="M10 205 C150 196 300 172 420 120 S560 40 590 22 V205 Z"/>
+              <path class="proj-line" d="M10 205 C150 196 300 172 420 120 S560 40 590 22" vector-effect="non-scaling-stroke"/>
+              <line class="proj-axis" x1="10" y1="207" x2="590" y2="207" vector-effect="non-scaling-stroke"/>
+            </svg>
+            <span class="proj-badge"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="8" class="st-ink" stroke-width="2"/><path d="M10 6v4l3 2" class="st-ink" stroke-width="2"/></svg>Náhled</span>
+          </div>
+          <div class="proj-axis-labels" aria-hidden="true"><span>dnes</span><span>až ti bude šedesát</span></div>
+          <p class="note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M10 9v5M10 6v.3" stroke-width="2.4" stroke-linecap="round"/></svg>Náhled grafu, výpočet přijde v další fázi. Výnos a poplatek půjde nastavit.</p>
+        </section>
+
+        <!-- Tabulky -->
+        <section class="card" aria-labelledby="tabulky-nadpis">
+          <h2 id="tabulky-nadpis">Pro kontrolu a srovnání</h2>
+          <p class="muted">Ověřené příklady, se kterými kalkulačka musí sedět. Tvoje situace je ve druhém řádku.</p>
+          <div class="table-wrap" role="region" aria-label="Tabulka: kontrolní příklady" tabindex="0">
+            <table class="stack-table">
+              <caption>Kontrolní příklady (zdroj: money.cz)</caption>
+              <thead><tr><th scope="col">Měsíční vklady</th><th scope="col" class="r">Odpočet za rok</th><th scope="col" class="r">Daňová úspora (15 %)</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Penzijko 5&nbsp;700&nbsp;Kč</th><td class="r" data-label="Odpočet za rok">48&nbsp;000&nbsp;Kč</td><td class="r" data-label="Daňová úspora (15 %)">7&nbsp;200&nbsp;Kč</td></tr>
+                <tr class="hl"><th scope="row">Penzijko 3&nbsp;000&nbsp;Kč + životní pojištění 2&nbsp;500&nbsp;Kč <span class="tag">tvoje situace</span></th><td class="r" data-label="Odpočet za rok">45&nbsp;600&nbsp;Kč</td><td class="r" data-label="Daňová úspora (15 %)">6&nbsp;840&nbsp;Kč</td></tr>
+                <tr><th scope="row">DIP 4&nbsp;000&nbsp;Kč</th><td class="r" data-label="Odpočet za rok">48&nbsp;000&nbsp;Kč</td><td class="r" data-label="Daňová úspora (15 %)">7&nbsp;200&nbsp;Kč</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap" role="region" aria-label="Tabulka: státní příspěvek 2026 a návrh 2027" tabindex="0" style="margin-top: var(--sp-5)">
+            <table class="stack-table">
+              <caption>Státní příspěvek: pravidla 2026 a návrh 2027</caption>
+              <thead><tr><th scope="col">Měsíční vklad</th><th scope="col">Pravidla 2026</th><th scope="col">Návrh 2027 (do 30 let)</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">400&nbsp;Kč</th><td data-label="Pravidla 2026">0&nbsp;Kč</td><td data-label="Návrh 2027 (do 30 let)">–</td></tr>
+                <tr><th scope="row">1&nbsp;700&nbsp;Kč</th><td data-label="Pravidla 2026">340&nbsp;Kč měsíčně</td><td data-label="Návrh 2027 (do 30 let)">680&nbsp;Kč měsíčně (8&nbsp;160&nbsp;Kč ročně)</td></tr>
+                <tr><th scope="row">3&nbsp;000&nbsp;Kč</th><td data-label="Pravidla 2026">340&nbsp;Kč měsíčně</td><td data-label="Návrh 2027 (do 30 let)">680&nbsp;Kč měsíčně</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">Pod <span class="num">500&nbsp;Kč</span> měsíčně je příspěvek podle pravidel 2026 nulový; mezi <span class="num">500</span> a <span class="num">1&nbsp;700&nbsp;Kč</span> je to 20 % vkladu. Sloupec Návrh 2027 je <strong>návrh, zatím neschválený</strong>.</p>
+        </section>
+
+        <!-- Na co si dát pozor -->
+        <section class="card" aria-labelledby="pozor-nadpis">
+          <h2 id="pozor-nadpis">Na co si dát pozor</h2>
+          <ul class="watch">
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14"/><path d="M14 8v8M14 20v.3" stroke-width="3" stroke-linecap="round"/></svg><span>U DIP vzniká nárok na odpočet jen při trvání aspoň 10 let a výběru nejdřív v 60 letech.</span></li>
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14"/><path d="M14 8v8M14 20v.3" stroke-width="3" stroke-linecap="round"/></svg><span>Starobní důchodci státní příspěvek nedostávají.</span></li>
+            <li><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="14"/><path d="M14 8v8M14 20v.3" stroke-width="3" stroke-linecap="round"/></svg><span>Příspěvek zaměstnavatele se do odpočtu nepočítá.</span></li>
+          </ul>
+        </section>
+
+        <!-- Zdroje -->
+        <section class="card" aria-labelledby="zdroje-nadpis">
+          <h2 id="zdroje-nadpis">Odkud to víme</h2>
+          <ul class="sources">
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://money.cz/novinky-a-tipy/?p=15884">money.cz – Daňově podporované produkty spoření na stáří 2026</a></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.e15.cz/dip-sporeni-duchod-2024">E15 – DIP: podmínky</a></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://energozrouti.cz/clanek/mladi-do-30-let-maji-od-statu-dostavat-8160-kc-rocne">Energozrouti – Mladí do 30 let až 8&nbsp;160&nbsp;Kč ročně</a></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni">Echo24 – Vláda schválila změnu pravidel penzijního spoření</a></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a3 3 0 0 0 4 4l2-2M13 11l2-2a3 3 0 0 0-4-4L9 7" stroke-width="2" stroke-linecap="round"/></svg><a href="https://www.blesk.cz/clanek/848986">Blesk – Sněmovna podpořila změny penzijka v 1. čtení</a></li>
+          </ul>
+        </section>
+
+        <aside class="notice" aria-label="Upozornění">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16"/><path d="M16 9v9M16 23v.5" stroke-width="3.4" stroke-linecap="round"/></svg>
+          <div>
+            <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+            <p class="small">Prototyp designu – kalkulačky zatím nepočítají naostro.</p>
+          </div>
+        </aside>
+
+        <section aria-labelledby="dal-nadpis">
+          <h2 id="dal-nadpis" class="small" style="font-size: var(--fs-lg)">Co dál? Mohlo by se ti hodit</h2>
+          <ul class="helper-choices">
+            <li><a href="#">Penzijko kompas<b aria-hidden="true">→</b></a></li>
+            <li><a href="#">Zdaním to?<b aria-hidden="true">→</b></a></li>
+            <li><a href="#">Slevy 2027<b aria-hidden="true">→</b></a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>Spočítáno</h2>
+      <ul class="badges">
+        <li class="badge badge-ok"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pravidla ověřena k 4. 11. 2026</li>
+      </ul>
+      <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+      <p>Nic neukládáme ani neodesíláme. Všechno se počítá jen v tvém prohlížeči.</p>
+      <p>Prototyp designu – kalkulačky zatím nepočítají naostro.</p>
+      <p class="print-note">Při tisku se skryje navigace, zobrazí se adresy odkazů a datum ověření pravidel.</p>
+    </div>
+    <nav aria-label="Kategorie v patičce">
+      <h2>Témata</h2>
+      <ul>
+        <li><a href="kategorie.html">Peníze a investice</a></li>
+        <li><a href="#">Daně a podnikání</a></li>
+        <li><a href="#">Bydlení a energie</a></li>
+        <li><a href="#">Práce a rodina</a></li>
+        <li><a href="index.html#dluhy">Dluhy</a></li>
+        <li><a href="index.html#zmeny-2027">Co se mění v roce 2027</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Oblíbené</h2>
+      <ul>
+        <li><a href="kalkulacka.html">Plán48</a></li>
+        <li><a href="pruvodce.html">Mám EET?</a></li>
+        <li><a href="#">Penzijko kompas</a></li>
+        <li><a href="#">Slevy 2027</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

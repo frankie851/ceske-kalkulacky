@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "a-klidna-jistota",
+    "pismeno": "A",
+    "nazev": "Klidná jistota",
+    "barva": "#0B5D5B",
+    "veta": "Věcná příručka: hodně volného místa, vysoký kontrast a jedna petrolejová barva.",
+    "myslenka": "Web jako spolehlivá a dobře udělaná příručka. Velké písmo, úzký sloupec textu, nadpisy oddílů po straně a jediná akcentní barva. Každý výsledek má hned u sebe pravidlo, zdroj a štítek ověření. Uživatel má mít pocit, že je to přesné a nic mu to nevnucuje. Ilustrace nahrazují jen jednoduché linkové ikony.",
+    "vyhody": [
+      "Působí věrohodně a klidně, nic nevnucuje; ke každému výsledku je hned vidět pravidlo, zdroj a datum ověření.",
+      "Nejlépe čitelná: velké písmo (18 px), úzký sloupec, nízká hustota a kontrast s rezervou v obou režimech.",
+      "Nejsnáz se udržuje a rozšiřuje na dalších 11 nástrojů; dobře se tiskne a sekce Dluhy je klidná s výrazným odkazem na pomoc."
+    ],
+    "nevyhody": [
+      "Nejméně výrazná a zapamatovatelná, při špatném provedení může působit až úředně.",
+      "Na mobilu je stránka dlouhá a výsledek kalkulačky je až pod celým formulářem.",
+      "Jedna barva a žádné ilustrace: kategorie a nástroje se na první pohled hůř rozlišují."
+    ],
+    "pismo": "Source Sans 3 + Source Serif 4 na nadpisy a velká čísla",
+    "barvy": "černá na bílé, petrolejová #0B5D5B; tmavý režim #111414 / #5EC2BC",
+    "hustota": "nízká",
+    "pro_koho": "všichni, zvlášť lidé, kteří chtějí jistotu a přesnost"
+  },
+  {
+    "slug": "b-pratelsky-pruvodce",
+    "pismeno": "B",
+    "nazev": "Přátelský průvodce",
+    "barva": "#A4432A",
+    "veta": "Teplé barvy, zaoblené tvary, vlastní ilustrace a tykání; vše po krocích.",
+    "myslenka": "Web jako trpělivý kamarád, který vás provede krok za krokem. Hlavním vzorem je průvodce po krocích, a to i v kalkulačce Plán48 (O tobě, Co si spoříš, Výsledek). Na úvodní stránce se začíná otázkou „S čím ti můžeme pomoct?“ a výběrem životní situace. Vlastní ploché SVG ilustrace (kasička, pokladna, kalendář) a teplé krémové, terakotové a šalvějové barvy ubírají financím na strašidelnosti.",
+    "vyhody": [
+      "Nejvlídnější tón: vyhovuje lidem, které finance a úřední pravidla stresují; dluhy jsou podané laskavě a s respektem.",
+      "Stejný vzor po krocích v kalkulačce i průvodci, takže se uživatel snadno zorientuje; výsledek je jasný (velké číslo + konkrétní krok do 31. 12.).",
+      "Výrazná a zapamatovatelná tvář díky vlastním ilustracím; tmavý režim je teplý, ne černý."
+    ],
+    "nevyhody": [
+      "Málo informací na obrazovce a hodně posouvání; na mobilu je výsledek až pod formulářem.",
+      "Tykání a hravý tón mohou u daní a u starších lidí působit málo seriózně.",
+      "Ilustrace jsou vložené v každé stránce: větší soubory a náročnější údržba při 13 nástrojích."
+    ],
+    "pismo": "Nunito na text, Fredoka na nadpisy a velká čísla",
+    "barvy": "krémová #FFF8F0, terakota #A4432A, meruňková, šalvějová; tmavý režim hnědo-lilková",
+    "hustota": "nízká až střední",
+    "pro_koho": "lidé, kteří řeší finance poprvé nebo z nich mají obavy"
+  },
+  {
+    "slug": "c-datovy-nastroj",
+    "pismeno": "C",
+    "nazev": "Datový nástroj",
+    "barva": "#2F5E8C",
+    "veta": "Hustý tmavý dashboard s tabulkami, grafy a číslicemi stejné šířky.",
+    "myslenka": "Pracovní nástroj pro investory a živnostníky, něco mezi terminálem a dobrým dashboardem. Výchozí je tmavý režim. Postranní panel se stromem nástrojů, ukazatele klíčových čísel (limit 48 000 Kč, příspěvek 340 Kč, EET od 1. 1. 2027, přirážka 16 800 Kč, paušální daň 9 662 Kč), časová osa termínů 2026–2027 a tabulka všech nástrojů. Čísla jsou v IBM Plex Mono a zarovnaná pod sebou. Nic zbytečného, žádné ilustrace.",
+    "vyhody": [
+      "Nejvíc informací na jedné obrazovce: ukazatele, časová osa termínů, tabulka nástrojů a výsledkové karty.",
+      "Čísla stejné šířky zarovnaná vpravo, tabulky a grafy s textovou alternativou: snadné porovnávání pro investory a účetní.",
+      "Stavy jsou jasně odlišené (návrh 2027 fialově s čárkovaným okrajem, termíny jantarově) a oba režimy splňují kontrast AA."
+    ],
+    "nevyhody": [
+      "Laik se v hustém technickém rozhraní hůř zorientuje; pro citlivé téma dluhů je tón chladný.",
+      "Výchozí tmavý režim nerespektuje systémový světlý režim; bez JS si volbu mezi stránkami nepamatuje.",
+      "Na mobilu se časová osa a některé tabulky musí posouvat do strany a strom nástrojů se nevejde."
+    ],
+    "pismo": "IBM Plex Sans + IBM Plex Mono na čísla a tabulky",
+    "barvy": "grafit #0E1116, tyrkysová #3DDBB8, jantarová, korálová, fialová pro návrhy",
+    "hustota": "vysoká",
+    "pro_koho": "investoři, živnostníci, účetní"
+  },
+  {
+    "slug": "d-redakcni",
+    "pismeno": "D",
+    "nazev": "Redakční",
+    "barva": "#8C1C13",
+    "veta": "Ekonomický magazín: titulní strana „Co se mění v roce 2027“ a kalkulačky uvnitř článků.",
+    "myslenka": "Web jako kvalitní ekonomický magazín. Titulní strana s mastheadem ukazuje „Co se mění v roce 2027“ jako noviny: hlavní zpráva o EET 2.0, vedle ní menší zprávy, u každé stav, datum a zdroj. Kalkulačka Plán48 je rámeček uprostřed vysvětlujícího článku s infografikou, vytaženým číslem a poznámkami. Čtenář nejdřív pochopí, co se mění, a pak si to spočítá. Výrazné serifové písmo a jedna vínová barva.",
+    "vyhody": [
+      "Nejdřív vysvětlení, pak výpočet: kontext článku zvyšuje důvěru a pomáhá pochopit pravidla, ne jen číslo.",
+      "Titulní strana „Co se mění v roce 2027“ dává důvod se vracet a dobře se sdílí; stav návrh/schváleno je u každé zprávy.",
+      "Nejsilnější typografie a charakter; jedna barva dobře funguje v obou režimech i v tisku."
+    ],
+    "nevyhody": [
+      "Dlouhé stránky: kdo chce jen rychle spočítat, musí k formuláři projít úvod článku.",
+      "Nejvíc textu na psaní a údržbu – každý nástroj potřebuje redakční článek a jeho aktualizace.",
+      "Na mobilu zabírá hlavička (masthead, rubriky, vyhledávání) skoro celou první obrazovku."
+    ],
+    "pismo": "Fraunces na titulky, Newsreader na text, Inter na popisky a formuláře",
+    "barvy": "papír #FBF8F3, inkoust #1B1714, vínová #8C1C13; noční vydání #161210",
+    "hustota": "střední, dlouhé čtení",
+    "pro_koho": "čtenáři, kteří chtějí změnám porozumět, a lidé z vyhledávačů"
+  }
+]
