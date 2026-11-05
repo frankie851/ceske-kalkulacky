@@ -70,8 +70,9 @@
         </ul>
       </div>
       <svg class="page-head-art" viewBox="0 0 220 210" aria-hidden="true">
+        <defs><clipPath id="ph-kruh"><circle cx="110" cy="100" r="96"/></clipPath></defs>
         <circle cx="110" cy="100" r="96" class="il-bg"/>
-        <path d="M60 210v-34a14 14 0 0 1 14-14h56a14 14 0 0 1 14 14v34z" class="il-sage-d"/>
+        <path clip-path="url(#ph-kruh)" d="M60 210v-34a14 14 0 0 1 14-14h56a14 14 0 0 1 14 14v34z" class="il-sage-d"/>
         <ellipse cx="104" cy="160" rx="48" ry="26" class="il-blush"/>
         <g transform="rotate(7 110 100)">
           <rect x="62" y="26" width="96" height="136" rx="18" class="il-terra"/>
@@ -215,7 +216,7 @@
           <p class="result-expl">Z penzijka se počítá <span class="num">15&nbsp;600&nbsp;Kč</span> (část nad <span class="num">1&nbsp;700&nbsp;Kč</span> měsíčně) a z životního pojištění <span class="num">30&nbsp;000&nbsp;Kč</span>. Limit je <span class="num">48&nbsp;000&nbsp;Kč</span>.</p>
           <ul class="stats">
             <li class="stat sage"><b>6&nbsp;840&nbsp;Kč</b><span>daňová úspora při sazbě 15 %</span></li>
-            <li class="stat sage"><b>4&nbsp;080&nbsp;Kč</b><span>státní příspěvek na penzijko za rok (<span class="num">340&nbsp;Kč</span> měsíčně, to je maximum)</span></li>
+            <li class="stat sage"><b>4&nbsp;080&nbsp;Kč</b><span>státní příspěvek na penzijko za rok (maximum <span class="num">340&nbsp;Kč</span> měsíčně)</span></li>
             <li class="stat"><b>2&nbsp;400&nbsp;Kč</b><span>nevyužitý odpočet z limitu <span class="num">48&nbsp;000&nbsp;Kč</span></span></li>
           </ul>
           <div class="todo">
@@ -250,9 +251,9 @@
             </svg>
             <figcaption>
               <ul class="legend">
-                <li><span class="sw sw-1"></span>Penzijko (DPS): <b>15&nbsp;600&nbsp;Kč</b></li>
-                <li><span class="sw sw-2"></span>Životní pojištění: <b>30&nbsp;000&nbsp;Kč</b></li>
-                <li><span class="sw sw-free"></span>Volné místo v limitu: <b>2&nbsp;400&nbsp;Kč</b></li>
+                <li><span class="sw sw-1"></span><span>Penzijko (DPS):</span> <b>15&nbsp;600&nbsp;Kč</b></li>
+                <li><span class="sw sw-2"></span><span>Životní pojištění:</span> <b>30&nbsp;000&nbsp;Kč</b></li>
+                <li><span class="sw sw-free"></span><span>Volné místo v limitu:</span> <b>2&nbsp;400&nbsp;Kč</b></li>
               </ul>
               <p class="chart-sum">Dohromady <span class="num">45&nbsp;600&nbsp;Kč</span> z <span class="num">48&nbsp;000&nbsp;Kč</span>.</p>
             </figcaption>
