@@ -21,7 +21,7 @@ export function jeKlientskyModul(relCesta) {
   if (p.split('/').includes('test')) return false;
   const soubor = p.split('/').pop();
   if (!soubor.includes('.')) return true; // složka
-  return soubor.endsWith('.js') && !soubor.endsWith('.11tydata.js') && !soubor.endsWith('.test.js');
+  return (soubor.endsWith('.js') || soubor.endsWith('.css')) && !soubor.endsWith('.11tydata.js') && !soubor.endsWith('.test.js');
 }
 
 /** Bezpečné JSON pro <script type="application/json">: nic nemůže ukončit značku script. */

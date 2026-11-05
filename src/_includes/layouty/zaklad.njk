@@ -1,5 +1,5 @@
 {#- Základní layout všech stránek.
-    Front matter stránky: title, description, skripty: ['/js/…', '/nastroje/<id>/ui.js'] (ES moduly). -#}
+    Front matter stránky: title, description, skripty: ['/js/…', '/nastroje/<id>/ui.js'] (ES moduly), styly: ['/nastroje/<id>/<id>.css'] (CSS jen pro daný nástroj). -#}
 {%- from "komponenty/rozvrzeni.njk" import hlavicka, paticka -%}
 <!doctype html>
 <html lang="cs">
@@ -16,6 +16,9 @@
 <link rel="preload" href="{{ '/fonts/nunito-latin-ext-400-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ '/fonts/fredoka-latin-600-normal.woff2' | url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+{%- for st in styly %}
+<link rel="stylesheet" href="{{ st | url }}">
+{%- endfor %}
 <link rel="icon" href="{{ '/img/favicon.svg' | url }}" type="image/svg+xml">
 </head>
 <body>
