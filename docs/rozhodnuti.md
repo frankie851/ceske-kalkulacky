@@ -266,3 +266,13 @@ Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`.
   - pomoc je na `/dluhy/` vidět bez posouvání
 - Lighthouse (mobil) na úvodu a 7 nových nástrojích: přístupnost 100, výkon 98–100.
 - Snímky: `docs/snimky/vlna-2/`, nezveřejněné Dluhy v `docs/snimky/vlna-2/nezverejneno/`.
+12. **Variabilní písma.** Na sdíleném CI stroji ukázal Lighthouse posun rozvržení (CLS ~0,22)
+    na Penzijko kompasu, Inflaci, Cestovním příkazu a Přijímačkách. Příčina byla
+    „Web font loaded“: přednačtený byl jen řez Nunito 400, tučné řezy 600, 700 a 800 se
+    načítaly později a text se přelil. Řešení:
+    - statické řezy jsou nahrazené variabilními (`@fontsource-variable/nunito` a `/fredoka`),
+      tedy jedním souborem pro latin a jedním pro latin-ext s celou škálou tlouštěk,
+    - všechny čtyři soubory se přednačítají,
+    - písma jsou celkem menší (asi 109 kB místo 176 kB).
+    
+    Lighthouse navíc měří každou stránku třikrát, bere medián a vypisuje CLS a jeho příčiny.

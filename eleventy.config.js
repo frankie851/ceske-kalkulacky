@@ -12,10 +12,9 @@ import { skryteNastroje } from './src/_lib/nastroje.js';
 export const TEMA_SKRIPT =
   'try{var r=localStorage.getItem("spocitano-rezim");if(r==="light"||r==="dark")document.documentElement.dataset.theme=r}catch(e){}';
 
-const PISMA = [
-  ['nunito', [400, 600, 700, 800]],
-  ['fredoka', [500, 600]],
-];
+// Variabilní písma: jeden soubor na znakovou sadu pokryje všechny tloušťky, takže se dají celá
+// přednačíst a po načtení se text nepřelévá (dřív posun rozvržení u řezů 600/800, které se načítaly pozdě).
+const PISMA = ['nunito', 'fredoka'];
 
 // Klientské moduly nástrojů: jen *.js, ne testy, ne data šablon (*.11tydata.js)
 export function jeKlientskyModul(relCesta) {
@@ -63,12 +62,10 @@ export default function (eleventyConfig) {
   }
 
   const pisma = {};
-  for (const [rodina, rezy] of PISMA) {
-    for (const rez of rezy) {
-      for (const sada of ['latin', 'latin-ext']) {
-        const soubor = `${rodina}-${sada}-${rez}-normal.woff2`;
-        pisma[`node_modules/@fontsource/${rodina}/files/${soubor}`] = `fonts/${soubor}`;
-      }
+  for (const rodina of PISMA) {
+    for (const sada of ['latin', 'latin-ext']) {
+      const soubor = `${rodina}-${sada}-wght-normal.woff2`;
+      pisma[`node_modules/@fontsource-variable/${rodina}/files/${soubor}`] = `fonts/${soubor}`;
     }
   }
   eleventyConfig.addPassthroughCopy(pisma);
