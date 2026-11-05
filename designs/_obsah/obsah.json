@@ -1,0 +1,251 @@
+{
+  "_poznamka": "Společný ukázkový obsah pro všechny 4 varianty. Čísla, pravidla, zdroje, štítky a upozornění jsou NEMĚNNÉ (převzaté z docs/zadani.md nebo z nich odvozené prostou aritmetikou – viz pole 'odvozeno'). Titulky a mikrotexty smí každá varianta přepsat svým tónem, ale nesmí změnit fakta.",
+  "web": {
+    "pracovni_nazev": "Spočítáno",
+    "podtitul": "Kalkulačky a průvodci podle českých pravidel",
+    "slogan_neutralni": "Česká pravidla srozumitelně. Spočítáte si to sami, v prohlížeči, bez registrace.",
+    "soukromi": "Nic neukládáme ani neodesíláme. Výpočty běží jen ve vašem prohlížeči.",
+    "datum_overeni": "4. 11. 2026",
+    "stitek_overeno": "Pravidla ověřena k 4. 11. 2026",
+    "stitek_navrh": "Návrh, zatím neschváleno",
+    "upozorneni_poradenstvi": "Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.",
+    "upozorneni_prototyp": "Prototyp designu – kalkulačky zatím nepočítají naostro."
+  },
+  "navigace": [
+    { "nazev": "Peníze a investice", "slug": "penize" },
+    { "nazev": "Daně a podnikání", "slug": "dane-podnikani" },
+    { "nazev": "Bydlení a energie", "slug": "bydleni-energie" },
+    { "nazev": "Práce a rodina", "slug": "prace-rodina" },
+    { "nazev": "Dluhy", "slug": "dluhy" },
+    { "nazev": "Co se mění v roce 2027", "slug": "co-se-meni-2027" }
+  ],
+  "situace": [
+    { "nazev": "Jsem zaměstnanec", "nastroje": ["slevy-2027", "plan48", "vypoved-2026", "inflacni-kalkulacka"] },
+    { "nazev": "Podnikám (OSVČ)", "nastroje": ["mam-eet", "osvc-2027", "cestovni-prikaz-2027", "plan48"] },
+    { "nazev": "Investuji a spořím", "nastroje": ["plan48", "penzijko-kompas", "zdanim-to", "inflacni-kalkulacka"] },
+    { "nazev": "Mám rodinu a děti", "nastroje": ["rodicovska", "prijimacky", "slevy-2027", "volno-2027"] },
+    { "nazev": "Mám dluhy", "nastroje": ["exekuce-nebo-oddluzeni"] }
+  ],
+  "kategorie": [
+    {
+      "slug": "penize",
+      "nazev": "Peníze a investice",
+      "popis": "Penzijko, DIP, daňový odpočet 48 000 Kč, zdanění investic a inflace.",
+      "nastroje": [
+        { "id": "plan48", "nazev": "Plán48", "typ": "kalkulačka", "perex": "Kolik vám stát přidá na penzijko a kolik ušetříte na daních z odpočtu 48 000 Kč (penzijko + DIP + životní pojištění). A co udělat do 31. 12.", "termin": "Vklady do 31. 12. 2026", "url": "/penize/plan48/", "stitky": ["penzijko", "DIP", "odpočet", "životní pojištění"], "novinka_2027": true },
+        { "id": "penzijko-kompas", "nazev": "Penzijko kompas", "typ": "kalkulačka", "perex": "Který fond, kolik sežerou poplatky, co s transformovaným fondem a co přinese reforma Lepší penzijko podle věku.", "termin": null, "url": "/penize/penzijko-kompas/", "stitky": ["penzijko", "poplatky", "transformovaný fond"], "novinka_2027": true },
+        { "id": "zdanim-to", "nazev": "Zdaním to?", "typ": "průvodce", "perex": "Ke každému prodeji akcií, ETF nebo krypta řekne, jestli je osvobozený, a připraví dividendy ze zahraničí do přiznání.", "termin": "Přiznání za rok 2026 na jaře 2027", "url": "/penize/zdanim-to/", "stitky": ["akcie", "krypto", "dividendy", "W-8BEN"], "novinka_2027": false },
+        { "id": "inflacni-kalkulacka", "nazev": "Inflační kalkulačka", "typ": "kalkulačka", "perex": "Kolik mají dnes reálnou hodnotu vaše peníze, mzda nebo úspory a jaký je reálný výnos spořicího účtu.", "termin": null, "url": "/penize/inflacni-kalkulacka/", "stitky": ["inflace", "ČSÚ", "reálný výnos"], "novinka_2027": false }
+      ]
+    },
+    {
+      "slug": "dane-podnikani",
+      "nazev": "Daně a podnikání",
+      "popis": "EET 2.0, paušální daň, slevy na dani a cestovní náhrady.",
+      "nastroje": [
+        { "id": "mam-eet", "nazev": "Mám EET?", "typ": "průvodce", "perex": "Za dvě minuty zjistíte, jestli se vás EET 2.0 od 1. 1. 2027 týká, zda se vyplatí EET OFF a co udělat do kdy.", "termin": "Start 1. 1. 2027", "url": "/dane-podnikani/mam-eet/", "stitky": ["EET 2.0", "EET OFF", "pokladna", "MOJE EET"], "novinka_2027": true },
+        { "id": "osvc-2027", "nazev": "OSVČ 2027", "typ": "kalkulačka", "perex": "Paušální daň, přiznání s výdajovým paušálem, nebo EET OFF? Porovnání tří cest pro živnostníky.", "termin": "Přihláška k paušální dani do 11. 1. 2027", "url": "/dane-podnikani/osvc-2027/", "stitky": ["paušální daň", "výdajový paušál", "zálohy"], "novinka_2027": true },
+        { "id": "slevy-2027", "nazev": "Slevy 2027", "typ": "průvodce", "perex": "Projde vaši situaci a řekne, které slevy a odpočty si říct u zaměstnavatele.", "termin": null, "url": "/dane-podnikani/slevy-2027/", "stitky": ["sleva na studenta", "školkovné", "prohlášení poplatníka"], "novinka_2027": true },
+        { "id": "cestovni-prikaz-2027", "nazev": "Cestovní příkaz 2027", "typ": "kalkulačka", "perex": "Náhrada za auto, pohonné hmoty a stravné na tuzemské cestě a cestovní příkaz k tisku.", "termin": "Nová vyhláška obvykle koncem prosince", "url": "/dane-podnikani/cestovni-prikaz-2027/", "stitky": ["stravné", "náhrada za km", "vyhláška"], "novinka_2027": true }
+      ]
+    },
+    {
+      "slug": "bydleni-energie",
+      "nazev": "Bydlení a energie",
+      "popis": "Refixace hypotéky, nájem vs. koupě a tarify elektřiny.",
+      "nastroje": [
+        { "id": "bydlometr", "nazev": "Bydlometr", "typ": "kalkulačka", "perex": "Co s hypotékou při refixaci a jestli se víc vyplatí nájem, nebo koupě.", "termin": null, "url": "/bydleni-energie/bydlometr/", "stitky": ["hypotéka", "refixace", "nájem"], "novinka_2027": false },
+        { "id": "spot-nebo-fix", "nazev": "Spot, nebo fix?", "typ": "kalkulačka", "perex": "Kolik by domácnost zaplatila za elektřinu na spotu, na fixu a na dynamickém tarifu.", "termin": null, "url": "/bydleni-energie/spot-nebo-fix/", "stitky": ["elektřina", "spot", "dynamický tarif"], "novinka_2027": false }
+      ]
+    },
+    {
+      "slug": "prace-rodina",
+      "nazev": "Práce a rodina",
+      "popis": "Konec práce, rodičovská, přijímačky na střední školu a plánování volna.",
+      "nastroje": [
+        { "id": "vypoved-2026", "nazev": "Výpověď 2026", "typ": "průvodce", "perex": "Kdy přesně končíte, kolik je odstupné a poměrná dovolená a co dál s podporou v nezaměstnanosti.", "termin": null, "url": "/prace-rodina/vypoved-2026/", "stitky": ["výpovědní doba", "odstupné"], "novinka_2027": false },
+        { "id": "rodicovska", "nazev": "Rodičovská pro celou rodinu", "typ": "kalkulačka", "perex": "Rozvrhne mateřskou, otcovskou a rodičovský příspěvek pro oba rodiče a ukáže, kdy se peníze vyčerpají.", "termin": null, "url": "/prace-rodina/rodicovska/", "stitky": ["mateřská", "otcovská", "rodičovský příspěvek"], "novinka_2027": false },
+        { "id": "prijimacky", "nazev": "Přijímačky bez paniky", "typ": "průvodce", "perex": "Jak systém rozřazuje uchazeče na střední školy a co dělá pořadí škol na přihlášce.", "termin": null, "url": "/prace-rodina/prijimacky/", "stitky": ["přihláška", "priority", "CERMAT"], "novinka_2027": false },
+        { "id": "volno-2027", "nazev": "Volno 2027", "typ": "kalkulačka", "perex": "Kdy si vzít dovolenou, aby vyšlo co nejvíc volných dní v kuse, a kdy jsou zavřené obchody.", "termin": null, "url": "/prace-rodina/volno-2027/", "stitky": ["dovolená", "svátky"], "novinka_2027": true }
+      ]
+    },
+    {
+      "slug": "dluhy",
+      "nazev": "Dluhy",
+      "popis": "Klidný průvodce exekucí a oddlužením. Bez reklam, bez nabídek půjček.",
+      "citlive": true,
+      "nastroje": [
+        { "id": "exekuce-nebo-oddluzeni", "nazev": "Exekuce, nebo oddlužení?", "typ": "průvodce", "perex": "Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. A kde najít bezplatnou pomoc.", "termin": null, "url": "/dluhy/exekuce-nebo-oddluzeni/", "stitky": ["exekuce", "oddlužení", "nezabavitelná částka"], "novinka_2027": false }
+      ]
+    }
+  ],
+  "dluhy_pomoc": {
+    "nadpis": "Nejste v tom sami",
+    "text": "Bezplatná dluhová poradna vám pomůže zdarma a bez závazků.",
+    "odkaz_text": "Najít bezplatnou poradnu",
+    "odkaz_url": "#pomoc",
+    "poznamka_prototyp": "Odkaz na oficiální seznam bezplatných poraden doplníme po ověření.",
+    "veta_vysledek": "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+    "pravidla": ["Žádné reklamy ani affiliate odkazy", "Žádné nabídky půjček ani placení zprostředkovatelé", "Žádné sbírání kontaktů"]
+  },
+  "plan48": {
+    "nazev": "Plán48",
+    "otazka": "Kolik peněz nechávám státu na stole a co s tím mám udělat do konce roku?",
+    "formular": {
+      "vek": { "label": "Věk", "hodnota": 35, "jednotka": "let", "napoveda": "Starobní důchodci státní příspěvek nedostávají." },
+      "sazba": { "label": "Sazba daně", "moznosti": ["15 %", "23 %"], "hodnota": "15 %", "napoveda": "23 % jen pro vysoké příjmy." },
+      "dps": { "label": "Penzijko (DPS) měsíčně", "hodnota": 3000, "zobrazeni": "3 000", "jednotka": "Kč", "napoveda": "Do odpočtu jde jen část nad 1 700 Kč měsíčně." },
+      "dip": { "label": "DIP měsíčně", "hodnota": 0, "zobrazeni": "0", "jednotka": "Kč", "napoveda": "Odečítá se od první koruny. Smlouva musí trvat aspoň 10 let a výběr nejdřív v 60 letech." },
+      "zp": { "label": "Životní pojištění měsíčně", "hodnota": 2500, "zobrazeni": "2 500", "jednotka": "Kč", "napoveda": "Odečítá se od první koruny." },
+      "zamestnavatel": { "label": "Příspěvek zaměstnavatele měsíčně", "hodnota": 0, "zobrazeni": "0", "jednotka": "Kč", "napoveda": "Do odpočtu se nepočítá." },
+      "mesice": { "label": "Období", "hodnota": "celý rok 2026 (12 měsíců)", "napoveda": "Ukázka počítá s vklady po celý rok." },
+      "pravidla": { "label": "Pravidla", "moznosti": ["Pravidla 2026", "Návrh 2027"], "hodnota": "Pravidla 2026" }
+    },
+    "chybovy_stav": {
+      "pole": "Věk",
+      "zadano": "",
+      "hlaska": "Vyplňte věk. Podle něj poznáme, jestli máte nárok na státní příspěvek."
+    },
+    "vysledek": {
+      "hlavni_cislo": "45 600 Kč",
+      "hlavni_popis": "Odpočet od základu daně za rok 2026",
+      "vysvetleni": "Z penzijka se počítá 15 600 Kč (část nad 1 700 Kč měsíčně) a z životního pojištění 30 000 Kč. Limit je 48 000 Kč.",
+      "dane_usetrite": "6 840 Kč",
+      "dane_usetrite_popis": "daňová úspora při sazbě 15 %",
+      "nevyuzito": "2 400 Kč",
+      "nevyuzito_popis": "nevyužitý odpočet z limitu 48 000 Kč",
+      "statni_prispevek_rok": "4 080 Kč",
+      "statni_prispevek_mesic": "340 Kč",
+      "statni_prispevek_popis": "státní příspěvek na penzijko (maximum 340 Kč měsíčně)",
+      "krok": "Do 31. 12. vložte mimořádně 2 400 Kč na DIP a využijete celý limit 48 000 Kč.",
+      "odvozeno": "Úspora 45 600 × 15 % = 6 840 Kč; nevyužito 48 000 − 45 600 = 2 400 Kč; příspěvek 340 Kč × 12 = 4 080 Kč. Odpočet 45 600 Kč a pravidla jsou přímo ze zadání."
+    },
+    "navrh_2027": {
+      "stitek": "Návrh, zatím neschváleno",
+      "text": "Pro lidi do 30 let má být státní příspěvek 40 % vkladu: při vkladu 1 700 Kč měsíčně 680 Kč měsíčně, tedy 8 160 Kč ročně. Děti mají mít nárok už od vkladu 100 Kč.",
+      "stav": "Vláda návrh schválila 24. 8. 2026, Sněmovna ho podpořila v 1. čtení 24. 9. 2026. Zákonem zatím není."
+    },
+    "graf_limit": {
+      "nadpis": "Jak máte využitý limit 48 000 Kč",
+      "polozky": [
+        { "nazev": "Penzijko (DPS)", "hodnota": 15600, "zobrazeni": "15 600 Kč" },
+        { "nazev": "Životní pojištění", "hodnota": 30000, "zobrazeni": "30 000 Kč" },
+        { "nazev": "Volné místo v limitu", "hodnota": 2400, "zobrazeni": "2 400 Kč" }
+      ],
+      "limit": 48000
+    },
+    "graf_projekce": {
+      "nadpis": "Projekce úspor do 60 let",
+      "poznamka": "Náhled grafu, výpočet přijde v další fázi. Výnos a poplatek půjde nastavit."
+    },
+    "tabulka_priklady": {
+      "nadpis": "Kontrolní příklady",
+      "sloupce": ["Měsíční vklady", "Odpočet za rok", "Daňová úspora (15 %)"],
+      "radky": [
+        ["Penzijko 5 700 Kč", "48 000 Kč", "7 200 Kč"],
+        ["Penzijko 3 000 Kč + životní pojištění 2 500 Kč", "45 600 Kč", "6 840 Kč"],
+        ["DIP 4 000 Kč", "48 000 Kč", "7 200 Kč"]
+      ],
+      "zdroj": "money.cz"
+    },
+    "tabulka_prispevek": {
+      "nadpis": "Státní příspěvek: pravidla 2026 a návrh 2027",
+      "sloupce": ["Měsíční vklad", "Pravidla 2026", "Návrh 2027 (do 30 let)"],
+      "radky": [
+        ["400 Kč", "0 Kč", "–"],
+        ["1 700 Kč", "340 Kč měsíčně", "680 Kč měsíčně (8 160 Kč ročně)"],
+        ["3 000 Kč", "340 Kč měsíčně", "680 Kč měsíčně"]
+      ],
+      "poznamka": "Pod 500 Kč měsíčně je příspěvek podle pravidel 2026 nulový; mezi 500 a 1 700 Kč je to 20 % vkladu."
+    },
+    "hlidat": [
+      "U DIP vzniká nárok na odpočet jen při trvání aspoň 10 let a výběru nejdřív v 60 letech.",
+      "Starobní důchodci státní příspěvek nedostávají.",
+      "Příspěvek zaměstnavatele se do odpočtu nepočítá."
+    ],
+    "zdroje": [
+      { "nazev": "money.cz – Daňově podporované produkty spoření na stáří 2026", "url": "https://money.cz/novinky-a-tipy/?p=15884" },
+      { "nazev": "E15 – DIP: podmínky", "url": "https://www.e15.cz/dip-sporeni-duchod-2024" },
+      { "nazev": "Energozrouti – Mladí do 30 let až 8 160 Kč ročně", "url": "https://energozrouti.cz/clanek/mladi-do-30-let-maji-od-statu-dostavat-8160-kc-rocne" },
+      { "nazev": "Echo24 – Vláda schválila změnu pravidel penzijního spoření", "url": "https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni" },
+      { "nazev": "Blesk – Sněmovna podpořila změny penzijka v 1. čtení", "url": "https://www.blesk.cz/clanek/848986" }
+    ],
+    "souvisejici": ["penzijko-kompas", "zdanim-to", "slevy-2027"]
+  },
+  "mam_eet": {
+    "nazev": "Mám EET?",
+    "pocet_kroku": 8,
+    "kroky": ["Forma podnikání", "Jak přijímáte platby", "Obor", "Paušální daň a pásmo", "Roční příjmy", "Provozovny a pokladny", "Zaměstnanci", "ZTP/P"],
+    "krok_2": {
+      "cislo": 2,
+      "otazka": "Jak od zákazníků přijímáte platby?",
+      "napoveda": "Zaškrtněte vše, co používáte. Eviduje se kontaktní platba: hotovost (vždy, i mimo provozovnu), karta na místě, QR platba na místě, stravenky, poukázky a virtuální aktiva.",
+      "moznosti": [
+        { "text": "Hotovost", "zaskrtnuto": true },
+        { "text": "Platební karta na provozovně", "zaskrtnuto": false },
+        { "text": "QR platba u pultu", "zaskrtnuto": true },
+        { "text": "Stravenky nebo poukázky", "zaskrtnuto": false },
+        { "text": "Virtuální aktiva (kryptoměny)", "zaskrtnuto": false },
+        { "text": "Faktura placená převodem", "zaskrtnuto": true },
+        { "text": "Online platba přes platební bránu e-shopu", "zaskrtnuto": false }
+      ],
+      "chyba": "Vyberte aspoň jeden způsob platby, jinak nepoznáme, jestli se vás EET týká.",
+      "tlacitka": ["Zpět", "Pokračovat"]
+    },
+    "scenar": "Paušální daň v 1. pásmu, roční příjmy 800 000 Kč, hotovost a QR platby u pultu.",
+    "vysledek": {
+      "veta": "Můžete zvolit EET OFF",
+      "hlavni_cislo": "16 800 Kč",
+      "hlavni_popis": "roční přirážka k paušální dani v režimu EET OFF (1 400 Kč měsíčně)",
+      "vysvetleni": "Platby v hotovosti a QR kódem u pultu jsou kontaktní platby, takže je musíte evidovat. Protože jste v 1. pásmu paušální daně s příjmy do 1 000 000 Kč, můžete místo evidence zvolit EET OFF. Daňová složka paušální daně pak bude 1 500 Kč měsíčně místo 100 Kč.",
+      "duvody": [
+        { "text": "Přijímáte hotovost a QR platby na místě – to jsou kontaktní platby.", "zdroj": "Fakturoid – EET 2.0", "url": "https://www.fakturoid.cz/almanach/legislativa/eet" },
+        { "text": "Faktury placené převodem se neevidují.", "zdroj": "Deník – Vláda projednala nové EET", "url": "https://www.denik.cz/ekonomika/vlada-projednala-nove-eet/" },
+        { "text": "EET OFF je jen pro 1. pásmo paušální daně s příjmy do 1 000 000 Kč a nejde měnit během roku.", "zdroj": "MF – Brožura EET 2.0", "url": "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf" }
+      ],
+      "srovnani": {
+        "nadpis": "EET OFF, nebo evidence?",
+        "sloupce": ["Možnost", "Náklad za rok"],
+        "radky": [
+          ["EET OFF (přirážka 1 400 Kč měsíčně)", "16 800 Kč"],
+          ["Evidence v bezplatné aplikaci MOJE EET", "0 Kč"],
+          ["Evidence ve vlastní pokladně", "zadáte vlastní cenu"]
+        ],
+        "poznamka": "MOJE EET je pro nejvýš 2 evidenční jednotky a 2 zaměstnance."
+      },
+      "kontrolni_seznam": [
+        { "ukol": "Vygenerovat pokladní certifikát", "termin": "před spuštěním MOJE EET, termín ověříme" },
+        { "ukol": "Zřídit Daňovou informační schránku plus", "termin": "termín ověříme" },
+        { "ukol": "Rozhodnout se pro EET OFF, nebo evidenci", "termin": "termín ověříme; během roku režim nejde změnit" },
+        { "ukol": "Nainstalovat MOJE EET, nebo připravit pokladnu", "termin": "MOJE EET je k dispozici od 1. 12. 2026" },
+        { "ukol": "Vyzkoušet evidenci naostro", "termin": "před 1. 1. 2027" }
+      ],
+      "upozorneni": "Informativní průvodce, nejde o daňové poradenství.",
+      "oficialni": "Ověřte si to na eet.gov.cz nebo na infolince finanční správy."
+    },
+    "zdroje": [
+      { "nazev": "MF – Brožura EET 2.0 jednoduše, moderně a přehledně", "url": "https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf" },
+      { "nazev": "Fakturoid – EET 2.0", "url": "https://www.fakturoid.cz/almanach/legislativa/eet" },
+      { "nazev": "epravo – EET 2.0 je na světě", "url": "https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1" },
+      { "nazev": "DAUČ – Moje EET pro drobné podnikatele", "url": "https://www.dauc.cz/aktuality/2087/moje-eet-pro-drobne-podnikatele" },
+      { "nazev": "Podnikatel.cz – Aplikace MOJE EET", "url": "https://www.podnikatel.cz/clanky/financni-sprava-ukazala-jak-by-mela-vypadat-aplikace-zdarma-moje-eet/" }
+    ],
+    "souvisejici": ["osvc-2027", "slevy-2027", "cestovni-prikaz-2027"]
+  },
+  "co_se_meni_2027": {
+    "nadpis": "Co se mění v roce 2027",
+    "polozky": [
+      { "titulek": "Vrací se EET – jako EET 2.0", "datum": "od 1. 1. 2027", "text": "Evidovat se budou kontaktní platby včetně karty a QR kódu na místě. Drobní živnostníci v 1. pásmu paušální daně mohou zvolit EET OFF za přirážku 1 400 Kč měsíčně.", "nastroj": "mam-eet", "stav": "schváleno", "zdroj": { "nazev": "epravo", "url": "https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1" } },
+      { "titulek": "Lepší penzijko: 40 % pro mladé", "datum": "od 2027, pokud projde", "text": "Lidé do 30 let mají dostat státní příspěvek až 680 Kč měsíčně (8 160 Kč ročně), děti už od vkladu 100 Kč, poplatek za správu se zastropuje na 0,5 %.", "nastroj": "plan48", "stav": "návrh", "zdroj": { "nazev": "Echo24", "url": "https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni" } },
+      { "titulek": "Paušální daň v 1. pásmu stoupá", "datum": "přihláška do 11. 1. 2027", "text": "1. pásmo paušální daně stoupá na 9 662 Kč měsíčně.", "nastroj": "osvc-2027", "stav": "schváleno", "zdroj": { "nazev": "Pohoda", "url": "https://portal.pohoda.cz/?p=45627" } },
+      { "titulek": "Vrací se sleva na studenta a školkovné", "datum": "2027", "text": "Sleva na studenta 4 020 Kč ročně a školkovné do výše minimální mzdy.", "nastroj": "slevy-2027", "stav": "schváleno", "zdroj": { "nazev": "Práce a mzda", "url": "https://www.praceamzda.cz/tydenik/253/podtrzeno-secteno-c-26-30-2026" } },
+      { "titulek": "Svátky 2027 a prodloužené víkendy", "datum": "celý rok", "text": "1. 5., 8. 5. a oba vánoční svátky připadnou na víkend, zato 5.–6. 7. dají čtyři dny volna bez dovolené.", "nastroj": "volno-2027", "stav": "kalendář", "zdroj": { "nazev": "vlastní výpočet z kalendáře", "url": null } }
+    ]
+  },
+  "hledani": {
+    "placeholder": "Hledat kalkulačku, např. penzijko, EET, výpověď",
+    "label": "Hledat na webu",
+    "priklad_dotaz": "penzijko"
+  },
+  "tisk": "Při tisku se skryje navigace, zobrazí se adresy odkazů a datum ověření pravidel."
+}
