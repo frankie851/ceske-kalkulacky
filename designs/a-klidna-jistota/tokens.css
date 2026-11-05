@@ -1,0 +1,147 @@
+/* Varianta A – Klidná jistota: design tokeny
+   Jedna akcentní barva (tmavá petrolejová), téměř černá na bílé, šedé linky. */
+
+:root {
+  color-scheme: light;
+
+  /* Barvy – světlý režim */
+  --c-bg: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-muted: #f6f7f7;
+  --c-text: #111111;
+  --c-text-muted: #4d4d4d;
+  --c-line: #dcdcdc;          /* dekorativní linky */
+  --c-line-strong: #767676;   /* hranice ovládacích prvků (≥ 3:1) */
+  --c-accent: #0b5d5b;        /* jediná akcentní barva */
+  --c-accent-hover: #084745;
+  --c-accent-soft: #eef5f4;   /* jemný podklad karty výsledku */
+  --c-on-accent: #ffffff;
+  --c-focus: #0b5d5b;
+  --c-error: #b3261e;
+  --c-error-soft: #fdf3f2;
+  --c-warn: #7a4f00;
+  --c-warn-soft: #fff8ec;
+  --c-chart-accent: #0b5d5b;
+  --c-chart-gray: #8a8a8a;
+  --c-chart-grid: #dcdcdc;
+
+  /* Písma */
+  --font-sans: "Source Sans 3", "Source Sans Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-serif: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+
+  /* Velikosti písma (základ 18 px) */
+  --fs-xs: 0.875rem;   /* 14 px – jen drobné popisky */
+  --fs-sm: 1rem;       /* 16 px */
+  --fs-base: 1.125rem; /* 18 px */
+  --fs-md: 1.3125rem;  /* 21 px */
+  --fs-lg: 1.625rem;   /* 26 px */
+  --fs-xl: clamp(2rem, 1.4rem + 2.4vw, 3rem);       /* nadpis stránky */
+  --fs-num: clamp(2.75rem, 2rem + 3vw, 4.25rem);    /* velké číslo výsledku */
+
+  --lh-tight: 1.2;
+  --lh-base: 1.65;
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Mezery */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 6rem;
+
+  /* Šířky */
+  --w-text: 70ch;
+  --w-page: 72rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+
+  /* Zaoblení a stíny */
+  --radius-sm: 2px;
+  --radius: 3px;
+  --radius-lg: 4px;
+  --shadow: none;
+  --shadow-focus: 0 0 0 3px var(--c-focus);
+
+  /* Linky */
+  --border: 1px solid var(--c-line);
+  --border-strong: 1px solid var(--c-line-strong);
+}
+
+/* Tmavé tokeny – platí i v režimu Auto, když systém chce tmavý režim */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --c-bg: #111414;
+    --c-surface: #111414;
+    --c-surface-muted: #1a1f1f;
+    --c-text: #ededed;
+    --c-text-muted: #b4b9b9;
+    --c-line: #343a3a;
+    --c-line-strong: #7e8686;
+    --c-accent: #5ec2bc;
+    --c-accent-hover: #86d6d1;
+    --c-accent-soft: #162423;
+    --c-on-accent: #0b1414;
+    --c-focus: #86d6d1;
+    --c-error: #ff8a80;
+    --c-error-soft: #2a1716;
+    --c-warn: #e2b65a;
+    --c-warn-soft: #2a2213;
+    --c-chart-accent: #5ec2bc;
+    --c-chart-gray: #7e8686;
+    --c-chart-grid: #343a3a;
+  }
+}
+
+/* Ruční přepínač bez JS: Světlý */
+:root:has(#t-light:checked) {
+  color-scheme: light;
+  --c-bg: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-muted: #f6f7f7;
+  --c-text: #111111;
+  --c-text-muted: #4d4d4d;
+  --c-line: #dcdcdc;
+  --c-line-strong: #767676;
+  --c-accent: #0b5d5b;
+  --c-accent-hover: #084745;
+  --c-accent-soft: #eef5f4;
+  --c-on-accent: #ffffff;
+  --c-focus: #0b5d5b;
+  --c-error: #b3261e;
+  --c-error-soft: #fdf3f2;
+  --c-warn: #7a4f00;
+  --c-warn-soft: #fff8ec;
+  --c-chart-accent: #0b5d5b;
+  --c-chart-gray: #8a8a8a;
+  --c-chart-grid: #dcdcdc;
+}
+
+/* Ruční přepínač bez JS: Tmavý */
+:root:has(#t-dark:checked) {
+  color-scheme: dark;
+  --c-bg: #111414;
+  --c-surface: #111414;
+  --c-surface-muted: #1a1f1f;
+  --c-text: #ededed;
+  --c-text-muted: #b4b9b9;
+  --c-line: #343a3a;
+  --c-line-strong: #7e8686;
+  --c-accent: #5ec2bc;
+  --c-accent-hover: #86d6d1;
+  --c-accent-soft: #162423;
+  --c-on-accent: #0b1414;
+  --c-focus: #86d6d1;
+  --c-error: #ff8a80;
+  --c-error-soft: #2a1716;
+  --c-warn: #e2b65a;
+  --c-warn-soft: #2a2213;
+  --c-chart-accent: #5ec2bc;
+  --c-chart-gray: #7e8686;
+  --c-chart-grid: #343a3a;
+}
