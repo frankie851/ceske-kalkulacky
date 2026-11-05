@@ -1,0 +1,107 @@
+{#
+  Karty a dlaždice.
+
+  karta_nastroje(n, { uroven = 3, stitky = false })
+    n       – objekt nástroje z dat `nastroje` (nebo záložka z filtru najdiNastroj)
+              stav 'aktivni' = celá karta je odkaz (h3 a::after); stav 'pripravujeme' = bez odkazu,
+              štítek „Připravujeme“, čárkovaný okraj
+    uroven  – úroveň nadpisu (2–4)
+    stitky  – true: vypíše i tematické štítky (n.stitky)
+
+  situace(s, nastroje)
+    s – položka ze situace.json { slug, nazev, popis, ikona, url?, citlive? }
+        bez url vede na /hledat/#situace-<slug> (seznam nástrojů pro situaci funguje bez JS)
+
+  kategorie_dlazdice({ nazev, popis, url, ikona })
+
+  zmena_2027(z, nastroje, { uroven = 3 })
+    z – položka ze zmeny2027.json { id, titulek, datum, text, nastroj, akce, stav: schvaleno|navrh|kalendar, zdroj }
+
+  souvisi(idcka, nastroje, { nadpis, uroven = 2 })
+    idcka – pole id nástrojů (nastroj.souvisi); záložky (např. osvc-2027) se dohledají také
+#}
+{% from "komponenty/ikona.njk" import ikona %}
+{% from "komponenty/stitky.njk" import stitek %}
+
+{% macro karta_nastroje(n, p = {}) %}
+{%- set uroven = p.uroven or 3 -%}
+{%- set aktivni = n.stav == 'aktivni' -%}
+<article class="tool-card{% if not aktivni %} tool-card-soon{% endif %}">
+  <svg class="tool-art" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><use href="{{ ('/img/sprite.svg#' + (n.ilustrace or 'nastroj-obecny')) | url }}"/></svg>
+  <div>
+    <h{{ uroven }}>{% if aktivni %}<a href="{{ n.url | url }}">{{ n.nazev }}</a>{% else %}{{ n.nazev }}{% endif %}</h{{ uroven }}>
+    <div class="tool-meta">
+      <span class="tag">{{ n.typ }}</span>
+      {% if not aktivni %}{{ stitek({ typ: 'pripravujeme' }) }}{% endif %}
+      {% if n.novinka2027 %}{{ stitek({ typ: 'nove' }) }}{% endif %}
+    </div>
+    <p>{{ n.perex }}</p>
+    {% if p.stitky and n.stitky and n.stitky.length %}
+    <ul class="tool-tags" aria-label="Štítky">{% for t in n.stitky %}<li class="tag">{{ t }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if n.termin %}<p class="tool-when">{{ ikona('ikona-kalendar') }}{{ n.termin }}</p>{% endif %}
+    {% if aktivni %}
+    <span class="tool-cta" aria-hidden="true">{{ n.cta or ('Projít otázky' if n.typ == 'průvodce' else 'Spočítat') }} {{ ikona('ikona-sipka') }}</span>
+    {% else %}
+    <p class="small muted mb-0">Na nástroji pracujeme. Zatím nikam nevede.</p>
+    {% endif %}
+  </div>
+</article>
+{% endmacro %}
+
+{% macro situace(s) %}
+<a class="situ{% if s.citlive %} situ-debt{% endif %}" href="{{ (s.url or ('/hledat/#situace-' + s.slug)) | url }}">
+  {{ ikona(s.ikona, 'situ-ico') }}
+  <span><span class="situ-name">{{ s.nazev }}</span><span class="situ-sub">{{ s.popis }}</span></span>
+  <span class="situ-go">{{ ikona('ikona-sipka') }}</span>
+</a>
+{% endmacro %}
+
+{% macro kategorie_dlazdice(p) %}
+<a class="cat" href="{{ p.url | url }}">
+  {{ ikona(p.ikona) }}
+  <span><strong>{{ p.nazev }}</strong><span>{{ p.popis }}</span></span>
+</a>
+{% endmacro %}
+
+{% macro zmena_2027(z, nastroje, p = {}) %}
+{%- set uroven = p.uroven or 3 -%}
+{%- set n = nastroje | najdiNastroj(z.nastroj) -%}
+<li class="change" id="{{ z.id }}">
+  <p class="change-date">{{ ikona('ikona-kalendar') }}{{ z.datum }}</p>
+  <h{{ uroven }}>{{ z.titulek }}</h{{ uroven }}>
+  <p>{{ z.text }}</p>
+  <div class="change-foot">
+    {%- if z.stav == 'navrh' %}{{ stitek({ typ: 'navrh' }) }}
+    {%- elif z.stav == 'kalendar' %}{{ stitek({ typ: 'kalendar' }) }}
+    {%- else %}{{ stitek({ typ: 'schvaleno' }) }}{% endif %}
+    {%- if n and n.stav == 'aktivni' %}
+    <a href="{{ n.url | url }}">{{ z.akce or n.nazev }}</a>
+    {%- elif n %}
+    <span class="muted">{{ n.nazev }}: připravujeme</span>
+    {%- endif %}
+    {%- if z.zdroj and z.zdroj.url %}
+    <a href="{{ z.zdroj.url }}">Zdroj: {{ z.zdroj.kratce or z.zdroj.nazev }}</a>
+    {%- elif z.zdroj %}
+    <span class="muted">Zdroj: {{ z.zdroj.kratce or z.zdroj.nazev }}</span>
+    {%- endif %}
+  </div>
+</li>
+{% endmacro %}
+
+{% macro souvisi(idcka, nastroje, p = {}) %}
+{%- set uroven = p.uroven or 2 -%}
+{%- if idcka and idcka.length %}
+<section class="section-tight" aria-labelledby="souvisi-nadpis">
+  <h{{ uroven }} id="souvisi-nadpis" class="h-xl">{{ p.nadpis or 'Co dál? Mohlo by se ti hodit' }}</h{{ uroven }}>
+  <ul class="tool-grid">
+    {%- for id in idcka %}
+    {%- set n = nastroje | najdiNastroj(id) %}
+    {%- if n %}
+    <li>{{ karta_nastroje(n, { uroven: uroven + 1 }) }}</li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+{% endmacro %}

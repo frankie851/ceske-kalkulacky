@@ -1,0 +1,66 @@
+[
+  {
+    "slug": "penize",
+    "nazev": "Peníze a investice",
+    "popis": "Penzijko, DIP, daňový odpočet 48 000 Kč, zdanění investic a inflace.",
+    "kratce": "Penzijko, DIP, odpočet 48 000 Kč, inflace",
+    "uvod": "Penzijko, DIP, daňový odpočet 48 000 Kč, zdanění investic a inflace. Vyber si nástroj a projdeme to spolu krok za krokem.",
+    "ilustrace": "kategorie-penize",
+    "pomocnik": [
+      { "text": "Chci ušetřit na daních do konce roku", "nastroj": "plan48" },
+      { "text": "Vybírám penzijní fond", "nastroj": "penzijko-kompas" },
+      { "text": "Prodávám akcie nebo krypto", "nastroj": "zdanim-to" },
+      { "text": "Kolik mi sežrala inflace?", "nastroj": "inflacni-kalkulacka" }
+    ]
+  },
+  {
+    "slug": "dane-podnikani",
+    "nazev": "Daně a podnikání",
+    "popis": "EET 2.0, paušální daň, slevy na dani a cestovní náhrady.",
+    "kratce": "EET 2.0, paušální daň, slevy na dani",
+    "uvod": "EET 2.0, paušální daň, slevy na dani a cestovní náhrady. Nástroje s pevnými termíny, ať ti nic neuteče.",
+    "ilustrace": "kategorie-dane",
+    "pomocnik": [
+      { "text": "Týká se mě nové EET?", "nastroj": "mam-eet" },
+      { "text": "Paušální daň, nebo přiznání?", "nastroj": "osvc-2027" },
+      { "text": "Jaké slevy si říct u zaměstnavatele", "nastroj": "slevy-2027" },
+      { "text": "Proplácím služební cestu", "nastroj": "cestovni-prikaz-2027" }
+    ]
+  },
+  {
+    "slug": "bydleni-energie",
+    "nazev": "Bydlení a energie",
+    "popis": "Refixace hypotéky, nájem vs. koupě a tarify elektřiny.",
+    "kratce": "Refixace hypotéky, nájem, elektřina",
+    "uvod": "Refixace hypotéky, nájem, nebo koupě a tarify elektřiny. Kolik tě bydlení opravdu stojí.",
+    "ilustrace": "kategorie-bydleni",
+    "pomocnik": [
+      { "text": "Končí mi fixace hypotéky", "nastroj": "bydlometr" },
+      { "text": "Spot, nebo fixní cena elektřiny?", "nastroj": "spot-nebo-fix" }
+    ]
+  },
+  {
+    "slug": "prace-rodina",
+    "nazev": "Práce a rodina",
+    "popis": "Konec práce, rodičovská, přijímačky na střední školu a plánování volna.",
+    "kratce": "Výpověď, rodičovská, přijímačky, volno",
+    "uvod": "Konec práce, rodičovská, přijímačky na střední školu a plánování volna. Životní události v klidu a s čísly.",
+    "ilustrace": "kategorie-prace",
+    "pomocnik": [
+      { "text": "Dostávám výpověď", "nastroj": "vypoved-2026" },
+      { "text": "Plánujeme rodičovskou", "nastroj": "rodicovska" },
+      { "text": "Dítě jde na střední", "nastroj": "prijimacky" },
+      { "text": "Kdy si vzít dovolenou", "nastroj": "volno-2027" }
+    ]
+  },
+  {
+    "slug": "dluhy",
+    "nazev": "Dluhy",
+    "popis": "Klidný průvodce exekucí a oddlužením. Bez reklam, bez nabídek půjček.",
+    "kratce": "Exekuce a oddlužení. Bez reklam, bez půjček.",
+    "uvod": "Klidný průvodce exekucí a oddlužením. Bez reklam, bez nabídek půjček a bez sbírání kontaktů.",
+    "ilustrace": "kategorie-dluhy",
+    "citlive": true,
+    "pomocnik": []
+  }
+]

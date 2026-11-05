@@ -1,0 +1,22 @@
+{
+  "_poznamka": "Skupiny výrazů, které se při hledání považují za totéž (IA kap. 8). Píše se s diakritikou, hledání ji samo odstraní.",
+  "skupiny": [
+    ["penzijko", "dps", "doplňkové penzijní spoření", "penzijní spoření", "penzijní připojištění", "penze", "důchod"],
+    ["dip", "dlouhodobý investiční produkt"],
+    ["eet", "evidence tržeb", "účtenky", "účtenka", "pokladna", "moje eet"],
+    ["paušál", "paušální daň", "paušální režim"],
+    ["exekuce", "srážky ze mzdy", "obstavení", "exekutor"],
+    ["oddlužení", "osobní bankrot", "insolvence", "insolvenční návrh"],
+    ["mateřská", "ppm", "peněžitá pomoc v mateřství", "rodičovská", "rodičovský příspěvek"],
+    ["krypto", "kryptoměny", "bitcoin"],
+    ["akcie", "etf", "cenné papíry"],
+    ["osvč", "živnostník", "živnost", "podnikatel"],
+    ["hypotéka", "úvěr na bydlení", "refixace"],
+    ["elektřina", "energie", "proud", "tarif"],
+    ["výpověď", "konec práce", "odstupné", "výpovědní doba"],
+    ["přijímačky", "přijímací zkoušky", "střední škola", "cermat"],
+    ["dovolená", "volno", "svátky"],
+    ["cesťák", "cestovní příkaz", "cestovní náhrady", "stravné"],
+    ["sleva na dani", "slevy", "odpočet", "odpočty"]
+  ]
+}

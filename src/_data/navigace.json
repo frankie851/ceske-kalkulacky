@@ -1,0 +1,8 @@
+[
+  { "nazev": "Peníze a investice", "url": "/penize/" },
+  { "nazev": "Daně a podnikání", "url": "/dane-podnikani/" },
+  { "nazev": "Bydlení a energie", "url": "/bydleni-energie/" },
+  { "nazev": "Práce a rodina", "url": "/prace-rodina/" },
+  { "nazev": "Dluhy", "url": "/dluhy/" },
+  { "nazev": "Co se mění v roce 2027", "url": "/co-se-meni-2027/" }
+]

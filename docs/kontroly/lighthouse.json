@@ -1,0 +1,50 @@
+{
+  "datum": "2026-11-05T08:46:02.730Z",
+  "vysledky": [
+    {
+      "stranka": "/",
+      "skore": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/penize/plan48/",
+      "skore": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/penize/penzijko-kompas/",
+      "skore": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/dane-podnikani/mam-eet/",
+      "skore": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
+      "skore": {
+        "performance": 92,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      }
+    }
+  ]
+}

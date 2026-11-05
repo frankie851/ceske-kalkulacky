@@ -1,0 +1,16 @@
+{
+  "id": "penzijko-kompas",
+  "nazev": "Penzijko kompas",
+  "typ": "kalkulačka",
+  "kategorie": "penize",
+  "url": "/penize/penzijko-kompas/",
+  "poradi": 2,
+  "perex": "Který fond, kolik sežerou poplatky, co s transformovaným fondem a co přinese reforma Lepší penzijko podle věku.",
+  "otazka": "Který penzijní fond, kolik mě stojí poplatky a co pro mě znamená Lepší penzijko?",
+  "stitky": ["penzijko", "poplatky", "transformovaný fond"],
+  "termin": null,
+  "novinka2027": true,
+  "ilustrace": "nastroj-penzijko-kompas",
+  "cta": "Najít směr",
+  "souvisi": ["plan48", "inflacni-kalkulacka"]
+}

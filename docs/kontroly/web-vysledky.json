@@ -1,0 +1,76 @@
+{
+  "datum": "2026-11-05T08:45:28.413Z",
+  "prefix": "/ceske-kalkulacky/",
+  "stranek": 17,
+  "chyb": 0,
+  "stranky": [
+    {
+      "stranka": "/",
+      "chyby": []
+    },
+    {
+      "stranka": "/404.html",
+      "chyby": []
+    },
+    {
+      "stranka": "/bydleni-energie/",
+      "chyby": []
+    },
+    {
+      "stranka": "/co-se-meni-2027/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dane-podnikani/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dane-podnikani/mam-eet/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dluhy/",
+      "chyby": []
+    },
+    {
+      "stranka": "/hledat/",
+      "chyby": []
+    },
+    {
+      "stranka": "/jak-pocitame/",
+      "chyby": []
+    },
+    {
+      "stranka": "/o-webu/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/penzijko-kompas/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/plan48/",
+      "chyby": []
+    },
+    {
+      "stranka": "/prace-rodina/",
+      "chyby": []
+    },
+    {
+      "stranka": "/soukromi/",
+      "chyby": []
+    },
+    {
+      "stranka": "/zdroje/",
+      "chyby": []
+    }
+  ]
+}

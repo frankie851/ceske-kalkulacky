@@ -104,7 +104,7 @@ a důvody k nim.
 ## Jak to spustit znovu
 
 ```bash
-cd tools/kontroly && npm ci && cd ../..
+npm ci                                      # od 2. fáze jsou závislosti v kořeni repozitáře
 node tools/kontroly/kontrola.mjs            # kontroly všech stránek
 node tools/kontroly/snimky.mjs --webp       # snímky + WebP výřezy pro porovnání
 node tools/kontroly/rozcestnik.mjs          # designs/index.html z designs/_obsah/varianty.json
@@ -116,3 +116,79 @@ node tools/kontroly/porovnani.mjs           # designs/porovnani.html (jeden soub
 5. 11. 2026 byla vybrána **varianta B „Přátelský průvodce“**. Zadání 2. fáze je
 v `docs/zadani-faze-2.md`. Sestavení webu je rozdělené do tří vln podle termínů a převezme
 výpočty a testy z 12 existujících repozitářů aplikací.
+
+# 2. fáze – vlna 1 (5. 11. 2026)
+
+## Rozhodnutí
+
+1. **Nástroje jsou převzaté, ne přepsané.** Výpočetní moduly (`calc.js`, `rules.js`, `osvc.js`)
+   a původní testy jsou zkopírované beze změny do `src/nastroje/<id>/`. Testy leží
+   v `src/nastroje/<id>/test/`, takže jejich relativní cesty (`../calc.js`, `../rules.json`)
+   fungují bez úprav. Změnilo se jen rozhraní.
+2. **`rules.json` dostal jednotný obal `meta`** (`overeno`, `zdroje`, `neovereno`). Ostatní
+   klíče zůstaly. U Mám EET? je výjimka pro malé hotovostní tržby popsaná bez částky, protože
+   integritní test zakazuje text „300 000“.
+3. **Ukázkový výsledek bez JavaScriptu** se počítá při buildu (`<id>.11tydata.js`) stejným
+   modulem jako v prohlížeči. Výstup skládají sdílené moduly bez DOM (`plan48/vystup.js`,
+   `penzijko-kompas/zobrazeni.js`, `mam-eet/vystup.js`), takže stránka bez JS a s JS vypadá
+   stejně. Kontrola webu to ověřuje přes `[data-ukazka]`.
+4. **Plán48 a Penzijko kompas mají dál každý vlastní výpočet státního příspěvku.** Liší se
+   konvencemi (`vekDo` inkluzivní/exkluzivní, `maxZaklad`/`maxPrispevek`, zaokrouhlení).
+   Sloučení by znamenalo změnit převzaté a otestované moduly. Proto
+   `test/sdilene/konzistence.test.js` porovnává oba výpočty v mřížce věk 0–70 × 22 vkladů
+   × důchodce ano/ne pro obě sady pravidel a hlídá i odpočet.
+5. **Penzijko kompas počítá s koncem transformovaných fondů 31. 12. 2036 i u pravidel 2026**,
+   stejně jako původní `calc.js`. Podle zadání je to součást návrhu 2027, proto je to na
+   stránce označené jako návrh. K rozhodnutí ve vlně 2: má projekce s pravidly 2026
+   transformovaný fond neukončit?
+6. **Texty jsou rodově neutrální.** „Jsem zaměstnanec“ → „Mám zaměstnání“. V Mám EET? se
+   tvary jako „Ty jsi zadal“ přepsaly na „Zadáno:“. Čísla ani zdroje se neměnily. Sekce
+   Dluhy vyká.
+7. **Tmavý režim** používá CSS `light-dark()`. Každá barva je definovaná jednou a mění se
+   jen `color-scheme` (systémové nastavení, `data-theme` z přepínače a fallback přes `:has`
+   bez JS). Potřebuje prohlížeč z roku 2024 nebo novější (Safari 17.5+). Volbu režimu si web
+   pamatuje v `localStorage` a je to jediná věc, kterou ukládá.
+8. **CSP v `<meta>`:** `script-src 'self'` a hash jediného inline skriptu (nastavení režimu
+   před vykreslením). Pravidla jsou vložená jako `<script type="application/json">`
+   a nespouštějí se. Žádné cizí domény. Písma Nunito a Fredoka se hostují na webu
+   (`@fontsource`, jen latin a latin-ext).
+9. **Grafy jsou vlastní SVG** (`src/js/graf.js`): skládaný pruh, čárový a sloupcový graf,
+   každý s tabulkou jako textovou alternativou. Chart.js z CDN je pryč.
+10. **Formulář na desktopu nelepí.** Lepicí sloupec u dlouhých formulářů schovával tlačítko.
+    Na mobilu ukazuje hlavní číslo lepivá lišta s odkazem na výsledek.
+11. **Záložky sourozeneckých nástrojů** (Plán48 | Penzijko kompas, Mám EET? | OSVČ 2027) jsou
+    samostatné stránky, ne přepínání přes `#hash`. OSVČ 2027 je na
+    `/dane-podnikani/mam-eet/osvc-2027/`.
+12. **Data obsahují 14 nástrojů:** 12 existujících a 2 nové (Zdaním to?, Volno 2027).
+    3 jsou aktivní, ostatní mají kartu „Připravujeme“ bez odkazu.
+
+## Bezplatná dluhová pomoc
+
+| Odkaz | Provozovatel | Stav ověření |
+| --- | --- | --- |
+| https://iregistr.mpsv.cz/ – registr poskytovatelů sociálních služeb (odborné sociální poradenství) | MPSV | Uvádí ho příručka MPSV „Dluhové poradenství pro obce“. Stránku samotnou se z cloudové relace otevřít nepodařilo, protože síťová politika ji blokuje. **Ověřit ručně.** |
+| https://sako.justice.cz/ – seznam akreditovaných osob (bezplatný sepis návrhu na oddlužení) | Ministerstvo spravedlnosti | Totéž: uvádí ho příručka MPSV, přímé ověření nebylo možné. **Ověřit ručně.** |
+
+Odkazy jsou v `src/_data/pomoc.json`. Kalkulačka dluhů (vlna 2) se zveřejní až po ručním
+ověření.
+
+## Výsledky kontrol vlny 1
+
+Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`, stejně jako v CI.
+
+- `npm test`: **159/159**
+  - Plán48: 34
+  - Penzijko kompas: 25
+  - Mám EET? + OSVČ: 72
+  - sdílené moduly a konzistence: 28
+- `npm run test:e2e`: **29/29**
+  - Plán48: 7
+  - Penzijko kompas: 7
+  - Mám EET? + OSVČ 2027: 15
+- `npm run kontrola`: **17 stránek**, 0 chyb axe serious/critical ve světlém i tmavém režimu,
+  0 přetečení na 360 px, 0 cizích požadavků, 0 chyb v konzoli. Všechny stránky fungují bez
+  JS a odkaz na pomoc je na `/dluhy/` vidět bez posouvání (360 × 640).
+- `npm run lighthouse` (mobil): přístupnost 100 a výkon 92–100 na úvodu a 4 stránkách
+  nástrojů. Podrobnosti jsou v `docs/kontroly/`.
+- Snímky: `docs/snimky/vlna-1/` (desktop 1440 px a mobil 390 px; úvod a nástroje
+  i v tmavém režimu).

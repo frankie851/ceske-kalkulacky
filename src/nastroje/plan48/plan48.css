@@ -1,0 +1,24 @@
+/* Plán48 – styly jen pro tento nástroj. Barvy jen z tokenů. */
+@layer stranky {
+  /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
+  .plan48 [hidden] { display: none !important; }
+
+  .plan48-stitek { margin: calc(-1 * var(--sp-2)) 0 0; }
+  .plan48-navrh-vysledek { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); margin: var(--sp-3) 0 0; font-weight: 700; }
+
+  /* Výnos a poplatek vedle sebe */
+  .plan48-dvojice { display: grid; gap: 0 var(--sp-4); }
+  @media (min-width: 560px) { .plan48-dvojice { grid-template-columns: 1fr 1fr; } }
+  .plan48-shrnuti { font-weight: 700; margin: var(--sp-2) 0 0; }
+
+  /* Tabulka jako textová alternativa ke grafu */
+  .plan48-tabulka { margin-top: var(--sp-4); }
+  .plan48-tabulka > summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 800; color: var(--c-link); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .plan48-tabulka[open] > summary { margin-bottom: var(--sp-2); }
+
+  /* Formulář je delší než okno – na širokých obrazovkách proto nelepí */
+  @media (min-width: 1040px) { .plan48 .calc-side { position: static; } }
+}

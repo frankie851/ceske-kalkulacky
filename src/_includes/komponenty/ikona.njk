@@ -1,0 +1,12 @@
+{#
+  ikona(id, trida = '', titulek = '')
+    id      – id symbolu ve spritu src/img/sprite.svg (např. 'ikona-sipka', 'nastroj-plan48')
+    trida   – třídy navíc (vždy se přidá třída "ikona")
+    titulek – jen když ikona nese význam bez okolního textu; jinak je aria-hidden
+  Příklad: {{ ikona('ikona-overeno') }}
+  Barvy: jednobarevné ikony berou currentColor (+ --ikona-pozadi pro znak uvnitř kolečka),
+  ilustrace berou --il-* tokeny, kalendář --kal-barva.
+#}
+{% macro ikona(id, trida = '', titulek = '') -%}
+<svg class="ikona{% if trida %} {{ trida }}{% endif %}"{% if titulek %} role="img" aria-label="{{ titulek }}"{% else %} aria-hidden="true"{% endif %} focusable="false"><use href="{{ ('/img/sprite.svg#' + id) | url }}"/></svg>
+{%- endmacro %}

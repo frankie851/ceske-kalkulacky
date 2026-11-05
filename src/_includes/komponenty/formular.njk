@@ -1,0 +1,119 @@
+{#
+  Formulářové prvky a průběh.
+
+  pole({ id, label, nazev = id, hodnota, jednotka, napoveda, chyba, chybaMisto, typ = 'text', inputmode = 'numeric',
+         moznosti, autocomplete, povinne })
+    jednotka   – text vpravo v poli (Kč, let, %); pro čtečky je součástí nápovědy, ne labelu
+    napoveda   – nápověda pod polem (id "<id>-napoveda", propojená aria-describedby)
+    chyba      – text chyby: pole dostane .is-error, aria-invalid="true" a .error-msg s ikonou (id "<id>-chyba")
+    chybaMisto – true: vykreslí prázdný skrytý .error-msg pro chyby z JS (přepni hidden + aria-invalid)
+    moznosti   – pole { hodnota, text, vybrano } → <select> místo <input>
+
+  segmenty({ id, nazev, legenda, moznosti: [{ hodnota, text, vybrano }], napoveda })
+    Rádia jako pilulky ve <fieldset>. id prvku = "<id>-<hodnota>".
+
+  volby({ id, nazev, legenda, typ = 'checkbox' | 'radio', moznosti: [{ hodnota, text, vybrano, poznamka }],
+          napoveda, otazka = false })
+    Velké dlaždice (.options). otazka: true = legenda jako velká otázka průvodce (.quiz-q).
+
+  krokovac({ kroky: ['Název', …], aktualni = 1, varianta = 'bubliny' | 'pruh', popisek, dalsi })
+    bubliny – do ~4 kroků (kruhy s čísly), pruh – dlouhý průvodce („Krok 2 z 8“).
+    Aktuální krok má aria-current="step", hotové kroky třídu "done".
+
+  krok({ cislo, titulek, shrnuti, otevreny = false, hotovo = true, id })  + {% call %} = obsah kroku
+    Sbalitelný krok (details.step) se shrnutím vyplněných hodnot.
+#}
+{% from "komponenty/ikona.njk" import ikona %}
+
+{% macro pole(p) %}
+{%- set nazev = p.nazev or p.id -%}
+{%- set popis = '' -%}
+{%- if p.chyba or p.chybaMisto %}{% set popis = p.id + '-chyba' %}{% endif -%}
+{%- if p.napoveda %}{% set popis = ((popis + ' ') if popis else '') + p.id + '-napoveda' %}{% endif -%}
+<div class="field{% if p.chyba %} is-error{% endif %}">
+  <label for="{{ p.id }}">{{ p.label }}</label>
+  <div class="input{% if p.moznosti %} input-select{% endif %}">
+    {%- if p.moznosti %}
+    <select id="{{ p.id }}" name="{{ nazev }}"{% if popis %} aria-describedby="{{ popis }}"{% endif %}{% if p.chyba %} aria-invalid="true"{% endif %}>
+      {%- for m in p.moznosti %}<option value="{{ m.hodnota }}"{% if m.vybrano %} selected{% endif %}>{{ m.text }}</option>{% endfor %}
+    </select>
+    {%- else %}
+    <input id="{{ p.id }}" name="{{ nazev }}" type="{{ p.typ or 'text' }}"{% if (p.typ or 'text') == 'text' %} inputmode="{{ p.inputmode or 'numeric' }}"{% endif %} value="{{ p.hodnota if (p.hodnota or p.hodnota === 0) else '' }}"{% if p.autocomplete %} autocomplete="{{ p.autocomplete }}"{% else %} autocomplete="off"{% endif %}{% if p.povinne %} required{% endif %}{% if popis %} aria-describedby="{{ popis }}"{% endif %}{% if p.chyba %} aria-invalid="true"{% endif %}>
+    {%- if p.jednotka %}<span class="unit" aria-hidden="true">{{ p.jednotka }}</span>{% endif %}
+    {%- endif %}
+  </div>
+  {%- if p.chyba or p.chybaMisto %}
+  <p class="error-msg" id="{{ p.id }}-chyba"{% if not p.chyba %} hidden{% endif %}>{{ ikona('ikona-vystraha') }}<span><span class="sr-only">Chyba: </span><span class="error-text">{{ p.chyba }}</span></span></p>
+  {%- endif %}
+  {%- if p.napoveda %}
+  <span class="hint" id="{{ p.id }}-napoveda">{% if p.jednotka %}<span class="sr-only">V jednotkách {{ p.jednotka }}. </span>{% endif %}{{ p.napoveda }}</span>
+  {%- endif %}
+</div>
+{% endmacro %}
+
+{% macro segmenty(p) %}
+<fieldset class="field"{% if p.napoveda %} aria-describedby="{{ p.id }}-napoveda"{% endif %}>
+  <legend>{{ p.legenda }}</legend>
+  <div class="seg">
+    {%- for m in p.moznosti %}
+    <input type="radio" name="{{ p.nazev or p.id }}" id="{{ p.id }}-{{ m.hodnota }}" value="{{ m.hodnota }}"{% if m.vybrano %} checked{% endif %}><label for="{{ p.id }}-{{ m.hodnota }}">{{ m.text }}</label>
+    {%- endfor %}
+  </div>
+  {% if p.napoveda %}<span class="hint" id="{{ p.id }}-napoveda">{{ p.napoveda }}</span>{% endif %}
+</fieldset>
+{% endmacro %}
+
+{% macro volby(p) %}
+{%- set typ = p.typ or 'checkbox' -%}
+<fieldset class="volby"{% if p.napoveda %} aria-describedby="{{ p.id }}-napoveda"{% endif %}>
+  <legend{% if p.otazka %} class="quiz-q"{% endif %}>{{ p.legenda }}</legend>
+  {% if p.napoveda %}<p class="hint" id="{{ p.id }}-napoveda">{{ p.napoveda }}</p>{% endif %}
+  <ul class="options">
+    {%- for m in p.moznosti %}
+    <li class="opt"><input type="{{ typ }}" id="{{ p.id }}-{{ loop.index }}" name="{{ p.nazev or p.id }}" value="{{ m.hodnota }}"{% if m.vybrano %} checked{% endif %}><label for="{{ p.id }}-{{ loop.index }}"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span>{{ m.text }}{% if m.poznamka %}<span class="opt-note">{{ m.poznamka }}</span>{% endif %}</label></li>
+    {%- endfor %}
+  </ul>
+</fieldset>
+{% endmacro %}
+
+{% macro krokovac(p) %}
+{%- set aktualni = p.aktualni or 1 -%}
+{%- set pocet = p.kroky.length -%}
+{%- if (p.varianta or 'bubliny') == 'pruh' %}
+<div class="bar-progress">
+  <p class="bar-label"><span>Krok {{ aktualni }} z {{ pocet }} · {{ p.kroky[aktualni - 1] }}</span>{% if p.dalsi or aktualni < pocet %}<span class="muted">Další: {{ p.dalsi or p.kroky[aktualni] }}</span>{% endif %}</p>
+  <ol class="bar-steps" aria-label="{{ p.popisek or 'Kroky průvodce' }}" data-kroku="{{ pocet }}">
+    {%- for k in p.kroky %}
+    <li class="{% if loop.index < aktualni %}done{% elif loop.index == aktualni %}current{% endif %}"{% if loop.index == aktualni %} aria-current="step"{% endif %}><span class="sr-only">{{ loop.index }}. {{ k }}{% if loop.index < aktualni %} – hotovo{% elif loop.index == aktualni %} – právě tady{% endif %}</span></li>
+    {%- endfor %}
+  </ol>
+</div>
+{%- else %}
+<nav class="progress" aria-label="{{ p.popisek or 'Postup' }}">
+  <ol>
+    {%- for k in p.kroky %}
+    {%- if loop.index < aktualni %}
+    <li class="done"><span class="bubble">{{ ikona('ikona-zaskrtnuti') }}</span>{{ loop.index }}. {{ k }}<span class="state">hotovo</span></li>
+    {%- elif loop.index == aktualni %}
+    <li class="current" aria-current="step"><span class="bubble">{{ loop.index }}</span>{{ loop.index }}. {{ k }}<span class="state">teď tady</span></li>
+    {%- else %}
+    <li><span class="bubble">{{ loop.index }}</span>{{ loop.index }}. {{ k }}<span class="state">čeká</span></li>
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+</nav>
+{%- endif %}
+{% endmacro %}
+
+{% macro krok(p) %}
+<details class="step"{% if p.otevreny %} open{% endif %}{% if p.id %} id="{{ p.id }}"{% endif %}>
+  <summary>
+    <span class="step-num">{% if p.hotovo != false %}{{ ikona('ikona-zaskrtnuti') }}{% else %}{{ p.cislo }}{% endif %}</span>
+    <span><span class="step-title">{{ p.cislo }}. {{ p.titulek }}</span>{% if p.shrnuti %}<span class="step-sum">{{ p.shrnuti }}</span>{% endif %}</span>
+    <span class="step-edit"><span class="when-closed">Upravit</span><span class="when-open">Sbalit</span></span>
+  </summary>
+  <div class="step-body">
+    {% if caller %}{{ caller() }}{% endif %}
+  </div>
+</details>
+{% endmacro %}

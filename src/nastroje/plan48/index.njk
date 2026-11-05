@@ -1,0 +1,150 @@
+---
+layout: layouty/nastroj.njk
+nastroj: plan48
+title: Plán48
+description: Kolik ti stát přidá na penzijko a kolik ušetříš na daních z odpočtu 48 000 Kč. A co udělat do 31. 12.
+permalink: /penize/plan48/
+uvod: Vyplň pár údajů. Hned uvidíš, kolik ti stát přidá a co udělat do konce roku.
+skripty: ['/nastroje/plan48/app.js']
+styly: ['/nastroje/plan48/plan48.css']
+---
+{%- from "komponenty/zalozky.njk" import zalozky -%}
+{%- from "komponenty/formular.njk" import pole, segmenty, krok -%}
+{%- from "komponenty/vysledky.njk" import vysledek, statistiky, tabulka, lepiva_lista -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set p = plan48 -%}
+
+{{ zalozky({ popisek: 'Nástroje k penzijku', polozky: [
+  { nazev: 'Plán48', url: '/penize/plan48/', aktivni: true },
+  { nazev: 'Penzijko kompas', url: '/penize/penzijko-kompas/' }
+] }) }}
+
+<div class="calc-layout plan48">
+  <section class="calc-side" aria-labelledby="plan48-udaje">
+    <h2 id="plan48-udaje">Tvoje údaje</h2>
+    <p class="muted small">Cokoli změň a výsledek se hned přepočítá.</p>
+    <form id="plan48-formular" action="#vysledek" method="get" novalidate>
+      {%- call krok({ cislo: 1, titulek: 'O tobě', shrnuti: p.shrnuti.oTobe, otevreny: true, id: 'krok-o-tobe' }) %}
+        {{ pole({ id: 'vek', label: 'Kolik ti je?', hodnota: p.pole.vek, jednotka: 'let', napoveda: 'Věk v letech. Podle něj poznáme, jaký státní příspěvek ti náleží.', chybaMisto: true }) }}
+        {{ segmenty({ id: 'duchod', legenda: 'Pobíráš starobní důchod?', moznosti: p.duchod, napoveda: 'Důchodci státní příspěvek nedostávají. Penzijko si ale odečtou od první koruny.' }) }}
+        {{ segmenty({ id: 'sazba', legenda: 'Sazba daně', moznosti: p.sazby, napoveda: p.napovedy.sazba }) }}
+        {{ segmenty({ id: 'sada', legenda: 'Podle jakých pravidel počítat', moznosti: p.sady, napoveda: 'Návrh 2027 zatím není zákon. Ukážeme ho jen pro srovnání.' }) }}
+        <p class="plan48-stitek" data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: p.stitekSady or p.stitekNavrhu }) }}</p>
+      {%- endcall %}
+      {%- call krok({ cislo: 2, titulek: 'Co si spoříš', shrnuti: p.shrnuti.vklady, otevreny: true, id: 'krok-vklady' }) %}
+        {{ pole({ id: 'dps', label: 'Kolik si měsíčně posíláš na penzijko (DPS)?', hodnota: p.pole.dps, jednotka: 'Kč', napoveda: p.napovedy.dps, chybaMisto: true }) }}
+        {{ pole({ id: 'dip', label: 'DIP měsíčně', hodnota: p.pole.dip, jednotka: 'Kč', napoveda: 'Odečítá se od první koruny. Smlouva musí trvat aspoň 10 let a výběr nejdřív v 60 letech.', chybaMisto: true }) }}
+        {{ pole({ id: 'zp', label: 'Životní pojištění měsíčně', hodnota: p.pole.zp, jednotka: 'Kč', napoveda: 'Odečítá se od první koruny.', chybaMisto: true }) }}
+        {{ pole({ id: 'zamestnavatel', label: 'Příspěvek zaměstnavatele měsíčně', hodnota: p.pole.zamestnavatel, jednotka: 'Kč', napoveda: 'Do odpočtu se nepočítá. Ukážeme ho jen v projekci.', chybaMisto: true }) }}
+        {{ pole({ id: 'mesicu', label: 'Kolik měsíců letos už proběhlo?', moznosti: p.mesice, napoveda: 'Za uplynulé měsíce už státní příspěvek doplatit nejde.' }) }}
+        <div class="form-actions plan48-akce-formulare" hidden>
+          <button class="btn btn-primary" type="submit">Ukázat výsledek</button>
+        </div>
+      {%- endcall %}
+    </form>
+  </section>
+
+  <div class="calc-main">
+    {%- set prasatko -%}
+    <svg class="result-art" viewBox="0 0 140 140" aria-hidden="true" focusable="false">
+      <circle cx="70" cy="70" r="66" class="il-bg"/>
+      <rect x="38" y="92" width="14" height="22" rx="7" class="il-apricot-d"/>
+      <rect x="82" y="92" width="14" height="22" rx="7" class="il-apricot-d"/>
+      <ellipse cx="66" cy="80" rx="40" ry="30" class="il-apricot"/>
+      <path d="M82 56l8-14c2-3 6-2 6 1l-2 16z" class="il-apricot-d"/>
+      <rect x="52" y="53" width="22" height="5" rx="2.5" class="il-apricot-d"/>
+      <ellipse cx="106" cy="82" rx="9" ry="11" class="il-blush"/>
+      <path d="M84 72q4-4 8 0" class="st-ink" stroke-width="3"/>
+      <ellipse cx="88" cy="86" rx="6" ry="4" class="il-blush"/>
+      <circle cx="108" cy="34" r="16" class="il-sage-d"/>
+      <path d="M100 34l6 6 10-11" class="st-cream" stroke-width="4"/>
+      <path d="M30 30q2 6 8 8q-6 2-8 8q-2-6-8-8q6-2 8-8z" class="il-gold"/>
+    </svg>
+    {%- endset %}
+    {%- call vysledek({ id: 'vysledek', kicker: 'Počítáme podle: ' + p.nazevSady, nadpis: 'Tady je tvůj výsledek', cislo: p.odpocet, popis: p.popis, vysvetleni: p.vysvetleni, ilustraceSvg: prasatko, ukazka: true }) %}
+      <p class="plan48-navrh-vysledek" data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: p.stitekSady or p.stitekNavrhu }) }}<span>Počítáš podle návrhu. Zatím to není zákon.</span></p>
+      {{ statistiky(p.statistiky) }}
+      <div class="todo">
+        {{ ikona('ikona-kalendar-31') }}
+        <div>
+          <span class="todo-k">Co udělat do 31.&nbsp;12.</span>
+          <p data-akce>{{ p.akce }}</p>
+        </div>
+      </div>
+      <p class="note" data-akce-poznamka-obal{% if not p.akcePoznamka %} hidden{% endif %}>{{ ikona('ikona-info') }}<span data-akce-poznamka>{{ p.akcePoznamka }}</span></p>
+      <p class="sr-only" aria-live="polite" data-oznameni></p>
+    {%- endcall %}
+
+    <section class="card" aria-labelledby="limit-nadpis">
+      <h2 id="limit-nadpis">Jak máš využitý limit <span class="num">{{ p.limitCastka }}</span></h2>
+      <p class="muted" data-komentar-limitu>{{ p.komentarLimitu }}</p>
+      <div data-graf-limitu>{{ p.grafLimitu | safe }}</div>
+      <details class="plan48-tabulka">
+        <summary>Zobrazit jako tabulku</summary>
+        <div data-tabulka-limitu>{{ p.tabulkaLimitu | safe }}</div>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="projekce-nadpis">
+      <h2 id="projekce-nadpis">Projekce úspor do {{ p.vekKonec }} let</h2>
+      <p class="muted">Penzijko (tvůj vklad, zaměstnavatel a stát) a DIP při stejných měsíčních vkladech. Bez životního pojištění, bez inflace a bez daně z výnosu.</p>
+      <div class="plan48-dvojice">
+        {{ pole({ id: 'vynos', label: 'Výnos ročně', hodnota: p.pole.vynos, jednotka: '%', inputmode: 'decimal', napoveda: 'Průměrný roční výnos fondu.', chybaMisto: true }) }}
+        {{ pole({ id: 'poplatek', label: 'Poplatek ročně', hodnota: p.pole.poplatek, jednotka: '%', inputmode: 'decimal', napoveda: 'Poplatek za správu fondu.', chybaMisto: true }) }}
+      </div>
+      <p class="plan48-shrnuti" data-projekce-shrnuti>{{ p.shrnutiProjekce }}</p>
+      <div class="plan48-graf" data-graf-projekce>{{ p.grafProjekce | safe }}</div>
+      <details class="plan48-tabulka" data-projekce-tabulka-obal{% if not p.tabulkaProjekce %} hidden{% endif %}>
+        <summary>Zobrazit projekci jako tabulku</summary>
+        <div data-tabulka-projekce>{{ p.tabulkaProjekce | safe }}</div>
+      </details>
+      <p class="note">{{ ikona('ikona-info') }}<span>Jen ilustrace. Skutečný výnos se rok od roku mění a může být i záporný.</span></p>
+    </section>
+
+    {%- if p.navrh %}
+    <section class="card card-draft" aria-labelledby="navrh-nadpis">
+      <div class="card-head">
+        <h2 id="navrh-nadpis">A co {{ p.navrh.nazev | lower }}?</h2>
+        {{ stitek({ typ: 'navrh', text: p.navrh.stitek }) }}
+      </div>
+      <p>{{ p.navrh.popis }}</p>
+      <p class="muted">{{ p.navrh.poznamka }}</p>
+      <p class="small"><strong>Pro tebe:</strong> <span data-navrh-pro-tebe>{{ p.navrh.proTebe }}</span></p>
+    </section>
+    {%- endif %}
+
+    <section class="card" aria-labelledby="tabulky-nadpis">
+      <h2 id="tabulky-nadpis">Pro kontrolu a srovnání</h2>
+      <p class="muted">Ověřené příklady, se kterými kalkulačka musí sedět. Ukázka nahoře je ve druhém řádku.</p>
+      {{ tabulka({
+        caption: 'Kontrolní příklady (podle money.cz)',
+        popisek: 'kontrolní příklady',
+        sloupce: ['Měsíční vklady', 'Odpočet za rok', 'Daňová úspora (' + p.sazbaPrikladu + ')'],
+        radky: p.kontrolniPriklady,
+        vpravo: [1, 2],
+        stack: true,
+        zvyraznit: 1
+      }) }}
+      {{ tabulka({
+        caption: 'Státní příspěvek měsíčně: ' + p.srovnani.sloupce[1] + ((' a ' + p.srovnani.navrh) if p.srovnani.navrh else ''),
+        popisek: 'státní příspěvek podle pravidel',
+        sloupce: p.srovnani.sloupce,
+        radky: p.srovnani.radky,
+        stack: true,
+        poznamka: p.srovnani.poznamka
+      }) }}
+    </section>
+
+    <section class="card" aria-labelledby="pozor-nadpis">
+      <h2 id="pozor-nadpis">Na co si dát pozor</h2>
+      <ul class="watch">
+        <li>{{ ikona('ikona-vystraha') }}<span>U DIP vzniká nárok na odpočet jen při trvání aspoň 10 let a výběru nejdřív v 60 letech.</span></li>
+        <li>{{ ikona('ikona-vystraha') }}<span>Starobní důchodci státní příspěvek nedostávají.</span></li>
+        <li>{{ ikona('ikona-vystraha') }}<span>Příspěvek zaměstnavatele se do odpočtu nepočítá.</span></li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+{{ lepiva_lista({ cislo: p.odpocet, popis: 'Odpočet za rok', cil: '#vysledek' }) }}

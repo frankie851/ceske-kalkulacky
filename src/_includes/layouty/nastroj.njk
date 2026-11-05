@@ -1,0 +1,64 @@
+---
+layout: layouty/zaklad.njk
+---
+{#- Layout stránky nástroje.
+    Front matter: nastroj: <id> (povinné), zalozka: <id záložky> (např. osvc-2027), title, description,
+    skripty: [...], uvod: krátká věta pod otázkou, stitkyNavic: ['8 krátkých otázek'], ilustrace: <id ve spritu>.
+    Vykreslí drobečky, hlavičku se štítkem „Pravidla ověřena k …“, záložky, obsah stránky, zdroje,
+    neověřená pravidla, upozornění, Souvisí a pravidla jako <script type="application/json" id="pravidla">. -#}
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky, zalozky -%}
+{%- from "komponenty/karty.njk" import souvisi -%}
+{%- from "komponenty/obsah.njk" import zdroje, upozorneni -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set n = nastroje | najdiNastroj(nastroj) -%}
+{%- set kat = kategorie | najdiKategorii(n.kategorie) -%}
+{%- set z = (nastroje | najdiNastroj(zalozka)) if zalozka else null -%}
+{%- set aktualni = z or n -%}
+{%- set pravidla = n.pravidla -%}
+{%- set meta = n.meta -%}
+{%- set stitkyHlavicky = [{ typ: 'overeno', datum: meta.overeno }] -%}
+{%- for s in (stitkyNavic or []) %}{% set stitkyHlavicky = (stitkyHlavicky.concat([{ typ: 'plain', text: s }])) %}{% endfor -%}
+<div class="wrap">
+  {%- set cesta = [{ nazev: 'Úvod', url: '/' }, { nazev: kat.nazev, url: '/' + kat.slug + '/' }] %}
+  {%- if z %}{% set cesta = cesta.concat([{ nazev: n.nazev, url: n.url }, { nazev: z.nazev, url: z.url }]) %}{% else %}{% set cesta = cesta.concat([{ nazev: n.nazev, url: n.url }]) %}{% endif %}
+  {{ drobecky(cesta) }}
+
+  {{ hlavicka_stranky({
+    eyebrow: (aktualni.typ | capitalize) + ' · ' + (aktualni.stitky | join(', ')),
+    nadpis: aktualni.nazev,
+    otazka: aktualni.otazka,
+    lead: uvod or (aktualni.perex if z else ''),
+    stitky: stitkyHlavicky,
+    ilustrace: ilustrace or n.ilustrace
+  }) }}
+
+  {%- if n.zalozky and n.zalozky.length %}
+  {%- set polozkyZalozek = [{ nazev: n.nazev, url: n.url }] %}
+  {%- for zz in n.zalozky %}{% set polozkyZalozek = polozkyZalozek.concat([{ nazev: zz.nazev, url: zz.url }]) %}{% endfor %}
+  {{ zalozky({ polozky: polozkyZalozek, url: page.url, popisek: 'Části nástroje ' + n.nazev }) }}
+  {%- endif %}
+
+  <div class="nastroj-obsah">
+{{ content | safe }}
+  </div>
+
+  <div class="stack mt-6">
+    {{ zdroje({ zdroje: meta.zdroje, overeno: meta.overeno, id: 'zdroje-nastroje' }) }}
+
+    {%- if meta.neovereno and meta.neovereno.length %}
+    <section class="card" aria-labelledby="neovereno-nadpis">
+      <h2 id="neovereno-nadpis" class="h-xl">Co zatím neověřujeme a nepočítáme</h2>
+      <ul class="watch">
+        {%- for u in meta.neovereno %}
+        <li>{{ ikona('ikona-vystraha') }}<span>{{ u.text or u }}</span></li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {{ upozorneni() }}
+  </div>
+
+  {{ souvisi(n.souvisi, nastroje) }}
+</div>
+<script type="application/json" id="pravidla">{{ pravidla | json | safe }}</script>

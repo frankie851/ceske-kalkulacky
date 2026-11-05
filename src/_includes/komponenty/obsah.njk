@@ -1,0 +1,104 @@
+{#
+  Obsahové bloky.
+
+  zdroje({ zdroje, nadpis = 'Odkud to víme', overeno, uroven = 2, id = 'zdroje-nadpis' })
+    zdroje – pole { nazev, url, poznamka? } (meta.zdroje z rules.json); prázdné pole = věta „Zdroje doplníme.“
+
+  upozorneni({ typ = 'poradenstvi', titulek, text })  + volitelně {% call %} pro vlastní obsah
+    typ 'poradenstvi' – výchozí text „Nejde o investiční, daňové ani právní poradenství…“
+        'info' | 'navrh' | 'varovani'
+
+  pomoc_dluhy({ pomoc, varianta = 'velka', nadpis, eyebrow, uroven = 2, id = 'pomoc', ilustrace = false, skryty = false,
+               tlacitkoNahore = false })  + volitelně {% call %}
+    tlacitkoNahore – hlavní tlačítko hned pod nadpisem (stránka /dluhy/: vidět bez posouvání i na 360 × 640 px)
+    pomoc     – data pomoc.json { overeno, odkazy: [{ nazev, popis, url, provozovatel }] }
+                bez odkazů ukáže obecný text bez odkazu; s odkazy je první hlavní tlačítko
+    varianta  – 'velka' (úvod, /dluhy/) nebo 'kompaktni' (vyhledávání, nástroje)
+    skryty    – vykreslí blok s atributem hidden (zobrazí ho skript, např. hledání)
+    Vyká (rozhodnutí 7). Každý odkaz na pomoc má atribut data-pomoc.
+#}
+{% from "komponenty/ikona.njk" import ikona %}
+
+{% macro zdroje(p) %}
+{%- set uroven = p.uroven or 2 -%}
+{%- set id = p.id or 'zdroje-nadpis' -%}
+<section class="card" aria-labelledby="{{ id }}">
+  <h{{ uroven }} id="{{ id }}" class="h-xl">{{ p.nadpis or 'Odkud to víme' }}</h{{ uroven }}>
+  {% if p.overeno %}<p class="muted">Pravidla jsme naposledy ověřili {{ p.overeno | datum }}.</p>{% endif %}
+  {% if p.zdroje and p.zdroje.length %}
+  <ul class="sources">
+    {%- for z in p.zdroje %}
+    <li>{{ ikona('ikona-odkaz') }}<span>{% if z.url %}<a href="{{ z.url }}">{{ z.nazev }}</a>{% else %}{{ z.nazev }}{% endif %}{% if z.poznamka %}<span class="src-meta">{{ z.poznamka }}</span>{% endif %}</span></li>
+    {%- endfor %}
+  </ul>
+  {% else %}
+  <p class="mb-0">Seznam zdrojů doplníme spolu s nástrojem.</p>
+  {% endif %}
+</section>
+{% endmacro %}
+
+{% macro upozorneni(p = {}) %}
+{%- set typ = p.typ or 'poradenstvi' -%}
+<aside class="notice{% if typ == 'navrh' %} notice-draft{% elif typ == 'info' %} notice-info{% endif %}" aria-label="{{ p.titulek or 'Upozornění' }}">
+  {{ ikona('ikona-info' if typ == 'info' else 'ikona-vystraha') }}
+  <div>
+    {%- if typ == 'poradenstvi' and not p.titulek %}
+    <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+    <p class="small">Spočítáme to s tebou, ale rozhodnutí je vždycky na tobě.</p>
+    {%- else %}
+    {% if p.titulek %}<p><strong>{{ p.titulek }}</strong></p>{% endif %}
+    {% if p.text %}<p>{{ p.text }}</p>{% endif %}
+    {%- endif %}
+    {% if caller %}{{ caller() }}{% endif %}
+  </div>
+</aside>
+{% endmacro %}
+
+{% macro pomoc_dluhy(p) %}
+{%- set varianta = p.varianta or 'velka' -%}
+{%- set uroven = p.uroven or 2 -%}
+{%- set id = p.id or 'pomoc' -%}
+{%- set odkazy = (p.pomoc.odkazy if p.pomoc else []) or [] -%}
+<section class="debt{% if varianta == 'kompaktni' %} debt-compact{% endif %}{% if p.tlacitkoNahore %} debt-urgent{% endif %}" id="{{ id }}" aria-labelledby="{{ id }}-nadpis"{% if p.skryty %} hidden{% endif %}>
+  {%- if p.ilustrace and varianta != 'kompaktni' %}
+  <svg class="debt-art" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+    <circle cx="100" cy="100" r="96" class="il-paper"/>
+    <ellipse cx="96" cy="164" rx="58" ry="9" class="il-bg-2"/>
+    <path d="M128 106h8a15 15 0 0 1 0 30h-8" class="st-sage" stroke-width="10"/>
+    <rect x="54" y="90" width="76" height="72" rx="20" class="il-sage"/>
+    <path d="M92 140c-9-6-14-10-14-15.5a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 5.5-5 9.5-14 15.5z" class="il-paper"/>
+    <path d="M76 78c-9-10 9-15 0-28M100 76c-9-10 9-15 0-28" class="st-sage" stroke-width="5"/>
+    <path d="M124 64c-7-5-10-8-10-11.5a5 5 0 0 1 10-1.5 5 5 0 0 1 10 1.5c0 3.5-3 6.5-10 11.5z" class="il-terra"/>
+  </svg>
+  {%- endif %}
+  <div>
+    {% if varianta != 'kompaktni' %}<p class="eyebrow">{{ p.eyebrow or 'Bezplatná pomoc s dluhy' }}</p>{% endif %}
+    <h{{ uroven }} id="{{ id }}-nadpis">{{ p.nadpis or 'Nejste v tom sami' }}</h{{ uroven }}>
+    {%- set uvodniText -%}
+    {%- if odkazy.length -%}
+    <p>S dluhy se dá něco dělat. Bezplatná dluhová poradna vám pomůže zdarma, bez závazků a v klidu.</p>
+    {%- else -%}
+    <p>Bezplatnou pomoc poskytují dluhové poradny a akreditované osoby, které zdarma sepíší návrh na oddlužení. Pomohou vám bez závazků a v klidu.</p>
+    {%- endif -%}
+    {%- endset %}
+    {% if not p.tlacitkoNahore %}{{ uvodniText | safe }}{% endif %}
+    {%- if odkazy.length %}
+    <ul class="help-links">
+      {%- for o in odkazy %}
+      <li>
+        {%- if loop.first %}
+        <a class="btn btn-primary btn-big" href="{{ o.url }}" data-pomoc>{{ ikona('ikona-srdce') }}{{ o.nazev }}</a>
+        {%- else %}
+        <a class="help-secondary" href="{{ o.url }}" data-pomoc>{{ o.nazev }}</a>
+        {%- endif %}
+        {% if o.popis and varianta != 'kompaktni' %}<p class="help-desc">{{ o.popis }}</p>{% endif %}
+        {% if o.provozovatel and varianta != 'kompaktni' %}<span class="help-who">Provozuje: {{ o.provozovatel }}</span>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+    {% if p.tlacitkoNahore %}{{ uvodniText | safe }}{% endif %}
+    {% if caller %}{{ caller() }}{% endif %}
+  </div>
+</section>
+{% endmacro %}

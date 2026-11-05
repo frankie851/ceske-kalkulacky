@@ -1,0 +1,57 @@
+---
+layout: layouty/nastroj.njk
+nastroj: mam-eet
+title: Mám EET?
+description: Za dvě minuty zjistíš, jestli se tě EET 2.0 od 1. 1. 2027 týká a jestli se vyplatí EET OFF.
+permalink: /dane-podnikani/mam-eet/
+skripty: ['/nastroje/mam-eet/app.js']
+styly: ['/nastroje/mam-eet/mam-eet.css']
+stitkyNavic: ['Nejvýš 8 krátkých otázek']
+---
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set sprite = '/img/sprite.svg' | url -%}
+<div class="eet" id="eet" data-sprite="{{ sprite }}">
+  <div class="eet-uvod">
+    <p>{{ eetUvod }}</p>
+    <p class="note">{{ ikona('ikona-overeno') }}<span>{{ eetSoukromi }}</span></p>
+  </div>
+
+  {#- Sem app.js vykreslí dotazník (jedna otázka na obrazovku) a výsledek. -#}
+  <div id="eet-app" class="eet-app"></div>
+
+  {#- Bez JavaScriptu: přehled otázek a ukázkový výsledek. app.js tento blok odstraní. -#}
+  <div id="eet-bez-js" class="eet-bez-js">
+    {% call upozorneni({ typ: 'info', titulek: 'Interaktivní dotazník potřebuje JavaScript' }) %}
+    <p>Bez něj tu najdeš přehled všech otázek a ukázkový výsledek pro typickou situaci. Odpovědi se ani se zapnutým JavaScriptem nikam neodesílají.</p>
+    {% endcall %}
+
+    <details class="card eet-prehled">
+      <summary><span class="h-lg">Přehled všech {{ eetPrehled.length }} otázek</span> <span class="muted small">(jen pro čtení)</span></summary>
+      <ol class="eet-otazky">
+        {%- for q in eetPrehled %}
+        <li>
+          <h3>{{ q.titulek }}</h3>
+          <p class="hint">{{ q.napoveda }}</p>
+          {%- if q.moznosti %}
+          <ul class="eet-moznosti">
+            {%- for m in q.moznosti %}<li>{{ m }}</li>{% endfor %}
+          </ul>
+          {%- else %}
+          <p class="small">Odpověď: celé číslo{% if q.jednotka %} ({{ q.jednotka }}){% endif %}.</p>
+          {%- endif %}
+          {%- if q.ukazka %}<p class="small eet-ukazkova-odpoved"><strong>Ukázková odpověď:</strong> {{ q.ukazka }}</p>{% endif %}
+        </li>
+        {%- endfor %}
+      </ol>
+    </details>
+
+    <div class="eet-ukazka mt-6">
+      {{ eetUkazka.vysledek(sprite) | safe }}
+      {{ eetUkazka.kalkulacka(sprite) | safe }}
+      {{ eetUkazka.seznam(sprite) | safe }}
+    </div>
+  </div>
+
+  <p class="small muted mt-6">{{ eetPaticka.disclaimer }} Ověř si to na <a href="{{ eetPaticka.web.url }}">{{ eetPaticka.web.label }}</a> nebo na infolince finanční správy <a href="{{ eetPaticka.infolinka.phoneHref }}" class="num">{{ eetPaticka.infolinka.phone }}</a> ({{ eetPaticka.infolinka.hours }}).</p>
+</div>

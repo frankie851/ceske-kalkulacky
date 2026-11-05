@@ -1,0 +1,26 @@
+---
+permalink: /o-webu/
+title: O webu
+description: Kdo stojí za webem Spočítáno, co slibujeme a co nikdy neděláme.
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: 'O webu' }]) }}
+  {{ hlavicka_stranky({ eyebrow: 'O webu', nadpis: 'Česká pravidla srozumitelně', lead: site.nazev + ' spojuje kalkulačky a průvodce, které pomáhají spočítat situaci podle nových českých pravidel.' }) }}
+  <div class="text">
+    <p>Pravidla se mění každý rok. Penzijko, EET, paušální daň, slevy na dani. Chceme, aby šlo v klidu spočítat, co se tě týká, a vědět, co udělat do kdy.</p>
+    <h2>Co slibujeme</h2>
+    <ul>
+      <li>Výpočty běží jen v tvém prohlížeči. Nic neodesíláme a nic neukládáme.</li>
+      <li>U každého nástroje je datum, kdy jsme pravidla naposledy ověřili, a odkazy na zdroje.</li>
+      <li>Co je jen návrh zákona, má štítek „Návrh, zatím neschváleno“.</li>
+      <li>Bez registrace, bez reklam a bez affiliate odkazů.</li>
+    </ul>
+    <h2>Co nejsme</h2>
+    <p>Nejsme web státu ani úřadu. Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační a rozhodnutí je vždycky na tobě. Když si nevíš rady, zeptej se daňového poradce, finanční správy nebo jiné odborné služby.</p>
+    <h2>Dluhy</h2>
+    <p>Sekce Dluhy má přísnější pravidla: žádné reklamy, žádné nabídky půjček a žádné sbírání kontaktů. Vede na <a href="{{ '/dluhy/' | url }}">bezplatnou pomoc</a>.</p>
+    <h2>Název a doména</h2>
+    <p>Název {{ site.nazev }} je zatím pracovní.</p>
+  </div>
+</div>

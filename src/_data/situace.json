@@ -1,0 +1,7 @@
+[
+  { "slug": "zamestnanec", "nazev": "Mám zaměstnání", "popis": "Slevy 2027, Plán48, výpověď", "ikona": "situace-zamestnanec", "nastroje": ["slevy-2027", "plan48", "vypoved-2026", "inflacni-kalkulacka"] },
+  { "slug": "podnikam", "nazev": "Podnikám (OSVČ)", "popis": "Mám EET?, paušální daň, cesťák", "ikona": "situace-osvc", "nastroje": ["mam-eet", "osvc-2027", "cestovni-prikaz-2027", "plan48"] },
+  { "slug": "investuji", "nazev": "Investuji a spořím", "popis": "Penzijko, DIP, zdanění, inflace", "ikona": "situace-investice", "nastroje": ["plan48", "penzijko-kompas", "zdanim-to", "inflacni-kalkulacka"] },
+  { "slug": "rodina", "nazev": "Mám rodinu a děti", "popis": "Rodičovská, přijímačky, volno", "ikona": "situace-rodina", "nastroje": ["rodicovska", "prijimacky", "slevy-2027", "volno-2027"] },
+  { "slug": "dluhy", "nazev": "Mám dluhy", "popis": "V klidu a bez reklam", "ikona": "situace-dluhy", "url": "/dluhy/", "citlive": true, "nastroje": ["exekuce-nebo-oddluzeni"] }
+]

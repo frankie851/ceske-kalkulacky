@@ -1,0 +1,28 @@
+{#
+  stitek({ typ, text, datum, li })
+    typ   – 'overeno' (Pravidla ověřena k …), 'navrh' (Návrh, zatím neschváleno), 'nove' (Mění se v roce 2027),
+            'schvaleno', 'kalendar' (Podle kalendáře), 'pripravujeme', 'plain' (neutrální)
+    text  – vlastní text (jinak výchozí podle typu)
+    datum – ISO datum pro typ 'overeno' (např. meta.overeno)
+    li    – true: vykreslí <li class="badge …"> do seznamu <ul class="badges">, jinak <span>
+#}
+{% from "komponenty/ikona.njk" import ikona %}
+{% macro stitek(p) -%}
+{%- set typ = p.typ or 'plain' -%}
+{%- set tag = 'li' if p.li else 'span' -%}
+{%- if typ == 'overeno' -%}
+<{{ tag }} class="badge badge-ok">{{ ikona('ikona-overeno') }}{{ p.text or ('Pravidla ověřena k ' + (p.datum | datum)) }}</{{ tag }}>
+{%- elif typ == 'schvaleno' -%}
+<{{ tag }} class="badge badge-ok">{{ ikona('ikona-overeno') }}{{ p.text or 'Schváleno' }}</{{ tag }}>
+{%- elif typ == 'navrh' -%}
+<{{ tag }} class="badge badge-draft">{{ ikona('ikona-tuzka') }}{{ p.text or 'Návrh, zatím neschváleno' }}</{{ tag }}>
+{%- elif typ == 'nove' -%}
+<{{ tag }} class="badge badge-new">{{ p.text or 'Mění se v roce 2027' }}</{{ tag }}>
+{%- elif typ == 'kalendar' -%}
+<{{ tag }} class="badge badge-plain">{{ p.text or 'Podle kalendáře' }}</{{ tag }}>
+{%- elif typ == 'pripravujeme' -%}
+<{{ tag }} class="badge badge-soon">{{ ikona('ikona-hodiny') }}{{ p.text or 'Připravujeme' }}</{{ tag }}>
+{%- else -%}
+<{{ tag }} class="badge badge-plain">{{ p.text }}</{{ tag }}>
+{%- endif -%}
+{%- endmacro %}

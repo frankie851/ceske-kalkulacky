@@ -1,0 +1,24 @@
+---
+permalink: /soukromi/
+title: Soukromí
+description: Nic neukládáme ani neodesíláme. Žádné cookies, žádné měření návštěvnosti, písma hostujeme sami.
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: 'Soukromí' }]) }}
+  {{ hlavicka_stranky({ eyebrow: 'Soukromí', nadpis: 'Nic neukládáme ani neodesíláme', lead: 'Všechno, co do kalkulaček zadáš, zůstává v tvém prohlížeči.' }) }}
+  <div class="text">
+    <h2>Výpočty běží jen u tebe</h2>
+    <p>Kalkulačky a průvodci počítají přímo v prohlížeči. Zadané hodnoty nikam neposíláme a na žádném serveru je neukládáme.</p>
+    <h2>Co si prohlížeč pamatuje</h2>
+    <p>Jedinou věc: tvoji volbu světlého nebo tmavého režimu. Ukládá se v úložišti prohlížeče (localStorage) pod klíčem <code>spocitano-rezim</code>. Když zvolíš „Auto“, smažeme ji. Smazat ji můžeš i vymazáním dat webu v prohlížeči.</p>
+    <h2>Žádné cookies a žádné měření</h2>
+    <p>Nepoužíváme cookies, analytické nástroje ani reklamní sítě. Nevíme, kdo web navštěvuje ani co do kalkulaček zadává.</p>
+    <h2>Písma hostujeme sami</h2>
+    <p>Písma Nunito a Fredoka načítáme z tohoto webu, ne z Google Fonts ani jiné cizí služby. Tvoje IP adresa se tak nedostane k nikomu dalšímu.</p>
+    <h2>Odkazy ven</h2>
+    <p>Odkazy na zdroje a na bezplatnou pomoc vedou na jiné weby. Ty mají svá vlastní pravidla soukromí. Při přechodu na ně neposíláme, odkud přicházíš.</p>
+    <h2>Hledání</h2>
+    <p>Hledání probíhá v prohlížeči. Dotaz se nikam neodesílá ani neukládá.</p>
+  </div>
+</div>

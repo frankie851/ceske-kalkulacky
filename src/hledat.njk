@@ -1,0 +1,78 @@
+---
+permalink: /hledat/
+title: Hledat
+description: Hledání v kalkulačkách a průvodcích. Bez JavaScriptu ukáže všechny nástroje podle témat.
+skripty: ['/js/hledani.js']
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky -%}
+{%- from "komponenty/obsah.njk" import pomoc_dluhy -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: 'Hledat' }]) }}
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Hledání</p>
+      <h1>Co hledáš?</h1>
+      <form class="search search-big" role="search" aria-label="Hledat nástroje" action="{{ '/hledat/' | url }}" method="get">
+        <label class="sr-only" for="hledat-dotaz">Hledat nástroje</label>
+        <div class="search-field">
+          {{ ikona('ikona-lupa') }}
+          <input type="search" id="hledat-dotaz" name="q" placeholder="Např. penzijko, EET, výpověď" autocomplete="off">
+          <button type="submit">Hledat</button>
+        </div>
+      </form>
+      <p class="small muted mt-4">Hledáme jen v tvém prohlížeči. Dotaz se nikam neposílá.</p>
+    </div>
+  </div>
+
+  {{ pomoc_dluhy({ pomoc: pomoc, varianta: 'kompaktni', id: 'hledani-pomoc', skryty: true }) }}
+
+  <section id="hledani-vysledky" class="section-tight" aria-labelledby="vysledky-nadpis" aria-live="polite" hidden></section>
+
+  <section class="section-tight" aria-labelledby="vse-nadpis">
+    <h2 id="vse-nadpis">Všechny nástroje podle témat</h2>
+    {%- for k in kategorie %}
+    <div class="search-group">
+      <h3 id="tema-{{ k.slug }}"><a href="{{ ('/' + k.slug + '/') | url }}">{{ k.nazev }}</a></h3>
+      <ul class="plain-list">
+        {%- for n in nastroje | vKategorii(k.slug) %}
+        <li>{% if n.stav == 'aktivni' %}<a href="{{ n.url | url }}">{{ n.nazev }}</a>{% else %}<strong>{{ n.nazev }}</strong> <span class="tag">připravujeme</span>{% endif %}<span class="muted small">{{ n.perex }}</span></li>
+        {%- for z in n.zalozky or [] %}
+        <li>{% if n.stav == 'aktivni' %}<a href="{{ z.url | url }}">{{ z.nazev }}</a>{% else %}<strong>{{ z.nazev }}</strong>{% endif %}<span class="muted small">{{ z.perex }}</span></li>
+        {%- endfor %}
+        {%- endfor %}
+      </ul>
+    </div>
+    {%- endfor %}
+    <div class="search-group">
+      <h3 id="tema-2027"><a href="{{ '/co-se-meni-2027/' | url }}">Co se mění v roce 2027</a></h3>
+      <ul class="plain-list">
+        {%- for z in zmeny2027 %}
+        <li><a href="{{ ('/co-se-meni-2027/#' + z.id) | url }}">{{ z.titulek }}</a><span class="muted small">{{ z.datum }}</span></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="situace-nadpis">
+    <h2 id="situace-nadpis">Podle situace</h2>
+    {%- for s in situace %}
+    <div class="search-group">
+      <h3 id="situace-{{ s.slug }}">{{ s.nazev }}</h3>
+      <ul class="plain-list">
+        {%- if s.citlive %}
+        <li><a href="{{ '/dluhy/' | url }}" data-pomoc>Bezplatná pomoc s dluhy</a><span class="muted small">Dluhové poradny a akreditované osoby. Zdarma a bez reklam.</span></li>
+        {%- endif %}
+        {%- for id in s.nastroje %}
+        {%- set n = nastroje | najdiNastroj(id) %}
+        {%- if n %}
+        <li>{% if n.stav == 'aktivni' %}<a href="{{ n.url | url }}">{{ n.nazev }}</a>{% else %}<strong>{{ n.nazev }}</strong> <span class="tag">připravujeme</span>{% endif %}</li>
+        {%- endif %}
+        {%- endfor %}
+      </ul>
+    </div>
+    {%- endfor %}
+  </section>
+</div>
+<script type="application/json" id="hledani-index">{{ hledaniIndex | sPrefixem | json | safe }}</script>
+<script type="application/json" id="hledani-synonyma">{{ synonyma.skupiny | json | safe }}</script>

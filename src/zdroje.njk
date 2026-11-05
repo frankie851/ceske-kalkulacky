@@ -1,0 +1,47 @@
+---
+permalink: /zdroje/
+title: Všechny zdroje
+description: Odkud bereme pravidla pro všechny kalkulačky a průvodce a kdy jsme je naposledy ověřili.
+---
+{%- from "komponenty/rozvrzeni.njk" import drobecky, hlavicka_stranky -%}
+{%- from "komponenty/obsah.njk" import zdroje -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+<div class="wrap">
+  {{ drobecky([{ nazev: 'Úvod', url: '/' }, { nazev: 'Všechny zdroje' }]) }}
+  {{ hlavicka_stranky({
+    eyebrow: 'Odkud to víme',
+    nadpis: 'Všechny zdroje',
+    lead: 'Každý nástroj počítá podle pravidel, která jsme ověřili v zákonech, na webech úřadů a v odborných článcích. Tady jsou všechny zdroje pohromadě i s datem poslední kontroly.'
+  }) }}
+
+  <div class="stack">
+    {%- for n in nastroje | aktivni %}
+    <section class="card source-group" aria-labelledby="zdroje-{{ n.id }}">
+      <div class="card-head">
+        <h2 id="zdroje-{{ n.id }}"><a href="{{ n.url | url }}">{{ n.nazev }}</a></h2>
+        {{ stitek({ typ: 'overeno', datum: n.meta.overeno }) }}
+      </div>
+      {%- if n.meta.zdroje and n.meta.zdroje.length %}
+      <ul class="sources">
+        {%- for z in n.meta.zdroje %}
+        <li>{{ ikona('ikona-odkaz') }}<span>{% if z.url %}<a href="{{ z.url }}">{{ z.nazev }}</a>{% else %}{{ z.nazev }}{% endif %}{% if z.poznamka %}<span class="src-meta">{{ z.poznamka }}</span>{% endif %}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <p class="mb-0 muted">Zdroje doplníme spolu s nástrojem.</p>
+      {%- endif %}
+    </section>
+    {%- endfor %}
+
+    {%- set zdrojeZmen = [] %}
+    {%- for z in zmeny2027 %}{% if z.zdroj %}{% set zdrojeZmen = zdrojeZmen.concat([{ nazev: z.zdroj.nazev, url: z.zdroj.url, poznamka: z.titulek }]) %}{% endif %}{% endfor %}
+    {{ zdroje({ nadpis: 'Co se mění v roce 2027', zdroje: zdrojeZmen, id: 'zdroje-2027' }) }}
+
+    {%- set zdrojePomoci = [] %}
+    {%- for o in pomoc.odkazy %}{% set zdrojePomoci = zdrojePomoci.concat([{ nazev: o.nazev, url: o.url, poznamka: 'Provozuje: ' + o.provozovatel }]) %}{% endfor %}
+    {%- if zdrojePomoci.length %}
+    {{ zdroje({ nadpis: 'Bezplatná pomoc s dluhy', zdroje: zdrojePomoci, overeno: pomoc.overeno, id: 'zdroje-pomoc' }) }}
+    {%- endif %}
+  </div>
+</div>
