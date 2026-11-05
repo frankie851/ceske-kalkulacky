@@ -83,6 +83,11 @@ for (const [jmeno, sirka, vyska] of [['360', 360, 800], ['1440', 1440, 900]]) {
   // totéž s písm. e)
   await nastav(b.page, { duvod: 'e' });
   vysledek.scenare['B-duvod-e'] = { vstup: { ...vstup, duvod: 'e' }, vystup: await odesli(b.page) };
+  // a s písm. h) (zvlášť hrubé porušení § 301a → § 39 odst. 2 písm. b) ZoZ vylučuje podporu)
+  await nastav(b.page, { doruceni: '2026-07-10', duvod: 'h', cisty: '30 000' });
+  const rh = await odesli(b.page);
+  await snimek(b.page, 'duvod-h-360.png');
+  vysledek.scenare['B-duvod-h'] = { vstup: { ...vstup, doruceni: '2026-07-10', duvod: 'h', cisty: '30 000' }, vystup: rh };
   await b.zavri();
 }
 

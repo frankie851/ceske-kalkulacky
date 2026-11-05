@@ -1539,12 +1539,202 @@
   "kod": "CES",
   "repo": "cestovni-prikaz",
   "nazev": "Cestovní příkaz 2027",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 4,
+   "nizka": 6
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "\ud83d",
+    "nalez": "CES-02"
+   },
+   "2 Výpočty": {
+    "stav": "\ud83d",
+    "nalez": "CES-01"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "\ud83d",
+    "nalez": "CES-02"
+   },
+   "4 Testy": {
+    "stav": "\ud83d",
+    "nalez": "CES-06"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "\ud83d",
+    "nalez": "CES-03"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "\ud83d",
+    "nalez": "CES-04, CES-05"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "\ud83d",
+    "nalez": "CES-07 (Nízká)"
+   },
+   "8 Nasazení a větve": {
+    "stav": "\ud83d",
+    "nalez": "CES-09 (Nízká)"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "CES-01",
+    "zavaznost": "Vysoká",
+    "oblast": "2 Výpočty",
+    "nazev": "Cesta přes půlnoc se vždy dělí po dnech – chybí společné posouzení podle ZP § 163 odst. 4",
+    "kde": "`cesty.js:113–127` (`hodinyPoDnech`), `cesty.js:211–215` (`spocitejCestu` sčítá `stravneDen` za každý den zvlášť); `README.md` „Co aplikace záměrně nepočítá“ – „případné zvláštní pravidlo pro cestu přes půlnoc … se nepodařilo ověřit“; v UI žádné upozornění (`app.js:338–343` ukáže „pod 5 h → 0 Kč“).",
+    "reprodukce": "soukromá sféra, cesta 15. 3. 2026 20:00 – 16. 3. 2026 2:00, bez jídel, bez km → očekáváno 155 Kč: § 163 odst. 4 ZP („Při pracovní cestě, která spadá do 2 kalendářních dnů, se upustí od odděleného posuzování doby trvání pracovní cesty v kalendářním dnu, je-li to pro zaměstnance výhodnější“, https://www.zakonyprolidi.cz/cs/2006-262#p163); 4 h + 2 h = 6 h → pásmo 5–12 h → 155 Kč. Skutečnost: modul `stravneHal = 0`, obrazovka „Stravné 0,00 Kč … pod 5 h → 0 Kč; pod 5 h → 0 Kč“ (`prepocet.txt` V43, `prohlizec.json` C_pulnoc, `pulnoc-360.png`). Dále 6:00–0:30 (18 h + 0,5 h): očekáváno 370 Kč (18,5 h), skutečnost 236 Kč (V44, obrazovka); 22:00–11:00: očekáváno 236 Kč, skutečnost 155 Kč (V45). Ve veřejné sféře totéž (V48): § 176 odst. 1 vylučuje jen § 163 odst. 1–3, § 174 odkazuje na hlavu II.",
+    "dopad": "zaměstnavatel podle vyúčtování vyplatí méně, než je zákonné minimum (o 155 Kč, 134 Kč nebo 81 Kč za cestu); zaměstnanec vracející se po půlnoci z celodenní cesty přijde o 134 Kč stravného, aniž by ho na to aplikace upozornila.",
+    "oprava": "v `spocitejCestu` u cest s právě 2 kalendářními dny spočítat i variantu „dohromady“ (pásmo z celkové doby, všechna poskytnutá jídla, krácení podle společného pásma) a použít vyšší částku; v detailu ukázat, která varianta se použila; odstranit tvrzení v README; doplnit testy (20:00–2:00 → 155 Kč; 6:00–0:30 → 370 Kč; 19:00–10:00 → 310 Kč zůstává).",
+    "overeni": "reprodukováno 2× (dva běhy `porovnani.mjs`, dva běhy prohlížeče) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-02",
+    "zavaznost": "Vysoká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Přívěs: povinné navýšení sazby o 15 % aplikace odmítá s nepravdivým odůvodněním",
+    "kde": "`cesty.js:190–193` (`if (cesta.prives) throw new ChybaVstupu('… pravidlo v platném zákoníku práce se nepodařilo ověřit.')`), `index.html:91–94` (zaškrtávátko „S přívěsem“ `disabled` s textem „pravidlo se nepodařilo ověřit v platném znění ZP“), `README.md` „Co aplikace záměrně nepočítá: navýšení sazby za přívěs“, test `cesty.test.js:167–171`.",
+    "reprodukce": "100 km osobním autem s přívěsem, sazby 2026 → očekáváno základní náhrada nejméně 100 × 5,90 × 1,15 = 678,50 Kč (ZP § 157 odst. 4: „při použití přívěsu k silničnímu motorovému vozidlu zaměstnavatel sazbu základní náhrady za 1 km jízdy zvýší nejméně o 15 %“, https://www.zakonyprolidi.cz/cs/2006-262#p157; rejstřík PR-57). Skutečnost: modul vyhodí ChybaVstupu (`prepocet.txt` V32), v UI nelze přívěs vůbec zvolit; zadání přitom výslovně žádá „u přívěsu navýšení podle zákona“ a ověření „přirážku za přívěs“.",
+    "dopad": "zaměstnanec s přívěsem (řemeslníci, servis) buď dostane jen 5,90 Kč/km (o 0,885 Kč/km méně, 88,50 Kč na 100 km), nebo si musí vše dopočítat ručně; text navíc tvrdí, že platný zákon pravidlo neobsahuje.",
+    "oprava": "povolit zaškrtávátko, v `zakladniNahrada` násobit sazbu 1,15 (haléře z přesného součinu km × sazba × 1,15, ne z předem zaokrouhlené sazby 6,79 Kč), ukázat to v detailu („5,90 Kč/km + 15 % přívěs“), opravit texty v `index.html` i README a nahradit test 23 testem na 678,50 Kč.",
+    "overeni": "reprodukováno 2× (dva běhy `porovnani.mjs`; text v UI na obou snímcích) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-03",
+    "zavaznost": "Střední",
+    "oblast": "5 Mobil a přístupnost",
+    "nazev": "Desetinná čárka v číselných polích se v prohlížeči s jinou než českou lokalizací potichu zahodí (6,5 → 65)",
+    "kde": "`index.html:85, 129, 136` (`<input type=\"number\" step=\"0.01|0.1\" inputmode=\"decimal\">` pro spotřebu, km a cenu z dokladu; také `kr0–2`, `sv0–2`), `app.js:97, 156, 158` (`Number(f.km.value)` bez kontroly), formulář cesty má `novalidate`.",
+    "reprodukce": "Chromium `--lang=en-US`: spotřeba „6,5“, km „100,5“, cena z dokladu „38,90“ → pole obsahují „65“, „1005“, „3890“, `validity.badInput = false` (čárka je odfiltrována už při psaní i při vložení ze schránky – `prohlizec.json` E_cisla_en-US, test vložení `insertText`), žádná hláška; cesta se uloží a souhrn ukáže „1005 km × 65 l/100 km × 3 890,00 Kč/l = 2 541 142,50 Kč“, celkem 2 547 308,00 Kč. Očekáváno 100,5 km × 6,5 l × 38,90 = 254,11 Kč, celkem 1 083,06 Kč. V cs-CZ funguje správně (obrazovka 1 083,06 Kč). „1 500“ s mezerou se v obou lokalizacích správně převede na 1500.",
+    "dopad": "uživatel s anglickým prohlížečem/OS (běžné na firemních noteboocích) dostane nesmyslnou částku nebo – u méně nápadných hodnot (6,5 → 65 l/100 km) – desetinásobnou náhradu za PHM, aniž by ho na to cokoli upozornilo; kontrola `validity` tu nepomůže, protože prohlížeč vstup neoznačí za chybný.",
+    "oprava": "pro spotřebu, km a cenu použít `type=\"text\" inputmode=\"decimal\"` s vlastním převodem („6,5“, „1 500,50“ → číslo) a chybovou hláškou, nebo aspoň u `type=number` zachytit událost `beforeinput` s čárkou a varovat; přidat kontrolu rozumných mezí (spotřeba > 30 l/100 km, cena > 100 Kč/l → dotaz).",
+    "overeni": "reprodukováno 2× (dva běhy prohlížeče en-US, navíc test vložení) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-04",
+    "zavaznost": "Střední",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Nápověda ke spotřebě radí „aritmetický průměr“, zákon žádá přednostně údaj pro kombinovaný provoz",
+    "kde": "`index.html:90` („Uvádí-li technický průkaz více údajů o spotřebě, použijte jejich aritmetický průměr (§ 158 ZP).“), `README.md` totéž není opraveno.",
+    "reprodukce": "ZP § 158 odst. 4: „Při určení spotřeby pohonné hmoty použije zaměstnavatel údaj o spotřebě pro kombinovaný provoz podle norem Evropské unie. Není-li tento údaj … uveden, vypočítá zaměstnavatel spotřebu … aritmetickým průměrem z údajů … uvedených“ (https://www.zakonyprolidi.cz/cs/2006-262#p158; rejstřík PR-59). U vozidla s údaji např. 7,9 / 5,1 / 6,1 (město/mimo město/kombinovaná) nápověda vede k zadání průměru 6,37 místo kombinované 6,1; u WLTP údajů (nízká/střední/vysoká/velmi vysoká/kombinovaná) je odchylka podobná.",
+    "dopad": "náhrada za PHM o jednotky procent vyšší nebo nižší, než má být (u 6,37 vs. 6,1 l a 1 000 km po 41,80 Kč o 113 Kč), s odkazem na zákon, který říká něco jiného.",
+    "oprava": "text: „Použijte údaj o spotřebě pro kombinovaný provoz; jen pokud v technickém průkazu není, aritmetický průměr všech uvedených údajů (§ 158 odst. 4 ZP).“",
+    "overeni": "reprodukováno 2× (text v obou snímcích; § 158 odst. 4 ověřen v rejstříku i vlastním čtením) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-05",
+    "zavaznost": "Střední",
+    "oblast": "6 Texty a citlivá témata",
+    "nazev": "Aplikace tvrdí, že předpisy nebyly dostupné a že zákon zaokrouhlení neupravuje",
+    "kde": "`rules.json` `poznamkaOvereni` („plné znění ve Sbírce nebylo z prostředí dostupné“, zdroje jen sekundární); `README.md` „Co aplikace záměrně nepočítá … se nepodařilo ověřit v platném znění předpisů“ a „Zaokrouhlování: vyhláška ani zákoník práce ho neupravují“; `app.js:408–409` poznámka na výtisku „konvence aplikace – vyhláška ani zákoník práce zaokrouhlení neupravují“; `index.html:100–103` OSVČ „pravidla se nám nepodařilo spolehlivě ověřit“.",
+    "reprodukce": "texty vyhlášek 573/2025, 78/2026 a 175/2026 Sb. i zákoníku práce jsou na zakonyprolidi.cz volně dostupné (staženo 5. 11. 2026, HTTP 200); zaokrouhlení částky k výplatě nahoru na celé koruny stanoví ZP § 183 odst. 5 (a vratku § 183 odst. 3; https://www.zakonyprolidi.cz/cs/2006-262#p183) – aplikace ho shodou okolností dodržuje, ale popisuje jako vlastní konvenci; pravidla pro OSVČ jsou v ZDP § 24 odst. 2 písm. k) a zt) (PR-72–74).",
+    "dopad": "mzdová účetní nebo kontrolor nemohou uvedenému datu ověření důvěřovat a výtisk tvrdí účetní nepravdu; zároveň se tím maskují CES-01 a CES-02 jako „neověřitelné“.",
+    "oprava": "`poznamkaOvereni` nahradit odkazy na primární texty (zakonyprolidi.cz / e-Sbírka) s datem; poznámku na výtisku změnit na „zaokrouhleno nahoru na celé koruny podle § 183 odst. 5 zákoníku práce“; v README a u OSVČ uvést skutečný důvod (mimo rozsah aplikace) s odkazem na § 24 ZDP.",
+    "overeni": "reprodukováno 2× (texty na obou snímcích a ve výtisku PDF; zdroje staženy dvakrát – rejstřík a vlastní stažení) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-06",
+    "zavaznost": "Střední",
+    "oblast": "4 Testy",
+    "nazev": "Test konzervuje odmítnutí přívěsu, chybí test pro cestu přes dva dny",
+    "kde": "`cesty.test.js:167–171` („přívěs není ověřený → výpočet ho odmítne“ – `assert.throws`), žádný test pro § 163 odst. 4; `cesty.test.js:128–152` testují jen oddělené dny (vícedenní cesta 3 dny, návrat o půlnoci).",
+    "reprodukce": "`node --test` 26/26 projde (`testy.txt`), včetně testu, který očekává chybu místo 678,50 Kč; případy V43–V45 nejsou pokryté, takže oprava CES-01 ani CES-02 by bez změny testů neprošla, resp. chyba CES-01 testy neodhalí.",
+    "dopad": "nepřímý – testy dávají falešnou jistotu, že výpočet odpovídá zákonu.",
+    "oprava": "nahradit test 23 testem na 678,50 Kč; přidat testy 20:00–2:00 → 155 Kč, 6:00–0:30 → 370 Kč, 19:00–10:00 → 310 Kč, veřejná sféra 20:00–2:00 → 155 Kč; přidat test zaokrouhlení v `souhrn` s odkazem na § 183 odst. 5 (už existuje, jen přejmenovat zdůvodnění).",
+    "overeni": "reprodukováno 2× (`testy.txt`, vlastní čtení testů) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-07",
+    "zavaznost": "Nízká",
+    "oblast": "7 Soukromí a bezpečnost",
+    "nazev": "localStorage drží jméno zaměstnance, SPZ a cesty bez možnosti smazání v aplikaci",
+    "kde": "`app.js:7, 26–36` (klíč `cestovni-prikaz-v1`, celý `state` včetně `firma`, `zamestnanec`, `vozidlo.spz`, trasy a účely cest); UI nemá tlačítko „Smazat vše“ (cesty lze mazat jen jednotlivě, hlavičku jen přepsat).",
+    "reprodukce": "po vyplnění hlavičky a cesty obsahuje `localStorage` `{\"hlavicka\":{\"firma\":\"Testovací s.r.o.\",\"zamestnanec\":\"Jan Testovací\",…\"spz\":\"1AB 2345\"…},\"cesty\":[…]}` (`prohlizec.json` A_zadani.localStorage, `uvod-kontrola.json`); na sdíleném počítači je uvidí další uživatel. Ukládání je dokumentované (README, patička „Data se ukládají jen v tomto prohlížeči“), v try/catch, nikam se neodesílá (žádné cizí požadavky), žádné cookies ani analytika; `innerHTML` dostává jen hodnoty přes `esc()` – payload `<img src=x onerror=alert(1)>` ve všech polích hlavičky i cesty (odkud, kam, zpět, účel) se vykreslil jako text, bez dialogu (`prohlizec.json` F_xss, `uvod-360-xss.png`).",
+    "dopad": "osobní údaje zaměstnance zůstávají v prohlížeči kiosku či sdíleného PC bez jednoduchého vymazání.",
+    "oprava": "tlačítko „Smazat všechna data“ (`localStorage.removeItem(KLIC)` + reset formulářů) a věta o tom v patičce.",
+    "overeni": "reprodukováno 2× (oba běhy) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-08",
+    "zavaznost": "Nízká",
+    "oblast": "1 Pravidla a data",
+    "nazev": "Patička ani README neodkazují na texty předpisů",
+    "kde": "`app.js:418–433` (patička: čísla vyhlášek a paragrafů bez odkazu), `README.md` (odkazy jen na živý web a ukázkové PDF).",
+    "reprodukce": "uživatel chce „ověřit aktuální znění předpisů ve Sbírce zákonů“, jak patička radí, ale nemá kam kliknout; zadání uvádí jako podklady epravo.cz a praceamzda.cz (sekundární).",
+    "dopad": "ztížené ověření; žádný vliv na čísla.",
+    "oprava": "do `rules.json` přidat `zdroje: [{ nazev, url }]` (zakonyprolidi.cz/cs/2025-573, /2026-78, /2026-175, ZP § 157–189) a vypsat je v patičce.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-09",
+    "zavaznost": "Nízká",
+    "oblast": "8 Nasazení a větve",
+    "nazev": "Chybí favicon – chyba 404 v konzoli při každém načtení",
+    "kde": "repozitář bez `favicon.ico` a bez `<link rel=\"icon\">` v `index.html`.",
+    "reprodukce": "lokálně i na https://frankie851.github.io/cestovni-prikaz/ konzole „Failed to load resource: 404“ pro `/favicon.ico` (`uvod-kontrola.json`, `zivy-kontrola.json`); jiné chyby ani chybějící soubory nejsou, živý web odpovídá `main` (SHA-256 všech souborů, `zivy-web-vs-main.txt`), GitHub workflow není (nasazení z větve).",
+    "dopad": "žádný funkční; šum při ladění.",
+    "oprava": "přidat `<link rel=\"icon\" href=\"data:,\">` nebo malé SVG.",
+    "overeni": "reprodukováno 2× (lokálně i živě) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-10",
+    "zavaznost": "Nízká",
+    "oblast": "2 Výpočty",
+    "nazev": "Délka cesty se počítá z „nástěnného“ času, při změně letního času se liší o hodinu",
+    "kde": "`cesty.js:46–51` (`Date.UTC` z místních hodnot – komentář to přiznává).",
+    "reprodukce": "29. 3. 2026 0:30–5:30 → aplikace 5:00 h → 155 Kč, skutečně uplynou 4 h (hodiny přeskočí z 2:00 na 3:00) → 0 Kč; 25. 10. 2026 0:30–5:00 → aplikace 4:30 h → 0 Kč, skutečně 5,5 h → 155 Kč (`prepocet.txt` V54; moje reference počítá stejně, proto „shoda“). Zákon pracuje s dobou trvání cesty, nikoli s rozdílem údajů na hodinách.",
+    "dopad": "dvakrát ročně, jen u cest přes 2:00–3:00 ráno s délkou těsně u hranice pásma; částka 155 Kč.",
+    "oprava": "počítat trvání v reálném čase (lokální `Date` pro rozdíl, kalendářní den podle místního času) nebo aspoň upozornění u dnů změny času.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-11",
+    "zavaznost": "Nízká",
+    "oblast": "2 Výpočty",
+    "nazev": "Rozpětí veřejné sféry a výchozí krácení se berou z posledního roku v `rules.json`, ne z roku cesty",
+    "kde": "`app.js:55–56, 73–81, 91, 108` (`posledniRokSazeb()` pro `min/max/placeholder` polí `sv0–2` a doplnění `kraceniPct`/`stravneVerejna`), zatímco `cesty.js:154–160` kontroluje rozpětí roku cesty.",
+    "reprodukce": "dnes bez dopadu (jediný rok 2026). Po doplnění roku 2027 s jiným rozpětím (např. 160–190 Kč) zadá uživatel 190 Kč a všechny cesty z prosince 2026 skončí chybou „musí být 155–185 Kč“, protože částka se neukládá po letech.",
+    "dopad": "budoucí zmatek při přelomu roku, žádná špatná částka.",
+    "oprava": "určenou výši stravného ve veřejné sféře ukládat po letech, nebo ji validovat a nabízet podle roku rozpracované cesty.",
+    "overeni": "čtení kódu, 2× ověřeno · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "CES-12",
+    "zavaznost": "Nízká",
+    "oblast": "3 Shoda se zadáním",
+    "nazev": "Soukromá sféra neumožňuje vyšší sjednané stravné (§ 163 odst. 3 věta první)",
+    "kde": "`cesty.js:163` (`zakladKc = r.stravne.soukroma[p]` bez možnosti vyšší částky), `index.html:41–50` (jen krácení).",
+    "reprodukce": "zaměstnavatel, který určil stravné 200 Kč pro pásmo 5–12 h, nemůže vyúčtování v aplikaci sestavit; zákon vyšší stravné výslovně připouští („Nesjedná-li zaměstnavatel … vyšší stravné …, přísluší zaměstnanci stravné podle odstavce 1“). Zadání to nežádá, README omezení nezmiňuje.",
+    "dopad": "omezení použitelnosti, nikoli chybná částka (minimum je správně).",
+    "oprava": "volitelné pole „sjednané stravné“ pro soukromou sféru (≥ minimum) nebo věta v README, že aplikace počítá jen zákonné minimum.",
+    "overeni": "čtení kódu a § 163 odst. 3, 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `bb4e5801f25eae6d24d5253474527300cd4d59d1` (5. 11. 2026) · živý web: https://frankie851.github.io/cestovni-prikaz/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 0,
+   "vysoka": 2,
+   "stredni": 4,
+   "nizka": 6
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "VYP",

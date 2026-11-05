@@ -1,5 +1,5 @@
 {
- "datum": "2026-11-05T08:58:16.256Z",
+ "datum": "2026-11-05T09:02:54.879Z",
  "koren": "/tmp/revize/repos/vypoved-2026",
  "scenare": {
   "A-zadani-360": {
@@ -97,7 +97,7 @@
    ],
    "chyby": [
     {
-     "url": "http://127.0.0.1:36995/favicon.ico",
+     "url": "http://127.0.0.1:33867/favicon.ico",
      "stav": 404
     }
    ],
@@ -468,7 +468,7 @@
    ],
    "chyby": [
     {
-     "url": "http://127.0.0.1:36995/favicon.ico",
+     "url": "http://127.0.0.1:33867/favicon.ico",
      "stav": 404
     }
    ],
@@ -658,6 +658,85 @@
      "vek": "40",
      "hruby": "40 000",
      "cisty": "60 000"
+    }
+   }
+  },
+  "B-duvod-h": {
+   "vstup": {
+    "doruceni": "2026-07-10",
+    "kdo": "zamestnavatel",
+    "duvod": "h",
+    "delka": "5",
+    "vek": "40",
+    "hruby": "40 000",
+    "cisty": "30 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "10. 8. 2026",
+    "konecPopis": "Výpovědní doba 1 měsíc, začíná dnem doručení (10. 7. 2026). Den v týdnu: pondělí.",
+    "odstupne": "0 Kč",
+    "odstupnePopis": "Výpověď podle § 52 písm. h) – zákonné odstupné nenáleží.",
+    "podporaPopis": "Žádost podaná 11. 8. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Částka"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "24 000 Kč"
+     ],
+     [
+      "2.",
+      "24 000 Kč"
+     ],
+     [
+      "3.",
+      "15 000 Kč"
+     ],
+     [
+      "4.",
+      "15 000 Kč"
+     ],
+     [
+      "5.",
+      "12 000 Kč"
+     ]
+    ],
+    "celkem": [
+     "90 000 Kč"
+    ],
+    "poznamky": [
+     "Pokud by výpovědní doba skončila v ochranné době (např. pracovní neschopnost, mateřská), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP) – neplatí pro všechny důvody (§ 54 ZP).",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 10. 8. 2026"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 10. 8. 2026"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 13. 8. 2026"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 19. 8. 2026"
+     }
+    ],
+    "datumZadosti": "2026-08-11",
+    "hodnoty": {
+     "delka": "5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
     }
    }
   },
