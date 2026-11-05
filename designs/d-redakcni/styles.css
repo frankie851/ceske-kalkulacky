@@ -19,8 +19,6 @@ body {
   font-optical-sizing: auto;
   font-kerning: normal;
   overflow-wrap: break-word;
-  /* Plynulé velikosti jsou v jednotkách cqi vůči šířce stránky */
-  container-type: inline-size;
 }
 
 h1, h2, h3, h4 {
@@ -253,8 +251,8 @@ strong { font-weight: 650; }
   font-size: 1.0625rem;
   color: var(--ink);
 }
-.masthead--compact { padding-block: var(--space-4) 0; }
-.masthead--compact .masthead__title { font-size: clamp(2.5rem, 1.6rem + 3.6cqi, 4.25rem); }
+.masthead--compact { padding-block: var(--space-4) var(--space-3); }
+.masthead--compact .masthead__title { font-size: var(--fl-1); }
 
 /* ---------- Lišta rubrik + hledání ---------- */
 .sections {
@@ -360,7 +358,7 @@ strong { font-weight: 650; }
 }
 .edition-head h2 {
   margin: 0;
-  font-size: clamp(1.5rem, 1.2rem + 1.2cqi, 2.25rem);
+  font-size: var(--fl-2);
   font-weight: 800;
   font-variation-settings: "opsz" 72;
 }
@@ -398,7 +396,7 @@ strong { font-weight: 650; }
   .front__col > .story:last-child { border-bottom: 1px solid var(--rule-soft); }
   .front__lead > .story { border-bottom: 1px solid var(--rule); padding-bottom: var(--space-6); margin-bottom: var(--space-5); }
 }
-.story h3 { font-size: clamp(1.375rem, 1.2rem + 0.6cqi, 1.75rem); }
+.story h3 { font-size: var(--fl-3); }
 .story h3 a { text-decoration: none; color: var(--ink); }
 .story h3 a:hover { color: var(--accent); }
 .story p:not(.bignum) { font-size: 1.0625rem; line-height: 1.55; }
@@ -426,7 +424,7 @@ strong { font-weight: 650; }
 .source-line a { color: var(--ink-2); }
 
 .story--lead h3 {
-  font-size: clamp(2.25rem, 1.4rem + 3.4cqi, 4.25rem);
+  font-size: var(--fl-4);
   font-weight: 800;
   font-variation-settings: "opsz" 144;
   letter-spacing: -0.03em;
@@ -434,7 +432,7 @@ strong { font-weight: 650; }
   margin-bottom: var(--space-4);
 }
 .story--lead p.story__dek {
-  font-size: clamp(1.1875rem, 1.05rem + 0.5cqi, 1.4375rem);
+  font-size: var(--fl-5);
   line-height: 1.45;
   font-style: italic;
   color: var(--ink);
@@ -470,7 +468,7 @@ strong { font-weight: 650; }
 .factrow__num {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(1.625rem, 1.3rem + 1cqi, 2.25rem);
+  font-size: var(--fl-6);
   font-weight: 700;
   font-variation-settings: "opsz" 96;
   line-height: 1.05;
@@ -526,7 +524,7 @@ strong { font-weight: 650; }
 
 .bignum {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 1.8rem + 1.2cqi, 3rem);
+  font-size: var(--fl-7);
   font-weight: 800;
   font-variation-settings: "opsz" 144;
   line-height: 1;
@@ -617,7 +615,7 @@ strong { font-weight: 650; }
   .debts__inner { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8); }
 }
 .debts h2 { font-size: var(--fs-h2); font-weight: 500; font-style: italic; }
-.debts__lead { font-size: clamp(1.1875rem, 1.05rem + 0.5cqi, 1.4375rem); max-width: 34rem; }
+.debts__lead { font-size: var(--fl-8); max-width: 34rem; }
 .help-link {
   display: inline-flex;
   align-items: center;
@@ -655,13 +653,13 @@ strong { font-weight: 650; }
   .article__grid > .is-wide { grid-column: 2 / span 10; }
   .article__grid > .is-full { grid-column: 1 / -1; }
   .article__grid > .is-head { grid-column: 2 / span 9; }
-  .article__grid > .note { grid-column: 10 / span 3; align-self: start; margin-top: 0.35rem; }
+  .article__grid > .note { grid-column: 10 / span 3; grid-row: span 2; align-self: start; margin-top: 0.35rem; }
 }
 
 .article__head { padding-top: var(--space-6); padding-bottom: var(--space-5); }
 .article__head h1 { font-variation-settings: "opsz" 144; font-weight: 750; margin-bottom: var(--space-4); max-width: 18ch; }
 .perex {
-  font-size: clamp(1.25rem, 1.08rem + 0.7cqi, 1.6875rem);
+  font-size: var(--fl-9);
   line-height: 1.45;
   color: var(--ink);
   max-width: 44rem;
@@ -685,7 +683,7 @@ strong { font-weight: 650; }
 .prose p, .article__grid > p { max-width: var(--measure); }
 .article__grid > h2 {
   margin-top: var(--space-6);
-  font-size: clamp(1.625rem, 1.35rem + 1.1cqi, 2.25rem);
+  font-size: var(--fl-10);
 }
 .article__grid > h2 .h-num {
   display: block;
@@ -746,7 +744,7 @@ strong { font-weight: 650; }
 }
 .pullquote__text {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.08rem + 0.7cqi, 1.75rem);
+  font-size: var(--fl-11);
   font-weight: 400;
   font-style: italic;
   font-variation-settings: "opsz" 48;
@@ -780,7 +778,7 @@ strong { font-weight: 650; }
 .ibox__bar span { display: inline-flex; align-items: center; gap: var(--space-2); }
 .ibox__bar svg { width: 1rem; height: 1rem; }
 .ibox__head { padding: var(--space-5) var(--space-5) 0; }
-.ibox__head h2 { font-size: clamp(1.5rem, 1.25rem + 1cqi, 2.125rem); margin-bottom: var(--space-2); }
+.ibox__head h2 { font-size: var(--fl-12); margin-bottom: var(--space-2); }
 .ibox__head p { font-size: 1.0625rem; color: var(--ink-2); max-width: 44rem; }
 .ibox__body {
   display: grid;
@@ -922,7 +920,7 @@ fieldset.field legend { padding: 0; margin-bottom: var(--space-1); }
 .result h3 { font-family: var(--font-ui); font-size: var(--fs-micro); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); margin-bottom: var(--space-2); }
 .result__num {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 2.2rem + 3cqi, 4.75rem);
+  font-size: var(--fl-13);
   font-weight: 800;
   font-variation-settings: "opsz" 144;
   line-height: 0.95;
@@ -971,7 +969,7 @@ fieldset.field legend { padding: 0; margin-bottom: var(--space-1); }
   border-top: var(--line-bold) solid var(--rule);
 }
 .infographic__kicker { margin-bottom: var(--space-1); }
-.infographic h3 { font-size: clamp(1.375rem, 1.2rem + 0.8cqi, 1.875rem); margin-bottom: var(--space-1); }
+.infographic h3 { font-size: var(--fl-14); margin-bottom: var(--space-1); }
 .infographic__dek { font-size: 1.0625rem; color: var(--ink-2); margin-bottom: var(--space-4); }
 .infographic svg { display: block; width: 100%; max-width: 100%; height: auto; }
 .figure-note {
@@ -1049,7 +1047,7 @@ fieldset.field legend { padding: 0; margin-bottom: var(--space-1); }
   left: 50%;
   transform: translateX(-50%) rotate(-4deg);
   font-family: var(--font-ui);
-  font-size: clamp(0.75rem, 0.6rem + 0.5cqi, 0.9375rem);
+  font-size: var(--fl-15);
   font-weight: 800;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -1076,7 +1074,7 @@ caption {
   text-align: left;
   caption-side: top;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1.1rem + 0.6cqi, 1.625rem);
+  font-size: var(--fl-16);
   font-weight: 650;
   line-height: 1.2;
   padding-bottom: var(--space-3);
@@ -1103,7 +1101,12 @@ tbody th, tbody td {
 }
 tbody th { font-weight: 600; }
 tbody tr:last-child th, tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
-td.r, th.r { text-align: right; white-space: nowrap; padding-right: 0; }
+td.r, th.r { text-align: right; white-space: nowrap; padding-right: 0; padding-left: var(--space-3); }
+thead th.r { white-space: normal; }
+@media (max-width: 560px) {
+  table { font-size: 0.875rem; }
+  thead th { letter-spacing: 0.04em; }
+}
 tr.is-highlight th, tr.is-highlight td { background: var(--accent-soft); }
 tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(--space-3); }
 .table-note { font-family: var(--font-ui); font-size: 0.8125rem; color: var(--ink-2); margin-top: calc(-1 * var(--space-3)); }
@@ -1138,11 +1141,11 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
   padding-top: var(--space-4);
   border-top: var(--line-bold) double var(--rule);
 }
-.endnotes h2 { font-size: var(--fs-h4); font-family: var(--font-ui); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-3); }
+.endnotes h2 { font-size: 0.9375rem; font-family: var(--font-ui); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: var(--space-3); }
 .sources { font-family: var(--font-ui); font-size: var(--fs-ui); line-height: 1.5; padding-left: 1.6em; }
 .sources li { padding-block: var(--space-1); }
 .sources li::marker { font-weight: 700; color: var(--accent); }
-.sources a { display: inline-block; padding-block: 0.15rem; }
+.sources a { padding-block: 0.3rem; }
 
 .related { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
 @media (min-width: 720px) { .related { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--col-gap); } }
@@ -1212,7 +1215,7 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
 /* Výsledek průvodce */
 .verdict {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 1.4rem + 2.4cqi, 3.25rem);
+  font-size: var(--fl-17);
   font-weight: 800;
   font-variation-settings: "opsz" 144;
   line-height: 1;
@@ -1259,7 +1262,7 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
 @media (min-width: 1000px) { .section-head__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
 .section-head__num {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 3rem + 5cqi, 8rem);
+  font-size: var(--fl-18);
   font-weight: 200;
   font-variation-settings: "opsz" 144;
   line-height: 0.85;
@@ -1267,7 +1270,7 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
   display: block;
 }
 .section-head h1 { margin: var(--space-2) 0 0; }
-.section-head__intro { font-size: clamp(1.1875rem, 1.05rem + 0.5cqi, 1.4375rem); line-height: 1.5; margin: 0; }
+.section-head__intro { font-size: var(--fl-19); line-height: 1.5; margin: 0; }
 
 .feature {
   display: grid;
@@ -1277,10 +1280,10 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
   border-bottom: var(--line-bold) double var(--rule);
 }
 @media (min-width: 1000px) { .feature { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } .feature__aside { border-left: 1px solid var(--rule-soft); padding-left: var(--col-gap); } }
-.feature h2 { font-size: clamp(2.125rem, 1.4rem + 2.8cqi, 3.75rem); font-weight: 800; font-variation-settings: "opsz" 144; letter-spacing: -0.03em; line-height: 1; }
+.feature h2 { font-size: var(--fl-20); font-weight: 800; font-variation-settings: "opsz" 144; letter-spacing: -0.03em; line-height: 1; }
 .feature h2 a { color: var(--ink); text-decoration: none; }
 .feature h2 a:hover { color: var(--accent); }
-.feature__perex { font-size: clamp(1.1875rem, 1.05rem + 0.5cqi, 1.4375rem); line-height: 1.45; }
+.feature__perex { font-size: var(--fl-21); line-height: 1.45; }
 .tags { list-style: none; margin: var(--space-3) 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); font-family: var(--font-ui); font-size: var(--fs-micro); }
 .tags li { padding: 0.2rem 0.55rem; border: 1px solid var(--rule-ui); color: var(--ink-2); }
 
@@ -1296,7 +1299,7 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
   border-bottom: 1px solid var(--rule-soft);
 }
 .articles__num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 300; line-height: 0.9; color: var(--accent); font-variant-numeric: lining-nums; }
-.articles h3 { font-size: clamp(1.5rem, 1.3rem + 0.8cqi, 2rem); margin-bottom: var(--space-2); }
+.articles h3 { font-size: var(--fl-22); margin-bottom: var(--space-2); }
 .articles h3 a { text-decoration: none; color: var(--ink); }
 .articles h3 a:hover { color: var(--accent); text-decoration: underline; }
 .articles p { margin-bottom: var(--space-2); }
@@ -1361,7 +1364,7 @@ tr.is-highlight th { box-shadow: inset 4px 0 0 var(--accent); padding-left: var(
 /* ---------- Doplňky průvodce a rubriky ---------- */
 .q-legend {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 1.25rem + 1cqi, 2.125rem);
+  font-size: var(--fl-23);
   font-weight: 650;
   line-height: 1.1;
   color: var(--ink);
