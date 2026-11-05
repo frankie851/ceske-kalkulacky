@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "overeno": "2026-11-05",
+    "zdroje": [
+      {
+        "nazev": "Práce a mzda – vyhláška č. 573/2025 Sb. o změně sazeb základní náhrady a stravného",
+        "url": "https://www.praceamzda.cz/predpisy/573-2025-sb",
+        "poznamka": "Sazby pro rok 2026: náhrada za km, stravné a průměrné ceny pohonných hmot."
+      },
+      {
+        "nazev": "epravo.cz – vyhláška č. 573/2025 Sb.",
+        "url": "https://www.epravo.cz/top/zakony/sbirka-zakonu/sb/2025/573"
+      },
+      {
+        "nazev": "Sbírka zákonů – vyhláška č. 573/2025 Sb. (PDF)",
+        "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_573_PZZ.pdf",
+        "poznamka": "Vyšla 22. 12. 2025. Vyhláška pro rok 2027 se čeká v podobném termínu."
+      }
+    ],
+    "neovereno": [
+      "Sazby pro rok 2026 a změny cen pohonných hmot (vyhlášky 78/2026 Sb. a 175/2026 Sb.) jsme ověřili jen shodou sekundárních zdrojů (MPSV, SME Union, ČMKOS, Money, iustoria, mzdy.cz). Plné znění ve Sbírce zákonů jsme neměli k dispozici.",
+      "Navýšení náhrady za přívěs nepočítáme. Pravidlo se v platném zákoníku práce nepodařilo ověřit.",
+      "Zahraniční pracovní cesty nepočítáme.",
+      "Náhrady pro OSVČ, která jezdí za sebe (stravné podle § 24 zákona o daních z příjmů, auto mimo obchodní majetek, paušální výdaj na dopravu), nepočítáme.",
+      "Případné zvláštní pravidlo pro cestu přes půlnoc (méně než 5 hodin v každém dni) nepoužíváme. Stravné počítáme za každý kalendářní den zvlášť."
+    ]
+  },
+  "2026": {
+    "vyhlaska": "573/2025 Sb.",
+    "novely": [
+      { "cislo": "78/2026 Sb.", "ucinnost": "2026-06-01", "popis": "motorová nafta 44,50 Kč/l" },
+      { "cislo": "175/2026 Sb.", "ucinnost": "2026-10-01", "popis": "benzin 95 41,80 Kč/l" }
+    ],
+    "overeno": "2026-11-05",
+    "poznamkaOvereni": "Ověřeno shodou sekundárních zdrojů (MPSV ppropo, SME Union, ČMKOS, Money, iustoria, mzdy.cz); plné znění ve Sbírce nebylo z prostředí dostupné.",
+    "sazbaKm": { "osobni": 5.90, "jednostope": 1.60 },
+    "stravne": {
+      "soukroma": [155, 236, 370],
+      "verejnaMin": [155, 236, 370],
+      "verejnaMax": [185, 284, 442]
+    },
+    "kraceniMaxPct": [70, 35, 25],
+    "phm": {
+      "benzin95": [ { "od": "2026-01-01", "cena": 34.70 }, { "od": "2026-10-01", "cena": 41.80 } ],
+      "benzin98": [ { "od": "2026-01-01", "cena": 39.00 } ],
+      "nafta":    [ { "od": "2026-01-01", "cena": 34.10 }, { "od": "2026-06-01", "cena": 44.50 } ],
+      "elektrina":[ { "od": "2026-01-01", "cena": 7.20 } ]
+    }
+  },
+  "2027": null
+}

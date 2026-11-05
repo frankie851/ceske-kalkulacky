@@ -1,0 +1,413 @@
+{
+  "meta": {
+    "overeno": "2026-11-05",
+    "zdroje": [
+      {
+        "nazev": "FakturaOnline – Daňové slevy 2027: návrat školkovného a slevy na studenta",
+        "url": "https://www.fakturaonline.cz/podnikateluv-pruvodce/dane/dan-z-prijmu/danove-slevy-2027-navrat-skolkovneho-a-slevy-na-studenta"
+      },
+      {
+        "nazev": "Finanční správa – Sleva na manžela (dotazy a odpovědi)",
+        "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/dotazy-a-odpovedi/dan-z-prijmu-fyzickych-osob/sleva-na-manzela"
+      },
+      {
+        "nazev": "Peníze.cz – Školkovné a sleva na studenta se vrátí. Poslanci schválili změny",
+        "url": "https://www.penize.cz/dan-z-prijmu-fyzickych-osob/493056-skolkovne-a-sleva-na-studenta-se-vrati-poslanci-schvalili-zmeny"
+      },
+      {
+        "nazev": "Portál POHODA – Konsolidační balíček pro rok 2024",
+        "url": "https://portal.pohoda.cz/dane-ucetnictvi-mzdy/ostatni-dane/konsolidacni-ozdravny-balicek-pro-rok-2024"
+      },
+      {
+        "nazev": "Zákon č. 180/2026 Sb., o evidenci tržeb a o změně některých dalších zákonů – úplné znění k 7. 10. 2026 (část druhá: změna zákona o daních z příjmů)",
+        "url": "https://e-sbirka.gov.cz/sb/2026/180"
+      },
+      {
+        "nazev": "Důvodová zpráva k zákonu o evidenci tržeb (EET 2.0)",
+        "url": "https://eet.gov.cz/assets/cs/cmsmedia/pro-vyvojare/Duvodova_zprava_Zakon_o_EET.pdf"
+      },
+      {
+        "nazev": "Finanční správa – Aktuálně k dani z příjmů fyzických osob za zdaňovací období 2025",
+        "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/dotazy-a-odpovedi/dan-z-prijmu-fyzickych-osob/aktualne-k-dani-z-prijmu-fyzickych-osob-2025"
+      },
+      {
+        "nazev": "Finanční správa – Daňové novinky pro rok 2026 (tisková zpráva 5. 1. 2026)",
+        "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+      },
+      {
+        "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů – znění účinné od 1. 1. 2027 (e-Sbírka)",
+        "url": "https://e-sbirka.gov.cz/sb/1992/586/2027-01-01"
+      },
+      {
+        "nazev": "Zákon č. 360/2025 Sb. (změny v souvislosti se zákonem o jednotném měsíčním hlášení zaměstnavatele), čl. VI a čl. XXXIV písm. f)",
+        "url": "https://e-sbirka.gov.cz/sb/2025/360"
+      },
+      {
+        "nazev": "Zákon č. 24/2025 Sb. – prodloužení zvýšeného odpočtu darů na roky 2022–2026",
+        "url": "https://e-sbirka.gov.cz/sb/2025/24"
+      },
+      {
+        "nazev": "Sdělení MPSV č. 171/2026 Sb., o vyhlášení minimální mzdy pro rok 2027",
+        "url": "https://e-sbirka.gov.cz/sb/2026/171"
+      },
+      {
+        "nazev": "Nařízení vlády č. 164/2026 Sb., o koeficientech pro výpočet minimální mzdy v letech 2027 a 2028",
+        "url": "https://e-sbirka.gov.cz/sb/2026/164"
+      },
+      {
+        "nazev": "Nařízení vlády č. 177/2026 Sb. (všeobecný vyměřovací základ za rok 2025 a přepočítací koeficient)",
+        "url": "https://e-sbirka.gov.cz/sb/2026/177"
+      },
+      {
+        "nazev": "Sdělení MPSV č. 184/2026 Sb. – částka rozhodná pro účast na nemocenském pojištění u DPP od 1. 1. 2027 (12 500 Kč)",
+        "url": "https://e-sbirka.gov.cz/sb/2026/184"
+      },
+      {
+        "nazev": "Sdělení MPSV č. 186/2026 Sb. – částka rozhodná pro účast zaměstnanců na nemocenském pojištění od 1. 1. 2027 (5 000 Kč)",
+        "url": "https://e-sbirka.gov.cz/sb/2026/186"
+      },
+      {
+        "nazev": "Zákon č. 280/2009 Sb., daňový řád – § 33 a § 136 (e-Sbírka)",
+        "url": "https://e-sbirka.gov.cz/sb/2009/280"
+      },
+      {
+        "nazev": "Finanční správa – Krátí se čas na podání daňového přiznání. Elektronicky ho lze podat do 4. května 2026",
+        "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/krati-se-cas-na-podani-danoveho-priznani"
+      }
+    ],
+    "neovereno": [
+      "Věk a narození dítěte se zadávají s přesností na měsíc. Měsíc narozenin se počítá jako měsíc, na jehož začátku věková hranice ještě nebyla dovršena.",
+      "Základ daně = hrubá mzda × počet měsíců + další příjmy. Výdaje u ostatních příjmů se neodečítají.",
+      "Úspora z odpočtů je odhad: 15 % z odečtené částky.",
+      "Pořadí dětí (1., 2., 3. a další) odpovídá pořadí v dotazníku.",
+      "U penzijka se předpokládají pravidelné měsíční vklady (odečítá se jen část nad hranici pro nejvyšší státní příspěvek).",
+      "Školkovné u dítěte ve dvou domácnostech: strop je polovina minimální mzdy, nebo částka z písemné dohody.",
+      "Novela penzijního spoření „Lepší penzijko“ nebyla k datu ověření ve Sbírce zákonů, výpočet ji nezohledňuje."
+    ]
+  },
+  "rok": 2027,
+  "overeno": "2026-11-05",
+  "poznamka": "Ověřeno 5. 11. 2026 v primárních zdrojích: konsolidované znění zákona o daních z příjmů účinné od 1. 1. 2027 (e-Sbírka), zákony č. 180/2026 Sb., 360/2025 Sb. a 24/2025 Sb., sdělení MPSV č. 171, 184 a 186/2026 Sb., nařízení vlády č. 164 a 177/2026 Sb. a daňový řád. Doplňkově texty Finanční správy.",
+  "minimalniMzda": {
+    "mesicne": 24900,
+    "zdroje": [
+      "mpsv-171-2026",
+      "nv-164-2026"
+    ],
+    "overeno": "2026-11-05",
+    "poznamka": "Sdělení MPSV č. 171/2026 Sb. (podle nařízení vlády č. 164/2026 Sb. o koeficientech pro roky 2027 a 2028): 24 900 Kč měsíčně, 148,30 Kč za hodinu."
+  },
+  "sazbaDane": {
+    "zakladni": 0.15,
+    "zvysena": 0.23,
+    "hraniceZvysene": 1859868,
+    "zdroje": [
+      "zdp-2027",
+      "nv-177-2026"
+    ],
+    "overeno": "2026-11-05",
+    "poznamka": "§ 16 ZDP: 23 % nad 36násobek průměrné mzdy. Průměrná mzda 2027 = 48 900 Kč × 1,0565 (nařízení vlády č. 177/2026 Sb.) = 51 663 Kč; 36 × 51 663 = 1 859 868 Kč."
+  },
+  "slevy": {
+    "poplatnik": {
+      "nazev": "Sleva na poplatníka",
+      "rocne": 30840,
+      "mesicne": 2570,
+      "zdroje": [
+        "zdp-2027",
+        "fs-dpfo-2025",
+        "fakturaonline-slevy"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false
+    },
+    "manzel": {
+      "nazev": "Sleva na manžela/manželku",
+      "rocne": 24840,
+      "rocneZtpp": 49680,
+      "limitPrijmu": 68000,
+      "vekDitete": 3,
+      "zdroje": [
+        "zdp-2027",
+        "fs-dpfo-2025",
+        "fs-manzel",
+        "fs-novinky-2026"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false,
+      "poznamka": "Jen ročně. 1/12 za každý měsíc, na jehož počátku poplatník žije ve společně hospodařící domácnosti s manželem/manželkou a s vlastním vyživovaným dítětem mladším 3 let (dítě narozené 1. dne měsíce se počítá už za tento měsíc; v měsíci, kdy dítě 1. dne dovrší 3 roky, nárok není). Vlastní příjem manžela/manželky nejvýš 68 000 Kč za rok; nezapočítává se rodičovský příspěvek, dávky státní sociální podpory ani superdávka."
+    },
+    "invalidita12": {
+      "nazev": "Sleva na invaliditu I. nebo II. stupně",
+      "rocne": 2520,
+      "mesicne": 210,
+      "zdroje": [
+        "zdp-2027",
+        "fs-dpfo-2025",
+        "zakon-180-2026"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false,
+      "poznamka": "Částka podle § 35ba odst. 1 ZDP (FS, Aktuálně k DPFO 2025); zákon č. 180/2026 Sb. ji nemění."
+    },
+    "invalidita3": {
+      "nazev": "Sleva na invaliditu III. stupně",
+      "rocne": 5040,
+      "mesicne": 420,
+      "zdroje": [
+        "zdp-2027",
+        "fs-dpfo-2025",
+        "zakon-180-2026"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false,
+      "poznamka": "Částka podle § 35ba odst. 1 ZDP (FS, Aktuálně k DPFO 2025); zákon č. 180/2026 Sb. ji nemění."
+    },
+    "ztpp": {
+      "nazev": "Sleva pro držitele průkazu ZTP/P",
+      "rocne": 16140,
+      "mesicne": 1345,
+      "zdroje": [
+        "zdp-2027",
+        "fs-dpfo-2025",
+        "zakon-180-2026"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false,
+      "poznamka": "Částka podle § 35ba odst. 1 ZDP (FS, Aktuálně k DPFO 2025); zákon č. 180/2026 Sb. ji nemění."
+    },
+    "student": {
+      "nazev": "Sleva na studenta",
+      "rocne": 4020,
+      "mesicne": 335,
+      "vekMax": 26,
+      "vekMaxDoktorske": 28,
+      "zdroje": [
+        "zdp-2027",
+        "zakon-180-2026",
+        "duvodova-180-2026",
+        "penize-student"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": true,
+      "poznamka": "Zákon č. 180/2026 Sb., § 35bc ZDP: 4 020 Kč ročně, 1/12 za každý měsíc, na jehož počátku se poplatník soustavně připravuje na budoucí povolání (ve smyslu zákona o státní sociální podpoře) do dovršení 26 let, v prezenčním doktorském studiu do 28 let. Uplatní se i v měsíčních zálohách (prohlášení + potvrzení školy)."
+    },
+    "skolkovne": {
+      "nazev": "Sleva za umístění dítěte (školkovné)",
+      "stropNaDite": 24900,
+      "zdroje": [
+        "zdp-2027",
+        "zakon-180-2026",
+        "duvodova-180-2026"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": true,
+      "poznamka": "Zákon č. 180/2026 Sb., § 35bd ZDP: prokazatelné výdaje za umístění vyživovaného dítěte v mateřské škole, dětské skupině nebo srovnatelném živnostenském zařízení, nejvýš minimální mzda (24 900 Kč) na dítě. Žije-li dítě ve více domácnostech, strop se dělí počtem domácností, ledaže se poplatníci písemně dohodnou jinak; v jedné domácnosti uplatní slevu jen jeden. Jen v ročním zúčtování nebo přiznání (§ 38h odst. 6), nevytváří bonus. Doklady: potvrzení zařízení, potvrzení jiného poplatníka o výši jím uplatněné slevy, případně dohoda (§ 38l odst. 2 písm. g)."
+    }
+  },
+  "deti": {
+    "nazev": "Daňové zvýhodnění na děti",
+    "mesicne": [
+      1267,
+      1860,
+      2320
+    ],
+    "rocne": [
+      15204,
+      22320,
+      27840
+    ],
+    "nasobekZtpp": 2,
+    "bonusMinRocniPrijemNasobekMinMzdy": 6,
+    "bonusMinMesicniPrijemPodilMinMzdy": 0.5,
+    "zdroje": [
+      "zdp-2027",
+      "mpsv-171-2026",
+      "fs-dpfo-2025"
+    ],
+    "overeno": "2026-11-05",
+    "novinka2027": false,
+    "poznamka": "Částky podle § 35c ZDP (FS, Aktuálně k DPFO 2025), zákon č. 180/2026 Sb. je nemění. Nárok už za měsíc narození dítěte. Bonus jen při příjmu podle § 6 nebo § 7 aspoň 6× minimální mzda (149 400 Kč) a jen pokud činí aspoň 100 Kč; měsíčně při příjmu aspoň poloviny minimální mzdy (12 450 Kč).",
+    "bonusMinKc": 100
+  },
+  "odpocty": {
+    "stari": {
+      "nazev": "Produkty spoření na stáří (penzijko, DIP, životní pojištění, pojištění dlouhodobé péče)",
+      "limit": 48000,
+      "penzijkoNezapocitane": 20400,
+      "zdroje": [
+        "zdp-2027",
+        "fs-dpfo-2025"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false,
+      "poznamka": "§ 15 odst. 6 ZDP ve znění od 1. 1. 2027: společný limit 48 000 Kč; u penzijka jen část měsíčního příspěvku nad částku, od které náleží nejvyšší státní příspěvek (1 700 Kč). Výpočet předpokládá pravidelné měsíční vklady. Novela „Lepší penzijko“ nebyla k 5. 11. 2026 ve Sbírce vyhlášena – při příští aktualizaci zkontrolovat."
+    },
+    "uroky": {
+      "nazev": "Úroky z úvěru na bydlení",
+      "limit": 150000,
+      "limitStareSmlouvy": 300000,
+      "zdroje": [
+        "zdp-2027",
+        "fs-novinky-2026"
+      ],
+      "overeno": "2026-11-05",
+      "novinka2027": false,
+      "poznamka": "150 000 Kč (smlouvy od 1. 1. 2021), 300 000 Kč u starších – limit platí na celou společně hospodařící domácnost. Od 2026 i úroky z úvěru bytového družstva. Při placení jen část roku se limit krátí na dvanáctiny."
+    },
+    "dary": {
+      "nazev": "Dary",
+      "minKc": 1000,
+      "minPodilZakladu": 0.02,
+      "maxPodilZakladu": 0.15,
+      "darKrve": 3000,
+      "zdroje": [
+        "zdp-2027",
+        "zakon-24-2025",
+        "fs-dpfo-2025"
+      ],
+      "overeno": "2026-11-05",
+      "zmena2027": true,
+      "poznamka": "§ 15 odst. 1 ZDP: úhrn aspoň 1 000 Kč nebo nad 2 % základu daně, nejvýš 15 % základu daně. Zvýšený strop 30 % platí podle zákona č. 66/2022 Sb. ve znění zákona č. 24/2025 Sb. jen za roky 2022–2026. Odběr krve 3 000 Kč, odběr orgánu nebo krvetvorných buněk 20 000 Kč."
+    },
+    "odbory": {
+      "nazev": "Odborové příspěvky",
+      "zruseno": true,
+      "zdroje": [
+        "fs-dpfo-2025",
+        "pohoda-konsolidace"
+      ],
+      "overeno": "2026-11-05",
+      "poznamka": "Odpočet zrušen od roku 2024 konsolidačním balíčkem, pro rok 2027 se neobnovuje."
+    },
+    "zkousky": {
+      "nazev": "Úhrady za zkoušky dalšího vzdělávání",
+      "zruseno": true,
+      "zdroje": [
+        "fs-dpfo-2025",
+        "pohoda-konsolidace"
+      ],
+      "overeno": "2026-11-05",
+      "poznamka": "Zrušeno od roku 2024."
+    }
+  },
+  "priznani": {
+    "limitPrijmu": 100000,
+    "limitOstatnichPrijmuZamestnance": 40000,
+    "zdroje": [
+      "zdp-2027",
+      "zakon-180-2026",
+      "zakon-360-2025",
+      "mpsv-184-2026",
+      "mpsv-186-2026"
+    ],
+    "overeno": "2026-11-05",
+    "novinka2027": true,
+    "poznamka": "§ 38g ZDP ve znění od 1. 1. 2027 (zákon č. 180/2026 Sb.): obecná hranice 100 000 Kč, u zaměstnance ostatní příjmy podle § 7 až 10 nad 40 000 Kč. Zákon č. 360/2025 Sb. od 1. 1. 2027 nahrazuje srážkovou daň u malých dohod zálohou (§ 6 odst. 4: DPP pod 12 500 Kč měsíčně – sdělení MPSV č. 184/2026 Sb., ostatní pod 5 000 Kč – sdělení č. 186/2026 Sb., u plátce bez prohlášení). Tyto příjmy se do povinnosti přiznání nezapočítávají (§ 38g odst. 2 a 3) a do přiznání se zahrnují jen dobrovolně, a to všechny (§ 38h odst. 10). Souběžný příjem z jiného zaměstnání mimo § 6 odst. 4 přiznání vyžaduje.",
+    "limitMaleDppMesicne": 12500,
+    "limitMalyRozsahMesicne": 5000
+  },
+  "terminy": {
+    "prohlaseni": {
+      "datum": "2027-02-15",
+      "text": "do 15. 2. 2027 (při nástupu do 30 dnů)"
+    },
+    "rocniZuctovani": {
+      "datum": "2028-02-15",
+      "text": "do 15. 2. 2028"
+    },
+    "priznaniPapir": {
+      "datum": "2028-04-03",
+      "text": "do 3. 4. 2028"
+    },
+    "priznaniElektronicky": {
+      "datum": "2028-05-02",
+      "text": "do 2. 5. 2028 elektronicky"
+    },
+    "priznaniPoradce": {
+      "datum": "2028-07-03",
+      "text": "do 3. 7. 2028 s daňovým poradcem"
+    },
+    "zdroje": [
+      "zdp-2027",
+      "danovy-rad",
+      "fs-priznani-2026"
+    ],
+    "overeno": "2026-11-05",
+    "poznamka": "Prohlášení: § 38k odst. 4 ZDP – do 30 dnů po nástupu a každoročně do 15. 2.; žádost o roční zúčtování: § 38ch odst. 1 – do 15. 2. následujícího roku. Přiznání: § 136 daňového řádu – 3 měsíce, elektronicky 4 měsíce, s poradcem 6 měsíců; konec lhůty o víkendu/svátku se posouvá na pracovní den (§ 33 odst. 4): 1. 4. 2028 je sobota, 1. 5. 2028 svátek, 1. 7. 2028 sobota. Finanční správa stejně počítala termíny za rok 2025 (elektronicky do 4. 5. 2026)."
+  },
+  "zdroje": {
+    "fakturaonline-slevy": {
+      "nazev": "FakturaOnline – Daňové slevy 2027: návrat školkovného a slevy na studenta",
+      "url": "https://www.fakturaonline.cz/podnikateluv-pruvodce/dane/dan-z-prijmu/danove-slevy-2027-navrat-skolkovneho-a-slevy-na-studenta"
+    },
+    "fs-manzel": {
+      "nazev": "Finanční správa – Sleva na manžela (dotazy a odpovědi)",
+      "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/dotazy-a-odpovedi/dan-z-prijmu-fyzickych-osob/sleva-na-manzela"
+    },
+    "penize-student": {
+      "nazev": "Peníze.cz – Školkovné a sleva na studenta se vrátí. Poslanci schválili změny",
+      "url": "https://www.penize.cz/dan-z-prijmu-fyzickych-osob/493056-skolkovne-a-sleva-na-studenta-se-vrati-poslanci-schvalili-zmeny"
+    },
+    "pohoda-konsolidace": {
+      "nazev": "Portál POHODA – Konsolidační balíček pro rok 2024",
+      "url": "https://portal.pohoda.cz/dane-ucetnictvi-mzdy/ostatni-dane/konsolidacni-ozdravny-balicek-pro-rok-2024"
+    },
+    "zakon-180-2026": {
+      "nazev": "Zákon č. 180/2026 Sb., o evidenci tržeb a o změně některých dalších zákonů – úplné znění k 7. 10. 2026 (část druhá: změna zákona o daních z příjmů)",
+      "url": "https://e-sbirka.gov.cz/sb/2026/180"
+    },
+    "duvodova-180-2026": {
+      "nazev": "Důvodová zpráva k zákonu o evidenci tržeb (EET 2.0)",
+      "url": "https://eet.gov.cz/assets/cs/cmsmedia/pro-vyvojare/Duvodova_zprava_Zakon_o_EET.pdf"
+    },
+    "fs-dpfo-2025": {
+      "nazev": "Finanční správa – Aktuálně k dani z příjmů fyzických osob za zdaňovací období 2025",
+      "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/dotazy-a-odpovedi/dan-z-prijmu-fyzickych-osob/aktualne-k-dani-z-prijmu-fyzickych-osob-2025"
+    },
+    "fs-novinky-2026": {
+      "nazev": "Finanční správa – Daňové novinky pro rok 2026 (tisková zpráva 5. 1. 2026)",
+      "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+    },
+    "zdp-2027": {
+      "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů – znění účinné od 1. 1. 2027 (e-Sbírka)",
+      "url": "https://e-sbirka.gov.cz/sb/1992/586/2027-01-01"
+    },
+    "zakon-360-2025": {
+      "nazev": "Zákon č. 360/2025 Sb. (změny v souvislosti se zákonem o jednotném měsíčním hlášení zaměstnavatele), čl. VI a čl. XXXIV písm. f)",
+      "url": "https://e-sbirka.gov.cz/sb/2025/360"
+    },
+    "zakon-24-2025": {
+      "nazev": "Zákon č. 24/2025 Sb. – prodloužení zvýšeného odpočtu darů na roky 2022–2026",
+      "url": "https://e-sbirka.gov.cz/sb/2025/24"
+    },
+    "mpsv-171-2026": {
+      "nazev": "Sdělení MPSV č. 171/2026 Sb., o vyhlášení minimální mzdy pro rok 2027",
+      "url": "https://e-sbirka.gov.cz/sb/2026/171"
+    },
+    "nv-164-2026": {
+      "nazev": "Nařízení vlády č. 164/2026 Sb., o koeficientech pro výpočet minimální mzdy v letech 2027 a 2028",
+      "url": "https://e-sbirka.gov.cz/sb/2026/164"
+    },
+    "nv-177-2026": {
+      "nazev": "Nařízení vlády č. 177/2026 Sb. (všeobecný vyměřovací základ za rok 2025 a přepočítací koeficient)",
+      "url": "https://e-sbirka.gov.cz/sb/2026/177"
+    },
+    "mpsv-184-2026": {
+      "nazev": "Sdělení MPSV č. 184/2026 Sb. – částka rozhodná pro účast na nemocenském pojištění u DPP od 1. 1. 2027 (12 500 Kč)",
+      "url": "https://e-sbirka.gov.cz/sb/2026/184"
+    },
+    "mpsv-186-2026": {
+      "nazev": "Sdělení MPSV č. 186/2026 Sb. – částka rozhodná pro účast zaměstnanců na nemocenském pojištění od 1. 1. 2027 (5 000 Kč)",
+      "url": "https://e-sbirka.gov.cz/sb/2026/186"
+    },
+    "danovy-rad": {
+      "nazev": "Zákon č. 280/2009 Sb., daňový řád – § 33 a § 136 (e-Sbírka)",
+      "url": "https://e-sbirka.gov.cz/sb/2009/280"
+    },
+    "fs-priznani-2026": {
+      "nazev": "Finanční správa – Krátí se čas na podání daňového přiznání. Elektronicky ho lze podat do 4. května 2026",
+      "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/krati-se-cas-na-podani-danoveho-priznani"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "rodicovska",
+  "nazev": "Rodičovská pro celou rodinu",
+  "typ": "kalkulačka",
+  "kategorie": "prace-rodina",
+  "url": "/prace-rodina/rodicovska/",
+  "poradi": 2,
+  "perex": "Rozvrhne mateřskou, otcovskou a rodičovský příspěvek pro oba rodiče a ukáže, kdy se peníze vyčerpají.",
+  "otazka": "Kolik dostaneme na mateřské a rodičovské a kdy nám peníze dojdou?",
+  "stitky": ["mateřská", "otcovská", "rodičovský příspěvek"],
+  "termin": null,
+  "novinka2027": false,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Naplánovat",
+  "souvisi": ["volno-2027", "slevy-2027", "vypoved-2026"]
+}

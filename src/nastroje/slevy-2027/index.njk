@@ -1,0 +1,45 @@
+---
+layout: layouty/nastroj.njk
+nastroj: slevy-2027
+title: Slevy 2027
+description: Krátký průvodce pro zaměstnance – na které slevy na dani, zvýhodnění na děti a odpočty máš v roce 2027 nárok, kolik to dělá a kde si o ně říct.
+permalink: /dane-podnikani/slevy-2027/
+skripty: ['/nastroje/slevy-2027/app.js']
+styly: ['/nastroje/slevy-2027/slevy-2027.css']
+uvod: Projdi deset krátkých kroků. Spočítáme slevy, zvýhodnění na děti a odpočty a řekneme ti, kde a do kdy si o ně říct.
+stitkyNavic: ['10 krátkých kroků']
+---
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set sprite = '/img/sprite.svg' | url -%}
+{%- set plan48 = '/penize/plan48/' | url -%}
+<div class="slevy" id="slevy" data-sprite="{{ sprite }}" data-plan48="{{ plan48 }}">
+  <p class="note slevy-soukromi">{{ ikona('ikona-overeno') }}<span>Odpovědi zůstávají jen v tvém prohlížeči. Nikam se neukládají ani neodesílají.</span></p>
+
+  {#- Sem app.js vykreslí průvodce (jedna skupina otázek na obrazovku) a výsledek. -#}
+  <div id="slevy-app" class="slevy-app"></div>
+
+  {#- Bez JavaScriptu: přehled otázek a ukázkový výsledek. app.js tento blok odstraní. -#}
+  <div id="slevy-bez-js" class="slevy-bez-js">
+    {% call upozorneni({ typ: 'info', titulek: 'Průvodce potřebuje JavaScript' }) %}
+    <p>Bez něj tu najdeš přehled všech otázek a ukázkový výsledek pro studenta, kterému je v roce {{ slevy.rok }} 22 let. Odpovědi se ani se zapnutým JavaScriptem nikam neodesílají.</p>
+    {% endcall %}
+
+    <details class="card slevy-prehled">
+      <summary><span class="h-lg">Přehled všech {{ slevy.kroky.length }} kroků</span> <span class="muted small">(jen pro čtení)</span></summary>
+      <ol class="slevy-otazky">
+        {%- for k in slevy.kroky %}
+        <li>
+          <h3>{{ k.nadpis }}</h3>
+          <p class="hint">{{ k.napoveda }}</p>
+        </li>
+        {%- endfor %}
+      </ol>
+    </details>
+
+    <div class="slevy-ukazka">
+      {{ slevy.vysledek(sprite, plan48) | safe }}
+      {{ slevy.seznam(sprite) | safe }}
+    </div>
+  </div>
+</div>

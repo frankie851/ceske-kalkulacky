@@ -1,0 +1,16 @@
+{
+  "id": "slevy-2027",
+  "nazev": "Slevy 2027",
+  "typ": "průvodce",
+  "kategorie": "dane-podnikani",
+  "url": "/dane-podnikani/slevy-2027/",
+  "poradi": 2,
+  "perex": "Projde tvoji situaci a řekne, které slevy a odpočty si říct u zaměstnavatele. Kolik to dělá měsíčně i ročně a co podepsat do kdy.",
+  "otazka": "Na jaké slevy na dani mám v roce 2027 nárok a kde si o ně říct?",
+  "stitky": ["sleva na studenta", "školkovné", "prohlášení poplatníka", "daňové zvýhodnění na děti", "roční zúčtování"],
+  "termin": "Prohlášení do 15. 2. 2027",
+  "novinka2027": true,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Projít otázky",
+  "souvisi": ["plan48", "rodicovska", "mam-eet"]
+}

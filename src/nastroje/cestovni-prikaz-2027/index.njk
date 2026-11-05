@@ -1,0 +1,165 @@
+---
+layout: layouty/nastroj.njk
+nastroj: cestovni-prikaz-2027
+title: Cestovní příkaz 2027
+description: Náhrada za vlastní auto, pohonné hmoty a stravné na tuzemské pracovní cestě podle vyhlášky a vyúčtování cestovního příkazu k tisku.
+permalink: /dane-podnikani/cestovni-prikaz-2027/
+uvod: Vyplň hlavičku, přidej cesty a máš vyúčtování k tisku. Sazby se vyberou podle data cesty.
+skripty: ['/nastroje/cestovni-prikaz-2027/app.js']
+styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
+---
+{%- from "komponenty/formular.njk" import pole, segmenty, krok, ulozeni -%}
+{%- from "komponenty/vysledky.njk" import vysledek, tabulka, lepiva_lista -%}
+{%- from "komponenty/obsah.njk" import upozorneni -%}
+{%- from "komponenty/ikona.njk" import ikona -%}
+{%- set p = cp -%}
+
+{%- for x in p.rokyBezSazeb %}
+<div class="cp-bez-sazeb">
+  {{ upozorneni({ typ: 'info', titulek: 'Sazby pro rok ' + x.rok + ' zatím nejsou', text: x.text }) }}
+</div>
+{%- endfor %}
+
+<div class="cp">
+<div class="calc-layout">
+  <section class="calc-side" aria-labelledby="cp-udaje">
+    <h2 id="cp-udaje">Cestovní příkaz</h2>
+    <p class="muted small">Hlavička platí pro všechny cesty. Změny se hned přepočítají.</p>
+
+    {%- call krok({ cislo: 1, titulek: 'Hlavička příkazu', shrnuti: p.pole.firma + ' · ' + p.pole.kdo + ' · ' + p.pole.spz, otevreny: true, id: 'krok-hlavicka' }) %}
+    <form id="cp-hlavicka" action="#vysledek" method="get" novalidate>
+      {{ pole({ id: 'firma', label: 'Firma (zaměstnavatel)', hodnota: p.pole.firma, typ: 'text', inputmode: 'text', autocomplete: 'organization', chybaMisto: true }) }}
+      {{ pole({ id: 'kdo', label: 'Kdo jede (jméno a příjmení)', hodnota: p.pole.kdo, typ: 'text', inputmode: 'text', autocomplete: 'name', chybaMisto: true }) }}
+      {{ segmenty({ id: 'sfera', legenda: 'Kde pracovník pracuje', moznosti: p.sfera, napoveda: 'Ve veřejné sféře (stát, kraje, obce, příspěvkové organizace) je stravné v rozpětí a krácení za jídlo pevné.' }) }}
+
+      <fieldset class="cp-trojice" id="cp-kraceni" aria-describedby="cp-kraceni-napoveda">
+        <legend>Krácení stravného za jedno zaplacené jídlo</legend>
+        <p class="hint" id="cp-kraceni-napoveda">Zákon dovoluje nejvýš {{ p.kraceniMax[0] }} / {{ p.kraceniMax[1] }} / {{ p.kraceniMax[2] }} %. Nižší procento musí firma určit předem, před cestou.</p>
+        <div class="cp-trojice-pole">
+          {%- for pasmo in p.pasma %}
+          {{ pole({ id: 'kraceni' + loop.index0, label: pasmo, hodnota: p.pole.kraceni[loop.index0], jednotka: '%', chybaMisto: true }) }}
+          {%- endfor %}
+        </div>
+      </fieldset>
+
+      <fieldset class="cp-trojice" id="cp-verejna" aria-describedby="cp-verejna-napoveda" hidden>
+        <legend>Stravné ve veřejné sféře</legend>
+        <p class="hint" id="cp-verejna-napoveda">Firma určí částku v rozpětí z vyhlášky. Když necháš pole prázdné, počítáme s dolní hranicí. Krácení za jídlo je pevné.</p>
+        <div class="cp-trojice-pole">
+          {%- for pasmo in p.pasma %}
+          {{ pole({ id: 'verejna' + loop.index0, label: pasmo, hodnota: '', jednotka: 'Kč', napoveda: p.verejnaRozpeti[loop.index0], chybaMisto: true }) }}
+          {%- endfor %}
+        </div>
+      </fieldset>
+
+      {{ pole({ id: 'spz', label: 'SPZ auta', hodnota: p.pole.spz, typ: 'text', inputmode: 'text' }) }}
+      {{ pole({ id: 'druh', label: 'Druh vozidla', moznosti: p.druhy }) }}
+      {{ pole({ id: 'palivo', label: 'Palivo', moznosti: p.paliva }) }}
+      {{ pole({ id: 'spotreba', label: 'Spotřeba z technického průkazu', hodnota: p.pole.spotreba, jednotka: p.jednotka + '/100 km', inputmode: 'decimal', napoveda: 'Má-li technický průkaz víc údajů o spotřebě, použij jejich průměr.', chybaMisto: true }) }}
+    </form>
+    <details class="cp-osvc">
+      <summary>Podnikáš jako OSVČ a jezdíš za sebe?</summary>
+      <p class="small">Tady počítáme náhrady pro zaměstnance podle zákoníku práce. Stravné OSVČ podle § 24 zákona o daních z příjmů, auto mimo obchodní majetek ani paušální výdaj na dopravu nepočítáme. Tato pravidla jsme zatím spolehlivě neověřili.</p>
+    </details>
+    {%- endcall %}
+
+    {%- call krok({ cislo: 2, titulek: 'Přidat cestu', shrnuti: 'Datum a čas, trasa, km a jídla', otevreny: true, id: 'krok-cesta' }) %}
+    <form id="cp-cesta" action="#vysledek" method="get" novalidate>
+      <div class="cp-dvojice">
+        {{ pole({ id: 'odjezd', label: 'Odjezd', typ: 'datetime-local', napoveda: 'Datum a čas.', chybaMisto: true }) }}
+        {{ pole({ id: 'navrat', label: 'Návrat', typ: 'datetime-local', napoveda: 'Datum a čas.', chybaMisto: true }) }}
+      </div>
+      <div class="cp-dvojice">
+        {{ pole({ id: 'odkud', label: 'Odkud', typ: 'text', inputmode: 'text', chybaMisto: true }) }}
+        {{ pole({ id: 'kam', label: 'Kam', typ: 'text', inputmode: 'text', chybaMisto: true }) }}
+      </div>
+      {{ pole({ id: 'ucel', label: 'Účel cesty', typ: 'text', inputmode: 'text', chybaMisto: true }) }}
+      {{ pole({ id: 'km', label: 'Ujeté km vlastním autem', jednotka: 'km', inputmode: 'decimal', napoveda: 'Tam i zpět dohromady. Bez auta napiš 0.', chybaMisto: true }) }}
+      {{ pole({ id: 'cena', label: 'Cena paliva z dokladu (nepovinné)', jednotka: 'Kč/' + p.jednotka, inputmode: 'decimal', napoveda: 'Bez dokladu počítáme s průměrnou cenou z vyhlášky.', chybaMisto: true }) }}
+
+      <fieldset class="cp-jidla-obal" aria-describedby="cp-jidla-napoveda">
+        <legend>Jídla, která firma zaplatila</legend>
+        <p class="hint" id="cp-jidla-napoveda">Snídaně, oběd nebo večeře zdarma krátí stravné. Zaškrtni je u každého dne cesty.</p>
+        <div data-cp-jidla><p class="small muted mb-0">Nejdřív vyplň odjezd a návrat. Pak se tu ukážou dny cesty.</p></div>
+      </fieldset>
+
+      <div class="form-actions" data-cp-akce hidden>
+        <button class="btn btn-primary" type="submit" data-cp-pridat>Přidat cestu</button>
+        <button class="btn btn-ghost" type="button" data-cp-zrusit hidden>Zrušit úpravu</button>
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" data-cp-oznameni></p>
+    </form>
+    {%- endcall %}
+  </section>
+
+  <div class="calc-main">
+    {%- set auto -%}
+    <svg class="result-art" viewBox="0 0 140 140" aria-hidden="true" focusable="false">
+      <circle cx="70" cy="70" r="66" class="il-bg"/>
+      <path d="M22 98h96" class="st-ink" stroke-width="3"/>
+      <path d="M30 86V72q0-6 6-8l12-4 12-16q4-4 10-4h22q6 0 10 5l12 15 6 2q6 2 6 8v16z" class="il-apricot"/>
+      <path d="M56 58l9-12q2-2 5-2h10v14z" class="il-paper"/>
+      <path d="M86 44h6q3 0 5 2l9 12H86z" class="il-paper"/>
+      <circle cx="48" cy="88" r="11" class="il-ink"/>
+      <circle cx="48" cy="88" r="4" class="il-cream"/>
+      <circle cx="98" cy="88" r="11" class="il-ink"/>
+      <circle cx="98" cy="88" r="4" class="il-cream"/>
+      <rect x="108" y="70" width="8" height="5" rx="2" class="il-gold"/>
+      <circle cx="104" cy="32" r="14" class="il-sage-d"/>
+      <path d="M97 32l5 5 9-10" class="st-cream" stroke-width="4"/>
+    </svg>
+    {%- endset %}
+    {%- call vysledek({ id: 'vysledek', kicker: 'Sazby podle vyhlášky č. ' + p.vyhlaska, nadpis: 'Náhrady za cesty', cislo: p.cislo, popis: p.popis, vysvetleni: 'Základní náhrada za auto, pohonné hmoty a stravné dohromady. Rozpis po cestách je ve vyúčtování níž.', ilustraceSvg: auto, ukazka: true }) %}
+      <div data-cp-statistiky>{{ p.statistiky | safe }}</div>
+      <p class="sr-only" aria-live="polite" data-cp-vysledek-oznameni></p>
+    {%- endcall %}
+
+    <section class="card" aria-labelledby="cp-seznam-nadpis">
+      <div class="cp-hlava-karty">
+        <h2 id="cp-seznam-nadpis">Tvoje cesty</h2>
+        <button class="btn btn-ghost" type="button" data-cp-nacisto hidden>Začít načisto</button>
+      </div>
+      <p class="muted small" data-cp-ukazka-pozn>Na ukázku tu jsou dvě cesty. Uprav je, smaž, nebo začni načisto.</p>
+      <div data-cp-seznam>{{ p.seznam | safe }}</div>
+    </section>
+
+
+    {{ ulozeni({ id: 'cestovni-prikaz', popis: 'Uloží hlavičku a seznam cest jen v tomto prohlížeči (localStorage). Nikam je neposíláme. Bez kliknutí se nic neukládá.' }) }}
+  </div>
+</div>
+
+<div class="cp-dole stack">
+  <section class="card cp-vyuctovani" id="vyuctovani" aria-labelledby="cp-vyuctovani-nadpis">
+    <div class="cp-hlava-karty">
+      <h2 id="cp-vyuctovani-nadpis">Vyúčtování pracovních cest</h2>
+      <button class="btn btn-primary" type="button" data-cp-tisk hidden>Vytisknout nebo uložit PDF</button>
+    </div>
+    <div data-cp-vyuctovani>{{ p.vyuctovani | safe }}</div>
+    <p class="small muted cp-tisk-poznamka">Orientační výpočet z webu {{ site.nazev }}. Pravidla ověřena {{ p.overeno | datum }}. Zákoník práce § 157, § 158, § 163 a § 176.</p>
+  </section>
+
+  {%- for s in p.sazby %}
+  <section class="card" aria-labelledby="cp-sazby-{{ s.rok }}">
+    <h2 id="cp-sazby-{{ s.rok }}">Sazby pro rok {{ s.rok }}</h2>
+    <p class="muted">Podle <a href="{{ p.urlVyhlasky }}">vyhlášky č. {{ s.vyhlaska }}</a>{% if s.novely.length %} ve znění {{ s.novely | join(', ') }}{% endif %}. Rok sazeb se vybere podle data cesty.</p>
+    {{ tabulka({ caption: 'Základní náhrada za vlastní vozidlo', sloupce: ['Vozidlo', 'Sazba'], radky: s.km, vpravo: [1] }) }}
+    {{ tabulka({ caption: 'Stravné za jeden kalendářní den', popisek: 'stravné ' + s.rok, sloupce: ['Doba cesty v daném dni', 'Soukromá firma (nejméně)', 'Veřejná sféra (rozpětí)', 'Krácení za jedno jídlo'], radky: s.stravne, vpravo: [1, 2, 3], stack: true, poznamka: 'Pod 5 hodin stravné nenáleží.' }) }}
+    {{ tabulka({ caption: 'Průměrné ceny pohonných hmot', popisek: 'ceny pohonných hmot ' + s.rok, sloupce: ['Palivo', 'Cena', 'Platí'], radky: s.phm, vpravo: [1], stack: true, poznamka: 'Použijí se, když cenu nedoložíš dokladem o nákupu.' }) }}
+  </section>
+  {%- endfor %}
+
+  <section class="card" aria-labelledby="cp-pozor-nadpis">
+    <h2 id="cp-pozor-nadpis">Na co si dát pozor</h2>
+    <ul class="watch">
+      <li>{{ ikona('ikona-vystraha') }}<span>Stravné počítáme za každý kalendářní den cesty zvlášť. Den kratší než 5 hodin nemá nárok.</span></li>
+      <li>{{ ikona('ikona-vystraha') }}<span>Nižší krácení za jídlo platí, jen když ho firma určí předem. Jinak se krátí nejvyšší zákonnou sazbou.</span></li>
+      <li>{{ ikona('ikona-vystraha') }}<span>Cenu paliva z dokladu použij jen s dokladem o nákupu. Jinak platí průměrná cena z vyhlášky ke dni odjezdu.</span></li>
+      <li>{{ ikona('ikona-vystraha') }}<span>Vyhláška se sazbami vychází každý rok, obvykle koncem prosince. Cesty v novém roce spočítáš, až ji doplníme.</span></li>
+    </ul>
+  </section>
+</div>
+</div>
+
+<script type="application/json" id="cp-ukazka">{{ p.ukazka | json | safe }}</script>
+
+{{ lepiva_lista({ cislo: p.cislo, popis: 'Náhrady celkem', cil: '#vysledek' }) }}

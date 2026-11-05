@@ -1,0 +1,136 @@
+// E2E: Slevy 2027 – průvodce po krocích nad sestaveným webem (kontrolní příklady ze zadání).
+// Spuštění: npx eleventy && node --test test/e2e/slevy-2027.test.js
+import { test, after, describe } from 'node:test';
+import assert from 'node:assert/strict';
+import { otevri, zavri, text, vypln } from './pomocnik.mjs';
+
+after(zavri);
+
+const CESTA = 'dane-podnikani/slevy-2027/';
+
+async function nadpis(page) {
+  return text(page, '#krok-nadpis');
+}
+async function pokracovat(page) {
+  const pred = await page.$eval('.bar-label', (el) => el.textContent);
+  await page.click('.quiz button[type="submit"]');
+  await page.waitForFunction((p) => !document.querySelector('.bar-label') || document.querySelector('.bar-label').textContent !== p
+    || document.querySelector('.quiz .error-msg'), {}, pred);
+}
+async function zpet(page) {
+  await page.click('.quiz [data-akce="zpet"]');
+}
+/** Klikne na dlaždici (rádio / zaškrtávátko) podle name a hodnoty. */
+async function zvol(page, nazev, hodnota = 'ano') {
+  await page.click(`input[name="${nazev}"][value="${hodnota}"] + label`);
+}
+/** Pokračuje, dokud se neukáže výsledek. */
+async function dokonce(page) {
+  while (!(await page.$('#vysledek'))) await pokracovat(page);
+  return text(page, '#vysledek');
+}
+async function rocne(page, id) {
+  return text(page, `tr[data-polozka="${id}"] td[data-rocne]`);
+}
+
+describe('Slevy 2027 – kontrolní příklady', () => {
+  test('student 22 let po celý rok → sleva na studenta 4 020 Kč', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    assert.equal(await page.$('#slevy-bez-js'), null, 'blok bez JS se má odstranit');
+    await vypln(page, '#narRok', 2005);
+    await pokracovat(page);
+    assert.match(await nadpis(page), /^Studuješ v roce 2027/);
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'krok-nadpis', 'fokus na nadpisu kroku');
+    await zvol(page, 'studuje', 'ano');
+    const karta = await dokonce(page);
+    assert.match(karta, /Až \d/);
+    assert.match(await rocne(page, 'student'), /^4 020 Kč$/);
+    assert.match(await text(page, 'tr[data-polozka="student"] th'), /Novinka 2027/);
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'vysledek-nadpis');
+    assert.match(await text(page, '.slevy-seznam'), /Potvrzení školy/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  test('dvě děti po celý rok → zvýhodnění 37 524 Kč', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1990);
+    await pokracovat(page);
+    await pokracovat(page);
+    assert.match(await nadpis(page), /^Máš děti/);
+    await page.click('[data-akce="pridat"]');
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'ditRok0');
+    await page.click('[data-akce="pridat"]');
+    await vypln(page, '#ditRok0', 2018);
+    await vypln(page, '#ditRok1', 2021);
+    await dokonce(page);
+    assert.match(await rocne(page, 'deti'), /^37 524 Kč$/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  test('školkovné 30 000 Kč → sleva 24 900 Kč', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1990);
+    await pokracovat(page);
+    await pokracovat(page);
+    await page.click('[data-akce="pridat"]');
+    await vypln(page, '#ditRok0', 2023);
+    await pokracovat(page);
+    assert.match(await nadpis(page), /^Chodí některé dítě do školky/);
+    await zvol(page, 'skolka0');
+    await vypln(page, '#skolne0', '30 000');
+    await dokonce(page);
+    assert.match(await rocne(page, 'skolkovne'), /^24 900 Kč$/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+});
+
+describe('Slevy 2027 – ovládání', () => {
+  test('chybějící rok narození ukáže chybu u pole', async () => {
+    const { page } = await otevri(CESTA);
+    await pokracovat(page);
+    assert.equal(await page.$eval('#narRok', (el) => el.getAttribute('aria-invalid')), 'true');
+    assert.match(await text(page, '#narRok-chyba'), /Zadej rok narození/);
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'narRok');
+    await page.close();
+  });
+
+  test('Zpět zachová odpovědi', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1995);
+    await vypln(page, '#mzda', 32000);
+    await pokracovat(page);
+    await zvol(page, 'studuje', 'ano');
+    await pokracovat(page);
+    await page.click('[data-akce="pridat"]');
+    await vypln(page, '#ditRok0', 2020);
+    await zpet(page);
+    assert.equal(await page.$eval('input[name="studuje"][value="ano"]', (el) => el.checked), true);
+    await zpet(page);
+    assert.equal(await page.$eval('#narRok', (el) => el.value), '1995');
+    assert.equal(await page.$eval('#mzda', (el) => el.value), '32000');
+    await pokracovat(page);
+    await pokracovat(page);
+    assert.equal(await page.$eval('#ditRok0', (el) => el.value), '2020');
+    // Z výsledku zpět k poslední otázce a znovu na výsledek
+    await dokonce(page);
+    await page.click('[data-akce="upravit"]');
+    assert.match(await nadpis(page), /^Máš i jiné příjmy/);
+    await dokonce(page);
+    assert.match(await rocne(page, 'deti'), /Kč$/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  test('bez JavaScriptu je vidět ukázkový výsledek', async () => {
+    const { page } = await otevri(CESTA, { js: false });
+    const ukazka = await page.$('[data-ukazka]');
+    assert.ok(ukazka, 'chybí [data-ukazka]');
+    assert.ok(await ukazka.isVisible());
+    assert.match(await text(page, '[data-ukazka]'), /Ukázkový výsledek/);
+    assert.match(await rocne(page, 'student'), /^4 020 Kč$/);
+    await page.close();
+  });
+});

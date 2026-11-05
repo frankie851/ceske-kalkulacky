@@ -1,0 +1,16 @@
+{
+  "id": "prijimacky",
+  "nazev": "Přijímačky bez paniky",
+  "typ": "průvodce",
+  "kategorie": "prace-rodina",
+  "url": "/prace-rodina/prijimacky/",
+  "poradi": 3,
+  "perex": "Jak systém rozřazuje uchazeče na střední školy a co dělá pořadí škol na přihlášce.",
+  "otazka": "Na kterou střední se dítě dostane a záleží na tom, v jakém pořadí školy napíše?",
+  "stitky": ["přihláška", "priority", "CERMAT"],
+  "termin": "Přihlášky 1.–22. 2. 2027",
+  "novinka2027": false,
+  "ilustrace": "nastroj-obecny",
+  "cta": "Vyzkoušet simulátor",
+  "souvisi": ["rodicovska", "volno-2027", "slevy-2027"]
+}
