@@ -104,7 +104,7 @@ a důvody k nim.
 ## Jak to spustit znovu
 
 ```bash
-cd tools/kontroly && npm ci && cd ../..
+npm ci                                      # od 2. fáze jsou závislosti v kořeni repozitáře
 node tools/kontroly/kontrola.mjs            # kontroly všech stránek
 node tools/kontroly/snimky.mjs --webp       # snímky + WebP výřezy pro porovnání
 node tools/kontroly/rozcestnik.mjs          # designs/index.html z designs/_obsah/varianty.json
