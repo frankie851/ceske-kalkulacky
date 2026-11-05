@@ -150,7 +150,7 @@ function renderChart(input) {
   const rate = formatPercent(fr.rate);
   const present = SERIES.filter((sr) => pts.some((p) => p[sr.key] !== null));
 
-  const plot = h('div', { class: 'osvc-plot' });
+  const plot = h('div', { class: 'osvc-plot', tabindex: '0', role: 'group', 'aria-label': tx.chartHelp });
   const tooltip = h('div', { class: 'osvc-tooltip', hidden: true, role: 'status' });
   plot.append(tooltip);
 
@@ -201,7 +201,7 @@ function drawSvg(plot, tooltip, pts, be, input, present) {
   const L = o.chart.layout;
   const ch = o.chart;
   plot.querySelector('svg')?.remove();
-  const width = Math.max(plot.clientWidth, L.minWidth);
+  const width = plot.clientWidth || L.minWidth;
   const height = width < L.narrowWidth ? L.heightNarrow : L.height;
   const left = L.marginLeft;
   const narrow = width < L.narrowWidth;
@@ -277,10 +277,8 @@ function drawSvg(plot, tooltip, pts, be, input, present) {
   const cross = s('line', { y1: top, y2: bottom, class: 'osvc-zamerovac', visibility: 'hidden' });
   const dots = present.map((sr) => s('circle', { r: L.markerRadius, class: `graf-bod ${sr.cls}`, visibility: 'hidden' }));
   svg.append(cross, ...dots);
-  const overlay = s('rect', {
-    x: left, y: top, width: right - left, height: bottom - top, class: 'osvc-overlay', tabindex: 0,
-    'aria-label': tx.chartHelp,
-  });
+  // Myš a dotyk na průhledném obdélníku, klávesnice na obalu grafu (role group, šipky)
+  const overlay = s('rect', { x: left, y: top, width: right - left, height: bottom - top, class: 'osvc-overlay' });
   svg.append(overlay);
 
   let idx = -1;
@@ -321,14 +319,15 @@ function drawSvg(plot, tooltip, pts, be, input, present) {
   overlay.addEventListener('pointermove', (e) => show(nearest(e.clientX)));
   overlay.addEventListener('pointerdown', (e) => show(nearest(e.clientX)));
   overlay.addEventListener('pointerleave', hide);
-  overlay.addEventListener('blur', hide);
-  overlay.addEventListener('focus', () => show(nearest(svg.getBoundingClientRect().left + x(input.income))));
-  overlay.addEventListener('keydown', (e) => {
+  // Obal grafu se nepřekresluje, proto obsluhy jako vlastnosti (při překreslení se nahradí)
+  plot.onblur = hide;
+  plot.onfocus = () => show(nearest(svg.getBoundingClientRect().left + x(input.income)));
+  plot.onkeydown = (e) => {
     const jump = Math.max(1, Math.round(pts.length / (ch.max / ch.tableStep)));
     if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + jump); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - jump); }
     if (e.key === 'Escape') hide();
-  });
+  };
 
   plot.prepend(svg);
 }

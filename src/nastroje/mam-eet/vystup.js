@@ -17,7 +17,6 @@ export const TEXTY = {
   mustPopis: 'od tohoto dne evidovat tržby v EET 2.0',
   zdroj: 'Zdroj',
   startBadge: 'Start EET 2.0: {datum}',
-  seznamNadpis: 'Co udělat a do kdy',
   kalkUvod: 'Kolik tě která cesta stojí za rok.',
   kalkCaption: 'Náklady za rok podle zvolené cesty',
   kalkMoznost: 'Možnost',
@@ -235,7 +234,7 @@ export function seznamHtml(m, rules, { sprite, idPrefix = 'ukol' } = {}) {
   const skupiny = m.seznam.map((g) => `${g.title ? `<h3>${esc(g.title)}</h3>` : ''}<ul class="checklist">${g.items.map(polozka).join('')}</ul>`).join('');
   return `<section class="card eet-seznam" aria-labelledby="${idPrefix}-nadpis">
   <div class="card-head">
-    <h2 id="${idPrefix}-nadpis">${esc(TEXTY.seznamNadpis)}</h2>
+    <h2 id="${idPrefix}-nadpis">${esc(c.title)}</h2>
     <span class="badge badge-new">${esc(t('startBadge', { datum: datum(rules.launch.date) }))}</span>
   </div>
   ${m.verdikt === 'not' ? '' : `<p class="muted">${esc(fill(c.intro, vars))}</p>`}

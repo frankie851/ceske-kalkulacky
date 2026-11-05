@@ -553,7 +553,7 @@
   .calc-side { min-width: 0; }
   @media (min-width: 1040px) {
     .calc-layout { grid-template-columns: 400px minmax(0, 1fr); align-items: start; }
-    .calc-side { position: sticky; top: var(--sp-4); }
+    /* Formulář nelepí: u dlouhých formulářů by schoval tlačítko (výsledek ukazuje lepivá lišta na mobilu). */
   }
   .calc-side h2, .calc-main > section > h2 { font-size: var(--fs-xl); }
   .calc-main { display: grid; gap: var(--sp-6); min-width: 0; }

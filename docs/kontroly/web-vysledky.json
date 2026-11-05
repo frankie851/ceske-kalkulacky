@@ -1,8 +1,8 @@
 {
-  "datum": "2026-11-05T08:23:36.343Z",
-  "prefix": "/",
+  "datum": "2026-11-05T08:45:28.413Z",
+  "prefix": "/ceske-kalkulacky/",
   "stranek": 17,
-  "chyb": 4,
+  "chyb": 0,
   "stranky": [
     {
       "stranka": "/",
@@ -26,15 +26,11 @@
     },
     {
       "stranka": "/dane-podnikani/mam-eet/",
-      "chyby": [
-        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
-      ]
+      "chyby": []
     },
     {
       "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
-      "chyby": [
-        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
-      ]
+      "chyby": []
     },
     {
       "stranka": "/dluhy/",
@@ -58,15 +54,11 @@
     },
     {
       "stranka": "/penize/penzijko-kompas/",
-      "chyby": [
-        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
-      ]
+      "chyby": []
     },
     {
       "stranka": "/penize/plan48/",
-      "chyby": [
-        "bez JS: nástroj neukazuje ukázkový výsledek ([data-ukazka])"
-      ]
+      "chyby": []
     },
     {
       "stranka": "/prace-rodina/",

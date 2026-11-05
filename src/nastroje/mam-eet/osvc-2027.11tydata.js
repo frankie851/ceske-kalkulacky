@@ -5,7 +5,7 @@ import { fill, formatDate } from './rules.js';
 import { compare, series, chartIncomes, breakEven, osvcVars, formatPercent } from './osvc.js';
 import { modelOsvc, vysledekOsvcHtml, prvniPlatba, stavyOvereni } from './vystup.js';
 import { caroveGrafy, tabulkaDat } from '../../js/graf.js';
-import { kc } from '../../js/format.js';
+import { kc, cislo } from '../../js/format.js';
 
 const rules = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 const o = rules.osvc2027;
@@ -52,7 +52,7 @@ export default {
     uvod: fill(tx.intro, vars),
     soukromi: tx.panelPrivacy,
     pole: {
-      prijmy: { label: fill(tx.fieldIncome, vars), hodnota: String(vstup.income), napoveda: tx.fieldIncomeHelp, jednotka: rules.meta.currency },
+      prijmy: { label: fill(tx.fieldIncome, vars), hodnota: cislo(vstup.income), napoveda: tx.fieldIncomeHelp, jednotka: rules.meta.currency },
       pausal: {
         label: tx.fieldFlatRate, napoveda: tx.fieldFlatRateHelp,
         moznosti: o.expenseFlatRates.map((f) => ({ hodnota: f.id, text: f.label, vybrano: vybrano(f.id, vstup.flatRateId) })),

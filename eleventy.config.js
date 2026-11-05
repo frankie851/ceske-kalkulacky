@@ -73,7 +73,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('najdiNastroj', (nastroje, id) => {
     for (const n of nastroje || []) {
       if (n.id === id) return n;
-      for (const z of n.zalozky || []) if (z.id === id) return { ...n, ...z, rodic: n.id };
+      for (const z of n.zalozky || []) if (z.id === id) return { ...n, cta: undefined, otazka: undefined, ...z, rodic: n.id };
     }
     return null;
   });
