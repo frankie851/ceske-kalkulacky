@@ -1740,12 +1740,166 @@
   "kod": "VYP",
   "repo": "vypoved-2026",
   "nazev": "Výpověď 2026",
-  "zprava": false,
-  "verdikt": null,
-  "pocty": {},
-  "semafor": {},
-  "nalezy": [],
-  "hlavicka": ""
+  "zprava": true,
+  "verdikt": "Opravit před sloučením",
+  "pocty": {
+   "kriticka": 1,
+   "vysoka": 1,
+   "stredni": 3,
+   "nizka": 4
+  },
+  "semafor": {
+   "1 Pravidla a data": {
+    "stav": "🔴",
+    "nalez": "VYP-01 (§ 52 d)/e), § 67 odst. 3, § 271ca); dále VYP-02, VYP-05, VYP-08"
+   },
+   "2 Výpočty": {
+    "stav": "🔴",
+    "nalez": "VYP-01"
+   },
+   "3 Shoda se zadáním": {
+    "stav": "🟡",
+    "nalez": "— (zadání samo pomíjí § 67 odst. 3 a § 271ca – chyba v zadání; porovnání s kalkulačkou ÚP nedoloženo)"
+   },
+   "4 Testy": {
+    "stav": "🟡",
+    "nalez": "VYP-04"
+   },
+   "5 Mobil a přístupnost": {
+    "stav": "🟡",
+    "nalez": "VYP-03 („40.000“ → 40 Kč bez hlášky)"
+   },
+   "6 Texty a citlivá témata": {
+    "stav": "🔴",
+    "nalez": "VYP-02 („Způsob skončení … výši podpory neovlivňují“ u § 52 h))"
+   },
+   "7 Soukromí a bezpečnost": {
+    "stav": "🟢",
+    "nalez": "—"
+   },
+   "8 Nasazení a větve": {
+    "stav": "🟢",
+    "nalez": "— (VYP-09 jen kosmetika)"
+   }
+  },
+  "nalezy": [
+   {
+    "id": "VYP-01",
+    "zavaznost": "Kritická",
+    "oblast": "Pravidla a data / Výpočty",
+    "nazev": "Zdravotní výpovědní důvody podle znění do 31. 5. 2025: 12× „odstupné“ u § 52 písm. d), 0 Kč u písm. e), náhrada § 271ca vydávána za odstupné",
+    "kde": "`rules.json:26–28` (`duvodUraz: \"d\"`, `nasobekUraz: 12`, `zdroj: \"§ 67 odst. 1\"`), `vypoved.js:153–158` a `:161–163`, `index.html:42–43` (popisky d) „pracovní úraz nebo nemoc z povolání“, e) „jiné důvody“), `app.js:44` (nápověda u dohody), `README.md:30`, `vypoved.test.js:109–123`",
+    "reprodukce": "(a) modul `odstupne({kdo:'zamestnavatel', duvod:'d', delkaLet:5, prumernyHruby:40000})` → očekáváno 0 Kč odstupného: od 1. 6. 2025 (120/2025 Sb. čl. I bod 9) je písm. d) jednotný důvod „pozbyl … dlouhodobě způsobilost konat dále dosavadní práci“ bez rozlišení příčiny; odstupné přísluší jen u § 52 a)–c) (§ 67 odst. 1) a 12× jen u písm. e) (§ 67 odst. 3); u písm. d) náleží 12× pouze jako jednorázová náhrada podle § 271ca, a to jen je-li příčinou pracovní úraz, nemoc z povolání nebo její ohrožení (https://www.zakonyprolidi.cz/cs/2006-262#p67, #p271ca) → skutečnost 480 000 Kč, text „Pracovní úraz nebo nemoc z povolání (§ 52 písm. d) – nejméně 12× průměrný výdělek“. (b) `duvod:'e'` (výpověď i dohoda), 40 000 Kč → očekáváno 480 000 Kč (§ 67 odst. 3) → skutečnost 0 Kč „zákonné odstupné nenáleží“. (c) Obrazovka: doručení 31. 12. 2026, důvod d), 5 let, 40 000 Kč → „Odstupné (zákonné minimum) 480 000 Kč“ (`duvod-d-360.png`); po přepnutí na e) „0 Kč“ (`prohlizec.json` B-duvod-d, B-duvod-e). Přepočet O11–O14 v `prepocet.txt`.",
+    "dopad": "Zaměstnanec s výpovědí podle § 52 písm. d) z běžných zdravotních důvodů (po 1. 6. 2025 nejčastější zdravotní důvod) uvidí nárok na 12 platů, který nemá, a může podle něj odmítnout dohodu nebo plánovat finance; zaměstnanec s výpovědí podle písm. e) uvidí 0 Kč a o 12násobek si neřekne; u úrazu je plnění označeno špatným titulem (jiný režim vracení podle § 68, jiný vztah k § 77 odst. 2).",
+    "oprava": "Popisky v `index.html`: d) „Zdraví: podle lékařského posudku nemohu dlouhodobě dělat svou práci – § 52 písm. d)“, e) „Dosáhl/a jsem nejvyšší přípustné expozice – § 52 písm. e)“. U d) doplnit přepínač příčiny (pracovní úraz / nemoc z povolání / její ohrožení → zobrazit zvlášť „Jednorázová náhrada podle § 271ca: 12× průměrný měsíční výdělek“, odstupné 0; jinak 0 Kč). V `rules.json` nahradit `duvodUraz` za `duvodExpozice: \"e\"` (§ 67 odst. 3) a `nahrada271ca: {duvod:\"d\", nasobek:12}`, opravit `zdroj`; upravit `odstupne()` a texty v `app.js:44`, README a testy 13–14 (viz VYP-04).",
+    "overeni": "reprodukováno 2× (modul: 2 běhy `porovnani`; obrazovka: 2 běhy `prohlizec`) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-02",
+    "zavaznost": "Vysoká",
+    "oblast": "Texty a citlivá témata / Pravidla a data",
+    "nazev": "U výpovědi podle § 52 písm. h) (a g) pro zvlášť hrubé porušení) aplikace ukáže plnou podporu a tvrdí, že způsob skončení podporu neovlivňuje",
+    "kde": "`app.js:189` („Způsob skončení ani odstupné výši podpory neovlivňují.“), `vypoved.js:225–233` (`podpora()` důvod skončení vůbec nedostává), `index.html:45–46`",
+    "reprodukce": "doručení 10. 7. 2026, zaměstnavatel, důvod h), věk 40, čistý 30 000 Kč → očekáváno upozornění, že podle § 39 odst. 2 písm. b) ZoZ nárok na podporu nemá uchazeč, s nímž byl v posledních 6 měsících skončen pracovněprávní vztah pro porušení jiné povinnosti podle § 301a ZP zvlášť hrubým způsobem (pozn. 79 = § 52 písm. h) ZP; https://www.zakonyprolidi.cz/cs/2004-435#p39, 2. zdroj zákon č. 365/2011 Sb.), a obdobně u písm. g), šlo-li o porušení zvlášť hrubým způsobem (§ 39 odst. 2 písm. a)) → skutečnost: tabulka 24 000, 24 000, 15 000, 15 000, 12 000 Kč, „Celkem 90 000 Kč“, poznámka „Způsob skončení ani odstupné výši podpory neovlivňují“ (`duvod-h-360.png`, `prohlizec.json` B-duvod-h).",
+    "dopad": "Člověk propuštěný pro zvlášť hrubé porušení počítá s 90 000 Kč podpory, kterou mu úřad práce nepřizná; věta o způsobu skončení je u citlivého tématu zavádějící (platí jen pro zrušení 45% sazby a § 44a).",
+    "oprava": "U důvodu h) nahradit tabulku podpory upozorněním „Při skončení pro zvlášť hrubé porušení povinností v posledních 6 měsících nárok na podporu nevzniká (§ 39 odst. 2 ZoZ)“; u g) přidat dotaz „šlo o zvlášť hrubé porušení (důvod pro okamžité zrušení)?“ nebo aspoň upozornění; větu v `app.js:189` přeformulovat („Výpověď dohodou ani odstupné podporu nesnižují ani neodkládají; výjimkou je skončení pro zvlášť hrubé porušení povinností – § 39 odst. 2 ZoZ“); doplnit § 39 odst. 1 písm. c) (poživatel starobního důchodu).",
+    "overeni": "reprodukováno 2× (2 běhy `prohlizec`, modul důvod nezná – strukturálně) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-03",
+    "zavaznost": "Střední",
+    "oblast": "Mobil a přístupnost / Výpočty (UI)",
+    "nazev": "„40.000“ se přečte jako 40 Kč – tečka je vždy desetinná, bez hlášky",
+    "kde": "`app.js:20–24` (`cislo()`: odstraní mezery, čárku změní na tečku, regex `^\\d+(\\.\\d+)?$`), pole `hruby`, `cisty`, `delka` (`index.html:68–82`)",
+    "reprodukce": "hrubý „40.000“, čistý „30.000“, 1,5 roku, § 52 c), věk 40 → očekáváno 40 000 / 30 000 Kč (český zápis s tečkou jako oddělovačem tisíců), nebo hláška → skutečnost: „Odstupné 80 Kč“, podpora „24 Kč“, „Počítáno z čistého výdělku 30 Kč“, žádná hláška; stejně v cs-CZ i en-US (`prohlizec.json` E-cisla-cs-CZ / E-cisla-en-US, „tecka tisice 40.000“). Ostatní zápisy („40 000“, NBSP, „40000,50“, „1.5“) fungují.",
+    "dopad": "Nesmyslně nízké částky bez vysvětlení; uživatel zápis s tečkou v tisících používá běžně (výplatní pásky, banky).",
+    "oprava": "V `cislo()` považovat tečku následovanou přesně třemi číslicemi (a bez čárky) za oddělovač tisíců, nebo zápis s tečkou odmítnout hláškou „Desetinnou část oddělte čárkou“; přidat kontrolu rozumného rozsahu výdělku (např. < 1 000 Kč → upozornění).",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-04",
+    "zavaznost": "Střední",
+    "oblast": "Testy",
+    "nazev": "Testy zakonzervují chybu § 52 d)/e); chybějící testy parsování vstupu a hraničních stavů UI",
+    "kde": "`vypoved.test.js:109–113` (test „§ 52 písm. d) (pracovní úraz) → 12×“ očekává 480 000), `:115–123` (očekává 0 u písm. e)); `app.js:20–24` (`cislo()` mimo testovatelný modul); chybí test pro § 39 odst. 2 ZoZ (VYP-02), pro „40.000“ (VYP-03), pro věk 52/57 ve spojení se stropem a pro `konecDohody < doruceni` (jen v UI)",
+    "reprodukce": "`npm test` → 24/24 prošlo (`testy.txt`), přestože modul dává u d) 480 000 Kč a u e) 0 Kč v rozporu s § 67 odst. 3 a § 271ca → testy ověřují špatnou hodnotu.",
+    "dopad": "Nepřímý – zelené testy budí dojem ověřeného výpočtu a oprava VYP-01 bez změny testů selže.",
+    "oprava": "Testy 13–14 přepsat (d) obecný → 0; d) úraz → náhrada § 271ca 12×; e) → odstupné 12×); přesunout `cislo()` do `vypoved.js` a otestovat („1 500“, „1500,50“, „40.000“, „-1“, „abc“); přidat test § 39 odst. 2 a test pro `konecDohody < doruceni`.",
+    "overeni": "reprodukováno 2× (2 běhy porovnání) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-05",
+    "zavaznost": "Střední",
+    "oblast": "Pravidla a data / Texty",
+    "nazev": "Chybí § 67 odst. 2 – započtení předchozího pracovního poměru u téhož zaměstnavatele",
+    "kde": "`index.html:67–69` (nápověda „Ke dni skončení. Půl roku = 0,5.“), `rules.json:19–29`, `README.md`",
+    "reprodukce": "uživatel s PP 0,8 roku, který u téhož zaměstnavatele pracoval do 3 měsíců před nástupem další 2 roky, zadá „0,8“ → očekáváno: nápověda, že se započítává i předchozí PP, skončil-li nejvýše 6 měsíců před vznikem nového (ZP § 67 odst. 2, https://www.zakonyprolidi.cz/cs/2006-262#p67; PR-09), tedy 3× → skutečnost 1× (30 000 Kč místo 90 000 Kč); aplikace nikde § 67 odst. 2 nezmiňuje (`grep` v repu bez výsledku).",
+    "dopad": "Podhodnocené odstupné u lidí s opakovaným zaměstnáním u téhož zaměstnavatele (agenturní, sezonní, návrat po krátké pauze).",
+    "oprava": "Do nápovědy pole délky: „Počítejte i předchozí pracovní poměr u stejného zaměstnavatele, pokud mezi nimi nebyla pauza delší než 6 měsíců (§ 67 odst. 2 ZP).“ a totéž do README/rules.json.",
+    "overeni": "reprodukováno 2× (grep, obrazovka) · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-06",
+    "zavaznost": "Nízká",
+    "oblast": "Texty a citlivá témata",
+    "nazev": "Drobné nepřesnosti textů (ochranná doba, zkušební doba, „praxe úřadu práce“)",
+    "kde": "`app.js:187` („pracovní poměr se prodlouží o zbytek výpovědní doby“), `app.js:184` („dosavadní praxe úřadu práce“ bez zdroje), `index.html:62` a `vypoved.js:131` (zrušení ve zkušební době vždy = den doručení, bez možnosti zadat pozdější den; § 66 odst. 1 – zákaz zrušení v prvních 14 dnech DPN – nezmíněn), `app.js:189` (poživatel starobního důchodu nemá nárok – § 39 odst. 1 písm. c) ZoZ – chybí)",
+    "reprodukce": "§ 53 odst. 2 ZP: „ochranná doba se do výpovědní doby nezapočítává; pracovní poměr skončí teprve uplynutím zbývající části výpovědní doby po skončení ochranné doby“ – prodloužení je o délku ochranné doby, ne „o zbytek výpovědní doby“; hraniční věk 52/57 opírá aplikace o „praxi ÚP“, doložitelná je jen tabulka ÚP „52–57 let → 8 měsíců“ (`zdroje.txt`).",
+    "dopad": "Mate, ke škodě nevede (patička i poznámka správně odkazují na § 53/§ 54).",
+    "oprava": "Přeformulovat poznámku k § 53 („konec se posune o dobu, po kterou trvala ochranná doba“); u hraničního věku citovat tabulku ÚP; u zkušební doby umožnit zadat pozdější den z oznámení a zmínit 14 dnů DPN; doplnit starobní důchod k podmínkám podpory.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-07",
+    "zavaznost": "Nízká",
+    "oblast": "Výpočty",
+    "nazev": "Doručení před 1. 6. 2025 a žádost před koncem pracovního poměru nejsou hlídány",
+    "kde": "`vypoved.js:129–137` (`konecPomeru` bez kontroly data), `app.js:124–135` (validace `datumZadosti` jen na prázdnost)",
+    "reprodukce": "doručení 15. 5. 2025, zaměstnanec → aplikace 15. 7. 2025 podle § 51 ve znění od 1. 6. 2025 (120/2025 Sb. čl. I bod 8 nahradil § 51 celý), bez upozornění, že pro dřívější doručení platilo jiné znění (`prepocet.txt` V12); žádost 15. 12. 2026 u konce 28. 2. 2027 → sada 2026 bez upozornění, že žádost nemůže předcházet skončení.",
+    "dopad": "Okrajové (v listopadu 2026 už takové PP skončily; žádost před koncem je chyba zadání).",
+    "oprava": "Hláška pro `doruceni < 2025-06-01` („Kalkulačka počítá výpovědi doručené od 1. 6. 2025“) a pro `datumZadosti <= konec`.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-08",
+    "zavaznost": "Nízká",
+    "oblast": "Pravidla a data",
+    "nazev": "Zdroje jen sekundární; `rules.json` cituje „§ 67 odst. 1“ i pro 12násobek",
+    "kde": "`rules.json:84–91` (epravo místo Sbírky/zakonyprolidi pro 120/2025 Sb.; žádný odkaz na text ZP § 51/52/67/271ca, ZoZ § 43/50 ani na sdělení MPSV č. 537/2025 Sb., z něhož plyne strop), `rules.json:28` (`zdroj: \"§ 67 odst. 1 zákoníku práce\"` u bloku obsahujícího 12×)",
+    "reprodukce": "všech 6 odkazů funguje (HTTP 200; psp.cz jen přes prohlížeč – `zdroje.txt`) a obsahově odpovídá; strop 38 537 Kč je doložen jen stránkou ÚP a PDF MPSV, nikoli sdělením 537/2025 Sb.",
+    "dopad": "Nemění čísla; ztěžuje ověření.",
+    "oprava": "Doplnit https://www.zakonyprolidi.cz/cs/2006-262#p51 (a #p52, #p67, #p271ca), https://www.zakonyprolidi.cz/cs/2004-435#p43 (#p50), https://www.zakonyprolidi.cz/cs/2025-537 a https://www.zakonyprolidi.cz/cs/2025-120; opravit citaci na § 67 odst. 1 a 3.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   },
+   {
+    "id": "VYP-09",
+    "zavaznost": "Nízká",
+    "oblast": "Nasazení a větve",
+    "nazev": "Chybějící favicon → chyba 404 v konzoli lokálně i na živém webu",
+    "kde": "`index.html` (bez `<link rel=\"icon\">`), živá adresa `https://frankie851.github.io/favicon.ico` → 404",
+    "reprodukce": "načtení stránky → konzole „Failed to load resource: 404“ (`uvod-kontrola.json`, `zivy-kontrola.json`, obě rozlišení).",
+    "dopad": "Žádný (kosmetika, šum v konzoli).",
+    "oprava": "Přidat `<link rel=\"icon\" href=\"data:,\">` nebo malé SVG.",
+    "overeni": "reprodukováno 2× · skeptik:",
+    "skeptik": ""
+   }
+  ],
+  "hlavicka": "Revidovaný commit: `e5c7b54d4138fc0f89581c7a6adf4442d780fa4c` (5. 11. 2026) · živý web: https://frankie851.github.io/vypoved-2026/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
+  "spocitano": {
+   "kriticka": 1,
+   "vysoka": 1,
+   "stredni": 3,
+   "nizka": 4
+  },
+  "shodaPoctu": true
  },
  {
   "kod": "ROD",

@@ -118,7 +118,7 @@ console.log('');
   radek('V4e', '… strop RP (DVZ k datu narození 20. 1. 2027)', 'red. DVZ 2 254 → 21 × 2 254', ref.strop, plan.rp.strop, '—', 'modul bere red. DVZ k nástupu na PPM (2 177 → 45 717)');
   const vst2 = { terminPorodu: '2027-01-20', prijemMatka: 200000, kdoPpm: 'matka', otcovska: false };
   const ref2 = R.planRef(vst2); const plan2 = A.planRodiny(vst2, rules);
-  radek('V4f', 'Test aplikace „porod v lednu 2027, 200 000 Kč“: denní PPM od 1. 1. 2027', 'DVZ 6 575,34 → max', ref2.ppm.sazbyRoku[2027].denni, plan2.matka.ppm.denni, '—', 'test rodina.test.js:108 zakonzervovává 2 000 Kč/den po celou PPM; zákon od 1. 1. 2027 2 061 Kč/den');
+  radek('V4f', 'Test aplikace „porod v lednu 2027, 200 000 Kč“: denní PPM od 1. 1. 2027', 'DVZ 6 575,34 → max', ref2.ppm.sazbyRoku[2027].denni, plan2.matka.ppm.denni, '—', 'test rodina.test.js:108 zakonzervovává 2 000 Kč/den po celou PPM; zákon od 1. 1. 2027: max. red. DVZ 3 015 → 2 111 Kč/den');
   radek('V4g', '… PPM celkem', 'dtto', ref2.ppmCelkem, plan2.souhrn.ppm, '—');
 }
 {
