@@ -2,8 +2,8 @@
 Revidovaný commit: `b9e19800fed0e0bcbf0971930208b3ff0b541903` (5. 11. 2026) · živý web: https://frankie851.github.io/inflacni-kalkulacka/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026
 
 ## Verdikt: Opravit před sloučením
-Výpočty jsou správné: všech 45 referenčních případů (5 příkladů ze zadání, skutečná data, hraniční stavy) se shoduje s modulem `inflation.js` i s obrazovkou, datová řada `data/cpi.json` je měsíc po měsíci totožná s CSV ČSÚ (372/372 v 010022‑25, 141/141 v CEN0101E) a přepočet září 2025 → září 2026 dává 2,5 % jako oficiální meziroční inflace ČSÚ. Nejvážnější jsou dvě porušení přístupnosti stupně „serious“ (axe, WCAG 2.2 AA): aktivní záložka má kontrast 4,42:1 (tmavý režim 3,64:1) a posuvná tabulka hodnot není dosažitelná klávesnicí – podle škály závažnosti jde o nálezy Vysoké, kritický nález není. Dobře je oddělený výpočetní modul bez DOM, poctivé README (včetně upozornění na odchylku meziroční inflace z bazického indexu), poznámka u měsíce bez dat, žádná analytika ani ukládání, žádné přetékání na 360 px, funkční měsíční aktualizace dat a živý web shodný s `main`.
-Nálezy: Kritická 0 · Vysoká 2 · Střední 2 · Nízká 5
+Výpočty jsou správné: všech 45 referenčních případů (5 příkladů ze zadání, skutečná data, hraniční stavy) se shoduje s modulem `inflation.js` i s obrazovkou, datová řada `data/cpi.json` je měsíc po měsíci totožná s CSV ČSÚ (372/372 v 010022‑25, 141/141 v CEN0101E) a přepočet září 2025 → září 2026 dává 2,5 % jako oficiální meziroční inflace ČSÚ. Nejvážnější je porušení přístupnosti stupně „serious“ (axe, WCAG 2.2 AA): aktivní záložka má kontrast 4,42:1 (tmavý režim 3,64:1) – podle škály závažnosti jde o nález Vysoký, kritický nález není. Druhý původně vysoký nález (posuvná tabulka nedosažitelná klávesnicí) skeptik vyvrátil: Chromium od verze 130 posuvnou oblast samo zaostří a PageDown/End jí rolují, takže zůstává jen jako Nízký (chybí role, jméno a viditelný fokus). Dobře je oddělený výpočetní modul bez DOM, poctivé README (včetně upozornění na odchylku meziroční inflace z bazického indexu), poznámka u měsíce bez dat, žádná analytika ani ukládání, žádné přetékání na 360 px, funkční měsíční aktualizace dat a živý web shodný s `main`.
+Nálezy: Kritická 0 · Vysoká 1 · Střední 2 · Nízká 6
 
 ## Semafor oblastí
 | Oblast | Stav | Nejvážnější nález |
@@ -12,7 +12,7 @@ Nálezy: Kritická 0 · Vysoká 2 · Střední 2 · Nízká 5
 | 2 Výpočty | 🟡 | INF-03 („10.000“ se čte jako 10 Kč) |
 | 3 Shoda se zadáním | 🟢 | INF-08 (Nízká) |
 | 4 Testy | 🟡 | INF-04 |
-| 5 Mobil a přístupnost | 🔴 | INF-01, INF-02 |
+| 5 Mobil a přístupnost | 🔴 | INF-01 (INF-02 po skeptikovi sníženo na Nízkou) |
 | 6 Texty a citlivá témata | 🟢 | INF-05, INF-07 (Nízká) |
 | 7 Soukromí a bezpečnost | 🟢 | INF-06 (Nízká) |
 | 8 Nasazení a větve | 🟢 | — |
@@ -105,14 +105,14 @@ Termíny, víkendy a svátky se v této aplikaci nevyskytují (měsíční řada
 - **Reprodukce:** otevřít stránku (360 px) → axe WCAG 2.2 A/AA hlásí 1× `color-contrast` (serious) na `#tab-convert`; po přepnutí na „Reálná mzda“ na `#tab-wage`; v tmavém režimu (`prefers-color-scheme: dark`) totéž. Očekáváno: bílé písmo 15,2 px / tloušťka 600 (není „velký text“) potřebuje kontrast ≥ 4,5:1 (WCAG 1.4.3). Skutečnost: bílá na `#2a78d6` = 4,42:1, na `#3987e5` (tmavý režim) = 3,64:1 (výpočet relativní luminance; `prohlizec.json` → `barvyZalozky`, `axe360_convert`, `axe360_wage`, `axe360_dark`; `uvod-kontrola.json`; živý web `zivy-kontrola.json`).
 - **Dopad na uživatele:** slabozrací uživatelé hůř rozeznají, který ze tří nástrojů je právě zapnutý – nejdůležitější navigační prvek stránky.
 - **Doporučená oprava:** pro aktivní záložku použít tmavší pozadí (např. `var(--accent-ink)` `#1d5fae`, ≈ 6,5:1 s bílou) a v tmavém režimu tmavé písmo na světlém pozadí; nebo zvětšit písmo záložek na ≥ 18,66 px tučně. Po opravě znovu axe v obou režimech.
-- **Ověření:** reprodukováno 2× (nezávislé běhy prohlizec.mjs 1 a 2, navíc úvodní kontrola a živý web) · skeptik:
+- **Ověření:** reprodukováno 2× (nezávislé běhy prohlizec.mjs 1 a 2, navíc úvodní kontrola a živý web) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – poměry 4,42:1 a 3,64:1 přepočteny vzorcem WCAG, axe serious v obou režimech; písmo 15,2 px/600 není velký text; #1d5fae dává 6,36:1)
 
-### INF-02 · Vysoká · Mobil a přístupnost · Posuvná tabulka hodnot není dosažitelná klávesnicí (axe scrollable‑region‑focusable, serious)
+### INF-02 · Nízká · Mobil a přístupnost · Posuvná tabulka hodnot není dosažitelná klávesnicí (axe scrollable‑region‑focusable, serious)
 - **Kde:** `styles.css:194` (`.table-scroll { max-height: 360px; overflow: auto; }`), `index.html:121–128` (`<div class="table-scroll">` bez `tabindex`)
 - **Reprodukce:** rozbalit „Zobrazit hodnoty v tabulce“ (při výchozím období 261 řádků) → axe hlásí `scrollable-region-focusable` (serious, WCAG 2.1.1/2.1.3) na `.table-scroll`; Tab z `summary` přeskočí rovnou na odkaz ČSÚ v patičce (`uvod-kontrola.json` → `tab`), oblast nelze zaostřit ani odrolovat šipkami. Očekáváno: každý posuvný obsah musí jít ovládat klávesnicí. Skutečnost: bez myši jsou čitelné jen první řádky (do výšky 360 px, cca 10 měsíců).
 - **Dopad na uživatele:** uživatel klávesnice nebo přepínačů (a často i čtečky) se nedostane k hodnotám indexu a meziroční inflace starších měsíců, které jsou jedinou textovou alternativou grafů.
 - **Doporučená oprava:** `.table-scroll` doplnit `tabindex="0"`, `role="region"` a `aria-label="Tabulka hodnot"` (plus viditelný `:focus-visible`), nebo tabulku nerolovat a místo toho omezit/stránkovat řádky.
-- **Ověření:** reprodukováno 2× (prohlizec.mjs běh 1 a 2: `axe360_convert`, `axe360_wage`) · skeptik:
+- **Ověření:** reprodukováno 2× (prohlizec.mjs běh 1 a 2: `axe360_convert`, `axe360_wage`) · skeptik: Vyvráceno (Opus, 5. 11. 2026 – Chromium ≥ 130 posuvnou oblast bez fokusovatelného obsahu samo zaostří (Tab ze summary jde na .table-scroll) a PageDown/End rolují až na konec; axe pravidlo platí dál. Nález snížen z Vysoké na Nízkou)
 
 ### INF-03 · Střední · Výpočty (propojení formuláře) · Zápis „10.000“ se čte jako 10 Kč
 - **Kde:** `app.js:26` (`parseInput = (s) => Number(String(s).replace(/[\s ]/g, '').replace(',', '.'))`), pole `amount`, `rate`, `wageThen`, `wageNow`

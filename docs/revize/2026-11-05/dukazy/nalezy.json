@@ -1213,9 +1213,9 @@
   "verdikt": "Opravit před sloučením",
   "pocty": {
    "kriticka": 0,
-   "vysoka": 2,
+   "vysoka": 1,
    "stredni": 2,
-   "nizka": 5
+   "nizka": 6
   },
   "semafor": {
    "1 Pravidla a data": {
@@ -1236,7 +1236,7 @@
    },
    "5 Mobil a přístupnost": {
     "stav": "\ud83d",
-    "nalez": "INF-01, INF-02"
+    "nalez": "INF-01 (INF-02 po skeptikovi sníženo na Nízkou)"
    },
    "6 Texty a citlivá témata": {
     "stav": "\ud83d",
@@ -1261,20 +1261,20 @@
     "reprodukce": "otevřít stránku (360 px) → axe WCAG 2.2 A/AA hlásí 1× `color-contrast` (serious) na `#tab-convert`; po přepnutí na „Reálná mzda“ na `#tab-wage`; v tmavém režimu (`prefers-color-scheme: dark`) totéž. Očekáváno: bílé písmo 15,2 px / tloušťka 600 (není „velký text“) potřebuje kontrast ≥ 4,5:1 (WCAG 1.4.3). Skutečnost: bílá na `#2a78d6` = 4,42:1, na `#3987e5` (tmavý režim) = 3,64:1 (výpočet relativní luminance; `prohlizec.json` → `barvyZalozky`, `axe360_convert`, `axe360_wage`, `axe360_dark`; `uvod-kontrola.json`; živý web `zivy-kontrola.json`).",
     "dopad": "slabozrací uživatelé hůř rozeznají, který ze tří nástrojů je právě zapnutý – nejdůležitější navigační prvek stránky.",
     "oprava": "pro aktivní záložku použít tmavší pozadí (např. `var(--accent-ink)` `#1d5fae`, ≈ 6,5:1 s bílou) a v tmavém režimu tmavé písmo na světlém pozadí; nebo zvětšit písmo záložek na ≥ 18,66 px tučně. Po opravě znovu axe v obou režimech.",
-    "overeni": "reprodukováno 2× (nezávislé běhy prohlizec.mjs 1 a 2, navíc úvodní kontrola a živý web) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (nezávislé běhy prohlizec.mjs 1 a 2, navíc úvodní kontrola a živý web) · skeptik: Potvrzeno (Opus, 5. 11. 2026 – poměry 4,42:1 a 3,64:1 přepočteny vzorcem WCAG, axe serious v obou režimech; písmo 15,2 px/600 není velký text; #1d5fae dává 6,36:1)",
+    "skeptik": "Potvrzeno"
    },
    {
     "id": "INF-02",
-    "zavaznost": "Vysoká",
+    "zavaznost": "Nízká",
     "oblast": "Mobil a přístupnost",
     "nazev": "Posuvná tabulka hodnot není dosažitelná klávesnicí (axe scrollable‑region‑focusable, serious)",
     "kde": "`styles.css:194` (`.table-scroll { max-height: 360px; overflow: auto; }`), `index.html:121–128` (`<div class=\"table-scroll\">` bez `tabindex`)",
     "reprodukce": "rozbalit „Zobrazit hodnoty v tabulce“ (při výchozím období 261 řádků) → axe hlásí `scrollable-region-focusable` (serious, WCAG 2.1.1/2.1.3) na `.table-scroll`; Tab z `summary` přeskočí rovnou na odkaz ČSÚ v patičce (`uvod-kontrola.json` → `tab`), oblast nelze zaostřit ani odrolovat šipkami. Očekáváno: každý posuvný obsah musí jít ovládat klávesnicí. Skutečnost: bez myši jsou čitelné jen první řádky (do výšky 360 px, cca 10 měsíců).",
     "dopad": "uživatel klávesnice nebo přepínačů (a často i čtečky) se nedostane k hodnotám indexu a meziroční inflace starších měsíců, které jsou jedinou textovou alternativou grafů.",
     "oprava": "`.table-scroll` doplnit `tabindex=\"0\"`, `role=\"region\"` a `aria-label=\"Tabulka hodnot\"` (plus viditelný `:focus-visible`), nebo tabulku nerolovat a místo toho omezit/stránkovat řádky.",
-    "overeni": "reprodukováno 2× (prohlizec.mjs běh 1 a 2: `axe360_convert`, `axe360_wage`) · skeptik:",
-    "skeptik": ""
+    "overeni": "reprodukováno 2× (prohlizec.mjs běh 1 a 2: `axe360_convert`, `axe360_wage`) · skeptik: Vyvráceno (Opus, 5. 11. 2026 – Chromium ≥ 130 posuvnou oblast bez fokusovatelného obsahu samo zaostří (Tab ze summary jde na .table-scroll) a PageDown/End rolují až na konec; axe pravidlo platí dál. Nález snížen z Vysoké na Nízkou)",
+    "skeptik": "Vyvráceno"
    },
    {
     "id": "INF-03",
@@ -1364,9 +1364,9 @@
   "hlavicka": "Revidovaný commit: `b9e19800fed0e0bcbf0971930208b3ff0b541903` (5. 11. 2026) · živý web: https://frankie851.github.io/inflacni-kalkulacka/ (HTTP 200, shoda s main: ano) · revize: 5. 11. 2026",
   "spocitano": {
    "kriticka": 0,
-   "vysoka": 2,
+   "vysoka": 1,
    "stredni": 2,
-   "nizka": 5
+   "nizka": 6
   },
   "shodaPoctu": true
  },
