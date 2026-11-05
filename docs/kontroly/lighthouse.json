@@ -1,123 +1,11 @@
 {
-  "datum": "2026-11-05T10:13:12.218Z",
-  "behu": 3,
+  "datum": "2026-11-05T10:44:43.817Z",
+  "behu": 1,
   "vysledky": [
-    {
-      "stranka": "/",
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.2 s",
-            "largest-contentful-paint": "1.2 s",
-            "total-blocking-time": "40 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.2 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.4 s",
-            "largest-contentful-paint": "1.4 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0",
-            "speed-index": "1.4 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.2 s",
-            "largest-contentful-paint": "1.2 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.2 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/penize/plan48/",
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "40 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "40 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "30 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.5 s"
-          }
-        }
-      ]
-    },
     {
       "stranka": "/penize/penzijko-kompas/",
       "median": {
-        "performance": 100,
+        "performance": 95,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
@@ -125,46 +13,16 @@
       "behy": [
         {
           "skore": {
-            "performance": 100,
+            "performance": 95,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
           },
           "metriky": {
             "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "50 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "10 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "110 ms",
-            "cumulative-layout-shift": "0.001",
+            "largest-contentful-paint": "2.9 s",
+            "total-blocking-time": "0 ms",
+            "cumulative-layout-shift": "0",
             "speed-index": "1.5 s"
           }
         }
@@ -173,62 +31,6 @@
     {
       "stranka": "/penize/inflacni-kalkulacka/",
       "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "10 ms",
-            "cumulative-layout-shift": "0.002",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "20 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.002",
-            "speed-index": "1.5 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/dane-podnikani/mam-eet/",
-      "median": {
         "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
@@ -245,151 +47,9 @@
           "metriky": {
             "first-contentful-paint": "1.7 s",
             "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "10 ms",
-            "cumulative-layout-shift": "0.001",
+            "total-blocking-time": "20 ms",
+            "cumulative-layout-shift": "0",
             "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "10 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/dane-podnikani/mam-eet/osvc-2027/",
-      "median": {
-        "performance": 96,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 98,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "140 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 96,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "190 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 94,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "260 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/dane-podnikani/slevy-2027/",
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "10 ms",
-            "cumulative-layout-shift": "0.011",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.011",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.011",
-            "speed-index": "1.5 s"
           }
         }
       ]
@@ -397,7 +57,7 @@
     {
       "stranka": "/dane-podnikani/cestovni-prikaz-2027/",
       "median": {
-        "performance": 100,
+        "performance": 95,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
@@ -405,103 +65,17 @@
       "behy": [
         {
           "skore": {
-            "performance": 100,
+            "performance": 95,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
           },
           "metriky": {
             "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "40 ms",
-            "cumulative-layout-shift": "0.012",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "30 ms",
-            "cumulative-layout-shift": "0.011",
-            "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
-            "total-blocking-time": "50 ms",
-            "cumulative-layout-shift": "0.012",
-            "speed-index": "1.5 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/prace-rodina/vypoved-2026/",
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.4 s",
-            "largest-contentful-paint": "1.4 s",
-            "total-blocking-time": "30 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.4 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
+            "largest-contentful-paint": "2.9 s",
             "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
+            "cumulative-layout-shift": "0",
             "speed-index": "1.5 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.4 s",
-            "largest-contentful-paint": "1.4 s",
-            "total-blocking-time": "30 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.4 s"
           }
         }
       ]
@@ -509,62 +83,6 @@
     {
       "stranka": "/prace-rodina/prijimacky/",
       "median": {
-        "performance": 98,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 98,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.8 s",
-            "largest-contentful-paint": "1.8 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.8 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 98,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.8 s",
-            "largest-contentful-paint": "1.8 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.8 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 98,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.8 s",
-            "largest-contentful-paint": "1.8 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.8 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/prace-rodina/rodicovska/",
-      "median": {
         "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
@@ -581,94 +99,8 @@
           "metriky": {
             "first-contentful-paint": "1.7 s",
             "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "10 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "40 ms",
+            "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.001",
-            "speed-index": "1.7 s"
-          }
-        }
-      ]
-    },
-    {
-      "stranka": "/prace-rodina/volno-2027/",
-      "median": {
-        "performance": 99,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "behy": [
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "50 ms",
-            "cumulative-layout-shift": "0.012",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.012",
-            "speed-index": "1.7 s"
-          }
-        },
-        {
-          "skore": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "metriky": {
-            "first-contentful-paint": "1.7 s",
-            "largest-contentful-paint": "1.7 s",
-            "total-blocking-time": "0 ms",
-            "cumulative-layout-shift": "0.011",
             "speed-index": "1.7 s"
           }
         }
