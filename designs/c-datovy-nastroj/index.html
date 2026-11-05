@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Přehled nástrojů · Spočítáno (varianta C)</title>
+<meta name="description" content="Přehled kalkulaček a průvodců: klíčové ukazatele, termíny 2026–2027 a tabulka nástrojů.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-term" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M4 6l2.5 2L4 10M8 10.5h4"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 16 16"><path d="M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z"/></symbol>
+  <symbol id="i-penize" viewBox="0 0 16 16"><ellipse cx="8" cy="4.5" rx="5" ry="2"/><path d="M3 4.5v3c0 1.1 2.2 2 5 2s5-.9 5-2v-3M3 7.5v3c0 1.1 2.2 2 5 2s5-.9 5-2v-3"/></symbol>
+  <symbol id="i-dane-podnikani" viewBox="0 0 16 16"><path d="M3.5 1.5h9v13l-1.5-1-1.5 1-1.5-1-1.5 1-1.5-1-1.5 1zM6 5h4M6 8h4M6 11h2"/></symbol>
+  <symbol id="i-bydleni-energie" viewBox="0 0 16 16"><path d="M2 7.5 8 2.5l6 5M3.5 6.5v7h9v-7M6.5 13.5v-4h3v4"/></symbol>
+  <symbol id="i-prace-rodina" viewBox="0 0 16 16"><circle cx="6" cy="5" r="2.5"/><path d="M1.5 14c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4"/><circle cx="11.5" cy="5.5" r="2"/><path d="M11 10c2 0 3.5 1.3 3.5 3.5"/></symbol>
+  <symbol id="i-dluhy" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/><path d="M3.8 3.8l2.4 2.4M9.8 9.8l2.4 2.4M12.2 3.8 9.8 6.2M6.2 9.8l-2.4 2.4"/></symbol>
+  <symbol id="i-co-se-meni-2027" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M2 6.5h12M5 1.5v3M11 1.5v3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 1.8 14.8 13.5H1.2z"/><path d="M8 6v3.5M8 11.2v.6"/></symbol>
+  <symbol id="i-err" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.5v4.2M8 10.8v.6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2"/><path d="M8 7.2v4.3M8 4.6v.6"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 16 16"><rect x="3" y="1.5" width="10" height="13" rx="1"/><path d="M5.5 4.5h5M5.5 8h1M9.5 8h1M5.5 11h1M9.5 11h1"/></symbol>
+  <symbol id="i-guide" viewBox="0 0 16 16"><path d="M6 4h8M6 8h8M6 12h8M2 4h1M2 8h1M2 12h1"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 16 16"><path d="M4 1.5h5.5l3 3v10h-8.5zM9.5 1.5v3h3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="7.5" rx="1"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
+</svg>
+<div class="app">
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="brand__mark"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-term"/></svg></span>
+    <span>Spočítáno</span>
+    <span class="brand__sub">v0.1</span>
+  </a>
+  <form class="cmd" role="search" action="kategorie.html" method="get">
+    <label class="vh" for="q">Hledat na webu</label>
+    <span class="cmd__prompt" aria-hidden="true">›</span>
+    <input type="search" id="q" name="q" placeholder="Hledat kalkulačku, např. penzijko, EET, výpověď" autocomplete="off">
+    <kbd aria-hidden="true">/</kbd>
+    <button type="submit">Hledat</button>
+  </form>
+  <span class="topbar__meta tag tag--ok"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k 4.&nbsp;11.&nbsp;2026</span>
+  <fieldset class="theme-switch"><legend>Barevný režim</legend>
+    <input type="radio" name="theme" id="t-auto" checked><label for="t-auto"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-auto"/></svg>Auto</label>
+    <input type="radio" name="theme" id="t-light"><label for="t-light"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>Světlý</label>
+    <input type="radio" name="theme" id="t-dark"><label for="t-dark"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>Tmavý</label>
+  </fieldset>
+</header>
+<nav class="side" aria-label="Kategorie a nástroje">
+  <p class="side__h">Navigace</p>
+  <ul class="tree">
+    <li><a href="index.html" aria-current="page"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-grid"/></svg>Přehled</a></li>
+    <li><a href="kategorie.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-penize"/></svg>Peníze a investice<span class="cnt">4</span></a><ul><li><a href="kalkulacka.html">Plán48<span class="t-new">2027</span></a></li><li><a href="#">Penzijko kompas<span class="t-new">2027</span></a></li><li><a href="#">Zdaním to?</a></li><li><a href="#">Inflační kalkulačka</a></li></ul></li>
+    <li><a href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dane-podnikani"/></svg>Daně a podnikání<span class="cnt">4</span></a><ul><li><a href="pruvodce.html">Mám EET?<span class="t-new">2027</span></a></li><li><a href="#">OSVČ 2027<span class="t-new">2027</span></a></li><li><a href="#">Slevy 2027<span class="t-new">2027</span></a></li><li><a href="#">Cestovní příkaz 2027<span class="t-new">2027</span></a></li></ul></li>
+    <li><a href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bydleni-energie"/></svg>Bydlení a energie<span class="cnt">2</span></a><ul><li><a href="#">Bydlometr</a></li><li><a href="#">Spot, nebo fix?</a></li></ul></li>
+    <li><a href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-prace-rodina"/></svg>Práce a rodina<span class="cnt">4</span></a><ul><li><a href="#">Výpověď 2026</a></li><li><a href="#">Rodičovská pro celou rodinu</a></li><li><a href="#">Přijímačky bez paniky</a></li><li><a href="#">Volno 2027<span class="t-new">2027</span></a></li></ul></li>
+    <li><a href="index.html#dluhy"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dluhy"/></svg>Dluhy<span class="cnt">1</span></a></li>
+    <li><a href="index.html#zmeny-2027"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-co-se-meni-2027"/></svg>Co se mění v roce 2027</a></li>
+  </ul>
+  <p class="side__foot">zdroj dat: obsah.json<br>ověřeno: 4.&nbsp;11.&nbsp;2026<br>výpočet: lokálně v prohlížeči</p>
+</nav>
+<main id="obsah" tabindex="-1">
+  <div class="pagehead">
+    <nav aria-label="Drobečková navigace"><ol class="crumbs"><li><span aria-current="page">přehled</span></li></ol></nav>
+    <div class="headrow"><h1>Přehled nástrojů</h1><span class="panel__meta">15 nástrojů · 5 kategorií</span></div>
+    <p class="lede">Kalkulačky a průvodci podle českých pravidel. Výpočet běží lokálně v prohlížeči, bez registrace.</p>
+    <ul class="tags">
+      <li><span class="tag tag--ok"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k 4.&nbsp;11.&nbsp;2026</span></li>
+      <li><span class="tag"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg>nic se neodesílá</span></li>
+      <li><span class="tag tag--warn"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg>prototyp – výpočty neběží naostro</span></li>
+    </ul>
+  </div>
+
+  <h2 class="vh">Klíčové ukazatele</h2>
+  <ul class="kpis">
+    <li class="kpi kpi--pos"><span class="kpi__label">Limit odpočtu § 15a</span><span class="kpi__value">48&nbsp;000&nbsp;Kč <span class="kpi__unit">/ rok</span></span><span class="kpi__sub">penzijko + DIP + životní pojištění</span></li>
+    <li class="kpi"><span class="kpi__label">Státní příspěvek max.</span><span class="kpi__value">340&nbsp;Kč <span class="kpi__unit">/ měs</span></span><span class="kpi__sub">při vkladu 1&nbsp;700&nbsp;Kč měsíčně</span><span class="kpi__sub"><span class="tag tag--draft">návrh 2027: 680&nbsp;Kč / měs do 30&nbsp;let</span></span></li>
+    <li class="kpi kpi--pos"><span class="kpi__label">EET 2.0 · start</span><span class="kpi__value">1.&nbsp;1.&nbsp;2027</span><span class="kpi__sub">kontaktní platby vč. karty a QR na místě</span><span class="kpi__sub"><span class="tag tag--ok">schváleno</span></span></li>
+    <li class="kpi kpi--warn"><span class="kpi__label">Přirážka EET OFF</span><span class="kpi__value">16&nbsp;800&nbsp;Kč <span class="kpi__unit">/ rok</span></span><span class="kpi__sub">1&nbsp;400&nbsp;Kč měsíčně · jen 1. pásmo paušální daně</span></li>
+    <li class="kpi"><span class="kpi__label">Paušální daň · 1. pásmo</span><span class="kpi__value">9&nbsp;662&nbsp;Kč <span class="kpi__unit">/ měs</span></span><span class="kpi__sub">2027 · přihláška do 11.&nbsp;1.&nbsp;2027</span></li>
+  </ul>
+
+  <section class="mt-4" aria-labelledby="pin-h">
+    <div class="section-h"><h2 id="pin-h">Připnuté · blížící se termín</h2><span class="panel__meta">řazeno podle termínu</span></div>
+    <ul class="cards">
+      <li class="tool">
+    <div class="tool__top"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-penize"/></svg><span>Peníze a investice</span><span class="tag tag--warn">změna 2027</span></div>
+    <h3><a href="kalkulacka.html">Plán48</a></h3>
+    <p class="tool__perex">Kolik vám stát přidá na penzijko a kolik ušetříte na daních z odpočtu 48&nbsp;000&nbsp;Kč (penzijko + DIP + životní pojištění). A co udělat do 31.&nbsp;12.</p>
+    <dl class="tool__dl">
+      <dt>typ</dt><dd>kalkulačka</dd>
+      <dt>termín</dt><dd class="warn">Vklady do 31.&nbsp;12.&nbsp;2026</dd>
+      <dt>štítky</dt><dd>penzijko · DIP · odpočet · životní pojištění</dd>
+    </dl>
+  </li>
+      <li class="tool">
+    <div class="tool__top"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dane-podnikani"/></svg><span>Daně a podnikání</span><span class="tag tag--warn">změna 2027</span></div>
+    <h3><a href="pruvodce.html">Mám EET?</a></h3>
+    <p class="tool__perex">Za dvě minuty zjistíte, jestli se vás EET 2.0 od 1.&nbsp;1.&nbsp;2027 týká, zda se vyplatí EET OFF a co udělat do kdy.</p>
+    <dl class="tool__dl">
+      <dt>typ</dt><dd>průvodce</dd>
+      <dt>termín</dt><dd class="warn">Start 1.&nbsp;1.&nbsp;2027</dd>
+      <dt>štítky</dt><dd>EET 2.0 · EET OFF · pokladna · MOJE EET</dd>
+    </dl>
+  </li>
+      <li class="tool">
+    <div class="tool__top"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dane-podnikani"/></svg><span>Daně a podnikání</span><span class="tag tag--warn">změna 2027</span></div>
+    <h3><a href="#">OSVČ 2027</a></h3>
+    <p class="tool__perex">Paušální daň, přiznání s výdajovým paušálem, nebo EET OFF? Porovnání tří cest pro živnostníky.</p>
+    <dl class="tool__dl">
+      <dt>typ</dt><dd>kalkulačka</dd>
+      <dt>termín</dt><dd class="warn">Přihláška k paušální dani do 11.&nbsp;1.&nbsp;2027</dd>
+      <dt>štítky</dt><dd>paušální daň · výdajový paušál · zálohy</dd>
+    </dl>
+  </li>
+    </ul>
+  </section>
+
+  <section class="panel mt-4" aria-labelledby="tl-h">
+    <div class="panel__head"><h2 id="tl-h">Termíny 2026–2027</h2><span class="panel__meta">srp 2026 → čvn 2027 · čárkovaně = návrh</span></div>
+    <div class="scroll" tabindex="0" role="region" aria-label="Časová osa termínů, posuvná">
+      <div class="panel__body"><svg class="chart" viewBox="0 0 1000 196" role="img" aria-labelledby="tl-t tl-d" style="min-width:760px">
+      <title id="tl-t">Časová osa termínů srpen 2026 až červen 2027</title>
+      <desc id="tl-d">Tři řádky: penzijko, EET 2.0 a paušální daň. Klíčové body: 31. 12. 2026 vklady pro odpočet, 1. 12. 2026 MOJE EET, 1. 1. 2027 start EET 2.0, 11. 1. 2027 přihláška k paušální dani. Podrobnosti v tabulce Termíny.</desc>
+      <text class="c-lbl c-lbl--fg" x="164" y="11">2026</text>
+      <text class="c-lbl c-lbl--fg" x="539.6" y="11">2027</text>
+      <line class="c-grid" x1="160.0" y1="30" x2="160.0" y2="188"/><line class="c-grid" x1="236.1" y1="30" x2="236.1" y2="188"/><line class="c-grid" x1="309.8" y1="30" x2="309.8" y2="188"/><line class="c-grid" x1="385.9" y1="30" x2="385.9" y2="188"/><line class="c-grid" x1="459.5" y1="30" x2="459.5" y2="188"/><line class="c-grid" x1="535.6" y1="30" x2="535.6" y2="188"/><line class="c-grid" x1="611.7" y1="30" x2="611.7" y2="188"/><line class="c-grid" x1="680.5" y1="30" x2="680.5" y2="188"/><line class="c-grid" x1="756.6" y1="30" x2="756.6" y2="188"/><line class="c-grid" x1="830.2" y1="30" x2="830.2" y2="188"/><line class="c-grid" x1="906.3" y1="30" x2="906.3" y2="188"/><line class="c-grid" x1="980.0" y1="30" x2="980.0" y2="188"/><text class="c-lbl" x="198.1" y="26" text-anchor="middle">srp</text><text class="c-lbl" x="272.9" y="26" text-anchor="middle">zář</text><text class="c-lbl" x="347.9" y="26" text-anchor="middle">říj</text><text class="c-lbl" x="422.7" y="26" text-anchor="middle">lis</text><text class="c-lbl" x="497.6" y="26" text-anchor="middle">pro</text><text class="c-lbl" x="573.7" y="26" text-anchor="middle">led</text><text class="c-lbl" x="646.1" y="26" text-anchor="middle">úno</text><text class="c-lbl" x="718.5" y="26" text-anchor="middle">bře</text><text class="c-lbl" x="793.4" y="26" text-anchor="middle">dub</text><text class="c-lbl" x="868.3" y="26" text-anchor="middle">kvě</text><text class="c-lbl" x="943.1" y="26" text-anchor="middle">čvn</text>
+      <line class="c-axis" x1="535.6" y1="2" x2="535.6" y2="190" stroke-dasharray="2 3"/>
+      <line class="c-axis" x1="160" y1="31" x2="980" y2="31"/>
+      <line class="c-warn-s" x1="393.2" y1="34" x2="393.2" y2="188" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text class="c-lbl" x="398.2" y="45">ověřeno 4. 11.</text>
+
+      <text class="c-lbl c-lbl--fg" x="8" y="76">Penzijko · Plán48</text>
+      <line class="c-grid" x1="160" y1="72" x2="980" y2="72" stroke-width="2"/>
+      <line class="c-draft-s" x1="535.6" y1="72" x2="980" y2="72" stroke-width="2.5" stroke-dasharray="6 4"/>
+      <circle class="c-draft" cx="216.5" cy="72" r="5"/>
+      <text class="c-lbl" x="216.5" y="60" text-anchor="middle">24. 8. vláda</text>
+      <circle class="c-draft" cx="292.6" cy="72" r="5"/>
+      <text class="c-lbl" x="292.6" y="92" text-anchor="middle">24. 9. 1. čtení</text>
+      <rect class="c-warn" x="528.2" y="67" width="10" height="10" transform="rotate(45 533.2 72)"/>
+      <text class="c-lbl" x="523.2" y="60" text-anchor="end">31. 12. vklady</text>
+      <text class="c-lbl" x="547.6" y="92">návrh: Lepší penzijko od 2027, pokud projde</text>
+
+      <text class="c-lbl c-lbl--fg" x="8" y="122">EET 2.0</text>
+      <line class="c-grid" x1="160" y1="118" x2="980" y2="118" stroke-width="2"/>
+      <line class="c-pos-s" x1="535.6" y1="118" x2="980" y2="118" stroke-width="3"/>
+      <circle class="c-pos" cx="459.5" cy="118" r="5"/>
+      <text class="c-lbl" x="450.5" y="106" text-anchor="end">1. 12. MOJE EET</text>
+      <circle class="c-pos" cx="535.6" cy="118" r="7"/>
+      <text class="c-lbl c-lbl--fg" x="547.6" y="106">1. 1. start EET 2.0</text>
+
+      <text class="c-lbl c-lbl--fg" x="8" y="166">Paušální daň</text>
+      <line class="c-grid" x1="160" y1="162" x2="980" y2="162" stroke-width="2"/>
+      <circle class="c-warn" cx="560.2" cy="162" r="5"/>
+      <text class="c-lbl" x="569.2" y="182">11. 1. přihláška</text>
+      <rect class="c-band" x="680.5" y="152" width="225.8" height="20" rx="2"/>
+      <text class="c-lbl c-lbl--fg" x="793.4" y="166" text-anchor="middle">jaro 2027 · přiznání za 2026</text>
+    </svg></div>
+    </div>
+  </section>
+
+  <div class="grid grid--12 mt-3">
+    <section class="panel span-7" aria-labelledby="tools-h">
+      <div class="panel__head"><h2 id="tools-h">Všechny nástroje</h2><span class="panel__meta">14 řádků · Dluhy samostatně níže</span></div>
+      <div class="scroll" tabindex="0" role="region" aria-label="Tabulka nástrojů, posuvná">
+        <table class="tbl tbl--wide">
+          <caption class="vh">Všechny nástroje: název, kategorie, typ, termín a stav</caption>
+          <thead><tr><th scope="col">Nástroj</th><th scope="col">Kategorie</th><th scope="col">Typ</th><th scope="col">Termín</th><th scope="col">Stav</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="kalkulacka.html">Plán48</a></th><td class="muted">Peníze a investice</td><td>kalkulačka</td><td class="mono">Vklady do 31.&nbsp;12.&nbsp;2026</td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+            <tr><th scope="row"><a href="#">Penzijko kompas</a></th><td class="muted">Peníze a investice</td><td>kalkulačka</td><td class="mono"><span class="muted">–</span></td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+            <tr><th scope="row"><a href="#">Zdaním to?</a></th><td class="muted">Peníze a investice</td><td>průvodce</td><td class="mono">Přiznání za rok 2026 na jaře 2027</td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="#">Inflační kalkulačka</a></th><td class="muted">Peníze a investice</td><td>kalkulačka</td><td class="mono"><span class="muted">–</span></td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="pruvodce.html">Mám EET?</a></th><td class="muted">Daně a podnikání</td><td>průvodce</td><td class="mono">Start 1.&nbsp;1.&nbsp;2027</td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+            <tr><th scope="row"><a href="#">OSVČ 2027</a></th><td class="muted">Daně a podnikání</td><td>kalkulačka</td><td class="mono">Přihláška k paušální dani do 11.&nbsp;1.&nbsp;2027</td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+            <tr><th scope="row"><a href="#">Slevy 2027</a></th><td class="muted">Daně a podnikání</td><td>průvodce</td><td class="mono"><span class="muted">–</span></td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+            <tr><th scope="row"><a href="#">Cestovní příkaz 2027</a></th><td class="muted">Daně a podnikání</td><td>kalkulačka</td><td class="mono">Nová vyhláška obvykle koncem prosince</td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+            <tr><th scope="row"><a href="#">Bydlometr</a></th><td class="muted">Bydlení a energie</td><td>kalkulačka</td><td class="mono"><span class="muted">–</span></td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="#">Spot, nebo fix?</a></th><td class="muted">Bydlení a energie</td><td>kalkulačka</td><td class="mono"><span class="muted">–</span></td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="#">Výpověď 2026</a></th><td class="muted">Práce a rodina</td><td>průvodce</td><td class="mono"><span class="muted">–</span></td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="#">Rodičovská pro celou rodinu</a></th><td class="muted">Práce a rodina</td><td>kalkulačka</td><td class="mono"><span class="muted">–</span></td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="#">Přijímačky bez paniky</a></th><td class="muted">Práce a rodina</td><td>průvodce</td><td class="mono"><span class="muted">–</span></td><td><span class="muted" aria-label="beze štítku">–</span></td></tr>
+            <tr><th scope="row"><a href="#">Volno 2027</a></th><td class="muted">Práce a rodina</td><td>kalkulačka</td><td class="mono"><span class="muted">–</span></td><td><span class="tag tag--warn">změna 2027</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel span-5" aria-labelledby="ev-h">
+      <div class="panel__head"><h2 id="ev-h">Termíny · tabulka</h2><span class="panel__meta">textová podoba časové osy</span></div>
+      <div class="scroll" tabindex="0" role="region" aria-label="Tabulka termínů, posuvná">
+        <table class="tbl">
+          <caption class="vh">Termíny 2026–2027 v časovém pořadí</caption>
+          <thead><tr><th scope="col">Datum</th><th scope="col">Událost</th><th scope="col">Stav</th></tr></thead>
+          <tbody>
+            <tr><td class="mono nowrap">24.&nbsp;8.&nbsp;2026</td><td>Vláda schválila návrh Lepší penzijko</td><td><span class="tag tag--draft">návrh</span></td></tr>
+            <tr><td class="mono nowrap">24.&nbsp;9.&nbsp;2026</td><td>Sněmovna podpořila návrh v 1. čtení</td><td><span class="tag tag--draft">návrh</span></td></tr>
+            <tr><td class="mono nowrap">4.&nbsp;11.&nbsp;2026</td><td>Pravidla na webu ověřena</td><td><span class="tag ">ověřeno</span></td></tr>
+            <tr><td class="mono nowrap">1.&nbsp;12.&nbsp;2026</td><td>Aplikace MOJE EET k dispozici</td><td><span class="tag tag--ok">MOJE EET</span></td></tr>
+            <tr><td class="mono nowrap">31.&nbsp;12.&nbsp;2026</td><td>Vklady pro odpočet za rok 2026 (Plán48)</td><td><span class="tag tag--warn">termín</span></td></tr>
+            <tr><td class="mono nowrap">1.&nbsp;1.&nbsp;2027</td><td>Start EET 2.0</td><td><span class="tag tag--ok">schváleno</span></td></tr>
+            <tr><td class="mono nowrap">11.&nbsp;1.&nbsp;2027</td><td>Přihláška k paušální dani</td><td><span class="tag tag--warn">termín</span></td></tr>
+            <tr><td class="mono nowrap">od 2027</td><td>Lepší penzijko, pokud projde</td><td><span class="tag tag--draft">návrh</span></td></tr>
+            <tr><td class="mono nowrap">jaro 2027</td><td>Přiznání za rok 2026 (Zdaním to?)</td><td><span class="tag ">termín</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel span-7" id="zmeny-2027" aria-labelledby="ch-h">
+      <div class="panel__head"><h2 id="ch-h">Co se mění v roce 2027</h2><span class="panel__meta">5 změn</span></div>
+      <ul class="changes">
+        <li>
+          <h3>Vrací se EET – jako EET 2.0</h3>
+          <span><span class="tag tag--ok">schváleno</span></span>
+          <span class="when">od 1.&nbsp;1.&nbsp;2027 · nástroj: <a href="pruvodce.html">Mám EET?</a></span>
+          <p>Evidovat se budou kontaktní platby včetně karty a QR kódu na místě. Drobní živnostníci v 1. pásmu paušální daně mohou zvolit EET OFF za přirážku 1&nbsp;400&nbsp;Kč měsíčně.</p>
+          <span class="src">zdroj: <a href="https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1">epravo</a></span>
+        </li>
+        <li>
+          <h3>Lepší penzijko: 40&nbsp;% pro mladé</h3>
+          <span><span class="tag tag--draft"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg>Návrh, zatím neschváleno</span></span>
+          <span class="when">od 2027, pokud projde · nástroj: <a href="kalkulacka.html">Plán48</a></span>
+          <p>Lidé do 30&nbsp;let mají dostat státní příspěvek až 680&nbsp;Kč měsíčně (8&nbsp;160&nbsp;Kč ročně), děti už od vkladu 100&nbsp;Kč, poplatek za správu se zastropuje na 0,5&nbsp;%.</p>
+          <span class="src">zdroj: <a href="https://www.echo24.cz/a/HF2qp/zpravy-ekonomika-vlada-schvalila-zmenu-pravidel-penzijniho-sporeni">Echo24</a></span>
+        </li>
+        <li>
+          <h3>Paušální daň v 1. pásmu stoupá</h3>
+          <span><span class="tag tag--ok">schváleno</span></span>
+          <span class="when">přihláška do 11.&nbsp;1.&nbsp;2027 · nástroj: <a href="#">OSVČ 2027</a></span>
+          <p>1. pásmo paušální daně stoupá na 9&nbsp;662&nbsp;Kč měsíčně.</p>
+          <span class="src">zdroj: <a href="https://portal.pohoda.cz/?p=45627">Pohoda</a></span>
+        </li>
+        <li>
+          <h3>Vrací se sleva na studenta a školkovné</h3>
+          <span><span class="tag tag--ok">schváleno</span></span>
+          <span class="when">2027 · nástroj: <a href="#">Slevy 2027</a></span>
+          <p>Sleva na studenta 4&nbsp;020&nbsp;Kč ročně a školkovné do výše minimální mzdy.</p>
+          <span class="src">zdroj: <a href="https://www.praceamzda.cz/tydenik/253/podtrzeno-secteno-c-26-30-2026">Práce a mzda</a></span>
+        </li>
+        <li>
+          <h3>Svátky 2027 a prodloužené víkendy</h3>
+          <span><span class="tag ">kalendář</span></span>
+          <span class="when">celý rok · nástroj: <a href="#">Volno 2027</a></span>
+          <p>1.&nbsp;5., 8.&nbsp;5. a oba vánoční svátky připadnou na víkend, zato 5.–6.&nbsp;7. dají čtyři dny volna bez dovolené.</p>
+          <span class="src">zdroj: vlastní výpočet z kalendáře</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="panel span-5" aria-labelledby="sit-h">
+      <div class="panel__head"><h2 id="sit-h">Podle situace</h2><span class="panel__meta">předvolby</span></div>
+      <table class="tbl">
+        <caption class="vh">Nástroje podle životní situace</caption>
+        <thead><tr><th scope="col">Situace</th><th scope="col">Nástroje</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Jsem zaměstnanec</th><td><a href="#">Slevy 2027</a>, <a href="kalkulacka.html">Plán48</a>, <a href="#">Výpověď 2026</a>, <a href="#">Inflační kalkulačka</a></td></tr>
+          <tr><th scope="row">Podnikám (OSVČ)</th><td><a href="pruvodce.html">Mám EET?</a>, <a href="#">OSVČ 2027</a>, <a href="#">Cestovní příkaz 2027</a>, <a href="kalkulacka.html">Plán48</a></td></tr>
+          <tr><th scope="row">Investuji a spořím</th><td><a href="kalkulacka.html">Plán48</a>, <a href="#">Penzijko kompas</a>, <a href="#">Zdaním to?</a>, <a href="#">Inflační kalkulačka</a></td></tr>
+          <tr><th scope="row">Mám rodinu a děti</th><td><a href="#">Rodičovská pro celou rodinu</a>, <a href="#">Přijímačky bez paniky</a>, <a href="#">Slevy 2027</a>, <a href="#">Volno 2027</a></td></tr>
+          <tr><th scope="row">Mám dluhy</th><td><a href="#dluhy">Exekuce, nebo oddlužení?</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <section class="debt" id="dluhy" aria-labelledby="debt-h">
+    <div class="stack">
+      <h2 id="debt-h"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dluhy"/></svg>Dluhy</h2>
+      <p class="debt__text">Klidný průvodce exekucí a oddlužením. Bez reklam, bez nabídek půjček.</p>
+      <div class="debt__tool">
+        <h3><a href="#">Exekuce, nebo oddlužení?</a></h3>
+        <p class="hint">Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. A kde najít bezplatnou pomoc.</p>
+      </div>
+      <ul class="help__rules">
+        <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>Žádné reklamy ani affiliate odkazy</li>
+        <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>Žádné nabídky půjček ani placení zprostředkovatelé</li>
+        <li><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-minus"/></svg>Žádné sbírání kontaktů</li>
+      </ul>
+    </div>
+    <div class="help" id="pomoc">
+      <h3>Nejste v tom sami</h3>
+      <p>Bezplatná dluhová poradna vám pomůže zdarma a bez závazků.</p>
+      <a class="btn btn--primary" href="#pomoc">Najít bezplatnou poradnu <svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+      <p class="hint">Odkaz na oficiální seznam bezplatných poraden doplníme po ověření.</p>
+    </div>
+  </section>
+
+  <p class="disclaimer mt-4"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-alert"/></svg><span>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</span></p>
+</main>
+<footer class="foot">
+  <div>
+    <p><strong>Spočítáno</strong> · Kalkulačky a průvodci podle českých pravidel</p>
+    <p><span class="tag tag--ok"><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Pravidla ověřena k 4.&nbsp;11.&nbsp;2026</span></p>
+    <p><svg class="i i--sm" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg> Nic neukládáme ani neodesíláme. Výpočty běží jen ve vašem prohlížeči.</p>
+  </div>
+  <div>
+    <p><strong>Nejde o investiční, daňové ani právní poradenství. Výpočty jsou orientační.</strong></p>
+    <p>Prototyp designu – kalkulačky zatím nepočítají naostro.</p>
+    <p>Při tisku se skryje navigace, zobrazí se adresy odkazů a datum ověření pravidel.</p>
+  </div>
+  <div>
+    <ul class="foot__links">
+      <li><a href="kategorie.html">Peníze a investice</a></li>
+      <li><a href="#">Daně a podnikání</a></li>
+      <li><a href="#">Bydlení a energie</a></li>
+      <li><a href="#">Práce a rodina</a></li>
+      <li><a href="index.html#dluhy">Dluhy</a></li>
+      <li><a href="index.html#zmeny-2027">Co se mění v roce 2027</a></li>
+    </ul>
+  </div>
+</footer>
+</div>
+</body>
+</html>

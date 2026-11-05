@@ -1,0 +1,141 @@
+/* =====================================================================
+   Varianta C „Datový nástroj“ – design tokeny
+   ---------------------------------------------------------------------
+   Barevný režim:
+   - Výchozí tokeny v :root jsou TMAVÉ. Nástroj je primárně tmavý.
+   - „Auto“ = tmavý, pokud uživatel nezvolí jinak. Systémové
+     prefers-color-scheme: light proto režim úmyslně NEPŘEPÍNÁ
+     (tmavý je produktová výchozí volba, jako u terminálu nebo IDE).
+   - Blok @media (prefers-color-scheme: dark) opakuje tmavé tokeny,
+     aby i systémový tmavý režim dával jednoznačně tmavé hodnoty.
+   - Světlé tokeny se použijí jen přes přepínač: :root:has(#t-light:checked).
+   - :root:has(#t-dark:checked) vynutí tmavé tokeny výslovně.
+   Kontrasty (WCAG 2.2 AA) ověřeny pro text ≥ 4,5:1 a ovládací prvky
+   ≥ 3:1 na všech třech úrovních povrchu v obou režimech.
+   ===================================================================== */
+
+:root,
+:root:has(#t-dark:checked) {
+  color-scheme: dark;
+
+  /* povrchy */
+  --bg: #0E1116;          /* grafitové pozadí aplikace */
+  --surface: #151A21;     /* panely */
+  --surface-2: #1C222B;   /* hlavičky panelů, vstupy */
+  --surface-3: #252C37;   /* hover, vybraná položka */
+  --grid: #20262F;        /* jemné linky mřížky (dekorativní) */
+  --line: #2B333E;        /* okraje panelů (dekorativní) */
+  --ctl: #6A7685;         /* okraje ovládacích prvků (≥ 3:1) */
+
+  /* text */
+  --fg: #E6EAF0;
+  --muted: #9BA6B5;
+  --link: #7FD8C6;
+
+  /* datové akcenty */
+  --pos: #3DDBB8;         /* kladné, hotovo, využito */
+  --pos-bg: rgba(61, 219, 184, 0.10);
+  --on-pos: #062019;
+  --series-2: #7FB2FF;    /* druhá datová řada */
+  --warn: #F2B84B;        /* upozornění, termín, volné místo */
+  --warn-bg: rgba(242, 184, 75, 0.10);
+  --err: #FF8A7A;         /* chyba */
+  --err-bg: rgba(255, 138, 122, 0.10);
+  --draft: #BBA2FF;       /* návrh 2027 */
+  --draft-bg: rgba(187, 162, 255, 0.10);
+
+  --focus: #FFD45C;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0E1116;
+    --surface: #151A21;
+    --surface-2: #1C222B;
+    --surface-3: #252C37;
+    --grid: #20262F;
+    --line: #2B333E;
+    --ctl: #6A7685;
+    --fg: #E6EAF0;
+    --muted: #9BA6B5;
+    --link: #7FD8C6;
+    --pos: #3DDBB8;
+    --pos-bg: rgba(61, 219, 184, 0.10);
+    --on-pos: #062019;
+    --series-2: #7FB2FF;
+    --warn: #F2B84B;
+    --warn-bg: rgba(242, 184, 75, 0.10);
+    --err: #FF8A7A;
+    --err-bg: rgba(255, 138, 122, 0.10);
+    --draft: #BBA2FF;
+    --draft-bg: rgba(187, 162, 255, 0.10);
+    --focus: #FFD45C;
+  }
+}
+
+/* Světlý režim – jen na výslovnou volbu uživatele */
+:root:has(#t-light:checked) {
+  color-scheme: light;
+  --bg: #F4F5F7;
+  --surface: #FFFFFF;
+  --surface-2: #ECEEF2;
+  --surface-3: #E1E5EB;
+  --grid: #E6E9EE;
+  --line: #D5DAE1;
+  --ctl: #7C8696;
+  --fg: #12161C;
+  --muted: #4E5867;
+  --link: #0A6656;
+  --pos: #0A7360;
+  --pos-bg: rgba(10, 115, 96, 0.08);
+  --on-pos: #FFFFFF;
+  --series-2: #2F5FB3;
+  --warn: #8A5300;
+  --warn-bg: rgba(178, 110, 0, 0.09);
+  --err: #B42318;
+  --err-bg: rgba(180, 35, 24, 0.07);
+  --draft: #6941C6;
+  --draft-bg: rgba(105, 65, 198, 0.08);
+  --focus: #1D4ED8;
+}
+
+:root {
+  /* písma */
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* velikosti (mobil; od 1024 px viz --fs-base-desktop) */
+  --fs-xs: 0.75rem;     /* 12 px – štítky, osy */
+  --fs-sm: 0.8125rem;   /* 13 px – tabulky, nápovědy */
+  --fs-base: 0.9375rem; /* 15 px – mobil */
+  --fs-base-desktop: 0.875rem; /* 14 px – desktop */
+  --fs-md: 1rem;        /* 16 px – nadpisy panelů, pole na mobilu */
+  --fs-lg: 1.25rem;     /* 20 px */
+  --fs-xl: 1.625rem;    /* 26 px – h1 */
+  --fs-kpi: 1.5rem;     /* 24 px – ukazatele */
+  --fs-hero: 2.5rem;    /* 40 px – hlavní výsledek */
+  --lh: 1.5;
+  --lh-tight: 1.2;
+
+  /* mezery – hustá mřížka 4 px */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  /* zaoblení – ostré, nejvýš 4 px */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 4px;
+
+  /* stíny – skoro žádné, hierarchii dělají linky */
+  --shadow-0: none;
+  --shadow-1: 0 1px 0 rgba(0, 0, 0, 0.25);
+
+  /* rozměry */
+  --side-w: 248px;
+  --top-h: 48px;
+}

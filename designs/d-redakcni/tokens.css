@@ -1,0 +1,143 @@
+/* =========================================================
+   Spočítáno – varianta D „Redakční“
+   Design tokeny: papír, inkoust a jedna redakční barva.
+   Světlé „denní vydání“ a tmavé „noční vydání“.
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* --- Barvy: denní vydání --- */
+  --paper: #FBF8F3;          /* papírově teplá bílá */
+  --paper-2: #F4EEE4;        /* podklad rámečků a boxů */
+  --paper-3: #EDE5D8;        /* zvýraznění řádků, hlavičky */
+  --ink: #1B1714;            /* inkoustová černá */
+  --ink-2: #4E463E;          /* doprovodný text, popisky */
+  --ink-3: #6B6158;          /* drobné metainformace (≥ 4,5 : 1 na papíře) */
+  --rule: #1B1714;           /* silné linky */
+  --rule-soft: #CFC4B4;      /* tenké sloupkové dělítka (dekorativní) */
+  --rule-ui: #857a6e;        /* okraje ovládacích prvků (≥ 3 : 1) */
+  --accent: #8C1C13;         /* redakční vínová */
+  --accent-strong: #6E140D;
+  --accent-soft: #F5E3DE;    /* podklad štítků a výsledků */
+  --on-accent: #FFFFFF;
+  --success: #2F5D3A;        /* stav „schváleno“ */
+  --success-soft: #E4EEE3;
+  --error: #A3150B;
+  --error-soft: #FBE7E3;
+  --focus: #8C1C13;
+  --field: #FFFFFF;
+
+  /* Grafy */
+  --chart-1: #8C1C13;        /* penzijko */
+  --chart-2: #1B1714;        /* životní pojištění */
+  --chart-3: #6B6158;        /* volné místo – šrafování */
+  --chart-area: #E9D3CC;
+
+  /* --- Písma --- */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-text: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-ui: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* --- Typografická škála --- */
+  --fs-body: clamp(1.125rem, 1.02rem + 0.35vw, 1.25rem);   /* 18 → 20 px */
+  --fs-small: 0.9375rem;
+  --fs-ui: 0.875rem;
+  --fs-micro: 0.75rem;
+  --fs-h4: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --fs-h3: clamp(1.5rem, 1.25rem + 0.9vw, 2.125rem);
+  --fs-h2: clamp(1.875rem, 1.5rem + 1.5vw, 2.875rem);
+  --fs-h1: clamp(2.375rem, 1.6rem + 3.6vw, 4.75rem);
+  --fs-masthead: clamp(3.25rem, 1.5rem + 8vw, 8.5rem);
+  --fs-huge: clamp(3rem, 2rem + 4vw, 6rem);
+  --lh-body: 1.6;
+  --lh-tight: 1.08;
+  --measure: 38rem;
+
+  /* --- Mezery --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --gutter: clamp(16px, 4.5vw, 64px);
+  --col-gap: clamp(16px, 2.2vw, 32px);
+  --page-max: 1320px;
+
+  /* --- Zaoblení a stíny: tisk je hranatý --- */
+  --radius-0: 0;
+  --radius-1: 2px;
+  --radius-pill: 999px;
+  --shadow-box: 0 1px 0 var(--rule-soft);
+  --shadow-lift: 6px 6px 0 var(--paper-3);
+
+  --line-thin: 1px;
+  --line-bold: 3px;
+}
+
+/* --- Noční vydání: tmavý režim (platí i v režimu Auto) --- */
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(#t-light:checked)) {
+    color-scheme: dark;
+    --paper: #161210;
+    --paper-2: #201B18;
+    --paper-3: #2B2420;
+    --ink: #F1E8DA;
+    --ink-2: #CFC3B2;
+    --ink-3: #B3A794;
+    --rule: #F1E8DA;
+    --rule-soft: #3F3631;
+    --rule-ui: #8F8374;
+    --accent: #F0907F;
+    --accent-strong: #F6B0A3;
+    --accent-soft: #3A1F1A;
+    --on-accent: #161210;
+    --success: #9FCB9F;
+    --success-soft: #1F2C20;
+    --error: #FF9C8E;
+    --error-soft: #3B1C17;
+    --focus: #F6B0A3;
+    --field: #1C1815;
+    --chart-1: #F0907F;
+    --chart-2: #F1E8DA;
+    --chart-3: #B3A794;
+    --chart-area: #4A2A24;
+    --shadow-lift: 6px 6px 0 #0B0908;
+  }
+}
+
+/* Ruční volba přepínačem (bez JS) */
+:root:has(#t-light:checked) {
+  color-scheme: light;
+}
+
+:root:has(#t-dark:checked) {
+  color-scheme: dark;
+  --paper: #161210;
+  --paper-2: #201B18;
+  --paper-3: #2B2420;
+  --ink: #F1E8DA;
+  --ink-2: #CFC3B2;
+  --ink-3: #B3A794;
+  --rule: #F1E8DA;
+  --rule-soft: #3F3631;
+  --rule-ui: #8F8374;
+  --accent: #F0907F;
+  --accent-strong: #F6B0A3;
+  --accent-soft: #3A1F1A;
+  --on-accent: #161210;
+  --success: #9FCB9F;
+  --success-soft: #1F2C20;
+  --error: #FF9C8E;
+  --error-soft: #3B1C17;
+  --focus: #F6B0A3;
+  --field: #1C1815;
+  --chart-1: #F0907F;
+  --chart-2: #F1E8DA;
+  --chart-3: #B3A794;
+  --chart-area: #4A2A24;
+  --shadow-lift: 6px 6px 0 #0B0908;
+}
