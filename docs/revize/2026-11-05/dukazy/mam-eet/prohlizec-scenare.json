@@ -1,5 +1,5 @@
 {
- "datum": "2026-11-05T08:18:08.060Z",
+ "datum": "2026-11-05T08:20:27.091Z",
  "eet": {
   "360": {
    "sirka": 360,
@@ -317,14 +317,14 @@
    "o3": {
     "tabulka": [
      "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
-     "Přiznání, výdajový paušál 40 % 203 868 Kč 16 989 Kč +2 928 Kč",
+     "Přiznání, výdajový paušál 40 % 241 392 Kč 20 116 Kč +40 452 Kč",
      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 200 000 Kč, takže ti vychází 2. pásmo."
     ]
    },
    "dph": {
     "tabulka": [
      "Paušální daň Nedostupné: Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba).",
-     "Přiznání, výdajový paušál 40 %Nejlevnější 203 868 Kč 16 989 Kč —",
+     "Přiznání, výdajový paušál 40 %Nejlevnější 241 392 Kč 20 116 Kč —",
      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro OSVČ v paušálním režimu. Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba)."
     ]
    },
@@ -333,7 +333,7 @@
      "chyba": "",
      "tabulka": [
       "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
-      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "Přiznání, výdajový paušál 40 % 309 450 Kč 25 788 Kč +108 510 Kč",
       "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
      ]
     },
@@ -341,7 +341,7 @@
      "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
      "tabulka": [
       "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
-      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "Přiznání, výdajový paušál 40 % 309 450 Kč 25 788 Kč +108 510 Kč",
       "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
      ]
     }
@@ -351,7 +351,7 @@
      "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
      "tabulka": [
       "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
-      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "Přiznání, výdajový paušál 40 % 309 450 Kč 25 788 Kč +108 510 Kč",
       "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
      ]
     },
@@ -359,7 +359,7 @@
      "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
      "tabulka": [
       "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
-      "Přiznání, výdajový paušál 40 % 271 926 Kč 22 661 Kč +70 986 Kč",
+      "Přiznání, výdajový paušál 40 % 309 450 Kč 25 788 Kč +108 510 Kč",
       "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 500 000 Kč, takže ti vychází 2. pásmo."
      ],
      "fokus": "osvc-income"
@@ -382,6 +382,25 @@
    ],
    "zaporne": {
     "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1."
+   },
+   "tecky": {
+    "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1.",
+    "tabulka": [
+     "Paušální daň (1. pásmo) 115 944 Kč 9 662 Kč +10 733 Kč",
+     "Přiznání, výdajový paušál 40 %Nejlevnější 105 211 Kč 8 768 Kč —",
+     "EET OFF (1. pásmo + přirážka) 132 744 Kč 11 062 Kč +27 533 Kč"
+    ]
+   },
+   "exponent": {
+    "chyba": "",
+    "prvniRadek": "Paušální daň (1. pásmo)Nejlevnější 115 944 Kč 9 662 Kč —"
+   },
+   "fokusGrafu": {
+    "aktivni": true,
+    "outline": "none 3px",
+    "stroke": "none 1px",
+    "role": null,
+    "ariaLabel": "Najetím nebo šipkami na grafu zobrazíš hodnoty pro konkrétní příjmy."
    },
    "nula": {
     "chyba": "Zadej roční příjmy jako celé číslo, nejméně 1."
@@ -565,14 +584,14 @@
    "o3": {
     "tabulka": [
      "Paušální daň (2. pásmo)Nejlevnější 200 940 Kč 16 745 Kč —",
-     "Přiznání, výdajový paušál 40 % 203 868 Kč 16 989 Kč +2 928 Kč",
+     "Přiznání, výdajový paušál 40 % 241 392 Kč 20 116 Kč +40 452 Kč",
      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro 1. pásmo paušální daně. S druhem činnosti „40 % – svobodná povolání, autorská práva, jiné podnikání“ je limit 1. pásma 1 000 000 Kč, ty máš 1 200 000 Kč, takže ti vychází 2. pásmo."
     ]
    },
    "dph": {
     "tabulka": [
      "Paušální daň Nedostupné: Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba).",
-     "Přiznání, výdajový paušál 40 %Nejlevnější 203 868 Kč 16 989 Kč —",
+     "Přiznání, výdajový paušál 40 %Nejlevnější 241 392 Kč 20 116 Kč —",
      "EET OFF (1. pásmo + přirážka) Nedostupné: EET OFF je jen pro OSVČ v paušálním režimu. Plátce DPH nemůže mít paušální daň (výjimkou je jen identifikovaná osoba)."
     ]
    },

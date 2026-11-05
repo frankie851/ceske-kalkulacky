@@ -20,9 +20,10 @@ const vysl = { datum: new Date().toISOString(), commit: 'd88ba427d8f665161b10071
 const kc = (s) => Number(String(s).replace(/[^\d-]/g, ''));
 
 // --- pomocné ovládání formuláře ---------------------------------------------
+/** Vyprázdní pole a napíše hodnotu klávesnicí (trojklik v poli type=number text nevybere). */
 async function napis(page, sel, text) {
-  await page.click(sel, { clickCount: 3 });
-  await page.keyboard.press('Backspace');
+  await page.focus(sel);
+  await page.evaluate((s) => { const el = document.querySelector(s); el.value = ''; el.dispatchEvent(new Event('input', { bubbles: true })); }, sel);
   if (text !== '' && text !== null && text !== undefined) await page.type(sel, String(text));
 }
 async function zaskrtni(page, name, on) {
@@ -49,9 +50,7 @@ async function dalsi(page) {
   return { pred, po, chyba };
 }
 async function pocetDeti(page, n) {
-  await page.click('#pocetDeti', { clickCount: 3 });
-  await page.keyboard.press('Backspace');
-  await page.type('#pocetDeti', String(n));
+  await napis(page, '#pocetDeti', n);
   await cekej(150);
 }
 async function prectiVysledek(page) {
@@ -236,7 +235,7 @@ const srv = await spustServer(KOREN);
   await dalsi(page); // → školka
   // 4f čísla po česku do školného: psaní „30 000“, „1500,50“, „1500.50“, vložení „30 000“
   const testCisla = async (jak, text) => {
-    await page.click('#skolne0', { clickCount: 3 }); await page.keyboard.press('Backspace');
+    await napis(page, '#skolne0', '');
     if (jak === 'psani') await page.type('#skolne0', text);
     else await page.evaluate((t) => { document.querySelector('#skolne0').focus(); document.execCommand('insertText', false, t); }, text);
     return page.evaluate(() => { const el = document.querySelector('#skolne0'); return { value: el.value, badInput: el.validity.badInput, valueAsNumber: el.valueAsNumber }; });
