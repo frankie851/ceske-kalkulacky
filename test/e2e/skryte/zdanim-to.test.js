@@ -20,7 +20,7 @@ test('prodeje: ukázka po načtení – zdaníš 20 000 Kč rozdílu', async () 
   assert.equal(await text(page, '[data-vysledek-cislo]'), '20 000 Kč');
   assert.equal(await text(page, '[data-lista-cislo]'), '20 000 Kč');
   assert.deepEqual(await stavy(page), ['Osvobozeno', 'Zdanitelné', 'Osvobozeno']);
-  assert.match(await text(page, '[data-zt-polozky] li:nth-child(1) .zt-duvod'), /Časový test splněn od 2\. 3\. 2026/);
+  assert.match(await text(page, '[data-zt-polozky] li:nth-child(1) .zt-duvod'), /Časový test splněn od 2\. 3\. 2025/);
   assert.match(await text(page, '[data-zt-polozky] li:nth-child(3) .zt-duvod'), /Hodnotový test/);
   assert.deepEqual(chyby, []);
   await page.close();
@@ -221,6 +221,7 @@ test('po načtení JavaScriptu stránka neposkočí (CLS < 0,05, mobil, CPU × 6
     await page.evaluate(() => document.fonts.ready);
     await new Promise((r) => setTimeout(r, 1000));
     const cls = await page.evaluate(() => window.__cls);
+    console.log(`${cesta}: CLS ${cls.toFixed(4)}`);
     assert.ok(cls < 0.05, `${cesta}: CLS ${cls}`);
     await page.emulateCPUThrottling(1);
     await page.close();

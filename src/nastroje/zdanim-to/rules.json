@@ -69,8 +69,8 @@
     "umisteni": {
       "stav": "sporne",
       "varianty": [
-        { "id": "par8", "nazev": "Dílčí základ podle § 8", "priloha": "příloha č. 3", "radek": "ř. 38 (dílčí základ z kapitálového majetku)", "zapocet": "zápočet daně zaplacené v zahraničí v příloze č. 3", "zdroj": { "nazev": "Finex", "url": "https://finex.cz/zdaneni-dividend-jak-postupovat-pri-vyplneni-danoveho-priznani/" } },
-        { "id": "par16a", "nazev": "Samostatný základ daně podle § 16a", "priloha": "příloha č. 4", "radek": "ř. 330 (daň ze samostatného základu)", "zapocet": "zápočet daně zaplacené v zahraničí podle pokynů k příloze č. 4", "zdroj": { "nazev": "RuleCalc", "url": "https://rulecalc.com/cs/dan/dan-fo-samostatny-zaklad" } }
+        { "id": "par8", "nazev": "Dílčí základ podle § 8", "priloha": "příloha č. 3", "radekZaklad": "ř. 38, dílčí základ z kapitálového majetku", "radekDan": null, "zapocet": "zápočet daně zaplacené v zahraničí v příloze č. 3", "zdroj": { "nazev": "Finex", "url": "https://finex.cz/zdaneni-dividend-jak-postupovat-pri-vyplneni-danoveho-priznani/" } },
+        { "id": "par16a", "nazev": "Samostatný základ daně podle § 16a", "priloha": "příloha č. 4", "radekZaklad": null, "radekDan": "ř. 330, daň ze samostatného základu", "zapocet": "zápočet daně zaplacené v zahraničí podle pokynů k příloze č. 4", "zdroj": { "nazev": "RuleCalc", "url": "https://rulecalc.com/cs/dan/dan-fo-samostatny-zaklad" } }
       ]
     }
   },
@@ -86,8 +86,8 @@
   },
   "priznani": {
     "limity": [
-      { "id": "vedle-zamestnani", "text": "Zaměstnanec s podepsaným prohlášením u jednoho zaměstnavatele nemusí podat přiznání, když další příjmy podle § 7 až 10 nepřesáhnou", "hodnota": 20000, "obdobi": "2026", "stav": "shoda" },
-      { "id": "celkovy", "text": "Přiznání musí podat ten, kdo měl roční příjmy podléhající dani nad", "hodnota": 50000, "obdobi": "2026", "stav": "shoda" },
+      { "id": "vedle-zamestnani", "text": "Za rok 2026: zaměstnanec s podepsaným prohlášením u jednoho zaměstnavatele nemusí podat přiznání, když další příjmy podle § 7 až 10 nepřesáhnou", "hodnota": 20000, "obdobi": "2026", "stav": "shoda" },
+      { "id": "celkovy", "text": "Za rok 2026: přiznání musí podat ten, kdo měl roční příjmy podléhající dani nad", "hodnota": 50000, "obdobi": "2026", "stav": "shoda" },
       { "id": "vedle-zamestnani-2027", "text": "Od roku 2027 se má limit dalších příjmů vedle zaměstnání zvýšit na", "hodnota": 40000, "obdobi": "od 2027", "stav": "sporne" },
       { "id": "celkovy-2027", "text": "Od roku 2027 se má celkový limit zvýšit na", "hodnota": 100000, "obdobi": "od 2027", "stav": "sporne" }
     ],

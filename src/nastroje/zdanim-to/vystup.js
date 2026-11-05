@@ -141,8 +141,8 @@ export function navodHtml(v, rules) {
   const varianty = u.varianty.map((x) => `<li class="zt-varianta"><h3 class="h-lg">Podle části zdrojů: ${esc(x.nazev)}</h3>`
     + `<p class="small">Zdroj: <a href="${esc(x.zdroj.url)}">${esc(x.zdroj.nazev)}</a></p>`
     + '<ol class="zt-kroky">'
-    + `<li>Do přílohy (${esc(x.priloha)}) uveď hrubé dividendy přepočtené na koruny: <span class="num">${kc(c.zakladKc)}</span>.</li>`
-    + `<li>Česká daň z nich je <span class="num">${kc(c.ceskaDan)}</span> (${esc(x.radek)}).</li>`
+    + `<li>Do přílohy (${esc(x.priloha)}) uveď hrubé dividendy přepočtené na koruny: <span class="num">${kc(c.zakladKc)}</span>${x.radekZaklad ? `, v přiznání ${esc(x.radekZaklad)}` : ''}.</li>`
+    + `<li>Česká daň z nich je <span class="num">${kc(c.ceskaDan)}</span>${x.radekDan ? `, v přiznání ${esc(x.radekDan)}` : ''}.</li>`
     + `<li>Uplatni ${esc(x.zapocet)}: <span class="num">${kc(c.zapocet)}</span>, po zemích podle tabulky výše.</li>`
     + `<li>K doplacení zůstává <span class="num">${kc(c.doplatek)}</span>.</li>`
     + '</ol></li>');

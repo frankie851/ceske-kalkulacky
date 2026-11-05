@@ -91,7 +91,7 @@ stitkyNavic: ['Neověřeno: čeká na schválení pravidel', 'Za rok 2026']
     <p class="muted small">Povinnost záleží na všech tvých příjmech, ne jen na dividendách. Tady jsou limity, jak je uvádějí zdroje.</p>
     <ul class="zt-sporne">
       {%- for l in d.limity %}
-      <li>{{ stitek({ typ: 'navrh' if l.stavInfo.stitek == 'navrh' else 'plain', text: l.stavInfo.text }) }}<span>{{ l.text }} <span class="num">{{ l.castka }}</span> ({{ l.obdobi }}).</span></li>
+      <li>{{ stitek({ typ: 'navrh' if l.stavInfo.stitek == 'navrh' else 'plain', text: l.stavInfo.text }) }}<span>{{ l.text }} <span class="num">{{ l.castka }}</span>.</span></li>
       {%- endfor %}
       <li>{{ stitek({ typ: 'navrh', text: d.dividendyVzdy.stavInfo.text }) }}<span>{{ d.dividendyVzdy.text }}</span></li>
     </ul>
