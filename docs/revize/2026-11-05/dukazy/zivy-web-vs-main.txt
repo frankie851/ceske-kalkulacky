@@ -1,0 +1,101 @@
+== bydlometr
+  OK defaults.json
+  OK index.html
+  OK js/app.js
+  OK js/data.js
+  OK js/form.js
+  OK js/format.js
+  OK js/mortgage.js
+  OK js/rentbuy.js
+  OK js/ui-refix.js
+  OK js/ui-rentbuy.js
+  OK package.json
+  OK rules.json
+== cestovni-prikaz
+  OK app.js
+  OK cesty.js
+  OK index.html
+  OK package.json
+  OK rules.json
+== inflacni-kalkulacka
+  OK app.js
+  OK data/cpi.json
+  OK index.html
+  OK inflation.js
+  OK package.json
+== kalkulator-dluhu
+  OK app.js
+  OK dluhy.js
+  OK index.html
+  OK rules.json
+== mam-eet
+  OK app.js
+  OK dom.js
+  OK index.html
+  OK osvc-app.js
+  OK osvc.js
+  OK package.json
+  OK rules.js
+  OK rules.json
+== penzijko-kompas
+  OK app.js
+  OK calc.js
+  OK index.html
+  OK package.json
+  OK rules.json
+== plan48
+  OK app.js
+  OK calc.js
+  OK index.html
+  OK package.json
+  OK rules.json
+== prijimacky-bez-paniky
+  OK app.js
+  OK ics.js
+  OK index.html
+  OK matching.js
+  OK package.json
+  OK rules.json
+  OK scenarios.js
+  OK strategy.js
+== rodicovska
+  OK app.js
+  OK index.html
+  DIFF package.json
+  OK rodina.js
+  OK rules.json
+  OK timeline.js
+== slevy-2027
+  OK app.js
+  OK index.html
+  OK package.json
+  OK rules.json
+  OK slevy.js
+== spot-nebo-fix
+  OK app.js
+  OK calc.js
+  OK data/fx.json
+  OK data/meta.json
+  OK data/prices.json
+  OK data/tdd/TDD4.json
+  OK data/tdd/TDD5-JC.json
+  OK data/tdd/TDD5-JM.json
+  OK data/tdd/TDD5-P.json
+  OK data/tdd/TDD5-SC.json
+  OK data/tdd/TDD5-SM.json
+  OK data/tdd/TDD5-STC.json
+  OK data/tdd/TDD5-VC.json
+  OK data/tdd/TDD5-ZC.json
+  OK data/tdd/TDD6.json
+  OK data/tdd/TDD7.json
+  OK data/tdd/index.json
+  OK dynamic.json
+  OK index.html
+  OK package.json
+  OK tariffs.json
+== vypoved-2026
+  OK app.js
+  OK index.html
+  OK package.json
+  OK rules.json
+  OK vypoved.js

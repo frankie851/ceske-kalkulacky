@@ -1,0 +1,458 @@
+# bydlometr @ 0472985 · 2026-11-05T07:41:14+00:00 · node v22.23.4
+$ npm test
+
+> bydlometr@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: rules.json: každá položka má hodnotu, zdroj a datum
+ok 1 - rules.json: každá položka má hodnotu, zdroj a datum
+  ---
+  duration_ms: 1.289907
+  type: 'test'
+  ...
+# Subtest: defaults.json: každá položka má hodnotu, zdroj a datum
+ok 2 - defaults.json: každá položka má hodnotu, zdroj a datum
+  ---
+  duration_ms: 0.350742
+  type: 'test'
+  ...
+# Subtest: defaults.json: všechna města mají cenu, nájem a daň
+ok 3 - defaults.json: všechna města mají cenu, nájem a daň
+  ---
+  duration_ms: 0.175438
+  type: 'test'
+  ...
+# Subtest: test/helpers.js
+ok 2 - test/helpers.js
+  ---
+  duration_ms: 51.3006
+  type: 'test'
+  ...
+# Subtest: anuitní splátka
+    # Subtest: 3 500 000 Kč, 25 let, 4,94 % → 20 337 Kč ± 5 Kč (Swiss Life Hypoindex 1/2026)
+    ok 1 - 3 500 000 Kč, 25 let, 4,94 % → 20 337 Kč ± 5 Kč (Swiss Life Hypoindex 1/2026)
+      ---
+      duration_ms: 0.875757
+      type: 'test'
+      ...
+    # Subtest: 1 200 000 Kč, 0 %, 10 let → 10 000 Kč
+    ok 2 - 1 200 000 Kč, 0 %, 10 let → 10 000 Kč
+      ---
+      duration_ms: 0.193585
+      type: 'test'
+      ...
+    # Subtest: Hypoindex 6/2026: 3 500 000 Kč, 25 let, 5,30 % → 21 082 Kč ± 5 Kč
+    ok 3 - Hypoindex 6/2026: 3 500 000 Kč, 25 let, 5,30 % → 21 082 Kč ± 5 Kč
+      ---
+      duration_ms: 0.119017
+      type: 'test'
+      ...
+    # Subtest: reprezentativní příklad KB: 3 200 000 Kč, 30 let, 4,59 % → celkem splaceno 5 899 641 Kč (vč. poplatků) ± 0,1 %
+    ok 4 - reprezentativní příklad KB: 3 200 000 Kč, 30 let, 4,59 % → celkem splaceno 5 899 641 Kč (vč. poplatků) ± 0,1 %
+      ---
+      duration_ms: 0.114383
+      type: 'test'
+      ...
+    # Subtest: nulový úvěr → 0
+    ok 5 - nulový úvěr → 0
+      ---
+      duration_ms: 0.089473
+      type: 'test'
+      ...
+    # Subtest: neplatná doba vyhodí chybu
+    ok 6 - neplatná doba vyhodí chybu
+      ---
+      duration_ms: 0.371472
+      type: 'test'
+      ...
+    1..6
+ok 5 - anuitní splátka
+  ---
+  duration_ms: 4.233278
+  type: 'suite'
+  ...
+# Subtest: splátkový kalendář
+    # Subtest: součet splátek jistiny = výše úvěru (± 1 Kč)
+    ok 1 - součet splátek jistiny = výše úvěru (± 1 Kč)
+      ---
+      duration_ms: 0.598071
+      type: 'test'
+      ...
+    # Subtest: úroky z kalendáře = Σ splátek − úvěr
+    ok 2 - úroky z kalendáře = Σ splátek − úvěr
+      ---
+      duration_ms: 0.313642
+      type: 'test'
+      ...
+    # Subtest: zůstatek po k splátkách odpovídá kalendáři
+    ok 3 - zůstatek po k splátkách odpovídá kalendáři
+      ---
+      duration_ms: 0.246068
+      type: 'test'
+      ...
+    1..3
+ok 6 - splátkový kalendář
+  ---
+  duration_ms: 1.58665
+  type: 'suite'
+  ...
+# Subtest: poplatek za mimořádnou splátku
+    # Subtest: 500 000 Kč, 3 celé roky do konce fixace → 3 750 Kč
+    ok 1 - 500 000 Kč, 3 celé roky do konce fixace → 3 750 Kč
+      ---
+      duration_ms: 0.379724
+      type: 'test'
+      ...
+    # Subtest: 500 000 Kč, 5 let do konce fixace → 5 000 Kč (strop 1 %)
+    ok 2 - 500 000 Kč, 5 let do konce fixace → 5 000 Kč (strop 1 %)
+      ---
+      duration_ms: 0.09734
+      type: 'test'
+      ...
+    # Subtest: 500 000 Kč ke konci fixace → 0 Kč
+    ok 3 - 500 000 Kč ke konci fixace → 0 Kč
+      ---
+      duration_ms: 0.071888
+      type: 'test'
+      ...
+    # Subtest: do 25 % původní výše úvěru v měsíci před výročím → 0 Kč
+    ok 4 - do 25 % původní výše úvěru v měsíci před výročím → 0 Kč
+      ---
+      duration_ms: 0.065386
+      type: 'test'
+      ...
+    # Subtest: nad 25 % v okně před výročím → poplatek jen z přesahu
+    ok 5 - nad 25 % v okně před výročím → poplatek jen z přesahu
+      ---
+      duration_ms: 0.125983
+      type: 'test'
+      ...
+    # Subtest: bezplatná splátka už letos využita → platí se z celé částky
+    ok 6 - bezplatná splátka už letos využita → platí se z celé částky
+      ---
+      duration_ms: 0.076835
+      type: 'test'
+      ...
+    # Subtest: starší smlouva i fixace → jen upozornění „zkontroluj smlouvu“
+    ok 7 - starší smlouva i fixace → jen upozornění „zkontroluj smlouvu“
+      ---
+      duration_ms: 0.241119
+      type: 'test'
+      ...
+    # Subtest: započaté roky mezi daty
+    ok 8 - započaté roky mezi daty
+      ---
+      duration_ms: 0.316222
+      type: 'test'
+      ...
+    # Subtest: okno měsíc před výročím smlouvy
+    ok 9 - okno měsíc před výročím smlouvy
+      ---
+      duration_ms: 0.221952
+      type: 'test'
+      ...
+    # Subtest: nová pravidla: smlouva NEBO začátek fixace od 1. 9. 2024
+    ok 10 - nová pravidla: smlouva NEBO začátek fixace od 1. 9. 2024
+      ---
+      duration_ms: 0.117126
+      type: 'test'
+      ...
+    # Subtest: výpočet z dat: 3 roky do konce fixace mimo okno → 3 750 Kč
+    ok 11 - výpočet z dat: 3 roky do konce fixace mimo okno → 3 750 Kč
+      ---
+      duration_ms: 0.166119
+      type: 'test'
+      ...
+    # Subtest: výpočet z dat: den konce fixace → 0 Kč
+    ok 12 - výpočet z dat: den konce fixace → 0 Kč
+      ---
+      duration_ms: 1.077103
+      type: 'test'
+      ...
+    # Subtest: výpočet z dat: 25 % v měsíci před výročím → 0 Kč
+    ok 13 - výpočet z dat: 25 % v měsíci před výročím → 0 Kč
+      ---
+      duration_ms: 0.129105
+      type: 'test'
+      ...
+    1..13
+ok 7 - poplatek za mimořádnou splátku
+  ---
+  duration_ms: 3.414913
+  type: 'suite'
+  ...
+# Subtest: odpočet úroků
+    # Subtest: úroky 200 000 Kč/rok, sazba daně 15 % → úspora 22 500 Kč
+    ok 1 - úroky 200 000 Kč/rok, sazba daně 15 % → úspora 22 500 Kč
+      ---
+      duration_ms: 0.102375
+      type: 'test'
+      ...
+    # Subtest: pod limitem se odečte vše
+    ok 2 - pod limitem se odečte vše
+      ---
+      duration_ms: 0.050397
+      type: 'test'
+      ...
+    1..2
+ok 8 - odpočet úroků
+  ---
+  duration_ms: 0.218941
+  type: 'suite'
+  ...
+# Subtest: LTV podle věku
+    # Subtest: věk 30 → 90 %
+    ok 1 - věk 30 → 90 %
+      ---
+      duration_ms: 0.167831
+      type: 'test'
+      ...
+    # Subtest: věk 40 → 80 %
+    ok 2 - věk 40 → 80 %
+      ---
+      duration_ms: 0.052322
+      type: 'test'
+      ...
+    # Subtest: věk 35 → 90 %, 36 → 80 %
+    ok 3 - věk 35 → 90 %, 36 → 80 %
+      ---
+      duration_ms: 0.049218
+      type: 'test'
+      ...
+    # Subtest: investiční nemovitost → 70 % (doporučení)
+    ok 4 - investiční nemovitost → 70 % (doporučení)
+      ---
+      duration_ms: 0.051835
+      type: 'test'
+      ...
+    1..4
+ok 9 - LTV podle věku
+  ---
+  duration_ms: 0.475608
+  type: 'suite'
+  ...
+# Subtest: refixace – varianty
+    # Subtest: obsahuje 4 varianty
+    ok 1 - obsahuje 4 varianty
+      ---
+      duration_ms: 0.70315
+      type: 'test'
+      ...
+    # Subtest: dosavadní splátka = anuita při dosavadní sazbě
+    ok 2 - dosavadní splátka = anuita při dosavadní sazbě
+      ---
+      duration_ms: 0.070385
+      type: 'test'
+      ...
+    # Subtest: přijetí nabídky: splátka a úroky
+    ok 3 - přijetí nabídky: splátka a úroky
+      ---
+      duration_ms: 0.10198
+      type: 'test'
+      ...
+    # Subtest: refinancování započte náklady
+    ok 4 - refinancování započte náklady
+      ---
+      duration_ms: 0.206833
+      type: 'test'
+      ...
+    # Subtest: mimořádná splátka ke konci fixace: poplatek 0, nižší splátka
+    ok 5 - mimořádná splátka ke konci fixace: poplatek 0, nižší splátka
+      ---
+      duration_ms: 0.071305
+      type: 'test'
+      ...
+    # Subtest: prodloužení: nižší splátka, vyšší úroky
+    ok 6 - prodloužení: nižší splátka, vyšší úroky
+      ---
+      duration_ms: 0.053391
+      type: 'test'
+      ...
+    # Subtest: nejlevnější varianta má nejnižší celkové náklady
+    ok 7 - nejlevnější varianta má nejnižší celkové náklady
+      ---
+      duration_ms: 0.110013
+      type: 'test'
+      ...
+    # Subtest: úspory větší než dluh splatí jen dluh
+    ok 8 - úspory větší než dluh splatí jen dluh
+      ---
+      duration_ms: 0.313036
+      type: 'test'
+      ...
+    # Subtest: zátěžový test u každé varianty: +1 a +2 p. b.
+    ok 9 - zátěžový test u každé varianty: +1 a +2 p. b.
+      ---
+      duration_ms: 0.099277
+      type: 'test'
+      ...
+    1..9
+ok 10 - refixace – varianty
+  ---
+  duration_ms: 1.922045
+  type: 'suite'
+  ...
+# Subtest: zátěžový test a zátěž rozpočtu
+    # Subtest: po fixaci se zbytek dluhu přepočte se sazbou +1 a +2 p. b.
+    ok 1 - po fixaci se zbytek dluhu přepočte se sazbou +1 a +2 p. b.
+      ---
+      duration_ms: 0.170974
+      type: 'test'
+      ...
+    # Subtest: fixace delší než zbývající doba → bez zátěžového testu
+    ok 2 - fixace delší než zbývající doba → bez zátěžového testu
+      ---
+      duration_ms: 0.125614
+      type: 'test'
+      ...
+    # Subtest: úrovně zátěže kolem prahu 40 %
+    ok 3 - úrovně zátěže kolem prahu 40 %
+      ---
+      duration_ms: 0.084767
+      type: 'test'
+      ...
+    1..3
+ok 11 - zátěžový test a zátěž rozpočtu
+  ---
+  duration_ms: 0.470528
+  type: 'suite'
+  ...
+# Subtest: nájem vs. koupě – simulace
+    # Subtest: bez úroků a růstů: jmění kupujícího = splacená jistina + vlastní zdroje
+    ok 1 - bez úroků a růstů: jmění kupujícího = splacená jistina + vlastní zdroje
+      ---
+      duration_ms: 2.471718
+      type: 'test'
+      ...
+    # Subtest: po splacení hypotéky kupující investuje ušetřený nájem
+    ok 2 - po splacení hypotéky kupující investuje ušetřený nájem
+      ---
+      duration_ms: 0.370912
+      type: 'test'
+      ...
+    # Subtest: nájemník investuje rozdíl, když je nájem levnější
+    ok 3 - nájemník investuje rozdíl, když je nájem levnější
+      ---
+      duration_ms: 0.461604
+      type: 'test'
+      ...
+    # Subtest: výnos investic se úročí měsíčně (1 + r)^(1/12)
+    ok 4 - výnos investic se úročí měsíčně (1 + r)^(1/12)
+      ---
+      duration_ms: 0.33074
+      type: 'test'
+      ...
+    # Subtest: cena nemovitosti roste o zadané procento ročně
+    ok 5 - cena nemovitosti roste o zadané procento ročně
+      ---
+      duration_ms: 0.352644
+      type: 'test'
+      ...
+    # Subtest: nájem roste jednou ročně
+    ok 6 - nájem roste jednou ročně
+      ---
+      duration_ms: 0.514907
+      type: 'test'
+      ...
+    # Subtest: rok zlomu: koupě je od 1. roku napřed
+    ok 7 - rok zlomu: koupě je od 1. roku napřed
+      ---
+      duration_ms: 0.489757
+      type: 'test'
+      ...
+    # Subtest: rok zlomu: s náklady koupě se zlom posune
+    ok 8 - rok zlomu: s náklady koupě se zlom posune
+      ---
+      duration_ms: 0.665509
+      type: 'test'
+      ...
+    # Subtest: rok zlomu: koupě se nevyplatí → null
+    ok 9 - rok zlomu: koupě se nevyplatí → null
+      ---
+      duration_ms: 0.645017
+      type: 'test'
+      ...
+    # Subtest: po konci fixace se splátka přepočte novou sazbou
+    ok 10 - po konci fixace se splátka přepočte novou sazbou
+      ---
+      duration_ms: 1.542953
+      type: 'test'
+      ...
+    # Subtest: beze změny sazby po fixaci se splatí přesně podle anuity
+    ok 11 - beze změny sazby po fixaci se splatí přesně podle anuity
+      ---
+      duration_ms: 0.486937
+      type: 'test'
+      ...
+    # Subtest: odpočet úroků snižuje výdaje kupujícího
+    ok 12 - odpočet úroků snižuje výdaje kupujícího
+      ---
+      duration_ms: 1.335199
+      type: 'test'
+      ...
+    # Subtest: náklady vlastnictví: fond oprav, pojištění, daň, údržba
+    ok 13 - náklady vlastnictví: fond oprav, pojištění, daň, údržba
+      ---
+      duration_ms: 0.346498
+      type: 'test'
+      ...
+    # Subtest: LTV: věk 40 a 10 % vlastních zdrojů → varování
+    ok 14 - LTV: věk 40 a 10 % vlastních zdrojů → varování
+      ---
+      duration_ms: 0.901205
+      type: 'test'
+      ...
+    # Subtest: LTV: věk 30 a 10 % vlastních zdrojů → v pořádku
+    ok 15 - LTV: věk 30 a 10 % vlastních zdrojů → v pořádku
+      ---
+      duration_ms: 0.311894
+      type: 'test'
+      ...
+    # Subtest: vlastní zdroje nad cenu: bez úvěru, zbytek se investuje
+    ok 16 - vlastní zdroje nad cenu: bez úvěru, zbytek se investuje
+      ---
+      duration_ms: 0.333321
+      type: 'test'
+      ...
+    1..16
+ok 12 - nájem vs. koupě – simulace
+  ---
+  duration_ms: 14.461395
+  type: 'suite'
+  ...
+# Subtest: citlivost 3 × 3
+    # Subtest: rozměr a osy
+    ok 1 - rozměr a osy
+      ---
+      duration_ms: 0.207295
+      type: 'test'
+      ...
+    # Subtest: střed = základní scénář
+    ok 2 - střed = základní scénář
+      ---
+      duration_ms: 1.07654
+      type: 'test'
+      ...
+    # Subtest: vyšší růst cen pomáhá koupi, vyšší výnos nájmu
+    ok 3 - vyšší růst cen pomáhá koupi, vyšší výnos nájmu
+      ---
+      duration_ms: 0.401763
+      type: 'test'
+      ...
+    1..3
+ok 13 - citlivost 3 × 3
+  ---
+  duration_ms: 2.003081
+  type: 'suite'
+  ...
+1..13
+# tests 63
+# suites 9
+# pass 63
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.349258
+exit: 0

@@ -1,0 +1,1097 @@
+[
+ {
+  "beh": 1,
+  "datum": "2026-11-05T08:39:32.120Z",
+  "pripady": {
+   "V1_vychozi": {
+    "ui": {
+     "hodnota": "19 850 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v lednu 2005 má stejnou kupní sílu jako 19 850 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "19 850 Kč",
+     "cenyO": "98,5 %",
+     "prumerne": "3,2 %"
+    },
+    "graf": {
+     "chart": true,
+     "n": 261,
+     "prvniPopisek": "1/2005",
+     "posledniPopisek": "9/2026",
+     "posledniYoy": 2.5112685125563194,
+     "nullu": 0,
+     "hladinaPrvni": 100,
+     "hladinaPosledni": 198.50374064837902,
+     "podtitulky": [
+      "leden 2005 = 100, do září 2026",
+      "po měsících, leden 2005 – září 2026"
+     ]
+    },
+    "tabulka": {
+     "radku": 261,
+     "prvniRadek": [
+      "září 2026",
+      "159,20",
+      "198,5",
+      "2,5 %"
+     ]
+    }
+   },
+   "P1_1 500": {
+    "vstup": "1 500",
+    "ui": {
+     "hodnota": "2 978 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 1 500 Kč v lednu 2005 má stejnou kupní sílu jako 2 978 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P2_1500,50": {
+    "vstup": "1500,50",
+    "ui": {
+     "hodnota": "2 979 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 1 501 Kč v lednu 2005 má stejnou kupní sílu jako 2 979 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P3_10.000": {
+    "vstup": "10.000",
+    "ui": {
+     "hodnota": "19,85 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10,00 Kč v lednu 2005 má stejnou kupní sílu jako 19,85 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P4_prazdne": {
+    "vstup": "",
+    "ui": {
+     "hodnota": "0,00 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 0,00 Kč v lednu 2005 má stejnou kupní sílu jako 0,00 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P5_-5": {
+    "vstup": "-5",
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte částku jako číslo, např. 10 000.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P6_abc": {
+    "vstup": "abc",
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte částku jako číslo, např. 10 000.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "V3_zari2025_zari2026": {
+    "ui": {
+     "hodnota": "103 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od září 2025 do září 2026 vzrostly o 2,5 % (průměrně 2,5 % ročně). 100 Kč v září 2025 má stejnou kupní sílu jako 103 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "103 Kč",
+     "cenyO": "2,5 %"
+    },
+    "graf": {
+     "chart": true,
+     "n": 13,
+     "prvniPopisek": "9/2025",
+     "posledniPopisek": "9/2026",
+     "posledniYoy": 2.5112685125563194,
+     "nullu": 0,
+     "hladinaPrvni": 100,
+     "hladinaPosledni": 102.51126851255631,
+     "podtitulky": [
+      "září 2025 = 100, do září 2026",
+      "po měsících, září 2025 – září 2026"
+     ]
+    },
+    "tabulka": {
+     "radku": 13,
+     "prvniRadek": [
+      "září 2026",
+      "159,20",
+      "102,5",
+      "2,5 %"
+     ]
+    }
+   },
+   "D1_prosinec2026": {
+    "vyber": {
+     "mesic": "12",
+     "rok": "2026",
+     "roky": [
+      "2026",
+      "1995"
+     ],
+     "pocetMesicu": 12
+    },
+    "ui": {
+     "hodnota": "103 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od září 2025 do září 2026 vzrostly o 2,5 % (průměrně 2,5 % ročně). 100 Kč v září 2025 má stejnou kupní sílu jako 103 Kč v září 2026.",
+     "poznamka": "Za prosinec 2026 zatím data nejsou, počítám s posledním dostupným měsícem (září 2026).",
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "103 Kč"
+    }
+   },
+   "V2_prohozeni": {
+    "ui": {
+     "hodnota": "5 038 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v září 2026 má stejnou kupní sílu jako 5 038 Kč v lednu 2005.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "5 038 Kč"
+    },
+    "vybraneMesice": [
+     "09",
+     "2026",
+     "01",
+     "2005"
+    ]
+   },
+   "R1_vychozi": {
+    "ui": {
+     "hodnota": "-2,15 % ročně",
+     "tridaHodnoty": "result-value bad",
+     "text": "Za 60 měs. (září 2021 – září 2026) vzrostly peníze nominálně o 21,7 %, ceny o 35,6 %. Reálně tedy ztrácely hodnotu: -10,3 % (průměrně -2,15 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "modul": {
+     "hodnota": "-2,15 % ročně",
+     "nominalne": "21,7 %",
+     "ceny": "35,6 %",
+     "realne": "-10,3 %"
+    }
+   },
+   "R2_10pct_celkem": {
+    "ui": {
+     "hodnota": "+7,31 % za období",
+     "tridaHodnoty": "result-value good",
+     "text": "Za 12 měs. (září 2025 – září 2026) vzrostly peníze nominálně o 10,0 %, ceny o 2,5 %. Reálně tedy peníze rostly o 7,3 % (průměrně 7,31 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "modul": {
+     "hodnota": "+7,31 % za období"
+    }
+   },
+   "R2b_3,5_carka": {
+    "ui": {
+     "hodnota": "+0,96 % za období",
+     "tridaHodnoty": "result-value good",
+     "text": "Za 12 měs. (září 2025 – září 2026) vzrostly peníze nominálně o 3,5 %, ceny o 2,5 %. Reálně tedy peníze rostly o 1,0 % (průměrně 0,96 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "modul": {
+     "hodnota": "+0,96 % za období"
+    }
+   },
+   "R7_minus100": {
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte výnos v procentech, např. 4 nebo 3,5.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    }
+   },
+   "R8_obdobi_obracene": {
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zvolte období, ve kterém je „Do“ později než „Od“.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    }
+   },
+   "M1_vychozi": {
+    "ui": {
+     "hodnota": "-5,31 %",
+     "tridaHodnoty": "result-value bad",
+     "text": "Mzda se nominálně změnila o +50,0 %, ceny o +58,4 %. Reálně jste si pohoršili o 5,31 %; na stejnou kupní sílu jako 30 000 Kč v září 2016 by v září 2026 stačilo 47 522 Kč.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    },
+    "modul": {
+     "hodnota": "-5,31 %",
+     "stacilo": "47 522 Kč"
+    }
+   },
+   "M2_40000_50000": {
+    "ui": {
+     "hodnota": "+21,94 %",
+     "tridaHodnoty": "result-value good",
+     "text": "Mzda se nominálně změnila o +25,0 %, ceny o +2,5 %. Reálně jste si polepšili o 21,94 %; na stejnou kupní sílu jako 40 000 Kč v září 2025 by v září 2026 stačilo 41 005 Kč.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    },
+    "modul": {
+     "hodnota": "+21,94 %",
+     "stacilo": "41 005 Kč"
+    }
+   },
+   "M5_mzda0": {
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte obě mzdy jako kladná čísla.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    }
+   },
+   "V1_1440": {
+    "ui": {
+     "hodnota": "19 850 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v lednu 2005 má stejnou kupní sílu jako 19 850 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P2_enUS_1500,50": {
+    "ui": {
+     "hodnota": "2 979 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 1 501 Kč v lednu 2005 má stejnou kupní sílu jako 2 979 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "2 979 Kč"
+    },
+    "typPole": "text"
+   },
+   "R_enUS_3,5": {
+    "ui": {
+     "hodnota": "-2,62 % ročně",
+     "tridaHodnoty": "result-value bad",
+     "text": "Za 60 měs. (září 2021 – září 2026) vzrostly peníze nominálně o 18,8 %, ceny o 35,6 %. Reálně tedy ztrácely hodnotu: -12,4 % (průměrně -2,62 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "hodnotaPole": "3,5"
+   }
+  },
+  "kontroly": {
+   "preteka360_convert": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe360_convert": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-convert"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    },
+    {
+     "id": "scrollable-region-focusable",
+     "dopad": "serious",
+     "popis": "Scrollable region must have keyboard access",
+     "pocet": 1,
+     "uzly": [
+      ".table-scroll"
+     ],
+     "tags": [
+      "wcag2a",
+      "wcag211",
+      "wcag213"
+     ]
+    }
+   ],
+   "vyberObdobi": {
+    "mesicu": 12,
+    "roky": "2026 … 1995"
+   },
+   "preteka360_chyba": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "sipkaNaZalozce": {
+    "aktivni": "tab-return",
+    "vybrana": "tab-return",
+    "panelReturnViditelny": true
+   },
+   "preteka360_return": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "preteka360_wage": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe360_wage": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-wage"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    },
+    {
+     "id": "scrollable-region-focusable",
+     "dopad": "serious",
+     "popis": "Scrollable region must have keyboard access",
+     "pocet": 1,
+     "uzly": [
+      ".table-scroll"
+     ],
+     "tags": [
+      "wcag2a",
+      "wcag211",
+      "wcag213"
+     ]
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false,
+    "dialogy": [],
+    "textPoXss": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte obě mzdy jako kladná čísla.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    }
+   },
+   "localStorage": {},
+   "sit360": {
+    "pozadavky": [
+     "http://127.0.0.1:44143/",
+     "http://127.0.0.1:44143/styles.css",
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "http://127.0.0.1:44143/app.js",
+     "http://127.0.0.1:44143/inflation.js",
+     "http://127.0.0.1:44143/data/cpi.json"
+    ],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "konzole": [],
+    "chyby": []
+   },
+   "preteka1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "preteka1440_return": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "preteka1440_wage": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "axe360_dark": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-convert"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ],
+   "barvyZalozky": {
+    "pozadi": "rgb(57, 135, 229)",
+    "pismo": "rgb(255, 255, 255)",
+    "velikost": "15.2px",
+    "tloustka": "600"
+   }
+  },
+  "zivyWeb": {
+   "360": {
+    "preteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "konzole": [],
+    "chyby": [],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "axe": [
+     {
+      "id": "color-contrast",
+      "dopad": "serious",
+      "popis": "Elements must meet minimum color contrast ratio thresholds",
+      "pocet": 1,
+      "uzly": [
+       "#tab-convert"
+      ],
+      "tags": [
+       "wcag2aa",
+       "wcag143"
+      ]
+     }
+    ],
+    "xss": {
+     "vlozenyImg": false
+    },
+    "localStorage": {}
+   },
+   "1440": {
+    "preteka": {
+     "scrollWidth": 1440,
+     "innerWidth": 1440,
+     "preteka": false
+    },
+    "konzole": [],
+    "chyby": [],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ]
+   },
+   "vychoziVysledek": {
+    "hodnota": "19 850 Kč",
+    "tridaHodnoty": "result-value",
+    "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v lednu 2005 má stejnou kupní sílu jako 19 850 Kč v září 2026.",
+    "poznamka": null,
+    "panelSkryty": false,
+    "posledniData": "září 2026",
+    "aktivniZalozka": "tab-convert",
+    "hash": "#prepocet"
+   }
+  }
+ },
+ {
+  "beh": 2,
+  "datum": "2026-11-05T08:40:22.457Z",
+  "pripady": {
+   "V1_vychozi": {
+    "ui": {
+     "hodnota": "19 850 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v lednu 2005 má stejnou kupní sílu jako 19 850 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "19 850 Kč",
+     "cenyO": "98,5 %",
+     "prumerne": "3,2 %"
+    },
+    "graf": {
+     "chart": true,
+     "n": 261,
+     "prvniPopisek": "1/2005",
+     "posledniPopisek": "9/2026",
+     "posledniYoy": 2.5112685125563194,
+     "nullu": 0,
+     "hladinaPrvni": 100,
+     "hladinaPosledni": 198.50374064837902,
+     "podtitulky": [
+      "leden 2005 = 100, do září 2026",
+      "po měsících, leden 2005 – září 2026"
+     ]
+    },
+    "tabulka": {
+     "radku": 261,
+     "prvniRadek": [
+      "září 2026",
+      "159,20",
+      "198,5",
+      "2,5 %"
+     ]
+    }
+   },
+   "P1_1 500": {
+    "vstup": "1 500",
+    "ui": {
+     "hodnota": "2 978 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 1 500 Kč v lednu 2005 má stejnou kupní sílu jako 2 978 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P2_1500,50": {
+    "vstup": "1500,50",
+    "ui": {
+     "hodnota": "2 979 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 1 501 Kč v lednu 2005 má stejnou kupní sílu jako 2 979 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P3_10.000": {
+    "vstup": "10.000",
+    "ui": {
+     "hodnota": "19,85 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10,00 Kč v lednu 2005 má stejnou kupní sílu jako 19,85 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P4_prazdne": {
+    "vstup": "",
+    "ui": {
+     "hodnota": "0,00 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 0,00 Kč v lednu 2005 má stejnou kupní sílu jako 0,00 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P5_-5": {
+    "vstup": "-5",
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte částku jako číslo, např. 10 000.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P6_abc": {
+    "vstup": "abc",
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte částku jako číslo, např. 10 000.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "V3_zari2025_zari2026": {
+    "ui": {
+     "hodnota": "103 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od září 2025 do září 2026 vzrostly o 2,5 % (průměrně 2,5 % ročně). 100 Kč v září 2025 má stejnou kupní sílu jako 103 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "103 Kč",
+     "cenyO": "2,5 %"
+    },
+    "graf": {
+     "chart": true,
+     "n": 13,
+     "prvniPopisek": "9/2025",
+     "posledniPopisek": "9/2026",
+     "posledniYoy": 2.5112685125563194,
+     "nullu": 0,
+     "hladinaPrvni": 100,
+     "hladinaPosledni": 102.51126851255631,
+     "podtitulky": [
+      "září 2025 = 100, do září 2026",
+      "po měsících, září 2025 – září 2026"
+     ]
+    },
+    "tabulka": {
+     "radku": 13,
+     "prvniRadek": [
+      "září 2026",
+      "159,20",
+      "102,5",
+      "2,5 %"
+     ]
+    }
+   },
+   "D1_prosinec2026": {
+    "vyber": {
+     "mesic": "12",
+     "rok": "2026",
+     "roky": [
+      "2026",
+      "1995"
+     ],
+     "pocetMesicu": 12
+    },
+    "ui": {
+     "hodnota": "103 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od září 2025 do září 2026 vzrostly o 2,5 % (průměrně 2,5 % ročně). 100 Kč v září 2025 má stejnou kupní sílu jako 103 Kč v září 2026.",
+     "poznamka": "Za prosinec 2026 zatím data nejsou, počítám s posledním dostupným měsícem (září 2026).",
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "103 Kč"
+    }
+   },
+   "V2_prohozeni": {
+    "ui": {
+     "hodnota": "5 038 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v září 2026 má stejnou kupní sílu jako 5 038 Kč v lednu 2005.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "5 038 Kč"
+    },
+    "vybraneMesice": [
+     "09",
+     "2026",
+     "01",
+     "2005"
+    ]
+   },
+   "R1_vychozi": {
+    "ui": {
+     "hodnota": "-2,15 % ročně",
+     "tridaHodnoty": "result-value bad",
+     "text": "Za 60 měs. (září 2021 – září 2026) vzrostly peníze nominálně o 21,7 %, ceny o 35,6 %. Reálně tedy ztrácely hodnotu: -10,3 % (průměrně -2,15 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "modul": {
+     "hodnota": "-2,15 % ročně",
+     "nominalne": "21,7 %",
+     "ceny": "35,6 %",
+     "realne": "-10,3 %"
+    }
+   },
+   "R2_10pct_celkem": {
+    "ui": {
+     "hodnota": "+7,31 % za období",
+     "tridaHodnoty": "result-value good",
+     "text": "Za 12 měs. (září 2025 – září 2026) vzrostly peníze nominálně o 10,0 %, ceny o 2,5 %. Reálně tedy peníze rostly o 7,3 % (průměrně 7,31 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "modul": {
+     "hodnota": "+7,31 % za období"
+    }
+   },
+   "R2b_3,5_carka": {
+    "ui": {
+     "hodnota": "+0,96 % za období",
+     "tridaHodnoty": "result-value good",
+     "text": "Za 12 měs. (září 2025 – září 2026) vzrostly peníze nominálně o 3,5 %, ceny o 2,5 %. Reálně tedy peníze rostly o 1,0 % (průměrně 0,96 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "modul": {
+     "hodnota": "+0,96 % za období"
+    }
+   },
+   "R7_minus100": {
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte výnos v procentech, např. 4 nebo 3,5.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    }
+   },
+   "R8_obdobi_obracene": {
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zvolte období, ve kterém je „Do“ později než „Od“.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    }
+   },
+   "M1_vychozi": {
+    "ui": {
+     "hodnota": "-5,31 %",
+     "tridaHodnoty": "result-value bad",
+     "text": "Mzda se nominálně změnila o +50,0 %, ceny o +58,4 %. Reálně jste si pohoršili o 5,31 %; na stejnou kupní sílu jako 30 000 Kč v září 2016 by v září 2026 stačilo 47 522 Kč.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    },
+    "modul": {
+     "hodnota": "-5,31 %",
+     "stacilo": "47 522 Kč"
+    }
+   },
+   "M2_40000_50000": {
+    "ui": {
+     "hodnota": "+21,94 %",
+     "tridaHodnoty": "result-value good",
+     "text": "Mzda se nominálně změnila o +25,0 %, ceny o +2,5 %. Reálně jste si polepšili o 21,94 %; na stejnou kupní sílu jako 40 000 Kč v září 2025 by v září 2026 stačilo 41 005 Kč.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    },
+    "modul": {
+     "hodnota": "+21,94 %",
+     "stacilo": "41 005 Kč"
+    }
+   },
+   "M5_mzda0": {
+    "ui": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte obě mzdy jako kladná čísla.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    }
+   },
+   "V1_1440": {
+    "ui": {
+     "hodnota": "19 850 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 10 000 Kč v lednu 2005 má stejnou kupní sílu jako 19 850 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    }
+   },
+   "P2_enUS_1500,50": {
+    "ui": {
+     "hodnota": "2 979 Kč",
+     "tridaHodnoty": "result-value",
+     "text": "Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % (průměrně 3,2 % ročně). 1 501 Kč v lednu 2005 má stejnou kupní sílu jako 2 979 Kč v září 2026.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-convert",
+     "hash": "#prepocet"
+    },
+    "modul": {
+     "hodnota": "2 979 Kč"
+    },
+    "typPole": "text"
+   },
+   "R_enUS_3,5": {
+    "ui": {
+     "hodnota": "-2,62 % ročně",
+     "tridaHodnoty": "result-value bad",
+     "text": "Za 60 měs. (září 2021 – září 2026) vzrostly peníze nominálně o 18,8 %, ceny o 35,6 %. Reálně tedy ztrácely hodnotu: -12,4 % (průměrně -2,62 % ročně).",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-return",
+     "hash": "#vynos"
+    },
+    "hodnotaPole": "3,5"
+   }
+  },
+  "kontroly": {
+   "preteka360_convert": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe360_convert": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-convert"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    },
+    {
+     "id": "scrollable-region-focusable",
+     "dopad": "serious",
+     "popis": "Scrollable region must have keyboard access",
+     "pocet": 1,
+     "uzly": [
+      ".table-scroll"
+     ],
+     "tags": [
+      "wcag2a",
+      "wcag211",
+      "wcag213"
+     ]
+    }
+   ],
+   "vyberObdobi": {
+    "mesicu": 12,
+    "roky": "2026 … 1995"
+   },
+   "preteka360_chyba": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "sipkaNaZalozce": {
+    "aktivni": "tab-return",
+    "vybrana": "tab-return",
+    "panelReturnViditelny": true
+   },
+   "preteka360_return": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "preteka360_wage": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe360_wage": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-wage"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    },
+    {
+     "id": "scrollable-region-focusable",
+     "dopad": "serious",
+     "popis": "Scrollable region must have keyboard access",
+     "pocet": 1,
+     "uzly": [
+      ".table-scroll"
+     ],
+     "tags": [
+      "wcag2a",
+      "wcag211",
+      "wcag213"
+     ]
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false,
+    "dialogy": [],
+    "textPoXss": {
+     "hodnota": "–",
+     "tridaHodnoty": "result-value",
+     "text": "Zadejte obě mzdy jako kladná čísla.",
+     "poznamka": null,
+     "panelSkryty": false,
+     "posledniData": "září 2026",
+     "aktivniZalozka": "tab-wage",
+     "hash": "#mzda"
+    }
+   },
+   "localStorage": {},
+   "sit360": {
+    "pozadavky": [
+     "http://127.0.0.1:39245/",
+     "http://127.0.0.1:39245/styles.css",
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "http://127.0.0.1:39245/app.js",
+     "http://127.0.0.1:39245/inflation.js",
+     "http://127.0.0.1:39245/data/cpi.json"
+    ],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "konzole": [],
+    "chyby": []
+   },
+   "preteka1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "preteka1440_return": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "preteka1440_wage": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "axe360_dark": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-convert"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ],
+   "barvyZalozky": {
+    "pozadi": "rgb(57, 135, 229)",
+    "pismo": "rgb(255, 255, 255)",
+    "velikost": "15.2px",
+    "tloustka": "600"
+   }
+  }
+ }
+]

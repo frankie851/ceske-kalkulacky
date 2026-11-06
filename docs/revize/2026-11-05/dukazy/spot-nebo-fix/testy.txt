@@ -1,0 +1,119 @@
+# spot-nebo-fix @ 1c1f7b2 · 2026-11-05T07:41:17+00:00 · node v22.23.4
+$ npm test
+
+> spot-nebo-fix@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: fix: 3 MWh × (3 000 + 2 515,08) Kč/MWh = 16 545,24 Kč (bez stálých plateb)
+ok 1 - fix: 3 MWh × (3 000 + 2 515,08) Kč/MWh = 16 545,24 Kč (bez stálých plateb)
+  ---
+  duration_ms: 1.624517
+  type: 'test'
+  ...
+# Subtest: spot: 2 × 0,5 MWh, ceny 100 a 0 EUR/MWh, kurz 25 Kč/EUR → silová elektřina 1 250 Kč
+ok 2 - spot: 2 × 0,5 MWh, ceny 100 a 0 EUR/MWh, kurz 25 Kč/EUR → silová elektřina 1 250 Kč
+  ---
+  duration_ms: 0.322523
+  type: 'test'
+  ...
+# Subtest: spot: marže se přičítá za každou MWh
+ok 3 - spot: marže se přičítá za každou MWh
+  ---
+  duration_ms: 0.302885
+  type: 'test'
+  ...
+# Subtest: dynamický tarif: celá spotřeba v pásmu −50 % → polovina základní ceny
+ok 4 - dynamický tarif: celá spotřeba v pásmu −50 % → polovina základní ceny
+  ---
+  duration_ms: 0.140712
+  type: 'test'
+  ...
+# Subtest: dynamický tarif: pásma ČEZ podle sezóny a dne
+ok 5 - dynamický tarif: pásma ČEZ podle sezóny a dne
+  ---
+  duration_ms: 2.527279
+  type: 'test'
+  ...
+# Subtest: den přechodu na letní čas má 92 čtvrthodin, na zimní 100
+ok 6 - den přechodu na letní čas má 92 čtvrthodin, na zimní 100
+  ---
+  duration_ms: 72.607809
+  type: 'test'
+  ...
+# Subtest: roční součet TDD = 1 a délka odpovídá mřížce
+ok 7 - roční součet TDD = 1 a délka odpovídá mřížce
+  ---
+  duration_ms: 92.588358
+  type: 'test'
+  ...
+# Subtest: data: ceny a kurzy pokrývají celé období
+ok 8 - data: ceny a kurzy pokrývají celé období
+  ---
+  duration_ms: 90.614553
+  type: 'test'
+  ...
+# Subtest: svátky: Velikonoce 2026 a pevné svátky
+ok 9 - svátky: Velikonoce 2026 a pevné svátky
+  ---
+  duration_ms: 0.548176
+  type: 'test'
+  ...
+# Subtest: posun 0 % nemění výsledek
+ok 10 - posun 0 % nemění výsledek
+  ---
+  duration_ms: 7.651159
+  type: 'test'
+  ...
+# Subtest: posun nemění roční (ani denní) spotřebu a nezdražuje spot ani dynamický tarif
+ok 11 - posun nemění roční (ani denní) spotřebu a nezdražuje spot ani dynamický tarif
+  ---
+  duration_ms: 11.0293
+  type: 'test'
+  ...
+# Subtest: VT/NT podle oken NT a DPH
+ok 12 - VT/NT podle oken NT a DPH
+  ---
+  duration_ms: 0.52201
+  type: 'test'
+  ...
+# Subtest: POZE: účtuje se nižší z platby podle spotřeby a podle jističe
+ok 13 - POZE: účtuje se nižší z platby podle spotřeby a podle jističe
+  ---
+  duration_ms: 0.154989
+  type: 'test'
+  ...
+# Subtest: CSV: středník, desetinná čárka, čas konce intervalu
+ok 14 - CSV: středník, desetinná čárka, čas konce intervalu
+  ---
+  duration_ms: 1.578574
+  type: 'test'
+  ...
+# Subtest: CSV: hodinová data se rozdělí na čtvrthodiny, ISO čas, čárka jako oddělovač
+ok 15 - CSV: hodinová data se rozdělí na čtvrthodiny, ISO čas, čárka jako oddělovač
+  ---
+  duration_ms: 0.583568
+  type: 'test'
+  ...
+# Subtest: průměr podle hodiny dne
+ok 16 - průměr podle hodiny dne
+  ---
+  duration_ms: 0.579508
+  type: 'test'
+  ...
+# Subtest: dynamický tarif odpovídá výpočtu podle ceníku ČEZ Prodej (D02d i D25d, ČEZ Distribuce, 3× 25 A)
+ok 17 - dynamický tarif odpovídá výpočtu podle ceníku ČEZ Prodej (D02d i D25d, ČEZ Distribuce, 3× 25 A)
+  ---
+  duration_ms: 137.761705
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 554.405587
+exit: 0

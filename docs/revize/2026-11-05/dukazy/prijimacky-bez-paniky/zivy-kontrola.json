@@ -1,0 +1,329 @@
+{
+ "url": "https://frankie851.github.io/prijimacky-bez-paniky/",
+ "datum": "2026-11-05T08:50:08.110Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Přeskočit na obsah",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Jak to funguje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Simulátor",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Moje strategie",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Termíny",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Před přihláškou",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "CERMAT – Průvodce pro uchazeče k DiPSy 2",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "CERMAT – Jednotná přijímací zkouška",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "CERMAT – Průvodce pro uchazeče k DiPSy 2",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Metodický materiál k přijímacímu ",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "MŠMT – Časový harmonogram přijímacího ří",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Priorita nepřebíjí body",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Proč dát na 3. místo jistotu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Lepší výsledek ze dvou pokusů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Upravit třídu a školy",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Název",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Míst",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Odebrat školu Gymnázium",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Název",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Míst",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Odebrat školu Průmyslovka",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Název",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Míst",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/matching.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/strategy.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/ics.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/scenarios.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/matching.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/strategy.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/ics.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/scenarios.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/prijimacky-bez-paniky/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": []
+  }
+ }
+}

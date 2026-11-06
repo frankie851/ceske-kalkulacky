@@ -1,0 +1,270 @@
+# plan48 @ 48733fe · 2026-11-05T07:41:16+00:00 · node v22.23.4
+$ npm test
+
+> plan48@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: zadání – povinné případy
+    # Subtest: DPS 5 700 Kč/měs → odpočet 48 000 Kč, úspora 7 200 Kč
+    ok 1 - DPS 5 700 Kč/měs → odpočet 48 000 Kč, úspora 7 200 Kč
+      ---
+      duration_ms: 1.128069
+      type: 'test'
+      ...
+    # Subtest: DPS 3 000 + ŽP 2 500 Kč/měs → odpočet 45 600 Kč
+    ok 2 - DPS 3 000 + ŽP 2 500 Kč/měs → odpočet 45 600 Kč
+      ---
+      duration_ms: 0.188702
+      type: 'test'
+      ...
+    # Subtest: DPS 400 Kč/měs → státní příspěvek 0
+    ok 3 - DPS 400 Kč/měs → státní příspěvek 0
+      ---
+      duration_ms: 0.14266
+      type: 'test'
+      ...
+    # Subtest: věk 25, návrh 2027, DPS 1 700 Kč/měs → příspěvek 8 160 Kč/rok
+    ok 4 - věk 25, návrh 2027, DPS 1 700 Kč/měs → příspěvek 8 160 Kč/rok
+      ---
+      duration_ms: 0.180139
+      type: 'test'
+      ...
+    1..4
+ok 1 - zadání – povinné případy
+  ---
+  duration_ms: 3.095492
+  type: 'suite'
+  ...
+# Subtest: státní příspěvek – pravidla 2026
+    # Subtest: hranice 500 Kč → 100 Kč
+    ok 1 - hranice 500 Kč → 100 Kč
+      ---
+      duration_ms: 0.227158
+      type: 'test'
+      ...
+    # Subtest: 1 700 Kč → 340 Kč, víc už nepřidá
+    ok 2 - 1 700 Kč → 340 Kč, víc už nepřidá
+      ---
+      duration_ms: 0.097751
+      type: 'test'
+      ...
+    # Subtest: 20 % mezi hranicemi
+    ok 3 - 20 % mezi hranicemi
+      ---
+      duration_ms: 0.213516
+      type: 'test'
+      ...
+    # Subtest: poživatel starobního důchodu nemá nárok
+    ok 4 - poživatel starobního důchodu nemá nárok
+      ---
+      duration_ms: 0.233126
+      type: 'test'
+      ...
+    # Subtest: pásmo pro libovolný věk
+    ok 5 - pásmo pro libovolný věk
+      ---
+      duration_ms: 0.200019
+      type: 'test'
+      ...
+    1..5
+ok 2 - státní příspěvek – pravidla 2026
+  ---
+  duration_ms: 1.412216
+  type: 'suite'
+  ...
+# Subtest: státní příspěvek – návrh 2027
+    # Subtest: nezletilý (17) se 100 Kč → 40 Kč
+    ok 1 - nezletilý (17) se 100 Kč → 40 Kč
+      ---
+      duration_ms: 1.21696
+      type: 'test'
+      ...
+    # Subtest: 20 let se 100 Kč → 0 (minimum zůstává 500 Kč)
+    ok 2 - 20 let se 100 Kč → 0 (minimum zůstává 500 Kč)
+      ---
+      duration_ms: 0.116723
+      type: 'test'
+      ...
+    # Subtest: 29 let → 40 %, 30 let → 20 %
+    ok 3 - 29 let → 40 %, 30 let → 20 %
+      ---
+      duration_ms: 0.064961
+      type: 'test'
+      ...
+    # Subtest: max 680 Kč i při vyšším vkladu
+    ok 4 - max 680 Kč i při vyšším vkladu
+      ---
+      duration_ms: 0.060799
+      type: 'test'
+      ...
+    1..4
+ok 3 - státní příspěvek – návrh 2027
+  ---
+  duration_ms: 1.597402
+  type: 'suite'
+  ...
+# Subtest: daňový odpočet
+    # Subtest: DPS se počítá jen nad roční hranici 20 400 Kč
+    ok 1 - DPS se počítá jen nad roční hranici 20 400 Kč
+      ---
+      duration_ms: 0.136522
+      type: 'test'
+      ...
+    # Subtest: mimořádný vklad v prosinci se započte celý (roční výpočet)
+    ok 2 - mimořádný vklad v prosinci se započte celý (roční výpočet)
+      ---
+      duration_ms: 0.052752
+      type: 'test'
+      ...
+    # Subtest: DIP a ŽP od první koruny
+    ok 3 - DIP a ŽP od první koruny
+      ---
+      duration_ms: 0.066945
+      type: 'test'
+      ...
+    # Subtest: strop 48 000 Kč při kombinaci DIP + ŽP
+    ok 4 - strop 48 000 Kč při kombinaci DIP + ŽP
+      ---
+      duration_ms: 0.058596
+      type: 'test'
+      ...
+    # Subtest: starobní důchodce: DPS od první koruny
+    ok 5 - starobní důchodce: DPS od první koruny
+      ---
+      duration_ms: 0.103042
+      type: 'test'
+      ...
+    # Subtest: příspěvek zaměstnavatele odpočet neovlivní
+    ok 6 - příspěvek zaměstnavatele odpočet neovlivní
+      ---
+      duration_ms: 0.13238
+      type: 'test'
+      ...
+    # Subtest: sazba 23 %
+    ok 7 - sazba 23 %
+      ---
+      duration_ms: 0.136262
+      type: 'test'
+      ...
+    1..7
+ok 4 - daňový odpočet
+  ---
+  duration_ms: 0.825351
+  type: 'suite'
+  ...
+# Subtest: doporučení do 31. 12.
+    # Subtest: DPS 3 500 Kč/měs, 10 měsíců za námi → doplatit 26 400 Kč (příklad KB)
+    ok 1 - DPS 3 500 Kč/měs, 10 měsíců za námi → doplatit 26 400 Kč (příklad KB)
+      ---
+      duration_ms: 0.136727
+      type: 'test'
+      ...
+    # Subtest: nízký vklad: navýšit na 1 700 Kč na zbývající měsíce
+    ok 2 - nízký vklad: navýšit na 1 700 Kč na zbývající měsíce
+      ---
+      duration_ms: 0.132607
+      type: 'test'
+      ...
+    # Subtest: vše vyčerpáno → hotovo
+    ok 3 - vše vyčerpáno → hotovo
+      ---
+      duration_ms: 0.077532
+      type: 'test'
+      ...
+    # Subtest: důchodce nedostane radu na navýšení kvůli příspěvku
+    ok 4 - důchodce nedostane radu na navýšení kvůli příspěvku
+      ---
+      duration_ms: 0.076947
+      type: 'test'
+      ...
+    # Subtest: návrh 2027: mladý dostane radu podle 40 %
+    ok 5 - návrh 2027: mladý dostane radu podle 40 %
+      ---
+      duration_ms: 0.108194
+      type: 'test'
+      ...
+    1..5
+ok 5 - doporučení do 31. 12.
+  ---
+  duration_ms: 0.712603
+  type: 'suite'
+  ...
+# Subtest: projekce
+    # Subtest: začíná v aktuálním věku a končí v 60
+    ok 1 - začíná v aktuálním věku a končí v 60
+      ---
+      duration_ms: 0.297892
+      type: 'test'
+      ...
+    # Subtest: vloženo roste o vlastní + zaměstnavatel + stát + DIP
+    ok 2 - vloženo roste o vlastní + zaměstnavatel + stát + DIP
+      ---
+      duration_ms: 0.10605
+      type: 'test'
+      ...
+    # Subtest: kladný čistý výnos → hodnota nad vloženým, monotónní růst
+    ok 3 - kladný čistý výnos → hodnota nad vloženým, monotónní růst
+      ---
+      duration_ms: 0.218675
+      type: 'test'
+      ...
+    # Subtest: poplatek vyšší než výnos → hodnota pod vloženým
+    ok 4 - poplatek vyšší než výnos → hodnota pod vloženým
+      ---
+      duration_ms: 0.096376
+      type: 'test'
+      ...
+    # Subtest: návrh 2027: příspěvek se po 30. roce sníží
+    ok 5 - návrh 2027: příspěvek se po 30. roce sníží
+      ---
+      duration_ms: 0.120756
+      type: 'test'
+      ...
+    # Subtest: věk ≥ 60 → jen výchozí bod
+    ok 6 - věk ≥ 60 → jen výchozí bod
+      ---
+      duration_ms: 0.077066
+      type: 'test'
+      ...
+    1..6
+ok 6 - projekce
+  ---
+  duration_ms: 1.041253
+  type: 'suite'
+  ...
+# Subtest: rules.json
+    # Subtest: každá sada má datum a zdroje
+    ok 1 - každá sada má datum a zdroje
+      ---
+      duration_ms: 0.510239
+      type: 'test'
+      ...
+    # Subtest: návrh má štítek „návrh, zatím neschváleno“
+    ok 2 - návrh má štítek „návrh, zatím neschváleno“
+      ---
+      duration_ms: 0.220047
+      type: 'test'
+      ...
+    # Subtest: obsahuje obě požadované sady
+    ok 3 - obsahuje obě požadované sady
+      ---
+      duration_ms: 0.126306
+      type: 'test'
+      ...
+    1..3
+ok 7 - rules.json
+  ---
+  duration_ms: 1.023402
+  type: 'suite'
+  ...
+1..7
+# tests 34
+# suites 7
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 116.34247
+exit: 0

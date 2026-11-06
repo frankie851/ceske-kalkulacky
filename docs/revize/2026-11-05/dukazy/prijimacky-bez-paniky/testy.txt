@@ -1,0 +1,167 @@
+# prijimacky-bez-paniky @ e9dd0d3 · 2026-11-05T07:41:16+00:00 · node v22.23.4
+$ npm test
+
+> test
+> node --test
+
+TAP version 13
+# Subtest: ics: struktura, CRLF a povinné vlastnosti
+ok 1 - ics: struktura, CRLF a povinné vlastnosti
+  ---
+  duration_ms: 5.383461
+  type: 'test'
+  ...
+# Subtest: ics: celodenní události, DTEND je den po konci
+ok 2 - ics: celodenní události, DTEND je den po konci
+  ---
+  duration_ms: 3.873974
+  type: 'test'
+  ...
+# Subtest: ics: escapování textu
+ok 3 - ics: escapování textu
+  ---
+  duration_ms: 0.29177
+  type: 'test'
+  ...
+# Subtest: ics: řádky max 75 oktetů, nerozdělí UTF-8 znak
+ok 4 - ics: řádky max 75 oktetů, nerozdělí UTF-8 znak
+  ---
+  duration_ms: 1.285044
+  type: 'test'
+  ...
+# Subtest: X 90 (A,B), Y 80 (A,B) → X do A, Y do B
+ok 5 - X 90 (A,B), Y 80 (A,B) → X do A, Y do B
+  ---
+  duration_ms: 3.419371
+  type: 'test'
+  ...
+# Subtest: X 90 (B,A), Y 80 (A,B) → X do B, Y do A
+ok 6 - X 90 (B,A), Y 80 (A,B) → X do B, Y do A
+  ---
+  duration_ms: 0.383883
+  type: 'test'
+  ...
+# Subtest: X 90 (B,A), Z 85 (B,A), Y 80 (A) → X do B, Z do A, Y nepřijat
+ok 7 - X 90 (B,A), Z 85 (B,A), Y 80 (A) → X do B, Z do A, Y nepřijat
+  ---
+  duration_ms: 0.879595
+  type: 'test'
+  ...
+# Subtest: čeština 30 a 35, matematika 28 a 20 → 35 + 28 = 63
+ok 8 - čeština 30 a 35, matematika 28 a 20 → 35 + 28 = 63
+  ---
+  duration_ms: 0.226677
+  type: 'test'
+  ...
+# Subtest: bestOfTwo: chybějící pokus (např. nemoc) se ignoruje
+ok 9 - bestOfTwo: chybějící pokus (např. nemoc) se ignoruje
+  ---
+  duration_ms: 0.126599
+  type: 'test'
+  ...
+# Subtest: výsledek nezávisí na pořadí zadání uchazečů ani škol
+ok 10 - výsledek nezávisí na pořadí zadání uchazečů ani škol
+  ---
+  duration_ms: 44.751016
+  type: 'test'
+  ...
+# Subtest: výsledek je stabilní: nikdo s horším pořadím nepřeskočí lepšího
+ok 11 - výsledek je stabilní: nikdo s horším pořadím nepřeskočí lepšího
+  ---
+  duration_ms: 0.47962
+  type: 'test'
+  ...
+# Subtest: kapacita se nikdy nepřekročí a každý je nejvýš na jedné škole
+ok 12 - kapacita se nikdy nepřekročí a každý je nejvýš na jedné škole
+  ---
+  duration_ms: 0.233531
+  type: 'test'
+  ...
+# Subtest: shoda bodů bez rozhodovacího kritéria → chyba (škola musí určit jednoznačné pořadí)
+ok 13 - shoda bodů bez rozhodovacího kritéria → chyba (škola musí určit jednoznačné pořadí)
+  ---
+  duration_ms: 0.713393
+  type: 'test'
+  ...
+# Subtest: shoda bodů s rozhodovacím kritériem (tiebreak) se rozhodne
+ok 14 - shoda bodů s rozhodovacím kritériem (tiebreak) se rozhodne
+  ---
+  duration_ms: 0.553142
+  type: 'test'
+  ...
+# Subtest: rankApplicants řadí sestupně podle bodů
+ok 15 - rankApplicants řadí sestupně podle bodů
+  ---
+  duration_ms: 0.374416
+  type: 'test'
+  ...
+# Subtest: neznámá škola nebo duplicitní priorita se přeskočí
+ok 16 - neznámá škola nebo duplicitní priorita se přeskočí
+  ---
+  duration_ms: 0.134475
+  type: 'test'
+  ...
+# Subtest: kroky: první kolo = všichni na 1. prioritu
+ok 17 - kroky: první kolo = všichni na 1. prioritu
+  ---
+  duration_ms: 0.182469
+  type: 'test'
+  ...
+# Subtest: scénář „Priorita nepřebíjí body“ dává očekávaný výsledek
+ok 18 - scénář „Priorita nepřebíjí body“ dává očekávaný výsledek
+  ---
+  duration_ms: 5.867911
+  type: 'test'
+  ...
+# Subtest: scénář „Proč dát na 3. místo jistotu“ dává očekávaný výsledek
+ok 19 - scénář „Proč dát na 3. místo jistotu“ dává očekávaný výsledek
+  ---
+  duration_ms: 0.663755
+  type: 'test'
+  ...
+# Subtest: scénář „Lepší výsledek ze dvou pokusů“ dává očekávaný výsledek
+ok 20 - scénář „Lepší výsledek ze dvou pokusů“ dává očekávaný výsledek
+  ---
+  duration_ms: 0.733828
+  type: 'test'
+  ...
+# Subtest: rules.json: každá událost a pravidlo má existující zdroj a platné datum
+ok 21 - rules.json: každá událost a pravidlo má existující zdroj a platné datum
+  ---
+  duration_ms: 1.281309
+  type: 'test'
+  ...
+# Subtest: žádná jistota → varování
+ok 22 - žádná jistota → varování
+  ---
+  duration_ms: 2.314489
+  type: 'test'
+  ...
+# Subtest: jistota na 3. místě → bez varování no-safe
+ok 23 - jistota na 3. místě → bez varování no-safe
+  ---
+  duration_ms: 0.2959
+  type: 'test'
+  ...
+# Subtest: chybějící údaje → kategorie nevim a upozornění
+ok 24 - chybějící údaje → kategorie nevim a upozornění
+  ---
+  duration_ms: 0.342159
+  type: 'test'
+  ...
+# Subtest: vlastní rezerva
+ok 25 - vlastní rezerva
+  ---
+  duration_ms: 0.34881
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 192.284407
+exit: 0

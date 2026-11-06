@@ -1,0 +1,152 @@
+{
+ "datum": "2026-11-05T08:18:36.116Z",
+ "locale": {
+  "vychozi-en": {
+   "navigatorLanguage": "en-US",
+   "pokusy": {
+    "vklad=1500,50": {
+     "hodnotaPole": "150050",
+     "valueAsNumber": 150050,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "340 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 35 983 679 Kč v dnešních penězích (75 478 198 Kč nominálně). Z toho státní příspěv",
+     "poplatky": "+3 396 746 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 1 619 374 Kč. Dnešní poplatky75 478 198 Kč0,8 % za",
+     "viditelnaHlaska": false
+    },
+    "vklad=1 500": {
+     "hodnotaPole": "1500",
+     "valueAsNumber": 1500,
+     "valid": true,
+     "badInput": false,
+     "karta2026": "300 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 549 523 Kč v dnešních penězích (1 152 662 Kč nominálně). Z toho státní příspěvky 1",
+     "poplatky": "+63 478 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 30 263 Kč. Dnešní poplatky1 152 662 Kč0,8 % za správu",
+     "viditelnaHlaska": false
+    },
+    "vklad=1.500": {
+     "hodnotaPole": "1.500",
+     "valueAsNumber": 1.5,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "0 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 120 636 Kč v dnešních penězích (253 042 Kč nominálně). Z toho státní příspěvky 0 K",
+     "poplatky": "+23 133 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 11 028 Kč. Dnešní poplatky253 042 Kč0,8 % za správu +",
+     "viditelnaHlaska": false
+    },
+    "sprava=0,85": {
+     "hodnotaPole": "085",
+     "valueAsNumber": 85,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "200 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 185 451 Kč v dnešních penězích (388 996 Kč nominálně). Z toho státní příspěvky 72 ",
+     "poplatky": "+513 561 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 244 836 Kč. Dnešní poplatky388 996 Kč85 % za správu ",
+     "viditelnaHlaska": false
+    },
+    "sprava=0.85": {
+     "hodnotaPole": "0.85",
+     "valueAsNumber": 0.85,
+     "valid": true,
+     "badInput": false,
+     "karta2026": "200 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 405 631 Kč v dnešních penězích (850 839 Kč nominálně). Z toho státní příspěvky 72 ",
+     "poplatky": "+51 717 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 24 656 Kč. Dnešní poplatky850 839 Kč0,85 % za správu ",
+     "viditelnaHlaska": false
+    },
+    "zustatek=150 000,50": {
+     "hodnotaPole": "15000050",
+     "valueAsNumber": 15000050,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "200 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 12 314 032 Kč v dnešních penězích (25 829 514 Kč nominálně). Z toho státní příspěv",
+     "poplatky": "+2 336 822 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 1 114 063 Kč. Dnešní poplatky25 829 514 Kč0,8 % za",
+     "viditelnaHlaska": false
+    }
+   },
+   "axeDruhyBeh": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 4,
+     "uzly": [
+      "#poplatky-obsah > .srovnani > div:nth-child(1) > small",
+      "#poplatky-obsah > .srovnani > div:nth-child(2) > small",
+      "#tf-obsah > .srovnani > div:nth-child(1) > small"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ]
+  },
+  "cs-CZ": {
+   "navigatorLanguage": "en-US",
+   "pokusy": {
+    "vklad=1500,50": {
+     "hodnotaPole": "150050",
+     "valueAsNumber": 150050,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "340 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 35 983 679 Kč v dnešních penězích (75 478 198 Kč nominálně). Z toho státní příspěv",
+     "poplatky": "+3 396 746 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 1 619 374 Kč. Dnešní poplatky75 478 198 Kč0,8 % za",
+     "viditelnaHlaska": false
+    },
+    "vklad=1 500": {
+     "hodnotaPole": "1500",
+     "valueAsNumber": 1500,
+     "valid": true,
+     "badInput": false,
+     "karta2026": "300 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 549 523 Kč v dnešních penězích (1 152 662 Kč nominálně). Z toho státní příspěvky 1",
+     "poplatky": "+63 478 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 30 263 Kč. Dnešní poplatky1 152 662 Kč0,8 % za správu",
+     "viditelnaHlaska": false
+    },
+    "vklad=1.500": {
+     "hodnotaPole": "1.500",
+     "valueAsNumber": 1.5,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "0 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 120 636 Kč v dnešních penězích (253 042 Kč nominálně). Z toho státní příspěvky 0 K",
+     "poplatky": "+23 133 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 11 028 Kč. Dnešní poplatky253 042 Kč0,8 % za správu +",
+     "viditelnaHlaska": false
+    },
+    "sprava=0,85": {
+     "hodnotaPole": "085",
+     "valueAsNumber": 85,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "200 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 185 451 Kč v dnešních penězích (388 996 Kč nominálně). Z toho státní příspěvky 72 ",
+     "poplatky": "+513 561 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 244 836 Kč. Dnešní poplatky388 996 Kč85 % za správu ",
+     "viditelnaHlaska": false
+    },
+    "sprava=0.85": {
+     "hodnotaPole": "0.85",
+     "valueAsNumber": 0.85,
+     "valid": true,
+     "badInput": false,
+     "karta2026": "200 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 405 631 Kč v dnešních penězích (850 839 Kč nominálně). Z toho státní příspěvky 72 ",
+     "poplatky": "+51 717 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 24 656 Kč. Dnešní poplatky850 839 Kč0,85 % za správu ",
+     "viditelnaHlaska": false
+    },
+    "zustatek=150 000,50": {
+     "hodnotaPole": "15000050",
+     "valueAsNumber": 15000050,
+     "valid": false,
+     "badInput": false,
+     "karta2026": "200 Kč / měsíc",
+     "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 12 314 032 Kč v dnešních penězích (25 829 514 Kč nominálně). Z toho státní příspěv",
+     "poplatky": "+2 336 822 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 1 114 063 Kč. Dnešní poplatky25 829 514 Kč0,8 % za",
+     "viditelnaHlaska": false
+    }
+   }
+  }
+ }
+}

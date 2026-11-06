@@ -1,0 +1,91 @@
+# Penzijko kompas – nezávislý přepočet vs. modul aplikace (calc.js @ 7381900), 5. 11. 2026
+# Část A: referenční výpočet od nuly podle rejstříku pravidel (DP-01..DP-12) a ZDPS § 60–62, § 192. Část B: modul aplikace se stejnými vstupy.
+# Konvence referenčního modelu: měsíční krok, výnos geometricky z ročního, správa = sazba/12 × průměr zůstatku před a po výnosu,
+# zhodnocení = sazba × max(0, roční čistý výnos) vždy po 12 měsících od startu; vklady, příspěvek zaměstnavatele a státní příspěvek
+# se připisují na konci měsíce; věk v celých letech od startu; start 11/2026. Výnosy/inflace převzaty z rules.json jako předpoklad (ne pravidlo).
+
+| # | Skupina | Případ | Vstup | Můj výpočet | Modul aplikace | Rozdíl | Shoda |
+|---|---|---|---|---|---|---|---|
+| 1 | zadání | věk 35, 2026, vklad 1 700 Kč → 340 / 4 080 | 35, 2026, 1 700 | mesicne=340, rocne=4080 | mesicne=340, rocne=4080 | 0 | ano |
+| 2 | zadání | věk 35, 2026, vklad 400 Kč → 0 | 35, 2026, 400 | mesicne=0 | mesicne=0 | 0 | ano |
+| 3 | zadání | věk 25, návrh 2027, vklad 1 700 Kč → 680 / 8 160 | 25, návrh, 1 700 | mesicne=680, rocne=8160 | mesicne=680, rocne=8160 | 0 | ano |
+| 4 | zadání | věk 10, návrh 2027, vklad 100 Kč → 40 | 10, návrh, 100 | mesicne=40 | mesicne=40 | 0 | ano |
+| 5 | zadání | věk 35, vklad 3 000 Kč → odpočet 15 600 | 3 000/měs | rocne=15600 | rocne=15600 | 0 | ano |
+| 6 | zadání | 100 000 Kč, výnos 0 %, poplatek 1 %, bez vkladů, 10 let → cca 90 438 | 100 000, 0 %, 1 %, 120 měs. | nominal=90479.97 | nominal=90479.97 | 0 | ano |
+| 7 | vlastní | příspěvek: 2026, 499 Kč (pod hranicí) | 40 let, 499 Kč | mesicne=0 | mesicne=0 | 0 | ano |
+| 8 | vlastní | příspěvek: 2026, 500 Kč (hranice) | 40 let, 500 Kč | mesicne=100 | mesicne=100 | 0 | ano |
+| 9 | vlastní | příspěvek: 2026, 1 699 Kč | 40 let, 1699 Kč | mesicne=339.80 | mesicne=339.80 | 0 | ano |
+| 10 | vlastní | příspěvek: 2026, 1 700 Kč | 40 let, 1700 Kč | mesicne=340 | mesicne=340 | 0 | ano |
+| 11 | vlastní | příspěvek: 2026, 1 701 Kč | 40 let, 1701 Kč | mesicne=340 | mesicne=340 | 0 | ano |
+| 12 | vlastní | příspěvek: 2026, 1 234,56 Kč (zaokrouhlení § 14/4: 1 234 → 246,80) | 40 let, 1234.56 Kč | mesicne=246.80 | mesicne=246.91 | 0.11 | ano (±0,5 %) |
+| 13 | vlastní | příspěvek: 2026, 0 Kč | 40 let, 0 Kč | mesicne=0 | mesicne=0 | 0 | ano |
+| 14 | vlastní | příspěvek: 2026, −500 Kč (nesmysl) | 40 let, -500 Kč | mesicne=0 | mesicne=0 | 0 | ano |
+| 15 | vlastní | příspěvek: 2026, 1 mld. Kč | 40 let, 1000000000 Kč | mesicne=340 | mesicne=340 | 0 | ano |
+| 16 | vlastní | příspěvek: návrh, 17 let, 100 Kč | 17 let, 100 Kč | mesicne=40 | mesicne=40 | 0 | ano |
+| 17 | vlastní | příspěvek: návrh, 18 let, 100 Kč (už 500 Kč min.) | 18 let, 100 Kč | mesicne=0 | mesicne=0 | 0 | ano |
+| 18 | vlastní | příspěvek: návrh, 17 let, 400 Kč | 17 let, 400 Kč | mesicne=160 | mesicne=160 | 0 | ano |
+| 19 | vlastní | příspěvek: návrh, 29 let, 1 000 Kč | 29 let, 1000 Kč | mesicne=400 | mesicne=400 | 0 | ano |
+| 20 | vlastní | příspěvek: návrh, 30 let, 1 000 Kč | 30 let, 1000 Kč | mesicne=200 | mesicne=200 | 0 | ano |
+| 21 | vlastní | příspěvek: návrh, 29 let, 1 700 Kč | 29 let, 1700 Kč | mesicne=680 | mesicne=680 | 0 | ano |
+| 22 | vlastní | příspěvek: návrh, 29 let, 5 000 Kč | 29 let, 5000 Kč | mesicne=680 | mesicne=680 | 0 | ano |
+| 23 | vlastní | příspěvek: návrh, 0 let, 100 Kč | 0 let, 100 Kč | mesicne=40 | mesicne=40 | 0 | ano |
+| 24 | vlastní | příspěvek: 2026, 64 let, 1 700 Kč | 64 let, 1700 Kč | mesicne=340 | mesicne=340 | 0 | ano |
+| 25 | vlastní | příspěvek: 2026, 70 let bez důchodu, 1 700 Kč | 70 let, 1700 Kč | mesicne=340 | mesicne=340 | 0 | ano |
+| 26 | vlastní | příspěvek: starobní důchodce 2026 (66, 1 700) | 66, 1 700, důchodce | mesicne=0 | mesicne=0 | 0 | ano |
+| 27 | vlastní | příspěvek: starobní důchodce návrh (25, 1 700, předčasný) | 25, 1 700, důchodce | mesicne=0 | mesicne=0 | 0 | ano |
+| 28 | vlastní | odpočet: 1 700 (nic) | 1700 Kč/měs | rocne=0, uspora=0 | rocne=0, uspora=0 | 0 | ano |
+| 29 | vlastní | odpočet: 1 701 → 12 | 1701 Kč/měs | rocne=12, uspora=1.80 | rocne=12, uspora=1.80 | 0 | ano |
+| 30 | vlastní | odpočet: 5 700 → strop 48 000 | 5700 Kč/měs | rocne=48000, uspora=7200 | rocne=48000, uspora=7200 | 0 | ano |
+| 31 | vlastní | odpočet: 10 000 → 48 000 | 10000 Kč/měs | rocne=48000, uspora=7200 | rocne=48000, uspora=7200 | 0 | ano |
+| 32 | vlastní | odpočet: 0 | 0 Kč/měs | rocne=0, uspora=0 | rocne=0, uspora=0 | 0 | ano |
+| 33 | vlastní | odpočet: −100 (nesmysl) | -100 Kč/měs | rocne=0, uspora=0 | rocne=0, uspora=0 | 0 | ano |
+| 34 | vlastní | projekce: 12 měs. bez výnosu a poplatků, 1 700 + 300 zam. | 0, 1 700, 300, 35, 2026, 12 měs. | nominal=28080, realne=27395.12, poplatky=0, statni=4080, mesicuVNastupci=0 | nominal=28080, realne=27395.12, poplatky=0, statni=4080, mesicuVNastupci=0 | 0 | ano |
+| 35 | vlastní | projekce: zhodnocení 15 % z 5 % výnosu, 12 měs. | 100 000, 5 %, 0 % + 15 % | nominal=104250.00, realne=101707.32, poplatky=750.00, statni=0, mesicuVNastupci=0 | nominal=104250.00, realne=101707.32, poplatky=750.00, statni=0, mesicuVNastupci=0 | 0 | ano |
+| 36 | vlastní | projekce: záporný výnos −5 % → poplatek ze zhodnocení 0 | 100 000, −5 %, 0 % + 15 % | nominal=95000.00, realne=92682.93, poplatky=0, statni=0, mesicuVNastupci=0 | nominal=95000.00, realne=92682.93, poplatky=0, statni=0, mesicuVNastupci=0 | 0 | ano |
+| 37 | vlastní | projekce: návrh – strop 0,5 % na 1 % + 15 %, 120 měs., 0 % výnos | 100 000, 0 %, akciový, návrh | nominal=95121.95, realne=74309.12, poplatky=4878.05, statni=0, mesicuVNastupci=0 | nominal=95121.95, realne=74309.12, poplatky=4878.05, statni=0, mesicuVNastupci=0 | 0 | ano |
+| 38 | vlastní | projekce: výchozí formulář (35, 1 000, 150 000, TF 0,8+10, 2026) – PODLE ZÁKONA bez konce TF (zákon konec TF nestanoví) | výchozí, 2026 | nominal=655378.04, realne=312446.69, poplatky=102838.28, statni=72000, mesicuVNastupci=0 | nominal=852538.44, realne=406441.46, poplatky=93228.48, statni=72000, mesicuVNastupci=238 | 197160.40 | NE |
+| 39 | vlastní | projekce: výchozí formulář, TF končí 2036 (jen návrh, tisk 285) (to, co počítá aplikace i pro sadu 2026) | výchozí, 2026 + konec TF 2036 | nominal=852538.44, realne=406441.46, poplatky=93228.48, statni=72000, mesicuVNastupci=238 | nominal=852538.44, realne=406441.46, poplatky=93228.48, statni=72000, mesicuVNastupci=238 | 0 | ano |
+| 40 | vlastní | projekce: výchozí formulář, návrh 2027 (strop 0,5 %, TF→konz. 2037) | výchozí, návrh | nominal=902556.57, realne=430287.24, poplatky=58343.63, statni=72000, mesicuVNastupci=238 | nominal=902556.57, realne=430287.24, poplatky=58343.63, statni=72000, mesicuVNastupci=238 | 0.00 | ano |
+| 41 | vlastní | projekce: TF, 40 let, 100 000, 180 měs. od 1/2026 (test aplikace) | 100 000, TF, 2026-01, 180 měs. | nominal=117396.54, realne=81058.27, poplatky=12843.32, statni=0, mesicuVNastupci=48 | nominal=117396.54, realne=81058.27, poplatky=12843.32, statni=0, mesicuVNastupci=48 | 0 | ano |
+| 42 | vlastní | projekce: životní cyklus, 35 let, 1 000 Kč, 0 zůstatek, 2026 | ŽC, 35, 1 000 | nominal=796687.79, realne=379815.08, poplatky=167821.43, statni=72000, mesicuVNastupci=0 | nominal=796687.79, realne=379815.08, poplatky=167821.43, statni=72000, mesicuVNastupci=0 | 0.00 | ano |
+| 43 | vlastní | projekce: akciový, 25 let, 1 700 Kč, návrh (40 % do 30) | akciový, 25, 1 700, návrh | nominal=4603529.96, realne=1714495.53, poplatky=287585.22, statni=183600, mesicuVNastupci=0 | nominal=4603529.96, realne=1714495.53, poplatky=287585.22, statni=183600, mesicuVNastupci=0 | 0.00 | ano |
+| 44 | vlastní | projekce: konzervativní, 60 let, 10 000 + 1 000 Kč, 2026 (5 let) | konz., 60, 1 000 | nominal=87457.52, realne=77299.71, poplatky=1555.41, statni=12000, mesicuVNastupci=0 | nominal=87457.52, realne=77299.71, poplatky=1555.41, statni=12000, mesicuVNastupci=0 | 0 | ano |
+| 45 | vlastní | projekce: 65 let → 0 měsíců, zůstatek beze změny | 65 let, 50 000 | nominal=50000, realne=50000, poplatky=0, statni=0, mesicuVNastupci=0 | nominal=50000, realne=50000, poplatky=0, statni=0, mesicuVNastupci=0 | 0 | ano |
+| 46 | vlastní | projekce: 64 let, 1 měsíc před koncem roku projekce (12 měs.) | 64 let | nominal=169006.64, realne=164884.53, poplatky=2406.14, statni=2400, mesicuVNastupci=0 | nominal=169006.64, realne=164884.53, poplatky=2406.14, statni=2400, mesicuVNastupci=0 | 0 | ano |
+| 47 | vlastní | projekce: nulové vklady, nulový zůstatek | vše 0 | nominal=0, realne=0, poplatky=0, statni=0, mesicuVNastupci=0 | nominal=0, realne=0, poplatky=0, statni=0, mesicuVNastupci=238 | 238 | NE |
+| 48 | vlastní | projekce: poplatky přepsané na 0 % (uživatel smaže pole) | výchozí, poplatky 0 | nominal=886574.02, realne=422667.68, poplatky=76627.66, statni=72000, mesicuVNastupci=238 | nominal=886574.02, realne=422667.68, poplatky=76627.66, statni=72000, mesicuVNastupci=238 | 0 | ano |
+| 49 | vlastní | projekce: důchodce 60 let, 1 700 Kč – státní příspěvek 0 | důchodce 60 | nominal=276313.37, realne=244220.75, poplatky=6929.36, statni=0, mesicuVNastupci=0 | nominal=276313.37, realne=244220.75, poplatky=6929.36, statni=0, mesicuVNastupci=0 | 0 | ano |
+
+Případů: 49, neshod: 2
+
+## Citlivost na konvence (jen referenční model)
+- Vklad na konci měsíce (model aplikace) vs. na začátku: akciový, 35 let, 1 000 Kč/měs, 30 let: 986588 vs. 990645 Kč nominálně (rozdíl 4057 Kč = 0.41 %).
+- Návrh 2027 uplatněný od 11/2026 (aplikace) vs. až od 1/2027: výchozí formulář 902557 vs. cca 902387 Kč nominálně (rozdíl 170 Kč).
+
+## Doporučení („Co udělat“) pro výchozí formulář (35, 1 000 Kč, 150 000 Kč, TF 0,8 + 10, délka 8 let)
+### sada 2026
+| krok | můj přínos (zákon: TF bez konce) | můj přínos (s koncem TF 2036) | modul aplikace | pořadí modulu |
+|---|---|---|---|---|
+| vklad | -19405 | 22494 | 22494 | 3 |
+| fond | 312389 | 218394 | 218394 | 1 |
+| zamestnavatel | 94294 | 119235 | 119235 | 2 |
+### sada navrh2027
+| krok | můj přínos (zákon: TF bez konce) | můj přínos (s koncem TF 2036) | modul aplikace | pořadí modulu |
+|---|---|---|---|---|
+| vklad | 31478 | 31478 | 31478 | 3 |
+| fond | 391532 | 391532 | 391532 | 1 |
+| zamestnavatel | 124582 | 124582 | 124582 | 2 |
+
+## Transformovaný fond – zůstat vs. přejít (výchozí formulář, reálně v 65)
+- modul (sada 2026): zůstat 406441 Kč, přejít 624836 Kč, rozdíl 218394 Kč; poplatekKonkurence 0 Kč (délka 8 let), konci 2036-12-31
+- můj výpočet podle zákona (TF bez konce, 1,5 % až do 65): zůstat 312447 Kč, přejít 624836 Kč, rozdíl 312389 Kč
+- můj výpočet s koncem TF 2036 (návrh): zůstat 406441 Kč, rozdíl 218394 Kč
+- poplatek za převod ke konkurenci: § 61 odst. 3 ZDPS max. 800 Kč, § 62 odst. 3 po více než 60 měsících spořící doby zdarma; modul: 3 roky → 800 Kč, 5 let → 0 Kč (zákon: „po více než 60 měsících“ – přesně 60 měsíců ještě může být zpoplatněno; modul při 5 letech už 0 Kč)
+
+## Hodnoty v rules.json vs. zákonná maxima úplat (§ 60 odst. 3–4, § 192 odst. 3 ZDPS)
+- transformovany: rules.json 0.8 % + 10 % · zákonné maximum 0.8 % + 10 % · v mezích (rovno maximu)
+- konzervativni: rules.json 0.4 % + 10 % · zákonné maximum 0.4 % + 10 % · v mezích (rovno maximu)
+- vyvazeny: rules.json 1 % + 15 % · zákonné maximum 1 % + 15 % · v mezích (rovno maximu)
+- akciovy: rules.json 1 % + 15 % · zákonné maximum 1 % + 15 % · v mezích (rovno maximu)
+- zivotniCyklus: rules.json 1 % + 15 % · zákonné maximum 1 % + 15 % · v mezích (rovno maximu)
+- předpoklady.prevodKonkurence: 800 Kč / 5 let · zákon: max. 800 Kč, zdarma po více než 60 měsících (§ 61 odst. 3, § 62 odst. 3 ZDPS)

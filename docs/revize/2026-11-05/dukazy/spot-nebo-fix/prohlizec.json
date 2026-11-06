@@ -1,0 +1,1423 @@
+{
+ "datum": "2026-11-05T08:37:51.312Z",
+ "repo": "/tmp/revize/repos/spot-nebo-fix",
+ "scenare": {
+  "V1-360": {
+   "V1": {
+    "obrazovka": {
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 2 731 Kč méně než spot. Částky jsou včetně DPH.",
+     "karty": [
+      {
+       "nazev": "Fixní cena",
+       "nejlevnejsi": true,
+       "celkem": "23 108 Kč",
+       "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+       "energie": "9 000 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      },
+      {
+       "nazev": "Spot",
+       "nejlevnejsi": false,
+       "celkem": "25 839 Kč",
+       "kwh": "za rok vč. DPH · 8,61 Kč/kWh",
+       "energie": "11 731 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      },
+      {
+       "nazev": "Dynamický tarif",
+       "nejlevnejsi": false,
+       "celkem": "25 734 Kč",
+       "kwh": "za rok vč. DPH · 8,58 Kč/kWh",
+       "energie": "11 625 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      }
+     ],
+     "pole": {
+      "mwh": {
+       "value": "3",
+       "badInput": false,
+       "disabled": false
+      },
+      "fixPrice": {
+       "value": "3000",
+       "badInput": false,
+       "disabled": false
+      },
+      "spotMargin": {
+       "value": "400",
+       "badInput": false,
+       "disabled": false
+      },
+      "fixFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "spotFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "dynBase": {
+       "value": "3900",
+       "badInput": false,
+       "disabled": false
+      },
+      "dynFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "shift": {
+       "value": "0",
+       "badInput": false,
+       "disabled": false
+      }
+     },
+     "vyber": {
+      "household": "house",
+      "distributor": "cez",
+      "sazba": "D02d",
+      "breaker": "3x25",
+      "region": "SC"
+     }
+    },
+    "porovnani": [
+     {
+      "varianta": "Fixní cena",
+      "obrazovka": 23108,
+      "modul": 23108,
+      "shoda": true,
+      "energie": [
+       9000,
+       9000
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     },
+     {
+      "varianta": "Spot",
+      "obrazovka": 25839,
+      "modul": 25839,
+      "shoda": true,
+      "energie": [
+       11731,
+       11731
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     },
+     {
+      "varianta": "Dynamický tarif",
+      "obrazovka": 25734,
+      "modul": 25734,
+      "shoda": true,
+      "energie": [
+       11625,
+       11625
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     }
+    ]
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Další nastavení",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Vlastní průběhové měření (CSV)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "shift",
+     "typ": "range",
+     "popisek": "Přesun spotřeby do nejlevnějších hodin dne: 0 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "OTE – výsledky denního trhu s elektřinou",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "OTE – normalizované typové diagramy dodá",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "ČNB – kurzy devizového trhu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "ERÚ – cenové výměry (systémové služby, P",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "ČEZ Prodej – ceník Dynamický tarif (pásm",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "území EG.D",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "území PREdistribuce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "household",
+     "typ": "select-one",
+     "popisek": "Typ domácnosti\n        \n          Byt\n          Rodinný dům\n          Dům s tepelným čerpadlem\n          Dům s fotovoltaikou\n        \n        Rodinný dům bez elektrického vytápění: typicky D02d.",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "distributor",
+     "typ": "select-one",
+     "popisek": "Distributor\n          ČEZ DistribuceEG.DPREdistribuce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "sazba",
+     "typ": "select-one",
+     "popisek": "Distribuční sazba\n          D01d – jednotarif, malá spotřebaD02d – jednotarif, střední spotřebaD25d – dvoutarif, akumulace 8 hD26d – dvoutarif, akumulace 8 h (vyšší příkon)D27d – dvoutarif, elektromobilitaD35d – akumulace 16 hD45d – přímotop 20 hD56d – tepelné čerpadlo 22 hD57d – elektrické topení 20 hD61d – víkendová",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "mwh",
+     "typ": "number",
+     "popisek": "Roční spotřeba (MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "breaker",
+     "typ": "select-one",
+     "popisek": "Hlavní jistič\n          1× 25 A3× 10 A3× 16 A3× 20 A3× 25 A3× 32 A3× 40 A3× 50 A3× 63 A",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "fixPrice",
+     "typ": "number",
+     "popisek": "Fixní cena silové elektřiny (Kč/MWh)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "spotMargin",
+     "typ": "number",
+     "popisek": "Marže spotu (Kč/MWh)",
+     "fokusViditelny": true
+    }
+   ],
+   "V1b": {
+    "obrazovka": {
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 1 274 Kč méně než dynamický tarif. Částky jsou včetně DPH.",
+     "karty": [
+      {
+       "nazev": "Fixní cena",
+       "nejlevnejsi": true,
+       "celkem": "23 108 Kč",
+       "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+       "energie": "9 000 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      },
+      {
+       "nazev": "Spot",
+       "nejlevnejsi": false,
+       "celkem": "24 196 Kč",
+       "kwh": "za rok vč. DPH · 8,07 Kč/kWh",
+       "energie": "10 088 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": "Posun 30 %: úspora 1 643 Kč oproti bez posunu"
+      },
+      {
+       "nazev": "Dynamický tarif",
+       "nejlevnejsi": false,
+       "celkem": "24 383 Kč",
+       "kwh": "za rok vč. DPH · 8,13 Kč/kWh",
+       "energie": "10 274 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": "Posun 30 %: úspora 1 351 Kč oproti bez posunu"
+      }
+     ],
+     "pole": {
+      "mwh": {
+       "value": "3",
+       "badInput": false,
+       "disabled": false
+      },
+      "fixPrice": {
+       "value": "3000",
+       "badInput": false,
+       "disabled": false
+      },
+      "spotMargin": {
+       "value": "400",
+       "badInput": false,
+       "disabled": false
+      },
+      "fixFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "spotFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "dynBase": {
+       "value": "3900",
+       "badInput": false,
+       "disabled": false
+      },
+      "dynFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "shift": {
+       "value": "30",
+       "badInput": false,
+       "disabled": false
+      }
+     },
+     "vyber": {
+      "household": "house",
+      "distributor": "cez",
+      "sazba": "D02d",
+      "breaker": "3x25",
+      "region": "SC"
+     }
+    },
+    "porovnani": [
+     {
+      "varianta": "Fixní cena",
+      "obrazovka": 23108,
+      "modul": 23108,
+      "shoda": true,
+      "energie": [
+       9000,
+       9000
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     },
+     {
+      "varianta": "Spot",
+      "obrazovka": 24196,
+      "modul": 24196,
+      "shoda": true,
+      "energie": [
+       10088,
+       10088
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     },
+     {
+      "varianta": "Dynamický tarif",
+      "obrazovka": 24383,
+      "modul": 24383,
+      "shoda": true,
+      "energie": [
+       10274,
+       10274
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     }
+    ],
+    "posunPopisky": [
+     null,
+     "Posun 30 %: úspora 1 643 Kč oproti bez posunu",
+     "Posun 30 %: úspora 1 351 Kč oproti bez posunu"
+    ],
+    "shiftOut": "30 %"
+   },
+   "localStorage": {},
+   "sit": {
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "metody": [
+     "GET"
+    ]
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:41631/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "dialogy": []
+  },
+  "V1-1440": {
+   "V1": {
+    "obrazovka": {
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 2 731 Kč méně než spot. Částky jsou včetně DPH.",
+     "karty": [
+      {
+       "nazev": "Fixní cena",
+       "nejlevnejsi": true,
+       "celkem": "23 108 Kč",
+       "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+       "energie": "9 000 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      },
+      {
+       "nazev": "Spot",
+       "nejlevnejsi": false,
+       "celkem": "25 839 Kč",
+       "kwh": "za rok vč. DPH · 8,61 Kč/kWh",
+       "energie": "11 731 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      },
+      {
+       "nazev": "Dynamický tarif",
+       "nejlevnejsi": false,
+       "celkem": "25 734 Kč",
+       "kwh": "za rok vč. DPH · 8,58 Kč/kWh",
+       "energie": "11 625 Kč",
+       "regulovane": "8 244 Kč",
+       "stale": "5 864 Kč",
+       "posun": null
+      }
+     ],
+     "pole": {
+      "mwh": {
+       "value": "3",
+       "badInput": false,
+       "disabled": false
+      },
+      "fixPrice": {
+       "value": "3000",
+       "badInput": false,
+       "disabled": false
+      },
+      "spotMargin": {
+       "value": "400",
+       "badInput": false,
+       "disabled": false
+      },
+      "fixFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "spotFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "dynBase": {
+       "value": "3900",
+       "badInput": false,
+       "disabled": false
+      },
+      "dynFee": {
+       "value": "163.35",
+       "badInput": false,
+       "disabled": false
+      },
+      "shift": {
+       "value": "0",
+       "badInput": false,
+       "disabled": false
+      }
+     },
+     "vyber": {
+      "household": "house",
+      "distributor": "cez",
+      "sazba": "D02d",
+      "breaker": "3x25",
+      "region": "SC"
+     }
+    },
+    "porovnani": [
+     {
+      "varianta": "Fixní cena",
+      "obrazovka": 23108,
+      "modul": 23108,
+      "shoda": true,
+      "energie": [
+       9000,
+       9000
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     },
+     {
+      "varianta": "Spot",
+      "obrazovka": 25839,
+      "modul": 25839,
+      "shoda": true,
+      "energie": [
+       11731,
+       11731
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     },
+     {
+      "varianta": "Dynamický tarif",
+      "obrazovka": 25734,
+      "modul": 25734,
+      "shoda": true,
+      "energie": [
+       11625,
+       11625
+      ],
+      "regulovane": [
+       8244,
+       8244
+      ],
+      "stale": [
+       5864,
+       5864
+      ]
+     }
+    ]
+   },
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": {
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "metody": [
+     "GET"
+    ]
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:41631/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "dialogy": []
+  },
+  "V2-360": {
+   "predvolby": {
+    "sazba": "D56d",
+    "mwh": "9",
+    "breaker": "3x25",
+    "hint": "Tepelné čerpadlo: sazba D56d (22 h nízkého tarifu) nebo D57d."
+   },
+   "obrazovka": {
+    "summary": "Nejlevněji vychází fixní cena: 45 527 Kč za rok, o 3 183 Kč méně než spot. Částky jsou včetně DPH.",
+    "karty": [
+     {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "45 527 Kč",
+      "kwh": "za rok vč. DPH · 5,06 Kč/kWh",
+      "energie": "31 500 Kč",
+      "regulovane": "4 983 Kč",
+      "stale": "9 044 Kč",
+      "posun": null
+     },
+     {
+      "nazev": "Spot",
+      "nejlevnejsi": false,
+      "celkem": "48 710 Kč",
+      "kwh": "za rok vč. DPH · 5,41 Kč/kWh",
+      "energie": "34 683 Kč",
+      "regulovane": "4 983 Kč",
+      "stale": "9 044 Kč",
+      "posun": null
+     },
+     {
+      "nazev": "Dynamický tarif",
+      "nejlevnejsi": false,
+      "celkem": "48 476 Kč",
+      "kwh": "za rok vč. DPH · 5,39 Kč/kWh",
+      "energie": "34 450 Kč",
+      "regulovane": "4 983 Kč",
+      "stale": "9 044 Kč",
+      "posun": null
+     }
+    ],
+    "pole": {
+     "mwh": {
+      "value": "9",
+      "badInput": false,
+      "disabled": false
+     },
+     "fixPrice": {
+      "value": "3500",
+      "badInput": false,
+      "disabled": false
+     },
+     "spotMargin": {
+      "value": "400",
+      "badInput": false,
+      "disabled": false
+     },
+     "fixFee": {
+      "value": "163.35",
+      "badInput": false,
+      "disabled": false
+     },
+     "spotFee": {
+      "value": "163.35",
+      "badInput": false,
+      "disabled": false
+     },
+     "dynBase": {
+      "value": "3900",
+      "badInput": false,
+      "disabled": false
+     },
+     "dynFee": {
+      "value": "163.35",
+      "badInput": false,
+      "disabled": false
+     },
+     "shift": {
+      "value": "0",
+      "badInput": false,
+      "disabled": false
+     }
+    },
+    "vyber": {
+     "household": "heatpump",
+     "distributor": "egd",
+     "sazba": "D56d",
+     "breaker": "3x25",
+     "region": "JM"
+    }
+   },
+   "porovnani": [
+    {
+     "varianta": "Fixní cena",
+     "obrazovka": 45527,
+     "modul": 45527,
+     "shoda": true,
+     "energie": [
+      31500,
+      31500
+     ],
+     "regulovane": [
+      4983,
+      4983
+     ],
+     "stale": [
+      9044,
+      9044
+     ]
+    },
+    {
+     "varianta": "Spot",
+     "obrazovka": 48710,
+     "modul": 48710,
+     "shoda": true,
+     "energie": [
+      34683,
+      34683
+     ],
+     "regulovane": [
+      4983,
+      4983
+     ],
+     "stale": [
+      9044,
+      9044
+     ]
+    },
+    {
+     "varianta": "Dynamický tarif",
+     "obrazovka": 48476,
+     "modul": 48476,
+     "shoda": true,
+     "energie": [
+      34450,
+      34450
+     ],
+     "regulovane": [
+      4983,
+      4983
+     ],
+     "stale": [
+      9044,
+      9044
+     ]
+    }
+   ],
+   "tddPouzity": [
+    "TDD4.json",
+    "TDD6.json"
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "vstup-cs-CZ": {
+   "lang": "cs-CZ",
+   "kroky": {
+    "psáno 3000,50": {
+     "fixPrice": {
+      "value": "3000.50",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "23 110 Kč",
+      "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+      "energie": "9 001 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 23 110 Kč za rok, o 2 729 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "psáno 3 000 (mezera)": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "23 108 Kč",
+      "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+      "energie": "9 000 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 2 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "vloženo ze schránky 3 000": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "23 108 Kč",
+      "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+      "energie": "9 000 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 2 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "vloženo ze schránky 3000,50": {
+     "fixPrice": {
+      "value": "3000.50",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "23 110 Kč",
+      "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+      "energie": "9 001 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 23 110 Kč za rok, o 2 729 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "psáno 0,85": {
+     "fixPrice": {
+      "value": "0.85",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "14 111 Kč",
+      "kwh": "za rok vč. DPH · 4,70 Kč/kWh",
+      "energie": "3 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 14 111 Kč za rok, o 11 728 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "prázdné": {
+     "fixPrice": {
+      "value": "",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "14 108 Kč",
+      "kwh": "za rok vč. DPH · 4,70 Kč/kWh",
+      "energie": "0 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 14 108 Kč za rok, o 11 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "záporné −500": {
+     "fixPrice": {
+      "value": "-500",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "14 108 Kč",
+      "kwh": "za rok vč. DPH · 4,70 Kč/kWh",
+      "energie": "0 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 14 108 Kč za rok, o 11 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "mwh psáno 3,5": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3.5",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "25 982 Kč",
+      "kwh": "za rok vč. DPH · 7,42 Kč/kWh",
+      "energie": "10 500 Kč",
+      "regulovane": "9 618 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 25 982 Kč za rok, o 3 186 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "mwh prázdné": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "6 439 Kč",
+      "kwh": "za rok vč. DPH · 64,39 Kč/kWh",
+      "energie": "300 Kč",
+      "regulovane": "275 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 6 439 Kč za rok, o 91 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "mwh 250 (max 100)": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "250",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "1 442 878 Kč",
+      "kwh": "za rok vč. DPH · 5,77 Kč/kWh",
+      "energie": "750 000 Kč",
+      "regulovane": "687 014 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 1 442 878 Kč za rok, o 227 552 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "chyboveHlasky": []
+   },
+   "dialogy": [],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "vstup-en-US": {
+   "lang": "en-US",
+   "kroky": {
+    "psáno 3000,50": {
+     "fixPrice": {
+      "value": "300050",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": false,
+      "celkem": "914 258 Kč",
+      "kwh": "za rok vč. DPH · 304,75 Kč/kWh",
+      "energie": "900 150 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Dynamický tarif",
+     "summary": "Nejlevněji vychází dynamický tarif: 25 734 Kč za rok, o 888 525 Kč méně než fixní cena. Částky jsou včetně DPH."
+    },
+    "psáno 3 000 (mezera)": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "23 108 Kč",
+      "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+      "energie": "9 000 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 2 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "vloženo ze schránky 3 000": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "23 108 Kč",
+      "kwh": "za rok vč. DPH · 7,70 Kč/kWh",
+      "energie": "9 000 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 23 108 Kč za rok, o 2 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "vloženo ze schránky 3000,50": {
+     "fixPrice": {
+      "value": "300050",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": false,
+      "celkem": "914 258 Kč",
+      "kwh": "za rok vč. DPH · 304,75 Kč/kWh",
+      "energie": "900 150 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Dynamický tarif",
+     "summary": "Nejlevněji vychází dynamický tarif: 25 734 Kč za rok, o 888 525 Kč méně než fixní cena. Částky jsou včetně DPH."
+    },
+    "psáno 0,85": {
+     "fixPrice": {
+      "value": "085",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "14 363 Kč",
+      "kwh": "za rok vč. DPH · 4,79 Kč/kWh",
+      "energie": "255 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 14 363 Kč za rok, o 11 476 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "prázdné": {
+     "fixPrice": {
+      "value": "",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "14 108 Kč",
+      "kwh": "za rok vč. DPH · 4,70 Kč/kWh",
+      "energie": "0 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 14 108 Kč za rok, o 11 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "záporné −500": {
+     "fixPrice": {
+      "value": "-500",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "3",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "14 108 Kč",
+      "kwh": "za rok vč. DPH · 4,70 Kč/kWh",
+      "energie": "0 Kč",
+      "regulovane": "8 244 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 14 108 Kč za rok, o 11 731 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "mwh psáno 3,5": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "35",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "207 046 Kč",
+      "kwh": "za rok vč. DPH · 5,92 Kč/kWh",
+      "energie": "105 000 Kč",
+      "regulovane": "96 182 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 207 046 Kč za rok, o 31 857 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "mwh prázdné": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "6 439 Kč",
+      "kwh": "za rok vč. DPH · 64,39 Kč/kWh",
+      "energie": "300 Kč",
+      "regulovane": "275 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 6 439 Kč za rok, o 91 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "mwh 250 (max 100)": {
+     "fixPrice": {
+      "value": "3000",
+      "badInput": false,
+      "disabled": false
+     },
+     "mwh": {
+      "value": "250",
+      "badInput": false,
+      "disabled": false
+     },
+     "fix": {
+      "nazev": "Fixní cena",
+      "nejlevnejsi": true,
+      "celkem": "1 442 878 Kč",
+      "kwh": "za rok vč. DPH · 5,77 Kč/kWh",
+      "energie": "750 000 Kč",
+      "regulovane": "687 014 Kč",
+      "stale": "5 864 Kč",
+      "posun": null
+     },
+     "nejlevnejsi": "Fixní cena",
+     "summary": "Nejlevněji vychází fixní cena: 1 442 878 Kč za rok, o 227 552 Kč méně než spot. Částky jsou včetně DPH."
+    },
+    "chyboveHlasky": []
+   },
+   "dialogy": [],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "csv": {
+   "dobry": {
+    "status": "Načteno 193 řádků. Zkontrolujte sloupce a klikněte na „Použít měření“.",
+    "err": false,
+    "mapViditelna": true,
+    "sloupce": [
+     "Datum a čas",
+     "Spotřeba [kWh]"
+    ],
+    "casIdx": "0",
+    "hodnotaIdx": "1"
+   },
+   "dobryPouzit": {
+    "status": "Použito měření (interval 15 min): pokrývá 1 % čtvrthodin období, naměřeno 1,02 MWh. Chybějící čtvrthodiny jsou doplněny podle TDD ve stejném poměru. Měření pokrývá méně než polovinu roku, výsledek je jen hrubý odhad.",
+    "err": false,
+    "mwh": "168.60",
+    "mwhDisabled": true
+   },
+   "dobryKarty": [
+    {
+     "nazev": "Fixní cena",
+     "celkem": "974 966 Kč",
+     "energie": "505 789 Kč"
+    },
+    {
+     "nazev": "Spot",
+     "celkem": "1 127 287 Kč",
+     "energie": "658 110 Kč"
+    },
+    {
+     "nazev": "Dynamický tarif",
+     "celkem": "1 121 973 Kč",
+     "energie": "652 797 Kč"
+    }
+   ],
+   "ocekavanoNamerenoMWh": 1.018224,
+   "zpet": {
+    "status": "Výpočet opět používá typový diagram dodávky (TDD).",
+    "mwh": "3.5",
+    "mwhDisabled": false
+   },
+   "spatny": {
+    "status": "Načteno 2 řádků. Zkontrolujte sloupce a klikněte na „Použít měření“.",
+    "err": false,
+    "mapViditelna": true,
+    "sloupce": [
+     "toto není csv"
+    ],
+    "casIdx": "0",
+    "hodnotaIdx": "0"
+   },
+   "spatnyPouzit": {
+    "status": "V CSV jsem nenašel žádné řádky s časem a hodnotou.",
+    "err": true
+   },
+   "xss": {
+    "status": "Načteno 1 řádků. Zkontrolujte sloupce a klikněte na „Použít měření“.",
+    "err": false,
+    "mapViditelna": true,
+    "sloupce": [
+     "<img src=x onerror=alert(1)>",
+     "<script>alert(2)</script>"
+    ],
+    "casIdx": "0",
+    "hodnotaIdx": "1"
+   },
+   "xssVysledek": {
+    "dialogy": [],
+    "vlozenyImg": false,
+    "skriptVDom": false
+   },
+   "sit": {
+    "metody": [
+     "GET"
+    ],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ],
+    "pocetPoNahrani": 12
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "zivy": {
+   "360": {
+    "preteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "axe": [],
+    "konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+     }
+    ],
+    "chyby": [
+     {
+      "url": "https://frankie851.github.io/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "https://frankie851.github.io/favicon.ico"
+    ],
+    "xss": {
+     "vlozenyImg": false
+    },
+    "localStorage": {},
+    "pocetPozadavku": 12
+   },
+   "1440": {
+    "preteka": {
+     "scrollWidth": 1440,
+     "innerWidth": 1440,
+     "preteka": false
+    },
+    "konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+     }
+    ],
+    "chyby": [
+     {
+      "url": "https://frankie851.github.io/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "cizi": [
+     "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "https://frankie851.github.io/favicon.ico"
+    ],
+    "pocetPozadavku": 12
+   }
+  }
+ }
+}

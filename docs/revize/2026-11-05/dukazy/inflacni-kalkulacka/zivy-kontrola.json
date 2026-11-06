@@ -1,0 +1,314 @@
+{
+ "url": "https://frankie851.github.io/inflacni-kalkulacka/",
+ "datum": "2026-11-05T08:39:57.747Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 1,
+     "uzly": [
+      "#tab-convert"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ],
+   "tab": [
+    {
+     "tag": "button",
+     "id": "tab-convert",
+     "typ": "submit",
+     "popisek": "Přepočet částky",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Částka (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Z měsíce – měsíc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Z měsíce – rok",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Prohodit měsíce (obrácený přepočet)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Na měsíc – měsíc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Na měsíc – rok",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zobrazit hodnoty v tabulce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Český statistický úřad (ČSÚ)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "tab-convert",
+     "typ": "submit",
+     "popisek": "Přepočet částky",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Částka (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Z měsíce – měsíc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Z měsíce – rok",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Prohodit měsíce (obrácený přepočet)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Na měsíc – měsíc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Na měsíc – rok",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zobrazit hodnoty v tabulce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Český statistický úřad (ČSÚ)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "tab-convert",
+     "typ": "submit",
+     "popisek": "Přepočet částky",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "text",
+     "popisek": "Částka (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Z měsíce – měsíc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Z měsíce – rok",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Prohodit měsíce (obrácený přepočet)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Na měsíc – měsíc",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Na měsíc – rok",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zobrazit hodnoty v tabulce",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Český statistický úřad (ČSÚ)",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/inflation.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/data/cpi.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/inflation.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://frankie851.github.io/inflacni-kalkulacka/data/cpi.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

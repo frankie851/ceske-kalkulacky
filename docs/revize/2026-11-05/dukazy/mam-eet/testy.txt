@@ -1,0 +1,547 @@
+# mam-eet @ e5bf47f · 2026-11-05T07:41:15+00:00 · node v22.23.4
+$ npm test
+
+> test
+> node --test
+
+TAP version 13
+# Subtest: povinné případy ze zadání
+    # Subtest: paušál 1. pásmo za rok = 115 944 Kč (12 × 9 662)
+    ok 1 - paušál 1. pásmo za rok = 115 944 Kč (12 × 9 662)
+      ---
+      duration_ms: 1.790144
+      type: 'test'
+      ...
+    # Subtest: EET OFF za rok = 115 944 + 16 800 = 132 744 Kč
+    ok 2 - EET OFF za rok = 115 944 + 16 800 = 132 744 Kč
+      ---
+      duration_ms: 0.264377
+      type: 'test'
+      ...
+    # Subtest: plátce DPH → paušální daň i EET OFF nedostupné, s důvodem
+    ok 3 - plátce DPH → paušální daň i EET OFF nedostupné, s důvodem
+      ---
+      duration_ms: 16.145689
+      type: 'test'
+      ...
+    # Subtest: příjmy 1 200 000 Kč, 40% paušál → 1. pásmo nedostupné, EET OFF nedostupný
+    ok 4 - příjmy 1 200 000 Kč, 40% paušál → 1. pásmo nedostupné, EET OFF nedostupný
+      ---
+      duration_ms: 1.2757
+      type: 'test'
+      ...
+    # Subtest: základ daně 200 000 Kč, sleva na poplatníka, 2 děti → cca 67 704 Kč/rok (±100 Kč)
+    ok 5 - základ daně 200 000 Kč, sleva na poplatníka, 2 děti → cca 67 704 Kč/rok (±100 Kč)
+      ---
+      duration_ms: 0.195153
+      type: 'test'
+      ...
+    1..5
+ok 1 - povinné případy ze zadání
+  ---
+  duration_ms: 21.170949
+  type: 'suite'
+  ...
+# Subtest: parametry 2027 odpovídají ověřeným hodnotám
+    # Subtest: minimální základy a zálohy
+    ok 1 - minimální základy a zálohy
+      ---
+      duration_ms: 0.157948
+      type: 'test'
+      ...
+    # Subtest: 1. pásmo = 100 + min. soc. záloha × 1,15 (nahoru) + min. zdrav. záloha
+    ok 2 - 1. pásmo = 100 + min. soc. záloha × 1,15 (nahoru) + min. zdrav. záloha
+      ---
+      duration_ms: 0.196595
+      type: 'test'
+      ...
+    # Subtest: hranice 23% sazby = 36 × průměrná mzda = 1 859 868 Kč
+    ok 3 - hranice 23% sazby = 36 × průměrná mzda = 1 859 868 Kč
+      ---
+      duration_ms: 0.224445
+      type: 'test'
+      ...
+    # Subtest: ceilKc nezvedá celé částky kvůli plovoucí čárce
+    ok 4 - ceilKc nezvedá celé částky kvůli plovoucí čárce
+      ---
+      duration_ms: 0.233054
+      type: 'test'
+      ...
+    1..4
+ok 2 - parametry 2027 odpovídají ověřeným hodnotám
+  ---
+  duration_ms: 1.226418
+  type: 'suite'
+  ...
+# Subtest: výdaje a daň
+    # Subtest: výdajový paušál se stropem (60 % nejvýš 1 200 000 Kč)
+    ok 1 - výdajový paušál se stropem (60 % nejvýš 1 200 000 Kč)
+      ---
+      duration_ms: 0.20533
+      type: 'test'
+      ...
+    # Subtest: skutečné výdaje mají přednost před paušálem
+    ok 2 - skutečné výdaje mají přednost před paušálem
+      ---
+      duration_ms: 0.117998
+      type: 'test'
+      ...
+    # Subtest: základ daně se zaokrouhluje dolů na stovky, daň nahoru na Kč
+    ok 3 - základ daně se zaokrouhluje dolů na stovky, daň nahoru na Kč
+      ---
+      duration_ms: 0.079095
+      type: 'test'
+      ...
+    # Subtest: 23 % nad hranicí 36násobku průměrné mzdy
+    ok 4 - 23 % nad hranicí 36násobku průměrné mzdy
+      ---
+      duration_ms: 0.073901
+      type: 'test'
+      ...
+    # Subtest: sleva na poplatníka nejde pod nulu, bez dětí žádný bonus
+    ok 5 - sleva na poplatníka nejde pod nulu, bez dětí žádný bonus
+      ---
+      duration_ms: 0.097476
+      type: 'test'
+      ...
+    # Subtest: zvýhodnění na 3 a více dětí: 3. a další dítě má stejnou částku
+    ok 6 - zvýhodnění na 3 a více dětí: 3. a další dítě má stejnou částku
+      ---
+      duration_ms: 0.093037
+      type: 'test'
+      ...
+    # Subtest: daňový bonus jen při příjmech aspoň 6 × minimální mzda
+    ok 7 - daňový bonus jen při příjmech aspoň 6 × minimální mzda
+      ---
+      duration_ms: 0.191286
+      type: 'test'
+      ...
+    1..7
+ok 3 - výdaje a daň
+  ---
+  duration_ms: 1.036702
+  type: 'suite'
+  ...
+# Subtest: pojistné
+    # Subtest: hlavní činnost: nejméně roční minimum
+    ok 1 - hlavní činnost: nejméně roční minimum
+      ---
+      duration_ms: 0.127779
+      type: 'test'
+      ...
+    # Subtest: nad minimem: 55 % / 50 % zisku
+    ok 2 - nad minimem: 55 % / 50 % zisku
+      ---
+      duration_ms: 0.056335
+      type: 'test'
+      ...
+    # Subtest: sociální pojištění je omezené maximálním základem
+    ok 3 - sociální pojištění je omezené maximálním základem
+      ---
+      duration_ms: 0.055426
+      type: 'test'
+      ...
+    # Subtest: vedlejší činnost: do rozhodné částky bez sociálního, zdravotní bez minima
+    ok 4 - vedlejší činnost: do rozhodné částky bez sociálního, zdravotní bez minima
+      ---
+      duration_ms: 0.073132
+      type: 'test'
+      ...
+    # Subtest: vedlejší činnost při zaměstnání → paušální daň nedostupná
+    ok 5 - vedlejší činnost při zaměstnání → paušální daň nedostupná
+      ---
+      duration_ms: 0.064392
+      type: 'test'
+      ...
+    1..5
+ok 4 - pojistné
+  ---
+  duration_ms: 0.469972
+  type: 'suite'
+  ...
+# Subtest: pásma paušální daně
+    # Subtest: hranice 1. pásma podle druhu činnosti
+    ok 1 - hranice 1. pásma podle druhu činnosti
+      ---
+      duration_ms: 0.22202
+      type: 'test'
+      ...
+    # Subtest: příjmy nad 2 mil. Kč → paušální daň nedostupná
+    ok 2 - příjmy nad 2 mil. Kč → paušální daň nedostupná
+      ---
+      duration_ms: 1.110292
+      type: 'test'
+      ...
+    # Subtest: EET OFF: 60 % a 1,2 mil. Kč → 1. pásmo ano, EET OFF ne (limit 1 mil.)
+    ok 3 - EET OFF: 60 % a 1,2 mil. Kč → 1. pásmo ano, EET OFF ne (limit 1 mil.)
+      ---
+      duration_ms: 0.265836
+      type: 'test'
+      ...
+    # Subtest: EET OFF bez kontaktních plateb nemá smysl
+    ok 4 - EET OFF bez kontaktních plateb nemá smysl
+      ---
+      duration_ms: 0.09152
+      type: 'test'
+      ...
+    1..4
+ok 5 - pásma paušální daně
+  ---
+  duration_ms: 1.812086
+  type: 'suite'
+  ...
+# Subtest: porovnání a graf
+    # Subtest: nejlevnější varianta a rozdíly
+    ok 1 - nejlevnější varianta a rozdíly
+      ---
+      duration_ms: 1.005938
+      type: 'test'
+      ...
+    # Subtest: s dětmi upozorní, že paušál neumožňuje zvýhodnění na děti
+    ok 2 - s dětmi upozorní, že paušál neumožňuje zvýhodnění na děti
+      ---
+      duration_ms: 1.141765
+      type: 'test'
+      ...
+    # Subtest: graf 100 tis. – 2 mil. Kč včetně přesných hranic pásem
+    ok 3 - graf 100 tis. – 2 mil. Kč včetně přesných hranic pásem
+      ---
+      duration_ms: 8.180356
+      type: 'test'
+      ...
+    # Subtest: bod zlomu: pod ním je levnější přiznání, nad ním paušál
+    ok 4 - bod zlomu: pod ním je levnější přiznání, nad ním paušál
+      ---
+      duration_ms: 66.932822
+      type: 'test'
+      ...
+    1..4
+ok 6 - porovnání a graf
+  ---
+  duration_ms: 77.436934
+  type: 'suite'
+  ...
+# Subtest: integrita sekce osvc2027
+    # Subtest: každý výdajový paušál má limity ve všech pásmech
+    ok 1 - každý výdajový paušál má limity ve všech pásmech
+      ---
+      duration_ms: 0.198994
+      type: 'test'
+      ...
+    # Subtest: termíny: přihláška 11. 1. 2027, první platba 20. 1. 2027
+    ok 2 - termíny: přihláška 11. 1. 2027, první platba 20. 1. 2027
+      ---
+      duration_ms: 0.112304
+      type: 'test'
+      ...
+    1..2
+ok 7 - integrita sekce osvc2027
+  ---
+  duration_ms: 0.430901
+  type: 'suite'
+  ...
+# Subtest: povinné scénáře ze zadání
+    # Subtest: OSVČ, hotovost na provozovně, bez paušální daně → musí evidovat
+    ok 1 - OSVČ, hotovost na provozovně, bez paušální daně → musí evidovat
+      ---
+      duration_ms: 29.433575
+      type: 'test'
+      ...
+    # Subtest: jen faktury placené převodem → nemusí evidovat
+    ok 2 - jen faktury placené převodem → nemusí evidovat
+      ---
+      duration_ms: 0.532776
+      type: 'test'
+      ...
+    # Subtest: e-shop, jen online platby přes platební bránu → nemusí evidovat
+    ok 3 - e-shop, jen online platby přes platební bránu → nemusí evidovat
+      ---
+      duration_ms: 0.495322
+      type: 'test'
+      ...
+    # Subtest: kavárna, jen QR platby u pultu → musí evidovat
+    ok 4 - kavárna, jen QR platby u pultu → musí evidovat
+      ---
+      duration_ms: 0.837047
+      type: 'test'
+      ...
+    # Subtest: paušální daň 1. pásmo, příjmy 800 000 Kč → může zvolit EET OFF, přirážka 16 800 Kč/rok
+    ok 5 - paušální daň 1. pásmo, příjmy 800 000 Kč → může zvolit EET OFF, přirážka 16 800 Kč/rok
+      ---
+      duration_ms: 0.953736
+      type: 'test'
+      ...
+    # Subtest: paušální daň 2. pásmo → EET OFF nelze
+    ok 6 - paušální daň 2. pásmo → EET OFF nelze
+      ---
+      duration_ms: 0.857308
+      type: 'test'
+      ...
+    # Subtest: paušální daň 1. pásmo, příjmy 1 200 000 Kč → EET OFF nelze
+    ok 7 - paušální daň 1. pásmo, příjmy 1 200 000 Kč → EET OFF nelze
+      ---
+      duration_ms: 0.807411
+      type: 'test'
+      ...
+    1..7
+ok 8 - povinné scénáře ze zadání
+  ---
+  duration_ms: 35.24042
+  type: 'suite'
+  ...
+# Subtest: další pravidla z oficiálních zdrojů
+    # Subtest: nepodnikám → nemusí evidovat
+    ok 1 - nepodnikám → nemusí evidovat
+      ---
+      duration_ms: 0.618433
+      type: 'test'
+      ...
+    # Subtest: převod u pultu (osobní kontakt) se eviduje
+    ok 2 - převod u pultu (osobní kontakt) se eviduje
+      ---
+      duration_ms: 0.959728
+      type: 'test'
+      ...
+    # Subtest: dobírka přes poštu + online platby → nemusí evidovat
+    ok 3 - dobírka přes poštu + online platby → nemusí evidovat
+      ---
+      duration_ms: 0.622981
+      type: 'test'
+      ...
+    # Subtest: kombinace faktury a hotovosti → musí evidovat (hotovost rozhoduje)
+    ok 4 - kombinace faktury a hotovosti → musí evidovat (hotovost rozhoduje)
+      ---
+      duration_ms: 0.842845
+      type: 'test'
+      ...
+    # Subtest: stravenky, krypto a šeky se evidují
+    ok 5 - stravenky, krypto a šeky se evidují
+      ---
+      duration_ms: 2.70037
+      type: 'test'
+      ...
+    # Subtest: každý vyjmutý obor → nemusí evidovat, s upozorněním na jiné činnosti
+    ok 6 - každý vyjmutý obor → nemusí evidovat, s upozorněním na jiné činnosti
+      ---
+      duration_ms: 9.27599
+      type: 'test'
+      ...
+    # Subtest: nevidomý podnikatel bez zaměstnanců → nemusí evidovat
+    ok 7 - nevidomý podnikatel bez zaměstnanců → nemusí evidovat
+      ---
+      duration_ms: 0.354224
+      type: 'test'
+      ...
+    # Subtest: nevidomý podnikatel se zaměstnanci → musí evidovat
+    ok 8 - nevidomý podnikatel se zaměstnanci → musí evidovat
+      ---
+      duration_ms: 0.708435
+      type: 'test'
+      ...
+    # Subtest: příjmy přesně na limitu → EET OFF lze (zákon: „nepřesáhly“)
+    ok 9 - příjmy přesně na limitu → EET OFF lze (zákon: „nepřesáhly“)
+      ---
+      duration_ms: 0.715596
+      type: 'test'
+      ...
+    # Subtest: příjmy o 1 Kč nad limitem → EET OFF nelze
+    ok 10 - příjmy o 1 Kč nad limitem → EET OFF nelze
+      ---
+      duration_ms: 0.684326
+      type: 'test'
+      ...
+    # Subtest: právnická osoba → EET OFF nelze
+    ok 11 - právnická osoba → EET OFF nelze
+      ---
+      duration_ms: 1.5122
+      type: 'test'
+      ...
+    # Subtest: 1. pásmo bez zadaných příjmů → EET OFF neposoudíme
+    ok 12 - 1. pásmo bez zadaných příjmů → EET OFF neposoudíme
+      ---
+      duration_ms: 0.755878
+      type: 'test'
+      ...
+    1..12
+ok 9 - další pravidla z oficiálních zdrojů
+  ---
+  duration_ms: 20.367344
+  type: 'suite'
+  ...
+# Subtest: MOJE eet
+    # Subtest: do max. počtu evidenčních jednotek je MOJE eet vhodná
+    ok 1 - do max. počtu evidenčních jednotek je MOJE eet vhodná
+      ---
+      duration_ms: 0.725257
+      type: 'test'
+      ...
+    # Subtest: nad max. počtem evidenčních jednotek MOJE eet nedoporučíme
+    ok 2 - nad max. počtem evidenčních jednotek MOJE eet nedoporučíme
+      ---
+      duration_ms: 0.672695
+      type: 'test'
+      ...
+    1..2
+ok 10 - MOJE eet
+  ---
+  duration_ms: 1.489599
+  type: 'suite'
+  ...
+# Subtest: kalkulačka EET OFF
+    # Subtest: MOJE eet zdarma → evidence vychází levněji
+    ok 1 - MOJE eet zdarma → evidence vychází levněji
+      ---
+      duration_ms: 0.612796
+      type: 'test'
+      ...
+    # Subtest: vlastní pokladna 20 000 Kč → EET OFF vychází levněji
+    ok 2 - vlastní pokladna 20 000 Kč → EET OFF vychází levněji
+      ---
+      duration_ms: 0.260049
+      type: 'test'
+      ...
+    # Subtest: stejná cena → obě vycházejí stejně
+    ok 3 - stejná cena → obě vycházejí stejně
+      ---
+      duration_ms: 0.251467
+      type: 'test'
+      ...
+    # Subtest: neplatná cena pokladny se bere jako 0
+    ok 4 - neplatná cena pokladny se bere jako 0
+      ---
+      duration_ms: 0.183913
+      type: 'test'
+      ...
+    1..4
+ok 11 - kalkulačka EET OFF
+  ---
+  duration_ms: 1.42756
+  type: 'suite'
+  ...
+# Subtest: dotazník
+    # Subtest: nepodnikám → jen jedna otázka
+    ok 1 - nepodnikám → jen jedna otázka
+      ---
+      duration_ms: 0.801001
+      type: 'test'
+      ...
+    # Subtest: jen online platby → bez dalších otázek po platbách
+    ok 2 - jen online platby → bez dalších otázek po platbách
+      ---
+      duration_ms: 0.087165
+      type: 'test'
+      ...
+    # Subtest: OSVČ v 1. pásmu, nevidomý → všech 8 otázek, nikdy víc
+    ok 3 - OSVČ v 1. pásmu, nevidomý → všech 8 otázek, nikdy víc
+      ---
+      duration_ms: 0.115161
+      type: 'test'
+      ...
+    # Subtest: právnická osoba → bez otázek na paušál a průkaz
+    ok 4 - právnická osoba → bez otázek na paušál a průkaz
+      ---
+      duration_ms: 0.140677
+      type: 'test'
+      ...
+    # Subtest: vyjmutý obor → otázka na jednotky se nezobrazí
+    ok 5 - vyjmutý obor → otázka na jednotky se nezobrazí
+      ---
+      duration_ms: 0.073824
+      type: 'test'
+      ...
+    1..5
+ok 12 - dotazník
+  ---
+  duration_ms: 1.346035
+  type: 'suite'
+  ...
+# Subtest: kontrolní seznam
+    # Subtest: musí evidovat → kroky evidence s termíny, bez EET OFF
+    ok 1 - musí evidovat → kroky evidence s termíny, bez EET OFF
+      ---
+      duration_ms: 1.254202
+      type: 'test'
+      ...
+    # Subtest: EET OFF → nejdřív oznámení s termínem, pak alternativa evidence
+    ok 2 - EET OFF → nejdřív oznámení s termínem, pak alternativa evidence
+      ---
+      duration_ms: 1.090858
+      type: 'test'
+      ...
+    # Subtest: nemusí evidovat → jen připomínka
+    ok 3 - nemusí evidovat → jen připomínka
+      ---
+      duration_ms: 0.606287
+      type: 'test'
+      ...
+    # Subtest: každá položka seznamu má oficiální zdroj
+    ok 4 - každá položka seznamu má oficiální zdroj
+      ---
+      duration_ms: 0.984335
+      type: 'test'
+      ...
+    1..4
+ok 13 - kontrolní seznam
+  ---
+  duration_ms: 4.088644
+  type: 'suite'
+  ...
+# Subtest: integrita rules.json a kódu
+    # Subtest: každá položka se zdrojem má oficiální URL a datum ověření
+    ok 1 - každá položka se zdrojem má oficiální URL a datum ověření
+      ---
+      duration_ms: 1.38754
+      type: 'test'
+      ...
+    # Subtest: neobsahuje nepotvrzenou výjimku pro hotovost do 300 000 Kč
+    ok 2 - neobsahuje nepotvrzenou výjimku pro hotovost do 300 000 Kč
+      ---
+      duration_ms: 0.56256
+      type: 'test'
+      ...
+    # Subtest: rules.js nemá natvrdo zapsané částky, limity ani data
+    ok 3 - rules.js nemá natvrdo zapsané částky, limity ani data
+      ---
+      duration_ms: 0.361014
+      type: 'test'
+      ...
+    # Subtest: app.js nemá natvrdo zapsané částky, limity ani data
+    ok 4 - app.js nemá natvrdo zapsané částky, limity ani data
+      ---
+      duration_ms: 0.379621
+      type: 'test'
+      ...
+    # Subtest: osvc.js nemá natvrdo zapsané částky, limity ani data
+    ok 5 - osvc.js nemá natvrdo zapsané částky, limity ani data
+      ---
+      duration_ms: 1.039315
+      type: 'test'
+      ...
+    # Subtest: osvc-app.js nemá natvrdo zapsané částky, limity ani data
+    ok 6 - osvc-app.js nemá natvrdo zapsané částky, limity ani data
+      ---
+      duration_ms: 0.505668
+      type: 'test'
+      ...
+    # Subtest: dom.js nemá natvrdo zapsané částky, limity ani data
+    ok 7 - dom.js nemá natvrdo zapsané částky, limity ani data
+      ---
+      duration_ms: 0.226131
+      type: 'test'
+      ...
+    1..7
+ok 14 - integrita rules.json a kódu
+  ---
+  duration_ms: 5.542405
+  type: 'suite'
+  ...
+1..14
+# tests 72
+# suites 14
+# pass 72
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.889141
+exit: 0

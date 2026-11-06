@@ -1,0 +1,38 @@
+# Desetinná čárka ve dvou lokalizacích · 2026-11-05T08:28:32.954Z
+
+## cs-CZ
+navigator.language v prohlížeči: en-US
+| Pole (type) | Zadáno | Hodnota v poli | Hláška / výsledek |
+|---|---|---|---|
+| #osvc-income (text/numeric) | 1500,50 | 1500,50 | Zadej roční příjmy jako celé číslo, nejméně 1. |
+| #osvc-income (text/numeric) | 0,85 | 0,85 | Zadej roční příjmy jako celé číslo, nejméně 1. |
+| #osvc-income (text/numeric) | 1500.50 | 1500.50 | Zadej roční příjmy jako celé číslo, nejméně 1. |
+| #osvc-income (text/numeric) | 800 000 | 800 000 | bez hlášky; 1. řádek: Paušální daň (1. pásmo)Nejlevnější 115 944 Kč 9 662 Kč — |
+| #osvc-income (text/numeric) | 1 500 | 1 500 | bez hlášky; 1. řádek: Paušální daň (1. pásmo) 115 944 Kč 9 662 Kč +10 733 Kč |
+| #osvc-actual | 300000,50 | 300000,50 | Zadej skutečné výdaje jako celé číslo (0 nebo víc). |
+| #osvc-actual | 0,85 | 0,85 | Zadej skutečné výdaje jako celé číslo (0 nebo víc). |
+| #q-income | 800000,50 | 800000,50 | Zadej celé číslo, nejméně 0. |
+| #q-income | 0,85 | 0,85 | Zadej celé číslo, nejméně 0. |
+| #own-cost (kalkulačka EET OFF) | 20000,50 | 20000,50 | Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč. |
+| #own-cost (kalkulačka EET OFF) | 0,85 | 0,85 | Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč. |
+| #own-cost (kalkulačka EET OFF) | 20.000 | 20.000 | Evidence vychází levněji: 20 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 780 Kč. |
+| #own-cost (kalkulačka EET OFF) | 20 000 | 20 000 | EET OFF vychází levněji: přirážka 16 800 Kč ročně proti 20 000 Kč za evidenci, ušetříš 3 200 Kč. |
+
+## en-US
+navigator.language v prohlížeči: en-US
+| Pole (type) | Zadáno | Hodnota v poli | Hláška / výsledek |
+|---|---|---|---|
+| #osvc-income (text/numeric) | 1500,50 | 1500,50 | Zadej roční příjmy jako celé číslo, nejméně 1. |
+| #osvc-income (text/numeric) | 0,85 | 0,85 | Zadej roční příjmy jako celé číslo, nejméně 1. |
+| #osvc-income (text/numeric) | 1500.50 | 1500.50 | Zadej roční příjmy jako celé číslo, nejméně 1. |
+| #osvc-income (text/numeric) | 800 000 | 800 000 | bez hlášky; 1. řádek: Paušální daň (1. pásmo)Nejlevnější 115 944 Kč 9 662 Kč — |
+| #osvc-income (text/numeric) | 1 500 | 1 500 | bez hlášky; 1. řádek: Paušální daň (1. pásmo) 115 944 Kč 9 662 Kč +10 733 Kč |
+| #osvc-actual | 300000,50 | 300000,50 | Zadej skutečné výdaje jako celé číslo (0 nebo víc). |
+| #osvc-actual | 0,85 | 0,85 | Zadej skutečné výdaje jako celé číslo (0 nebo víc). |
+| #q-income | 800000,50 | 800000,50 | Zadej celé číslo, nejméně 0. |
+| #q-income | 0,85 | 0,85 | Zadej celé číslo, nejméně 0. |
+| #own-cost (kalkulačka EET OFF) | 20000,50 | 20000,50 | Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč. |
+| #own-cost (kalkulačka EET OFF) | 0,85 | 0,85 | Evidence vychází levněji: 0 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 800 Kč. |
+| #own-cost (kalkulačka EET OFF) | 20.000 | 20.000 | Evidence vychází levněji: 20 Kč ročně proti přirážce 16 800 Kč, ušetříš 16 780 Kč. |
+| #own-cost (kalkulačka EET OFF) | 20 000 | 20 000 | EET OFF vychází levněji: přirážka 16 800 Kč ročně proti 20 000 Kč za evidenci, ušetříš 3 200 Kč. |
+

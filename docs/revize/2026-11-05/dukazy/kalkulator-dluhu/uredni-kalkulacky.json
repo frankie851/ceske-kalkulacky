@@ -1,0 +1,524 @@
+{
+ "datum": "2026-11-05T09:13:28.213Z",
+ "exekuce": {
+  "jan": [
+   {
+    "popis": "Z1 23 000 běžný",
+    "mzda": 23000,
+    "nepred": 100000,
+    "s": {
+     "mzda": 23000,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 2966,
+     "exekutorovi": 2916,
+     "nahrada": 50,
+     "zustane": 20034,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 2966,
+     "vericum": 2916,
+     "nahrada": 50,
+     "zustane": 20034
+    },
+    "shoda": true
+   },
+   {
+    "popis": "Z2 50 000 přednostní",
+    "mzda": 50000,
+    "pred": 100000,
+    "nepred": 0,
+    "s": {
+     "mzda": 50000,
+     "osoby": 0,
+     "prednostni": true,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 25391,
+     "exekutorovi": 25341,
+     "nahrada": 50,
+     "zustane": 24609,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 25391,
+     "vericum": 25341,
+     "nahrada": 50,
+     "zustane": 24609
+    },
+    "shoda": true
+   },
+   {
+    "popis": "Z3 50 000 běžný",
+    "mzda": 50000,
+    "nepred": 100000,
+    "s": {
+     "mzda": 50000,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 14884,
+     "exekutorovi": 14834,
+     "nahrada": 50,
+     "zustane": 35116,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 14884,
+     "vericum": 14834,
+     "nahrada": 50,
+     "zustane": 35116
+    },
+    "shoda": true
+   },
+   {
+    "popis": "Z5 12 000 přednostní",
+    "mzda": 12000,
+    "pred": 100000,
+    "nepred": 0,
+    "s": {
+     "mzda": 12000,
+     "osoby": 0,
+     "prednostni": true,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 0,
+     "exekutorovi": 0,
+     "nahrada": 0,
+     "zustane": 12000,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 0,
+     "vericum": 0,
+     "nahrada": 0,
+     "zustane": 12000
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H7 23 000, 4 exekuce",
+    "mzda": 23000,
+    "nepred": 100000,
+    "vice": "Ano",
+    "s": {
+     "mzda": 23000,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 4
+    },
+    "uredni": {
+     "srazka": 5932,
+     "exekutorovi": 5882,
+     "nahrada": 50,
+     "zustane": 17068,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 5932,
+     "vericum": 5882,
+     "nahrada": 50,
+     "zustane": 17068
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H8 16 502, 4 exekuce, důchodce",
+    "mzda": 16502,
+    "nepred": 100000,
+    "vice": "Ano",
+    "duchod": "Ano",
+    "s": {
+     "mzda": 16502,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 4,
+     "duchodce": true
+    },
+    "uredni": {
+     "srazka": 800,
+     "exekutorovi": 750,
+     "nahrada": 50,
+     "zustane": 15702,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 800,
+     "vericum": 750,
+     "nahrada": 50,
+     "zustane": 15702
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H8 23 000, 4 exekuce, důchodce",
+    "mzda": 23000,
+    "nepred": 100000,
+    "vice": "Ano",
+    "duchod": "Ano",
+    "s": {
+     "mzda": 23000,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 4,
+     "duchodce": true
+    },
+    "uredni": {
+     "srazka": 5932,
+     "exekutorovi": 5882,
+     "nahrada": 50,
+     "zustane": 17068,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 5932,
+     "vericum": 5882,
+     "nahrada": 50,
+     "zustane": 17068
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H10 23 000, 2 osoby",
+    "mzda": 23000,
+    "deti": 2,
+    "nepred": 100000,
+    "s": {
+     "mzda": 23000,
+     "osoby": 2,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 615,
+     "exekutorovi": 565,
+     "nahrada": 50,
+     "zustane": 22385,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 615,
+     "vericum": 565,
+     "nahrada": 50,
+     "zustane": 22385
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H11 14 402 (srážka 100)",
+    "mzda": 14402,
+    "nepred": 100000,
+    "s": {
+     "mzda": 14402,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 100,
+     "exekutorovi": 66,
+     "nahrada": 34,
+     "zustane": 14302,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 100,
+     "vericum": 66,
+     "nahrada": 34,
+     "zustane": 14302
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H5 45 624 (zbytek 31 522)",
+    "mzda": 45624,
+    "nepred": 100000,
+    "s": {
+     "mzda": 45624,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 10508,
+     "exekutorovi": 10458,
+     "nahrada": 50,
+     "zustane": 35116,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 10508,
+     "vericum": 10458,
+     "nahrada": 50,
+     "zustane": 35116
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H6 50 001 běžný",
+    "mzda": 50001,
+    "nepred": 100000,
+    "s": {
+     "mzda": 50001,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 14885,
+     "exekutorovi": 14835,
+     "nahrada": 50,
+     "zustane": 35116,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 14885,
+     "vericum": 14835,
+     "nahrada": 50,
+     "zustane": 35116
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H3 14 105 (zbytek 3)",
+    "mzda": 14105,
+    "nepred": 100000,
+    "s": {
+     "mzda": 14105,
+     "osoby": 0,
+     "prednostni": false,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 1,
+     "exekutorovi": 0,
+     "nahrada": 1,
+     "zustane": 14104,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 1,
+     "vericum": 0,
+     "nahrada": 1,
+     "zustane": 14104
+    },
+    "shoda": true
+   },
+   {
+    "popis": "H14 1 000 000 přednostní",
+    "mzda": 1000000,
+    "pred": 5000000,
+    "nepred": 0,
+    "s": {
+     "mzda": 1000000,
+     "osoby": 0,
+     "prednostni": true,
+     "exekuci": 1
+    },
+    "uredni": {
+     "srazka": 975391,
+     "exekutorovi": 975341,
+     "nahrada": 50,
+     "zustane": 24609,
+     "rok": "2026"
+    },
+    "moje": {
+     "srazka": 975391,
+     "vericum": 975341,
+     "nahrada": 50,
+     "zustane": 24609
+    },
+    "shoda": true
+   }
+  ],
+  "okt": [
+   {
+    "popis": "Z1 23 000 běžný",
+    "uredni": {
+     "srazka": 2784,
+     "exekutorovi": 0,
+     "nahrada": 0,
+     "zustane": 20216,
+     "rok": "2026"
+    },
+    "mojeOkt": 2784,
+    "mojeJan": 2966
+   },
+   {
+    "popis": "Z2 50 000 přednostní",
+    "uredni": {
+     "srazka": 24441,
+     "exekutorovi": 0,
+     "nahrada": 0,
+     "zustane": 25559,
+     "rok": "2026"
+    },
+    "mojeOkt": 24441,
+    "mojeJan": 25391
+   },
+   {
+    "popis": "Z3 50 000 běžný",
+    "uredni": {
+     "srazka": 13529,
+     "exekutorovi": 0,
+     "nahrada": 0,
+     "zustane": 36471,
+     "rok": "2026"
+    },
+    "mojeOkt": 13529,
+    "mojeJan": 14884
+   },
+   {
+    "popis": "Z5 12 000 přednostní",
+    "uredni": {
+     "srazka": 0,
+     "exekutorovi": 0,
+     "nahrada": 0,
+     "zustane": 12000,
+     "rok": "2026"
+    },
+    "mojeOkt": 0,
+    "mojeJan": 0
+   },
+   {
+    "popis": "H7 23 000, 4 exekuce",
+    "uredni": {
+     "srazka": 2784,
+     "exekutorovi": 0,
+     "nahrada": 0,
+     "zustane": 20216,
+     "rok": "2026"
+    },
+    "mojeOkt": 5568,
+    "mojeJan": 5932
+   }
+  ]
+ },
+ "insolvence": [
+  {
+   "popis": "O1 30 000, 0 os.",
+   "mzdacista": 30000,
+   "deti": 0,
+   "uredni": {
+    "splatka": 10598,
+    "zustane": 19402,
+    "za3roky": 381528,
+    "hraniceUredni": 16590
+   },
+   "moje": 10598,
+   "shoda": true
+  },
+  {
+   "popis": "O2 23 000, 0 os.",
+   "mzdacista": 23000,
+   "deti": 0,
+   "uredni": {
+    "splatka": 5932,
+    "zustane": 17068,
+    "za3roky": 213552,
+    "hraniceUredni": 16590
+   },
+   "moje": 5932,
+   "shoda": true
+  },
+  {
+   "popis": "O3 17 369, 0 os.",
+   "mzdacista": 17369,
+   "deti": 0,
+   "uredni": {
+    "splatka": 2178,
+    "zustane": 15191,
+    "za3roky": 78408,
+    "hraniceUredni": 16590
+   },
+   "moje": 2178,
+   "shoda": true
+  },
+  {
+   "popis": "23 000, 2 os.",
+   "mzdacista": 23000,
+   "deti": 2,
+   "uredni": {
+    "splatka": 1230,
+    "zustane": 21770,
+    "za3roky": 44280,
+    "hraniceUredni": 16590
+   },
+   "moje": 1230,
+   "shoda": true
+  },
+  {
+   "popis": "hranice úřední 30 692 (= 14 102 + 16 590)",
+   "mzdacista": 30692,
+   "deti": 0,
+   "uredni": {
+    "splatka": 11060,
+    "zustane": 19632,
+    "za3roky": 398160,
+    "hraniceUredni": 16590
+   },
+   "moje": 11060,
+   "shoda": true
+  },
+  {
+   "popis": "35 000, 0 os.",
+   "mzdacista": 35000,
+   "deti": 0,
+   "uredni": {
+    "splatka": 15368,
+    "zustane": 19632,
+    "za3roky": 553248,
+    "hraniceUredni": 16590
+   },
+   "moje": 13932,
+   "shoda": false
+  },
+  {
+   "popis": "Z2 50 000, 0 os.",
+   "mzdacista": 50000,
+   "deti": 0,
+   "uredni": {
+    "splatka": 30368,
+    "zustane": 19632,
+    "za3roky": 1093248,
+    "hraniceUredni": 16590
+   },
+   "moje": 25391,
+   "shoda": false
+  }
+ ],
+ "insolvenceZive": [
+  {
+   "popis": "O1 30 000, 0 os.",
+   "sem1": "10 598",
+   "sem2": "19 402",
+   "sem3": "381 528",
+   "sem4": "1.1.2026",
+   "maKalkuluj": true
+  },
+  {
+   "popis": "O2 23 000, 0 os.",
+   "sem1": "5 932",
+   "sem2": "17 068",
+   "sem3": "213 552",
+   "sem4": "1.1.2026",
+   "maKalkuluj": true
+  },
+  {
+   "popis": "Z2 50 000, 0 os.",
+   "sem1": "30 368",
+   "sem2": "19 632",
+   "sem3": "1 093 248",
+   "sem4": "1.1.2026",
+   "maKalkuluj": true
+  }
+ ]
+}

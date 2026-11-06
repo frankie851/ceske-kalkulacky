@@ -1,0 +1,224 @@
+# kalkulator-dluhu @ abb6c1c · 2026-11-05T07:41:15+00:00 · node v22.23.4
+$ node --test
+TAP version 13
+# Subtest: povinné případy ze zadání (rok 2026)
+    # Subtest: 23 000 Kč, bez vyživovaných osob, běžný dluh → srážka 2 966 Kč
+    ok 1 - 23 000 Kč, bez vyživovaných osob, běžný dluh → srážka 2 966 Kč
+      ---
+      duration_ms: 1.012005
+      type: 'test'
+      ...
+    # Subtest: 50 000 Kč, bez vyživovaných osob, přednostní dluh → 25 391 Kč
+    ok 2 - 50 000 Kč, bez vyživovaných osob, přednostní dluh → 25 391 Kč
+      ---
+      duration_ms: 0.154048
+      type: 'test'
+      ...
+    # Subtest: 50 000 Kč, běžný dluh → 10 507 + 4 377 = 14 884 Kč
+    ok 3 - 50 000 Kč, běžný dluh → 10 507 + 4 377 = 14 884 Kč
+      ---
+      duration_ms: 0.125256
+      type: 'test'
+      ...
+    # Subtest: 2 vyživované osoby → nezabavitelná částka 21 153 Kč
+    ok 4 - 2 vyživované osoby → nezabavitelná částka 21 153 Kč
+      ---
+      duration_ms: 0.119448
+      type: 'test'
+      ...
+    # Subtest: čistá mzda nižší než nezabavitelná částka → srážka 0
+    ok 5 - čistá mzda nižší než nezabavitelná částka → srážka 0
+      ---
+      duration_ms: 0.246588
+      type: 'test'
+      ...
+    1..5
+ok 1 - povinné případy ze zadání (rok 2026)
+  ---
+  duration_ms: 2.731445
+  type: 'test'
+  ...
+# Subtest: parametry 2026
+ok 2 - parametry 2026
+  ---
+  duration_ms: 0.135241
+  type: 'test'
+  ...
+# Subtest: zaokrouhluje se celý součet, ne každá část zvlášť
+ok 3 - zaokrouhluje se celý součet, ne každá část zvlášť
+  ---
+  duration_ms: 0.093774
+  type: 'test'
+  ...
+# Subtest: zbytek do hranice se zaokrouhlí dolů na číslo dělitelné třemi
+ok 4 - zbytek do hranice se zaokrouhlí dolů na číslo dělitelné třemi
+  ---
+  duration_ms: 0.423582
+  type: 'test'
+  ...
+# Subtest: čistá mzda s haléři se počítá v celých korunách
+ok 5 - čistá mzda s haléři se počítá v celých korunách
+  ---
+  duration_ms: 0.278574
+  type: 'test'
+  ...
+# Subtest: 4 a více exekucí: srážejí se dvě třetiny i u běžných dluhů
+ok 6 - 4 a více exekucí: srážejí se dvě třetiny i u běžných dluhů
+  ---
+  duration_ms: 0.253462
+  type: 'test'
+  ...
+# Subtest: výjimka pro důchodce: při 4+ exekucích jen třetina, je-li menší než správce s daní (1 089 Kč)
+ok 7 - výjimka pro důchodce: při 4+ exekucích jen třetina, je-li menší než správce s daní (1 089 Kč)
+  ---
+  duration_ms: 0.146865
+  type: 'test'
+  ...
+# Subtest: náhrada zaměstnavateli 50 Kč se bere ze srážky (nejvýš třetina, nahoru)
+ok 8 - náhrada zaměstnavateli 50 Kč se bere ze srážky (nejvýš třetina, nahoru)
+  ---
+  duration_ms: 1.348716
+  type: 'test'
+  ...
+# Subtest: doba splácení v exekuci bez úroku
+ok 9 - doba splácení v exekuci bez úroku
+  ---
+  duration_ms: 0.334217
+  type: 'test'
+  ...
+# Subtest: doba splácení s úrokem z prodlení je delší a úrok se platí jako první
+ok 10 - doba splácení s úrokem z prodlení je delší a úrok se platí jako první
+  ---
+  duration_ms: 0.188251
+  type: 'test'
+  ...
+# Subtest: když úrok převýší splátku, dluh se nesplatí a roste
+ok 11 - když úrok převýší splátku, dluh se nesplatí a roste
+  ---
+  duration_ms: 0.107874
+  type: 'test'
+  ...
+# Subtest: nulová splátka v exekuci: dluh se nesplácí
+ok 12 - nulová splátka v exekuci: dluh se nesplácí
+  ---
+  duration_ms: 0.093001
+  type: 'test'
+  ...
+# Subtest: oddlužení: splátka jako u přednostních dluhů, správce 1 089 Kč, 36 měsíců
+ok 13 - oddlužení: splátka jako u přednostních dluhů, správce 1 089 Kč, 36 měsíců
+  ---
+  duration_ms: 0.182499
+  type: 'test'
+  ...
+# Subtest: oddlužení: opakované po 12 až 20 letech trvá 60 měsíců, do 12 let ho soud zamítne
+ok 14 - oddlužení: opakované po 12 až 20 letech trvá 60 měsíců, do 12 let ho soud zamítne
+  ---
+  duration_ms: 0.094902
+  type: 'test'
+  ...
+# Subtest: oddlužení: minimální splátka 2 178 Kč
+ok 15 - oddlužení: minimální splátka 2 178 Kč
+  ---
+  duration_ms: 0.08475
+  type: 'test'
+  ...
+# Subtest: oddlužení: malý dluh se splatí dřív a nic se neodpouští
+ok 16 - oddlužení: malý dluh se splatí dřív a nic se neodpouští
+  ---
+  duration_ms: 0.122683
+  type: 'test'
+  ...
+# Subtest: rok 2027 je neúplný a nelze podle něj počítat
+ok 17 - rok 2027 je neúplný a nelze podle něj počítat
+  ---
+  duration_ms: 0.527625
+  type: 'test'
+  ...
+# Subtest: každá obrazovka má hned nahoře odkaz na bezplatnou pomoc
+ok 18 - každá obrazovka má hned nahoře odkaz na bezplatnou pomoc
+  ---
+  duration_ms: 1.416201
+  type: 'test'
+  ...
+# Subtest: horní lišta s pomocí je přilepená a stránka obsahuje oficiální seznamy pomoci
+ok 19 - horní lišta s pomocí je přilepená a stránka obsahuje oficiální seznamy pomoci
+  ---
+  duration_ms: 0.54263
+  type: 'test'
+  ...
+# Subtest: u každého výsledku je povinná věta o orientačním výpočtu
+ok 20 - u každého výsledku je povinná věta o orientačním výpočtu
+  ---
+  duration_ms: 0.284417
+  type: 'test'
+  ...
+# Subtest: odkazy vedou jen na oficiální weby
+ok 21 - odkazy vedou jen na oficiální weby
+  ---
+  duration_ms: 0.528932
+  type: 'test'
+  ...
+# Subtest: nic se neukládá ani neodesílá
+ok 22 - nic se neukládá ani neodesílá
+  ---
+  duration_ms: 1.390827
+  type: 'test'
+  ...
+# Subtest: žádné reklamy ani nabídky půjček
+ok 23 - žádné reklamy ani nabídky půjček
+  ---
+  duration_ms: 3.584729
+  type: 'test'
+  ...
+# Subtest: čtivost: krátké věty a žádné nevysvětlené zkratky
+ok 24 - čtivost: krátké věty a žádné nevysvětlené zkratky
+  ---
+  duration_ms: 3.852341
+  type: 'test'
+  ...
+# Subtest: kontrola zkratek opravdu zkratky najde
+ok 25 - kontrola zkratek opravdu zkratky najde
+  ---
+  duration_ms: 0.54174
+  type: 'test'
+  ...
+# Subtest: patička uvádí datum ověření shodné s rules.json
+ok 26 - patička uvádí datum ověření shodné s rules.json
+  ---
+  duration_ms: 1.078105
+  type: 'test'
+  ...
+# Subtest: rules.json má datum ověření
+ok 27 - rules.json má datum ověření
+  ---
+  duration_ms: 1.018212
+  type: 'test'
+  ...
+# Subtest: každá hodnota má popis, zdroj, odkaz do e-Sbírky a datum účinnosti
+ok 28 - každá hodnota má popis, zdroj, odkaz do e-Sbírky a datum účinnosti
+  ---
+  duration_ms: 1.637801
+  type: 'test'
+  ...
+# Subtest: součty pro rok 2026 odpovídají ověřeným částkám
+ok 29 - součty pro rok 2026 odpovídají ověřeným částkám
+  ---
+  duration_ms: 0.210653
+  type: 'test'
+  ...
+# Subtest: rok 2027 je označen jako neúplný, dokud chybí normativní nájemné
+ok 30 - rok 2027 je označen jako neúplný, dokud chybí normativní nájemné
+  ---
+  duration_ms: 0.124738
+  type: 'test'
+  ...
+1..30
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 112.936877
+exit: 0

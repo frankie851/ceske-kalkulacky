@@ -1,0 +1,1624 @@
+{
+ "datum": "2026-11-05T09:15:13.184Z",
+ "commit": "abb6c1c",
+ "behy": [
+  {
+   "beh": 1,
+   "lang": "cs-CZ",
+   "kroky": {
+    "uvodVyrez": {
+     "obrazovka": "uvod",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "formularVyrez": {
+     "obrazovka": "formular",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "formularPreteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "formularAxe": [],
+    "formularTab": [
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Bezplatná pomoc",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Poradna vám pomůže zdarma",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "mzda",
+      "typ": "text",
+      "popisek": "Čistá mzda za měsíc (v korunách)",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "osoby",
+      "typ": "number",
+      "popisek": "Kolika lidem platíte výživné?",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "",
+      "typ": "radio",
+      "popisek": "Běžné dluhy",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "exekuce",
+      "typ": "number",
+      "popisek": "Kolik exekucí vám strhávají z výplaty?",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "duchod",
+      "typ": "checkbox",
+      "popisek": "Pobírám starobní důchod, invalidní důchod druhého či třetího stupně nebo sirotčí důchod",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "dluh",
+      "typ": "text",
+      "popisek": "Kolik dlužíte celkem? (v korunách)",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "",
+      "typ": "radio",
+      "popisek": "Ne, nebo před víc než 20 lety",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "input",
+      "id": "urok",
+      "typ": "checkbox",
+      "popisek": "Počítat i s úrokem z prodlení",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Zpět",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "button",
+      "id": "",
+      "typ": "submit",
+      "popisek": "Spočítat",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Dluhové poradny ve vašem okolí",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Kdo zdarma sepíše návrh na oddlužení",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Úřední kalkulačka srážek ze mzdy",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Úřední informace o oddlužení",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "Veřejný ochránce práv",
+      "fokusViditelny": true
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "typ": "",
+      "popisek": "vesta.justice.cz",
+      "fokusViditelny": true
+     }
+    ],
+    "chybaPrazdny": {
+     "mzda": {
+      "hlaska": "Napište částku v korunách, třeba 23 000.",
+      "ariaInvalid": "true",
+      "hodnota": "",
+      "validity": false
+     },
+     "osoby": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "0",
+      "validity": true
+     },
+     "exekuce": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "1",
+      "validity": true
+     },
+     "dluh": {
+      "hlaska": "Napište částku v korunách. Stačí odhad.",
+      "ariaInvalid": "true",
+      "hodnota": "",
+      "validity": false
+     },
+     "sazba": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "11,75",
+      "validity": true
+     },
+     "aktivni": "mzda",
+     "obrazovka": "formular"
+    },
+    "chybaAxe": [],
+    "chybaNesmysly": {
+     "mzda": {
+      "hlaska": "Napište částku v korunách, třeba 23 000.",
+      "ariaInvalid": "true",
+      "hodnota": "-5000",
+      "validity": true
+     },
+     "osoby": {
+      "hlaska": "Napište celé číslo od 0 do 15.",
+      "ariaInvalid": "true",
+      "hodnota": "16",
+      "validity": false
+     },
+     "exekuce": {
+      "hlaska": "Napište celé číslo, třeba 1.",
+      "ariaInvalid": "true",
+      "hodnota": "-1",
+      "validity": false
+     },
+     "dluh": {
+      "hlaska": "Napište částku v korunách. Stačí odhad.",
+      "ariaInvalid": "true",
+      "hodnota": "nevím",
+      "validity": true
+     },
+     "sazba": {
+      "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+      "ariaInvalid": "true",
+      "hodnota": "150",
+      "validity": true
+     },
+     "aktivni": "mzda",
+     "obrazovka": "formular"
+    },
+    "chybaSazbaText": {
+     "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+     "ariaInvalid": "true",
+     "hodnota": "abc",
+     "validity": true
+    },
+    "Z1": {
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "20 034 Kč",
+      "srazka": "2 966 Kč",
+      "vericum": "2 916 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+      "upozorneni": null,
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 8 898 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 8 898 Kč a rozdělí na třetiny po 2 966 Kč.",
+       "U běžných dluhů se strhává jedna třetina."
+      ],
+      "oSplatka": "5 932 Kč",
+      "oZustane": "17 068 Kč",
+      "oDelka": "1 rok a 9 měsíců",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 4 843 Kč měsíčně.",
+      "oSrovnani": "V oddlužení se strhává víc než v exekuci. Trvá ale jen omezenou dobu.",
+      "oZaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+      "oZbytek": "Nic by se neodpouštělo.",
+      "oMinimum": null,
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "vericum": "2 916 Kč",
+       "mesicu": 35,
+       "uroky": "0 Kč",
+       "oSplatka": "5 932 Kč",
+       "oZustane": "17 068 Kč",
+       "oMesicu": 21,
+       "oVericum": "4 843 Kč",
+       "oZaplaceno": "100 000 Kč",
+       "oOdpusteno": "0 Kč"
+      },
+      "modul": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "vericum": "2 916 Kč",
+       "mesicu": 35,
+       "uroky": "0 Kč",
+       "oSplatka": "5 932 Kč",
+       "oZustane": "17 068 Kč",
+       "oMesicu": 21,
+       "oVericum": "4 843 Kč",
+       "oZaplaceno": "100 000 Kč",
+       "oOdpusteno": "0 Kč"
+      }
+     },
+     "vyrez": {
+      "obrazovka": "vysledek",
+      "scrollY": 0,
+      "lista": true,
+      "pruh": true,
+      "vyrez": {
+       "w": 360,
+       "h": 800
+      }
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     }
+    },
+    "vysledekAxe": [],
+    "Z2": {
+     "sazbaPole": "11,75",
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "24 609 Kč",
+      "srazka": "25 391 Kč",
+      "vericum": "25 341 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 4 roky a 3 měsíce.",
+      "upozorneni": "Na úrocích zaplatíte asi 270 194 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 35 898 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 31 521 Kč a rozdělí na třetiny po 10 507 Kč.",
+       "U přednostních dluhů se strhávají dvě třetiny.",
+       "Částka nad 31 521 Kč se strhne celá. To je 4 377 Kč."
+      ],
+      "oSplatka": "25 391 Kč",
+      "oZustane": "24 609 Kč",
+      "oDelka": "3 roky",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 24 302 Kč měsíčně.",
+      "oSrovnani": "",
+      "oZaplaceno": "Věřitelům za tu dobu zaplatíte asi 874 872 Kč. To je 87 % dluhů.",
+      "oZbytek": "Zbytek asi 125 128 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti.",
+      "oMinimum": null,
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "24 609 Kč",
+       "srazka": "25 391 Kč",
+       "vericum": "25 341 Kč",
+       "mesicu": 51,
+       "uroky": "270 194 Kč",
+       "oSplatka": "25 391 Kč",
+       "oZustane": "24 609 Kč",
+       "oMesicu": 36,
+       "oVericum": "24 302 Kč",
+       "oZaplaceno": "874 872 Kč",
+       "oOdpusteno": "125 128 Kč"
+      },
+      "modul": {
+       "zustane": "24 609 Kč",
+       "srazka": "25 391 Kč",
+       "vericum": "25 341 Kč",
+       "mesicu": 51,
+       "uroky": "270 194 Kč",
+       "oSplatka": "25 391 Kč",
+       "oZustane": "24 609 Kč",
+       "oMesicu": 36,
+       "oVericum": "24 302 Kč",
+       "oZaplaceno": "874 872 Kč",
+       "oOdpusteno": "125 128 Kč"
+      }
+     }
+    },
+    "H8": {
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "15 702 Kč",
+      "srazka": "800 Kč",
+      "vericum": "750 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 5 let a 7 měsíců.",
+      "upozorneni": null,
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 2 400 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 2 400 Kč a rozdělí na třetiny po 800 Kč.",
+       "U běžných dluhů se strhává jedna třetina."
+      ],
+      "oSplatka": "1 600 Kč",
+      "oZustane": "14 902 Kč",
+      "oDelka": "3 roky",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 511 Kč měsíčně.",
+      "oSrovnani": "V oddlužení se strhává víc než v exekuci. Trvá ale jen omezenou dobu.",
+      "oZaplaceno": "Věřitelům za tu dobu zaplatíte asi 18 396 Kč. To je 37 % dluhů.",
+      "oZbytek": "Zbytek asi 31 604 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti.",
+      "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka.",
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "15 702 Kč",
+       "srazka": "800 Kč",
+       "vericum": "750 Kč",
+       "mesicu": 67,
+       "uroky": "0 Kč",
+       "oSplatka": "1 600 Kč",
+       "oZustane": "14 902 Kč",
+       "oMesicu": 36,
+       "oVericum": "511 Kč",
+       "oZaplaceno": "18 396 Kč",
+       "oOdpusteno": "31 604 Kč"
+      },
+      "modul": {
+       "zustane": "15 702 Kč",
+       "srazka": "800 Kč",
+       "vericum": "750 Kč",
+       "mesicu": 67,
+       "uroky": "0 Kč",
+       "oSplatka": "1 600 Kč",
+       "oZustane": "14 902 Kč",
+       "oMesicu": 36,
+       "oVericum": "511 Kč",
+       "oZaplaceno": "18 396 Kč",
+       "oOdpusteno": "31 604 Kč"
+      }
+     }
+    },
+    "formaty": {
+     "23000,50": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "23.000": {
+      "vysledek": {
+       "zustane": "23 Kč",
+       "srazka": "0 Kč",
+       "doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+       "oSplatka": "0 Kč",
+       "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka."
+      }
+     },
+     "23 000 Kč": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "1 500": {
+      "vysledek": {
+       "zustane": "1 500 Kč",
+       "srazka": "0 Kč",
+       "doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+       "oSplatka": "0 Kč",
+       "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka."
+      }
+     },
+     "23000.50": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "sazba 11,75": {
+      "hodnotaPole": "11,75",
+      "upozorneni": "Na úrocích zaplatíte asi 22 445 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 3 roky a 6 měsíců."
+     },
+     "sazba 11.75": {
+      "hodnotaPole": "11.75",
+      "upozorneni": "Na úrocích zaplatíte asi 22 445 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 3 roky a 6 měsíců."
+     },
+     "sazba 0,5": {
+      "hodnotaPole": "0,5",
+      "upozorneni": "Na úrocích zaplatíte asi 742 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 2 roky a 11 měsíců."
+     },
+     "osoby 1,5": {
+      "hodnotaPole": "1.5",
+      "validity": false,
+      "chyba": "Napište celé číslo od 0 do 15."
+     },
+     "osoby 2": {
+      "hodnotaPole": "2",
+      "validity": true,
+      "srazka": "615 Kč",
+      "rozpis0": "Musí vám zůstat aspoň 21 153 Kč. Je to takzvaná nezabavitelná částka."
+     }
+    },
+    "xss": {
+     "dialogy": 0,
+     "vlozenyImg": false,
+     "hlasky": {
+      "mzda": {
+       "hlaska": "Napište částku v korunách, třeba 23 000.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "osoby": {
+       "hlaska": "",
+       "ariaInvalid": "false",
+       "hodnota": "",
+       "validity": true
+      },
+      "exekuce": {
+       "hlaska": "",
+       "ariaInvalid": "false",
+       "hodnota": "",
+       "validity": true
+      },
+      "dluh": {
+       "hlaska": "Napište částku v korunách. Stačí odhad.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "sazba": {
+       "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "aktivni": "mzda",
+      "obrazovka": "formular"
+     }
+    },
+    "xssHash": {
+     "obrazovka": "uvod",
+     "dialogy": 0,
+     "img": false
+    },
+    "primoVysledek": "formular",
+    "krokyVyrez": {
+     "obrazovka": "kroky",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "krokyPreteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "krokyAxe": [],
+    "pomocKlik": {
+     "top": 189.046875,
+     "veVyrezu": true,
+     "aktivni": "pomoc"
+    }
+   },
+   "localStorage": {},
+   "sit": [
+    "http://127.0.0.1:43337/#uvod",
+    "http://127.0.0.1:43337/styles.css",
+    "http://127.0.0.1:43337/app.js",
+    "http://127.0.0.1:43337/dluhy.js",
+    "http://127.0.0.1:43337/rules.json",
+    "http://127.0.0.1:43337/favicon.ico",
+    "http://127.0.0.1:43337/#vysledek"
+   ],
+   "ciziPozadavky": [],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": []
+  },
+  {
+   "beh": 2,
+   "lang": "cs-CZ",
+   "kroky": {
+    "uvodVyrez": {
+     "obrazovka": "uvod",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "formularVyrez": {
+     "obrazovka": "formular",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "formularPreteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "chybaPrazdny": {
+     "mzda": {
+      "hlaska": "Napište částku v korunách, třeba 23 000.",
+      "ariaInvalid": "true",
+      "hodnota": "",
+      "validity": false
+     },
+     "osoby": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "0",
+      "validity": true
+     },
+     "exekuce": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "1",
+      "validity": true
+     },
+     "dluh": {
+      "hlaska": "Napište částku v korunách. Stačí odhad.",
+      "ariaInvalid": "true",
+      "hodnota": "",
+      "validity": false
+     },
+     "sazba": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "11,75",
+      "validity": true
+     },
+     "aktivni": "mzda",
+     "obrazovka": "formular"
+    },
+    "chybaNesmysly": {
+     "mzda": {
+      "hlaska": "Napište částku v korunách, třeba 23 000.",
+      "ariaInvalid": "true",
+      "hodnota": "-5000",
+      "validity": true
+     },
+     "osoby": {
+      "hlaska": "Napište celé číslo od 0 do 15.",
+      "ariaInvalid": "true",
+      "hodnota": "16",
+      "validity": false
+     },
+     "exekuce": {
+      "hlaska": "Napište celé číslo, třeba 1.",
+      "ariaInvalid": "true",
+      "hodnota": "-1",
+      "validity": false
+     },
+     "dluh": {
+      "hlaska": "Napište částku v korunách. Stačí odhad.",
+      "ariaInvalid": "true",
+      "hodnota": "nevím",
+      "validity": true
+     },
+     "sazba": {
+      "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+      "ariaInvalid": "true",
+      "hodnota": "150",
+      "validity": true
+     },
+     "aktivni": "mzda",
+     "obrazovka": "formular"
+    },
+    "chybaSazbaText": {
+     "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+     "ariaInvalid": "true",
+     "hodnota": "abc",
+     "validity": true
+    },
+    "Z1": {
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "20 034 Kč",
+      "srazka": "2 966 Kč",
+      "vericum": "2 916 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+      "upozorneni": null,
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 8 898 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 8 898 Kč a rozdělí na třetiny po 2 966 Kč.",
+       "U běžných dluhů se strhává jedna třetina."
+      ],
+      "oSplatka": "5 932 Kč",
+      "oZustane": "17 068 Kč",
+      "oDelka": "1 rok a 9 měsíců",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 4 843 Kč měsíčně.",
+      "oSrovnani": "V oddlužení se strhává víc než v exekuci. Trvá ale jen omezenou dobu.",
+      "oZaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+      "oZbytek": "Nic by se neodpouštělo.",
+      "oMinimum": null,
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "vericum": "2 916 Kč",
+       "mesicu": 35,
+       "uroky": "0 Kč",
+       "oSplatka": "5 932 Kč",
+       "oZustane": "17 068 Kč",
+       "oMesicu": 21,
+       "oVericum": "4 843 Kč",
+       "oZaplaceno": "100 000 Kč",
+       "oOdpusteno": "0 Kč"
+      },
+      "modul": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "vericum": "2 916 Kč",
+       "mesicu": 35,
+       "uroky": "0 Kč",
+       "oSplatka": "5 932 Kč",
+       "oZustane": "17 068 Kč",
+       "oMesicu": 21,
+       "oVericum": "4 843 Kč",
+       "oZaplaceno": "100 000 Kč",
+       "oOdpusteno": "0 Kč"
+      }
+     },
+     "vyrez": {
+      "obrazovka": "vysledek",
+      "scrollY": 0,
+      "lista": true,
+      "pruh": true,
+      "vyrez": {
+       "w": 360,
+       "h": 800
+      }
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     }
+    },
+    "Z2": {
+     "sazbaPole": "11,75",
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "24 609 Kč",
+      "srazka": "25 391 Kč",
+      "vericum": "25 341 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 4 roky a 3 měsíce.",
+      "upozorneni": "Na úrocích zaplatíte asi 270 194 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 35 898 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 31 521 Kč a rozdělí na třetiny po 10 507 Kč.",
+       "U přednostních dluhů se strhávají dvě třetiny.",
+       "Částka nad 31 521 Kč se strhne celá. To je 4 377 Kč."
+      ],
+      "oSplatka": "25 391 Kč",
+      "oZustane": "24 609 Kč",
+      "oDelka": "3 roky",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 24 302 Kč měsíčně.",
+      "oSrovnani": "",
+      "oZaplaceno": "Věřitelům za tu dobu zaplatíte asi 874 872 Kč. To je 87 % dluhů.",
+      "oZbytek": "Zbytek asi 125 128 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti.",
+      "oMinimum": null,
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "24 609 Kč",
+       "srazka": "25 391 Kč",
+       "vericum": "25 341 Kč",
+       "mesicu": 51,
+       "uroky": "270 194 Kč",
+       "oSplatka": "25 391 Kč",
+       "oZustane": "24 609 Kč",
+       "oMesicu": 36,
+       "oVericum": "24 302 Kč",
+       "oZaplaceno": "874 872 Kč",
+       "oOdpusteno": "125 128 Kč"
+      },
+      "modul": {
+       "zustane": "24 609 Kč",
+       "srazka": "25 391 Kč",
+       "vericum": "25 341 Kč",
+       "mesicu": 51,
+       "uroky": "270 194 Kč",
+       "oSplatka": "25 391 Kč",
+       "oZustane": "24 609 Kč",
+       "oMesicu": 36,
+       "oVericum": "24 302 Kč",
+       "oZaplaceno": "874 872 Kč",
+       "oOdpusteno": "125 128 Kč"
+      }
+     }
+    },
+    "H8": {
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "15 702 Kč",
+      "srazka": "800 Kč",
+      "vericum": "750 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 5 let a 7 měsíců.",
+      "upozorneni": null,
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 2 400 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 2 400 Kč a rozdělí na třetiny po 800 Kč.",
+       "U běžných dluhů se strhává jedna třetina."
+      ],
+      "oSplatka": "1 600 Kč",
+      "oZustane": "14 902 Kč",
+      "oDelka": "3 roky",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 511 Kč měsíčně.",
+      "oSrovnani": "V oddlužení se strhává víc než v exekuci. Trvá ale jen omezenou dobu.",
+      "oZaplaceno": "Věřitelům za tu dobu zaplatíte asi 18 396 Kč. To je 37 % dluhů.",
+      "oZbytek": "Zbytek asi 31 604 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti.",
+      "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka.",
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "15 702 Kč",
+       "srazka": "800 Kč",
+       "vericum": "750 Kč",
+       "mesicu": 67,
+       "uroky": "0 Kč",
+       "oSplatka": "1 600 Kč",
+       "oZustane": "14 902 Kč",
+       "oMesicu": 36,
+       "oVericum": "511 Kč",
+       "oZaplaceno": "18 396 Kč",
+       "oOdpusteno": "31 604 Kč"
+      },
+      "modul": {
+       "zustane": "15 702 Kč",
+       "srazka": "800 Kč",
+       "vericum": "750 Kč",
+       "mesicu": 67,
+       "uroky": "0 Kč",
+       "oSplatka": "1 600 Kč",
+       "oZustane": "14 902 Kč",
+       "oMesicu": 36,
+       "oVericum": "511 Kč",
+       "oZaplaceno": "18 396 Kč",
+       "oOdpusteno": "31 604 Kč"
+      }
+     }
+    },
+    "formaty": {
+     "23000,50": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "23.000": {
+      "vysledek": {
+       "zustane": "23 Kč",
+       "srazka": "0 Kč",
+       "doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+       "oSplatka": "0 Kč",
+       "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka."
+      }
+     },
+     "23 000 Kč": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "1 500": {
+      "vysledek": {
+       "zustane": "1 500 Kč",
+       "srazka": "0 Kč",
+       "doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+       "oSplatka": "0 Kč",
+       "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka."
+      }
+     },
+     "23000.50": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "sazba 11,75": {
+      "hodnotaPole": "11,75",
+      "upozorneni": "Na úrocích zaplatíte asi 22 445 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 3 roky a 6 měsíců."
+     },
+     "sazba 11.75": {
+      "hodnotaPole": "11.75",
+      "upozorneni": "Na úrocích zaplatíte asi 22 445 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 3 roky a 6 měsíců."
+     },
+     "sazba 0,5": {
+      "hodnotaPole": "0,5",
+      "upozorneni": "Na úrocích zaplatíte asi 742 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 2 roky a 11 měsíců."
+     },
+     "osoby 1,5": {
+      "hodnotaPole": "1.5",
+      "validity": false,
+      "chyba": "Napište celé číslo od 0 do 15."
+     },
+     "osoby 2": {
+      "hodnotaPole": "2",
+      "validity": true,
+      "srazka": "615 Kč",
+      "rozpis0": "Musí vám zůstat aspoň 21 153 Kč. Je to takzvaná nezabavitelná částka."
+     }
+    },
+    "xss": {
+     "dialogy": 0,
+     "vlozenyImg": false,
+     "hlasky": {
+      "mzda": {
+       "hlaska": "Napište částku v korunách, třeba 23 000.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "osoby": {
+       "hlaska": "",
+       "ariaInvalid": "false",
+       "hodnota": "",
+       "validity": true
+      },
+      "exekuce": {
+       "hlaska": "",
+       "ariaInvalid": "false",
+       "hodnota": "",
+       "validity": true
+      },
+      "dluh": {
+       "hlaska": "Napište částku v korunách. Stačí odhad.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "sazba": {
+       "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "aktivni": "mzda",
+      "obrazovka": "formular"
+     }
+    },
+    "xssHash": {
+     "obrazovka": "uvod",
+     "dialogy": 0,
+     "img": false
+    },
+    "primoVysledek": "formular",
+    "krokyVyrez": {
+     "obrazovka": "kroky",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "krokyPreteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "pomocKlik": {
+     "top": 171.046875,
+     "veVyrezu": true,
+     "aktivni": "pomoc"
+    }
+   },
+   "localStorage": {},
+   "sit": [
+    "http://127.0.0.1:43337/#uvod",
+    "http://127.0.0.1:43337/styles.css",
+    "http://127.0.0.1:43337/app.js",
+    "http://127.0.0.1:43337/dluhy.js",
+    "http://127.0.0.1:43337/rules.json",
+    "http://127.0.0.1:43337/favicon.ico",
+    "http://127.0.0.1:43337/#vysledek"
+   ],
+   "ciziPozadavky": [],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": []
+  },
+  {
+   "beh": 3,
+   "lang": "en-US",
+   "kroky": {
+    "uvodVyrez": {
+     "obrazovka": "uvod",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "formularVyrez": {
+     "obrazovka": "formular",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "formularPreteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "chybaPrazdny": {
+     "mzda": {
+      "hlaska": "Napište částku v korunách, třeba 23 000.",
+      "ariaInvalid": "true",
+      "hodnota": "",
+      "validity": false
+     },
+     "osoby": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "0",
+      "validity": true
+     },
+     "exekuce": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "1",
+      "validity": true
+     },
+     "dluh": {
+      "hlaska": "Napište částku v korunách. Stačí odhad.",
+      "ariaInvalid": "true",
+      "hodnota": "",
+      "validity": false
+     },
+     "sazba": {
+      "hlaska": "",
+      "ariaInvalid": "false",
+      "hodnota": "11,75",
+      "validity": true
+     },
+     "aktivni": "mzda",
+     "obrazovka": "formular"
+    },
+    "chybaNesmysly": {
+     "mzda": {
+      "hlaska": "Napište částku v korunách, třeba 23 000.",
+      "ariaInvalid": "true",
+      "hodnota": "-5000",
+      "validity": true
+     },
+     "osoby": {
+      "hlaska": "Napište celé číslo od 0 do 15.",
+      "ariaInvalid": "true",
+      "hodnota": "16",
+      "validity": false
+     },
+     "exekuce": {
+      "hlaska": "Napište celé číslo, třeba 1.",
+      "ariaInvalid": "true",
+      "hodnota": "-1",
+      "validity": false
+     },
+     "dluh": {
+      "hlaska": "Napište částku v korunách. Stačí odhad.",
+      "ariaInvalid": "true",
+      "hodnota": "nevím",
+      "validity": true
+     },
+     "sazba": {
+      "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+      "ariaInvalid": "true",
+      "hodnota": "150",
+      "validity": true
+     },
+     "aktivni": "mzda",
+     "obrazovka": "formular"
+    },
+    "chybaSazbaText": {
+     "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+     "ariaInvalid": "true",
+     "hodnota": "abc",
+     "validity": true
+    },
+    "Z1": {
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "20 034 Kč",
+      "srazka": "2 966 Kč",
+      "vericum": "2 916 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+      "upozorneni": null,
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 8 898 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 8 898 Kč a rozdělí na třetiny po 2 966 Kč.",
+       "U běžných dluhů se strhává jedna třetina."
+      ],
+      "oSplatka": "5 932 Kč",
+      "oZustane": "17 068 Kč",
+      "oDelka": "1 rok a 9 měsíců",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 4 843 Kč měsíčně.",
+      "oSrovnani": "V oddlužení se strhává víc než v exekuci. Trvá ale jen omezenou dobu.",
+      "oZaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+      "oZbytek": "Nic by se neodpouštělo.",
+      "oMinimum": null,
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "vericum": "2 916 Kč",
+       "mesicu": 35,
+       "uroky": "0 Kč",
+       "oSplatka": "5 932 Kč",
+       "oZustane": "17 068 Kč",
+       "oMesicu": 21,
+       "oVericum": "4 843 Kč",
+       "oZaplaceno": "100 000 Kč",
+       "oOdpusteno": "0 Kč"
+      },
+      "modul": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "vericum": "2 916 Kč",
+       "mesicu": 35,
+       "uroky": "0 Kč",
+       "oSplatka": "5 932 Kč",
+       "oZustane": "17 068 Kč",
+       "oMesicu": 21,
+       "oVericum": "4 843 Kč",
+       "oZaplaceno": "100 000 Kč",
+       "oOdpusteno": "0 Kč"
+      }
+     },
+     "vyrez": {
+      "obrazovka": "vysledek",
+      "scrollY": 0,
+      "lista": true,
+      "pruh": true,
+      "vyrez": {
+       "w": 360,
+       "h": 800
+      }
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     }
+    },
+    "Z2": {
+     "sazbaPole": "11,75",
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "24 609 Kč",
+      "srazka": "25 391 Kč",
+      "vericum": "25 341 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 4 roky a 3 měsíce.",
+      "upozorneni": "Na úrocích zaplatíte asi 270 194 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 35 898 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 31 521 Kč a rozdělí na třetiny po 10 507 Kč.",
+       "U přednostních dluhů se strhávají dvě třetiny.",
+       "Částka nad 31 521 Kč se strhne celá. To je 4 377 Kč."
+      ],
+      "oSplatka": "25 391 Kč",
+      "oZustane": "24 609 Kč",
+      "oDelka": "3 roky",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 24 302 Kč měsíčně.",
+      "oSrovnani": "",
+      "oZaplaceno": "Věřitelům za tu dobu zaplatíte asi 874 872 Kč. To je 87 % dluhů.",
+      "oZbytek": "Zbytek asi 125 128 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti.",
+      "oMinimum": null,
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "24 609 Kč",
+       "srazka": "25 391 Kč",
+       "vericum": "25 341 Kč",
+       "mesicu": 51,
+       "uroky": "270 194 Kč",
+       "oSplatka": "25 391 Kč",
+       "oZustane": "24 609 Kč",
+       "oMesicu": 36,
+       "oVericum": "24 302 Kč",
+       "oZaplaceno": "874 872 Kč",
+       "oOdpusteno": "125 128 Kč"
+      },
+      "modul": {
+       "zustane": "24 609 Kč",
+       "srazka": "25 391 Kč",
+       "vericum": "25 341 Kč",
+       "mesicu": 51,
+       "uroky": "270 194 Kč",
+       "oSplatka": "25 391 Kč",
+       "oZustane": "24 609 Kč",
+       "oMesicu": 36,
+       "oVericum": "24 302 Kč",
+       "oZaplaceno": "874 872 Kč",
+       "oOdpusteno": "125 128 Kč"
+      }
+     }
+    },
+    "H8": {
+     "obrazovka": {
+      "obrazovka": "vysledek",
+      "rok": "Počítáme podle pravidel pro rok 2026.",
+      "zustane": "15 702 Kč",
+      "srazka": "800 Kč",
+      "vericum": "750 Kč",
+      "nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+      "doba": "Odhad doby splácení: 5 let a 7 měsíců.",
+      "upozorneni": null,
+      "rozpis": [
+       "Musí vám zůstat aspoň 14 102 Kč. Je to takzvaná nezabavitelná částka.",
+       "Zbývá 2 400 Kč.",
+       "Část do 31 521 Kč se zaokrouhlí dolů na 2 400 Kč a rozdělí na třetiny po 800 Kč.",
+       "U běžných dluhů se strhává jedna třetina."
+      ],
+      "oSplatka": "1 600 Kč",
+      "oZustane": "14 902 Kč",
+      "oDelka": "3 roky",
+      "oSpravce": "Z toho 1 089 Kč měsíčně dostane insolvenční správce. Je to úředník, který na oddlužení dohlíží. Věřitelé dostanou 511 Kč měsíčně.",
+      "oSrovnani": "V oddlužení se strhává víc než v exekuci. Trvá ale jen omezenou dobu.",
+      "oZaplaceno": "Věřitelům za tu dobu zaplatíte asi 18 396 Kč. To je 37 % dluhů.",
+      "oZbytek": "Zbytek asi 31 604 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti.",
+      "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka.",
+      "oNelze": null,
+      "vyhrady": [
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.",
+       "Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud."
+      ],
+      "aktivni": "BODY"
+     },
+     "ocekavano": {
+      "moje": {
+       "zustane": "15 702 Kč",
+       "srazka": "800 Kč",
+       "vericum": "750 Kč",
+       "mesicu": 67,
+       "uroky": "0 Kč",
+       "oSplatka": "1 600 Kč",
+       "oZustane": "14 902 Kč",
+       "oMesicu": 36,
+       "oVericum": "511 Kč",
+       "oZaplaceno": "18 396 Kč",
+       "oOdpusteno": "31 604 Kč"
+      },
+      "modul": {
+       "zustane": "15 702 Kč",
+       "srazka": "800 Kč",
+       "vericum": "750 Kč",
+       "mesicu": 67,
+       "uroky": "0 Kč",
+       "oSplatka": "1 600 Kč",
+       "oZustane": "14 902 Kč",
+       "oMesicu": 36,
+       "oVericum": "511 Kč",
+       "oZaplaceno": "18 396 Kč",
+       "oOdpusteno": "31 604 Kč"
+      }
+     }
+    },
+    "formaty": {
+     "23000,50": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "23.000": {
+      "vysledek": {
+       "zustane": "23 Kč",
+       "srazka": "0 Kč",
+       "doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+       "oSplatka": "0 Kč",
+       "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka."
+      }
+     },
+     "23 000 Kč": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "1 500": {
+      "vysledek": {
+       "zustane": "1 500 Kč",
+       "srazka": "0 Kč",
+       "doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+       "oSplatka": "0 Kč",
+       "oMinimum": "Splátka musí být aspoň 2 178 Kč měsíčně. Jinak soud oddlužení nepovolí. V poradně zjistíte, jak to řešit. Pomoct může třeba příspěvek od blízkého člověka."
+      }
+     },
+     "23000.50": {
+      "vysledek": {
+       "zustane": "20 034 Kč",
+       "srazka": "2 966 Kč",
+       "doba": "Odhad doby splácení: 2 roky a 11 měsíců.",
+       "oSplatka": "5 932 Kč",
+       "oMinimum": null
+      }
+     },
+     "sazba 11,75": {
+      "hodnotaPole": "11,75",
+      "upozorneni": "Na úrocích zaplatíte asi 22 445 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 3 roky a 6 měsíců."
+     },
+     "sazba 11.75": {
+      "hodnotaPole": "11.75",
+      "upozorneni": "Na úrocích zaplatíte asi 22 445 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 3 roky a 6 měsíců."
+     },
+     "sazba 0,5": {
+      "hodnotaPole": "0,5",
+      "upozorneni": "Na úrocích zaplatíte asi 742 Kč. Dluh může růst rychleji, než se splácí. Stačí, aby přibyla další exekuce nebo klesla mzda.",
+      "doba": "Odhad doby splácení: 2 roky a 11 měsíců."
+     },
+     "osoby 1,5": {
+      "hodnotaPole": "15",
+      "validity": true,
+      "srazka": "0 Kč",
+      "rozpis0": "Musí vám zůstat aspoň 66 983 Kč. Je to takzvaná nezabavitelná částka."
+     },
+     "osoby 2": {
+      "hodnotaPole": "2",
+      "validity": true,
+      "srazka": "615 Kč",
+      "rozpis0": "Musí vám zůstat aspoň 21 153 Kč. Je to takzvaná nezabavitelná částka."
+     }
+    },
+    "xss": {
+     "dialogy": 0,
+     "vlozenyImg": false,
+     "hlasky": {
+      "mzda": {
+       "hlaska": "Napište částku v korunách, třeba 23 000.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "osoby": {
+       "hlaska": "",
+       "ariaInvalid": "false",
+       "hodnota": "",
+       "validity": true
+      },
+      "exekuce": {
+       "hlaska": "",
+       "ariaInvalid": "false",
+       "hodnota": "",
+       "validity": true
+      },
+      "dluh": {
+       "hlaska": "Napište částku v korunách. Stačí odhad.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "sazba": {
+       "hlaska": "Napište sazbu v procentech, třeba 11,75.",
+       "ariaInvalid": "true",
+       "hodnota": "<img src=x onerror=alert(1)>",
+       "validity": true
+      },
+      "aktivni": "mzda",
+      "obrazovka": "formular"
+     }
+    },
+    "xssHash": {
+     "obrazovka": "uvod",
+     "dialogy": 0,
+     "img": false
+    },
+    "primoVysledek": "formular",
+    "krokyVyrez": {
+     "obrazovka": "kroky",
+     "scrollY": 0,
+     "lista": true,
+     "pruh": true,
+     "vyrez": {
+      "w": 360,
+      "h": 800
+     }
+    },
+    "krokyPreteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "pomocKlik": {
+     "top": 171.046875,
+     "veVyrezu": true,
+     "aktivni": "pomoc"
+    }
+   },
+   "localStorage": {},
+   "sit": [
+    "http://127.0.0.1:43337/#uvod",
+    "http://127.0.0.1:43337/styles.css",
+    "http://127.0.0.1:43337/app.js",
+    "http://127.0.0.1:43337/dluhy.js",
+    "http://127.0.0.1:43337/rules.json",
+    "http://127.0.0.1:43337/favicon.ico",
+    "http://127.0.0.1:43337/#vysledek"
+   ],
+   "ciziPozadavky": [],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": []
+  }
+ ],
+ "sirka1440": {
+  "preteka": {
+   "scrollWidth": 1440,
+   "innerWidth": 1440,
+   "preteka": false
+  },
+  "vyrez": {
+   "obrazovka": "vysledek",
+   "scrollY": 0,
+   "lista": true,
+   "pruh": true,
+   "vyrez": {
+    "w": 1440,
+    "h": 900
+   }
+  },
+  "obrazovka": {
+   "zustane": "20 034 Kč",
+   "srazka": "2 966 Kč",
+   "oSplatka": "5 932 Kč"
+  }
+ },
+ "zivy": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "cizi": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    "https://frankie851.github.io/kalkulator-dluhu/",
+    "https://frankie851.github.io/kalkulator-dluhu/styles.css",
+    "https://frankie851.github.io/kalkulator-dluhu/app.js",
+    "https://frankie851.github.io/kalkulator-dluhu/dluhy.js",
+    "https://frankie851.github.io/kalkulator-dluhu/rules.json",
+    "https://frankie851.github.io/favicon.ico"
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "cizi": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "sit": [
+    "https://frankie851.github.io/kalkulator-dluhu/",
+    "https://frankie851.github.io/kalkulator-dluhu/styles.css",
+    "https://frankie851.github.io/kalkulator-dluhu/app.js",
+    "https://frankie851.github.io/kalkulator-dluhu/dluhy.js",
+    "https://frankie851.github.io/kalkulator-dluhu/rules.json",
+    "https://frankie851.github.io/favicon.ico"
+   ]
+  }
+ },
+ "esbirka": {
+  "https://e-sbirka.gov.cz/sb/2022/436": {
+   "title": "436/2022 Sb., 1. 1. 2023 - 30. 9. 2025, minulé znění, zrušeno, informativní znění systému e-Sbírka",
+   "h1": "Nařízení vlády č. 436/2022 Sb.",
+   "text": "Elektronická Sbírka zákonů a mezinárodních smluv EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 436/2022 Sb. Rozšířené vyhledávání Sbírka zákonů 436/2022 Sb. Nařízení vlády č. 436/2022 Sb. Nařízení vlády o zvýšení částek životního minima a existenčního minima Vyhlášeno 23. 12. 2022, datum účinnosti 1. 1. 2023, částka 197/2022, zrušeno 1. 10. 2025 (152/2025 Sb.) Sdílet Znění Historie Souvislosti Další informace Porovnat Stáhnout Tisknout Citovat Nastavení zobrazení Obsah § 1 - Částka životního minima jednotlivce činí měsíčně 4 860 Kč. § 2 - (1) Částka životního minima osoby, která je p"
+  },
+  "https://e-sbirka.gov.cz/sb/2025/361": {
+   "title": "361/2025 Sb., 29. 4. 2026 - 30. 9. 2026, minulé znění, zrušeno, informativní znění systému e-Sbírka",
+   "h1": "Nařízení vlády č. 361/2025 Sb.",
+   "text": "Elektronická Sbírka zákonů a mezinárodních smluv EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 361/2025 Sb. Rozšířené vyhledávání Sbírka zákonů 361/2025 Sb. Nařízení vlády č. 361/2025 Sb. Nařízení vlády o stanovení částek životního minima a existenčního minima Vyhlášeno 29. 9. 2025 12:42:34, datum účinnosti 1. 10. 2025, částka 361/2025, zrušeno 1. 10. 2026 Sdílet Znění Historie Souvislosti Stručný popis obsahu Důvodová zpráva Další informace Porovnat Stáhnout Tisknout Citovat Nastavení zobrazení Obsah § 1 - Částka životního minima jednotlivce činí měsíčně 4 860 Kč. § 2 - (1) Částka ž"
+  },
+  "https://e-sbirka.gov.cz/sb/2006/595": {
+   "title": "595/2006 Sb., 1. 1. 2026, aktuální znění, informativní znění systému e-Sbírka",
+   "h1": "Nařízení vlády č. 595/2006 Sb.",
+   "text": "Elektronická Sbírka zákonů a mezinárodních smluv EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 595/2006 Sb. Rozšířené vyhledávání Sbírka zákonů 595/2006 Sb. Nařízení vlády č. 595/2006 Sb. Nařízení vlády o způsobu výpočtu základní částky, která nesmí být sražena povinnému z měsíční mzdy při výkonu rozhodnutí, a o stanovení částky, nad kterou je mzda postižitelná srážkami bez omezení (nařízení o nezabavitelných částkách) Vyhlášeno 27. 12. 2006, datum účinnosti 1. 1. 2007, částka 188/2006 Sdílet Znění Historie Souvislosti Vybraná ustanovení novel Další informace Porovnat Stáhnout Tiskno"
+  }
+ }
+}

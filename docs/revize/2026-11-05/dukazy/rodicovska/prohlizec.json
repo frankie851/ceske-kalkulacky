@@ -1,0 +1,2309 @@
+{
+ "datum": "2026-11-05T09:03:33.599Z",
+ "scenare": {
+  "A_beh1": {
+   "data": {
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "375 436 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "135 436 Kč",
+      "pozn": "matka 691 Kč denně"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "0 Kč",
+      "pozn": "nečerpá se"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "240 000 Kč",
+      "pozn": "z 350 000 Kč, po 8 000 Kč měsíčně"
+     },
+     {
+      "nazev": "Rodičovská se vyčerpá",
+      "hodnota": "nevyčerpá se do 3 let",
+      "pozn": "30 měsíců čerpání"
+     },
+     {
+      "nazev": "Propadne k 3. narozeninám",
+      "hodnota": "110 000 Kč",
+      "pozn": "zvyšte měsíční výši"
+     },
+     {
+      "nazev": "Příjem rodiny za celé období",
+      "hodnota": "1 556 846 Kč",
+      "pozn": "z toho orientační čisté mzdy 1 181 410 Kč"
+     }
+    ],
+    "rpInfo": "Celkem 350 000 Kč, váš strop 27 636 Kč měsíčně. Čerpání od zář 2026 (6. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+    "rpText": "8 000 Kč",
+    "slider": {
+     "value": "8000",
+     "min": "1000",
+     "max": "27636"
+    },
+    "varovani": [
+     "Část rodičovské propadne. Do 3 let dítěte vyčerpáte jen 240 000 Kč, zbylých 110 000 Kč propadne. Aby se rodičovská vyčerpala celá, zvolte aspoň 11 700 Kč měsíčně.",
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "detail": "",
+    "tabulka": [
+     [
+      "úno 2026",
+      "19 348",
+      "31 930",
+      "51 278"
+     ],
+     [
+      "bře 2026 ★",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "dub 2026",
+      "20 730",
+      "31 930",
+      "52 660"
+     ],
+     [
+      "kvě 2026",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "čvn 2026",
+      "20 730",
+      "31 930",
+      "52 660"
+     ],
+     [
+      "čvc 2026",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "srp 2026",
+      "10 365",
+      "31 930",
+      "42 295"
+     ],
+     [
+      "zář 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "bře 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "dub 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "kvě 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvn 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvc 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "srp 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "zář 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "bře 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "dub 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "kvě 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvn 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvc 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "srp 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "zář 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2029",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2029",
+      "8 000",
+      "31 930",
+      "39 930"
+     ]
+    ],
+    "checklist": [
+     "Do 1. 2. 2026: Ošetřující gynekolog vystaví žádost o peněžitou pomoc v mateřství (nástup 8 až 6 týdnů před termínem). Dávku vyplácí ČSSZ, postup předání ověřte u zaměstnavatele nebo na cssz.cz.",
+     "Po porodu: Rodný list vystaví matrika podle místa narození. Dítě co nejdříve nahlaste zdravotní pojišťovně.",
+     "Od zář 2026: Rodičovský příspěvek: žádost na Úřadu práce ČR (online přes portál MPSV, datovou schránkou nebo osobně). Chcete-li víc než 15 000 Kč měsíčně, přiložte Potvrzení o denním vyměřovacím základu od ČSSZ.",
+     "Kdykoli během čerpání: Výši rodičovské lze měnit jednou za 3 měsíce, na písemnou žádost a ne zpětně.",
+     "U zaměstnavatele: Uplatněte daňové zvýhodnění na dítě (v čisté mzdě zde není započteno).",
+     "Narodí-li se další dítě: Nahlaste to Úřadu práce. Nárok na rodičovskou na starší dítě zaniká, ale nevyčerpaný zbytek lze vyplatit jednorázově.",
+     "Do 28. 2. 2029: Poslední měsíc čerpání rodičovské. Co do té doby nevyčerpáte, propadne."
+    ],
+    "overeno": "5. 11. 2026",
+    "zdroje": [
+     {
+      "text": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
+      "href": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+     },
+     {
+      "text": "ČSSZ – Otcovská",
+      "href": "https://cssz.cz/otcovska"
+     },
+     {
+      "text": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+      "href": "https://mpsv.gov.cz/nemocenske-pojisteni"
+     },
+     {
+      "text": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+      "href": "https://e-sbirka.gov.cz/sb/2026/185"
+     },
+     {
+      "text": "MPSV / ÚP ČR – Rodičovský příspěvek",
+      "href": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+     },
+     {
+      "text": "MPSV – Volba výše rodičovského příspěvku",
+      "href": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
+     },
+     {
+      "text": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
+      "href": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+     },
+     {
+      "text": "MPSV – Péče o dítě a finance",
+      "href": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+     },
+     {
+      "text": "Finanční správa – Daňové novinky pro rok 2026",
+      "href": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+     }
+    ],
+    "osaRadku": 37
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:37515/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [],
+   "axe": [],
+   "axeOtevrene": [],
+   "pretekaOtevrene": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   }
+  },
+  "A_beh2": {
+   "data": {
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "375 436 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "135 436 Kč",
+      "pozn": "matka 691 Kč denně"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "0 Kč",
+      "pozn": "nečerpá se"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "240 000 Kč",
+      "pozn": "z 350 000 Kč, po 8 000 Kč měsíčně"
+     },
+     {
+      "nazev": "Rodičovská se vyčerpá",
+      "hodnota": "nevyčerpá se do 3 let",
+      "pozn": "30 měsíců čerpání"
+     },
+     {
+      "nazev": "Propadne k 3. narozeninám",
+      "hodnota": "110 000 Kč",
+      "pozn": "zvyšte měsíční výši"
+     },
+     {
+      "nazev": "Příjem rodiny za celé období",
+      "hodnota": "1 556 846 Kč",
+      "pozn": "z toho orientační čisté mzdy 1 181 410 Kč"
+     }
+    ],
+    "rpInfo": "Celkem 350 000 Kč, váš strop 27 636 Kč měsíčně. Čerpání od zář 2026 (6. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+    "rpText": "8 000 Kč",
+    "slider": {
+     "value": "8000",
+     "min": "1000",
+     "max": "27636"
+    },
+    "varovani": [
+     "Část rodičovské propadne. Do 3 let dítěte vyčerpáte jen 240 000 Kč, zbylých 110 000 Kč propadne. Aby se rodičovská vyčerpala celá, zvolte aspoň 11 700 Kč měsíčně.",
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "detail": "",
+    "tabulka": [
+     [
+      "úno 2026",
+      "19 348",
+      "31 930",
+      "51 278"
+     ],
+     [
+      "bře 2026 ★",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "dub 2026",
+      "20 730",
+      "31 930",
+      "52 660"
+     ],
+     [
+      "kvě 2026",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "čvn 2026",
+      "20 730",
+      "31 930",
+      "52 660"
+     ],
+     [
+      "čvc 2026",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "srp 2026",
+      "10 365",
+      "31 930",
+      "42 295"
+     ],
+     [
+      "zář 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "bře 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "dub 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "kvě 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvn 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvc 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "srp 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "zář 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "bře 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "dub 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "kvě 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvn 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvc 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "srp 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "zář 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2029",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2029",
+      "8 000",
+      "31 930",
+      "39 930"
+     ]
+    ],
+    "checklist": [
+     "Do 1. 2. 2026: Ošetřující gynekolog vystaví žádost o peněžitou pomoc v mateřství (nástup 8 až 6 týdnů před termínem). Dávku vyplácí ČSSZ, postup předání ověřte u zaměstnavatele nebo na cssz.cz.",
+     "Po porodu: Rodný list vystaví matrika podle místa narození. Dítě co nejdříve nahlaste zdravotní pojišťovně.",
+     "Od zář 2026: Rodičovský příspěvek: žádost na Úřadu práce ČR (online přes portál MPSV, datovou schránkou nebo osobně). Chcete-li víc než 15 000 Kč měsíčně, přiložte Potvrzení o denním vyměřovacím základu od ČSSZ.",
+     "Kdykoli během čerpání: Výši rodičovské lze měnit jednou za 3 měsíce, na písemnou žádost a ne zpětně.",
+     "U zaměstnavatele: Uplatněte daňové zvýhodnění na dítě (v čisté mzdě zde není započteno).",
+     "Narodí-li se další dítě: Nahlaste to Úřadu práce. Nárok na rodičovskou na starší dítě zaniká, ale nevyčerpaný zbytek lze vyplatit jednorázově.",
+     "Do 28. 2. 2029: Poslední měsíc čerpání rodičovské. Co do té doby nevyčerpáte, propadne."
+    ],
+    "overeno": "5. 11. 2026",
+    "zdroje": [
+     {
+      "text": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
+      "href": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+     },
+     {
+      "text": "ČSSZ – Otcovská",
+      "href": "https://cssz.cz/otcovska"
+     },
+     {
+      "text": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+      "href": "https://mpsv.gov.cz/nemocenske-pojisteni"
+     },
+     {
+      "text": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+      "href": "https://e-sbirka.gov.cz/sb/2026/185"
+     },
+     {
+      "text": "MPSV / ÚP ČR – Rodičovský příspěvek",
+      "href": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+     },
+     {
+      "text": "MPSV – Volba výše rodičovského příspěvku",
+      "href": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
+     },
+     {
+      "text": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
+      "href": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+     },
+     {
+      "text": "MPSV – Péče o dítě a finance",
+      "href": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+     },
+     {
+      "text": "Finanční správa – Daňové novinky pro rok 2026",
+      "href": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+     }
+    ],
+    "osaRadku": 37
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:37515/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": []
+  },
+  "A_1440": {
+   "data": {
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "375 436 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "135 436 Kč",
+      "pozn": "matka 691 Kč denně"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "0 Kč",
+      "pozn": "nečerpá se"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "240 000 Kč",
+      "pozn": "z 350 000 Kč, po 8 000 Kč měsíčně"
+     },
+     {
+      "nazev": "Rodičovská se vyčerpá",
+      "hodnota": "nevyčerpá se do 3 let",
+      "pozn": "30 měsíců čerpání"
+     },
+     {
+      "nazev": "Propadne k 3. narozeninám",
+      "hodnota": "110 000 Kč",
+      "pozn": "zvyšte měsíční výši"
+     },
+     {
+      "nazev": "Příjem rodiny za celé období",
+      "hodnota": "1 556 846 Kč",
+      "pozn": "z toho orientační čisté mzdy 1 181 410 Kč"
+     }
+    ],
+    "rpInfo": "Celkem 350 000 Kč, váš strop 27 636 Kč měsíčně. Čerpání od zář 2026 (6. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+    "rpText": "8 000 Kč",
+    "slider": {
+     "value": "8000",
+     "min": "1000",
+     "max": "27636"
+    },
+    "varovani": [
+     "Část rodičovské propadne. Do 3 let dítěte vyčerpáte jen 240 000 Kč, zbylých 110 000 Kč propadne. Aby se rodičovská vyčerpala celá, zvolte aspoň 11 700 Kč měsíčně.",
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "detail": "",
+    "tabulka": [
+     [
+      "úno 2026",
+      "19 348",
+      "31 930",
+      "51 278"
+     ],
+     [
+      "bře 2026 ★",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "dub 2026",
+      "20 730",
+      "31 930",
+      "52 660"
+     ],
+     [
+      "kvě 2026",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "čvn 2026",
+      "20 730",
+      "31 930",
+      "52 660"
+     ],
+     [
+      "čvc 2026",
+      "21 421",
+      "31 930",
+      "53 351"
+     ],
+     [
+      "srp 2026",
+      "10 365",
+      "31 930",
+      "42 295"
+     ],
+     [
+      "zář 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2026",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "bře 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "dub 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "kvě 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvn 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvc 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "srp 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "zář 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2027",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "bře 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "dub 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "kvě 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvn 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "čvc 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "srp 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "zář 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "říj 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "lis 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "pro 2028",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "led 2029",
+      "8 000",
+      "31 930",
+      "39 930"
+     ],
+     [
+      "úno 2029",
+      "8 000",
+      "31 930",
+      "39 930"
+     ]
+    ],
+    "checklist": [
+     "Do 1. 2. 2026: Ošetřující gynekolog vystaví žádost o peněžitou pomoc v mateřství (nástup 8 až 6 týdnů před termínem). Dávku vyplácí ČSSZ, postup předání ověřte u zaměstnavatele nebo na cssz.cz.",
+     "Po porodu: Rodný list vystaví matrika podle místa narození. Dítě co nejdříve nahlaste zdravotní pojišťovně.",
+     "Od zář 2026: Rodičovský příspěvek: žádost na Úřadu práce ČR (online přes portál MPSV, datovou schránkou nebo osobně). Chcete-li víc než 15 000 Kč měsíčně, přiložte Potvrzení o denním vyměřovacím základu od ČSSZ.",
+     "Kdykoli během čerpání: Výši rodičovské lze měnit jednou za 3 měsíce, na písemnou žádost a ne zpětně.",
+     "U zaměstnavatele: Uplatněte daňové zvýhodnění na dítě (v čisté mzdě zde není započteno).",
+     "Narodí-li se další dítě: Nahlaste to Úřadu práce. Nárok na rodičovskou na starší dítě zaniká, ale nevyčerpaný zbytek lze vyplatit jednorázově.",
+     "Do 28. 2. 2029: Poslední měsíc čerpání rodičovské. Co do té doby nevyčerpáte, propadne."
+    ],
+    "overeno": "5. 11. 2026",
+    "zdroje": [
+     {
+      "text": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
+      "href": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+     },
+     {
+      "text": "ČSSZ – Otcovská",
+      "href": "https://cssz.cz/otcovska"
+     },
+     {
+      "text": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+      "href": "https://mpsv.gov.cz/nemocenske-pojisteni"
+     },
+     {
+      "text": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+      "href": "https://e-sbirka.gov.cz/sb/2026/185"
+     },
+     {
+      "text": "MPSV / ÚP ČR – Rodičovský příspěvek",
+      "href": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+     },
+     {
+      "text": "MPSV – Volba výše rodičovského příspěvku",
+      "href": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
+     },
+     {
+      "text": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
+      "href": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+     },
+     {
+      "text": "MPSV – Péče o dítě a finance",
+      "href": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+     },
+     {
+      "text": "Finanční správa – Daňové novinky pro rok 2026",
+      "href": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+     }
+    ],
+    "osaRadku": 37
+   },
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Čekáme dvojčata nebo vícerčata",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Matka (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Otec (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Matka byla nemocensky pojištěna aspoň 270 dní za poslední 2 roky",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Otec je zaměstnaný a nemocensky pojištěný",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Kdo nastoupí na mateřskou\n              \n                Matka (6–8 týdnů před porodem)\n                Otec (nejdříve od 7. týdne po porodu)\n                Nikdo (bez nároku)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "",
+     "typ": "select-one",
+     "popisek": "Nástup matky před termínem\n              \n                6 týdnů\n                7 týdnů\n                8 týdnů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Otec čerpá otcovskou (14 dní)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "rpVyse",
+     "typ": "range",
+     "popisek": "Výše rodičovského příspěvku: 8 000 Kč měsíčně",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnNavrh",
+     "typ": "button",
+     "popisek": "Vyčerpat přesně do 3 let",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnMax",
+     "typ": "button",
+     "popisek": "Maximum",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Střídání rodičů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Dřívější návrat do práce (oba rodiče pracují)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Tabulka po měsících",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Jak jsme počítali",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnUlozit",
+     "typ": "button",
+     "popisek": "Uložit plán v tomto prohlížeči",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "btnSmazat",
+     "typ": "button",
+     "popisek": "Smazat uložený plán",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "date",
+     "popisek": "Termín porodu",
+     "fokusViditelny": true
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "B_beh1": {
+   "data": {
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "700 000 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "0 Kč",
+      "pozn": "bez nároku"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "0 Kč",
+      "pozn": "nečerpá se"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "700 000 Kč",
+      "pozn": "z 700 000 Kč, po 30 000 Kč měsíčně"
+     },
+     {
+      "nazev": "Rodičovská se vyčerpá",
+      "hodnota": "kvě 2028 (23. měsíc dítěte)",
+      "pozn": "24 měsíců čerpání"
+     },
+     {
+      "nazev": "Propadne k 3. narozeninám",
+      "hodnota": "0 Kč",
+      "pozn": "nic nepropadne"
+     },
+     {
+      "nazev": "Příjem rodiny za celé období",
+      "hodnota": "700 000 Kč",
+      "pozn": "z toho orientační čisté mzdy 0 Kč"
+     }
+    ],
+    "rpInfo": "Celkem 700 000 Kč, váš strop 30 000 Kč měsíčně. Čerpání od čvn 2026 (0. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+    "rpText": "30 000 Kč",
+    "slider": {
+     "value": "30000",
+     "min": "1000",
+     "max": "30000"
+    },
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "detail": "",
+    "tabulka": [
+     [
+      "čvn 2026 ★",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "čvc 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "srp 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "zář 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "říj 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "lis 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "pro 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "led 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "úno 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "bře 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "dub 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "kvě 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "čvn 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "čvc 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "srp 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "zář 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "říj 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "lis 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "pro 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "led 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "úno 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "bře 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "dub 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "kvě 2028",
+      "10 000",
+      "0",
+      "10 000"
+     ],
+     [
+      "čvn 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "čvc 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "srp 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "zář 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "říj 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "lis 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "pro 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "led 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "úno 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "bře 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "dub 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "kvě 2029",
+      "0",
+      "0",
+      "0"
+     ]
+    ],
+    "checklist": [
+     "Po porodu: Rodný list vystaví matrika podle místa narození. Dítě co nejdříve nahlaste zdravotní pojišťovně.",
+     "Od čvn 2026: Rodičovský příspěvek: žádost na Úřadu práce ČR (online přes portál MPSV, datovou schránkou nebo osobně). Chcete-li víc než 15 000 Kč měsíčně, přiložte Potvrzení o denním vyměřovacím základu od ČSSZ.",
+     "Kdykoli během čerpání: Výši rodičovské lze měnit jednou za 3 měsíce, na písemnou žádost a ne zpětně.",
+     "U zaměstnavatele: Uplatněte daňové zvýhodnění na dítě (v čisté mzdě zde není započteno).",
+     "Narodí-li se další dítě: Nahlaste to Úřadu práce. Nárok na rodičovskou na starší dítě zaniká, ale nevyčerpaný zbytek lze vyplatit jednorázově.",
+     "Do 31. 5. 2029: Poslední měsíc čerpání rodičovské. Co do té doby nevyčerpáte, propadne."
+    ],
+    "overeno": "5. 11. 2026",
+    "zdroje": [
+     {
+      "text": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
+      "href": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+     },
+     {
+      "text": "ČSSZ – Otcovská",
+      "href": "https://cssz.cz/otcovska"
+     },
+     {
+      "text": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+      "href": "https://mpsv.gov.cz/nemocenske-pojisteni"
+     },
+     {
+      "text": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+      "href": "https://e-sbirka.gov.cz/sb/2026/185"
+     },
+     {
+      "text": "MPSV / ÚP ČR – Rodičovský příspěvek",
+      "href": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+     },
+     {
+      "text": "MPSV – Volba výše rodičovského příspěvku",
+      "href": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
+     },
+     {
+      "text": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
+      "href": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+     },
+     {
+      "text": "MPSV – Péče o dítě a finance",
+      "href": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+     },
+     {
+      "text": "Finanční správa – Daňové novinky pro rok 2026",
+      "href": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+     }
+    ],
+    "osaRadku": 36
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "B_beh2": {
+   "data": {
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "700 000 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "0 Kč",
+      "pozn": "bez nároku"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "0 Kč",
+      "pozn": "nečerpá se"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "700 000 Kč",
+      "pozn": "z 700 000 Kč, po 30 000 Kč měsíčně"
+     },
+     {
+      "nazev": "Rodičovská se vyčerpá",
+      "hodnota": "kvě 2028 (23. měsíc dítěte)",
+      "pozn": "24 měsíců čerpání"
+     },
+     {
+      "nazev": "Propadne k 3. narozeninám",
+      "hodnota": "0 Kč",
+      "pozn": "nic nepropadne"
+     },
+     {
+      "nazev": "Příjem rodiny za celé období",
+      "hodnota": "700 000 Kč",
+      "pozn": "z toho orientační čisté mzdy 0 Kč"
+     }
+    ],
+    "rpInfo": "Celkem 700 000 Kč, váš strop 30 000 Kč měsíčně. Čerpání od čvn 2026 (0. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+    "rpText": "30 000 Kč",
+    "slider": {
+     "value": "30000",
+     "min": "1000",
+     "max": "30000"
+    },
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "detail": "",
+    "tabulka": [
+     [
+      "čvn 2026 ★",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "čvc 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "srp 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "zář 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "říj 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "lis 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "pro 2026",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "led 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "úno 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "bře 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "dub 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "kvě 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "čvn 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "čvc 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "srp 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "zář 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "říj 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "lis 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "pro 2027",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "led 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "úno 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "bře 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "dub 2028",
+      "30 000",
+      "0",
+      "30 000"
+     ],
+     [
+      "kvě 2028",
+      "10 000",
+      "0",
+      "10 000"
+     ],
+     [
+      "čvn 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "čvc 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "srp 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "zář 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "říj 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "lis 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "pro 2028",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "led 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "úno 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "bře 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "dub 2029",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "kvě 2029",
+      "0",
+      "0",
+      "0"
+     ]
+    ],
+    "checklist": [
+     "Po porodu: Rodný list vystaví matrika podle místa narození. Dítě co nejdříve nahlaste zdravotní pojišťovně.",
+     "Od čvn 2026: Rodičovský příspěvek: žádost na Úřadu práce ČR (online přes portál MPSV, datovou schránkou nebo osobně). Chcete-li víc než 15 000 Kč měsíčně, přiložte Potvrzení o denním vyměřovacím základu od ČSSZ.",
+     "Kdykoli během čerpání: Výši rodičovské lze měnit jednou za 3 měsíce, na písemnou žádost a ne zpětně.",
+     "U zaměstnavatele: Uplatněte daňové zvýhodnění na dítě (v čisté mzdě zde není započteno).",
+     "Narodí-li se další dítě: Nahlaste to Úřadu práce. Nárok na rodičovskou na starší dítě zaniká, ale nevyčerpaný zbytek lze vyplatit jednorázově.",
+     "Do 31. 5. 2029: Poslední měsíc čerpání rodičovské. Co do té doby nevyčerpáte, propadne."
+    ],
+    "overeno": "5. 11. 2026",
+    "zdroje": [
+     {
+      "text": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
+      "href": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+     },
+     {
+      "text": "ČSSZ – Otcovská",
+      "href": "https://cssz.cz/otcovska"
+     },
+     {
+      "text": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+      "href": "https://mpsv.gov.cz/nemocenske-pojisteni"
+     },
+     {
+      "text": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+      "href": "https://e-sbirka.gov.cz/sb/2026/185"
+     },
+     {
+      "text": "MPSV / ÚP ČR – Rodičovský příspěvek",
+      "href": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+     },
+     {
+      "text": "MPSV – Volba výše rodičovského příspěvku",
+      "href": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
+     },
+     {
+      "text": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
+      "href": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+     },
+     {
+      "text": "MPSV – Péče o dítě a finance",
+      "href": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+     },
+     {
+      "text": "Finanční správa – Daňové novinky pro rok 2026",
+      "href": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+     }
+    ],
+    "osaRadku": 36
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "C": {
+   "data": {
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "417 816 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "67 816 Kč",
+      "pozn": "matka 346 Kč denně"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "0 Kč",
+      "pozn": "nečerpá se"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "350 000 Kč",
+      "pozn": "z 350 000 Kč, po 15 000 Kč měsíčně"
+     },
+     {
+      "nazev": "Rodičovská se vyčerpá",
+      "hodnota": "srp 2028 (29. měsíc dítěte)",
+      "pozn": "24 měsíců čerpání"
+     },
+     {
+      "nazev": "Propadne k 3. narozeninám",
+      "hodnota": "0 Kč",
+      "pozn": "nic nepropadne"
+     },
+     {
+      "nazev": "Příjem rodiny za celé období",
+      "hodnota": "417 816 Kč",
+      "pozn": "z toho orientační čisté mzdy 0 Kč"
+     }
+    ],
+    "rpInfo": "Celkem 350 000 Kč, váš strop 15 000 Kč měsíčně. Čerpání od zář 2026 (6. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+    "tabulka": [
+     [
+      "úno 2026",
+      "9 688",
+      "0",
+      "9 688"
+     ],
+     [
+      "bře 2026 ★",
+      "10 726",
+      "0",
+      "10 726"
+     ],
+     [
+      "dub 2026",
+      "10 380",
+      "0",
+      "10 380"
+     ],
+     [
+      "kvě 2026",
+      "10 726",
+      "0",
+      "10 726"
+     ],
+     [
+      "čvn 2026",
+      "10 380",
+      "0",
+      "10 380"
+     ],
+     [
+      "čvc 2026",
+      "10 726",
+      "0",
+      "10 726"
+     ],
+     [
+      "srp 2026",
+      "5 190",
+      "0",
+      "5 190"
+     ],
+     [
+      "zář 2026",
+      "15 000",
+      "0",
+      "15 000"
+     ],
+     [
+      "říj 2026",
+      "15 000",
+      "0",
+      "15 000"
+     ]
+    ],
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "detail": "",
+    "checklist": [
+     "Do 1. 2. 2026: Ošetřující gynekolog vystaví žádost o peněžitou pomoc v mateřství (nástup 8 až 6 týdnů před termínem). Dávku vyplácí ČSSZ, postup předání ověřte u zaměstnavatele nebo na cssz.cz.",
+     "Po porodu: Rodný list vystaví matrika podle místa narození. Dítě co nejdříve nahlaste zdravotní pojišťovně.",
+     "Od zář 2026: Rodičovský příspěvek: žádost na Úřadu práce ČR (online přes portál MPSV, datovou schránkou nebo osobně). Chcete-li víc než 15 000 Kč měsíčně, přiložte Potvrzení o denním vyměřovacím základu od ČSSZ.",
+     "Kdykoli během čerpání: Výši rodičovské lze měnit jednou za 3 měsíce, na písemnou žádost a ne zpětně.",
+     "U zaměstnavatele: Uplatněte daňové zvýhodnění na dítě (v čisté mzdě zde není započteno).",
+     "Narodí-li se další dítě: Nahlaste to Úřadu práce. Nárok na rodičovskou na starší dítě zaniká, ale nevyčerpaný zbytek lze vyplatit jednorázově.",
+     "Do 28. 2. 2029: Poslední měsíc čerpání rodičovské. Co do té doby nevyčerpáte, propadne."
+    ]
+   }
+  },
+  "D": {
+   "terminPred2026": {
+    "varovani": [
+     "Zadejte termín porodu od 1. 1. 2026. Pro dřívější narození platí jiná pravidla."
+    ],
+    "souhrnZustal": 7,
+    "osaRadku": 0
+   },
+   "terminPrazdny": {
+    "varovani": [
+     "Zadejte termín porodu od 1. 1. 2026. Pro dřívější narození platí jiná pravidla."
+    ],
+    "osaRadku": 0
+   },
+   "zapornyPrijem": {
+    "varovani": [
+     "Matka nemá podle zadání nárok na mateřskou (chybí příjem nebo 270 dní pojištění za poslední 2 roky). Počítám bez mateřské, rodičovský příspěvek od narození.",
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "350 000 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "0 Kč",
+      "pozn": "bez nároku"
+     }
+    ],
+    "validita": {
+     "value": "-30000",
+     "valid": false,
+     "rangeUnderflow": true,
+     "hlaska": "Hodnota musí být větší nebo rovna 0."
+    }
+   },
+   "prazdnyPrijem": {
+    "varovani": [
+     "Matka nemá podle zadání nárok na mateřskou (chybí příjem nebo 270 dní pojištění za poslední 2 roky). Počítám bez mateřské, rodičovský příspěvek od narození.",
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "350 000 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "0 Kč",
+      "pozn": "bez nároku"
+     }
+    ]
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  "E_cs-CZ": {
+   "30 000": {
+    "value": "30000",
+    "badInput": false,
+    "stepMismatch": false,
+    "valid": true,
+    "hlaska": "",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   },
+   "30000,50": {
+    "value": "30000.50",
+    "badInput": false,
+    "stepMismatch": true,
+    "valid": false,
+    "hlaska": "Zadejte platnou hodnotu. Dvě nejbližší hodnoty jsou 30000 a 30100.",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   },
+   "30000.50": {
+    "value": "30000.50",
+    "badInput": false,
+    "stepMismatch": true,
+    "valid": false,
+    "hlaska": "Zadejte platnou hodnotu. Dvě nejbližší hodnoty jsou 30000 a 30100.",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   },
+   "1500,5": {
+    "value": "1500.5",
+    "badInput": false,
+    "stepMismatch": true,
+    "valid": false,
+    "hlaska": "Zadejte platnou hodnotu. Dvě nejbližší hodnoty jsou 1500 a 1600.",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   }
+  },
+  "E_en-US": {
+   "30 000": {
+    "value": "30000",
+    "badInput": false,
+    "stepMismatch": false,
+    "valid": true,
+    "hlaska": "",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   },
+   "30000,50": {
+    "value": "3000050",
+    "badInput": false,
+    "stepMismatch": true,
+    "valid": false,
+    "hlaska": "Please enter a valid value. The two nearest valid values are 3000000 and 3000100.",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   },
+   "30000.50": {
+    "value": "30000.50",
+    "badInput": false,
+    "stepMismatch": true,
+    "valid": false,
+    "hlaska": "Please enter a valid value. The two nearest valid values are 30000 and 30100.",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   },
+   "1500,5": {
+    "value": "15005",
+    "badInput": false,
+    "stepMismatch": true,
+    "valid": false,
+    "hlaska": "Please enter a valid value. The two nearest valid values are 15000 and 15100.",
+    "detail": null,
+    "varovani": [
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ]
+   }
+  },
+  "F": {
+   "hodnotyPoVlozeni": {
+    "stridaniOdMesice": "",
+    "navratOdMesice": "",
+    "otcovskaOdDne": "",
+    "terminPorodu": "",
+    "prijemOtec": ""
+   },
+   "vlozenyImg": false,
+   "dialogy": [],
+   "podvrzenyStorage": {
+    "vlozenyImg": false,
+    "dialogy": [],
+    "varovani": [
+     "Část rodičovské propadne. Do 3 let dítěte vyčerpáte jen 0 Kč, zbylých 350 000 Kč propadne. Aby se rodičovská vyčerpala celá, zvolte aspoň 9 800 Kč měsíčně.",
+     "Otec nemá podle zadání nárok na mateřskou (chybí příjem nebo 270 dní pojištění za poslední 2 roky). Počítám bez mateřské, rodičovský příspěvek od narození.",
+     "Pro čistou mzdu v dalších letech jsou použity sazby roku 2026."
+    ],
+    "souhrn": [
+     {
+      "nazev": "Dávky celkem dostaneme",
+      "hodnota": "9 674 Kč",
+      "pozn": "mateřská + otcovská + rodičovská"
+     },
+     {
+      "nazev": "Mateřská",
+      "hodnota": "0 Kč",
+      "pozn": "bez nároku"
+     },
+     {
+      "nazev": "Otcovská",
+      "hodnota": "9 674 Kč",
+      "pozn": "691 Kč denně, 14 dní"
+     },
+     {
+      "nazev": "Rodičovský příspěvek vyčerpán",
+      "hodnota": "0 Kč",
+      "pozn": "z 350 000 Kč, po NaN Kč měsíčně"
+     }
+    ],
+    "konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+     }
+    ]
+   }
+  },
+  "G": {
+   "pred": {},
+   "po": {
+    "rodicovska-plan-v1": "{\"terminPorodu\":\"2026-03-15\",\"vicercata\":false,\"prijemMatka\":30000,\"prijemOtec\":40000,\"narokMatka\":true,\"narokOtec\":true,\"kdoPpm\":\"matka\",\"ppmTydnuPred\":6,\"otcovska\":false,\"otcovskaOdDne\":0,\"rpVyse\":null,\"stridani\":false,\"stridaniOdMesice\":12,\"navrat\":false,\"navratOdMesice\":24}"
+   },
+   "stavText": "Plán je uložený v tomto prohlížeči.",
+   "poReloadu": {
+    "stav": "Načten uložený plán.",
+    "prijemMatka": "30000",
+    "termin": "2026-03-15"
+   },
+   "poSmazani": {},
+   "cookies": []
+  },
+  "H_zivy": {
+   "url": "https://frankie851.github.io/rodicovska/",
+   "http": 200,
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "overeno": "5. 11. 2026",
+   "rpInfo": "Celkem 400 000 Kč, váš strop 34 524 Kč měsíčně. Čerpání od říj 2027 (6. měsíc dítěte). Výši lze měnit jednou za 3 měsíce.",
+   "souhrn": [
+    {
+     "nazev": "Dávky celkem dostaneme",
+     "hodnota": "596 826 Kč",
+     "pozn": "mateřská + otcovská + rodičovská"
+    },
+    {
+     "nazev": "Mateřská",
+     "hodnota": "180 712 Kč",
+     "pozn": "matka 922 Kč denně"
+    }
+   ],
+   "zdroje": [
+    {
+     "text": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
+     "href": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+    },
+    {
+     "text": "ČSSZ – Otcovská",
+     "href": "https://cssz.cz/otcovska"
+    },
+    {
+     "text": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+     "href": "https://mpsv.gov.cz/nemocenske-pojisteni"
+    },
+    {
+     "text": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+     "href": "https://e-sbirka.gov.cz/sb/2026/185"
+    },
+    {
+     "text": "MPSV / ÚP ČR – Rodičovský příspěvek",
+     "href": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+    },
+    {
+     "text": "MPSV – Volba výše rodičovského příspěvku",
+     "href": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
+    },
+    {
+     "text": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
+     "href": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+    },
+    {
+     "text": "MPSV – Péče o dítě a finance",
+     "href": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+    },
+    {
+     "text": "Finanční správa – Daňové novinky pro rok 2026",
+     "href": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+    }
+   ],
+   "sit": [
+    {
+     "url": "https://frankie851.github.io/rodicovska/",
+     "typ": "document"
+    },
+    {
+     "url": "https://frankie851.github.io/rodicovska/styles.css",
+     "typ": "stylesheet"
+    },
+    {
+     "url": "https://frankie851.github.io/rodicovska/app.js",
+     "typ": "script"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image"
+    },
+    {
+     "url": "https://frankie851.github.io/rodicovska/rodina.js",
+     "typ": "script"
+    },
+    {
+     "url": "https://frankie851.github.io/rodicovska/timeline.js",
+     "typ": "script"
+    },
+    {
+     "url": "https://frankie851.github.io/rodicovska/rules.json",
+     "typ": "fetch"
+    },
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "https://frankie851.github.io/favicon.ico",
+     "typ": "other"
+    }
+   ],
+   "localStorage": {},
+   "cookies": []
+  }
+ }
+}

@@ -1,0 +1,344 @@
+{
+ "url": "http://127.0.0.1:46541/",
+ "datum": "2026-11-05T07:43:42.889Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Výpověď mi dal zaměstnavatel",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "duvod",
+     "typ": "select-one",
+     "popisek": "Důvod výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "zkusebniDoba",
+     "typ": "checkbox",
+     "popisek": "Jde o zrušení ve zkušební době",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "delka",
+     "typ": "text",
+     "popisek": "Délka pracovního poměru (roky)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "vek",
+     "typ": "text",
+     "popisek": "Věk v den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "hruby",
+     "typ": "text",
+     "popisek": "Průměrný hrubý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "cisty",
+     "typ": "text",
+     "popisek": "Průměrný čistý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Spočítat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Výpověď mi dal zaměstnavatel",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "duvod",
+     "typ": "select-one",
+     "popisek": "Důvod výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "zkusebniDoba",
+     "typ": "checkbox",
+     "popisek": "Jde o zrušení ve zkušební době",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "delka",
+     "typ": "text",
+     "popisek": "Délka pracovního poměru (roky)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "vek",
+     "typ": "text",
+     "popisek": "Věk v den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "hruby",
+     "typ": "text",
+     "popisek": "Průměrný hrubý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "cisty",
+     "typ": "text",
+     "popisek": "Průměrný čistý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:46541/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/vypoved.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:46541/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:46541/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/vypoved.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:46541/favicon.ico",
+     "typ": "other",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "dialogy": [],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:46541/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "ciziPozadavky": [
+    {
+     "url": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=",
+     "typ": "image",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

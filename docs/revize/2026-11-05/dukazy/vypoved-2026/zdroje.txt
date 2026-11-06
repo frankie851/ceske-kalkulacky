@@ -1,0 +1,211 @@
+# Výpověď 2026 – úřední zdroje použité revizorem (staženo 5. 11. 2026 přes curl, převedeno na text). Výňatky doslovně.
+
+## HTTP stav zdrojů uvedených v rules.json/patičce aplikace (curl -L, 5. 11. 2026)
+https://www.epravo.cz/top/zakony/sbirka-zakonu/sb/2025/120 -> 200 text/html; charset=UTF-8
+https://up.gov.cz/zmeny-v-oblasti-zamestnanosti-a-podpory-v-nezamestnanosti-od-1-ledna-2026 -> 200 text/html;charset=utf-8
+https://mpsv.gov.cz/cms/documents/1a49413e-8c82-6b1c-6f56-d060b01d81bc/Nov%C3%A1%20podpora%20v%20nezam%C4%9Bstnanosti%20%20v%20roce%202026.pdf -> 200 application/pdf
+https://mpsv.gov.cz/vlada-schvalila-zmeny-podpory-v-nezamestnanosti-statu-usetri-az-5-miliard-korun-rocne -> 200 text/html;charset=utf-8
+https://www.psp.cz/sqw/historie.sqw?o=10&t=300 -> 000 
+curl selhal (psp.cz jen přes WebFetch: tisk 300 rozeslán 8. 9. 2026, 1. čtení 16. a 20. 10. 2026, přikázán Výboru pro sociální politiku, výbor neprojednal, 2./3. čtení neproběhla)
+https://up.gov.cz/co-delat-pri-ztrate-zamestnani -> 200 text/html;charset=utf-8
+https://frankie851.github.io/vypoved-2026/ -> 200 text/html; charset=utf-8
+https://frankie851.github.io/vypoved-2026/rules.json -> 200 application/json; charset=utf-8
+
+## Zákoník práce č. 262/2006 Sb. – https://www.zakonyprolidi.cz/cs/2006-262 (Aktuální znění 01.11.2026 - 31.12.2026 (verze 64))
+ § 51
+ (1) Byla-li dána výpověď, skončí pracovní poměr uplynutím výpovědní doby. Výpovědní doba začíná dnem, v němž byla výpověď doručena druhé smluvní straně, a končí dnem, který se s tímto dnem číslem shoduje; není-li takový den v posledním měsíci, připadne konec výpovědní doby na poslední den měsíce.
+ (2) Výpovědní doba činí nejméně 2 měsíce, s výjimkou výpovědi dané
+ a) zaměstnanci z důvodu uvedeného v § 52 písm. f) až h), kde činí výpovědní doba nejméně 1 měsíc,
+ b) zaměstnavateli podle § 51a.
+ (3) Písemnou dohodou mezi zaměstnavatelem a zaměstnancem lze prodloužit výpovědní dobu nebo změnit její běh. Výpovědní doba a její běh musí být sjednány stejně pro zaměstnavatele i zaměstnance; to neplatí pro případ výpovědi podle § 52 písm. f) až h).
+
+ § 52
+ Zaměstnavatel může dát zaměstnanci výpověď jen z těchto důvodů:
+ a) ruší-li se zaměstnavatel nebo jeho část,
+ b) přemísťuje-li se zaměstnavatel nebo jeho část,
+ c) stane-li se zaměstnanec nadbytečným vzhledem k rozhodnutí zaměstnavatele nebo příslušného orgánu o změně jeho úkolů, technického vybavení, o snížení stavu zaměstnanců za účelem zvýšení efektivnosti práce nebo o jiných organizačních změnách,
+ d) pozbyl-li zaměstnanec vzhledem ke svému zdravotnímu stavu podle lékařského posudku vydaného poskytovatelem pracovnělékařských služeb nebo rozhodnutí příslušného správního orgánu, který lékařský posudek přezkoumává, dlouhodobě způsobilost konat dále dosavadní práci,
+ e) dosáhl-li na pracovišti určeném rozhodnutím příslušného orgánu ochrany veřejného zdraví nejvyšší přípustné expozice,
+ f) nesplňuje-li zaměstnanec předpoklady stanovené právními předpisy pro výkon sjednané práce nebo nesplňuje-li bez zavinění zaměstnavatele požadavky pro řádný výkon této práce; spočívá-li nesplňování těchto požadavků v neuspokojivých pracovních výsledcích, je možné zaměstnanci z tohoto důvodu dát výpověď, jen jestliže byl zaměstnavatelem v době posledních 12 měsíců písemně vyzván k jejich odstranění a zaměstnanec je v přiměřené době neodstranil,
+ g) jsou-li u zaměstnance dány důvody, pro které by s ním zaměstnavatel mohl okamžitě zrušit pracovní poměr, nebo pro závažné porušení povinnosti vyplývající z právních předpisů vztahujících se k zaměstnancem vykonávané práci; pro soustavné méně závažné porušování povinnosti vyplývající z právních předpisů vztahujících se k vykonávané práci je možné dát zaměstnanci výpověď, jestliže byl v době posledních 6 měsíců v souvislosti s porušením povinnosti vyplývající z právních předpisů vztahujících se k vykonávané práci písemně upozorněn na možnost výpovědi,
+ h) poruší-li zaměstnanec zvlášť hrubým způsobem jinou povinnost zaměstnance stanovenou v § 301a.
+
+ (2) Byla-li dána zaměstnanci výpověď před počátkem ochranné doby tak, že by výpovědní doba měla uplynout v ochranné době, ochranná doba se do výpovědní doby nezapočítává; pracovní poměr skončí teprve uplynutím zbývající části výpovědní doby po skončení ochranné doby, ledaže zaměstnanec sdělí zaměstnavateli, že na prodloužení pracovního poměru netrvá.
+
+ § 66
+ Zrušení pracovního poměru ve zkušební době
+ (1) Zaměstnavatel i zaměstnanec mohou zrušit pracovní poměr ve zkušební době z jakéhokoliv důvodu nebo bez uvedení důvodu. Zaměstnavatel nesmí ve zkušební době zrušit pracovní poměr v době prvních 14 kalendářních dnů trvání dočasné pracovní neschopnosti (karantény) zaměstnance.
+ (2) Pro zrušení pracovního poměru ve zkušební době se vyžaduje písemná forma, jinak se k němu nepřihlíží. Pracovní poměr skončí dnem doručení zrušení, není-li v něm uveden den pozdější.
+
+ § 67
+ (1) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem z důvodů uvedených v § 52 písm. a) až c) nebo dohodou z týchž důvodů, přísluší od zaměstnavatele při skončení pracovního poměru odstupné ve výši nejméně
+ a) jednonásobku jeho průměrného výdělku, jestliže jeho pracovní poměr u zaměstnavatele trval méně než 1 rok,
+ b) dvojnásobku jeho průměrného výdělku, jestliže jeho pracovní poměr u zaměstnavatele trval alespoň 1 rok a méně než 2 roky,
+ c) trojnásobku jeho průměrného výdělku, jestliže jeho pracovní poměr u zaměstnavatele trval alespoň 2 roky,
+ d) součtu trojnásobku jeho průměrného výdělku a částek uvedených v písmenech a) až c), jestliže dochází k rozvázání pracovního poměru v době, kdy se na zaměstnance vztahuje v kontu pracovní doby postup podle § 86 odst. 4.
+ (2) Za dobu trvání pracovního poměru se pro účely odstavce 1 považuje i doba trvání předchozího pracovního poměru u téhož zaměstnavatele, pokud doba od jeho skončení do vzniku následujícího pracovního poměru nepřesáhla dobu 6 měsíců.
+ (3) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem z důvodu uvedeného v § 52 písm. e) nebo dohodou z téhož důvodu, přísluší od zaměstnavatele při skončení pracovního poměru odstupné ve výši nejméně dvanáctinásobku průměrného výdělku.
+ (4) Pro účely odstupného se průměrným výdělkem rozumí průměrný měsíční výdělek.
+ (5) Odstupné je zaměstnavatel povinen zaměstnanci vyplatit po skončení pracovního poměru v nejbližším výplatním termínu určeném u zaměstnavatele pro výplatu mzdy nebo platu, pokud se písemně nedohodne se zaměstnancem na výplatě odstupného v den skončení pracovního poměru nebo na pozdějším termínu výplaty.
+ § 68
+ (1) Bude-li zaměstnanec po skončení pracovního poměru konat práci u dosavadního zaměstnavatele v pracovním poměru nebo na základě dohody o pracovní činnosti před uplynutím doby určené podle počtu násobků průměrných výdělků, z nichž byla odvozena výše odstupného, je povinen tomuto zaměstnavateli vrátit odstupné nebo jeho poměrnou část.
+ (2) Poměrná část odstupného se stanoví podle počtu kalendářních dnů od nového nástupu do zaměstnání do uplynutí doby podle odstavce 1.
+
+ § 222
+ (1) Zaměstnanci přísluší za dobu čerpání dovolené náhrada mzdy nebo platu ve výši průměrného výdělku.
+ (2) Zaměstnanci přísluší náhrada mzdy nebo platu za nevyčerpanou dovolenou pouze v případě skončení pracovního poměru.
+ (3) Jestliže vznikne zaměstnanci právo na náhradu mzdy nebo platu za nevyčerpanou dovolenou nebo její část, tato náhrada přísluší ve výši průměrného výdělku.
+
+ § 271ca
+ Jednorázová náhrada při skončení pracovního poměru
+ (1) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem podle § 52 písm. d) z důvodu, že pozbyl vzhledem ke svému zdravotnímu stavu podle lékařského posudku vydaného poskytovatelem pracovnělékařských služeb nebo rozhodnutí příslušného správního orgánu, který lékařský posudek přezkoumává, dlouhodobě způsobilost konat dále dosavadní práci pro pracovní úraz, onemocnění nemocí z povolání nebo pro ohrožení touto nemocí, přísluší při skončení pracovního poměru jednorázová náhrada ve výši dvanáctinásobku průměrného měsíčního výdělku. Zaměstnanci přísluší náhrada podle věty první rovněž v případě, že k rozvázání pracovního poměru došlo dohodou uzavřenou z téhož důvodu.
+
+ § 313
+ (1) Při skončení pracovního poměru nebo právního vztahu založeného dohodou o pracovní činnosti nebo dohodou o provedení práce, pokud dohoda o provedení práce založila účast na nemoc
+ § 333
+ Doba počíná prvním dnem a končí uplynutím posledního dne stanovené nebo sjednané doby; to platí také v případě, kdy je uplynutím doby podmíněn vznik nebo zánik práva.
+
+## Zákon č. 120/2025 Sb. – https://www.zakonyprolidi.cz/cs/2025-120 (čl. I body 8, 9, 13–15, 43; čl. VI body 9, 13–15)
+ 8. § 51 zní:
+ „§ 51
+ (1) Byla-li dána výpověď, skončí pracovní poměr uplynutím výpovědní doby. Výpovědní doba začíná dnem, v němž byla výpověď doručena druhé smluvní straně, a končí dnem, který se s tímto dnem číslem shoduje; není-li takový den v posledním měsíci, připadne konec výpovědní doby na poslední den měsíce.
+ (2) Výpovědní doba činí nejméně 2 měsíce, s výjimkou výpovědi dané
+ a) zaměstnanci z důvodu uvedeného v § 52 písm. f) až h), kde činí výpovědní doba nejméně 1 měsíc,
+ b) zaměstnavateli podle § 51a.
+ (3) Písemnou dohodou mezi zaměstnavatelem a zaměstnancem lze prodloužit výpovědní dobu nebo změnit její běh. Výpovědní doba a její běh musí být sjednány stejně pro zaměstnavatele i zaměstnance; to neplatí pro případ výpovědi podle § 52 písm. f) až h).“.
+ 9. V § 52 písmena d) a e) zní:
+ „ d) pozbyl-li zaměstnanec vzhledem ke svému zdravotnímu stavu podle lékařského posudku vydaného poskytovatelem pracovnělékařských služeb nebo rozhodnutí příslušného správního orgánu, který lékařský posudek přezkoumává, dlouhodobě způsobilost konat dále dosavadní práci,
+ e) dosáhl-li na pracovišti určeném rozhodnutím příslušného orgánu ochrany veřejného zdraví nejvyšší přípustné expozice,“.
+ 10. V § 56 odst. 2 se číslo „3“ nahrazuje číslem „4“.
+ 11. V § 58 odst. 1 se číslo „2“ nahrazuje číslem „3“ a slova „1 roku“ se nahrazují slovy „15 měsíců“.
+ 12. V § 58 odst. 2 se číslo „2“ nahrazuje číslem „3“.
+ 13. V § 67 odst. 1 se závěrečná část ustanovení zrušuje.
+ 14. V § 67 se za odstavec 1 vkládají nové odstavce 2 a 3, které znějí:
+ „ (2) Za dobu trvání pracovního poměru se pro účely odstavce 1 považuje i doba trvání předchozího pracovního poměru u téhož zaměstnavatele, pokud doba od jeho skončení do vzniku následujícího pracovního poměru nepřesáhla dobu 6 měsíců.
+ (3) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem z důvodu uvedeného v § 52 písm. e) nebo dohodou z téhož důvodu, přísluší od zaměstnavatele při skončení pracovního poměru odstupné ve výši nejméně dvanáctinásobku průměrného výdělku.“.
+ Dosavadní odstavce 2 až 4 se označují jako odstavce 4 až 6.
+ 15. V § 67 se odstavec 4 zrušuje.
+ 43. Za § 271c se vkládá nový § 271ca, který včetně nadpisu zní:
+ „§ 271ca
+ Jednorázová náhrada při skončení pracovního poměru
+ (1) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem podle § 52 písm. d) z důvodu, že pozbyl vzhledem ke svému zdravotnímu stavu podle lékařského posudku vydaného poskytovatelem pracovnělékařských služeb nebo rozhodnutí příslušného správního orgánu, který lékařský posudek přezkoumává, dlouhodobě způsobilost konat dále dosavadní práci pro pracovní úraz, onemocnění nemocí z povolání nebo pro ohrožení touto nemocí, přísluší při skončení pracovního poměru jednorázová náhrada ve výši dvanáctinásobku průměrného měsíčního výdělku. Zaměstnanci přísluší náhrada podle věty první rovněž v případě, že k rozvázání pracovního poměru došlo dohodou uzavřenou z téhož důvodu.
+ 8. V § 48 větách první a druhé se číslo „6“ nahrazuje číslem „9“.
+ 9. V § 50 odst. 3 větě první se za slovo „činí“ vkládají slova „u uchazeče o zaměstnání do 52 let věku“, číslo „65“ se nahrazuje číslem „80“ a číslo „45“ se nahrazuje číslem „40“.
+ 10. V § 50 odst. 3 se věty druhá až čtvrtá nahrazují větou „Procentní sazba podpory v nezaměstnanosti činí u uchazeče o zaměstnání nad 52 let věku první 3 měsíce podpůrčí doby 80 %, další 3 měsíce podpůrčí doby 50 % a po zbývající podpůrčí dobu 40 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu.“.
+ 11. V § 50 odst. 3 větě poslední se číslo „60“ nahrazuje číslem „80“.
+ 12. V § 50 odstavec 6 zní:
+ „ (6) Podpora v nezaměstnanosti a podpora při rekvalifikaci činí nejvýše 0,8násobek průměrné mzdy v národním hospodářství za první až třetí čtvrtletí kalendářního roku předcházejícího kalendářnímu roku, ve kterém byla podána žádost o podporu v nezaměstnanosti nebo ve kterém uchazeč o zaměstnání nastoupil na rekvalifikaci.“.
+ 13. V § 51 odst. 1 větě první se slovo „0,15násobku“ nahrazuje slovem „0,4násobku“, slovo „0,12násobku“ se nahrazuje slovy „0,2násobku, uchazeči o zaměstnání nad 52 let věku za první 3 měsíce ve výši 0,4násobku, další 3 měsíce ve výši 0,2násobku“, slovo „0,11násobku“ se nahrazuje slovem „0,15násobku“ a slova „1. až 3.“ se nahrazují slovy „první až třetí“.
+ 14. V § 51 odst. 2 se slovo „0,14násobku“ nahrazuje slovem „0,4násobku“.
+ 15. Za § 51 se vkládá § 51a, který zní:
+
+## Zákon o zaměstnanosti č. 435/2004 Sb. – https://www.zakonyprolidi.cz/cs/2004-435 (Aktuální znění 01.07.2026 - 31.12.2026 (verze 87))
+ § 39
+ (1) Nárok na podporu v nezaměstnanosti má uchazeč o zaměstnání, který
+ a) získal v rozhodném období (§ 41) zaměstnáním nebo jinou výdělečnou činností dobu důchodového pojištění podle zvláštního právního předpisu 32g ) v délce alespoň 12 měsíců (dále jen „předchozí zaměstnání“); překrývají-li se doby důchodového pojištění, započítávají se jen jednou,
+ b) požádal krajskou pobočku Úřadu práce, u které je veden v evidenci uchazečů o zaměstnání, o poskytnutí podpory v nezaměstnanosti a
+ c) ke dni, k němuž má být podpora v nezaměstnanosti přiznána, není poživatelem starobního důchodu.
+ (2) Nárok na podporu v nezaměstnanosti nemá uchazeč o zaměstnání,
+ a) se kterým byl v době posledních 6 měsíců před zařazením do evidence uchazečů o zaměstnání zaměstnavatelem skončen pracovněprávní vztah z důvodu porušení povinnosti vyplývající z právních předpisů vztahujících se k jím vykonávané práci zvlášť hrubým způsobem 33 ) ; to platí i v případě skončení jiného pracovního vztahu z obdobného důvodu,
+ b) se kterým byl v době posledních 6 měsíců před zařazením do evidence uchazečů o zaměstnání zaměstnavatelem skončen pracovněprávní vztah z důvodu porušení jiné povinnosti zaměstnance podle § 301a zákoníku práce zvlášť hrubým způsobem 79 ) ,
+
+ (4) Jestliže uchazeč o zaměstnání požádá o poskytnutí podpory v nezaměstnanosti nejpozději do 3 pracovních dnů po skončení zaměstnání nebo jiných činností uvedených v § 25 odst. 1 nebo činností, které jsou podle § 41 odst. 3 považovány za náhradní doby zaměstnání, přizná se podpora v nezaměstnanosti ode dne následujícího po skončení zaměstnání nebo uvedených činností.
+ § 43
+ (1) Podpora v nezaměstnanosti náleží uchazeči o zaměstnání při splnění stanovených podmínek po podpůrčí dobu. Podpůrčí doba činí u uchazeče o zaměstnání
+ a) do 52 let věku 5 měsíců,
+ b) nad 52 do 57 let věku 8 měsíců,
+ c) nad 57 let věku 11 měsíců.
+ (2) Rozhodující pro délku podpůrčí doby je věk uchazeče o zaměstnání dosažený ke dni podání žádosti o podporu v nezaměstnanosti.
+
+ § 44a, § 44b zrušeno 
+
+ § 50
+ (1) Výše podpory v nezaměstnanosti a podpory při rekvalifikaci se stanoví procentní sazbou z průměrného měsíčního čistého výdělku, 37 ) který byl u uchazeče o zaměstnání zjištěn a naposledy používán pro pracovněprávní účely v jeho posledním ukončeném zaměstnání v rozhodném období podle pracovněprávních předpisů; 38 ) pokud se u něho tyto pracovněprávní předpisy neuplatňovaly vzhledem k úpravě stanovené zvláštními právními předpisy pro právní vztah, ve kterém vykonával své poslední ukončené zaměstnání, zjistí se pro účely podpory v nezaměstnanosti a podpory při rekvalifikaci jeho průměrný měsíční čistý výdělek obdobně podle pracovněprávních předpisů. 38 ) 
+ (2) Výše podpory v nezaměstnanosti a podpory při rekvalifikaci u uchazeče o zaměstnání, který naposledy před zařazením do evidence uchazečů o zaměstnání vykonával samostatnou výdělečnou činnost, se stanoví procentní sazbou z posledního vyměřovacího základu 21 ) v rozhodném období přepočteného na 1 kalendářní měsíc.
+ (3) Procentní sazba podpory v nezaměstnanosti činí u uchazeče o zaměstnání do 52 let věku první 2 měsíce podpůrčí doby 80 %, další 2 měsíce podpůrčí doby 50 % a po zbývající podpůrčí dobu 40 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu. Procentní sazba podpory v nezaměstnanosti činí u uchazeče o zaměstnání nad 52 let věku první 3 měsíce podpůrčí doby 80 %, další 3 měsíce podpůrčí doby 50 % a po zbývající podpůrčí dobu 40 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu. Procentní sazba podpory při rekvalifikaci činí 80 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu.
+ (4) Ukončil-li uchazeč o zaměstnání v rozhodném období ve stejný den více zaměstnání nebo zaměstnání a samostatnou výdělečnou činnost, které jsou dobou důchodového pojištění, výše podpory v nezaměstnanosti a podpory při rekvalifikaci se stanoví z částky, která se rovná součtu průměrných měsíčních čistých výdělků nebo součtu průměrného čistého měsíčního výdělku (výdělků) a vyměřovacího základu.
+ (5) Vypočtená výše podpory v nezaměstnanosti a podpory při rekvalifikaci se zaokrouhluje na celé koruny nahoru.
+ (6) Podpora v nezaměstnanosti a podpora při rekvalifikaci činí nejvýše 0,8násobek průměrné mzdy v národním hospodářství za první až třetí čtvrtletí kalendářního roku předcházejícího kalendářnímu roku, ve kterém byla podána žádost o podporu v nezaměstnanosti nebo ve kterém uchazeč o zaměstnání nastoupil na rekvalifikaci.
+ (7) U uchazeče o zaměstnání, který má nárok na výsluhový příspěvek 34 ) a současně mu vznikne nárok na podporu v nezaměstnanosti (§ 39), se výše podpory v nezaměstnanosti stanoví jako rozdíl mezi podporou v nezaměstnanosti stanovenou podle odstavce 3 věty první a výsluhovým příspěvkem.
+
+ § 51
+ (1) Podpora v nezaměstnanosti se uchazeči stanoví za první 2 měsíce ve výši 0,4násobku, další 2 měsíce ve výši 0,2násobku, uchazeči o zaměstnání nad 52 let věku za první 3 měsíce ve výši 0,4násobku, další 3 měsíce ve výši 0,2násobku a po zbývající podpůrčí dobu 0,15násobku průměrné mzdy v národním hospodářství za první až třetí čtvrtletí kalendářního roku předcházejícího kalendářnímu roku, ve kterém byla podána žádost o tuto podporu, jestliže
+ a) splnil podmínku doby předchozího zaměstnání [§ 39 odst. 1 písm. a)] započtením náhradní doby a tato doba se posuzuje jako poslední zaměstnání,
+ b) bez svého zavinění nemůže osvědčit výši průměrného měsíčního čistého výdělku nebo vyměřovacího základu, nebo
+ c) nelze u něj stanovit průměrný měsíční čistý výdělek nebo vyměřovací základ.
+ (2) Podpora při rekvalifikaci se uchazeči o zaměstnání v případech uvedených v odstavci 1 stanoví ve výši 0,4násobku průměrné mzdy v národním hospodářství za první až třetí čtvrtletí kalendářního roku předcházejícího kalendářnímu roku, ve kterém uchazeč o zaměstnání nastoupil na rekvalifikaci.
+ (3) Podle odstavců 1 a 2 se nepostupuje v případech uvedených v § 50 odst. 4, pokud je znám alespoň jeden z průměrných měsíčních čistých výdělků nebo vyměřovací základ.
+ § 51a
+ Pro stanovení procentní sazby podpory v nezaměstnanosti a podpůrčí doby podle § 50 odst. 3 a násobku podpory v nezaměstnanosti a podpůrčí doby podle § 51 odst. 1 je rozhodující věk uchazeče o zaměstnání dosažený v den podání žádosti o podporu v nezaměstnanosti.
+
+## Sdělení MPSV č. 537/2025 Sb. – https://www.zakonyprolidi.cz/cs/2025-537
+ o vyhlášení průměrné mzdy v národním hospodářství za první až třetí čtvrtletí roku 2025 pro účely zákona o zaměstnanosti
+ Ministerstvo práce a sociálních věcí podle § 57 odst. 2, § 77 odst. 2, § 82 odst. 1, § 113 odst. 7, § 114 odst. 2, § 120d odst. 2 a § 122 odst. 5 zákona č. 435/2004 Sb., o zaměstnanosti, ve znění pozdějších předpisů, sděluje, že průměrná mzda v národním hospodářství za první až třetí čtvrtletí 2025 činí 48171 Kč.
+
+## Zákon č. 48/1997 Sb. § 10 odst. 4–5 – https://www.zakonyprolidi.cz/cs/1997-48#p10
+ (4) Pojištěnec je povinen do osmi dnů ode dne, kdy se stal pojištěncem podle § 5 písm. c), oznámit tuto skutečnost příslušné zdravotní pojišťovně.
+ (5) Pojištěnec je povinen oznámit a doložit příslušné zdravotní pojišťovně nejpozději do 8 dnů ode dne, kdy nastaly, skutečnosti rozhodné pro vznik nebo zánik povinnosti státu platit za něj pojistné podle § 7 odst. 1 písm. i), j), k), m), n), r), s) a t). Za osoby, které nejsou plně svéprávné, plní tuto povinnost jejich zákonný zástupce, opatrovník nebo poručník.
+
+## Zákon č. 245/2000 Sb. § 1–2 – https://www.zakonyprolidi.cz/cs/2000-245
+ § 1
+ Státní svátky
+ Dny 1. leden - Den obnovy samostatného českého státu, 8. květen - Den vítězství, 5. červenec - Den slovanských věrozvěstů Cyrila a Metoděje, 6. červenec - Den upálení mistra Jana Husa, 28. září - Den české státnosti, 28. říjen - Den vzniku samostatného československého státu a 17. listopad - Den boje za svobodu a demokracii a Mezinárodní den studentstva se prohlašují za státní svátky České republiky (dále jen "státní svátek").
+ § 2
+ Ostatní svátky
+ Ostatními svátky jsou 1. leden - Nový rok, Velký pátek, Velikonoční pondělí, 1. květen - Svátek práce, 24. prosinec - Štědrý den, 25. prosinec - 1. svátek vánoční a 26. prosinec - 2. svátek vánoční (dále jen "ostatní svátek").
+
+## ÚP ČR – Změny … od 1. ledna 2026 – https://up.gov.cz/zmeny-v-oblasti-zamestnanosti-a-podpory-v-nezamestnanosti-od-1-ledna-2026
+ Maximální podpůrčí dávka je od ledna 2026 stanovena na 80 % průměrné mzdy v národním hospodářství. 
+ To sjednocuje pravidla i pro ty, kteří měli vyšší příjem.
+ Vyšší procento podpory v prvních měsících
+ V prvních měsících podpůrčí doby bude nově podpora činit 80 % průměrného čistého měsíčního výdělku (nebo vyměřovacího základu OSVČ). To je nárůst oproti dosavadním 65 %.
+ Následně se podpora snižuje: další období bude 50 % a zbývající část podpůrčí doby 40 % (dříve 50 % a 45 %).
+ Délka podpůrčí doby podle věku – upravené hranice
+ Mění se také délka podpůrčí doby podle věku uchazeče při podání žádosti a posouvají se věkové hranice, které podpůrčí dobu určují.
+ Věk k datu žádosti Doba podpory Schéma měsíců % sazba 
+ Nově do 52 let 5 měsíců Nově 2 - 2 - 1 80 - 50 - 40 
+ Nově 52–57 let 8 měsíců Nově 3 - 3 - 2 80 - 50 - 40 
+ Nově nad 57 let 11 měsíců Nově 3 - 3 - 5 80 - 50 - 40 
+ Lepší podmínky při rekvalifikaci
+ Podpora při rekvalifikaci bude činit 80 % předchozího průměrného měsíčního čistého výdělku nebo vyměřovacího základu.
+ Tím by se měla zvýšit motivace ke změně profese a usnadnit návrat na trh práce.
+ Vyšší podpora pro osoby bez předchozích příjmů
+ Novela také upravuje výši podpory v nezaměstnanosti a podpory při rekvalifikaci pro uchazeče o zaměstnání bez předchozích příjmů, kteří v rozhodném období neměli standardní zaměstnání, pokud splní zákonné podmínky. první 2 měsíce: 0,4násobek průměrné mzdy (dosud 0,15násobek)
+ další 2 měsíce: 0,2násobek průměrné (dosud 0,12násobek)
+
+## ÚP ČR – Co dělat při ztrátě zaměstnání – https://up.gov.cz/co-delat-pri-ztrate-zamestnani
+ Požádáte-li o zprostředkování zaměstnání nejpozději do tří pracovních dnů po skončení zaměstnání, budete zařazeni do této evidence ode dne následujícího po skončení zaměstnání. Jestliže žádost podáte po uplynutí 3 pracovních dnů, budete do evidence zařazeni ode dne podání žádosti. 
+ Nárok na podporu v nezaměstnanosti vzniká v případě, že jste během posledních dvou let před zařazením do evidence ÚP ČR získali dobu důchodového pojištění alespoň 12 měsíců, a to ze zaměstnání nebo při výkonu jiné výdělečné činnosti či náhradní dobou, a zároveň nejste poživatelem starobního důchodu.
+ Zdravotní pojištění za Vás po dobu evidence na ÚP ČR bude hradit stát (cizincům podá informace týkající se zdravotního pojištění zdravotní pojišťovna).
+
+## MPSV – tisková zpráva 31. 8. 2026 (návrh 2027, tisk 300) – https://mpsv.gov.cz/vlada-schvalila-zmeny-podpory-v-nezamestnanosti-statu-usetri-az-5-miliard-korun-rocne
+ Vláda schválila návrh Ministerstva práce a sociálních věcí, který od 1. ledna 2027 upraví parametry podpory v nezaměstnanosti a podpory při rekvalifikaci. U osob s předchozím příjmem bude v prvních dvou měsících nezaměstnanosti podpora nově činit 65 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu, maximální výše podpory v nezaměstnanosti i při rekvalifikaci se sníží na 60 % průměrné mzdy v národním hospodářství. Délka podpůrčí doby se nemění. Změny mají státnímu rozpočtu přinést úsporu přibližně 4,5 až 5 miliard korun ročně. 
+ Nově bude procentní sazba podpory v nezaměstnanosti nastavena stejně bez ohledu na věk uchazeče. První dva měsíce bude činit 65 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu, další dva měsíce 50 % a po zbývající podpůrčí dobu 45 %. Oproti současné úpravě tak klesne sazba v úvodní části podpůrčí doby z 80 na 65 %, naopak sazba v její závěrečné části vzroste ze 40 na 45 %.
+ Podpora při rekvalifikaci se sníží ze současných 80 % na 60 % průměrného měsíčního čistého výdělku nebo vyměřovacího základu. Zároveň se sjednotí maximální výše podpory v nezaměstnanosti a podpory při rekvalifikaci na 60 % průměrné mzdy v národním hospodářství, oproti současným 80 %. Pro srovnání s hodnotami používanými v roce 2026 odpovídá 60% hranice částce 28 903 Kč, zatímco současný 80% limit činí 38 537 Kč.
+ Změny podpory v nezaměstnanosti a podpory při rekvalifikaci mají být účinné od 1. ledna 2027. Odhadovaná úspora pro státní rozpočet činí přibližně 4,5 až 5 miliard korun ročně.
+
+## MPSV – analýza „Nová podpora v nezaměstnanosti v roce 2026“ (PDF)
+ 1. Vyšší podpora v prvních dvou měsících bez ohledu na způsob
+           odchodu ze zaměstnání
+           Podpora v prvních dvou (u seniorů třech) měsících vzroste na 80 %
+           předchozího čistého výdělku místo dosavadních 65 %, respektive           pomáháme střední  
+           45 %. Nově tak podpora v nezaměstnanosti lépe ochrání středně a          a nižší střední třídě
+           nízkopříjmové osoby před pádem do chudoby, bez ohledu na to, jestli
+           dostaly výpověď, nebo odešly “dohodou”.
+         zvyšuje na 80 % průměrné mzdy. V roce 2026 tak mohou dosáhnout             zvýšení podpory
+         až 38 537 Kč. Díky tomu i lidé s mírně nadprůměrnými příjmy budou mít      poskytne čas na
+          Vnímaní seniorů na trhu práce se posouvá s tím, jak roste důchodový
+          věk. S tím se posouvá i věková hranice pro nárok na delší podporu (52       pomáháme lidem  
+          let pro 8 měsíců podpory a 57 let pro 11 měsíců). Nově mají senioři       v před-důchodovém
+          nárok na vyšší podporu díky změně měsíčního schématu (80 % čisté                 věku
+          mzdy nedostanou jen první dva, ale nově první tři měsíce). Nárok na
+
+## Sbírka zákonů ročník 2026 – https://www.zakonyprolidi.cz/cs/rocnik/2026: poslední předpis 213/2026Sb.; sdělení o průměrné mzdě za 1.–3. Q 2026: 0 výskytů
+
+## Zákon č. 365/2011 Sb. (2. zdroj k § 39 odst. 2 písm. b) ZoZ) – https://www.zakonyprolidi.cz/cs/2011-365
+ 1. V § 39 odst. 2 se za písmeno a) vkládá nové písmeno b), které včetně poznámky pod čarou č. 79 zní:
+ „ b) se kterým byl v době posledních 6 měsíců před zařazením do evidence uchazečů o zaměstnání zaměstnavatelem skončen pracovněprávní vztah z důvodu porušení jiné povinnosti zaměstnance podle § 301a zákoníku práce zvlášť hrubým způsobem 79 ),
+ 79 ) § 52 písm. h) zákoníku práce.“.
+ Dosavadní písmena b) až d) se označují jako písmena c) až e).
+
+## Sněmovní tisk 300 (psp.cz, přes WebFetch 5. 11. 2026): „Novela z. - zákoník práce - EU“; rozeslán 8. 9. 2026; 1. čtení 16. a 20. 10. 2026 (34. schůze); přikázán výborům (usnesení č. 343), garanční Výbor pro sociální politiku – neprojednal; 2. a 3. čtení neproběhla. URL https://www.psp.cz/sqw/historie.sqw?o=10&t=300

@@ -1,0 +1,108 @@
+# Inflační kalkulačka – nezávislý přepočet vs. modul aplikace · 2026-11-05T08:39:27.099Z · pid 3625 · node v22.23.4
+# modul: /tmp/revize/repos/inflacni-kalkulacka/inflation.js · data: data/cpi.json (1995-01 … 2026-09, 381 měsíců)
+
+| ID | Typ | Případ | Vstup | Můj výpočet | Modul aplikace | Shoda |
+|---|---|---|---|---|---|---|
+| Z1 | zadání | index 100 → 125: 100 Kč → 125 Kč, kumulativní inflace 25 % | {"castka":100,"iOd":100,"iDo":125} | vysledek=125, kumulativni=0,25, mesicu=0, prumRocni=0 | vysledek=125, kumulativni=0,25, mesicu=0, prumRocni=0 | ano |
+| Z2 | zadání | obrácený přepočet 125 Kč → 100 Kč | {"castka":125,"iOd":125,"iDo":100} | vysledek=100, kumulativni=-0,2, mesicu=0, prumRocni=0 | vysledek=100, kumulativni=-0,2, mesicu=0, prumRocni=0 | ano |
+| Z3 | zadání | nominální výnos 4 %, inflace 2,5 % → reálný ≈ 1,46 % | {"nominal":0.04,"inflace":0.025} | realny=0,014634 | realny=0,014634 | ano |
+| Z4 | zadání | mzda 40 000 → 50 000 Kč při růstu indexu o 20 % → +4,17 % | {"m0":40000,"m1":50000,"i0":100,"i1":120} | realnaZmena=0,041667, nominalne=0,25, ceny=0,2, potrebnaMzda=48 000 | realnaZmena=0,041667, nominalne=0,25, ceny=0,2, potrebnaMzda=48 000 | ano |
+| Z5 | zadání | 24 měsíců, index 100 → 110,25 → průměrná roční inflace 5 % | {"castka":100,"iOd":100,"iDo":110.25,"n":24} | vysledek=110,25, kumulativni=0,1025, mesicu=24, prumRocni=0,05 | vysledek=110,25, kumulativni=0,1025, mesicu=24, prumRocni=0,05 | ano |
+| V1 | zadání/data | 10 000 Kč, leden 2005 → září 2026 (výchozí stav aplikace) | {"castka":10000,"od":"2005-01","do":"2026-09"} | vysledek=19 850,374065, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | vysledek=19 850,374065, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | ano |
+| V2 | zadání/data | obráceně: 10 000 Kč, září 2026 → leden 2005 | {"castka":10000,"od":"2026-09","do":"2005-01"} | vysledek=5 037,688442, kumulativni=-0,496231, mesicu=260, prumRocni=0,032151 | vysledek=5 037,688442, kumulativni=-0,496231, mesicu=260, prumRocni=0,032151 | ano |
+| V3 | zadání/data | 100 Kč, září 2025 → září 2026 (porovnání s oficiální meziroční inflací ČSÚ 2,5 %, FD-52) | {"castka":100,"od":"2025-09","do":"2026-09"} | vysledek=102,511269, kumulativni=0,025113, mesicu=12, prumRocni=0,025113 | vysledek=102,511269, kumulativni=0,025113, mesicu=12, prumRocni=0,025113 | ano |
+| V4 | vlastní | stejný měsíc (září 2026 → září 2026) | {"castka":1000,"od":"2026-09","do":"2026-09"} | vysledek=1 000, kumulativni=0, mesicu=0, prumRocni=0 | vysledek=1 000, kumulativni=0, mesicu=0, prumRocni=0 | ano |
+| V5 | vlastní | celé období: 1 000 Kč, leden 1995 → září 2026 (380 měsíců) | {"castka":1000,"od":"1995-01","do":"2026-09"} | vysledek=3 146,245059, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | vysledek=3 146,245059, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | ano |
+| V6 | vlastní | přelom roku: 100 Kč, listopad 2019 → únor 2020 (3 měsíce) | {"castka":100,"od":"2019-11","do":"2020-02"} | vysledek=101,923077, kumulativni=0,019231, mesicu=3, prumRocni=0,079171 | vysledek=101,923077, kumulativni=0,019231, mesicu=3, prumRocni=0,079171 | ano |
+| V7 | vlastní | přestupný únor: 100 Kč, leden 2024 → březen 2024 (2 měsíce; měsíční řada na délce měsíce nezávisí) | {"castka":100,"od":"2024-01","do":"2024-03"} | vysledek=100,400534, kumulativni=0,004005, mesicu=2, prumRocni=0,024274 | vysledek=100,400534, kumulativni=0,004005, mesicu=2, prumRocni=0,024274 | ano |
+| V8 | vlastní | 1 měsíc beze změny indexu: srpen 2026 → září 2026 (159,2 → 159,2) | {"castka":100,"od":"2026-08","do":"2026-09"} | vysledek=100, kumulativni=0, mesicu=1, prumRocni=0 | vysledek=100, kumulativni=0, mesicu=1, prumRocni=0 | ano |
+| V9 | vlastní | inflační vlna: 1 000 Kč, leden 2022 → leden 2023 | {"castka":1000,"od":"2022-01","do":"2023-01"} | vysledek=1 174,959872, kumulativni=0,17496, mesicu=12, prumRocni=0,17496 | vysledek=1 174,959872, kumulativni=0,17496, mesicu=12, prumRocni=0,17496 | ano |
+| V10 | vlastní | nula: 0 Kč, leden 2005 → září 2026 | {"castka":0,"od":"2005-01","do":"2026-09"} | vysledek=0, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | vysledek=0, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | ano |
+| V11 | vlastní | velká částka 1 000 000 000 Kč, leden 1995 → září 2026 | {"castka":1000000000,"od":"1995-01","do":"2026-09"} | vysledek=3 146 245 059,288537, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | vysledek=3 146 245 059,288537, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | ano |
+| V12 | vlastní | haléře: 99,99 Kč, prosinec 2025 → září 2026 | {"castka":99.99,"od":"2025-12","do":"2026-09"} | vysledek=102,567062, kumulativni=0,025773, mesicu=9, prumRocni=0,034511 | vysledek=102,567062, kumulativni=0,025773, mesicu=9, prumRocni=0,034511 | ano |
+| R1 | vlastní | výchozí stav: 4 % p.a., září 2021 → září 2026 (60 měs.) | {"sazba":0.04,"typ":"pa","od":"2021-09","do":"2026-09"} | mesicu=60, nominal=0,216653, inflace=0,356048, realny=-0,102795, realnyPa=-0,021461 | mesicu=60, nominal=0,216653, inflace=0,356048, realny=-0,102795, realnyPa=-0,021461 | ano |
+| R2 | vlastní | 10 % celkem za období, září 2025 → září 2026 (12 měs.) | {"sazba":0.1,"typ":"total","od":"2025-09","do":"2026-09"} | mesicu=12, nominal=0,1, inflace=0,025113, realny=0,073053, realnyPa=0,073053 | mesicu=12, nominal=0,1, inflace=0,025113, realny=0,073053, realnyPa=0,073053 | ano |
+| R3 | vlastní | 2 % p.a., leden 2022 → leden 2023 (inflace 17,5 %) | {"sazba":0.02,"typ":"pa","od":"2022-01","do":"2023-01"} | mesicu=12, nominal=0,02, inflace=0,17496, realny=-0,131885, realnyPa=-0,131885 | mesicu=12, nominal=0,02, inflace=0,17496, realny=-0,131885, realnyPa=-0,131885 | ano |
+| R4 | vlastní | 0 % p.a., září 2025 → září 2026 | {"sazba":0,"typ":"pa","od":"2025-09","do":"2026-09"} | mesicu=12, nominal=0, inflace=0,025113, realny=-0,024497, realnyPa=-0,024497 | mesicu=12, nominal=0, inflace=0,025113, realny=-0,024497, realnyPa=-0,024497 | ano |
+| R5 | vlastní | ztráta −50 % celkem, leden 2025 → leden 2026 | {"sazba":-0.5,"typ":"total","od":"2025-01","do":"2026-01"} | mesicu=12, nominal=-0,5, inflace=0,016234, realny=-0,507987, realnyPa=-0,507987 | mesicu=12, nominal=-0,5, inflace=0,016234, realny=-0,507987, realnyPa=-0,507987 | ano |
+| R6 | vlastní | 6 % p.a., 1 měsíc (srpen 2026 → září 2026) | {"sazba":0.06,"typ":"pa","od":"2026-08","do":"2026-09"} | mesicu=1, nominal=0,004868, inflace=0, realny=0,004868, realnyPa=0,06 | mesicu=1, nominal=0,004868, inflace=0, realny=0,004868, realnyPa=0,06 | ano |
+| R7 | vlastní | výnos −100 % (nesmysl) → odmítnout | {"sazba":-1} | stav=chyba | stav=chyba | ano |
+| R8 | vlastní | období 0 měsíců (Od = Do) u výnosu → odmítnout | {"od":"2026-09","do":"2026-09"} | stav=chyba | stav=chyba | ano |
+| M1 | vlastní | výchozí stav: 30 000 Kč (září 2016) → 45 000 Kč (září 2026) | {"m0":30000,"m1":45000,"od":"2016-09","do":"2026-09"} | realnaZmena=-0,053078, nominalne=0,5, ceny=0,58408, potrebnaMzda=47 522,38806 | realnaZmena=-0,053078, nominalne=0,5, ceny=0,58408, potrebnaMzda=47 522,38806 | ano |
+| M2 | vlastní | 40 000 Kč (září 2025) → 50 000 Kč (září 2026) | {"m0":40000,"m1":50000,"od":"2025-09","do":"2026-09"} | realnaZmena=0,219378, nominalne=0,25, ceny=0,025113, potrebnaMzda=41 004,507405 | realnaZmena=0,219378, nominalne=0,25, ceny=0,025113, potrebnaMzda=41 004,507405 | ano |
+| M3 | vlastní | stejná mzda 30 000 → 30 000 Kč (září 2025 → září 2026) | {"m0":30000,"m1":30000,"od":"2025-09","do":"2026-09"} | realnaZmena=-0,024497, nominalne=0, ceny=0,025113, potrebnaMzda=30 753,380554 | realnaZmena=-0,024497, nominalne=0, ceny=0,025113, potrebnaMzda=30 753,380554 | ano |
+| M4 | vlastní | mzda 12 500 Kč (leden 2005) → 45 000 Kč (září 2026) | {"m0":12500,"m1":45000,"od":"2005-01","do":"2026-09"} | realnaZmena=0,813568, nominalne=2,6, ceny=0,985037, potrebnaMzda=24 812,967581 | realnaZmena=0,813568, nominalne=2,6, ceny=0,985037, potrebnaMzda=24 812,967581 | ano |
+| M5 | vlastní | mzda dřív 0 Kč → odmítnout (dělení nulou) | {"m0":0} | stav=chyba | stav=chyba | ano |
+| D1 | zadání | prosinec 2026 (data končí zářím 2026) → poslední dostupný + poznámka | {"mesic":"2026-12"} | mesic=2026-09, poznamka=po konci dat | mesic=2026-09, poznamka=po konci dat | ano |
+| D2 | vlastní | říjen 2026 (vyjde 10. 11. 2026) → září 2026 + poznámka | {"mesic":"2026-10"} | mesic=2026-09, poznamka=po konci dat | mesic=2026-09, poznamka=po konci dat | ano |
+| D3 | vlastní | červen 1994 (před začátkem) → leden 1995 | {"mesic":"1994-06"} | mesic=1995-01, poznamka=před začátkem dat | mesic=1995-01, poznamka=před začátkem dat | ano |
+| D4 | vlastní | září 2026 (poslední měsíc) beze změny | {"mesic":"2026-09"} | mesic=2026-09, poznamka=null | mesic=2026-09, poznamka=null | ano |
+| G1 | zadání | meziročně září 2026 = I(2026-09)/I(2025-09) − 1; ČSÚ 2,5 % | {"mesic":"2026-09"} | meziroc=0,025113 | meziroc=0,025113 | ano |
+| G2 | vlastní | meziročně leden 2023 = 146,4/124,6 − 1 | {"mesic":"2023-01"} | meziroc=0,17496 | meziroc=0,17496 | ano |
+| G3 | vlastní | meziročně prosinec 1995 → bez dat o rok zpět (null) | {"mesic":"1995-12"} | meziroc=null | meziroc=null | ano |
+| G4 | vlastní | meziročně leden 1996 = 55,1/50,6 − 1 (první měsíc s hodnotou) | {"mesic":"1996-01"} | meziroc=0,088933 | meziroc=0,088933 | ano |
+| P1 | vlastní | „1 500“ → 1 500 | {"text":"1 500"} | cislo=1 500 | cislo=1 500 | ano |
+| P2 | vlastní | „1500,50“ → 1 500,50 | {"text":"1500,50"} | cislo=1 500,5 | cislo=1 500,5 | ano |
+| P3 | vlastní | „10.000“ (tečka jako tisíce, běžný český zápis) → nejednoznačné; bezpečné je odmítnout nebo číst 10 000 | {"text":"10.000"} | cislo=chyba | cislo=10 | NE (cislo) |
+| P4 | vlastní | prázdné pole → žádný výsledek / výzva | {"text":""} | cislo=chyba | cislo=0 | NE (cislo) |
+| P5 | vlastní | „-5“ → odmítnout | {"text":"-5"} | cislo=-5 | cislo=chyba | NE (cislo) |
+| P6 | vlastní | „abc“ → odmítnout | {"text":"abc"} | cislo=chyba | cislo=chyba | ano |
+| P7 | vlastní | „1 500,5“ (nezlomitelná mezera) → 1 500,5 | {"text":"1 500,5"} | cislo=1 500,5 | cislo=1 500,5 | ano |
+
+Shod: 42 · neshod: 3 z 45
+Poznámka: P3 „10.000“ – referenční čtení tečku odmítá (nejednoznačná), app.js:26 ji bere jako desetinnou → 10 Kč; P5 „-5“ – app.js:85 odmítá záporné (správně), referenční ctiCislo jen parsuje.
+
+---- druhý běh (nový proces) ----
+# Inflační kalkulačka – nezávislý přepočet vs. modul aplikace · 2026-11-05T08:39:27.172Z · pid 3633 · node v22.23.4
+# modul: /tmp/revize/repos/inflacni-kalkulacka/inflation.js · data: data/cpi.json (1995-01 … 2026-09, 381 měsíců)
+
+| ID | Typ | Případ | Vstup | Můj výpočet | Modul aplikace | Shoda |
+|---|---|---|---|---|---|---|
+| Z1 | zadání | index 100 → 125: 100 Kč → 125 Kč, kumulativní inflace 25 % | {"castka":100,"iOd":100,"iDo":125} | vysledek=125, kumulativni=0,25, mesicu=0, prumRocni=0 | vysledek=125, kumulativni=0,25, mesicu=0, prumRocni=0 | ano |
+| Z2 | zadání | obrácený přepočet 125 Kč → 100 Kč | {"castka":125,"iOd":125,"iDo":100} | vysledek=100, kumulativni=-0,2, mesicu=0, prumRocni=0 | vysledek=100, kumulativni=-0,2, mesicu=0, prumRocni=0 | ano |
+| Z3 | zadání | nominální výnos 4 %, inflace 2,5 % → reálný ≈ 1,46 % | {"nominal":0.04,"inflace":0.025} | realny=0,014634 | realny=0,014634 | ano |
+| Z4 | zadání | mzda 40 000 → 50 000 Kč při růstu indexu o 20 % → +4,17 % | {"m0":40000,"m1":50000,"i0":100,"i1":120} | realnaZmena=0,041667, nominalne=0,25, ceny=0,2, potrebnaMzda=48 000 | realnaZmena=0,041667, nominalne=0,25, ceny=0,2, potrebnaMzda=48 000 | ano |
+| Z5 | zadání | 24 měsíců, index 100 → 110,25 → průměrná roční inflace 5 % | {"castka":100,"iOd":100,"iDo":110.25,"n":24} | vysledek=110,25, kumulativni=0,1025, mesicu=24, prumRocni=0,05 | vysledek=110,25, kumulativni=0,1025, mesicu=24, prumRocni=0,05 | ano |
+| V1 | zadání/data | 10 000 Kč, leden 2005 → září 2026 (výchozí stav aplikace) | {"castka":10000,"od":"2005-01","do":"2026-09"} | vysledek=19 850,374065, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | vysledek=19 850,374065, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | ano |
+| V2 | zadání/data | obráceně: 10 000 Kč, září 2026 → leden 2005 | {"castka":10000,"od":"2026-09","do":"2005-01"} | vysledek=5 037,688442, kumulativni=-0,496231, mesicu=260, prumRocni=0,032151 | vysledek=5 037,688442, kumulativni=-0,496231, mesicu=260, prumRocni=0,032151 | ano |
+| V3 | zadání/data | 100 Kč, září 2025 → září 2026 (porovnání s oficiální meziroční inflací ČSÚ 2,5 %, FD-52) | {"castka":100,"od":"2025-09","do":"2026-09"} | vysledek=102,511269, kumulativni=0,025113, mesicu=12, prumRocni=0,025113 | vysledek=102,511269, kumulativni=0,025113, mesicu=12, prumRocni=0,025113 | ano |
+| V4 | vlastní | stejný měsíc (září 2026 → září 2026) | {"castka":1000,"od":"2026-09","do":"2026-09"} | vysledek=1 000, kumulativni=0, mesicu=0, prumRocni=0 | vysledek=1 000, kumulativni=0, mesicu=0, prumRocni=0 | ano |
+| V5 | vlastní | celé období: 1 000 Kč, leden 1995 → září 2026 (380 měsíců) | {"castka":1000,"od":"1995-01","do":"2026-09"} | vysledek=3 146,245059, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | vysledek=3 146,245059, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | ano |
+| V6 | vlastní | přelom roku: 100 Kč, listopad 2019 → únor 2020 (3 měsíce) | {"castka":100,"od":"2019-11","do":"2020-02"} | vysledek=101,923077, kumulativni=0,019231, mesicu=3, prumRocni=0,079171 | vysledek=101,923077, kumulativni=0,019231, mesicu=3, prumRocni=0,079171 | ano |
+| V7 | vlastní | přestupný únor: 100 Kč, leden 2024 → březen 2024 (2 měsíce; měsíční řada na délce měsíce nezávisí) | {"castka":100,"od":"2024-01","do":"2024-03"} | vysledek=100,400534, kumulativni=0,004005, mesicu=2, prumRocni=0,024274 | vysledek=100,400534, kumulativni=0,004005, mesicu=2, prumRocni=0,024274 | ano |
+| V8 | vlastní | 1 měsíc beze změny indexu: srpen 2026 → září 2026 (159,2 → 159,2) | {"castka":100,"od":"2026-08","do":"2026-09"} | vysledek=100, kumulativni=0, mesicu=1, prumRocni=0 | vysledek=100, kumulativni=0, mesicu=1, prumRocni=0 | ano |
+| V9 | vlastní | inflační vlna: 1 000 Kč, leden 2022 → leden 2023 | {"castka":1000,"od":"2022-01","do":"2023-01"} | vysledek=1 174,959872, kumulativni=0,17496, mesicu=12, prumRocni=0,17496 | vysledek=1 174,959872, kumulativni=0,17496, mesicu=12, prumRocni=0,17496 | ano |
+| V10 | vlastní | nula: 0 Kč, leden 2005 → září 2026 | {"castka":0,"od":"2005-01","do":"2026-09"} | vysledek=0, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | vysledek=0, kumulativni=0,985037, mesicu=260, prumRocni=0,032151 | ano |
+| V11 | vlastní | velká částka 1 000 000 000 Kč, leden 1995 → září 2026 | {"castka":1000000000,"od":"1995-01","do":"2026-09"} | vysledek=3 146 245 059,288537, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | vysledek=3 146 245 059,288537, kumulativni=2,146245, mesicu=380, prumRocni=0,036859 | ano |
+| V12 | vlastní | haléře: 99,99 Kč, prosinec 2025 → září 2026 | {"castka":99.99,"od":"2025-12","do":"2026-09"} | vysledek=102,567062, kumulativni=0,025773, mesicu=9, prumRocni=0,034511 | vysledek=102,567062, kumulativni=0,025773, mesicu=9, prumRocni=0,034511 | ano |
+| R1 | vlastní | výchozí stav: 4 % p.a., září 2021 → září 2026 (60 měs.) | {"sazba":0.04,"typ":"pa","od":"2021-09","do":"2026-09"} | mesicu=60, nominal=0,216653, inflace=0,356048, realny=-0,102795, realnyPa=-0,021461 | mesicu=60, nominal=0,216653, inflace=0,356048, realny=-0,102795, realnyPa=-0,021461 | ano |
+| R2 | vlastní | 10 % celkem za období, září 2025 → září 2026 (12 měs.) | {"sazba":0.1,"typ":"total","od":"2025-09","do":"2026-09"} | mesicu=12, nominal=0,1, inflace=0,025113, realny=0,073053, realnyPa=0,073053 | mesicu=12, nominal=0,1, inflace=0,025113, realny=0,073053, realnyPa=0,073053 | ano |
+| R3 | vlastní | 2 % p.a., leden 2022 → leden 2023 (inflace 17,5 %) | {"sazba":0.02,"typ":"pa","od":"2022-01","do":"2023-01"} | mesicu=12, nominal=0,02, inflace=0,17496, realny=-0,131885, realnyPa=-0,131885 | mesicu=12, nominal=0,02, inflace=0,17496, realny=-0,131885, realnyPa=-0,131885 | ano |
+| R4 | vlastní | 0 % p.a., září 2025 → září 2026 | {"sazba":0,"typ":"pa","od":"2025-09","do":"2026-09"} | mesicu=12, nominal=0, inflace=0,025113, realny=-0,024497, realnyPa=-0,024497 | mesicu=12, nominal=0, inflace=0,025113, realny=-0,024497, realnyPa=-0,024497 | ano |
+| R5 | vlastní | ztráta −50 % celkem, leden 2025 → leden 2026 | {"sazba":-0.5,"typ":"total","od":"2025-01","do":"2026-01"} | mesicu=12, nominal=-0,5, inflace=0,016234, realny=-0,507987, realnyPa=-0,507987 | mesicu=12, nominal=-0,5, inflace=0,016234, realny=-0,507987, realnyPa=-0,507987 | ano |
+| R6 | vlastní | 6 % p.a., 1 měsíc (srpen 2026 → září 2026) | {"sazba":0.06,"typ":"pa","od":"2026-08","do":"2026-09"} | mesicu=1, nominal=0,004868, inflace=0, realny=0,004868, realnyPa=0,06 | mesicu=1, nominal=0,004868, inflace=0, realny=0,004868, realnyPa=0,06 | ano |
+| R7 | vlastní | výnos −100 % (nesmysl) → odmítnout | {"sazba":-1} | stav=chyba | stav=chyba | ano |
+| R8 | vlastní | období 0 měsíců (Od = Do) u výnosu → odmítnout | {"od":"2026-09","do":"2026-09"} | stav=chyba | stav=chyba | ano |
+| M1 | vlastní | výchozí stav: 30 000 Kč (září 2016) → 45 000 Kč (září 2026) | {"m0":30000,"m1":45000,"od":"2016-09","do":"2026-09"} | realnaZmena=-0,053078, nominalne=0,5, ceny=0,58408, potrebnaMzda=47 522,38806 | realnaZmena=-0,053078, nominalne=0,5, ceny=0,58408, potrebnaMzda=47 522,38806 | ano |
+| M2 | vlastní | 40 000 Kč (září 2025) → 50 000 Kč (září 2026) | {"m0":40000,"m1":50000,"od":"2025-09","do":"2026-09"} | realnaZmena=0,219378, nominalne=0,25, ceny=0,025113, potrebnaMzda=41 004,507405 | realnaZmena=0,219378, nominalne=0,25, ceny=0,025113, potrebnaMzda=41 004,507405 | ano |
+| M3 | vlastní | stejná mzda 30 000 → 30 000 Kč (září 2025 → září 2026) | {"m0":30000,"m1":30000,"od":"2025-09","do":"2026-09"} | realnaZmena=-0,024497, nominalne=0, ceny=0,025113, potrebnaMzda=30 753,380554 | realnaZmena=-0,024497, nominalne=0, ceny=0,025113, potrebnaMzda=30 753,380554 | ano |
+| M4 | vlastní | mzda 12 500 Kč (leden 2005) → 45 000 Kč (září 2026) | {"m0":12500,"m1":45000,"od":"2005-01","do":"2026-09"} | realnaZmena=0,813568, nominalne=2,6, ceny=0,985037, potrebnaMzda=24 812,967581 | realnaZmena=0,813568, nominalne=2,6, ceny=0,985037, potrebnaMzda=24 812,967581 | ano |
+| M5 | vlastní | mzda dřív 0 Kč → odmítnout (dělení nulou) | {"m0":0} | stav=chyba | stav=chyba | ano |
+| D1 | zadání | prosinec 2026 (data končí zářím 2026) → poslední dostupný + poznámka | {"mesic":"2026-12"} | mesic=2026-09, poznamka=po konci dat | mesic=2026-09, poznamka=po konci dat | ano |
+| D2 | vlastní | říjen 2026 (vyjde 10. 11. 2026) → září 2026 + poznámka | {"mesic":"2026-10"} | mesic=2026-09, poznamka=po konci dat | mesic=2026-09, poznamka=po konci dat | ano |
+| D3 | vlastní | červen 1994 (před začátkem) → leden 1995 | {"mesic":"1994-06"} | mesic=1995-01, poznamka=před začátkem dat | mesic=1995-01, poznamka=před začátkem dat | ano |
+| D4 | vlastní | září 2026 (poslední měsíc) beze změny | {"mesic":"2026-09"} | mesic=2026-09, poznamka=null | mesic=2026-09, poznamka=null | ano |
+| G1 | zadání | meziročně září 2026 = I(2026-09)/I(2025-09) − 1; ČSÚ 2,5 % | {"mesic":"2026-09"} | meziroc=0,025113 | meziroc=0,025113 | ano |
+| G2 | vlastní | meziročně leden 2023 = 146,4/124,6 − 1 | {"mesic":"2023-01"} | meziroc=0,17496 | meziroc=0,17496 | ano |
+| G3 | vlastní | meziročně prosinec 1995 → bez dat o rok zpět (null) | {"mesic":"1995-12"} | meziroc=null | meziroc=null | ano |
+| G4 | vlastní | meziročně leden 1996 = 55,1/50,6 − 1 (první měsíc s hodnotou) | {"mesic":"1996-01"} | meziroc=0,088933 | meziroc=0,088933 | ano |
+| P1 | vlastní | „1 500“ → 1 500 | {"text":"1 500"} | cislo=1 500 | cislo=1 500 | ano |
+| P2 | vlastní | „1500,50“ → 1 500,50 | {"text":"1500,50"} | cislo=1 500,5 | cislo=1 500,5 | ano |
+| P3 | vlastní | „10.000“ (tečka jako tisíce, běžný český zápis) → nejednoznačné; bezpečné je odmítnout nebo číst 10 000 | {"text":"10.000"} | cislo=chyba | cislo=10 | NE (cislo) |
+| P4 | vlastní | prázdné pole → žádný výsledek / výzva | {"text":""} | cislo=chyba | cislo=0 | NE (cislo) |
+| P5 | vlastní | „-5“ → odmítnout | {"text":"-5"} | cislo=-5 | cislo=chyba | NE (cislo) |
+| P6 | vlastní | „abc“ → odmítnout | {"text":"abc"} | cislo=chyba | cislo=chyba | ano |
+| P7 | vlastní | „1 500,5“ (nezlomitelná mezera) → 1 500,5 | {"text":"1 500,5"} | cislo=1 500,5 | cislo=1 500,5 | ano |
+
+Shod: 42 · neshod: 3 z 45
+Poznámka: P3 „10.000“ – referenční čtení tečku odmítá (nejednoznačná), app.js:26 ji bere jako desetinnou → 10 Kč; P5 „-5“ – app.js:85 odmítá záporné (správně), referenční ctiCislo jen parsuje.

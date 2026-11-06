@@ -1,0 +1,223 @@
+{
+ "datum": "2026-11-05T09:18:28.242Z",
+ "behy": [
+  {
+   "beh": 1,
+   "fokusPoEnter": {
+    "t0": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "t100": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "t600": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "poTabu": {
+     "aktivni": "a#",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    }
+   },
+   "fokusPoKliku": {
+    "t0": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "t600": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "poTabu": {
+     "aktivni": "a#",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    }
+   },
+   "fokusChyba": {
+    "aktivni": "input#mzda",
+    "hash": "#formular",
+    "obrazovka": "formular"
+   },
+   "dluh0": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "20 034 Kč",
+    "v-srazka": "2 966 Kč",
+    "v-vericum": "2 916 Kč",
+    "v-nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+    "v-doba": "Odhad doby splácení: 0 měsíců.",
+    "o-splatka": "5 932 Kč",
+    "o-delka": "3 roky",
+    "o-zaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+    "o-zbytek": "Nic by se neodpouštělo."
+   },
+   "mzda14105": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "14 104 Kč",
+    "v-srazka": "1 Kč",
+    "v-vericum": "0 Kč",
+    "v-nahrada": "Zaměstnavatel si ze srážky nechá 1 Kč za svou práci. Tak to určuje zákon.",
+    "v-doba": "Splácení by trvalo déle než 50 let.",
+    "o-splatka": "2 Kč",
+    "o-delka": "3 roky",
+    "o-zaplaceno": "Věřitelům za tu dobu zaplatíte asi 0 Kč. To je 0 % dluhů.",
+    "o-zbytek": "Zbytek asi 100 000 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti."
+   },
+   "mzda23tecka": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "23 Kč",
+    "v-srazka": "0 Kč",
+    "v-vericum": "0 Kč",
+    "v-nahrada": "",
+    "v-doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+    "o-splatka": "0 Kč",
+    "o-delka": "3 roky",
+    "o-zaplaceno": "Věřitelům za tu dobu zaplatíte asi 0 Kč. To je 0 % dluhů.",
+    "o-zbytek": "Zbytek asi 100 000 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti."
+   },
+   "dluh150tecka": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "20 034 Kč",
+    "v-srazka": "2 966 Kč",
+    "v-vericum": "2 916 Kč",
+    "v-nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+    "v-doba": "Odhad doby splácení: 1 měsíc.",
+    "o-splatka": "5 932 Kč",
+    "o-delka": "1 měsíc",
+    "o-zaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+    "o-zbytek": "Nic by se neodpouštělo."
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  },
+  {
+   "beh": 2,
+   "fokusPoEnter": {
+    "t0": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "t100": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "t600": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "poTabu": {
+     "aktivni": "a#",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    }
+   },
+   "fokusPoKliku": {
+    "t0": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "t600": {
+     "aktivni": "BODY",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    },
+    "poTabu": {
+     "aktivni": "a#",
+     "hash": "#vysledek",
+     "obrazovka": "vysledek"
+    }
+   },
+   "fokusChyba": {
+    "aktivni": "input#mzda",
+    "hash": "#formular",
+    "obrazovka": "formular"
+   },
+   "dluh0": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "20 034 Kč",
+    "v-srazka": "2 966 Kč",
+    "v-vericum": "2 916 Kč",
+    "v-nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+    "v-doba": "Odhad doby splácení: 0 měsíců.",
+    "o-splatka": "5 932 Kč",
+    "o-delka": "3 roky",
+    "o-zaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+    "o-zbytek": "Nic by se neodpouštělo."
+   },
+   "mzda14105": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "14 104 Kč",
+    "v-srazka": "1 Kč",
+    "v-vericum": "0 Kč",
+    "v-nahrada": "Zaměstnavatel si ze srážky nechá 1 Kč za svou práci. Tak to určuje zákon.",
+    "v-doba": "Splácení by trvalo déle než 50 let.",
+    "o-splatka": "2 Kč",
+    "o-delka": "3 roky",
+    "o-zaplaceno": "Věřitelům za tu dobu zaplatíte asi 0 Kč. To je 0 % dluhů.",
+    "o-zbytek": "Zbytek asi 100 000 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti."
+   },
+   "mzda23tecka": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "23 Kč",
+    "v-srazka": "0 Kč",
+    "v-vericum": "0 Kč",
+    "v-nahrada": "",
+    "v-doba": "Vaše výplata je nižší než částka, kterou vám musí nechat. Z výplaty se tedy nestrhává nic. Dluh ale nezmizí.",
+    "o-splatka": "0 Kč",
+    "o-delka": "3 roky",
+    "o-zaplaceno": "Věřitelům za tu dobu zaplatíte asi 0 Kč. To je 0 % dluhů.",
+    "o-zbytek": "Zbytek asi 100 000 Kč vám soud odpustí. Podmínka je, že budete poctivě plnit povinnosti."
+   },
+   "dluh150tecka": {
+    "aktivni": "BODY",
+    "hash": "#vysledek",
+    "obrazovka": "vysledek",
+    "v-zustane": "20 034 Kč",
+    "v-srazka": "2 966 Kč",
+    "v-vericum": "2 916 Kč",
+    "v-nahrada": "Zaměstnavatel si ze srážky nechá 50 Kč za svou práci. Tak to určuje zákon.",
+    "v-doba": "Odhad doby splácení: 1 měsíc.",
+    "o-splatka": "5 932 Kč",
+    "o-delka": "1 měsíc",
+    "o-zaplaceno": "Dluhy byste splatili celé dřív než za 3 roky.",
+    "o-zbytek": "Nic by se neodpouštělo."
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ]
+  }
+ ]
+}

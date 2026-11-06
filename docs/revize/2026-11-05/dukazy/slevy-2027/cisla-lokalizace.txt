@@ -1,0 +1,6 @@
+# 2. nezávislá reprodukce (nový proces, 5. 11. 2026): čárka v poli type=number podle jazyka prohlížeče a zastaralé školkovné po změně roku dítěte
+# skript: skripty/slevy-2027-lokalizace.mjs
+en-US {"1500,50":{"value":"150050","badInput":false,"lang":"en-US"},"84 512,30":{"value":"8451230","badInput":false,"lang":"en-US"},"1 500":{"value":"1500","badInput":false,"lang":"en-US"},"1500.50":{"value":"1500.50","badInput":false,"lang":"en-US"}}
+en-US krok školka: Nezadali jste žádné dítě v předškolním věku – můžete pokračovat. | výsledek: Sleva za umístění dítěte (školkovné) = 20 000 Kč; Daňové zvýhodnění na děti = 15 204 Kč | Až: Až 66 044 Kč ročně
+cs-CZ {"1500,50":{"value":"1500.50","badInput":false,"lang":"cs-CZ"},"84 512,30":{"value":"84512.30","badInput":false,"lang":"cs-CZ"},"1 500":{"value":"1500","badInput":false,"lang":"cs-CZ"},"1500.50":{"value":"1500.50","badInput":false,"lang":"cs-CZ"}}
+cs-CZ krok školka: Nezadali jste žádné dítě v předškolním věku – můžete pokračovat. | výsledek: Sleva za umístění dítěte (školkovné) = 20 000 Kč; Daňové zvýhodnění na děti = 15 204 Kč | Až: Až 66 044 Kč ročně

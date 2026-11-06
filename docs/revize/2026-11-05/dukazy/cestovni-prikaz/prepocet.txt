@@ -1,0 +1,69 @@
+# Nezávislý přepočet – Cestovní příkaz 2027 (cestovni-prikaz @ bb4e580) · 2026-11-05T08:53:28.517Z · node v22.23.4
+# Reference: cestovni-prikaz-prepocet.mjs (bez kódu aplikace). Modul: /tmp/revize/repos/cestovni-prikaz/cesty.js + rules.json.
+# Sloupce: ID | typ | můj výpočet | modul aplikace | shoda | popis
+
+Z1	zadání	590,00 Kč	590,00 Kč	shoda	100 km × 5,90 Kč → 590 Kč
+Z2	zadání	208,20 Kč	208,20 Kč	shoda	100 km, 6 l/100 km, benzin 95 bez dokladu (15. 3. 2026) → 6 × 34,70 = 208,20 Kč
+Z3	zadání	236,00 Kč	236,00 Kč	shoda	cesta 13 h bez jídla, soukromá → 236 Kč
+Z4	zadání	370,00 Kč	370,00 Kč	shoda	cesta 20 h → 370 Kč
+Z5	zadání	0,00 Kč	0,00 Kč	shoda	cesta 4 h → 0 Kč
+Z6	zadání	129,60 Kč	129,60 Kč	shoda	elektromobil 100 km, 18 kWh/100 km bez dokladu → 18 × 7,20 = 129,60 Kč
+Z7	zadání	chyba: rok 2027: vyhláška nevydána – výpočet nelze provést	chyba (ChybaSazby): Vyhláška MPSV se sazbami cestovních náhrad pro rok 2027 zatím nevyšla ve Sbírce zákonů (nebo ještě nebyla doplněna do aplikace). Sazbu za km, stravné ani průměrné ceny PHM pro rok 2027 proto nelze určit a výpočet se neprovede. Sazby z předchozího roku se nepoužijí, protože by výsledek mohl být nesprávný.	shoda	cesta 10. 1. 2027, 7:00–15:00, 100 km → výpočet se nepustí (vyhláška 2027 nevyšla)
+Z8	zadání	1 034,20 Kč	1 034,20 Kč	shoda	součet příkladů: 100 km, 6 l, benzin 95, 15. 3. 2026 6:00–19:00 → 590 + 208,20 + 236 = 1 034,20 Kč; k výplatě 1 035 Kč (§ 183 odst. 5) · k výplatě: ref 1035 Kč, modul 1035 Kč
+V1	vlastní	155,00 Kč	155,00 Kč	shoda	přesně 5:00 h → 155 Kč („5 až 12 hodin“)
+V2	vlastní	0,00 Kč	0,00 Kč	shoda	4:59 h → 0 Kč
+V3	vlastní	155,00 Kč	155,00 Kč	shoda	přesně 12:00 h → 155 Kč
+V4	vlastní	236,00 Kč	236,00 Kč	shoda	12:01 h → 236 Kč („déle než 12 hodin“)
+V5	vlastní	236,00 Kč	236,00 Kč	shoda	přesně 18:00 h → 236 Kč („nejdéle však 18 hodin“)
+V6	vlastní	370,00 Kč	370,00 Kč	shoda	18:01 h → 370 Kč
+V7	vlastní	370,00 Kč	370,00 Kč	shoda	celý kalendářní den 24 h (15. 3. 0:00 – 16. 3. 0:00) → 370 Kč, jeden den
+V8	vlastní	153,40 Kč	153,40 Kč	shoda	13 h + 1 jídlo → 236 − 35 % = 153,40 Kč
+V9	vlastní	0,00 Kč	0,00 Kč	shoda	13 h + 3 jídla → 236 − 105 % → 0 Kč (ne záporné)
+V10	vlastní	46,50 Kč	46,50 Kč	shoda	6 h + 1 jídlo → 155 − 70 % = 46,50 Kč
+V11	vlastní	0,00 Kč	0,00 Kč	shoda	6 h + 2 jídla → 0 Kč
+V12	vlastní	92,50 Kč	92,50 Kč	shoda	20 h + 3 jídla → 370 − 75 % = 92,50 Kč
+V13	vlastní	77,50 Kč	77,50 Kč	shoda	6 h + 1 jídlo, zaměstnavatel předem určil krácení 50 % → 77,50 Kč
+V14	vlastní	chyba: krácení nad zákonné maximum	chyba (ChybaVstupu): Krácení pro pásmo 5–12 h může být nejvýše 70 % za jídlo.	shoda	krácení 80 % (nad zákonné maximum 70 %) → chyba
+V15	vlastní	236,00 Kč	236,00 Kč	shoda	veřejná, 13 h, bez určení → dolní sazba 236 Kč
+V16	vlastní	331,50 Kč	331,50 Kč	shoda	veřejná, 20 h, určeno 442 Kč + 1 jídlo → 442 − 25 % = 331,50 Kč
+V17	vlastní	0,00 Kč	0,00 Kč	shoda	veřejná, 6 h, 185 Kč + 2 jídla → 0 Kč (§ 176 odst. 4 písm. a))
+V18	vlastní	0,00 Kč	0,00 Kč	shoda	veřejná, 13 h, 284 Kč + 3 jídla → 0 Kč (§ 176 odst. 4 písm. b))
+V19	vlastní	chyba: veřejná sféra: částka mimo rozpětí 155–185	chyba (ChybaVstupu): Stravné ve veřejné sféře pro pásmo 5–12 h musí být 155–185 Kč.	shoda	veřejná, 6 h, určeno 200 Kč (mimo rozpětí 155–185) → chyba
+V20	vlastní	208,20 Kč	208,20 Kč	shoda	benzin 95, 30. 9. 2026, 100 km, 6 l → 208,20 Kč (34,70)
+V21	vlastní	250,80 Kč	250,80 Kč	shoda	benzin 95, 1. 10. 2026, 100 km, 6 l → 250,80 Kč (41,80)
+V22	vlastní	170,50 Kč	170,50 Kč	shoda	nafta, 31. 5. 2026, 100 km, 5 l → 170,50 Kč (34,10)
+V23	vlastní	222,50 Kč	222,50 Kč	shoda	nafta, 1. 6. 2026, 100 km, 5 l → 222,50 Kč (44,50)
+V24	vlastní	273,00 Kč	273,00 Kč	shoda	benzin 98, 100 km, 7 l → 273,00 Kč (39)
+V25	vlastní	233,40 Kč	233,40 Kč	shoda	cena z dokladu 38,90 Kč má přednost: 100 km, 6 l → 233,40 Kč
+V26	vlastní	117,00 Kč	117,00 Kč	shoda	elektřina z dokladu 6,50 Kč/kWh, 100 km, 18 kWh → 117,00 Kč
+V27	vlastní	chyba: cena z dokladu musí být > 0	chyba (ChybaVstupu): Cena PHM z dokladu musí být větší než 0.	shoda	cena z dokladu 0 → chyba
+V28	vlastní	73,75 Kč	73,75 Kč	shoda	12,5 km × 5,90 → 73,75 Kč
+V29	vlastní	73,95 Kč	73,95 Kč	shoda	33,3 km × 6,4 l × 34,70 = 73,95264 → 73,95 Kč
+V30	vlastní	0,21 Kč	0,21 Kč	shoda	0,1 km × 5 l × 41,00 = 0,205 → 0,21 Kč (polovina nahoru)
+V31	vlastní	80,00 Kč	80,00 Kč	shoda	jednostopé 50 km × 1,60 → 80,00 Kč
+V32	vlastní	678,50 Kč	chyba (ChybaVstupu): Navýšení náhrady za přívěs aplikace nepočítá – pravidlo v platném zákoníku práce se nepodařilo ověřit.	ROZDÍL	přívěs: 100 km × 5,90 × 1,15 = 678,50 Kč (§ 157 odst. 4 – nejméně)
+V33	vlastní	58 999,41 Kč	58 999,41 Kč	shoda	maximum: 9 999,9 km × 5,90 → 58 999,41 Kč
+V34	vlastní	25 079,75 Kč	25 079,75 Kč	shoda	maximum PHM: 9 999,9 km × 6 l × 41,80 = 25 079,7492 → 25 079,75 Kč
+V35	vlastní	236,00 Kč	236,00 Kč	shoda	km = 0 → bez vozidla, jen stravné (13 h) → 236 Kč
+V36	vlastní	chyba: km musí být nezáporné číslo	chyba (ChybaVstupu): Počet km musí být nezáporné číslo.	shoda	km = −5 → chyba
+V37	vlastní	chyba: km musí být nezáporné číslo	chyba (ChybaVstupu): Počet km musí být nezáporné číslo.	shoda	km = NaN („abc“) → chyba
+V38	vlastní	chyba: spotřeba musí být > 0	chyba (ChybaVstupu): Zadejte spotřebu vozidla z technického průkazu.	shoda	km 100, spotřeba 0 → chyba (bez spotřeby nelze PHM)
+V39	vlastní	chyba: návrat musí být po odjezdu	chyba (ChybaVstupu): Návrat musí být později než odjezd.	shoda	návrat před odjezdem → chyba
+V40	vlastní	chyba: datum a čas ve tvaru YYYY-MM-DDTHH:MM	chyba (ChybaVstupu): Odjezd: zadejte datum a čas.	shoda	prázdný odjezd → chyba
+V41	vlastní	587,50 Kč	587,50 Kč	shoda	3 dny: 15. 3. 14:00 – 17. 3. 10:30, 1 jídlo 16. 3. → 155 + (370 − 25 %) 277,50 + 155 = 587,50 Kč
+V42	vlastní	236,00 Kč	236,00 Kč	shoda	návrat přesně o půlnoci: 15. 3. 8:00 – 16. 3. 0:00 → 16 h, jeden den → 236 Kč
+V43	vlastní	155,00 Kč	0,00 Kč	ROZDÍL	přes půlnoc 20:00–2:00 (4 h + 2 h): odděleně 0 + 0; společně 6 h → 155 Kč (§ 163 odst. 4)
+V44	vlastní	370,00 Kč	236,00 Kč	ROZDÍL	přes půlnoc 6:00–0:30 (18 h + 0,5 h): odděleně 236 + 0; společně 18,5 h → 370 Kč
+V45	vlastní	236,00 Kč	155,00 Kč	ROZDÍL	přes půlnoc 22:00–11:00 (2 h + 11 h): odděleně 0 + 155; společně 13 h → 236 Kč
+V46	vlastní	310,00 Kč	310,00 Kč	shoda	přes půlnoc 19:00–10:00 (5 h + 10 h): odděleně 155 + 155 = 310; společně 15 h → 236 → výhodnější oddělené 310 Kč
+V47	vlastní	46,50 Kč	46,50 Kč	shoda	přes půlnoc 21:00–9:00, 1 jídlo 2. den: odděleně 0 + 46,50; společně 12 h, 1 jídlo → 46,50 → 46,50 Kč
+V48	vlastní	155,00 Kč	0,00 Kč	ROZDÍL	veřejná sféra přes půlnoc 20:00–2:00 → § 163 odst. 4 platí i zde (§ 174, § 176 odst. 1 vylučuje jen odst. 1–3) → 155 Kč
+V49	vlastní	155,00 Kč	0,00 Kč	ROZDÍL	nepřestupný rok: 28. 2. 2026 22:00 – 1. 3. 2026 4:00 (bez 29. 2.): odděleně 0 + 0; společně 6 h → 155 Kč
+V50	vlastní	chyba: rok 2027: vyhláška nevydána – výpočet nelze provést	chyba (ChybaSazby): Vyhláška MPSV se sazbami cestovních náhrad pro rok 2027 zatím nevyšla ve Sbírce zákonů (nebo ještě nebyla doplněna do aplikace). Sazbu za km, stravné ani průměrné ceny PHM pro rok 2027 proto nelze určit a výpočet se neprovede. Sazby z předchozího roku se nepoužijí, protože by výsledek mohl být nesprávný.	shoda	přelom roku: 31. 12. 2026 20:00 – 1. 1. 2027 8:00 → chyba (pro 2027 není vyhláška)
+V51	vlastní	chyba: rok 2025: v referenci není	chyba (ChybaSazby): Pro rok 2025 nejsou v aplikaci sazby. Aplikace počítá jen roky, pro které je v rules.json zapsána vyhláška MPSV o sazbách cestovních náhrad.	shoda	cesta 2025 (rok bez sazeb v aplikaci) → chyba
+V52	vlastní	1 335,30 Kč	1 335,30 Kč	shoda	součet 2 cest 301,10 + 1 034,20 = 1 335,30 Kč → k výplatě 1 336 Kč · k výplatě: ref 1336 Kč, modul 1336 Kč
+V53	vlastní	1 034,00 Kč	1 034,00 Kč	shoda	součet přesně na koruny 1 034,00 → k výplatě 1 034 Kč (nezaokrouhluje se výš) · k výplatě: ref 1034 Kč, modul 1034 Kč
+V54	vlastní	155,00 Kč	155,00 Kč	shoda	29. 3. 2026 0:30–5:30 (změna na letní čas): nástěnně 5 h → 155 Kč; skutečně uplyne 4 h → 0 Kč (reference počítá nástěnný čas stejně jako aplikace)
+
+Celkem 62 případů, shoda 56, rozdíl 6: V32, V43, V44, V45, V48, V49
+Otisk výsledků (pro porovnání dvou běhů): c1518690f85f05f1

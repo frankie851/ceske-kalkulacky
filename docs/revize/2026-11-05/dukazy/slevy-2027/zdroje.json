@@ -1,0 +1,178 @@
+{
+ "datum": "2026-11-05T08:22:14.096Z",
+ "vysledky": [
+  {
+   "klic": "fakturaonline-slevy",
+   "nazev": "FakturaOnline – Daňové slevy 2027: návrat školkovného a slevy na studenta",
+   "url": "https://www.fakturaonline.cz/podnikateluv-pruvodce/dane/dan-z-prijmu/danove-slevy-2027-navrat-skolkovneho-a-slevy-na-studenta",
+   "stav": null,
+   "chyba": "Error: net::ERR_TUNNEL_CONNECTION_FAILED at https://www.fakturaonline.cz/podnikateluv-pruvodce/dane/dan-z-prijmu/danove-slevy-2027-navrat-skolkovneho-a-slevy-na",
+   "odpovida": null
+  },
+  {
+   "klic": "fs-manzel",
+   "nazev": "Finanční správa – Sleva na manžela (dotazy a odpovědi)",
+   "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/dotazy-a-odpovedi/dan-z-prijmu-fyzickych-osob/sleva-na-manzela",
+   "stav": 200,
+   "typ": "text/html; charset=utf-8",
+   "titulek": "Sleva na manžela | Daň z příjmů fyzických osob | Dotazy a odpovědi | Daň z příjmů | Daně | Daně | Finanční správa",
+   "text": "Přejít k obsahu | Přejít k hlavnímu menu | Přejít k vyhledávání Finanční správa Daně Mezinárodní spolupráce Kontakty CZ EN DANĚ DANĚ DAŇ Z PŘÍJMŮ DOTAZY A ODPOVĚDI DAŇ Z PŘÍJMŮ FYZICKÝCH OSOB SLEVA NA MANŽELA Hledat Hledat 10. 1. 2025 Žijeme s manželkou ve společně hospodařící domácnosti a máme (vyž",
+   "odpovida": true
+  },
+  {
+   "klic": "penize-student",
+   "nazev": "Peníze.cz – Školkovné a sleva na studenta se vrátí. Poslanci schválili změny",
+   "url": "https://www.penize.cz/dan-z-prijmu-fyzickych-osob/493056-skolkovne-a-sleva-na-studenta-se-vrati-poslanci-schvalili-zmeny",
+   "stav": null,
+   "chyba": "Error: net::ERR_TUNNEL_CONNECTION_FAILED at https://www.penize.cz/dan-z-prijmu-fyzickych-osob/493056-skolkovne-a-sleva-na-studenta-se-vrati-poslanci-schvalili-z",
+   "odpovida": null
+  },
+  {
+   "klic": "pohoda-konsolidace",
+   "nazev": "Portál POHODA – Konsolidační balíček pro rok 2024",
+   "url": "https://portal.pohoda.cz/dane-ucetnictvi-mzdy/ostatni-dane/konsolidacni-ozdravny-balicek-pro-rok-2024",
+   "stav": null,
+   "chyba": "Error: net::ERR_TUNNEL_CONNECTION_FAILED at https://portal.pohoda.cz/dane-ucetnictvi-mzdy/ostatni-dane/konsolidacni-ozdravny-balicek-pro-rok-2024",
+   "odpovida": null
+  },
+  {
+   "klic": "zakon-180-2026",
+   "nazev": "Zákon č. 180/2026 Sb., o evidenci tržeb a o změně některých dalších zákonů – úplné znění k 7. 10. 2026 (část druhá: změna zákona o daních z příjmů)",
+   "url": "https://e-sbirka.gov.cz/sb/2026/180",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "180/2026 Sb., 8. 10. 2026, aktuální částečně účinné znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 180/2026 Sb. Rozšířené vyhledávání Sbírka zákonů 180/2026 Sb. Zákon č. 180/2026 Sb. Zákon o evidenci tržeb a o změně některých dalších zákonů Vyhlášeno 7. 10. 2026 13:10:33, datum účinnosti 1. 1. 2027, částka 180/2026 Sdílet Znění Historie Souv",
+   "odpovida": true
+  },
+  {
+   "klic": "duvodova-180-2026",
+   "nazev": "Důvodová zpráva k zákonu o evidenci tržeb (EET 2.0)",
+   "url": "https://eet.gov.cz/assets/cs/cmsmedia/pro-vyvojare/Duvodova_zprava_Zakon_o_EET.pdf",
+   "stav": 200,
+   "typ": "application/pdf",
+   "text": "(PDF)",
+   "odpovida": true
+  },
+  {
+   "klic": "fs-dpfo-2025",
+   "nazev": "Finanční správa – Aktuálně k dani z příjmů fyzických osob za zdaňovací období 2025",
+   "url": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/dotazy-a-odpovedi/dan-z-prijmu-fyzickych-osob/aktualne-k-dani-z-prijmu-fyzickych-osob-2025",
+   "stav": 200,
+   "typ": "text/html; charset=utf-8",
+   "titulek": "Aktuálně k dani z příjmů fyzických osob za zdaňovací období 2025 | Daň z příjmů fyzických osob | Dotazy a odpovědi | Daň z příjmů | Daně | Daně | Finanční správa",
+   "text": "Přejít k obsahu | Přejít k hlavnímu menu | Přejít k vyhledávání Finanční správa Daně Mezinárodní spolupráce Kontakty CZ EN DANĚ DANĚ DAŇ Z PŘÍJMŮ DOTAZY A ODPOVĚDI DAŇ Z PŘÍJMŮ FYZICKÝCH OSOB AKTUÁLNĚ K DANI Z PŘÍJMŮ FYZICKÝCH OSOB ZA ZDAŇOVACÍ OBDOBÍ 2025 Hledat Hledat 19. 1. 2026 Předmět daně z př",
+   "odpovida": true
+  },
+  {
+   "klic": "fs-novinky-2026",
+   "nazev": "Finanční správa – Daňové novinky pro rok 2026 (tisková zpráva 5. 1. 2026)",
+   "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026",
+   "stav": 200,
+   "typ": "text/html; charset=utf-8",
+   "titulek": "Daňové novinky pro rok 2026: změny v daních z příjmů, DPH i v oblasti administrativních povinností | Tiskové zprávy 2026 | Tiskové zprávy | Pro média | Finanční správa | Finanční správa",
+   "text": "Přejít k obsahu | Přejít k hlavnímu menu | Přejít k vyhledávání Finanční správa Daně Mezinárodní spolupráce Kontakty CZ EN FINANČNÍ SPRÁVA PRO MÉDIA TISKOVÉ ZPRÁVY TISKOVÉ ZPRÁVY 2026 DAŇOVÉ NOVINKY PRO ROK 2026: ZMĚNY V DANÍCH Z PŘÍJMŮ, DPH I V OBLASTI ADMINISTRATIVNÍCH POVINNOSTÍ Hledat Hledat 5. ",
+   "odpovida": true
+  },
+  {
+   "klic": "zdp-2027",
+   "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů – znění účinné od 1. 1. 2027 (e-Sbírka)",
+   "url": "https://e-sbirka.gov.cz/sb/1992/586/2027-01-01",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "586/1992 Sb., 1. 1. 2027, budoucí znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 586/1992 Sb. Rozšířené vyhledávání Sbírka zákonů 586/1992 Sb. Zákon České národní rady č. 586/1992 Sb. Zákon České národní rady o daních z příjmů Vyhlášeno 18. 12. 1992, datum účinnosti 1. 1. 1993, částka 117/1992 Sdílet Znění Historie Souvislo",
+   "odpovida": true
+  },
+  {
+   "klic": "zakon-360-2025",
+   "nazev": "Zákon č. 360/2025 Sb. (změny v souvislosti se zákonem o jednotném měsíčním hlášení zaměstnavatele), čl. VI a čl. XXXIV písm. f)",
+   "url": "https://e-sbirka.gov.cz/sb/2025/360",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "360/2025 Sb., 24. 7. 2026, aktuální znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 360/2025 Sb. Rozšířené vyhledávání Sbírka zákonů 360/2025 Sb. Zákon č. 360/2025 Sb. Zákon, kterým se mění některé zákony v souvislosti s přijetím zákona o jednotném měsíčním hlášení zaměstnavatele Vyhlášeno 29. 9. 2025 12:39:29, datum účinnosti",
+   "odpovida": true
+  },
+  {
+   "klic": "zakon-24-2025",
+   "nazev": "Zákon č. 24/2025 Sb. – prodloužení zvýšeného odpočtu darů na roky 2022–2026",
+   "url": "https://e-sbirka.gov.cz/sb/2025/24",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "24/2025 Sb., 1. 7. 2025, aktuální znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 24/2025 Sb. Rozšířené vyhledávání Sbírka zákonů 24/2025 Sb. Zákon č. 24/2025 Sb. Zákon, kterým se mění zákon č. 65/2022 Sb., o některých opatřeních v souvislosti s ozbrojeným konfliktem na území Ukrajiny vyvolaným invazí vojsk Ruské federace, v",
+   "odpovida": true
+  },
+  {
+   "klic": "mpsv-171-2026",
+   "nazev": "Sdělení MPSV č. 171/2026 Sb., o vyhlášení minimální mzdy pro rok 2027",
+   "url": "https://e-sbirka.gov.cz/sb/2026/171",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "171/2026 Sb., 24. 9. 2026, vyhlášené znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 171/2026 Sb. Rozšířené vyhledávání Sbírka zákonů 171/2026 Sb. Sdělení Ministerstva práce a sociálních věcí č. 171/2026 Sb. Sdělení Ministerstva práce a sociálních věcí o vyhlášení minimální mzdy, nejnižších úrovní zaručeného platu a rozpětí výš",
+   "odpovida": true
+  },
+  {
+   "klic": "nv-164-2026",
+   "nazev": "Nařízení vlády č. 164/2026 Sb., o koeficientech pro výpočet minimální mzdy v letech 2027 a 2028",
+   "url": "https://e-sbirka.gov.cz/sb/2026/164",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "164/2026 Sb., 16. 9. 2026, aktuální znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 164/2026 Sb. Rozšířené vyhledávání Sbírka zákonů 164/2026 Sb. Nařízení vlády č. 164/2026 Sb. Nařízení vlády o koeficientech pro výpočet minimální mzdy v letech 2027 a 2028 Vyhlášeno 15. 9. 2026 15:10:23, datum účinnosti 16. 9. 2026, částka 164/",
+   "odpovida": true
+  },
+  {
+   "klic": "nv-177-2026",
+   "nazev": "Nařízení vlády č. 177/2026 Sb. (všeobecný vyměřovací základ za rok 2025 a přepočítací koeficient)",
+   "url": "https://e-sbirka.gov.cz/sb/2026/177",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "177/2026 Sb., 1. 1. 2027, budoucí znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 177/2026 Sb. Rozšířené vyhledávání Sbírka zákonů 177/2026 Sb. Nařízení vlády č. 177/2026 Sb. Nařízení vlády o výši všeobecného vyměřovacího základu za rok 2025, přepočítacího koeficientu pro úpravu všeobecného vyměřovacího základu za rok 2025, ",
+   "odpovida": true
+  },
+  {
+   "klic": "mpsv-184-2026",
+   "nazev": "Sdělení MPSV č. 184/2026 Sb. – částka rozhodná pro účast na nemocenském pojištění u DPP od 1. 1. 2027 (12 500 Kč)",
+   "url": "https://e-sbirka.gov.cz/sb/2026/184",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "184/2026 Sb., 13. 10. 2026, vyhlášené znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 184/2026 Sb. Rozšířené vyhledávání Sbírka zákonů 184/2026 Sb. Sdělení Ministerstva práce a sociálních věcí č. 184/2026 Sb. Sdělení Ministerstva práce a sociálních věcí, kterým se vyhlašuje výše částky rozhodné pro účast zaměstnanců činných na z",
+   "odpovida": true
+  },
+  {
+   "klic": "mpsv-186-2026",
+   "nazev": "Sdělení MPSV č. 186/2026 Sb. – částka rozhodná pro účast zaměstnanců na nemocenském pojištění od 1. 1. 2027 (5 000 Kč)",
+   "url": "https://e-sbirka.gov.cz/sb/2026/186",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "186/2026 Sb., 13. 10. 2026, vyhlášené znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 186/2026 Sb. Rozšířené vyhledávání Sbírka zákonů 186/2026 Sb. Sdělení Ministerstva práce a sociálních věcí č. 186/2026 Sb. Sdělení Ministerstva práce a sociálních věcí, kterým se vyhlašuje zvýšení částky rozhodné pro účast zaměstnanců na nemoce",
+   "odpovida": true
+  },
+  {
+   "klic": "danovy-rad",
+   "nazev": "Zákon č. 280/2009 Sb., daňový řád – § 33 a § 136 (e-Sbírka)",
+   "url": "https://e-sbirka.gov.cz/sb/2009/280",
+   "stav": 200,
+   "typ": "text/html",
+   "titulek": "280/2009 Sb., 1. 1. 2026, aktuální znění, informativní znění systému e-Sbírka",
+   "text": "EUR-Lex EuroVOC N-Lex zakony.gov.cz Nápověda Přihlášení 280/2009 Sb. Rozšířené vyhledávání Sbírka zákonů 280/2009 Sb. Zákon č. 280/2009 Sb. Zákon daňový řád Vyhlášeno 3. 9. 2009, datum účinnosti 1. 1. 2011, částka 87/2009 Sdílet Znění Historie Souvislosti Vybraná ustanovení novel Další informace Por",
+   "odpovida": true
+  },
+  {
+   "klic": "fs-priznani-2026",
+   "nazev": "Finanční správa – Krátí se čas na podání daňového přiznání. Elektronicky ho lze podat do 4. května 2026",
+   "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/krati-se-cas-na-podani-danoveho-priznani",
+   "stav": 200,
+   "typ": "text/html; charset=utf-8",
+   "titulek": "Krátí se čas na podání daňového přiznání k daním z příjmů. Elektronicky ho lze podat do 4. května 2026 | Tiskové zprávy 2026 | Tiskové zprávy | Pro média | Finanční správa | Finanční správa",
+   "text": "Přejít k obsahu | Přejít k hlavnímu menu | Přejít k vyhledávání Finanční správa Daně Mezinárodní spolupráce Kontakty CZ EN FINANČNÍ SPRÁVA PRO MÉDIA TISKOVÉ ZPRÁVY TISKOVÉ ZPRÁVY 2026 KRÁTÍ SE ČAS NA PODÁNÍ DAŇOVÉHO PŘIZNÁNÍ K DANÍM Z PŘÍJMŮ. ELEKTRONICKY HO LZE PODAT DO 4. KVĚTNA 2026 Hledat Hledat",
+   "odpovida": true
+  }
+ ]
+}

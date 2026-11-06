@@ -1,0 +1,151 @@
+# Nezávislý přepočet – Přijímačky bez paniky @ e9dd0d3 · 2026-11-05T08:45:54.354Z · node v22.23.4
+Můj výpočet: sekvenční odložené přijetí + hrubá síla (stabilita, uchazečská optimalita); modul: deferredAcceptance z matching.js.
+
+## A. Rozřazení (zadání Z1–Z3 a vlastní případy)
+| Případ | Popis | Vstup | Můj výpočet | Modul aplikace | Shoda | Pozn. |
+|---|---|---|---|---|---|---|
+| Z1 | zadání: X 90 (A,B), Y 80 (A,B) | X 90 b. (A,B); Y 80 b. (A,B) · školy A:1 B:1 | {"X":"A","Y":"B"} | {"X":"A","Y":"B"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| Z2 | zadání: X 90 (B,A), Y 80 (A,B) | X 90 b. (B,A); Y 80 b. (A,B) · školy A:1 B:1 | {"X":"B","Y":"A"} | {"X":"B","Y":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| Z3 | zadání: X 90 (B,A), Z 85 (B,A), Y 80 (A) | X 90 b. (B,A); Z 85 b. (B,A); Y 80 b. (A) · školy A:1 B:1 | {"X":"B","Y":null,"Z":"A"} | {"X":"B","Y":null,"Z":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| Z3r | zadání Z3 v opačném pořadí zadání (Y, Z, X) | Y 80 b. (A); Z 85 b. (B,A); X 90 b. (B,A) · školy B:1 A:1 | {"X":"B","Y":null,"Z":"A"} | {"X":"B","Y":null,"Z":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V1 | kapacita 0 – nikdo není přijat, uchazeč jde dál | X 90 b. (A,B) · školy A:0 B:1 | {"X":"B"} | {"X":"B"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V2 | uchazeč bez priorit | X 90 b. (—); Y 50 b. (A) · školy A:1 B:1 | {"X":null,"Y":"A"} | {"X":null,"Y":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V3 | škola bez uchazečů (B) | X 90 b. (A) · školy A:1 B:1 | {"X":"A"} | {"X":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V4 | neznámá škola a duplicitní priorita | X 50 b. (Q,A,A) · školy A:1 B:1 | {"X":"A"} | {"X":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V5 | shoda bodů bez kritéria → chyba | P 80 b. (A); Q 80 b. (A) · školy A:1 B:1 | CHYBA: NejednoznacnePoradi | CHYBA: TieError | ano |  |
+| V6 | shoda bodů, rozhodne kritérium (vyšší lepší) | P 80 b. tb 2 (A); Q 80 b. tb 5 (A) · školy A:1 B:1 | {"P":null,"Q":"A"} | {"P":null,"Q":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V7 | shoda bodů i kritéria → chyba | P 80 b. tb 3 (A); Q 80 b. tb 3 (A) · školy A:1 B:1 | CHYBA: NejednoznacnePoradi | CHYBA: TieError | ano |  |
+| V8 | shoda bodů na škole, kterou oba uvedli až jako 2. prioritu → chyba (škola musí mít úplné pořadí) | P 80 b. (A,B); Q 80 b. (A,B) · školy A:2 B:2 | CHYBA: NejednoznacnePoradi | CHYBA: TieError | ano |  |
+| V9 | body 0, záporné a chybějící | P 0 b. (A); Q -5 b. (A); R — b. (A) · školy A:2 | CHYBA: NejednoznacnePoradi | CHYBA: TieError | ano |  |
+| V10 | body 0 a záporné, kapacita 1 | P 0 b. (A); Q -5 b. (A) · školy A:1 | {"P":"A","Q":null} | {"P":"A","Q":null} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V11 | kapacita desetinná 1,9 → 1; záporná → 0 | P 90 b. (A,B); Q 80 b. (A,B) · školy A:1.9 B:-2 | {"P":"A","Q":null} | {"P":"A","Q":null} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V12 | minScore: nesplnění kritéria školy | P 59 b. (A,B); Q 60 b. (A) · školy A:2 min 60 B:1 | {"P":"B","Q":"A"} | {"P":"B","Q":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V13 | řetězové vytlačení přes 3 školy | P 90 b. (A); Q 85 b. (A,B); R 80 b. (B,C); S 75 b. (C,A) · školy A:1 B:1 C:1 | {"P":"A","Q":"B","R":"C","S":null} | {"P":"A","Q":"B","R":"C","S":null} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V14 | žádní uchazeči |  · školy A:1 B:1 | {} | {} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V15 | žádné školy | P 90 b. (A) · školy — | {"P":null} | {"P":null} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V16 | všichni na jednu školu s kapacitou 2, 5 uchazečů | u1 51 b. (A); u2 52 b. (A); u3 53 b. (A); u4 54 b. (A); u5 55 b. (A) · školy A:2 | {"u1":null,"u2":null,"u3":null,"u4":"A","u5":"A"} | {"u1":null,"u2":null,"u3":null,"u4":"A","u5":"A"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V17 | pokusy: čeština 30/35, matematika 28/20 → 63 b. rozhoduje proti 62 b. | P ČJL 30/35 M 28/20 (A); Q 62 b. (A) · školy A:1 | {"P":"A","Q":null} | {"P":"A","Q":null} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V18 | pokusy: nemoc (2. pokus null) – počítá se 1. pokus | P ČJL 40/ M 35/ (A); Q ČJL 38/30 M 36/30 (A) · školy A:1 | {"P":"A","Q":null} | {"P":"A","Q":null} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+| V19 | zadání: uchazeč s horší 1. prioritou nepřeskočí lepšího (priorita jako jediný rozdíl) | P 70 b. (A,B); Q 90 b. (B,A); R 95 b. (B); S 93 b. (B); T 92 b. (B); U 91 b. (B); W 90.5 b. (B) · školy A:1 B:5 | {"P":null,"Q":"A","R":"B","S":"B","T":"B","U":"B","W":"B"} | {"P":null,"Q":"A","R":"B","S":"B","T":"B","U":"B","W":"B"} | ano | hrubá síla: 1 stabilní(ch), optimální = modul |
+
+## B. Scénáře ze scenarios.js (vlastní ruční propočet vs. modul vs. EXPECTED v kódu)
+| Scénář | Vstup | Můj výpočet | Modul aplikace | Shoda | Pozn. |
+|---|---|---|---|---|---|
+| Priorita nepřebíjí body | Adam 92 b. (P,G); Bára 88 b. (G,O); Cyril 85 b. (G,O); Dana 80 b. (G,O); Eva 95 b. (P,G); Filip 70 b. (O) · Gymnázium:2 Průmyslovka:1 Obchodní akademie:3 | {"a1":"G","a2":"G","a3":"O","a4":"O","a5":"P","a6":"O"} | {"a1":"G","a2":"G","a3":"O","a4":"O","a5":"P","a6":"O"} | ano | ruční propočet = EXPECTED; obrácené pořadí zadání stejné: true; stabilních 1 |
+| Proč dát na 3. místo jistotu | Ondra 90 b. (G,P); Petra 86 b. (G,P); Radek 80 b. (P,G); Simona 75 b. (P,S); Kuba 68 b. (G,P); Lucie 67 b. (G,P,S) · Gymnázium:2 Průmyslovka:2 SOŠ služeb:3 | {"b1":"G","b2":"G","b3":"P","b4":"P","b5":null,"b6":"S"} | {"b1":"G","b2":"G","b3":"P","b4":"P","b5":null,"b6":"S"} | ano | ruční propočet = EXPECTED; obrácené pořadí zadání stejné: true; stabilních 1 |
+| Lepší výsledek ze dvou pokusů | Hana 75 b. (G,P); Tomáš 68 b. (G,P,O); Věra 65 b. (P,G,O); Zuzka 63 b. (P,O) · Gymnázium:1 Průmyslovka:2 Obchodní akademie:2 | {"c1":"G","c2":"P","c3":"P","c4":"O"} | {"c1":"G","c2":"P","c3":"P","c4":"O"} | ano | ruční propočet = EXPECTED; obrácené pořadí zadání stejné: true; stabilních 1 |
+
+## C. Lepší ze dvou pokusů (ŠZ § 60i odst. 3)
+| Případ | Vstup | Můj výpočet | Modul (bestOfTwo) | Shoda |
+|---|---|---|---|---|
+| P | zadání: ČJL 30 a 35, M 28 a 20 | {"cj":[30,35],"m":[28,20]} | 63 | 63 | ano |  |
+| P | nemoc: ČJL 40/–, M 35/– | {"cj":[40,null],"m":[35,null]} | 75 | 75 | ano |  |
+| P | oba chybí (nedostavil se) → 0 | {"cj":[],"m":[]} | 0 | 0 | ano |  |
+| P | maximum 50+50 | {"cj":[50,49],"m":[49,50]} | 100 | 100 | ano |  |
+| P | nula a záporné (nesmyslný vstup, bere se větší) | {"cj":[0,-3],"m":[-1,-2]} | -1 | -1 | ano |  |
+| P | nečíselné hodnoty se ignorují | {"cj":["35",null],"m":[null,20]} | 20 | 20 | ano |  |
+
+## D. Náhodné instance (200, bez shod bodů): sekvenční DA vs. modul; modul při 4 permutacích pořadí; stabilita hrubou silou do 6 uchazečů
+shoda: 200/200 (z toho hrubou silou ověřeno 200); rozdíly: 0
+
+## E. Vysvětlení (explain) pro Z3 a kapacitu 0
+{
+ "X": [
+  "Přijat(a) na 1. prioritu: B."
+ ],
+ "Z": [
+  "1. priorita B: všech 1 míst obsadili uchazeči s lepším pořadím (poslední přijatý: X, 90 b.; Z má 85 b.).",
+  "Přijat(a) na 2. prioritu: A."
+ ],
+ "Y": [
+  "1. priorita A: všech 1 míst obsadili uchazeči s lepším pořadím (poslední přijatý: Z, 85 b.; Y má 80 b.).",
+  "Nepřijat(a) v tomto kole – může se hlásit do dalšího kola."
+ ]
+}
+{"X":["1. priorita A: škola nemá žádné volné místo.","Přijat(a) na 2. prioritu: B."]}
+kroky Z3: [{"proposals":[{"applicant":"X","school":"B","priority":1},{"applicant":"Y","school":"A","priority":1},{"applicant":"Z","school":"B","priority":1}],"rejected":[{"applicant":"Z","school":"B","reason":"kapacita","displacedBy":"X"}],"held":{"A":["Y"],"B":["X"]}},{"proposals":[{"applicant":"Z","school":"A","priority":2}],"rejected":[{"applicant":"Y","school":"A","reason":"kapacita","displacedBy":"Z"}],"held":{"A":["Z"],"B":["X"]}}]
+
+## F. Termíny v rules.json vs. rejstřík pravidla.md (PS-14 … PS-27) a kontrola víkendů/svátků (V422 § 31)
+| ID události | rules.json | Rejstřík | Den v týdnu (start) | Pracovní den | Shoda |
+|---|---|---|---|---|---|
+| kons-prihlasky | Konzervatoře: podání přihlášek (nejvýše 2 obory) | 2026-11-01–2026-11-30 (confirmed) | 2026-11-01–2026-11-30 (PS-14) | neděle – pondělí; NE pracovní (začátek období) | ano |  |
+| kons-zkousky | Konzervatoře: řádný termín talentových zkoušek | 2027-01-04–2027-01-15 (confirmed) | 2027-01-04–2027-01-15 (PS-15) | pondělí – pátek; pracovní | ano |  |
+| kons-nahradni | Konzervatoře: náhradní termín talentových zkoušek | 2027-01-18–2027-01-29 (confirmed) | 2027-01-18–2027-01-29 (PS-15) | pondělí – pátek; pracovní | ano |  |
+| kons-vysledky | Konzervatoře: zveřejnění výsledků | 2027-02-08 (confirmed) | 2027-02-08 (PS-15) | pondělí; pracovní | ano |  |
+| ss-kriteria | Školy zveřejní kritéria přijímacího řízení | 2027-01-15–2027-01-31 (confirmed) | 2027-01-15–2027-01-31 (PS-16) | pátek – neděle; pracovní | ano |  |
+| ss-prihlasky-start | Začátek podávání přihlášek na SŠ (1. kolo) | 2027-02-01 (confirmed) | 2027-02-01 (PS-17) | pondělí; pracovní | ano |  |
+| ss-prihlasky-konec | Konec lhůty pro podání přihlášek (1. kolo) | 2027-02-22 (confirmed) | 2027-02-22 (PS-17) | pondělí; pracovní | ano | V422 § 2 (20. 2.) + § 31 (sobota → pondělí) |
+| ss-skolni-zkousky | Řádný termín školních a talentových zkoušek | 2027-03-15–2027-04-23 (confirmed) | 2027-03-15–2027-04-23 (PS-18) | pondělí – pátek; pracovní | ano |  |
+| jpz-1 | Jednotná zkouška – 1. řádný termín (4leté obory) | 2027-04-12 (confirmed) | 2027-04-12 (PS-19) | pondělí; pracovní | ano |  |
+| jpz-2 | Jednotná zkouška – 2. řádný termín (4leté obory) | 2027-04-13 (confirmed) | 2027-04-13 (PS-19) | úterý; pracovní | ano |  |
+| vg-1 | Jednotná zkouška – 1. řádný termín (víceletá gymnázia) | 2027-04-14 (confirmed) | 2027-04-14 (PS-20) | středa; pracovní | ano |  |
+| vg-2 | Jednotná zkouška – 2. řádný termín (víceletá gymnázia) | 2027-04-15 (confirmed) | 2027-04-15 (PS-20) | čtvrtek; pracovní | ano |  |
+| skolni-nahradni | Náhradní termín školních a talentových zkoušek | 2027-04-26–2027-05-05 (confirmed) | 2027-04-26–2027-05-05 (PS-22) | pondělí – středa; pracovní | ano | období od 24. 4. (sobota), první pracovní den 26. 4. |
+| jpz-nahr-1 | Jednotná zkouška – 1. náhradní termín | 2027-04-29 (confirmed) | 2027-04-29 (PS-21) | čtvrtek; pracovní | ano |  |
+| jpz-nahr-2 | Jednotná zkouška – 2. náhradní termín | 2027-04-30 (confirmed) | 2027-04-30 (PS-21) | pátek; pracovní | ano |  |
+| zpetvzeti | Poslední den pro vzetí přihlášky zpět | 2027-05-04 (confirmed) | 2027-05-04 (PS-23) | úterý; pracovní | ano |  |
+| rozrazeni | Rozřazení uchazečů algoritmem v DiPSy | 2027-05-11 (confirmed) | 2027-05-11 (PS-24) | úterý; pracovní | ano |  |
+| vysledky-1-kolo | Zveřejnění výsledků 1. kola | 2027-05-14 (confirmed) | 2027-05-14 (PS-25) | pátek; pracovní | ano |  |
+| kolo2-prihlasky | 2. kolo: podání přihlášek | 2027-05-19–2027-05-24 (confirmed) | 2027-05-19–2027-05-24 (PS-26) | středa – pondělí; pracovní | ano |  |
+| kolo2-zkousky | 2. kolo: školní a talentové zkoušky | 2027-06-08–2027-06-14 (confirmed) | 2027-06-08–2027-06-14 (PS-26) | úterý – pondělí; pracovní | ano |  |
+| kolo2-vysledky | 2. kolo: zveřejnění výsledků | 2027-06-22 (confirmed) | 2027-06-22 (PS-26) | úterý; pracovní | ano |  |
+| kolo3 | 3. a další kola: školy zveřejňují kritéria | 2027-06-23 (confirmed) | 2027-06-23 (PS-27) | středa; pracovní | ano |  |
+počet událostí v rules.json: 22; v rejstříku: 22; chybí v rejstříku: nic
+20. 2. 2027 je sobota → nejbližší pracovní den 2027-02-22 (rules.json: 2027-02-22)
+24. 4. 2027 je sobota → 2027-04-26 (rules.json skolni-nahradni start: 2027-04-26)
+meta.checked = 2026-11-05; stavy: {"confirmed":34,"unverified":0,"tip":0}
+svátky 2027 (zákon 245/2000 Sb.): 2027-01-01, 2027-03-26, 2027-03-29, 2027-05-01, 2027-05-08, 2027-07-05, 2027-07-06, 2027-09-28, 2027-10-28, 2027-11-17, 2027-12-24, 2027-12-25, 2027-12-26
+
+## G. „Moje strategie“ – vlastní definice (rezerva ≥ margin = jistota; 0 ≤ rozdíl < margin = těsné; < 0 = riziko) vs. evaluateStrategy
+| Případ | Vstup | Můj výpočet | Modul | Shoda |
+|---|---|---|---|---|
+| S | test aplikace: 60 b.; 75/62/58 | {"expected":60,"schools":[{"name":"A","lastMin":75},{"name":"B","lastMin":62},{"name":"C","lastMin":58}]} | riziko,riziko,tesne; no-safe=true | riziko,riziko,tesne; no-safe=true | ano |  |
+| S | hranice: rozdíl přesně 5 = jistota, 4 = těsné, 0 = těsné, −1 = riziko | {"expected":60,"schools":[{"name":"A","lastMin":55},{"name":"B","lastMin":56},{"name":"C","lastMin":60},{"name":"D","lastMin":61}]} | jistota,tesne,tesne,riziko; no-safe=false | jistota,tesne,tesne,riziko; no-safe=false | ano |  |
+| S | rezerva 10: rozdíl 9 = těsné | {"expected":60,"margin":10,"schools":[{"name":"A","lastMin":51}]} | tesne; no-safe=true | tesne; no-safe=true | ano |  |
+| S | rezerva 3: rozdíl 3 = jistota | {"expected":60,"margin":3,"schools":[{"name":"A","lastMin":57}]} | jistota; no-safe=false | jistota; no-safe=false | ano |  |
+| S | chybí očekávané body | {"expected":null,"schools":[{"name":"A","lastMin":50}]} | nevim; no-safe=false | nevim; no-safe=false | ano |  |
+| S | očekávané body, ale žádná škola vyplněná (3 prázdné) | {"expected":62,"schools":[{"name":"","lastMin":null},{"name":"","lastMin":null},{"name":"","lastMin":null}]} | nevim,nevim,nevim; no-safe=true | nevim,nevim,nevim; no-safe=true | ano |  |
+| S | body 0 a minimum 0 | {"expected":0,"schools":[{"name":"A","lastMin":0}]} | tesne; no-safe=true | tesne; no-safe=true | ano |  |
+| S | body 100, minimum 100 | {"expected":100,"schools":[{"name":"A","lastMin":100}]} | tesne; no-safe=true | tesne; no-safe=true | ano |  |
+| S | záporné / nad 100 (nesmyslný vstup) | {"expected":150,"schools":[{"name":"A","lastMin":-5}]} | jistota; no-safe=false | jistota; no-safe=false | ano |  |
+
+## H. Export .ics – kontrola podle RFC 5545 (vlastní parser) nad výstupem buildICS
+událostí: 22 (očekáváno 22); chyb RFC: 0
+| Událost | start–end | DTSTART | DTEND | Očekávaný DTEND (den po konci) | Shoda |
+|---|---|---|---|---|---|
+| I | kons-prihlasky | 2026-11-01–2026-11-30 | 20261201 | 20261201 | ano |  |
+| I | kons-zkousky | 2027-01-04–2027-01-15 | 20270116 | 20270116 | ano |  |
+| I | kons-nahradni | 2027-01-18–2027-01-29 | 20270130 | 20270130 | ano |  |
+| I | kons-vysledky | 2027-02-08–2027-02-08 | 20270209 | 20270209 | ano |  |
+| I | ss-kriteria | 2027-01-15–2027-01-31 | 20270201 | 20270201 | ano |  |
+| I | ss-prihlasky-start | 2027-02-01–2027-02-01 | 20270202 | 20270202 | ano |  |
+| I | ss-prihlasky-konec | 2027-02-22–2027-02-22 | 20270223 | 20270223 | ano |  |
+| I | ss-skolni-zkousky | 2027-03-15–2027-04-23 | 20270424 | 20270424 | ano |  |
+| I | jpz-1 | 2027-04-12–2027-04-12 | 20270413 | 20270413 | ano |  |
+| I | jpz-2 | 2027-04-13–2027-04-13 | 20270414 | 20270414 | ano |  |
+| I | vg-1 | 2027-04-14–2027-04-14 | 20270415 | 20270415 | ano |  |
+| I | vg-2 | 2027-04-15–2027-04-15 | 20270416 | 20270416 | ano |  |
+| I | skolni-nahradni | 2027-04-26–2027-05-05 | 20270506 | 20270506 | ano |  |
+| I | jpz-nahr-1 | 2027-04-29–2027-04-29 | 20270430 | 20270430 | ano |  |
+| I | jpz-nahr-2 | 2027-04-30–2027-04-30 | 20270501 | 20270501 | ano |  |
+| I | zpetvzeti | 2027-05-04–2027-05-04 | 20270505 | 20270505 | ano |  |
+| I | rozrazeni | 2027-05-11–2027-05-11 | 20270512 | 20270512 | ano |  |
+| I | vysledky-1-kolo | 2027-05-14–2027-05-14 | 20270515 | 20270515 | ano |  |
+| I | kolo2-prihlasky | 2027-05-19–2027-05-24 | 20270525 | 20270525 | ano |  |
+| I | kolo2-zkousky | 2027-06-08–2027-06-14 | 20270615 | 20270615 | ano |  |
+| I | kolo2-vysledky | 2027-06-22–2027-06-22 | 20270623 | 20270623 | ano |  |
+| I | kolo3 | 2027-06-23–2027-06-23 | 20270624 | 20270624 | ano |  |
+| I | DTEND: přelom roku 31. 12. 2026 | {"id":"x1","title":"x","start":"2026-12-31"} | 20270101 | 20270101 | ano |  |
+| I | DTEND: přestupný rok 28. 2. 2028 | {"id":"x2","title":"x","start":"2028-02-28"} | 20280229 | 20280229 | ano |  |
+| I | DTEND: 29. 2. 2028 | {"id":"x3","title":"x","start":"2028-02-29"} | 20280301 | 20280301 | ano |  |
+| I | DTEND: nepřestupný 28. 2. 2027 | {"id":"x4","title":"x","start":"2027-02-28"} | 20270301 | 20270301 | ano |  |
+| I | DTEND: období 1.–30. 11. 2026 | {"id":"x5","title":"x","start":"2026-11-01","end":"2026-11-30"} | 20261201 | 20261201 | ano |  |
+| I | escapeText | "a, b" | "a\\, b" | "a\\, b" | ano |  |
+| I | escapeText | "a; b" | "a\\; b" | "a; b" | NE | RFC 5545 §3.3.11: SEMICOLON musí být escapovaný jako \; |
+| I | escapeText | "zpět\\lomítko" | "zpět\\\\lomítko" | "zpět\\\\lomítko" | ano |  |
+| I | escapeText | "řádek\nnový" | "řádek\\nnový" | "řádek\\nnový" | ano |  |
+| I | escapeText | "Jen pro omluvené. Omluvu je třeba poslat řediteli školy písemně do 3 pracovních dnů; jinak termín propadá, a to bez náhrady." | "Jen pro omluvené. Omluvu je třeba poslat řediteli školy písemně do 3 pracovních dnů\\; jinak termín propadá\\, a to bez náhrady." | "Jen pro omluvené. Omluvu je třeba poslat řediteli školy písemně do 3 pracovních dnů; jinak termín propadá\\, a to bez náhrady." | NE | RFC 5545 §3.3.11: SEMICOLON musí být escapovaný jako \; |
+| I | VEVENT se středníkem v SUMMARY | Zkouška; termín, místo | 0 chyb RFC | 1 chyb: SUMMARY obsahuje neescapované ; nebo ,: Zkouška; termín\, místo | NE |  |
+| I | skládání řádků (UTF-8, 75 oktetů) | title 6× věta, description 300× Ř | 0 chyb | 0 chyb | ano | SUMMARY po rozbalení shodné: true |
+
+## Souhrn: 98 porovnání, shoda 95, rozdíl 3

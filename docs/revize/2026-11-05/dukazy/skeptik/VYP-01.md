@@ -1,0 +1,7 @@
+# Skeptik – VYP-01 (model Opus, čistý kontext, 5. 11. 2026)
+
+Verdikt: Potvrzeno
+
+Proč: Modul na commitu e5c7b54: `odstupne({kdo:'zamestnavatel', duvod:'d', delkaLet:5, prumernyHruby:40000})` vrací 480 000 Kč (12×) s popiskem „Pracovní úraz nebo nemoc z povolání (§ 52 písm. d)“. Pro `duvod:'e'` vrací 0 Kč, a to u výpovědi i u dohody. Příčina je v `rules.json:26–28` (`duvodUraz:"d"`, `nasobekUraz:12`) a ve `vypoved.js:153–163`. Popisky v `index.html:42–43` a `app.js:44`, README i testy (`vypoved.test.js:109`, `:115`) vycházejí ze stejného chybného předpokladu. Současné znění na zakonyprolidi.cz: § 52 písm. d) je obecná dlouhodobá ztráta zdravotní způsobilosti podle lékařského posudku bez ohledu na příčinu; § 52 písm. e) dosažení nejvyšší přípustné expozice; § 67 odst. 3 odstupné nejméně 12× průměrného výdělku při výpovědi nebo dohodě podle písm. e); § 271ca odst. 1 u písm. d) náleží 12× pouze jako „jednorázová náhrada“, a jen pokud je příčinou pracovní úraz, nemoc z povolání nebo ohrožení touto nemocí. Aplikace tedy u d) přiznává 12× každému pod nesprávným právním titulem, zatímco u e) uvádí 0 Kč místo 480 000 Kč.
+
+Co jsem udělal: V klonu přečetl `rules.json`, `vypoved.js`, `index.html` a `app.js` a funkci `odstupne()` spustil přes `node`. Znění zákona stáhl přes curl a vytáhl texty § 52, § 67 a § 271ca. Obrazovku v prohlížeči neověřoval; ověřil, že `app.js:140` volá stejnou funkci `odstupne()` a její výsledek vypisuje.

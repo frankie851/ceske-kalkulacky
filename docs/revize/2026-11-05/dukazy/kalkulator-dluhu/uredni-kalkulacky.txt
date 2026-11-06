@@ -1,0 +1,47 @@
+# Úřední kalkulačky vs. můj výpočet · 2026-11-05T09:12:59.215Z
+
+## A) exekuce.justice.cz – varianta „2026 výpočet od 1. 1.“ (012026)
+| Případ | Úřední srážka | k exekutorovi | náhrada plátce | zůstane | Můj výpočet (praxe) srážka / věřitelům / náhrada / zůstane | Shoda |
+|---|---|---|---|---|---|---|
+| Z1 23 000 běžný | 2 966 Kč | 2 916 Kč | 50 Kč | 20 034 Kč | 2 966 Kč / 2 916 Kč / 50 Kč / 20 034 Kč | ano |
+| Z2 50 000 přednostní | 25 391 Kč | 25 341 Kč | 50 Kč | 24 609 Kč | 25 391 Kč / 25 341 Kč / 50 Kč / 24 609 Kč | ano |
+| Z3 50 000 běžný | 14 884 Kč | 14 834 Kč | 50 Kč | 35 116 Kč | 14 884 Kč / 14 834 Kč / 50 Kč / 35 116 Kč | ano |
+| Z5 12 000 přednostní | 0 Kč | 0 Kč | 0 Kč | 12 000 Kč | 0 Kč / 0 Kč / 0 Kč / 12 000 Kč | ano |
+| H7 23 000, 4 exekuce | 5 932 Kč | 5 882 Kč | 50 Kč | 17 068 Kč | 5 932 Kč / 5 882 Kč / 50 Kč / 17 068 Kč | ano |
+| H8 16 502, 4 exekuce, důchodce | 800 Kč | 750 Kč | 50 Kč | 15 702 Kč | 800 Kč / 750 Kč / 50 Kč / 15 702 Kč | ano |
+| H8 23 000, 4 exekuce, důchodce | 5 932 Kč | 5 882 Kč | 50 Kč | 17 068 Kč | 5 932 Kč / 5 882 Kč / 50 Kč / 17 068 Kč | ano |
+| H10 23 000, 2 osoby | 615 Kč | 565 Kč | 50 Kč | 22 385 Kč | 615 Kč / 565 Kč / 50 Kč / 22 385 Kč | ano |
+| H11 14 402 (srážka 100) | 100 Kč | 66 Kč | 34 Kč | 14 302 Kč | 100 Kč / 66 Kč / 34 Kč / 14 302 Kč | ano |
+| H5 45 624 (zbytek 31 522) | 10 508 Kč | 10 458 Kč | 50 Kč | 35 116 Kč | 10 508 Kč / 10 458 Kč / 50 Kč / 35 116 Kč | ano |
+| H6 50 001 běžný | 14 885 Kč | 14 835 Kč | 50 Kč | 35 116 Kč | 14 885 Kč / 14 835 Kč / 50 Kč / 35 116 Kč | ano |
+| H3 14 105 (zbytek 3) | 1 Kč | 0 Kč | 1 Kč | 14 104 Kč | 1 Kč / 0 Kč / 1 Kč / 14 104 Kč | ano |
+| H14 1 000 000 přednostní | 975 391 Kč | 975 341 Kč | 50 Kč | 24 609 Kč | 975 391 Kč / 975 341 Kč / 50 Kč / 24 609 Kč | ano |
+
+## A2) exekuce.justice.cz – varianta „2026 výpočet od 1. 10.“ (102026, ŽM 5 500 Kč; výchozí volba formuláře)
+Moje kontrola se stejnými hodnotami: součet 5 500 + 9 430 + 2 300 = 17 230; NČ 0,85 × 17 230 = 14 645,50 → 14 646; hranice 1,9 × 17 230 = 32 737.
+| Případ | Úřední srážka (od 1. 10.) | k exekutorovi | náhrada | zůstane | Můj výpočet s ŽM 5 500 | Aplikace/NV § 4 (ŽM 4 860) | Rozdíl proti aplikaci |
+|---|---|---|---|---|---|---|---|
+| Z1 23 000 běžný | 2 784 Kč | 0 Kč | 0 Kč | 20 216 Kč | 2 784 Kč | 2 966 Kč | -182 Kč |
+| Z2 50 000 přednostní | 24 441 Kč | 0 Kč | 0 Kč | 25 559 Kč | 24 441 Kč | 25 391 Kč | -950 Kč |
+| Z3 50 000 běžný | 13 529 Kč | 0 Kč | 0 Kč | 36 471 Kč | 13 529 Kč | 14 884 Kč | -1 355 Kč |
+| Z5 12 000 přednostní | 0 Kč | 0 Kč | 0 Kč | 12 000 Kč | 0 Kč | 0 Kč | 0 Kč |
+| H7 23 000, 4 exekuce | 2 784 Kč | 0 Kč | 0 Kč | 20 216 Kč | 5 568 Kč | 5 932 Kč | -3 148 Kč |
+
+## B) insolvence.justice.cz/kalkulator-splatek/ (rok 2026) – přepis jejich kalkul.js vs. můj výpočet (IZ § 398 odst. 3 = srážka pro přednostní)
+| Případ | Úřední splátka (přepis kalkul.js) | zůstane | Můj výpočet splátka | zůstane | Shoda | Poznámka |
+|---|---|---|---|---|---|---|
+| O1 30 000, 0 os. | 10 598 Kč | 19 402 Kč | 10 598 Kč | 19 402 Kč | ano |  |
+| O2 23 000, 0 os. | 5 932 Kč | 17 068 Kč | 5 932 Kč | 17 068 Kč | ano |  |
+| O3 17 369, 0 os. | 2 178 Kč | 15 191 Kč | 2 178 Kč | 15 191 Kč | ano |  |
+| 23 000, 2 os. | 1 230 Kč | 21 770 Kč | 1 230 Kč | 21 770 Kč | ano |  |
+| hranice úřední 30 692 (= 14 102 + 16 590) | 11 060 Kč | 19 632 Kč | 11 060 Kč | 19 632 Kč | ano |  |
+| 35 000, 0 os. | 15 368 Kč | 19 632 Kč | 13 932 Kč | 21 068 Kč | NE | úřední skript používá hranici 1 × 16 590 = 16 590 Kč místo 1,9 × (NV 595/2006 § 2 = 31 521 Kč) |
+| Z2 50 000, 0 os. | 30 368 Kč | 19 632 Kč | 25 391 Kč | 24 609 Kč | NE | úřední skript používá hranici 1 × 16 590 = 16 590 Kč místo 1,9 × (NV 595/2006 § 2 = 31 521 Kč) |
+
+## B2) insolvence.justice.cz živě v prohlížeči (puppeteer)
+- skripty stránky: ["https://insolvence.justice.cz/wp-content/themes/insolvence/js/TweenMax.min.js","https://insolvence.justice.cz/wp-content/themes/insolvence/js/main.js","https://insolvence.justice.cz/wp-content/themes/insolvence/js/skip-link-focus-fix.js?ver=20160816","https://insolvence.justice.cz/wp-content/themes/insolvence/js/functions.js?ver=20160816"]
+- kalkuluj() nebyla na stránce dostupná (konzole: ["Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED","Failed to load resource: the server responded with a status of 404 (Not Found)","TypeError: $ is not a function","Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED","Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"]); vložen jejich kalkul.js stažený curl
+- O1 30 000, 0 os.: splátka „10 598“, zůstane „19 402“, za 3 roky „381 528“, platné k „1.1.2026“ (kalkuluj(): true)
+- O2 23 000, 0 os.: splátka „5 932“, zůstane „17 068“, za 3 roky „213 552“, platné k „1.1.2026“ (kalkuluj(): true)
+- Z2 50 000, 0 os.: splátka „30 368“, zůstane „19 632“, za 3 roky „1 093 248“, platné k „1.1.2026“ (kalkuluj(): true)
+- chyby stránky v konzoli: ["TypeError: $ is not a function"]

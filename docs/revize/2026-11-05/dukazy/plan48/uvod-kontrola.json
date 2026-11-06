@@ -1,0 +1,314 @@
+{
+ "url": "http://127.0.0.1:43403/",
+ "datum": "2026-11-05T07:42:32.319Z",
+ "zobrazeni": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "tab": [
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Pravidla 2026",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Návrh 2027",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Věk\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "15 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "23 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Pobírám starobní důchod (bez státního příspěvku, odpočet od první koruny)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Penzijko (DPS) – můj vklad\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "DIP – dlouhodobý investiční produkt\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Životní pojištění (daňově uznatelné)\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Příspěvek zaměstnavatele\n          Kč/měs\n          Do odpočtu se nezapočítává, jen do projekce.",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Měsíců, které už letos proběhly\n          z 12\n          Předvyplněno podle dnešního data. Za uplynulé měsíce už státní příspěvek doplatit nejde.",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "vynos",
+     "typ": "number",
+     "popisek": "Výnos ročně\n          %",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "poplatek",
+     "typ": "number",
+     "popisek": "Poplatek ročně\n          %",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Zákon č. 427/2011 Sb., o doplňkovém penz",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "Zákon č. 586/1992 Sb., o daních z příjmů",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "KB Penzijní společnost: Pošlete si v pro",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "a",
+     "id": "",
+     "typ": "",
+     "popisek": "finance.cz: Nejvyšší čas poslat peníze n",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Pravidla 2026",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Návrh 2027",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Věk\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "15 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "23 %",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Pobírám starobní důchod (bez státního příspěvku, odpočet od první koruny)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Penzijko (DPS) – můj vklad\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "DIP – dlouhodobý investiční produkt\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Životní pojištění (daňově uznatelné)\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Příspěvek zaměstnavatele\n          Kč/měs\n          Do odpočtu se nezapočítává, jen do projekce.",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Měsíců, které už letos proběhly\n          z 12\n          Předvyplněno podle dnešního data. Za uplynulé měsíce už státní příspěvek doplatit nejde.",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "vynos",
+     "typ": "number",
+     "popisek": "Výnos ročně\n          %",
+     "fokusViditelny": false
+    }
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {},
+   "sit": [
+    {
+     "url": "http://127.0.0.1:43403/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/calc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    {
+     "url": "http://127.0.0.1:43403/",
+     "typ": "document",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/styles.css",
+     "typ": "stylesheet",
+     "metoda": "GET"
+    },
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/app.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/calc.js",
+     "typ": "script",
+     "metoda": "GET"
+    },
+    {
+     "url": "http://127.0.0.1:43403/rules.json",
+     "typ": "fetch",
+     "metoda": "GET"
+    }
+   ],
+   "konzole": [],
+   "dialogy": [],
+   "chyby": [],
+   "ciziPozadavky": [
+    {
+     "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js",
+     "typ": "script",
+     "metoda": "GET"
+    }
+   ]
+  }
+ }
+}

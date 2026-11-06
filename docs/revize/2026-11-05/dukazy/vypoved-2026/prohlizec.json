@@ -1,0 +1,1153 @@
+{
+ "datum": "2026-11-05T09:02:54.879Z",
+ "koren": "/tmp/revize/repos/vypoved-2026",
+ "scenare": {
+  "A-zadani-360": {
+   "vstup": {
+    "doruceni": "2026-07-10",
+    "kdo": "zamestnavatel",
+    "duvod": "c",
+    "delka": "1,5",
+    "vek": "40",
+    "hruby": "40 000",
+    "cisty": "30 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "10. 9. 2026",
+    "konecPopis": "Výpovědní doba 2 měsíce, začíná dnem doručení (10. 7. 2026). Den v týdnu: čtvrtek.",
+    "odstupne": "80 000 Kč",
+    "odstupnePopis": "Organizační důvod (§ 52 písm. c) – 2× průměrný výdělek. Kolektivní smlouva může určit víc.",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Částka"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "24 000 Kč"
+     ],
+     [
+      "2.",
+      "24 000 Kč"
+     ],
+     [
+      "3.",
+      "15 000 Kč"
+     ],
+     [
+      "4.",
+      "15 000 Kč"
+     ],
+     [
+      "5.",
+      "12 000 Kč"
+     ]
+    ],
+    "celkem": [
+     "90 000 Kč"
+    ],
+    "poznamky": [
+     "Pokud by výpovědní doba skončila v ochranné době (např. pracovní neschopnost, mateřská), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP) – neplatí pro všechny důvody (§ 54 ZP).",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 10. 9. 2026"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 10. 9. 2026"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 15. 9. 2026"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 19. 9. 2026"
+     },
+     {
+      "nazev": "Zkontrolovat výplatu odstupného (pokud náleží)",
+      "termin": null
+     }
+    ],
+    "datumZadosti": "2026-09-11",
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    }
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:33867/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "cizi": [],
+   "axe": [],
+   "tab": [
+    {
+     "tag": "button",
+     "id": "tisk",
+     "typ": "button",
+     "popisek": "Vytisknout",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Výpověď mi dal zaměstnavatel",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "duvod",
+     "typ": "select-one",
+     "popisek": "Důvod výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "zkusebniDoba",
+     "typ": "checkbox",
+     "popisek": "Jde o zrušení ve zkušební době",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "delka",
+     "typ": "text",
+     "popisek": "Délka pracovního poměru (roky)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "vek",
+     "typ": "text",
+     "popisek": "Věk v den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "hruby",
+     "typ": "text",
+     "popisek": "Průměrný hrubý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "cisty",
+     "typ": "text",
+     "popisek": "Průměrný čistý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Spočítat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "tisk",
+     "typ": "button",
+     "popisek": "Vytisknout",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "doruceni",
+     "typ": "date",
+     "popisek": "Den doručení výpovědi",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Výpověď mi dal zaměstnavatel",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "select",
+     "id": "duvod",
+     "typ": "select-one",
+     "popisek": "Důvod výpovědi",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "zkusebniDoba",
+     "typ": "checkbox",
+     "popisek": "Jde o zrušení ve zkušební době",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "delka",
+     "typ": "text",
+     "popisek": "Délka pracovního poměru (roky)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "vek",
+     "typ": "text",
+     "popisek": "Věk v den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "hruby",
+     "typ": "text",
+     "popisek": "Průměrný hrubý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "cisty",
+     "typ": "text",
+     "popisek": "Průměrný čistý měsíční výdělek (Kč)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "datumZadosti",
+     "typ": "date",
+     "popisek": "Den podání žádosti o podporu",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "submit",
+     "popisek": "Spočítat",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "tisk",
+     "typ": "button",
+     "popisek": "Vytisknout",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "summary",
+     "id": "",
+     "typ": "",
+     "popisek": "Zdroje",
+     "fokusViditelny": true
+    }
+   ],
+   "localStorage": {}
+  },
+  "A-zadani-1440": {
+   "vstup": {
+    "doruceni": "2026-07-10",
+    "kdo": "zamestnavatel",
+    "duvod": "c",
+    "delka": "1,5",
+    "vek": "40",
+    "hruby": "40 000",
+    "cisty": "30 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "10. 9. 2026",
+    "konecPopis": "Výpovědní doba 2 měsíce, začíná dnem doručení (10. 7. 2026). Den v týdnu: čtvrtek.",
+    "odstupne": "80 000 Kč",
+    "odstupnePopis": "Organizační důvod (§ 52 písm. c) – 2× průměrný výdělek. Kolektivní smlouva může určit víc.",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Částka"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "24 000 Kč"
+     ],
+     [
+      "2.",
+      "24 000 Kč"
+     ],
+     [
+      "3.",
+      "15 000 Kč"
+     ],
+     [
+      "4.",
+      "15 000 Kč"
+     ],
+     [
+      "5.",
+      "12 000 Kč"
+     ]
+    ],
+    "celkem": [
+     "90 000 Kč"
+    ],
+    "poznamky": [
+     "Pokud by výpovědní doba skončila v ochranné době (např. pracovní neschopnost, mateřská), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP) – neplatí pro všechny důvody (§ 54 ZP).",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 10. 9. 2026"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 10. 9. 2026"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 15. 9. 2026"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 19. 9. 2026"
+     },
+     {
+      "nazev": "Zkontrolovat výplatu odstupného (pokud náleží)",
+      "termin": null
+     }
+    ],
+    "datumZadosti": "2026-09-11",
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    }
+   },
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "chyby": [
+    {
+     "url": "http://127.0.0.1:33867/favicon.ico",
+     "stav": 404
+    }
+   ],
+   "cizi": []
+  },
+  "B-duvod-d": {
+   "vstup": {
+    "doruceni": "2026-12-31",
+    "kdo": "zamestnavatel",
+    "duvod": "d",
+    "delka": "5",
+    "vek": "40",
+    "hruby": "40 000",
+    "cisty": "60 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "28. 2. 2027",
+    "konecPopis": "Výpovědní doba 2 měsíce, začíná dnem doručení (31. 12. 2026). Den v týdnu: neděle.",
+    "odstupne": "480 000 Kč",
+    "odstupnePopis": "Pracovní úraz nebo nemoc z povolání (§ 52 písm. d) – nejméně 12× průměrný výdělek. Kolektivní smlouva může určit víc.",
+    "podporaPopis": "Žádost podaná 1. 3. 2027: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 60 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Platný zákon",
+     "Pokud projde návrh"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "38 537 Kč *",
+      "28 903 Kč *"
+     ],
+     [
+      "2.",
+      "38 537 Kč *",
+      "28 903 Kč *"
+     ],
+     [
+      "3.",
+      "30 000 Kč",
+      "28 903 Kč *"
+     ],
+     [
+      "4.",
+      "30 000 Kč",
+      "28 903 Kč *"
+     ],
+     [
+      "5.",
+      "24 000 Kč",
+      "27 000 Kč"
+     ]
+    ],
+    "celkem": [
+     "161 074 Kč",
+     "142 612 Kč"
+    ],
+    "poznamky": [
+     "* Částka je omezena maximální měsíční výší podpory.",
+     "Strop pro rok 2027 ještě nebyl vyhlášen; použita částka 38 537 Kč (rok 2026). Skutečná částka se bude lišit.",
+     "Sloupec „Pokud projde návrh“ ukazuje vládní návrh (sněmovní tisk 300): 65/50/45 % a strop 0,6× průměrné mzdy (ilustračně na hodnotách 2026). Návrh zatím není zákon a může se změnit.",
+     "Pokud by výpovědní doba skončila v ochranné době (např. pracovní neschopnost, mateřská), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP) – neplatí pro všechny důvody (§ 54 ZP).",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 28. 2. 2027"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 28. 2. 2027"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 3. 3. 2027"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 9. 3. 2027"
+     },
+     {
+      "nazev": "Zkontrolovat výplatu odstupného (pokud náleží)",
+      "termin": null
+     }
+    ],
+    "datumZadosti": "2027-03-01",
+    "hodnoty": {
+     "delka": "5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "60 000"
+    }
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   }
+  },
+  "B-duvod-e": {
+   "vstup": {
+    "doruceni": "2026-12-31",
+    "kdo": "zamestnavatel",
+    "duvod": "e",
+    "delka": "5",
+    "vek": "40",
+    "hruby": "40 000",
+    "cisty": "60 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "28. 2. 2027",
+    "konecPopis": "Výpovědní doba 2 měsíce, začíná dnem doručení (31. 12. 2026). Den v týdnu: neděle.",
+    "odstupne": "0 Kč",
+    "odstupnePopis": "Výpověď podle § 52 písm. e) – zákonné odstupné nenáleží.",
+    "podporaPopis": "Žádost podaná 1. 3. 2027: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 60 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Platný zákon",
+     "Pokud projde návrh"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "38 537 Kč *",
+      "28 903 Kč *"
+     ],
+     [
+      "2.",
+      "38 537 Kč *",
+      "28 903 Kč *"
+     ],
+     [
+      "3.",
+      "30 000 Kč",
+      "28 903 Kč *"
+     ],
+     [
+      "4.",
+      "30 000 Kč",
+      "28 903 Kč *"
+     ],
+     [
+      "5.",
+      "24 000 Kč",
+      "27 000 Kč"
+     ]
+    ],
+    "celkem": [
+     "161 074 Kč",
+     "142 612 Kč"
+    ],
+    "poznamky": [
+     "* Částka je omezena maximální měsíční výší podpory.",
+     "Strop pro rok 2027 ještě nebyl vyhlášen; použita částka 38 537 Kč (rok 2026). Skutečná částka se bude lišit.",
+     "Sloupec „Pokud projde návrh“ ukazuje vládní návrh (sněmovní tisk 300): 65/50/45 % a strop 0,6× průměrné mzdy (ilustračně na hodnotách 2026). Návrh zatím není zákon a může se změnit.",
+     "Pokud by výpovědní doba skončila v ochranné době (např. pracovní neschopnost, mateřská), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP) – neplatí pro všechny důvody (§ 54 ZP).",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 28. 2. 2027"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 28. 2. 2027"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 3. 3. 2027"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 9. 3. 2027"
+     }
+    ],
+    "datumZadosti": "2027-03-01",
+    "hodnoty": {
+     "delka": "5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "60 000"
+    }
+   }
+  },
+  "B-duvod-h": {
+   "vstup": {
+    "doruceni": "2026-07-10",
+    "kdo": "zamestnavatel",
+    "duvod": "h",
+    "delka": "5",
+    "vek": "40",
+    "hruby": "40 000",
+    "cisty": "30 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "10. 8. 2026",
+    "konecPopis": "Výpovědní doba 1 měsíc, začíná dnem doručení (10. 7. 2026). Den v týdnu: pondělí.",
+    "odstupne": "0 Kč",
+    "odstupnePopis": "Výpověď podle § 52 písm. h) – zákonné odstupné nenáleží.",
+    "podporaPopis": "Žádost podaná 11. 8. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Částka"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "24 000 Kč"
+     ],
+     [
+      "2.",
+      "24 000 Kč"
+     ],
+     [
+      "3.",
+      "15 000 Kč"
+     ],
+     [
+      "4.",
+      "15 000 Kč"
+     ],
+     [
+      "5.",
+      "12 000 Kč"
+     ]
+    ],
+    "celkem": [
+     "90 000 Kč"
+    ],
+    "poznamky": [
+     "Pokud by výpovědní doba skončila v ochranné době (např. pracovní neschopnost, mateřská), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP) – neplatí pro všechny důvody (§ 54 ZP).",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 10. 8. 2026"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 10. 8. 2026"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 13. 8. 2026"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 19. 8. 2026"
+     }
+    ],
+    "datumZadosti": "2026-08-11",
+    "hodnoty": {
+     "delka": "5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    }
+   }
+  },
+  "C-zadost-2027": {
+   "vstup": {
+    "doruceni": "2026-11-20",
+    "kdo": "zamestnanec",
+    "delka": "3",
+    "vek": "55",
+    "hruby": "40 000",
+    "cisty": "30 000"
+   },
+   "vystup": {
+    "chyby": [],
+    "chybyViditelne": false,
+    "vysledekViditelny": true,
+    "konec": "20. 1. 2027",
+    "konecPopis": "Výpovědní doba 2 měsíce, začíná dnem doručení (20. 11. 2026). Den v týdnu: středa.",
+    "odstupne": "0 Kč",
+    "odstupnePopis": "Při výpovědi ze strany zaměstnance odstupné nenáleží.",
+    "podporaPopis": "Žádost podaná 21. 1. 2027: podpůrčí doba 8 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč.",
+    "hlavicka": [
+     "Měsíc",
+     "Platný zákon",
+     "Pokud projde návrh"
+    ],
+    "podpora": [
+     [
+      "1.",
+      "24 000 Kč",
+      "19 500 Kč"
+     ],
+     [
+      "2.",
+      "24 000 Kč",
+      "19 500 Kč"
+     ],
+     [
+      "3.",
+      "24 000 Kč",
+      "15 000 Kč"
+     ],
+     [
+      "4.",
+      "15 000 Kč",
+      "15 000 Kč"
+     ],
+     [
+      "5.",
+      "15 000 Kč",
+      "13 500 Kč"
+     ],
+     [
+      "6.",
+      "15 000 Kč",
+      "13 500 Kč"
+     ],
+     [
+      "7.",
+      "12 000 Kč",
+      "13 500 Kč"
+     ],
+     [
+      "8.",
+      "12 000 Kč",
+      "13 500 Kč"
+     ]
+    ],
+    "celkem": [
+     "141 000 Kč",
+     "123 000 Kč"
+    ],
+    "poznamky": [
+     "Strop pro rok 2027 ještě nebyl vyhlášen; použita částka 38 537 Kč (rok 2026). Skutečná částka se bude lišit.",
+     "Sloupec „Pokud projde návrh“ ukazuje vládní návrh (sněmovní tisk 300): 65/50/45 % a strop 0,6× průměrné mzdy (ilustračně na hodnotách 2026). Návrh zatím není zákon a může se změnit.",
+     "Podpora náleží, máte-li za poslední 2 roky alespoň 12 měsíců důchodového pojištění. Způsob skončení ani odstupné výši podpory neovlivňují."
+    ],
+    "ukoly": [
+     {
+      "nazev": "Převzít zápočtový list (potvrzení o zaměstnání)",
+      "termin": "do 20. 1. 2027"
+     },
+     {
+      "nazev": "Zkontrolovat proplacení nevyčerpané dovolené",
+      "termin": "do 20. 1. 2027"
+     },
+     {
+      "nazev": "Registrovat se na úřadu práce a požádat o podporu",
+      "termin": "do 25. 1. 2027"
+     },
+     {
+      "nazev": "Vyřešit zdravotní pojištění",
+      "termin": "do 29. 1. 2027"
+     }
+    ],
+    "datumZadosti": "2027-01-21",
+    "hodnoty": {
+     "delka": "3",
+     "vek": "55",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    }
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": []
+  },
+  "D-prazdny": {
+   "vystup": {
+    "chyby": [
+     "Zadejte den doručení výpovědi.",
+     "Zadejte délku pracovního poměru v letech (např. 1,5).",
+     "Zadejte věk celým číslem (15–100).",
+     "Zadejte průměrný hrubý výdělek v Kč.",
+     "Zadejte průměrný čistý výdělek v Kč.",
+     "Zadejte den podání žádosti o podporu."
+    ],
+    "chybyViditelne": true,
+    "vysledekViditelny": false,
+    "konec": "",
+    "konecPopis": "",
+    "odstupne": "",
+    "odstupnePopis": "",
+    "podporaPopis": "",
+    "hlavicka": [],
+    "podpora": [],
+    "celkem": [],
+    "poznamky": [],
+    "ukoly": [],
+    "datumZadosti": "",
+    "hodnoty": {
+     "delka": "",
+     "vek": "",
+     "hruby": "",
+     "cisty": ""
+    }
+   },
+   "axe": []
+  },
+  "D-nesmysly": {
+   "vstup": {
+    "delka": "-1",
+    "vek": "40,5",
+    "hruby": "abc",
+    "cisty": "-5"
+   },
+   "vystup": {
+    "chyby": [
+     "Zadejte délku pracovního poměru v letech (např. 1,5).",
+     "Zadejte věk celým číslem (15–100).",
+     "Zadejte průměrný hrubý výdělek v Kč.",
+     "Zadejte průměrný čistý výdělek v Kč."
+    ],
+    "chybyViditelne": true,
+    "vysledekViditelny": false,
+    "konec": "",
+    "konecPopis": "",
+    "odstupne": "",
+    "odstupnePopis": "",
+    "podporaPopis": "",
+    "hlavicka": [],
+    "podpora": [],
+    "celkem": [],
+    "poznamky": [],
+    "ukoly": [],
+    "datumZadosti": "2026-09-11",
+    "hodnoty": {
+     "delka": "-1",
+     "vek": "40,5",
+     "hruby": "abc",
+     "cisty": "-5"
+    }
+   }
+  },
+  "D-dohoda-drive": {
+   "vstup": {
+    "doruceni": "2026-07-10",
+    "konecDohody": "2026-07-01"
+   },
+   "vystup": {
+    "chyby": [
+     "Sjednaný den skončení nemůže být dřív než den uzavření dohody."
+    ],
+    "chybyViditelne": true,
+    "vysledekViditelny": false,
+    "konec": "",
+    "konecPopis": "",
+    "odstupne": "",
+    "odstupnePopis": "",
+    "podporaPopis": "",
+    "hlavicka": [],
+    "podpora": [],
+    "celkem": [],
+    "poznamky": [],
+    "ukoly": [],
+    "datumZadosti": "2026-07-02",
+    "hodnoty": {
+     "delka": "3",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    }
+   }
+  },
+  "E-cisla-cs-CZ": {
+   "mezera 40 000": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    },
+    "chyby": [],
+    "odstupne": "80 000 Kč",
+    "podpora1": "24 000 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč."
+   },
+   "carka 40000,50": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40000,50",
+     "cisty": "30000,50"
+    },
+    "chyby": [],
+    "odstupne": "80 001 Kč",
+    "podpora1": "24 001 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 001 Kč."
+   },
+   "tecka tisice 40.000": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40.000",
+     "cisty": "30.000"
+    },
+    "chyby": [],
+    "odstupne": "80 Kč",
+    "podpora1": "24 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 Kč."
+   },
+   "nbsp 40 000": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    },
+    "chyby": [],
+    "odstupne": "80 000 Kč",
+    "podpora1": "24 000 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč."
+   },
+   "delka 1,5 / 1.5": {
+    "hodnoty": {
+     "delka": "1.5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    },
+    "chyby": [],
+    "odstupne": "80 000 Kč",
+    "podpora1": "24 000 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč."
+   }
+  },
+  "E-cisla-en-US": {
+   "mezera 40 000": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    },
+    "chyby": [],
+    "odstupne": "80 000 Kč",
+    "podpora1": "24 000 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč."
+   },
+   "carka 40000,50": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40000,50",
+     "cisty": "30000,50"
+    },
+    "chyby": [],
+    "odstupne": "80 001 Kč",
+    "podpora1": "24 001 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 001 Kč."
+   },
+   "tecka tisice 40.000": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40.000",
+     "cisty": "30.000"
+    },
+    "chyby": [],
+    "odstupne": "80 Kč",
+    "podpora1": "24 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 Kč."
+   },
+   "nbsp 40 000": {
+    "hodnoty": {
+     "delka": "1,5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    },
+    "chyby": [],
+    "odstupne": "80 000 Kč",
+    "podpora1": "24 000 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč."
+   },
+   "delka 1,5 / 1.5": {
+    "hodnoty": {
+     "delka": "1.5",
+     "vek": "40",
+     "hruby": "40 000",
+     "cisty": "30 000"
+    },
+    "chyby": [],
+    "odstupne": "80 000 Kč",
+    "podpora1": "24 000 Kč",
+    "podporaPopis": "Žádost podaná 11. 9. 2026: podpůrčí doba 5 měsíců, strop 38 537 Kč měsíčně. Počítáno z čistého výdělku 30 000 Kč."
+   }
+  },
+  "F-xss": {
+   "pokus1": {
+    "img": false,
+    "chyby": [
+     "Zadejte den doručení výpovědi.",
+     "Zadejte sjednaný den skončení podle dohody.",
+     "Zadejte délku pracovního poměru v letech (např. 1,5).",
+     "Zadejte věk celým číslem (15–100).",
+     "Zadejte průměrný hrubý výdělek v Kč.",
+     "Zadejte průměrný čistý výdělek v Kč.",
+     "Zadejte den podání žádosti o podporu."
+    ]
+   },
+   "pokus2": {
+    "img": false,
+    "chyby": [
+     "Zadejte délku pracovního poměru v letech (např. 1,5).",
+     "Zadejte věk celým číslem (15–100).",
+     "Zadejte průměrný hrubý výdělek v Kč.",
+     "Zadejte průměrný čistý výdělek v Kč.",
+     "Zadejte den podání žádosti o podporu."
+    ]
+   },
+   "dialogy": []
+  },
+  "G-tisk": {
+   "formularSkryt": true,
+   "seznamVidet": true,
+   "zdrojeVidet": true
+  },
+  "H-zivy-web": {
+   "360": {
+    "preteka": {
+     "scrollWidth": 360,
+     "innerWidth": 360,
+     "preteka": false
+    },
+    "axe": [],
+    "konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+     }
+    ],
+    "chyby": [
+     {
+      "url": "https://frankie851.github.io/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "cizi": [
+     "https://frankie851.github.io/favicon.ico"
+    ],
+    "xss": {
+     "vlozenyImg": false
+    },
+    "localStorage": {}
+   },
+   "1440": {
+    "preteka": {
+     "scrollWidth": 1440,
+     "innerWidth": 1440,
+     "preteka": false
+    },
+    "konzole": [
+     {
+      "typ": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+     }
+    ],
+    "chyby": [
+     {
+      "url": "https://frankie851.github.io/favicon.ico",
+      "stav": 404
+     }
+    ],
+    "cizi": [
+     "https://frankie851.github.io/favicon.ico"
+    ]
+   }
+  }
+ }
+}

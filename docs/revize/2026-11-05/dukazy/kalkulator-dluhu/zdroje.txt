@@ -1,0 +1,148 @@
+# Úřední zdroje pro revizi kalkulator-dluhu · staženo 5. 11. 2026 (curl přes proxy sezení) do /tmp/revize/scratch/kalkulator-dluhu/dl/
+# Výňatky jsou z HTML zakonyprolidi.cz (ZPL), exekuce.justice.cz, insolvence.justice.cz, cnb.cz; e-Sbírka přes puppeteer (viz prohlizec.json → esbirka).
+
+## HTTP stavy odkazů v aplikaci (curl -L, 5. 11. 2026)
+https://frankie851.github.io/kalkulator-dluhu/ 200
+https://www.ceecr.cz 200 → https://www.ceecr.cz/
+https://isir.justice.cz 200 → https://isir.justice.cz/isir/common/index.do
+https://mpsv.gov.cz/registr-poskytovatelu-sluzeb 200
+https://sako.justice.cz 200
+https://exekuce.justice.cz/vypocet-srazek-ze-mzdy/ 200
+https://insolvence.justice.cz 200 ; https://insolvence.justice.cz/kalkulator-splatek/ 200
+https://www.ochrance.cz 200
+https://vesta.justice.cz 200
+https://e-sbirka.gov.cz/sb/2006/595 200 ; https://e-sbirka.gov.cz/sb/2022/436 200 (stránka: „minulé znění, zrušeno“ – viz prohlizec.json)
+https://frankie851.github.io/kalkulator-dluhu/favicon.ico 404
+
+## NV 595/2006 Sb. – ZPL, aktuální znění 1. 1. 2026 (verze 7), https://www.zakonyprolidi.cz/cs/2006-595
+§ 1
+(1) Základní částka, která nesmí být podle § 278 občanského soudního řádu sražena povinnému z měsíční mzdy, je rovna úhrnu 85 % součtu částky životního minima jednotlivce podle právních předpisů upravujících životní minimum, částky normativního nájemného a částky energetického paušálu podle právních předpisů upravujících dávku státní sociální pomoci (dále jen „nezabavitelná částka“) na osobu povinného, a jedné čtvrtiny nezabavitelné částky na každou osobu, které je povinen poskytovat výživné; manžel povinného nebo partner povinného podle občanského zákoníku nebo zákona o registrovaném partnerství se pro účely odstavce 1 za osobu, které je povinný povinen poskytovat výživné, nepovažuje. Ve výpočtu podle věty první se použije částka normativního nájemného pro jednočlennou domácnost v obci s alespoň 70000 obyvateli a částka energetického paušálu pro jednočlennou domácnost.
+(2) Na manžela povinného nebo partnera povinného podle občanského zákoníku nebo zákona o registrovaném partnerství se započítává jedna čtvrtina nezabavitelné částky, i když má samostatný příjem, doloží-li povinný plátci mzdy, že jemu nebo jeho manželovi nebo partnerovi podle občanského zákoníku nebo zákona o registrovaném partnerství byl přiznán starobní důchod, invalidní důchod pro invaliditu druhého nebo třetího stupně nebo sirotčí důchod. Zjistí-li plátce důchodu ze své úřední činnosti, že povinnému byl přiznán důchod podle věty první, započte na manžela povinného nebo partnera povinného podle občanského zákoníku nebo zákona o registrovaném partnerství jednu čtvrtinu nezabavitelné částky, i když mu povinný tuto skutečnost nedoloží. Na dítě, jež manželé společně vyživují, se započítává jedna čtvrtina nezabavitelné částky každému manželovi zvlášť, jsou-li srážky prováděny ze mzdy obou manželů. Jedna čtvrtina nezabavitelné částky se nezapočítává na žádného z těch, v jejichž prospěch byl nařízen výkon rozhodnutí pro pohledávky výživného, jestliže výkon rozhodnutí dosud trvá.
+§ 2
+Částka, nad kterou se zbytek čisté mzdy vypočtené podle § 279 odst. 1 věty první občanského soudního řádu srazí bez omezení, činí 1,9násobek součtu částky životního minima jednotlivce, částky normativního nájemného a částky energetického paušálu podle § 1 odst. 1.
+§ 3
+Základní částka, která nesmí být povinnému sražena z měsíční mzdy, se zaokrouhluje na celé koruny nahoru.
+§ 4
+Při výpočtu nezabavitelné částky a částky, nad kterou se zbytek čisté mzdy srazí bez omezení, se použije částka životního minima jednotlivce, částka normativního nájemného a částka energetického paušálu podle § 1 odst. 1 ve výši k 1. lednu kalendářního roku, do kterého spadá výplata mzdy.
+
+## NV 548/2025 Sb. – platnost 17. 12. 2025, účinnost 1. 1. 2026, https://www.zakonyprolidi.cz/cs/2025-548
+Čl. II
+Přechodné ustanovení
+V řízeních zahájených přede dnem nabytí účinnosti tohoto nařízení se ode dne nabytí účinnosti tohoto nařízení použije nařízení vlády č. 595/2006 Sb., ve znění účinném ode dne nabytí účinnosti tohoto nařízení.
+Čl. III
+Účinnost
+Toto nařízení nabývá účinnosti dnem 1. ledna 2026.
+Předseda vlády:
+prof. PhDr. Fiala, Ph.D., LL.M., v. r.
+Ministryně spravedlnosti:
+Decroix, Ph.D., MBA, MPA, v. r.
+Př
+
+## OSŘ § 270 odst. 2 a § 279 – https://www.zakonyprolidi.cz/cs/1963-99
+(2) Oprávněný má nárok na náhradu všech účelných nákladů výkonu rozhodnutí. Plátce mzdy má vůči povinnému nárok na paušálně stanovenou náhradu nákladů, které mu vznikly za kalendářní měsíc, v němž provádí srážky ze mzdy povinného. Náklady plátce mzdy jsou náklady výkonu rozhodnutí. Provádí-li plátce mzdy zároveň srážky k vydobytí několika pohledávek vůči témuž povinnému, náleží mu náhrada nákladů pouze jednou. Právo na částku náhrady nákladů, jež nebyla odečtena podle § 289 odst. 2, § 291 odst. 3 nebo § 293 odst. 1 ze sražené částky před jejím vyplacením nebo zasláním, zaniká.
+(3) Náklady provedení výkonu rozhodn
+§ 279
+(1) Z čisté mzdy, která zbývá po odečtení nezabavitelné částky a která se zaokrouhlí směrem dolů na částku dělitelnou třemi a vyjádřenou v celých korunách, lze srazit k vydobytí pohledávky oprávněného jen jednu třetinu. Pro přednostní pohledávky uvedené v odstavci 2 se srážejí dvě třetiny. Přednostní pohledávky se uspokojují nejprve z druhé třetiny a teprve, nestačí-li tato třetina k jejich úhradě, uspokojují se spolu s ostatními pohledávkami z první třetiny. Paušálně stanovená náhrada nákladů plátce mzdy se uspokojuje před všemi ostatními pohledávkami z první třetiny.
+(2) Přednostními pohledávkami jsou
+a) pohledávky výživného včetně pohledávek výživného, které byly postoupeny, a pohledávky na úhradu úplaty za postupované pohledávky výživného;
+b) pohledávky náhrady újmy způsobené poškozenému ublížením na zdraví;
+c) pohledávky náhrady újmy, způsobené úmyslnými trestnými činy;
+d) pohledávky daní, poplatků a jiných obdobných peněžitých plnění,
+e) pohledávky náhrady přeplatků na dávkách nemocenského pojištění a důchodového pojištění,
+f) pohledávky pojistného na sociální zabezpečení a příspěvku na státní politiku zaměstnanosti a pohledávky pojistného na veřejné zdravotní pojištění,
+g) pohledávky náhrady přeplatků na podpoře v nezaměstnanosti a podpoře při rekvalifikaci,
+h) pohledávky náhrady přeplatků na dávkách státní sociální podpory a dávce státní sociální pomoci,
+i) pohledávky regresní náhrady podle zákona o nemocenském pojištění,
+j) pohledávky náhrady mzdy, platu nebo odměny a sníženého platu nebo snížené odměny, poskytované v období prvních 14 kalendářních dnů a od 1. ledna 2011 do 31. prosince 2013 v období prvních 21 kalendářních dnů dočasné pracovní neschopnosti nebo karantény,
+k) pohledávky za náhradní výživné podle jiného zákona.
+(3) Vláda České republiky stanoví nařízením částku, nad kterou se srazí zbytek čisté mzdy vypočtené podle odstavce 1 věty první bez omezení. Takto zjištěná plně zabavitelná část zbytku čisté mzdy se připočte ke druhé třetině zbytku čisté mzdy v rozsahu, který je potřebný k uspokojení přednostních pohledávek; zbývající část se připočte k první třetině.
+(4) Dvě třetiny zbytku čisté mzdy vypočteného podle odstavce 1 věty první se srážejí vždy,
+a) jsou-li na mzdu povinného současně nařízeny nejméně 4 výkony rozhodnutí k vymožení splatných peněžitých pohledávek, a
+b) usnesení o nařízení výkonu rozhodnutí nebo usnesení obsahující vyrozumění o nařízení výkonu rozhodnutí (§ 294 odst. 3) bylo doručeno plátci mzdy.
+(5) Odstavec 4 se nepoužije,
+a) doloží-li povinný plátci mzdy, že mu byl přiznán starobní důchod, invalidní důchod pro invaliditu druhého nebo třetího stupně nebo sirotčí důchod, a
+b) nedosahuje-li jedna třetina zbytku čisté mzdy částky rovnající se součtu měsíčních hotových výdajů a měsíční odměny insolvenčního správce náležejících v oddlužení za období plnění splátkového kalendáře zvýšených o daň z přidané hodnoty110).
+(6) Při postupu podle odstavce 4 se druhá třetina připočte k první třetině; jsou-li však ve výkonu rozhodnutí podle odstavce 4 vymáhány přednostní pohledávky, uspokojují se z druhé třetiny nejprve postupem podle
+
+## Vyhláška 485/2000 Sb. § 4d, § 4e – https://www.zakonyprolidi.cz/cs/2000-485
+§ 4d
+Paušálně stanovená náhrada nákladů plátce mzdy nebo jiného příjmu činí za 1 kalendářní měsíc, v němž plátce mzdy nebo jiného příjmu provádí srážky ze mzdy nebo jiného příjmu vypláceného jednomu povinnému, 50 Kč; to platí i v případě, že plátce mzdy nebo jiného příjmu provádí srážky z více mezd nebo jiných příjmů, které vyplácí povinnému.
+§ 4e
+Výše paušálně stanovené náhrady nákladů plátce mzdy nebo jiného příjmu nesmí přesáhnout třetinu částky sražené ze mzdy nebo jiného příjmu povinného zaokrouhlenou na celé koruny nahoru.
+
+## Vyhláška 313/2007 Sb. § 3 odst. 2 písm. a), § 7 odst. 4 – https://www.zakonyprolidi.cz/cs/2007-313
+(2) Pokud je způsobem řešení dlužníkova úpadku oddlužení plněním splátkového kalendáře se zpeněžením majetkové podstaty, činí odměna insolvenčního správce
+a) 1 650 Kč za každý započatý kalendářní měsíc od rozhodnutí o povolení oddlužení do rozhodnutí o schválení oddlužení a 750 Kč za každý započatý kalendářní měsíc následující p
+(4) Insolvenčnímu správci náleží v souvislosti s výkonem jeho činnosti při oddlužení plněním splátkového kalendáře se zpeněžením majetkové podstaty náhrada hotových výdajů ve výši 150 Kč a v případě oddlužení povoleného na základě společného návrhu manželů 225 Kč za každý započatý kalendářní měsíc od rozhodnutí o povolení oddluž
+
+## Insolvenční zákon 182/2006 Sb. – https://www.zakonyprolidi.cz/cs/2006-182
+§ 395
+(1) Insolvenční soud zamítne návrh na povolení oddlužení, jestliže se zřetelem ke všem okolnostem lze důvodně předpokládat,
+a) že jím je sledován nepoctivý záměr, nebo
+b) že dlužník nebude schopen splácet v plné výši ani pohledávky podle § 168 odst. 2 písm. a), přičemž výše splátky ostatním věřitelům včetně věřitelů pohledávek za majetkovou podstatou a pohledávek postavených jim na roveň nesmí být nižší než tato pohledávka náležící za období plnění splátkového kalendáře, a dále ani pohledávky podle § 169 odst. 1 písm. e) a § 390a odst. 5.
+(2) Insolvenční soud zamítne návrh na povolení oddlužení i tehdy, jestliže dosavadní výsledky řízení dokládají lehkomyslný nebo nedbalý přístup dlužníka k plnění povinností v insolvenčním řízení.
+(3) Insolvenční soud zamítne návrh na povolení oddlužení také tehdy, jestliže v posledních 12 letech před podáním insolvenčního návrhu bylo dlužníku pravomocným rozhodnutím přiznáno osvobození od placení pohledávek zahrnutých do oddlužení, v rozsahu, v němž nebyly uspokojeny.
+(4) Insolvenční soud zamítne návrh na povolení oddlužení také tehdy, jestliže v posledních 5 letech před podáním insolvenčního návrhu byl návrh dlužníka na povolení oddlužení pravomocně zamítnut z důvodu, že je jím sledován nepoctivý záměr, nebo jestliže z téhož důvodu nebylo oddlužení schváleno nebo bylo schválené oddlužení zrušeno.
+(5) Insolvenční soud zamítne návrh na po
+---
+(3) Při oddlužení plněním splátkového kalendáře se zpeněžením majetkové podstaty je dlužník povinen vydat insolvenčnímu správci majetek náležející do majetkové podstaty ke zpeněžení postupem obdobným podle ustanovení o zpeněžení majetkové podstaty v konkursu a dále do doby podání zprávy pro osvobození měsíčně splácet nezajištěným věřitelům ze svých příjmů částku ve stejném rozsahu, v jakém z nich mohou být při výkonu rozhodnutí nebo při exekuci uspokojeny přednostní pohledávky29).
+(4) Nestačí-li částka podle odstav
+---
+§ 412a
+Splnění předpokladů pro osvobození
+(1) V oddlužení plněním splátkového kalendáře se zpeněžením majetkové podstaty jsou splněny předpoklady pro osvobození dlužníka od placení pohledávek zahrnutých do oddlužení v rozsahu, v němž dosud nebyly uspokojeny, jestliže
+a) dlužník splatil nezajištěným věřitelům jejich pohledávky v plné výši, nebo
+b) po dobu 3 let od schválení oddlužení nebylo dlužníku oddlužení zrušeno a plnil-li dlužník po tuto dobu všechny podstatné povinnosti vyplývající z oddlužení plněním splátkového kalendáře se zpeněžením majetkové podstaty; má se za to, že tyto povinnosti plnil, jestliže dosáhl předpokládané míry uspokojení pohledávek nezajištěných věřitelů určené insolvenčním soudem v rozhodnutí o schválení oddlužení.
+(2) V oddlužení zpeněžením majetkové podstaty jsou splněny předpoklady pro osvobození dlužníka od placení pohledávek zahrnutých do oddlužení v rozsahu, v němž dosud nebyly uspokojeny, jestliže insolvenční soud
+a) obdržel zprávu insolvenčního správce o splnění rozvrhového usnesení a dlužník řádně splnil všechny podstatné povinnosti stanovené v rozhodnutí o schválení oddlužení, nebo
+b) neobdržel zprávu insolvenčního správce o splnění rozvrhového usnesení a od schválení oddlužení uplynula doba 3 let, plnil-li dlužník po tuto dobu všechny podstatné povinnosti stanovené v rozhodnutí o schválení oddlužení a nebylo-li dlužníku po tuto dobu oddlužení zrušeno.
+(3) Bylo-li dlužníku přiznáno osvobození podle § 414 v posledních 20 letech před podáním
+---
+§ 170
+V insolvenčním řízení se neuspokojují žádným ze způsobů řešení úpadku, není-li dále stanoveno jinak,
+a) úroky, úroky z prodlení a poplatek z prodlení z pohledávek přihlášených věřitelů, vzniklých před rozhodnutím o úpadku, pokud přirostly až v době po tomto rozhodnutí,
+b) úroky, úroky z prodlení a poplatek z prodlení z pohledávek věřitelů, které se staly splatné až po rozhodnutí o úpadku,
+c) pohledávky věřitelů z darovacích smluv,
+d) mimosmluvní sankce postihující majetek dlužníka, s výjimkou penále za nezapl
+---
+c) výkon rozhodnutí či exekuci, která by postihovala majetek ve vlastnictví dlužníka, jakož i jiný majetek, který náleží do majetkové podstaty, lze nařídit nebo zahájit, nelze jej však provést. Pro pohledávky za majetkovou podstatou (§ 168) a pohledávky jim na roveň postavené (§ 169) však lze provést nebo vést výkon rozhodnutí č
+---
+(3) Osobě podle odstavce 1 písm. a), která sepsala a za dlužníka podala návrh na povolení oddlužení anebo také insolvenční návrh podle § 390 odst. 1, náleží odměna, jejíž maximální výše činí 4000 Kč bez daně z přidané hodnoty a v případě společného oddlužení manželů 6000 Kč bez daně z přidané hodnoty; v odměně je zahrnuta také náhrada nákladů vynaložených v souvislosti se sepisem a podáním návrhů podle části věty před středníkem. Za sepis a podání návrhu na povolení oddlužení anebo také insolvenčního návrhu podle §
+---
+§ 416
+(1) Osvobození podle § 414 se nedotýká peněžitého trestu nebo jiné majetkové sankce, která byla dlužníku uložena v trestním řízení pro úmyslný trestný čin, pohledávek na náhradu škody způsobené úmyslným porušením právní povinnosti, pohledávky insolvenčního správce na odměnu a hotové výdaje a dále pohledávek věřitelů na výživném ze zákona a pohledávek věřitelů na náhradu škody způsobené na zdraví.
+(2) Proti rozh
+---
+
+## NV 351/2013 Sb. § 2 – https://www.zakonyprolidi.cz/cs/2013-351
+§ 2
+(1) Výše úroku z prodlení odpovídá ročně výši repo sazby stanovené Českou národní bankou pro první den kalendářního pololetí, v němž došlo k prodlení, zvýšené o 8 procentních bodů.
+(2) Výše úroku z prodlení s placením pohledávky výživného pro nezletilé dítě, které nenabylo plné svéprávnosti, činí po dobu prvních 6 měsíců prodlení 2,5 promile dlužné částky za každý den prodlení. Po uplynutí této doby se výše úroku z prodlení stanoví podle odstavce 1.
+
+## ČNB – vývoj 2T repo sazby (https://www.cnb.cz/cs/casto-kladene-dotazy/.galleries/vyvoj_repo_historie.txt), posledních 12 řádků
+['20220623|7,00', '20231222|6,75', '20240209|6,25', '20240321|5,75', '20240503|5,25', '20240628|4,75', '20240802|4,50', '20240926|4,25', '20241108|4,00', '20250207|3,75', '20250509|3,50', '20260619|3,75']
+→ k 1. 1. 2023 7,00 % (15,00 %); 1. 7. 2023 7,00 % (15,00 %); 1. 1. 2024 6,75 % (14,75 %); 1. 7. 2024 4,75 % (12,75 %); 1. 1. 2025 4,00 % (12,00 %); 1. 7. 2025 3,50 % (11,50 %); 1. 1. 2026 3,50 % (11,50 %); 1. 7. 2026 3,75 % (11,75 %)
+
+## Životní minimum
+NV 361/2025 Sb. (ZPL): Platnost od | 	29.09.2025 | 	Účinnost od | 	01.10.2025 | 	Zrušeno k | 	01.10.2026 | Zařazeno v právních oblastech | Pracovní právo | Soc … Zrušeno k | 	01.10.2026 | Zařazeno v právníc
+NV 361/2025 § 1: § 1 Částka životního minima jednotlivce činí měsíčně 4860 Kč. § 2 (1)
+NV 436/2022 Sb. (ZPL): Platnost od | 	23.12.2022 | 	Účinnost od | 	01.01.2023 | 	Zrušeno k | 	01.10.2025(152/2025 Sb.) | Zařazeno v právních oblastech | Prac … Zrušeno k | 	01.10.2025(152/2025 Sb.) | Zařazeno v právních obla
+Zákon 110/2006 Sb. (ZPL, Aktuální znění 01.10.2026 - 31.05.2028 (verze 29)): Částka životního minima jednotlivce činí měsíčně 5500 Kč. Za
+
+## exekuce.justice.cz – výklad (výňatek)
+Výpočet nezabavitelné částky na osobu povinného (dlužníka):
+součet částky životního minima jednotlivce, výše vymezených částek normativního nájemného a energetického paušálu:
+4 860 Kč + 9 430 Kč + 2 300 Kč = 16 590 Kč,
+85 % z tohoto součtu: 14 101,50 Kč.
+Jedna čtvrtina nezabavitelné částky činí 3 525,375 Kč.
+Nezabavitelná částka, která nesmí být povinnému (dlužníkovi) sražena z měsíční mzdy, se zaokrouhluje na celé koruny nahoru.
+Příklad:
+Povinný (dlužník) je ženatý a má 2 děti, kterým je povinen výživou. Nezabavitelná částka na osobu povinného (dlužníka) činí 14 101,50 Kč, jedna čtvrtina nezabavitelné částky se započítává na manželku povinného (dlužníka) (3 525,375 Kč) a jedna čtvrtina na každé dítě (3 525,375 Kč + 3 525,375 Kč). Celkem tedy nezabavitelná částka v exekuci vedené na mzdu povinného (dlužníka) činí 24 677,625 Kč, po zaokrouhlení na celé koruny nahoru tedy 24 678 Kč.
+Údaje o vyživovacích povinnostech je povinen plátci mzdy sdělit a doložit povinný (dlužník).
+Po odečtení nezabavitelné částky z čisté mzdy je třeba zjistit, zda zbytek čisté mzdy přesahuje 1,9násobek součtu částky životního minima jednotlivce, částky normativního nájemného a částky energetického paušálu (§ 2 nařízení o nezabavitelných částkách). Zbytek čisté mzdy, který přesahuje tuto částku, je plně za
+Podle právní úpravy účinné od 1. ledna 2026 činí 1,9násobek součtu částky životního minima jednotlivce, částky normativního nájemného a částky energetického paušálu částku 31 521 Kč.
+Zbytek čisté mzdy nepřesahující po odečtení nezabavitelné částky 1,9násobek s
+Formulář: první (výchozí) volba <option value="102026">2026 výpočet od 1. 10.</option>; skryté pole livemin102026 = 5500, flatmin102026 = 11730; výpočet probíhá na serveru (POST) – výsledky v uredni-kalkulacky.txt
+
+## insolvence.justice.cz/kalkulator-splatek/ – kalkul.js (staženo 5. 11. 2026)
+skrytá pole 012026: livemin 4860, flatmin 11730, koef 85/100, osoba 1/4, puvodni_vypocet_nasobeni = 1 (→ hranice 1 × 16 590 Kč místo 1,9 ×); text stránky: „odměnu a náhradu hotových výdajů insolvenčního správce, která … zpravidla činí 1089 Kč měsíčně u jednotlivce a 1633,50 Kč měsíčně u manželů“

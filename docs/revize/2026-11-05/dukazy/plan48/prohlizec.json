@@ -1,0 +1,1045 @@
+{
+ "datum": "2026-11-05T08:12:28.285Z",
+ "behy": [
+  {
+   "cislo": 1,
+   "pripady": {
+    "A_dps5700": {
+     "ui": {
+      "prispevek": "4 080 Kč",
+      "prispevekPozn": "340 Kč měsíčně (20 %)",
+      "uspora": "7 200 Kč",
+      "vyuzity": "48 000 Kč",
+      "nevyuzity": "0 Kč",
+      "nevyuzityPozn": "limit je vyčerpán",
+      "akce": "Nic dalšího není potřeba – máte maximální státní příspěvek i celý limit odpočtu, stačí pokračovat ve vkladech.",
+      "akcePozn": "",
+      "limit": "48 000 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 3 160 367 Kč, z toho vloženo 1 812 000 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modul": {
+      "prispevek": "4 080 Kč",
+      "uspora": "7 200 Kč",
+      "vyuzity": "48 000 Kč",
+      "nevyuzity": "0 Kč"
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "chyby": [],
+     "axe": [],
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "B_dps3000_zp2500": {
+     "ui15": {
+      "prispevek": "4 080 Kč",
+      "prispevekPozn": "340 Kč měsíčně (20 %)",
+      "uspora": "6 840 Kč",
+      "vyuzity": "45 600 Kč",
+      "nevyuzity": "2 400 Kč",
+      "nevyuzityPozn": "propásnutá úspora 360 Kč",
+      "akce": "Do 31. 12. pošlete ještě 2 400 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 360 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "45 600 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 1 241 863 Kč, z toho vloženo 801 600 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "ui23": {
+      "prispevek": "4 080 Kč",
+      "prispevekPozn": "340 Kč měsíčně (20 %)",
+      "uspora": "10 488 Kč",
+      "vyuzity": "45 600 Kč",
+      "nevyuzity": "2 400 Kč",
+      "nevyuzityPozn": "propásnutá úspora 552 Kč",
+      "akce": "Do 31. 12. pošlete ještě 2 400 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 552 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "45 600 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 1 241 863 Kč, z toho vloženo 801 600 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modul23": {
+      "prispevek": "4 080 Kč",
+      "uspora": "10 488 Kč",
+      "vyuzity": "45 600 Kč",
+      "nevyuzity": "2 400 Kč",
+      "doplatek": {
+       "doplatekDipZp": 2400,
+       "doplatekDps": 2400,
+       "uspora": 552
+      }
+     }
+    },
+    "C_navrh_25": {
+     "ui": {
+      "prispevek": "8 160 Kč",
+      "prispevekPozn": "680 Kč měsíčně (40 %)",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Do 31. 12. pošlete ještě 48 000 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": "návrh, zatím neschváleno",
+      "stitekAkce": "návrh, zatím neschváleno",
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 1 990 681 Kč, z toho vloženo 877 200 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Vládní návrh novely (schválen vládou 8/2026), zatím neprošel Poslaneckou sněmovnou ani Senátem. Parametry odpočtu převzaty z pravidel 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modul": {
+      "prispevek": "8 160 Kč"
+     }
+    },
+    "C2_navrh_vek_prazdny": {
+     "ui": {
+      "prispevek": "8 160 Kč",
+      "prispevekPozn": "680 Kč měsíčně (40 %)",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Do 31. 12. pošlete ještě 48 000 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": "návrh, zatím neschváleno",
+      "stitekAkce": "návrh, zatím neschváleno",
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 7 246 588 Kč, z toho vloženo 1 591 200 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Vládní návrh novely (schválen vládou 8/2026), zatím neprošel Poslaneckou sněmovnou ani Senátem. Parametry odpočtu převzaty z pravidel 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     }
+    },
+    "D_rada_dps1000": {
+     "ui": {
+      "prispevek": "2 400 Kč",
+      "prispevekPozn": "200 Kč měsíčně (20 %)",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 280 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 55 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Za uplynulé měsíce už propadlo 1 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 446 178 Kč, z toho vloženo 288 000 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modulDoporuceni": {
+      "prispevek": {
+       "navysitNa": 1700,
+       "mesicu": 2,
+       "ziskate": 280,
+       "propadlo": 1400
+      },
+      "odpocet": {
+       "doplatekDipZp": 48000,
+       "doplatekDps": 55000,
+       "uspora": 7200
+      },
+      "hotovo": false
+     }
+    },
+    "D2_rada_dps0": {
+     "ui": {
+      "prispevek": "0 Kč",
+      "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modulDoporuceni": {
+      "prispevek": {
+       "navysitNa": 1700,
+       "mesicu": 2,
+       "ziskate": 680,
+       "propadlo": 3400
+      },
+      "odpocet": {
+       "doplatekDipZp": 48000,
+       "doplatekDps": 65000,
+       "uspora": 7200
+      },
+      "hotovo": false
+     }
+    },
+    "E_cesky_zapis": {
+     "mezera": {
+      "zadano": "1 500",
+      "pole": {
+       "value": "1500",
+       "valid": true,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "3 600 Kč",
+       "prispevekPozn": "300 Kč měsíčně (20 %)",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 80 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 50 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 941 831 Kč, z toho vloženo 540 000 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "carka": {
+      "zadano": "1500,50",
+      "pole": {
+       "value": "150050",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "4 080 Kč",
+       "prispevekPozn": "340 Kč měsíčně (20 %)",
+       "uspora": "7 200 Kč",
+       "vyuzity": "48 000 Kč",
+       "nevyuzity": "0 Kč",
+       "nevyuzityPozn": "limit je vyčerpán",
+       "akce": "Nic dalšího není potřeba – máte maximální státní příspěvek i celý limit odpočtu, stačí pokračovat ve vkladech.",
+       "akcePozn": "",
+       "limit": "48 000 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 78 690 004 Kč, z toho vloženo 45 117 000 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "tecka": {
+      "zadano": "1500.50",
+      "pole": {
+       "value": "1500.50",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "3 600 Kč",
+       "prispevekPozn": "300 Kč měsíčně (20 %)",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 80 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 49 995 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 942 093 Kč, z toho vloženo 540 150 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "zaporne": {
+      "zadano": "-500",
+      "pole": {
+       "value": "-500",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "pismena": {
+      "zadano": "abc",
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "vlozeniMezera": {
+      "pole": "",
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "vekVelky": {
+      "zadano": "150",
+      "pole": {
+       "value": "150",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "Projekce se počítá do 60 let – pro zadaný věk už není co promítat.",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "mesicu": {
+      "zadano": "15",
+      "pole": {
+       "value": "15",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající měsíc (stát přidá o 340 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 66 700 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 740 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "Projekce se počítá do 60 let – pro zadaný věk už není co promítat.",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "xssPozdeji": {
+      "vlozenyImg": false
+     }
+    },
+    "F_chyba_rules": {
+     "ui": {
+      "prispevek": "–",
+      "prispevekPozn": "",
+      "uspora": "–",
+      "vyuzity": "–",
+      "nevyuzity": "–",
+      "nevyuzityPozn": "",
+      "akce": "…",
+      "akcePozn": "",
+      "limit": "",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": "Nepodařilo se načíst pravidla (rules.json): HTTP 404. Spusťte stránku přes webový server, ne z file://.",
+      "projekce": "",
+      "poznamkaSady": "",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     }
+    },
+    "G_fokus": {
+     "aktivni": "dps",
+     "obalBoxShadow": "rgb(215, 239, 233) 0px 0px 0px 3px",
+     "obalBorder": "rgb(15, 118, 110)",
+     "inputOutline": "none",
+     "tab": [
+      {
+       "prvek": "dip",
+       "viditelny": true
+      },
+      {
+       "prvek": "zp",
+       "viditelny": true
+      },
+      {
+       "prvek": "zamestnavatel",
+       "viditelny": true
+      },
+      {
+       "prvek": "mesicuProbehlo",
+       "viditelny": true
+      },
+      {
+       "prvek": "vynos",
+       "viditelny": true
+      },
+      {
+       "prvek": "poplatek",
+       "viditelny": true
+      },
+      {
+       "prvek": "Zákon č. 427/2011 Sb",
+       "viditelny": true
+      },
+      {
+       "prvek": "Zákon č. 586/1992 Sb",
+       "viditelny": true
+      },
+      {
+       "prvek": "KB Penzijní společno",
+       "viditelny": true
+      },
+      {
+       "prvek": "finance.cz: Nejvyšší",
+       "viditelny": true
+      },
+      {
+       "prvek": "Pravidla 2026",
+       "viditelny": true
+      },
+      {
+       "prvek": "Návrh 2027",
+       "viditelny": true
+      },
+      {
+       "prvek": "vek",
+       "viditelny": true
+      },
+      {
+       "prvek": "15 %",
+       "viditelny": true
+      },
+      {
+       "prvek": "23 %",
+       "viditelny": true
+      }
+     ]
+    }
+   }
+  },
+  {
+   "cislo": 2,
+   "pripady": {
+    "A_dps5700": {
+     "ui": {
+      "prispevek": "4 080 Kč",
+      "prispevekPozn": "340 Kč měsíčně (20 %)",
+      "uspora": "7 200 Kč",
+      "vyuzity": "48 000 Kč",
+      "nevyuzity": "0 Kč",
+      "nevyuzityPozn": "limit je vyčerpán",
+      "akce": "Nic dalšího není potřeba – máte maximální státní příspěvek i celý limit odpočtu, stačí pokračovat ve vkladech.",
+      "akcePozn": "",
+      "limit": "48 000 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 3 160 367 Kč, z toho vloženo 1 812 000 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modul": {
+      "prispevek": "4 080 Kč",
+      "uspora": "7 200 Kč",
+      "vyuzity": "48 000 Kč",
+      "nevyuzity": "0 Kč"
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     },
+     "konzole": [],
+     "chyby": [],
+     "preteka1440": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "preteka": false
+     }
+    },
+    "B_dps3000_zp2500": {
+     "ui15": {
+      "prispevek": "4 080 Kč",
+      "prispevekPozn": "340 Kč měsíčně (20 %)",
+      "uspora": "6 840 Kč",
+      "vyuzity": "45 600 Kč",
+      "nevyuzity": "2 400 Kč",
+      "nevyuzityPozn": "propásnutá úspora 360 Kč",
+      "akce": "Do 31. 12. pošlete ještě 2 400 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 360 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "45 600 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 1 241 863 Kč, z toho vloženo 801 600 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "ui23": {
+      "prispevek": "4 080 Kč",
+      "prispevekPozn": "340 Kč měsíčně (20 %)",
+      "uspora": "10 488 Kč",
+      "vyuzity": "45 600 Kč",
+      "nevyuzity": "2 400 Kč",
+      "nevyuzityPozn": "propásnutá úspora 552 Kč",
+      "akce": "Do 31. 12. pošlete ještě 2 400 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 552 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "45 600 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 1 241 863 Kč, z toho vloženo 801 600 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modul23": {
+      "prispevek": "4 080 Kč",
+      "uspora": "10 488 Kč",
+      "vyuzity": "45 600 Kč",
+      "nevyuzity": "2 400 Kč",
+      "doplatek": {
+       "doplatekDipZp": 2400,
+       "doplatekDps": 2400,
+       "uspora": 552
+      }
+     }
+    },
+    "C_navrh_25": {
+     "ui": {
+      "prispevek": "8 160 Kč",
+      "prispevekPozn": "680 Kč měsíčně (40 %)",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Do 31. 12. pošlete ještě 48 000 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": "návrh, zatím neschváleno",
+      "stitekAkce": "návrh, zatím neschváleno",
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 1 990 681 Kč, z toho vloženo 877 200 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Vládní návrh novely (schválen vládou 8/2026), zatím neprošel Poslaneckou sněmovnou ani Senátem. Parametry odpočtu převzaty z pravidel 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modul": {
+      "prispevek": "8 160 Kč"
+     }
+    },
+    "C2_navrh_vek_prazdny": {
+     "ui": {
+      "prispevek": "8 160 Kč",
+      "prispevekPozn": "680 Kč měsíčně (40 %)",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Do 31. 12. pošlete ještě 48 000 Kč na DIP, životní pojištění nebo mimořádně na penzijko, čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": "návrh, zatím neschváleno",
+      "stitekAkce": "návrh, zatím neschváleno",
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 7 246 588 Kč, z toho vloženo 1 591 200 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Vládní návrh novely (schválen vládou 8/2026), zatím neprošel Poslaneckou sněmovnou ani Senátem. Parametry odpočtu převzaty z pravidel 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     }
+    },
+    "D_rada_dps1000": {
+     "ui": {
+      "prispevek": "2 400 Kč",
+      "prispevekPozn": "200 Kč měsíčně (20 %)",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 280 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 55 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Za uplynulé měsíce už propadlo 1 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 446 178 Kč, z toho vloženo 288 000 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modulDoporuceni": {
+      "prispevek": {
+       "navysitNa": 1700,
+       "mesicu": 2,
+       "ziskate": 280,
+       "propadlo": 1400
+      },
+      "odpocet": {
+       "doplatekDipZp": 48000,
+       "doplatekDps": 55000,
+       "uspora": 7200
+      },
+      "hotovo": false
+     }
+    },
+    "D2_rada_dps0": {
+     "ui": {
+      "prispevek": "0 Kč",
+      "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+      "uspora": "0 Kč",
+      "vyuzity": "0 Kč",
+      "nevyuzity": "48 000 Kč",
+      "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+      "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+      "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+      "limit": "0 Kč / 48 000 Kč",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": null,
+      "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+      "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "modulDoporuceni": {
+      "prispevek": {
+       "navysitNa": 1700,
+       "mesicu": 2,
+       "ziskate": 680,
+       "propadlo": 3400
+      },
+      "odpocet": {
+       "doplatekDipZp": 48000,
+       "doplatekDps": 65000,
+       "uspora": 7200
+      },
+      "hotovo": false
+     }
+    },
+    "E_cesky_zapis": {
+     "mezera": {
+      "zadano": "1 500",
+      "pole": {
+       "value": "1500",
+       "valid": true,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "3 600 Kč",
+       "prispevekPozn": "300 Kč měsíčně (20 %)",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 80 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 50 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 941 831 Kč, z toho vloženo 540 000 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "carka": {
+      "zadano": "1500,50",
+      "pole": {
+       "value": "150050",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "4 080 Kč",
+       "prispevekPozn": "340 Kč měsíčně (20 %)",
+       "uspora": "7 200 Kč",
+       "vyuzity": "48 000 Kč",
+       "nevyuzity": "0 Kč",
+       "nevyuzityPozn": "limit je vyčerpán",
+       "akce": "Nic dalšího není potřeba – máte maximální státní příspěvek i celý limit odpočtu, stačí pokračovat ve vkladech.",
+       "akcePozn": "",
+       "limit": "48 000 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 78 690 004 Kč, z toho vloženo 45 117 000 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "tecka": {
+      "zadano": "1500.50",
+      "pole": {
+       "value": "1500.50",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "3 600 Kč",
+       "prispevekPozn": "300 Kč měsíčně (20 %)",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 80 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 49 995 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 942 093 Kč, z toho vloženo 540 150 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "zaporne": {
+      "zadano": "-500",
+      "pole": {
+       "value": "-500",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "pismena": {
+      "zadano": "abc",
+      "pole": {
+       "value": "",
+       "valid": true,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "vlozeniMezera": {
+      "pole": "",
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "V 60 letech by mohlo být naspořeno zhruba 0 Kč, z toho vloženo 0 Kč (vy, zaměstnavatel, stát a DIP).",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "vekVelky": {
+      "zadano": "150",
+      "pole": {
+       "value": "150",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající 2 měsíce (stát přidá o 680 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 65 000 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 400 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "Projekce se počítá do 60 let – pro zadaný věk už není co promítat.",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "mesicu": {
+      "zadano": "15",
+      "pole": {
+       "value": "15",
+       "valid": false,
+       "badInput": false
+      },
+      "ui": {
+       "prispevek": "0 Kč",
+       "prispevekPozn": "vklad pod 500 Kč – bez nároku",
+       "uspora": "0 Kč",
+       "vyuzity": "0 Kč",
+       "nevyuzity": "48 000 Kč",
+       "nevyuzityPozn": "propásnutá úspora 7 200 Kč",
+       "akce": "Zvyšte vklad na penzijko na 1 700 Kč měsíčně na zbývající měsíc (stát přidá o 340 Kč víc) a do 31. 12. pošlete ještě 48 000 Kč na DIP nebo životní pojištění (případně 66 700 Kč mimořádně na penzijko), čímž ušetříte dalších 7 200 Kč na dani.",
+       "akcePozn": "Za uplynulé měsíce už propadlo 3 740 Kč státního příspěvku. Mimořádný vklad na penzijko označte jako mimořádný (jinak ho společnost může brát jako předplatné na další rok); obvykle musí být připsán do 20. 12. Odpočet ušetří jen tolik, kolik máte zaplatit daně.",
+       "limit": "0 Kč / 48 000 Kč",
+       "stitekSady": null,
+       "stitekAkce": null,
+       "chyba": null,
+       "projekce": "Projekce se počítá do 60 let – pro zadaný věk už není co promítat.",
+       "poznamkaSady": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15a ZDP), beze změny pro rok 2026. Stav ke dni 4. 11. 2026.",
+       "stitekUProjekce": false,
+       "stitekUDlazdic": false
+      }
+     },
+     "xssPozdeji": {
+      "vlozenyImg": false
+     }
+    },
+    "F_chyba_rules": {
+     "ui": {
+      "prispevek": "–",
+      "prispevekPozn": "",
+      "uspora": "–",
+      "vyuzity": "–",
+      "nevyuzity": "–",
+      "nevyuzityPozn": "",
+      "akce": "…",
+      "akcePozn": "",
+      "limit": "",
+      "stitekSady": null,
+      "stitekAkce": null,
+      "chyba": "Nepodařilo se načíst pravidla (rules.json): HTTP 404. Spusťte stránku přes webový server, ne z file://.",
+      "projekce": "",
+      "poznamkaSady": "",
+      "stitekUProjekce": false,
+      "stitekUDlazdic": false
+     },
+     "preteka": {
+      "scrollWidth": 360,
+      "innerWidth": 360,
+      "preteka": false
+     }
+    },
+    "G_fokus": {
+     "aktivni": "dps",
+     "obalBoxShadow": "rgb(215, 239, 233) 0px 0px 0px 3px",
+     "obalBorder": "rgb(15, 118, 110)",
+     "inputOutline": "none",
+     "tab": [
+      {
+       "prvek": "dip",
+       "viditelny": true
+      },
+      {
+       "prvek": "zp",
+       "viditelny": true
+      },
+      {
+       "prvek": "zamestnavatel",
+       "viditelny": true
+      },
+      {
+       "prvek": "mesicuProbehlo",
+       "viditelny": true
+      },
+      {
+       "prvek": "vynos",
+       "viditelny": true
+      },
+      {
+       "prvek": "poplatek",
+       "viditelny": true
+      },
+      {
+       "prvek": "Zákon č. 427/2011 Sb",
+       "viditelny": true
+      },
+      {
+       "prvek": "Zákon č. 586/1992 Sb",
+       "viditelny": true
+      },
+      {
+       "prvek": "KB Penzijní společno",
+       "viditelny": true
+      },
+      {
+       "prvek": "finance.cz: Nejvyšší",
+       "viditelny": true
+      },
+      {
+       "prvek": "Pravidla 2026",
+       "viditelny": true
+      },
+      {
+       "prvek": "Návrh 2027",
+       "viditelny": true
+      },
+      {
+       "prvek": "vek",
+       "viditelny": true
+      },
+      {
+       "prvek": "15 %",
+       "viditelny": true
+      },
+      {
+       "prvek": "23 %",
+       "viditelny": true
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "zivyWeb": {
+  "360": {
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [],
+   "konzole": [],
+   "chyby": [],
+   "cizi": [
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"
+   ],
+   "xss": {
+    "vlozenyImg": false
+   },
+   "localStorage": {}
+  },
+  "1440": {
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "konzole": [],
+   "chyby": [],
+   "cizi": [
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"
+   ]
+  }
+ }
+}

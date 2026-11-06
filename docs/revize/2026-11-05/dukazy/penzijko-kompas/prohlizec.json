@@ -1,0 +1,1004 @@
+{
+ "datum": "2026-11-05T08:16:19.328Z",
+ "start": {
+  "rok": 2026,
+  "mesic": 11
+ },
+ "scenare": {
+  "A-vychozi-360": {
+   "obrazovka": {
+    "karty": [
+     {
+      "nazev": "Platná pravidla 2026",
+      "stitek": "platí",
+      "mesicne": "200 Kč",
+      "rocne": "2 400 Kč za rok",
+      "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč."
+     },
+     {
+      "nazev": "Návrh „Lepší penzijko“ (od 2027)",
+      "stitek": "návrh, zatím neschváleno",
+      "mesicne": "200 Kč",
+      "rocne": "2 400 Kč za rok",
+      "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč."
+     }
+    ],
+    "odpocet": "Daňový odpočet se týká jen vlastních vkladů nad 1 700 Kč měsíčně. Limit 48 000 Kč ročně je společný s DIP a životním pojištěním, plný výpočet udělá Plán48.",
+    "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 406 441 Kč v dnešních penězích (852 538 Kč nominálně). Z toho státní příspěvky 72 000 Kč, poplatky tě budou stát 93 228 Kč. Počítáno podle: Platná pravidla 2026 platí",
+    "hlavniStitek": "platí",
+    "tabulka": [
+     [
+      "Transformovanýtvůj fond",
+      "406 441",
+      "852 538",
+      "93 228"
+     ],
+     [
+      "Konzervativní",
+      "439 226",
+      "921 306",
+      "96 703"
+     ],
+     [
+      "Vyvážený",
+      "498 607",
+      "1 045 861",
+      "242 284"
+     ],
+     [
+      "Akciový",
+      "783 611",
+      "1 643 678",
+      "403 981"
+     ],
+     [
+      "Životní cyklus",
+      "624 836",
+      "1 310 635",
+      "327 637"
+     ]
+    ],
+    "poplatky": "+50 018 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 23 846 Kč. Dnešní poplatky852 538 Kč0,8 % za správu + 10 % ze zhodnocenízaplatíš 93 228 Kč Se stropem z návrhu902 557 Kč0,5 % za správu, bez poplatku ze zhodnocenízaplatíš 58 344 Kč Obě varianty počítají se stejnými vklady a výnosy. Částky v 65 letech jsou nominální.",
+    "poplatkyStitek": "návrh, zatím neschváleno",
+    "tfSkryta": false,
+    "tf": "Zůstat v transformovaném406 441 Kčv 65 letech, dnešní peníze Přejít do „Životní cyklus“624 836 Kčv 65 letech, dnešní peníze Přechod ti podle předpokladů přinese o 218 394 Kč víc (v dnešních penězích). Transformované fondy skončí 31. 12. 2036, pak se peníze převedou do fondu „Konzervativní“. Jejich výhodou je, že nesmějí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos. Vyber účastnický fond nebo strategii u své současné penzijní společnosti. Přechod v rámci společnosti je zdarma. Podej žádost o převod (smlouva o doplňkovém penzijním spoření) v klientské zóně nebo na pobočce. Převod obvykle trvá několik týdnů. Zpět do transformovaného fondu se vrátit nejde. Po převodu zkontroluj výpis a nastav vklad tak, aby ti chodil maximální státní příspěvek. Převod ke konkurenci: smlouva trvá aspoň 5 let, převod je zdarma.",
+    "tfStitky": [],
+    "kroky": [
+     "Změň fond na „Životní cyklus“ Přechod z transformovaného do účastnického fondu téže společnosti je zdarma. Zpět se už vrátit nejde. Přínos v 65 letech: +218 394 Kč",
+     "Řekni si zaměstnavateli o příspěvek Počítáme s 500 Kč měsíčně. Pro firmu je příspěvek daňově zvýhodněný a do státního příspěvku se nepočítá. Přínos v 65 letech: +119 235 Kč",
+     "Navyš vklad na 1 700 Kč měsíčně Stát ti pak přidá 340 Kč místo 200 Kč měsíčně. Ze svého dáš navíc 700 Kč měsíčně. Přínos v 65 letech: +22 494 Kč"
+    ],
+    "predpoklady": [
+     "Předpokládané roční výnosy před poplatky: Transformovaný 1,5 %, Konzervativní 3 %, Vyvážený 4,5 %, Akciový 7 %. Inflace 2,5 % ročně.",
+     "Strategie životního cyklu je předpoklad aplikace, ne zákon: do 45 let 100 % akcie (výnos 7 %), pak lineárně dolů na 20 % akcií v 65 letech, zbytek dluhopisy (3 %).",
+     "Zjednodušení poplatků: poplatek za správu se strhává měsíčně z průměrného zůstatku v měsíci, poplatek ze zhodnocení jen z kladného ročního výnosu (po poplatku za správu). Ztráty z minulých let se nepřevádějí.",
+     "Transformovaný fond počítáme do 31. 12. 2036, potom jako fond „Konzervativní“.",
+     "Zvolená sada pravidel platí v projekci po celou dobu. Vklady se nemění ani nezvyšují s inflací, věk se bere v celých letech.",
+     "Návrh 2027: strop poplatku za správu 0,5 %, bez poplatku ze zhodnocení. Pro 30 let a více zůstává příspěvek jako dnes, odpočet od daně beze změny.",
+     "Doporučení počítají s příspěvkem zaměstnavatele 500 Kč měsíčně a s přechodem do fondu „Životní cyklus“.",
+     "Daňový odpočet je jen informativní. Výplata po 65 letech se nemodeluje."
+    ],
+    "zdroje": [
+     {
+      "text": "Zákon č. 427/2011 Sb., o doplňkovém penzijním spoření (§ 14 státní příspěvek)",
+      "href": "https://www.zakonyprolidi.cz/cs/2011-427",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "Zákon č. 586/1992 Sb., o daních z příjmů (§ 15a)",
+      "href": "https://www.zakonyprolidi.cz/cs/1992-586",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "MF ČR – Státní podpora penzijního spoření",
+      "href": "https://mf.gov.cz/cs/financni-trh/penzijni-sporeni",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "MF ČR – prezentace Lepší penzijko (3. 6. 2026)",
+      "href": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf",
+      "pozn": "(Návrh „Lepší penzijko“ (od 2027), ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "Finance.cz – Penzijní spoření čeká revoluce, schválila vláda",
+      "href": "https://www.finance.cz/aktuality/penzijni-sporeni-ceka-revoluce-snizi-se-poplatky-a-pro-nekoho-se-zvysi-statni-prispevky/",
+      "pozn": "(Návrh „Lepší penzijko“ (od 2027), ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "KB Penzijní společnost – sazebník (typické poplatky 2026)",
+      "href": "https://www.kb.cz/getmedia/bff31c8a-0113-467a-89ed-e89a8ac41a71/sazebnik-ps.pdf",
+      "pozn": "(typické poplatky)"
+     },
+     {
+      "text": "Finex – Transformované vs. účastnické fondy",
+      "href": "https://finex.cz/transformovane-vs-ucastnicke-fondy/",
+      "pozn": "(typické poplatky)"
+     }
+    ],
+    "grafSkryty": false,
+    "grafChyba": false,
+    "chyboveHlasky": [],
+    "hodnotyPoli": {
+     "vek": "35",
+     "delkaSmlouvy": "8",
+     "vklad": "1000",
+     "zamestnavatel": "0",
+     "zustatek": "150000",
+     "sprava": "0.8",
+     "zhodnoceni": "10",
+     "duchodce": false,
+     "sada": "navrh2027"
+    }
+   },
+   "modul": {
+    "stat": {
+     "2026": {
+      "mesicne": 200,
+      "rocne": 2400
+     },
+     "navrh2027": {
+      "mesicne": 200,
+      "rocne": 2400
+     }
+    },
+    "odpocetRocne": 0,
+    "uspora": 0,
+    "realne": 406441,
+    "nominal": 852538,
+    "statni": 72000,
+    "poplatky": 93228,
+    "tabulka": {
+     "transformovany": {
+      "realne": 406441,
+      "nominal": 852538,
+      "poplatky": 93228
+     },
+     "konzervativni": {
+      "realne": 439226,
+      "nominal": 921306,
+      "poplatky": 96703
+     },
+     "vyvazeny": {
+      "realne": 498607,
+      "nominal": 1045861,
+      "poplatky": 242284
+     },
+     "akciovy": {
+      "realne": 783611,
+      "nominal": 1643678,
+      "poplatky": 403981
+     },
+     "zivotniCyklus": {
+      "realne": 624836,
+      "nominal": 1310635,
+      "poplatky": 327637
+     }
+    },
+    "poplatkyRozdilNominal": 50018,
+    "poplatkyDnes": 852538,
+    "poplatkyStrop": 902557,
+    "kroky": [
+     {
+      "id": "fond",
+      "prinos": 218394
+     },
+     {
+      "id": "zamestnavatel",
+      "prinos": 119235
+     },
+     {
+      "id": "vklad",
+      "prinos": 22494
+     }
+    ],
+    "tf": {
+     "zustat": 406441,
+     "prejit": 624836,
+     "rozdil": 218394
+    }
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axeSvetly": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 4,
+     "uzly": [
+      "#poplatky-obsah > .srovnani > div:nth-child(1) > small",
+      "#poplatky-obsah > .srovnani > div:nth-child(2) > small",
+      "#tf-obsah > .srovnani > div:nth-child(1) > small"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ],
+   "tab": [
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Věk\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Délka smlouvy\n            let",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Tvůj měsíční vklad\n          Kč",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Příspěvek zaměstnavatele\n          Kč/měs",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Dosavadní zůstatek\n          Kč",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "select",
+     "id": "fond",
+     "typ": "select-one",
+     "popisek": "Typ fondu\n          TransformovanýKonzervativníVyváženýAkciovýŽivotní cyklus (strategie)",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Za správu\n              % ročně",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "number",
+     "popisek": "Ze zhodnocení\n              %",
+     "fokusViditelny": false
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "checkbox",
+     "popisek": "Pobírám starobní důchod",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "input",
+     "id": "",
+     "typ": "radio",
+     "popisek": "Pravidla 2026",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Reálně",
+     "fokusViditelny": true
+    },
+    {
+     "tag": "button",
+     "id": "",
+     "typ": "button",
+     "popisek": "Nominálně",
+     "fokusViditelny": true
+    }
+   ],
+   "fokusNaObalu": [
+    {
+     "pole": "vek",
+     "outline": "solid",
+     "sirka": "2px"
+    },
+    {
+     "pole": "delkaSmlouvy",
+     "outline": "solid",
+     "sirka": "2px"
+    },
+    {
+     "pole": "vklad",
+     "outline": "solid",
+     "sirka": "2px"
+    },
+    {
+     "pole": "zamestnavatel",
+     "outline": "solid",
+     "sirka": "2px"
+    },
+    {
+     "pole": "zustatek",
+     "outline": "solid",
+     "sirka": "2px"
+    },
+    {
+     "pole": "sprava",
+     "outline": "solid",
+     "sirka": "2px"
+    },
+    {
+     "pole": "zhodnoceni",
+     "outline": "solid",
+     "sirka": "2px"
+    }
+   ],
+   "poPrepnutiNaNavrh": {
+    "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 430 287 Kč v dnešních penězích (902 557 Kč nominálně). Z toho státní příspěvky 72 000 Kč, poplatky tě budou stát 58 344 Kč. Počítáno podle: Návrh „Lepší penzijko“ (od 2027) návrh, zatím neschváleno",
+    "hlavniStitek": "návrh, zatím neschváleno",
+    "tf": "Zůstat v transformovaném430 287 Kčv 65 letech, dnešní peníze Přejít do „Životní cyklus“821 820 Kčv 65 letech, dnešní peníze Přechod ti podle předpokladů přinese o 391 532 Kč víc (v dnešních penězích). Transformované fondy skončí 31. 12. 2036, pak se peníze převedou do fondu „Konzervativní“. Jejich výhodou je, že nesmějí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos. Vyber účastnický fond nebo strategii u své současné penzijní společnosti. Přechod v rámci společnosti je zdarma. Podej žádost o převod (smlouva o doplňkovém penzijním spoření) v klientské zóně nebo na pobočce. Převod obvykle trvá několik týdnů. Zpět do transformovaného fondu se vrátit nejde. Po převodu zkontroluj výpis a nastav vklad tak, aby ti chodil maximální státní příspěvek. Převod ke konkurenci: smlouva trvá aspoň 5 let, převod je zdarma.",
+    "tfStitky": [],
+    "kroky": [
+     "Změň fond na „Životní cyklus“ Přechod z transformovaného do účastnického fondu téže společnosti je zdarma. Zpět se už vrátit nejde. Přínos v 65 letech: +391 532 Kč návrh, zatím neschváleno",
+     "Řekni si zaměstnavateli o příspěvek Počítáme s 500 Kč měsíčně. Pro firmu je příspěvek daňově zvýhodněný a do státního příspěvku se nepočítá. Přínos v 65 letech: +124 582 Kč návrh, zatím neschváleno",
+     "Navyš vklad na 1 700 Kč měsíčně Stát ti pak přidá 340 Kč místo 200 Kč měsíčně. Ze svého dáš navíc 700 Kč měsíčně. Přínos v 65 letech: +31 478 Kč návrh, zatím neschváleno"
+    ]
+   },
+   "modulNavrh": {
+    "stat": {
+     "2026": {
+      "mesicne": 200,
+      "rocne": 2400
+     },
+     "navrh2027": {
+      "mesicne": 200,
+      "rocne": 2400
+     }
+    },
+    "odpocetRocne": 0,
+    "uspora": 0,
+    "realne": 430287,
+    "nominal": 902557,
+    "statni": 72000,
+    "poplatky": 58344,
+    "tabulka": {
+     "transformovany": {
+      "realne": 430287,
+      "nominal": 902557,
+      "poplatky": 58344
+     },
+     "konzervativni": {
+      "realne": 463300,
+      "nominal": 971803,
+      "poplatky": 61005
+     },
+     "vyvazeny": {
+      "realne": 621254,
+      "nominal": 1303122,
+      "poplatky": 92412
+     },
+     "akciovy": {
+      "realne": 1075575,
+      "nominal": 2256092,
+      "poplatky": 133589
+     },
+     "zivotniCyklus": {
+      "realne": 821820,
+      "nominal": 1723822,
+      "poplatky": 120330
+     }
+    },
+    "poplatkyRozdilNominal": 50018,
+    "poplatkyDnes": 852538,
+    "poplatkyStrop": 902557,
+    "kroky": [
+     {
+      "id": "fond",
+      "prinos": 391532
+     },
+     {
+      "id": "zamestnavatel",
+      "prinos": 124582
+     },
+     {
+      "id": "vklad",
+      "prinos": 31478
+     }
+    ],
+    "tf": {
+     "zustat": 430287,
+     "prejit": 821820,
+     "rozdil": 391532
+    }
+   },
+   "axeTmavy": [],
+   "localStorage": {},
+   "xss": {
+    "vlozenyImg": false
+   },
+   "sit": [
+    "http://127.0.0.1:41281/",
+    "http://127.0.0.1:41281/styles.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+    "http://127.0.0.1:41281/app.js",
+    "http://127.0.0.1:41281/calc.js",
+    "http://127.0.0.1:41281/rules.json"
+   ],
+   "konzole": [],
+   "chyby": [],
+   "dialogy": []
+  },
+  "A-vychozi-1440": {
+   "obrazovka": {
+    "karty": [
+     {
+      "nazev": "Platná pravidla 2026",
+      "stitek": "platí",
+      "mesicne": "200 Kč",
+      "rocne": "2 400 Kč za rok",
+      "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč."
+     },
+     {
+      "nazev": "Návrh „Lepší penzijko“ (od 2027)",
+      "stitek": "návrh, zatím neschváleno",
+      "mesicne": "200 Kč",
+      "rocne": "2 400 Kč za rok",
+      "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč."
+     }
+    ],
+    "odpocet": "Daňový odpočet se týká jen vlastních vkladů nad 1 700 Kč měsíčně. Limit 48 000 Kč ročně je společný s DIP a životním pojištěním, plný výpočet udělá Plán48.",
+    "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 406 441 Kč v dnešních penězích (852 538 Kč nominálně). Z toho státní příspěvky 72 000 Kč, poplatky tě budou stát 93 228 Kč. Počítáno podle: Platná pravidla 2026 platí",
+    "hlavniStitek": "platí",
+    "tabulka": [
+     [
+      "Transformovanýtvůj fond",
+      "406 441",
+      "852 538",
+      "93 228"
+     ],
+     [
+      "Konzervativní",
+      "439 226",
+      "921 306",
+      "96 703"
+     ],
+     [
+      "Vyvážený",
+      "498 607",
+      "1 045 861",
+      "242 284"
+     ],
+     [
+      "Akciový",
+      "783 611",
+      "1 643 678",
+      "403 981"
+     ],
+     [
+      "Životní cyklus",
+      "624 836",
+      "1 310 635",
+      "327 637"
+     ]
+    ],
+    "poplatky": "+50 018 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 23 846 Kč. Dnešní poplatky852 538 Kč0,8 % za správu + 10 % ze zhodnocenízaplatíš 93 228 Kč Se stropem z návrhu902 557 Kč0,5 % za správu, bez poplatku ze zhodnocenízaplatíš 58 344 Kč Obě varianty počítají se stejnými vklady a výnosy. Částky v 65 letech jsou nominální.",
+    "poplatkyStitek": "návrh, zatím neschváleno",
+    "tfSkryta": false,
+    "tf": "Zůstat v transformovaném406 441 Kčv 65 letech, dnešní peníze Přejít do „Životní cyklus“624 836 Kčv 65 letech, dnešní peníze Přechod ti podle předpokladů přinese o 218 394 Kč víc (v dnešních penězích). Transformované fondy skončí 31. 12. 2036, pak se peníze převedou do fondu „Konzervativní“. Jejich výhodou je, že nesmějí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos. Vyber účastnický fond nebo strategii u své současné penzijní společnosti. Přechod v rámci společnosti je zdarma. Podej žádost o převod (smlouva o doplňkovém penzijním spoření) v klientské zóně nebo na pobočce. Převod obvykle trvá několik týdnů. Zpět do transformovaného fondu se vrátit nejde. Po převodu zkontroluj výpis a nastav vklad tak, aby ti chodil maximální státní příspěvek. Převod ke konkurenci: smlouva trvá aspoň 5 let, převod je zdarma.",
+    "tfStitky": [],
+    "kroky": [
+     "Změň fond na „Životní cyklus“ Přechod z transformovaného do účastnického fondu téže společnosti je zdarma. Zpět se už vrátit nejde. Přínos v 65 letech: +218 394 Kč",
+     "Řekni si zaměstnavateli o příspěvek Počítáme s 500 Kč měsíčně. Pro firmu je příspěvek daňově zvýhodněný a do státního příspěvku se nepočítá. Přínos v 65 letech: +119 235 Kč",
+     "Navyš vklad na 1 700 Kč měsíčně Stát ti pak přidá 340 Kč místo 200 Kč měsíčně. Ze svého dáš navíc 700 Kč měsíčně. Přínos v 65 letech: +22 494 Kč"
+    ],
+    "predpoklady": [
+     "Předpokládané roční výnosy před poplatky: Transformovaný 1,5 %, Konzervativní 3 %, Vyvážený 4,5 %, Akciový 7 %. Inflace 2,5 % ročně.",
+     "Strategie životního cyklu je předpoklad aplikace, ne zákon: do 45 let 100 % akcie (výnos 7 %), pak lineárně dolů na 20 % akcií v 65 letech, zbytek dluhopisy (3 %).",
+     "Zjednodušení poplatků: poplatek za správu se strhává měsíčně z průměrného zůstatku v měsíci, poplatek ze zhodnocení jen z kladného ročního výnosu (po poplatku za správu). Ztráty z minulých let se nepřevádějí.",
+     "Transformovaný fond počítáme do 31. 12. 2036, potom jako fond „Konzervativní“.",
+     "Zvolená sada pravidel platí v projekci po celou dobu. Vklady se nemění ani nezvyšují s inflací, věk se bere v celých letech.",
+     "Návrh 2027: strop poplatku za správu 0,5 %, bez poplatku ze zhodnocení. Pro 30 let a více zůstává příspěvek jako dnes, odpočet od daně beze změny.",
+     "Doporučení počítají s příspěvkem zaměstnavatele 500 Kč měsíčně a s přechodem do fondu „Životní cyklus“.",
+     "Daňový odpočet je jen informativní. Výplata po 65 letech se nemodeluje."
+    ],
+    "zdroje": [
+     {
+      "text": "Zákon č. 427/2011 Sb., o doplňkovém penzijním spoření (§ 14 státní příspěvek)",
+      "href": "https://www.zakonyprolidi.cz/cs/2011-427",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "Zákon č. 586/1992 Sb., o daních z příjmů (§ 15a)",
+      "href": "https://www.zakonyprolidi.cz/cs/1992-586",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "MF ČR – Státní podpora penzijního spoření",
+      "href": "https://mf.gov.cz/cs/financni-trh/penzijni-sporeni",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "MF ČR – prezentace Lepší penzijko (3. 6. 2026)",
+      "href": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf",
+      "pozn": "(Návrh „Lepší penzijko“ (od 2027), ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "Finance.cz – Penzijní spoření čeká revoluce, schválila vláda",
+      "href": "https://www.finance.cz/aktuality/penzijni-sporeni-ceka-revoluce-snizi-se-poplatky-a-pro-nekoho-se-zvysi-statni-prispevky/",
+      "pozn": "(Návrh „Lepší penzijko“ (od 2027), ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "KB Penzijní společnost – sazebník (typické poplatky 2026)",
+      "href": "https://www.kb.cz/getmedia/bff31c8a-0113-467a-89ed-e89a8ac41a71/sazebnik-ps.pdf",
+      "pozn": "(typické poplatky)"
+     },
+     {
+      "text": "Finex – Transformované vs. účastnické fondy",
+      "href": "https://finex.cz/transformovane-vs-ucastnicke-fondy/",
+      "pozn": "(typické poplatky)"
+     }
+    ],
+    "grafSkryty": false,
+    "grafChyba": false,
+    "chyboveHlasky": [],
+    "hodnotyPoli": {
+     "vek": "35",
+     "delkaSmlouvy": "8",
+     "vklad": "1000",
+     "zamestnavatel": "0",
+     "zustatek": "150000",
+     "sprava": "0.8",
+     "zhodnoceni": "10",
+     "duchodce": false,
+     "sada": "navrh2027"
+    }
+   },
+   "modul": {
+    "stat": {
+     "2026": {
+      "mesicne": 200,
+      "rocne": 2400
+     },
+     "navrh2027": {
+      "mesicne": 200,
+      "rocne": 2400
+     }
+    },
+    "odpocetRocne": 0,
+    "uspora": 0,
+    "realne": 406441,
+    "nominal": 852538,
+    "statni": 72000,
+    "poplatky": 93228,
+    "tabulka": {
+     "transformovany": {
+      "realne": 406441,
+      "nominal": 852538,
+      "poplatky": 93228
+     },
+     "konzervativni": {
+      "realne": 439226,
+      "nominal": 921306,
+      "poplatky": 96703
+     },
+     "vyvazeny": {
+      "realne": 498607,
+      "nominal": 1045861,
+      "poplatky": 242284
+     },
+     "akciovy": {
+      "realne": 783611,
+      "nominal": 1643678,
+      "poplatky": 403981
+     },
+     "zivotniCyklus": {
+      "realne": 624836,
+      "nominal": 1310635,
+      "poplatky": 327637
+     }
+    },
+    "poplatkyRozdilNominal": 50018,
+    "poplatkyDnes": 852538,
+    "poplatkyStrop": 902557,
+    "kroky": [
+     {
+      "id": "fond",
+      "prinos": 218394
+     },
+     {
+      "id": "zamestnavatel",
+      "prinos": 119235
+     },
+     {
+      "id": "vklad",
+      "prinos": 22494
+     }
+    ],
+    "tf": {
+     "zustat": 406441,
+     "prejit": 624836,
+     "rozdil": 218394
+    }
+   },
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "sit": [
+    "http://127.0.0.1:41281/",
+    "http://127.0.0.1:41281/styles.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+    "http://127.0.0.1:41281/app.js",
+    "http://127.0.0.1:41281/calc.js",
+    "http://127.0.0.1:41281/rules.json"
+   ],
+   "konzole": [],
+   "chyby": [],
+   "dialogy": []
+  },
+  "B-25-akciovy-navrh": {
+   "obrazovka": {
+    "karty": [
+     {
+      "nazev": "Platná pravidla 2026",
+      "stitek": "platí",
+      "mesicne": "340 Kč",
+      "rocne": "4 080 Kč za rok",
+      "vysvetleni": "Máš maximum. Vklad nad 1 700 Kč už příspěvek nezvýší, ale může snížit daň."
+     },
+     {
+      "nazev": "Návrh „Lepší penzijko“ (od 2027)",
+      "stitek": "návrh, zatím neschváleno",
+      "mesicne": "680 Kč",
+      "rocne": "8 160 Kč za rok",
+      "vysvetleni": "Máš maximum. Vklad nad 1 700 Kč už příspěvek nezvýší, ale může snížit daň. Vyšší sazba platí do 30. narozenin."
+     }
+    ],
+    "odpocet": "Daňový odpočet se týká jen vlastních vkladů nad 1 700 Kč měsíčně. Limit 48 000 Kč ročně je společný s DIP a životním pojištěním, plný výpočet udělá Plán48. Příspěvek zaměstnavatele se do státního příspěvku ani do odpočtu nepočítá.",
+    "hlavni": "Ve fondu „Akciový“ budeš mít v 65 letech přibližně 2 115 157 Kč v dnešních penězích (5 679 331 Kč nominálně). Z toho státní příspěvky 183 600 Kč, poplatky tě budou stát 354 280 Kč. Počítáno podle: Návrh „Lepší penzijko“ (od 2027) návrh, zatím neschváleno",
+    "hlavniStitek": "návrh, zatím neschváleno",
+    "tabulka": [
+     [
+      "Transformovaný",
+      "785 183",
+      "2 108 268",
+      "142 086"
+     ],
+     [
+      "Konzervativní",
+      "809 491",
+      "2 173 536",
+      "146 163"
+     ],
+     [
+      "Vyvážený",
+      "1 125 807",
+      "3 022 864",
+      "228 525"
+     ],
+     [
+      "Akciovýtvůj fond",
+      "2 115 157",
+      "5 679 331",
+      "354 280"
+     ],
+     [
+      "Životní cyklus",
+      "1 611 578",
+      "4 327 189",
+      "320 410"
+     ]
+    ],
+    "poplatky": "+1 740 070 Kč tolik bys měl v 65 letech navíc, kdyby platil navrhovaný strop (0,5 % za správu, bez poplatku ze zhodnocení). V dnešních penězích je to 648 055 Kč. Dnešní poplatky3 939 261 Kč1 % za správu + 15 % ze zhodnocenízaplatíš 1 027 253 Kč Se stropem z návrhu5 679 331 Kč0,5 % za správu, bez poplatku ze zhodnocenízaplatíš 354 280 Kč Obě varianty počítají se stejnými vklady a výnosy. Částky v 65 letech jsou nominální.",
+    "poplatkyStitek": "návrh, zatím neschváleno",
+    "tfSkryta": true,
+    "tf": "Zůstat v transformovaném723 293 Kčv 65 letech, dnešní peníze Přejít do „Životní cyklus“1 129 551 Kčv 65 letech, dnešní peníze Přechod ti podle předpokladů přinese o 406 258 Kč víc (v dnešních penězích). Transformované fondy skončí 31. 12. 2036, pak se peníze převedou do fondu „Konzervativní“. Jejich výhodou je, že nesmějí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos. Vyber účastnický fond nebo strategii u své současné penzijní společnosti. Přechod v rámci společnosti je zdarma. Podej žádost o převod (smlouva o doplňkovém penzijním spoření) v klientské zóně nebo na pobočce. Převod obvykle trvá několik týdnů. Zpět do transformovaného fondu se vrátit nejde. Po převodu zkontroluj výpis a nastav vklad tak, aby ti chodil maximální státní příspěvek. Převod ke konkurenci: smlouva trvá aspoň 5 let, převod je zdarma.",
+    "tfStitky": [],
+    "kroky": [
+     "Nemáme co doporučit: vklad, fond i příspěvek zaměstnavatele máš nastavené dobře."
+    ],
+    "predpoklady": [
+     "Předpokládané roční výnosy před poplatky: Transformovaný 1,5 %, Konzervativní 3 %, Vyvážený 4,5 %, Akciový 7 %. Inflace 2,5 % ročně.",
+     "Strategie životního cyklu je předpoklad aplikace, ne zákon: do 45 let 100 % akcie (výnos 7 %), pak lineárně dolů na 20 % akcií v 65 letech, zbytek dluhopisy (3 %).",
+     "Zjednodušení poplatků: poplatek za správu se strhává měsíčně z průměrného zůstatku v měsíci, poplatek ze zhodnocení jen z kladného ročního výnosu (po poplatku za správu). Ztráty z minulých let se nepřevádějí.",
+     "Transformovaný fond počítáme do 31. 12. 2036, potom jako fond „Konzervativní“.",
+     "Zvolená sada pravidel platí v projekci po celou dobu. Vklady se nemění ani nezvyšují s inflací, věk se bere v celých letech.",
+     "Návrh 2027: strop poplatku za správu 0,5 %, bez poplatku ze zhodnocení. Pro 30 let a více zůstává příspěvek jako dnes, odpočet od daně beze změny.",
+     "Doporučení počítají s příspěvkem zaměstnavatele 500 Kč měsíčně a s přechodem do fondu „Životní cyklus“.",
+     "Daňový odpočet je jen informativní. Výplata po 65 letech se nemodeluje."
+    ],
+    "zdroje": [
+     {
+      "text": "Zákon č. 427/2011 Sb., o doplňkovém penzijním spoření (§ 14 státní příspěvek)",
+      "href": "https://www.zakonyprolidi.cz/cs/2011-427",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "Zákon č. 586/1992 Sb., o daních z příjmů (§ 15a)",
+      "href": "https://www.zakonyprolidi.cz/cs/1992-586",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "MF ČR – Státní podpora penzijního spoření",
+      "href": "https://mf.gov.cz/cs/financni-trh/penzijni-sporeni",
+      "pozn": "(Platná pravidla 2026, ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "MF ČR – prezentace Lepší penzijko (3. 6. 2026)",
+      "href": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf",
+      "pozn": "(Návrh „Lepší penzijko“ (od 2027), ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "Finance.cz – Penzijní spoření čeká revoluce, schválila vláda",
+      "href": "https://www.finance.cz/aktuality/penzijni-sporeni-ceka-revoluce-snizi-se-poplatky-a-pro-nekoho-se-zvysi-statni-prispevky/",
+      "pozn": "(Návrh „Lepší penzijko“ (od 2027), ověřeno 4. 11. 2026)"
+     },
+     {
+      "text": "KB Penzijní společnost – sazebník (typické poplatky 2026)",
+      "href": "https://www.kb.cz/getmedia/bff31c8a-0113-467a-89ed-e89a8ac41a71/sazebnik-ps.pdf",
+      "pozn": "(typické poplatky)"
+     },
+     {
+      "text": "Finex – Transformované vs. účastnické fondy",
+      "href": "https://finex.cz/transformovane-vs-ucastnicke-fondy/",
+      "pozn": "(typické poplatky)"
+     }
+    ],
+    "grafSkryty": false,
+    "grafChyba": false,
+    "chyboveHlasky": [],
+    "hodnotyPoli": {
+     "vek": "25",
+     "delkaSmlouvy": "2",
+     "vklad": "1700",
+     "zamestnavatel": "500",
+     "zustatek": "0",
+     "sprava": "1",
+     "zhodnoceni": "15",
+     "duchodce": false,
+     "sada": "navrh2027"
+    }
+   },
+   "modul": {
+    "stat": {
+     "2026": {
+      "mesicne": 340,
+      "rocne": 4080
+     },
+     "navrh2027": {
+      "mesicne": 680,
+      "rocne": 8160
+     }
+    },
+    "odpocetRocne": 0,
+    "uspora": 0,
+    "realne": 2115157,
+    "nominal": 5679331,
+    "statni": 183600,
+    "poplatky": 354280,
+    "tabulka": {
+     "transformovany": {
+      "realne": 785183,
+      "nominal": 2108268,
+      "poplatky": 142086
+     },
+     "konzervativni": {
+      "realne": 809491,
+      "nominal": 2173536,
+      "poplatky": 146163
+     },
+     "vyvazeny": {
+      "realne": 1125807,
+      "nominal": 3022864,
+      "poplatky": 228525
+     },
+     "akciovy": {
+      "realne": 2115157,
+      "nominal": 5679331,
+      "poplatky": 354280
+     },
+     "zivotniCyklus": {
+      "realne": 1611578,
+      "nominal": 4327189,
+      "poplatky": 320410
+     }
+    },
+    "poplatkyRozdilNominal": 1740070,
+    "poplatkyDnes": 3939261,
+    "poplatkyStrop": 5679331,
+    "kroky": []
+   },
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "axe": [
+    {
+     "id": "color-contrast",
+     "dopad": "serious",
+     "popis": "Elements must meet minimum color contrast ratio thresholds",
+     "pocet": 2,
+     "uzly": [
+      "#poplatky-obsah > .srovnani > div:nth-child(1) > small",
+      "#poplatky-obsah > .srovnani > div:nth-child(2) > small"
+     ],
+     "tags": [
+      "wcag2aa",
+      "wcag143"
+     ]
+    }
+   ],
+   "konzole": []
+  },
+  "C-ceska-cisla": {
+   "1 500": {
+    "hodnotaPole": "1500",
+    "validity": {
+     "valid": true,
+     "badInput": false,
+     "valueAsNumber": 1500
+    },
+    "karta2026": "300 Kč",
+    "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč.",
+    "chyboveHlasky": []
+   },
+   "1500,50": {
+    "hodnotaPole": "150050",
+    "validity": {
+     "valid": false,
+     "badInput": false,
+     "valueAsNumber": 150050
+    },
+    "karta2026": "340 Kč",
+    "vysvetleni": "Máš maximum. Vklad nad 1 700 Kč už příspěvek nezvýší, ale může snížit daň.",
+    "chyboveHlasky": [
+     "<form id=\"formular\" novalidate=\"\">\n        <div class=\"pole-rada\">\n          <label class=\"pole\">\n            <span>Věk<",
+     "<input name=\"vklad\" type=\"number\" inputmode=\"numeric\" min=\"0\" step=\"100\" value=\"1000\">"
+    ]
+   },
+   "1500.50": {
+    "hodnotaPole": "1500.50",
+    "validity": {
+     "valid": false,
+     "badInput": false,
+     "valueAsNumber": 1500.5
+    },
+    "karta2026": "300 Kč",
+    "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč.",
+    "chyboveHlasky": [
+     "<form id=\"formular\" novalidate=\"\">\n        <div class=\"pole-rada\">\n          <label class=\"pole\">\n            <span>Věk<",
+     "<input name=\"vklad\" type=\"number\" inputmode=\"numeric\" min=\"0\" step=\"100\" value=\"1000\">"
+    ]
+   },
+   "1.500": {
+    "hodnotaPole": "1.500",
+    "validity": {
+     "valid": false,
+     "badInput": false,
+     "valueAsNumber": 1.5
+    },
+    "karta2026": "0 Kč",
+    "vysvetleni": "Příspěvek začíná od vkladu 500 Kč měsíčně.",
+    "chyboveHlasky": [
+     "<form id=\"formular\" novalidate=\"\">\n        <div class=\"pole-rada\">\n          <label class=\"pole\">\n            <span>Věk<",
+     "<input name=\"vklad\" type=\"number\" inputmode=\"numeric\" min=\"0\" step=\"100\" value=\"1000\">"
+    ]
+   },
+   "1e3": {
+    "hodnotaPole": "1e3",
+    "validity": {
+     "valid": true,
+     "badInput": false,
+     "valueAsNumber": 1000
+    },
+    "karta2026": "200 Kč",
+    "vysvetleni": "20 % z vkladu. Maximum 340 Kč dostaneš při vkladu 1 700 Kč.",
+    "chyboveHlasky": []
+   }
+  },
+  "D-nesmyslne-vstupy": {
+   "zapornyVkladAPoplatek": {
+    "hodnotyPoli": {
+     "vek": "35",
+     "delkaSmlouvy": "8",
+     "vklad": "-500",
+     "zamestnavatel": "0",
+     "zustatek": "",
+     "sprava": "-1",
+     "zhodnoceni": "10",
+     "duchodce": false,
+     "sada": "navrh2027"
+    },
+    "karta2026": {
+     "nazev": "Platná pravidla 2026",
+     "stitek": "platí",
+     "mesicne": "0 Kč",
+     "rocne": "0 Kč za rok",
+     "vysvetleni": "Příspěvek začíná od vkladu 500 Kč měsíčně."
+    },
+    "poplatky": "0 KčTvoje poplatky už jsou pod navrhovaným stropem (0,5 % za správu, bez poplatku ze zhodnocení). Dnešní poplatky0 Kč0 % za správu + 10 % ze zhodnocenízaplatíš 0 Kč Se stropem z návrhu0 Kč0,5 % za správu, bez poplatku ze zhodnocenízaplatíš 0 Kč Obě varianty počítají se stejnými vklady a výnosy. Částky v 65 letech jsou nominální.",
+    "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 0 Kč v dnešních penězích (0 Kč nominálně). Z toho státní příspěvky 0 Kč, poplatky tě budou stát 0 Kč. Počítáno podle: Platná pravidla 2026 platí",
+    "chyboveHlasky": [
+     "<form id=\"formular\" novalidate=\"\">\n        <div class=\"pole-rada\">\n          <label class=\"pole\">\n            <span>Věk<",
+     "<input name=\"vklad\" type=\"number\" inputmode=\"numeric\" min=\"0\" step=\"100\" value=\"1000\">",
+     "<fieldset class=\"poplatky-pole\">\n          <legend>Poplatky fondu <small>(předvyplněné typické, lze přepsat)</small></le",
+     "<input name=\"sprava\" type=\"number\" inputmode=\"decimal\" min=\"0\" max=\"5\" step=\"0.05\">"
+    ],
+    "kroky": [
+     "Řekni si zaměstnavateli o příspěvek Počítáme s 500 Kč měsíčně. Pro firmu je příspěvek daňově zvýhodněný a do státního příspěvku se nepočítá. Přínos v 65 letech: +121 018 Kč",
+     "Navyš vklad na 1 700 Kč měsíčně Stát ti pak přidá 340 Kč místo 0 Kč měsíčně. Ze svého dáš navíc 1 700 Kč měsíčně. Přínos v 65 letech: +61 904 Kč"
+    ]
+   },
+   "vek150": {
+    "hlavni": "Projekce se počítá do 65 let. Tvůj zůstatek je 0 Kč.",
+    "karty": [
+     "200 Kč",
+     "200 Kč"
+    ],
+    "kroky": [
+     "Doporučení počítáme pro spoření do 65 let."
+    ],
+    "chyboveHlasky": [
+     "<form id=\"formular\" novalidate=\"\">\n        <div class=\"pole-rada\">\n          <label class=\"pole\">\n            <span>Věk<",
+     "<input name=\"vek\" type=\"number\" inputmode=\"numeric\" min=\"0\" max=\"99\" step=\"1\" value=\"35\">"
+    ]
+   },
+   "prazdnyVekAVklad": {
+    "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 0 Kč v dnešních penězích (0 Kč nominálně). Z toho státní příspěvky 0 Kč, poplatky tě budou stát 0 Kč. Počítáno podle: Platná pravidla 2026 platí",
+    "karty": [
+     "0 Kč Příspěvek začíná od vkladu 500 Kč měsíčně.",
+     "0 Kč Příspěvek začíná od vkladu 100 Kč měsíčně. Vyšší sazba platí do 18. narozenin."
+    ],
+    "chyboveHlasky": []
+   },
+   "konzole": []
+  },
+  "E1-bez-rules": {
+   "text": "Nepodařilo se načíst rules.json. Stránku spusť přes webový server (viz README), ne otevřením souboru.",
+   "konzole": [
+    {
+     "typ": "error",
+     "text": "Failed to load resource: net::ERR_FAILED"
+    }
+   ]
+  },
+  "E2-bez-cdnjs": {
+   "grafSkryty": true,
+   "grafChyba": true,
+   "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 406 441 Kč v dnešních penězích (852 538 Kč nominálně). Z toho státní příspěvky 72 000 Kč, poplatky tě budou stát 93 228 Kč. Počítáno podle: Platná pravidla 2026 platí",
+   "tabulkaRadku": 5,
+   "konzole": [
+    "Failed to load resource: net::ERR_FAILED"
+   ]
+  }
+ },
+ "zivy": {
+  "httpStav": 200,
+  "hlavni": "Ve fondu „Transformovaný“ budeš mít v 65 letech přibližně 406 441 Kč v dnešních penězích (852 538 Kč nominálně). Z toho státní příspěvky 72 000 Kč, poplatky tě budou stát 93 228 Kč. Počítáno podle: Platná pravidla 2026 platí",
+  "cizi": [
+   "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+  ],
+  "konzole": [],
+  "chyby": []
+ },
+ "kontrast": {
+  "svetly text-3 #6f6e69 na surface-2 #f0efec (.srovnani small)": 4.44,
+  "svetly text-3 #6f6e69 na surface #fcfcfb (.poznamka)": 4.98,
+  "svetly text-2 #52514e na surface-2 #f0efec": 6.9,
+  "tmavy text-3 #9e9d95 na surface-2 #242422": 5.71,
+  "tmavy text-3 #9e9d95 na surface #1a1a19": 6.4,
+  "stitek warn-ink #8a5a00 na warn-soft #fff3d6": 5.37,
+  "stitek good #006300 na good-soft #e4f3e4": 6.55
+ }
+}

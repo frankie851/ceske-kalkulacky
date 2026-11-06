@@ -1,0 +1,157 @@
+# Ověření zdrojů aplikace (rules.json sources) a úředních textů – 2026-11-05T08:41:57Z – curl -L
+https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf -> HTTP 200 application/pdf 172784 B
+https://msmt.gov.cz/media/wp-content/uploads/2026/08/Metodika_prijimaci-rizeni_2026-2027.pdf -> HTTP 200 application/pdf 913485 B
+https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminech_2026-2027.pdf -> HTTP 200 application/pdf 336780 B
+https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf -> HTTP 200 application/pdf 278310 B
+https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027.pdf -> HTTP 200 application/pdf 3844496 B
+https://prijimacky.cermat.gov.cz/menu/jednotna-prijimaci-zkouska.html -> HTTP 200 text/html 48944 B
+https://www.zakonyprolidi.cz/cs/2004-561 -> HTTP 200 text/html; charset=utf-8 774267 B
+https://www.zakonyprolidi.cz/cs/2023-422 -> HTTP 200 text/html; charset=utf-8 104258 B
+https://frankie851.github.io/prijimacky-bez-paniky/ -> HTTP 200 text/html; charset=utf-8 15608 B
+https://frankie851.github.io/prijimacky-bez-paniky/rules.json -> HTTP 200 application/json; charset=utf-8 11383 B
+
+## Sdělení MŠMT MSMT-525/2026-13 (pdftotext, výňatek)
+    Sdělení Ministerstva školství, mládeže a tělovýchovy, kterým se stanoví termíny
+             konání jednotné přijímací zkoušky ve školním roce 2026/2027
+
+
+                                                                           Praha, srpen 2026
+                                                                           Č. j.: MSMT-525/2026-13
+
+Ministerstvo školství, mládeže a tělovýchovy podle § 9 odst. 1 vyhlášky č. 422/2023 Sb., o přijímacím
+řízení ke střednímu vzdělávání a vzdělávání v konzervatoři, ve znění pozdějších předpisů, stanoví
+termíny konání jednotné přijímací zkoušky v prvním kole přijímacího řízení pro přijetí do 1. ročníku
+u oborů středního vzdělání s maturitní zkouškou stanovených v § 60 odst. 2 zákona č. 561/2004 Sb.,
+o předškolním, základním, středním, vyšším odborném a jiném vzdělávání (školský zákon), ve znění
+pozdějších předpisů, ve všech formách vzdělávání, včetně nástavbového studia, ve školním roce
+2026/2027.
+Jednotná přijímací zkouška, jež se koná formou písemného testu ze vzdělávacího oboru Český jazyk
+a literatura a písemného testu ze vzdělávacího oboru Matematika a její aplikace ve dvou termínech, je
+stanovena v řádném termínu na dny:
+
+Čtyřleté obory vzdělání, včetně nástavbového studia:
+    1. termín: pondělí 12. dubna 2027
+    2. termín: úterý 13. dubna 2027
+Obory šestiletých a osmiletých gymnázií:
+    1. termín: středa 14. dubna 2027
+    2. termín: čtvrtek 15. dubna 2027
+
+
+Jednotná přijímací zkouška v náhradním termínu je stanovena pro všechny uvedené obory vzdělání
+na dny:
+    1. termín: čtvrtek 29. dubna 2027
+    2. termín: pátek 30. dubna 2027
+
+
+Jednotná přijímací zkouška se nekoná při přijímacím řízení do oborů vzdělání se závěrečnou zkouškou,
+do oborů vzdělání s výučním listem, do oborů zkráceného studia a do oborů vzdělání středních škol
+skupiny 82 Umění a užité umění. Možnost konání školní přijímací zkoušky tím není dotčena. Řádný
+termín školní přijímací zkoušky a talentové zkoušky se koná v pracovních dnech v období od 15. března
+do 23. dubna tak, aby se alespoň jeden z termínů konal v jiný den než jednotná přijímací zkouška;
+náhradní termín školní přijímací zkoušky a talentové zkoušky se koná v pracovních dnech v období od
+24. dubna do 5. května tak, aby se konal v jiný den než jednotná přijímací zkouška. V případě oboru
+vzdělání Gymnázium se sportovní přípravou se koná talentová zkouška i jednotná přijímací zkouška
+v termínech uvedených výše.
+                                                      Digitálně podepsal
+                                                      Mgr. Jan Mareš
+                                                      MBA
+                                                      Datum: 2026.08.10
+
+## Časový harmonogram MŠMT 2026/2027 (pdftotext -layout, řádky s termíny SŠ)
+6: Vyhlášení kritérií přijímacího řízení
+11:          Podání přihlášky                          1. - 30. 11.
+21:Řádný termín školní zkoušky (ŠPZ) a
+24:     Náhradní termín ŠPZ a TZ                 18. – 31., resp. 29. 1.        Min. jeden termín v pracovních dnech.
+31:        Vzetí přihlášky zpět                         do 27. 1.
+38:     Přijatí uchazeči dle DiPSy                        3. 2.                      Do 1 dne od předání pořadí.
+50:        Zveřejnění výsledků                            8. 2.                 2. pracovní den od potvrzení přijatých.
+56: Vyhlášení kritérií přijímacího řízení
+61:          Podání přihlášky                    1. - 20., resp. 22. 2.
+79:Řádný termín školní zkoušky (ŠPZ) a                                      Min. dva termíny v pracovních dnech,
+82:                                                4leté: 12. a 13. 4.
+83:          Řádný termín JZ                                                        Období 10. 4. - 18. 4.
+84:                                              víceleté: 14. a 15. 4.
+86:     Náhradní termín ŠPZ a TZ                24., resp. 26. 4. - 5. 5.
+88:        Náhradní termín JZ                         29. a 30. 4.                   Období 24. 4. - 5. 5.
+95:        Vzetí přihlášky zpět                         do 4. 5.
+101:     Přijatí uchazeči dle DiPSy                       11. 5.                  Do 1 dne od předání pořadí.
+113:        Zveřejnění výsledků                           14. 5.             2. pracovní den od potvrzení přijatých.
+118:  Vyhlášení kritérií přijímacího                                               Připadne-li termín či konec lhůty na
+122:         Podání přihlášky                          19. - 24. 5.
+138:     Řádný termín ŠPZ a TZ                          8. - 14. 6.
+146:       Vzetí přihlášky zpět                         do 10. 6.
+154:   Přijatí uchazeči dle DiPSy                         17. 6.                       Do 1 dne od předání pořadí.
+166:      Zveřejnění výsledků                             22. 6.                   2. pracovní den od potvrzení přijatých.
+
+## ŠZ 561/2004 Sb. (zakonyprolidi.cz, znění k 5. 11. 2026) – § 60a odst. 1, § 60b odst. 2–3, § 60h odst. 1–2, § 60i odst. 3, § 60j odst. 2–3, § 60l odst. 1
+§ 60a
+Přihláška
+(1)
+ Pro první kolo přijímacího řízení může uchazeč podat přihlášku nejvýše do 3 oborů středního vzdělání bez talentové zkoušky a do 2 oborů středního vzdělání s talentovou zkouškou.
+(2)
+ Přihlášku podává uchazeč střední škole. Za nezletilého u
+…
+§ 60b
+Pořadí oborů středního vzdělání v přihlášce
+(1)
+ Uchazeč v přihlášce uvede pořadí oborů středního vzdělání, do kterých podává přihlášku.
+(2)
+ Pořadí uvedené v přihlášce vyjadřuje přednostní volbu oboru středního vzdělání.
+(3)
+ Po uplynutí termínu pro podání přihlášky nelze pořadí oborů středního vzdělání změnit. To se netýká práva vzít přihlášku zpět.
+(4)
+ Vzít zpět přihlášku nebo její část lze pouze do dne stanoveného vyhláškou.
+§ 60c
+Podání přihlášky prostřednictvím informačního systému o přijímacím řízení
+…
+§ 60h
+Organizace přijímacích zkoušek
+(1)
+ Uchazeč, který se hlásí alespoň do jednoho oboru středního vzdělání, do kterého se koná jednotná zkouška, může jednotnou zkoušku konat dvakrát. Uchazeč může školní přijímací zkoušku nebo talentovou zkoušku konat jedenkrát v každém oboru středního vzdělání, do kterého podal přihlášku.
+(2)
+ Uchazeč, který se pro vážné důvody k řádnému termínu přijímací zkoušky nedostavil a svoji neúčast písemně nejpozději do 3 pracovních dnů omluvil řediteli školy, ve které měl přijímací zkoušku konat, koná zkoušku v náhradním termínu. V tomto náhradním termínu koná zkoušku i nezletilý uchazeč a uchazeč s nařízenou ústavní výchovou nebo uloženou ochrannou výchovou, který se pro vážné důvody k řádnému termínu přijímací zkoušky nedostavil a jeho neúčast omluvil písemně nejpozději do 3 pracovních dnů řediteli školy zákonný zástupce tohoto uchazeče, popřípadě ředitel příslušného školského zařízení pro výkon ústavní výchovy nebo ochranné výchovy.
+(3)
+ Zadávající učitel může vyloučit uchazeče z konání jednotné zkoušky, školní přijímací nebo talentové zkoušky, pokud u
+…
+(3)
+ Hodnocení jednotné zkoušky se na celkovém hodnocení splnění kritérií přijímacího řízení uchazečem podílí nejméně 60 %; v případě přijímacího řízení do oboru vzdělání Gymnázium se sportovní přípravou nejméně 40 %. Uchazeči se do celkového hodnocení započítává lepší výsledek z písemného testu z českého jazyka a literatury a písemného testu z matematiky. Další hodnocení splnění kritérií stanoví ředitel školy. Ředit
+…
+§ 60j
+Výsledek přijímacího řízení
+(1)
+ Ředitel školy zadá do informačního systému o přijímacím řízení výsledné pořadí uchazečů.
+(2)
+ Pokud splní kritéria přijímacího řízení více uchazečů, než kolik lze přijmout, rozhoduje jejich pořadí podle výsledků hodnocení kritérií přijímacího řízení.
+(3)
+ Umístí-li se uchazeč na místě opravňujícím k přijetí do více oborů středního vzdělání, bude přijat do oboru umístěného z těchto oborů středního vzdělání na přednostnějším pořadí uvedeném v přihlášce podle § 60b; do ostatních oborů středního vzdělání nebude uchazeč přijat.
+(4)
+ Ministerstvo nebo jím zřízená a pověřená právnická osoba podle výsledků dosažených uchazeči při přijímacím řízení a v souladu s pořadím oborů vzdělání v přihlášce informuje ředitele školy o pořadí uchazečů, kteří budou přijati.
+(5)
+ Výsledky přijímacího řízení zveřejní všechny střední školy v den určený prováděcím právním pře
+…
+§ 60l
+Odvolání
+(1)
+ Odvolání lze podat ve lhůtě 3 pracovních dnů ode dne zveřejnění výsledků přijímacího řízení podle § 60j odst. 5.
+(2)
+ Rozhodnutí o přijetí k
+…
+
+## Vyhláška 422/2023 Sb. – § 2, § 9 odst. 1, § 19 odst. 2, § 31
+§ 2
+Lhůta pro odeslání přihlášky
+Lhůta pro odeslání přihlášky je pro první kolo přijímacího řízení od 1. února do 20. února.
+§ 3
+N
+…
+§ 9
+Jednotná zkouška
+(1)
+ Jednotná zkouška se v řádném termínu koná v pracovních dnech v období od 10. dubna do 18. dubna a v náhradním termínu v pracovních dnech v období od 24. dubna do 5. května. Ministerstvo stanoví termíny jednotné zkoušky do 15. srpna předchozího kalendářního roku a časy konání písemných testů do 15. ledna
+…
+(2)
+ Ředitel školy, s výjimkou konzervatoře, do 2 pracovních dnů od posledního dne lhůty pro zpřístupnění výsledků jednotné zkoušky stanoví pořadí uchazečů v přijímacím řízení a předá toto pořadí do informačního systému. Ředitel školy uvede pořadí u každého uchazeče, s výjimkou uchazečů, kteří nesplní kritéria přijímacího řízení. Více uchazečů nesmí sdílet shodné pořadí. Ředitel konzervatoře stanoví pořadí a předá toto pořadí do informačního systému do 2 pracovních dnů od posledního dne období pro konání náhradního
+…
+§ 31
+Připadne-li termín nebo konec lhůty na sobotu, neděli nebo svátek, je termínem nebo posledním dnem lhůty nejbližší příští pracovní den.
+…

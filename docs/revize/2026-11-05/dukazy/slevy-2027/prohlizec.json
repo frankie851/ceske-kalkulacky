@@ -1,0 +1,755 @@
+{
+ "datum": "2026-11-05T08:32:48.282Z",
+ "commit": "d88ba427d8f665161b10071deb45c3a26bd4ac9d",
+ "scenarA360": {
+  "kroky": [
+   {
+    "pred": "Kdy jste se narodili a kolik vyděláváte?",
+    "po": "Studujete v roce 2027?",
+    "chyba": null
+   },
+   {
+    "pred": "Studujete v roce 2027?",
+    "po": "Máte děti?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte děti?",
+    "po": "Chodí některé dítě do školky?",
+    "chyba": null
+   },
+   {
+    "pred": "Chodí některé dítě do školky?",
+    "po": "Manžel nebo manželka",
+    "chyba": null
+   },
+   {
+    "pred": "Manžel nebo manželka",
+    "po": "Invalidita nebo průkaz ZTP/P",
+    "chyba": null
+   },
+   {
+    "pred": "Invalidita nebo průkaz ZTP/P",
+    "po": "Hypotéka nebo úvěr na bydlení",
+    "chyba": null
+   },
+   {
+    "pred": "Hypotéka nebo úvěr na bydlení",
+    "po": "Spoření na stáří",
+    "chyba": null
+   },
+   {
+    "pred": "Spoření na stáří",
+    "po": "Dary a dárcovství krve",
+    "chyba": null
+   },
+   {
+    "pred": "Dary a dárcovství krve",
+    "po": "Máte i jiné příjmy?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte i jiné příjmy?",
+    "po": "VÝSLEDEK",
+    "chyba": null
+   }
+  ],
+  "preteka": {
+   "scrollWidth": 360,
+   "innerWidth": 360,
+   "preteka": false
+  },
+  "axeVysledek": [],
+  "porovnani": {
+   "scenar": "A",
+   "az": {
+    "obrazovka": 141594,
+    "modul": 141594,
+    "reference": 141594,
+    "shoda": true
+   },
+   "realne": {
+    "obrazovka": 118524,
+    "modul": 118524,
+    "reference": 118524,
+    "shoda": true
+   },
+   "polozky": [
+    {
+     "nazev": "Sleva na poplatníka",
+     "obrazovkaRocne": 30840,
+     "modulRocne": 30840,
+     "obrazovkaOdpocet": null,
+     "modulOdpocet": null,
+     "shoda": true,
+     "kde": "Prohlášení poplatníka u zaměstnavatele (měsíčně); co nestihnete, v ročním zúčtování",
+     "kdy": "Podpis do 15. 2. 2027 (při nástupu do 30 dnů)",
+     "mesicne": "2 570 Kč",
+     "stitky": []
+    },
+    {
+     "nazev": "Sleva na manžela/manželku",
+     "obrazovkaRocne": 24840,
+     "modulRocne": 24840,
+     "obrazovkaOdpocet": null,
+     "modulOdpocet": null,
+     "shoda": true,
+     "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+     "kdy": "Žádost do 15. 2. 2028",
+     "mesicne": "–",
+     "stitky": []
+    },
+    {
+     "nazev": "Sleva za umístění dítěte (školkovné)",
+     "obrazovkaRocne": 24900,
+     "modulRocne": 24900,
+     "obrazovkaOdpocet": null,
+     "modulOdpocet": null,
+     "shoda": true,
+     "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+     "kdy": "Žádost do 15. 2. 2028",
+     "mesicne": "–",
+     "stitky": [
+      "Novinka 2027"
+     ]
+    },
+    {
+     "nazev": "Daňové zvýhodnění na děti",
+     "obrazovkaRocne": 37524,
+     "modulRocne": 37524,
+     "obrazovkaOdpocet": null,
+     "modulOdpocet": null,
+     "shoda": true,
+     "kde": "Prohlášení poplatníka u zaměstnavatele (měsíčně); co nestihnete, v ročním zúčtování",
+     "kdy": "Podpis do 15. 2. 2027 (při nástupu do 30 dnů)",
+     "mesicne": "3 127 Kč",
+     "stitky": []
+    },
+    {
+     "nazev": "Produkty spoření na stáří (penzijko, DIP, životní pojištění, pojištění dlouhodobé péče)",
+     "obrazovkaRocne": 3840,
+     "modulRocne": 3840,
+     "obrazovkaOdpocet": 25600,
+     "modulOdpocet": 25600,
+     "shoda": true,
+     "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+     "kdy": "Žádost do 15. 2. 2028",
+     "mesicne": "–",
+     "stitky": []
+    },
+    {
+     "nazev": "Úroky z úvěru na bydlení",
+     "obrazovkaRocne": 18000,
+     "modulRocne": 18000,
+     "obrazovkaOdpocet": 120000,
+     "modulOdpocet": 120000,
+     "shoda": true,
+     "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+     "kdy": "Žádost do 15. 2. 2028",
+     "mesicne": "–",
+     "stitky": []
+    },
+    {
+     "nazev": "Dary",
+     "obrazovkaRocne": 1650,
+     "modulRocne": 1650,
+     "obrazovkaOdpocet": 11000,
+     "modulOdpocet": 11000,
+     "shoda": true,
+     "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+     "kdy": "Žádost do 15. 2. 2028",
+     "mesicne": "–",
+     "stitky": [
+      "Změna 2027"
+     ]
+    }
+   ],
+   "info": [
+    "Novinky roku 2027"
+   ],
+   "souhrn": "Na slevách a zvýhodnění za rok 2027 můžete získat Až 141 594 Kč ročně Při vaší mzdě to reálně dělá 118 524 Kč ročně: daň 57 510 Kč → 0 Kč, k tomu daňový bonus 37 524 Kč.",
+   "fokusPoVysledku": "souhrn__castka"
+  },
+  "tab": [
+   {
+    "tag": "button",
+    "id": "",
+    "typ": "button",
+    "popisek": "← Upravit odpovědi",
+    "fokusViditelny": true
+   },
+   {
+    "tag": "button",
+    "id": "",
+    "typ": "button",
+    "popisek": "Kontrolní seznam k vytištění",
+    "fokusViditelny": true
+   },
+   {
+    "tag": "summary",
+    "id": "",
+    "typ": "",
+    "popisek": "Zdroje",
+    "fokusViditelny": true
+   },
+   {
+    "tag": "button",
+    "id": "",
+    "typ": "button",
+    "popisek": "← Upravit odpovědi",
+    "fokusViditelny": true
+   },
+   {
+    "tag": "button",
+    "id": "",
+    "typ": "button",
+    "popisek": "Kontrolní seznam k vytištění",
+    "fokusViditelny": true
+   },
+   {
+    "tag": "summary",
+    "id": "",
+    "typ": "",
+    "popisek": "Zdroje",
+    "fokusViditelny": true
+   }
+  ]
+ },
+ "seznam360": {
+  "preteka": {
+   "scrollWidth": 360,
+   "innerWidth": 360,
+   "preteka": false
+  },
+  "axe": [],
+  "text": "Kontrolní seznam – daň za rok 2027\nCo udělat\nPodepsat u hlavního zaměstnavatele Prohlášení poplatníka daně na rok 2027 – do 15. 2. 2027 (při nástupu do 30 dnů).\nPožádat zaměstnavatele o roční zúčtování daně za rok 2027 – do 15. 2. 2028.\nJaké doklady přinést\nJména a rodná čísla dětí (rodný list při prvním uplatnění)\nPotvrzení zaměstnavatele druhého rodiče, že zvýhodnění na děti neuplatňuje (nebo jaké děti uplatňuje)\nPotvrzení předškolního zařízení o výdajích za umístění dítěte za rok 2027 (jméno dítěte, celková částka, datum zápisu zařízení do rejstříku / evidence nebo vzniku živnostenského oprávnění)\nPotvrzení druhého poplatníka, který dítě také vyživuje (např. druhý rodič): jeho jméno, jméno dítěte a výše jím uplatněné slevy za umístění dítěte\nJméno a rodné číslo manžela/manželky, oddací list\nDoklad o příjmech manžela/manželky za rok 2027 (nejvýš 68 000 Kč) a rodný list dítěte do 3 let\nPotvrzení banky / stavební spořitelny o úrocích zaplacených za rok 2027; při prvním uplatnění úvěrová smlouva a výpis z katastru\nPotvrzení penzijní společnosti / poskytovatele DIP / pojišťovny o příspěvcích za rok 2027 (u pojištění i smlouva)\nDarovací potvrzení od obdarovaných organizací\nPotvrzení o bezpříspěvkových odběrech krve\nPřehled nároků\nSleva na poplatníka: 30 840 Kč\nSleva na manžela/manželku: 24 840 Kč\nSleva za umístění dítěte (školkovné): 24 900 Kč (novinka 2027)\nDaňové zvýhodnění na děti: 37 524 Kč\nProdukty spoření na stáří (penzijko, DIP, životní pojištění, pojištění dlouhodobé péče): odpočet 25 600 Kč\nÚroky z úvěru na bydlení: odpočet 120 000 Kč\nDary: odpočet 11 000 Kč\n\nOrientační přehled, nejde o daňové poradenství. Údaje ověřeny 5. 11. 2026.\n\n← Zpět na výsledek\nVytisknout"
+ },
+ "xssKrok10": {
+  "nadpis": "Máte i jiné příjmy?",
+  "poOdeslani": "VÝSLEDEK",
+  "vlozenyImg": false,
+  "dialogy": 0
+ },
+ "sit360": {
+  "pozadavky": [
+   "http://127.0.0.1:43837/",
+   "http://127.0.0.1:43837/styles.css",
+   "http://127.0.0.1:43837/app.js",
+   "http://127.0.0.1:43837/slevy.js",
+   "http://127.0.0.1:43837/rules.json"
+  ],
+  "cizi": [],
+  "konzole": [],
+  "chyby": [],
+  "localStorage": {},
+  "cookies": 0
+ },
+ "scenarA1440": {
+  "preteka": {
+   "scrollWidth": 1440,
+   "innerWidth": 1440,
+   "preteka": false
+  },
+  "az": "Až 141 594 Kč ročně",
+  "souhrn": "Na slevách a zvýhodnění za rok 2027 můžete získat Až 141 594 Kč ročně Při vaší mzdě to reálně dělá 118 524 Kč ročně: daň 57 510 Kč → 0 Kč, k tomu daňový bonus 37 524 Kč.",
+  "radky": [
+   [
+    "Sleva na poplatníka",
+    "2 570 Kč",
+    "30 840 Kč",
+    null,
+    "Prohlášení poplatníka u zaměstnavatele (měsíčně); co nestihnete, v ročním zúčtování",
+    "Podpis do 15. 2. 2027 (při nástupu do 30 dnů)"
+   ],
+   [
+    "Sleva na manžela/manželku",
+    "–",
+    "24 840 Kč",
+    null,
+    "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+    "Žádost do 15. 2. 2028"
+   ],
+   [
+    "Sleva za umístění dítěte (školkovné)",
+    "–",
+    "24 900 Kč",
+    null,
+    "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+    "Žádost do 15. 2. 2028"
+   ],
+   [
+    "Daňové zvýhodnění na děti",
+    "3 127 Kč",
+    "37 524 Kč",
+    null,
+    "Prohlášení poplatníka u zaměstnavatele (měsíčně); co nestihnete, v ročním zúčtování",
+    "Podpis do 15. 2. 2027 (při nástupu do 30 dnů)"
+   ],
+   [
+    "Produkty spoření na stáří (penzijko, DIP, životní pojištění, pojištění dlouhodobé péče)",
+    "–",
+    "3 840 Kč",
+    "odpočet 25 600 Kč",
+    "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+    "Žádost do 15. 2. 2028"
+   ],
+   [
+    "Úroky z úvěru na bydlení",
+    "–",
+    "18 000 Kč",
+    "odpočet 120 000 Kč",
+    "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+    "Žádost do 15. 2. 2028"
+   ],
+   [
+    "Dary",
+    "–",
+    "1 650 Kč",
+    "odpočet 11 000 Kč",
+    "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+    "Žádost do 15. 2. 2028"
+   ]
+  ],
+  "konzole": []
+ },
+ "scenarB360": {
+  "kroky": [
+   {
+    "pred": "Kdy jste se narodili a kolik vyděláváte?",
+    "po": "Studujete v roce 2027?",
+    "chyba": null
+   },
+   {
+    "pred": "Studujete v roce 2027?",
+    "po": "Máte děti?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte děti?",
+    "po": "Chodí některé dítě do školky?",
+    "chyba": null
+   },
+   {
+    "pred": "Chodí některé dítě do školky?",
+    "po": "Manžel nebo manželka",
+    "chyba": null
+   },
+   {
+    "pred": "Manžel nebo manželka",
+    "po": "Invalidita nebo průkaz ZTP/P",
+    "chyba": null
+   },
+   {
+    "pred": "Invalidita nebo průkaz ZTP/P",
+    "po": "Hypotéka nebo úvěr na bydlení",
+    "chyba": null
+   },
+   {
+    "pred": "Hypotéka nebo úvěr na bydlení",
+    "po": "Spoření na stáří",
+    "chyba": null
+   },
+   {
+    "pred": "Spoření na stáří",
+    "po": "Dary a dárcovství krve",
+    "chyba": null
+   },
+   {
+    "pred": "Dary a dárcovství krve",
+    "po": "Máte i jiné příjmy?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte i jiné příjmy?",
+    "po": "VÝSLEDEK",
+    "chyba": null
+   }
+  ],
+  "preteka": {
+   "scrollWidth": 360,
+   "innerWidth": 360,
+   "preteka": false
+  },
+  "porovnani": {
+   "scenar": "B",
+   "az": {
+    "obrazovka": 40050,
+    "modul": 40050,
+    "reference": 40050,
+    "shoda": true
+   },
+   "realne": {
+    "obrazovka": 40050,
+    "modul": 40050,
+    "reference": 40050,
+    "shoda": true
+   },
+   "polozky": [
+    {
+     "nazev": "Sleva na poplatníka",
+     "obrazovkaRocne": 30840,
+     "modulRocne": 30840,
+     "obrazovkaOdpocet": null,
+     "modulOdpocet": null,
+     "shoda": true,
+     "kde": "Prohlášení poplatníka u zaměstnavatele (měsíčně), vyrovnání v daňovém přiznání",
+     "kdy": "Podpis do 15. 2. 2027 (při nástupu do 30 dnů)",
+     "mesicne": "2 570 Kč",
+     "stitky": []
+    },
+    {
+     "nazev": "Sleva na studenta",
+     "obrazovkaRocne": 2010,
+     "modulRocne": 2010,
+     "obrazovkaOdpocet": null,
+     "modulOdpocet": null,
+     "shoda": true,
+     "kde": "Prohlášení poplatníka u zaměstnavatele (měsíčně), vyrovnání v daňovém přiznání",
+     "kdy": "Podpis do 15. 2. 2027 (při nástupu do 30 dnů)",
+     "mesicne": "335 Kč",
+     "stitky": [
+      "Novinka 2027"
+     ]
+    },
+    {
+     "nazev": "Produkty spoření na stáří (penzijko, DIP, životní pojištění, pojištění dlouhodobé péče)",
+     "obrazovkaRocne": 7200,
+     "modulRocne": 7200,
+     "obrazovkaOdpocet": 48000,
+     "modulOdpocet": 48000,
+     "shoda": true,
+     "kde": "Daňové přiznání",
+     "kdy": "do 3. 4. 2028, do 2. 5. 2028 elektronicky",
+     "mesicne": "–",
+     "stitky": []
+    }
+   ],
+   "info": [
+    "Budete podávat daňové přiznání za rok 2027. Ostatní příjmy přesahují 40 000 Kč. Roční položky proto uplatníte v přiznání (do 3. 4. 2028, do 2. 5. 2028 elektronicky).",
+    "Novinky roku 2027"
+   ],
+   "souhrn": "Na slevách a zvýhodnění za rok 2027 můžete získat Až 40 050 Kč ročně Při vaší mzdě to reálně dělá 40 050 Kč ročně: daň 44 550 Kč → 11 700 Kč.",
+   "fokusPoVysledku": "souhrn__castka"
+  },
+  "konzole": []
+ },
+ "chyby": {
+  "prazdne": {
+   "pred": "Kdy jste se narodili a kolik vyděláváte?",
+   "po": "Kdy jste se narodili a kolik vyděláváte?",
+   "chyba": "Zadejte prosím rok narození."
+  },
+  "chybaRole": "alert",
+  "chybaAxe": [],
+  "rok1900": {
+   "pred": "Kdy jste se narodili a kolik vyděláváte?",
+   "po": "Kdy jste se narodili a kolik vyděláváte?",
+   "chyba": "Zadejte prosím rok narození."
+  },
+  "rok2030": {
+   "pred": "Kdy jste se narodili a kolik vyděláváte?",
+   "po": "Kdy jste se narodili a kolik vyděláváte?",
+   "chyba": "Zadejte prosím rok narození."
+  },
+  "zapornaMzdaA15Mesicu": {
+   "pred": "Kdy jste se narodili a kolik vyděláváte?",
+   "po": "Studujete v roce 2027?",
+   "chyba": null,
+   "stavPoZaporne": "Studujete v roce 2027?",
+   "hodnotyPoZpet": {
+    "rok": "1990",
+    "mzda": "0",
+    "mesice": "12"
+   }
+  },
+  "studiumOdDo": {
+   "pred": "Studujete v roce 2027?",
+   "po": "Studujete v roce 2027?",
+   "chyba": "Měsíc „od“ musí být před měsícem „do“."
+  },
+  "diteBezRoku": {
+   "pred": "Máte děti?",
+   "po": "Máte děti?",
+   "chyba": "Zadejte u každého dítěte rok narození."
+  },
+  "dite2000": {
+   "pred": "Máte děti?",
+   "po": "Máte děti?",
+   "chyba": "Zadejte u každého dítěte rok narození."
+  }
+ },
+ "xssKrok3": {
+  "po": "Chodí některé dítě do školky?",
+  "chyba": null,
+  "vlozenyImg": false,
+  "dialogy": 0
+ },
+ "pretekaKrokDeti": {
+  "scrollWidth": 360,
+  "innerWidth": 360,
+  "preteka": false
+ },
+ "axeKrokDeti": [],
+ "cisla": {
+  "psani_30_000": {
+   "value": "30000",
+   "badInput": false,
+   "valueAsNumber": 30000
+  },
+  "psani_1500_carka_50": {
+   "value": "150050",
+   "badInput": false,
+   "valueAsNumber": 150050
+  },
+  "psani_1500_tecka_50": {
+   "value": "1500.50",
+   "badInput": false,
+   "valueAsNumber": 1500.5
+  },
+  "vlozeni_30_000": {
+   "value": "30000",
+   "badInput": false,
+   "valueAsNumber": 30000
+  },
+  "vlozeni_1500_carka_50": {
+   "value": "150050",
+   "badInput": false,
+   "valueAsNumber": 150050
+  },
+  "pruchod": [
+   {
+    "pred": "Chodí některé dítě do školky?",
+    "po": "Manžel nebo manželka",
+    "chyba": null
+   },
+   {
+    "pred": "Manžel nebo manželka",
+    "po": "Invalidita nebo průkaz ZTP/P",
+    "chyba": null
+   },
+   {
+    "pred": "Invalidita nebo průkaz ZTP/P",
+    "po": "Hypotéka nebo úvěr na bydlení",
+    "chyba": null
+   },
+   {
+    "pred": "Hypotéka nebo úvěr na bydlení",
+    "po": "Spoření na stáří",
+    "chyba": null
+   },
+   {
+    "pred": "Spoření na stáří",
+    "po": "Dary a dárcovství krve",
+    "chyba": null
+   },
+   {
+    "pred": "Dary a dárcovství krve",
+    "po": "Máte i jiné příjmy?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte i jiné příjmy?",
+    "po": "VÝSLEDEK",
+    "chyba": null
+   }
+  ],
+  "poOdeslani": {
+   "krok": {
+    "pred": "Chodí některé dítě do školky?",
+    "po": "Chodí některé dítě do školky?",
+    "chyba": null
+   },
+   "skolkovneNaVysledku": {
+    "nazev": "Sleva za umístění dítěte (školkovné)",
+    "stitky": [
+     "Novinka 2027"
+    ],
+    "poznamka": "Za každé dítě skutečně zaplacené školné, nejvýš 24 900 Kč. Sleva nevytváří bonus.",
+    "mesicne": "–",
+    "rocne": "24 900 Kč",
+    "odpocet": null,
+    "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+    "kdy": "Žádost do 15. 2. 2028"
+   },
+   "az": "Až 70 944 Kč ročně"
+  }
+ },
+ "xssKrok8": {
+  "nadpis": "Spoření na stáří",
+  "pruchod": [
+   {
+    "pred": "Spoření na stáří",
+    "po": "Dary a dárcovství krve",
+    "chyba": null
+   },
+   {
+    "pred": "Dary a dárcovství krve",
+    "po": "Máte i jiné příjmy?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte i jiné příjmy?",
+    "po": "VÝSLEDEK",
+    "chyba": null
+   }
+  ],
+  "po": "VÝSLEDEK",
+  "vlozenyImg": false,
+  "dialogy": 0,
+  "konzole": []
+ },
+ "cislaLokalizace": {
+  "cs-CZ": {
+   "navigatorLanguage": "cs-CZ",
+   "psani „1500,50“": {
+    "value": "1500.50",
+    "badInput": false
+   },
+   "psani „84 512,30“": {
+    "value": "84512.30",
+    "badInput": false
+   },
+   "psani „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "psani „0,85“": {
+    "value": "0.85",
+    "badInput": false
+   },
+   "vlozeni „84 512,30“": {
+    "value": "84512.30",
+    "badInput": false
+   },
+   "vlozeni „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "vysledekSkolkovne": "24 900 Kč"
+  },
+  "en-US": {
+   "navigatorLanguage": "en-US",
+   "psani „1500,50“": {
+    "value": "150050",
+    "badInput": false
+   },
+   "psani „84 512,30“": {
+    "value": "8451230",
+    "badInput": false
+   },
+   "psani „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "psani „0,85“": {
+    "value": "085",
+    "badInput": false
+   },
+   "vlozeni „84 512,30“": {
+    "value": "8451230",
+    "badInput": false
+   },
+   "vlozeni „1 500“": {
+    "value": "1500",
+    "badInput": false
+   },
+   "vysledekSkolkovne": "24 900 Kč"
+  }
+ },
+ "zastaraleSkolkovne": {
+  "pruchod": [
+   {
+    "pred": "Chodí některé dítě do školky?",
+    "po": "Manžel nebo manželka",
+    "chyba": null
+   },
+   {
+    "pred": "Manžel nebo manželka",
+    "po": "Invalidita nebo průkaz ZTP/P",
+    "chyba": null
+   },
+   {
+    "pred": "Invalidita nebo průkaz ZTP/P",
+    "po": "Hypotéka nebo úvěr na bydlení",
+    "chyba": null
+   },
+   {
+    "pred": "Hypotéka nebo úvěr na bydlení",
+    "po": "Spoření na stáří",
+    "chyba": null
+   },
+   {
+    "pred": "Spoření na stáří",
+    "po": "Dary a dárcovství krve",
+    "chyba": null
+   },
+   {
+    "pred": "Dary a dárcovství krve",
+    "po": "Máte i jiné příjmy?",
+    "chyba": null
+   },
+   {
+    "pred": "Máte i jiné příjmy?",
+    "po": "VÝSLEDEK",
+    "chyba": null
+   }
+  ],
+  "textSkolka": "Nezadali jste žádné dítě v předškolním věku – můžete pokračovat.",
+  "skolkovneNaVysledku": {
+   "nazev": "Sleva za umístění dítěte (školkovné)",
+   "stitky": [
+    "Novinka 2027"
+   ],
+   "poznamka": "Za každé dítě skutečně zaplacené školné, nejvýš 24 900 Kč. Sleva nevytváří bonus.",
+   "mesicne": "–",
+   "rocne": "20 000 Kč",
+   "odpocet": null,
+   "kde": "Žádost o roční zúčtování u zaměstnavatele (jen ročně)",
+   "kdy": "Žádost do 15. 2. 2028"
+  },
+  "az": "Až 66 044 Kč ročně"
+ },
+ "zivyWeb": {
+  "360": {
+   "stav": 200,
+   "preteka": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "preteka": false
+   },
+   "konzole": [],
+   "chyby": [],
+   "cizi": [],
+   "pozadavky": [
+    "https://frankie851.github.io/slevy-2027/",
+    "https://frankie851.github.io/slevy-2027/styles.css",
+    "https://frankie851.github.io/slevy-2027/app.js",
+    "https://frankie851.github.io/slevy-2027/slevy.js",
+    "https://frankie851.github.io/slevy-2027/rules.json"
+   ],
+   "overeno": "5. 11. 2026",
+   "nadpis": "Kdy jste se narodili a kolik vyděláváte?",
+   "axe": []
+  },
+  "1440": {
+   "stav": 200,
+   "preteka": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "preteka": false
+   },
+   "konzole": [],
+   "chyby": [],
+   "cizi": [],
+   "pozadavky": [
+    "https://frankie851.github.io/slevy-2027/",
+    "https://frankie851.github.io/slevy-2027/styles.css",
+    "https://frankie851.github.io/slevy-2027/app.js",
+    "https://frankie851.github.io/slevy-2027/slevy.js",
+    "https://frankie851.github.io/slevy-2027/rules.json"
+   ],
+   "overeno": "5. 11. 2026",
+   "nadpis": "Kdy jste se narodili a kolik vyděláváte?"
+  }
+ }
+}
