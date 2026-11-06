@@ -99,5 +99,7 @@ test('pravidla: sazba 15 %, USA 15 %, jednotný kurz 2026 null, sporná místa o
     const s = rules.dividendy.zeme[kod].smluvniSazba;
     assert.ok(s.hodnota === null ? s.stav === 'neovereno' : true, kod);
   }
-  assert.ok(rules.meta.neovereno.some((t) => /čeká na schválení/.test(t)));
+  // Tabulku pravidel schválil uživatel (6. 11. 2026); sporné body musí zůstat označené.
+  assert.ok(rules.meta.neovereno.some((t) => /40 mil/.test(t)), 'chybí upozornění na limit 40 mil. Kč u kryptoaktiv');
+  assert.ok(rules.meta.neovereno.some((t) => /§ 16a/.test(t)), 'chybí upozornění na umístění dividend v přiznání');
 });

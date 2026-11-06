@@ -1,9 +1,9 @@
-// E2E: Zdaním to? ve skutečném UI (skrytý nástroj, sestavení se skrytými nástroji).
-// Spuštění: ZOBRAZIT_SKRYTE=1 npx eleventy --output=_site-vse && SITE_DIR=_site-vse node --test test/e2e/skryte/zdanim-to.test.js
+// E2E: Zdaním to? ve skutečném UI.
+// Spuštění: npx eleventy && node --test test/e2e/zdanim-to.test.js
 // Kontrolní příklady z docs/zadani-zdanim-to.md (dividendy při kurzu 23 Kč/USD, prodeje).
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { otevri, vypln, text, zavri } from '../pomocnik.mjs';
+import { otevri, vypln, text, zavri } from './pomocnik.mjs';
 
 after(zavri);
 

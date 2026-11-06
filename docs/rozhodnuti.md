@@ -367,3 +367,29 @@ Výsledky před zveřejněním:
 - Lighthouse pro `/dluhy/exekuce-nebo-oddluzeni/` a `/dluhy/`: výkon 100, přístupnost 100.
 
 Skrytý zůstává jen nástroj Zdaním to? (čeká na schválení pravidel).
+
+## Zveřejnění Zdaním to? (6. 11. 2026)
+
+Uživatel schválil tabulku pravidel v `docs/zadani-zdanim-to.md` a požádal o zveřejnění.
+Schválení znamená přijetí tabulky tak, jak je. Sporné body se tím nestávají ověřenými:
+- zůstávají v `meta.neovereno` a na stránce jako upozornění,
+- nástroj je dál nepočítá: limit 40 mil. Kč u kryptoaktiv, umístění zahraničních dividend
+  v přiznání, smluvní sazby mimo USA, limity přiznání od 2027,
+- jednotný kurz GFŘ za 2026 se zadává ručně.
+
+Změny:
+- z `nastroj.json` je odebrané `"skryty": true`,
+- `meta.stavText` je „Pravidla z odborných zdrojů, sporná místa označujeme“. Varovný styl
+  štítku zůstává, protože oficiální texty se z cloudové relace ověřit nedaly,
+- ze stránek zmizel štítek „čeká na schválení“,
+- `src/_data/pripravujeme.json` je prázdný,
+- e2e test se přesunul do `test/e2e/`, krok CI pro skryté nástroje je odebraný (žádný teď není)
+  a stránky jsou v Lighthouse.
+
+Mechanismus `"skryty": true` (`ZOBRAZIT_SKRYTE=1`, `_site-vse`, `test/e2e/skryte/`) zůstává
+pro budoucí nástroje.
+
+Výsledky:
+- `npm test` 477/477, `npm run test:e2e` 129/129,
+- `npm run kontrola` 29 stránek bez chyb,
+- Lighthouse pro obě stránky Zdaním to?: výkon 100, přístupnost 100.

@@ -2,7 +2,7 @@
   "meta": {
     "overeno": "2026-11-05",
     "stav": "neovereno",
-    "stavText": "Neověřeno: čeká na schválení pravidel",
+    "stavText": "Pravidla z odborných zdrojů, sporná místa označujeme",
     "poznamka": "Oficiální texty (financnisprava.gov.cz, e-Sbírka) se při přípravě nepodařilo otevřít. Pravidla jsou ověřená jen ze sekundárních zdrojů, viz docs/zadani-zdanim-to.md.",
     "zdroje": [
       { "nazev": "ARROWS – Zdanění investičních příjmů 2026", "url": "https://arws.cz/novinky-v-arrows/zdaneni-investicnich-prijmu-2026", "poznamka": "časový test 3 roky, hodnotový test 100 000 Kč (hrubé příjmy, ne zisk)" },
@@ -17,7 +17,6 @@
       { "nazev": "Podnikatel.cz – Limit pro podání přiznání vzroste na 100 tisíc", "url": "https://www.podnikatel.cz/clanky/vyse-prijmu-od-ktere-musite-podat-danove-priznani-vzroste-na-100-tisic-korun/", "poznamka": "od roku 2027 podle zdrojů; průchod legislativou nepotvrzen" }
     ],
     "neovereno": [
-      "Nástroj čeká na schválení tabulky pravidel – zatím není zveřejněný.",
       "Limit 40 mil. Kč u kryptoaktiv: většina zdrojů píše, že od roku 2026 zůstal, některé ho nezmiňují a liší se, zda je společný s cennými papíry. Nepočítáme ho, jen upozorníme.",
       "Zda se do úhrnu 100 000 Kč počítají i příjmy osvobozené časovým testem. Počítáme je (méně osvobození, opatrnější varianta).",
       "Vzájemné započtení zisků a ztrát z prodejů stejného druhu. Počítáme ho, celková ztráta se nepočítá.",
