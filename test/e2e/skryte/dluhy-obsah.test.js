@@ -57,7 +57,9 @@ test('stránka obsahuje oficiální seznamy pomoci z rules.json', () => {
   assert.ok(rules.pomoc.length >= 5);
   for (const o of rules.pomoc) assert.ok(pomoc.includes(`href="${o.url}"`), `chybí ${o.url}`);
   assert.match(pomoc, /https:\/\/mpsv\.gov\.cz\/registr-poskytovatelu-sluzeb/);
-  assert.match(pomoc, /https:\/\/sako\.justice\.cz/);
+  // Bezplatná pomoc s návrhem na oddlužení: oficiální průvodce ministerstva (sako.justice.cz se
+  // 5. 11. 2026 zobrazovala prázdná, viz test/sdilene/pomoc.test.js).
+  assert.match(pomoc, /https:\/\/insolvence\.justice\.cz\/jak-vstoupit-do-oddluzeni\//);
 });
 
 test('u každého výsledku je povinná věta o orientačním výpočtu', () => {

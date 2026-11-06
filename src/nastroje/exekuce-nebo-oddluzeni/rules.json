@@ -101,10 +101,10 @@
       "popis": "Seznam ministerstva práce. Vyberte „odborné sociální poradenství“ a svůj kraj. Služba je ze zákona zdarma."
     },
     {
-      "nazev": "Kdo zdarma sepíše návrh na oddlužení",
-      "url": "https://sako.justice.cz/",
+      "nazev": "Kdo zdarma pomůže s návrhem na oddlužení",
+      "url": "https://insolvence.justice.cz/jak-vstoupit-do-oddluzeni/",
       "provozovatel": "Ministerstvo spravedlnosti",
-      "popis": "Seznam akreditovaných organizací. Za sepis návrhu si nesmějí nic účtovat."
+      "popis": "Oficiální průvodce ministerstva. Vysvětlí, jak vám s návrhem zdarma pomůže nezisková organizace, a varuje před těmi, kdo chtějí zaplatit předem."
     },
     {
       "nazev": "Úřední kalkulačka srážek ze mzdy",
@@ -123,12 +123,6 @@
       "url": "https://www.ochrance.cz/",
       "provozovatel": "Kancelář veřejného ochránce práv",
       "popis": "Srozumitelné letáky o srážkách ze mzdy a o poradenství."
-    },
-    {
-      "nazev": "Kdo smí sepsat návrh za odměnu",
-      "url": "https://vesta.justice.cz/",
-      "provozovatel": "Ministerstvo spravedlnosti",
-      "popis": "Advokát, notář, exekutor nebo insolvenční správce může za sepis chtít až 4 000 korun bez daně. Akreditované organizace to dělají zdarma."
     }
   ],
   "overeno": "2026-11-05",

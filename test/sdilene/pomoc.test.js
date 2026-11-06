@@ -13,6 +13,11 @@ const dluhy = cti('../../src/nastroje/exekuce-nebo-oddluzeni/rules.json');
 
 const POVOLENE = [/(^|\.)justice\.cz$/, /^mpsv\.gov\.cz$/, /^(www\.)?ceecr\.cz$/, /^(www\.)?ochrance\.cz$/, /^e-sbirka\.gov\.cz$/];
 const MRTVE = ['iregistr.mpsv.cz'];
+// Stránky, které existují, ale návštěvník na nich neuvidí obsah. sako.justice.cz se 5. 11. 2026
+// zobrazovala prázdná: skripty se ze serveru nestáhly celé (ERR_CONTENT_LENGTH_MISMATCH),
+// takže se seznam nevykreslil. Odkazujeme proto na průvodce insolvence.justice.cz. Až bude
+// seznam zase fungovat (ověř: npm run kontrola:odkazy), lze doménu odsud odebrat.
+const NEFUNKCNI = ['sako.justice.cz', 'vesta.justice.cz']; // vesta: stejná serverová chyba jako sako
 
 const odkazy = [
   ...pomoc.odkazy.map((o) => ({ kde: 'src/_data/pomoc.json', ...o })),
@@ -32,6 +37,7 @@ test('odkazy na pomoc jsou https, z oficiálních domén a ne na známé mrtvé 
     const u = new URL(o.url);
     assert.equal(u.protocol, 'https:', `${o.kde}: ${o.url} není https`);
     assert.ok(!MRTVE.includes(u.hostname), `${o.kde}: ${o.url} vede na neexistující doménu`);
+    assert.ok(!NEFUNKCNI.includes(u.hostname), `${o.kde}: ${o.url} se návštěvníkům zobrazuje prázdná`);
     assert.ok(POVOLENE.some((re) => re.test(u.hostname)), `${o.kde}: ${u.hostname} není mezi povolenými oficiálními doménami`);
   }
 });
