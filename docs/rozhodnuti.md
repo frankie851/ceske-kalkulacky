@@ -345,3 +345,25 @@ a při každé změně odkazů.
 vesta.justice.cz, dokud se nevykreslují. Tlačítko „Najít neziskovku“ v průvodci ministerstva
 vede také na sako.justice.cz. Je proto vhodné upozornit ministerstvo přes kontakt na
 insolvence.justice.cz (Kontakt pro dlužníka).
+
+## Zveřejnění kalkulačky dluhů (6. 11. 2026)
+
+Kalkulačka Exekuce, nebo oddlužení? je zveřejněná na `/dluhy/exekuce-nebo-oddluzeni/`
+(uživatel o to požádal). Podmínka zveřejnění, tedy ověřené odkazy na bezplatnou pomoc, je splněná:
+- PR #6 opravil mrtvý odkaz na registr poraden (`mpsv.gov.cz/registr-poskytovatelu-sluzeb`),
+- PR #7 nahradil prázdnou stránku sako.justice.cz průvodcem ministerstva
+  `insolvence.justice.cz/jak-vstoupit-do-oddluzeni/`,
+- `npm run kontrola:odkazy` 6. 11. 2026 vykreslil v prohlížeči všech 5 odkazů pomoci s obsahem.
+
+Změny při zveřejnění:
+- z `nastroj.json` je odebrané `"skryty": true` a z `meta.neovereno` bod o čekání na ověření,
+- záznam zmizel ze `src/_data/pripravujeme.json`,
+- e2e testy dluhů se přesunuly z `test/e2e/skryte/` do `test/e2e/` a běží nad veřejným webem,
+- stránka je v Lighthouse.
+
+Výsledky před zveřejněním:
+- `npm test` 477/477, `npm run test:e2e` 114/114, `npm run kontrola` 27 stránek bez chyb
+  (včetně pomoci viditelné bez posouvání na 360 × 640),
+- Lighthouse pro `/dluhy/exekuce-nebo-oddluzeni/` a `/dluhy/`: výkon 100, přístupnost 100.
+
+Skrytý zůstává jen nástroj Zdaním to? (čeká na schválení pravidel).

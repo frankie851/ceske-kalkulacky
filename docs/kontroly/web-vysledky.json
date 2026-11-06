@@ -1,7 +1,7 @@
 {
-  "datum": "2026-11-05T11:00:08.198Z",
+  "datum": "2026-11-06T02:38:12.811Z",
   "prefix": "/ceske-kalkulacky/",
-  "stranek": 26,
+  "stranek": 27,
   "chyb": 0,
   "stranky": [
     {
@@ -50,6 +50,10 @@
     },
     {
       "stranka": "/dluhy/",
+      "chyby": []
+    },
+    {
+      "stranka": "/dluhy/exekuce-nebo-oddluzeni/",
       "chyby": []
     },
     {

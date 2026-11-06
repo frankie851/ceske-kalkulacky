@@ -5,7 +5,6 @@
   "kategorie": "dluhy",
   "url": "/dluhy/exekuce-nebo-oddluzeni/",
   "poradi": 1,
-  "skryty": true,
   "perex": "Kolik vám zůstane z výplaty, jak dlouho byste spláceli v exekuci a jak by vypadalo oddlužení. A kde najít bezplatnou pomoc.",
   "otazka": null,
   "stitky": ["exekuce", "oddlužení", "nezabavitelná částka"],
