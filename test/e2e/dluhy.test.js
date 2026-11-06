@@ -1,9 +1,9 @@
-// E2E: Exekuce, nebo oddlužení? ve skutečném UI (skrytý nástroj, sestavení se skrytými nástroji).
-// Spuštění: ZOBRAZIT_SKRYTE=1 npx eleventy --output=_site-vse && SITE_DIR=_site-vse node --test test/e2e/skryte/dluhy.test.js
+// E2E: Exekuce, nebo oddlužení? ve skutečném UI.
+// Spuštění: npx eleventy && node --test test/e2e/dluhy.test.js
 // Kontrolní příklady ze zadání (rok 2026) a z test/dluhy.test.js.
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { otevri, vypln, text, zavri } from '../pomocnik.mjs';
+import { otevri, vypln, text, zavri } from './pomocnik.mjs';
 
 after(zavri);
 

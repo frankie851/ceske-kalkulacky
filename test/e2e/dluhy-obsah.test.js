@@ -1,16 +1,15 @@
 // Obsah stránky Exekuce, nebo oddlužení? – převod kontrol z původního test/obsah.test.js
 // (frankie851/kalkulator-dluhu) na vygenerované HTML webu Spočítáno.
-// Nástroj je skrytý: čte sestavení se skrytými nástroji.
-// Spuštění: ZOBRAZIT_SKRYTE=1 npx eleventy --output=_site-vse && SITE_DIR=_site-vse node --test test/e2e/skryte/
+// Čte sestavený web (_site, případně SITE_DIR). Spuštění: npx eleventy && node --test test/e2e/dluhy-obsah.test.js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { analyzuj, textZHtml, textZJs, LIMITY } from '../../../src/nastroje/exekuce-nebo-oddluzeni/scripts/ctenost.mjs';
+import { analyzuj, textZHtml, textZJs, LIMITY } from '../../src/nastroje/exekuce-nebo-oddluzeni/scripts/ctenost.mjs';
 
-const KOREN = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-const SITE = path.resolve(KOREN, process.env.SITE_DIR || '_site-vse');
+const KOREN = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const SITE = path.resolve(KOREN, process.env.SITE_DIR || '_site');
 const cti = (rel) => fs.readFileSync(path.join(SITE, rel), 'utf8');
 const NASTROJ = path.join(KOREN, 'src/nastroje/exekuce-nebo-oddluzeni');
 
@@ -25,7 +24,7 @@ const VYHRADA = 'Orientační výpočet. Závazně to posoudí poradna, exekutor
 const POVOLENE = [/(^|\.)justice\.cz$/, /^mpsv\.gov\.cz$/, /^e-sbirka\.gov\.cz$/, /^(www\.)?ceecr\.cz$/, /^(www\.)?ochrance\.cz$/];
 const externi = (h) => [...h.matchAll(/href="(https?:[^"]+)"/g)].map((m) => new URL(m[1]).hostname);
 
-test('stránka nástroje existuje jen v sestavení se skrytými nástroji', () => {
+test('stránka nástroje existuje v sestavení webu', () => {
   assert.ok(fs.existsSync(path.join(SITE, 'dluhy/exekuce-nebo-oddluzeni/index.html')));
   assert.match(htmlDluhy, /href="[^"]*\/dluhy\/exekuce-nebo-oddluzeni\/"/, '/dluhy/ odkazuje na nástroj');
 });
