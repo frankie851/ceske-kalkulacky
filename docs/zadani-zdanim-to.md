@@ -21,6 +21,8 @@ v `docs/zadani-faze-2.md`.
 > § 4 odst. 1 písm. t), u), zj), zk), § 4 odst. 3, § 16, § 16a, § 38f). Pravidla v `rules.json`
 > mají citaci (`zdroj.citace`) a stránka ji ukazuje v části „Jak počítáme“. Sazba 15 % je tím
 > doložená z § 16 odst. 1 písm. a).
+> Po nahrání úplného znění ZDP jsou doplněné i § 8 odst. 4 a 8, § 10 odst. 4 a 5, § 38, § 38g
+> a § 38v (oznámení osvobozených příjmů nad 5 000 000 Kč).
 
 ## Cíl
 
@@ -77,6 +79,8 @@ z `meta.overeno`).
 | – | Sazba 15 % pro část základu do 36násobku průměrné mzdy; 23 % nad něj se nepočítá; zaokrouhlení základu na sta Kč dolů se nepočítá | `dane.sazba = 0.15`, `dane.sazba.vyssiSazba` | § 16 odst. 1 a 2 ZDP | potvrzeno |
 | – | Jiná země (smlouva není v přehledu): dvojí zdanění se vylučuje podle mezinárodní smlouvy, bez ní zápočet podle § 38f nevzniká | `dividendy.zeme.XX.bezSmlouvy.zapocet = 0` + upozornění | § 38f odst. 1 ZDP | potvrzeno (volba uživatele: opatrně 0) |
 | – | Doklady k zápočtu: potvrzení zahraničního správce daně, v odůvodněných případech plátce nebo depozitáře; seznam potvrzení k přiznání | `dividendy.doklady` (kroky návodu) | § 38f odst. 5 a 10 ZDP | potvrzeno |
+| – | Osvobozený příjem vyšší než 5 000 000 Kč oznámit správci daně do konce lhůty pro přiznání (posuzuje se každý prodej, u krypta nad 40 mil. jen osvobozená část) | `prodeje.oznameni.limit = 5000000`, upozornění `oznameni` | § 38v odst. 1 ZDP | potvrzeno |
+| – | Náklady: nabývací cena, u cenných papírů i poplatky za nákup a výdaje spojené s prodejem; u věci ze směny cena podle zákona o oceňování | `prodeje.naklady` (nápověda u formuláře) | § 10 odst. 5 ZDP | potvrzeno |
 
 Nejasné body jsou i v `meta.neovereno`, na stránce v bloku „Co zákon ani finanční správa jasně
 neřeší“.

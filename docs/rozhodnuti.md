@@ -457,3 +457,38 @@ v `docs/zdroje/zdp-2026-08-01-vyber.md`. Text zákona není podle § 3 autorské
 - **Beze změny zůstává** úhrn 100 000 Kč včetně prodejů po 3 letech. Písm. t) a zj) mluví
   o „úhrnu“ bez výjimky, ale ověřovací JSON bod vede jako nejasný a oficiální metodika
   chybí. Proto má dál štítek „Nejasné“, teď s citací zákona.
+
+### Doplnění: úplné znění ZDP (6. 11. 2026)
+
+Uživatel nahrál celé znění ZDP od 1. 8. 2026. Do `docs/zdroje/zdp-2026-08-01-vyber.md` jsem
+přidal další ustanovení: § 8 odst. 4 a 8, § 10 odst. 4 a 5, § 38 odst. 1, 5 a 7, § 38g
+odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké.
+
+**Potvrzeno beze změny výpočtu**
+- § 10 odst. 4: k rozdílu, o který výdaje druhu převyšují příjem, se nepřihlíží. U částečně
+  osvobozeného příjmu se výdaje krátí poměrem.
+- § 8 odst. 4 a 8:
+  - zahraniční dividendy jsou základem daně nesníženým o výdaje,
+  - když se do § 16a zahrne jeden takový příjem, musí tam být všechny.
+- § 38 odst. 1 písm. b), 5 a 7:
+  - přepočet denním kurzem ČNB ke dni příjmu, nebo jednotným kurzem,
+  - obojí v jednom období současně použít nelze.
+- § 38g odst. 1 a 2: limity za rok 2026 jsou 50 000 Kč a 20 000 Kč (jiné příjmy podle § 7
+  až 10). Limity od roku 2027 mění zák. č. 180/2026 Sb. a v tomto znění ještě nejsou.
+
+**Nejasné zůstává**
+- Dividendy v limitu přiznání. Text § 38g z limitu vyjímá jen osvobozené příjmy a příjmy
+  sražené zvláštní sazbou, což výklad podporuje. Stav ale zůstává podle ověřovacího JSONu,
+  stránka teď ukazuje citaci.
+
+**Nové**
+- § 38v: osvobozený příjem vyšší než 5 000 000 Kč je nutné oznámit správci daně do konce
+  lhůty pro přiznání. Kalkulačka upozorní u každého prodeje, jehož osvobozená část limit
+  přesahuje.
+  - U krypta nad 40 mil. Kč se počítá jen osvobozená část.
+  - Zákon neříká, zda se příjmy sčítají. Kalkulačka posuzuje každý prodej zvlášť, podle textu
+    „obdrží příjem“.
+- § 10 odst. 5: k formuláři přibyla nápověda, co patří do nákladů:
+  - nabývací cena,
+  - u cenných papírů poplatky za nákup a výdaje spojené s prodejem,
+  - u krypta ze směny cena podle zákona o oceňování.

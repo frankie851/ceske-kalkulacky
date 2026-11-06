@@ -104,6 +104,11 @@ export function upozorneniProdejuHtml(v, rules) {
       const zaporny = u.vysledek < 0 ? ' Výsledek druhu je záporný: počítá se jako 0 a do dalších let se ztráta nepřevádí.' : '';
       return `<li><span>${s} ${druh}: ztrátu jsme odečetli jen od zisků stejného druhu. Mezi cennými papíry a kryptoaktivy se zisky a ztráty nezapočítávají.${zaporny}</span></li>`;
     }
+    if (u.id === 'oznameni') {
+      const prodeje = u.polozky.map((x) => `prodej ${x.index + 1} (${kc(x.castka)})`).join(', ');
+      return `<li><span>${s} Osvobozený příjem vyšší než ${kc(u.limit)} musíš oznámit finančnímu úřadu do konce lhůty pro podání přiznání (${esc(pr.oznameni.zdroj.pravniZaklad)}). `
+        + `Týká se: ${prodeje}. V oznámení uvedeš výši příjmu, okolnosti jeho nabytí a datum, kdy vznikl.</span></li>`;
+    }
     if (u.id === 'kod-krypta-p2') {
       return `<li><span>${s} Pro kryptoaktiva není v příloze č. 2 přiznání samostatný kód druhu příjmu. Než přiznání podáš, ověř v pokynech, který kód použít.</span></li>`;
     }
@@ -195,7 +200,8 @@ export function navodHtml(v, rules) {
   const c = v.celkem;
   const orientacne = v.zapocetOrientacni ? ' (orientačně)' : '';
   return `<p>${stitekStavu(rz.stav, rules)} Zvolený režim: <strong>${esc(x.nazev)}</strong>, ${esc(x.popis)}. `
-    + `Volba platí pro všechny tvoje zahraniční příjmy z kapitálového majetku najednou (${esc(rz.podminka)}).</p>`
+    + `Volba platí pro všechny tvoje zahraniční příjmy z kapitálového majetku najednou (${esc(rz.podminka)}). `
+    + `${esc(rz.zakon.pravniZaklad)}: <q class="zt-citace">${esc(rz.zakon.citace)}</q></p>`
     + '<ol class="zt-kroky">'
     + `<li>Základ (hrubé dividendy v korunách): <span class="num">${kc(c.zakladKc)}</span>, česká daň ${pct(v.sazba)}: <span class="num">${kc(c.ceskaDan)}</span>.</li>`
     + x.kroky.map((k) => `<li>${esc(k)}</li>`).join('')

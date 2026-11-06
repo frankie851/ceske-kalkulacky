@@ -167,6 +167,12 @@ export function osvobozeniProdeje(prodeje, rok, rules) {
     if (vRoce.some((p) => p.druh === d && zdanitelnaCast(p) < 0)) upozorneni.push({ id: 'ztraty', stav: pr.zapocteni.stav, druh: d, vysledek: uhrny[d].vysledek });
   }
   if (uhrny.kryptoaktivum?.zdanitelnyRozdil > 0) upozorneni.push({ id: 'kod-krypta-p2', stav: pr.zapocteni.kodKryptaP2.stav });
+  // Osvobozený příjem nad limit je třeba oznámit správci daně (§ 38v)
+  const osvobozenaCast = (p) => (p.stav === 'hodnotovy' || p.stav === 'casovy' ? p.prijem : p.stav === 'castecne' ? p.prijem - p.zdanitelnaCast.prijem : 0);
+  const kOznameni = vRoce.filter((p) => osvobozenaCast(p) > pr.oznameni.limit);
+  if (kOznameni.length) {
+    upozorneni.push({ id: 'oznameni', stav: pr.oznameni.stav, limit: pr.oznameni.limit, polozky: kOznameni.map((p) => ({ index: p.index, castka: osvobozenaCast(p) })) });
+  }
 
   return { rok, polozky, uhrny, zdanitelnyRozdil, orientacniDan, upozorneni };
 }

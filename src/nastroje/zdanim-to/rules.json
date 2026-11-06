@@ -3,7 +3,7 @@
     "overeno": "2026-11-06",
     "poznamka": "Hodnoty převzaté jen ze souboru zdanim-to-overeni-2026.json (ověření k 6. 11. 2026: ZDP v úplném znění z e-Sbírky od 1. 8. 2026, pokyny GFŘ, smlouvy o zamezení dvojího zdanění) a z doslovného výběru ZDP v úplném znění od 1. 8. 2026 (docs/zdroje/zdp-2026-08-01-vyber.md, převedeno 6. 11. 2026).",
     "zdroje": [
-      { "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů – úplné znění od 1. 8. 2026 (e-Sbírka)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "poznamka": "§ 4 odst. 1 písm. t), u), zj), zk) a odst. 3, § 16, § 16a, § 38f – doslovný výběr v docs/zdroje/zdp-2026-08-01-vyber.md" },
+      { "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů – úplné znění od 1. 8. 2026 (e-Sbírka)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "poznamka": "§ 4 odst. 1 písm. t), u), zj), zk) a odst. 3, § 8 odst. 4 a 8, § 10 odst. 4 a 5, § 16, § 16a, § 38, § 38f, § 38g, § 38v – doslovný výběr v docs/zdroje/zdp-2026-08-01-vyber.md" },
       { "nazev": "Zákon č. 360/2025 Sb. (novela ZDP, § 4 odst. 3)", "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf", "poznamka": "limit 40 mil. Kč platí od 1. 1. 2026 jen u kryptoaktiv osvobozených časovým testem" },
       { "nazev": "Finanční správa – Kryptoaktiva (29. 4. 2026)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf", "poznamka": "samostatné limity 100 000 Kč pro cenné papíry a kryptoaktiva; elektronický peněžní token je z hodnotového testu vyňatý" },
       { "nazev": "Zákon o daních z příjmů č. 586/1992 Sb. (Zákony pro lidi)", "url": "https://www.zakonyprolidi.cz/cs/1992-586", "poznamka": "úhrn pro hodnotový test (§ 4 odst. 1 písm. t a zj), zákaz kombinace kurzů (§ 38 odst. 1 a 7), limity přiznání (§ 38g)" },
@@ -105,6 +105,16 @@
         "zdroj": { "pravniZaklad": "§ 10 odst. 1 písm. b) bod 3 ZDP; Informace GFŘ č. j. 18809/22/7100-40050-205680", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/Info_kryptomeny_GFR.pdf" }
       }
     },
+    "naklady": {
+      "text": "Náklady jsou nabývací cena, tedy cena při nákupu cenného papíru nebo kryptoaktiva. U cenných papírů k ní patří i poplatky za nákup a výdaje spojené s prodejem. U kryptoaktiva získaného směnou se vychází z ceny podle zákona o oceňování majetku.",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 10 odst. 5 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "U příjmů z úplatného převodu cenných papírů lze kromě nabývací ceny akcie nebo kmenového listu a pořizovací ceny ostatních cenných papírů uplatnit i výdaje související s uskutečněním úplatného převodu a platby za obchodování na trhu s cennými papíry při pořízení cenných papírů." }
+    },
+    "oznameni": {
+      "limit": 5000000,
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 38v odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Pokud poplatník daně z příjmů fyzických osob obdrží příjem, který je od daně z příjmů fyzických osob osvobozen a je vyšší než 5 000 000 Kč, je povinen oznámit správci daně tuto skutečnost do konce lhůty pro podání daňového přiznání" }
+    },
     "zapocteni": {
       "uvnitrDruhu": true,
       "meziDruhy": false,
@@ -112,7 +122,8 @@
       "prevodZtraty": false,
       "castecneOsvobozeni": "výdaje krátit poměrem neosvobozené části",
       "stav": "potvrzeno",
-      "zdroj": { "pravniZaklad": "§ 10 odst. 4 ZDP; pokyny k Příloze č. 2 DAP (25 5405/P2)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf" },
+      "zdroj": { "pravniZaklad": "§ 10 odst. 4 ZDP; pokyny k Příloze č. 2 DAP (25 5405/P2)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf", "citace": "Jsou-li výdaje spojené s jednotlivým druhem příjmu uvedeným v odstavci 1 vyšší než příjem, k rozdílu se nepřihlíží." },
+      "castecneZdroj": { "pravniZaklad": "§ 10 odst. 4 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "výdaje podle věty první snižují příjem jen v části odpovídající poměru, v jakém tento příjem není od daně osvobozen" },
       "kodKryptaP2": { "stav": "nejasne", "text": "kód druhu pro krypto v Příloze č. 2 (není samostatný kód)" }
     }
   },
@@ -151,6 +162,7 @@
       "vychozi": "par8",
       "podminka": "všechny příjmy podle § 8 odst. 8 věty první, ne výběr",
       "zapocet": "prostý zápočet samostatně za každý stát (§ 38f odst. 8)",
+      "zakon": { "pravniZaklad": "§ 8 odst. 4 a 8 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Zahrne-li se takový příjem do tohoto základu daně, zahrnou se do tohoto základu daně veškeré příjmy podle věty první. Tyto příjmy se nesnižují o výdaje" },
       "zapocetZdroj": { "pravniZaklad": "§ 38f odst. 8 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "vyloučení dvojího zdanění metodou prostého zápočtu se provede samostatně za každý stát" },
       "radkyDle": "tiskopis za rok 2025 (pokyny 2026 zatím nevydány)",
       "stav": "potvrzeno",
@@ -195,7 +207,7 @@
     "kombinovatLze": false,
     "volba": "denní kurz ČNB (kurz pro přepočet daně) NEBO jednotný kurz pro celé zdaňovací období",
     "stav": "potvrzeno",
-    "zdroj": { "pravniZaklad": "§ 38 odst. 1 písm. b) a odst. 7 ZDP (znění 1. 8. 2026)", "url": "https://www.zakonyprolidi.cz/cs/1992-586" },
+    "zdroj": { "pravniZaklad": "§ 38 odst. 1 písm. b) a odst. 7 ZDP (znění 1. 8. 2026)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "V rámci zdaňovacího období nebo období, za které se podává daňové přiznání, nelze použít kurz pro přepočet daně a jednotný kurz současně." },
     "jednotny": {
       "2025": { "USD": 21.84, "EUR": 24.66, "GBP": 28.8, "CHF": 26.33, "CAD": 15.61 },
       "2026": null
@@ -217,14 +229,14 @@
     "stav": "potvrzeno",
     "zdroj": { "pravniZaklad": "zák. č. 180/2026 Sb.; § 38g odst. 1 a 2 ZDP", "url": "https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf" },
     "limity": [
-      { "id": "celkem", "text": "Přiznání musí podat ten, kdo měl roční příjmy podléhající dani nad", "do2026": 50000, "od2027": 100000 },
-      { "id": "vedle-zamestnani", "text": "Zaměstnanec s podepsaným prohlášením u jednoho zaměstnavatele nemusí podat přiznání, když další příjmy nepřesáhnou", "do2026": 20000, "od2027": 40000 }
+      { "id": "celkem", "text": "Přiznání musí podat ten, jehož roční příjmy, které jsou předmětem daně, přesáhly (kromě osvobozených a sražených zvláštní sazbou)", "do2026": 50000, "od2027": 100000, "pravniZaklad": "§ 38g odst. 1 ZDP" },
+      { "id": "vedle-zamestnani", "text": "Zaměstnanec s podepsaným prohlášením nemusí přiznání podat, když jiné příjmy podle § 7 až 10 (kromě osvobozených a sražených zvláštní sazbou) nejsou vyšší než", "do2026": 20000, "od2027": 40000, "pravniZaklad": "§ 38g odst. 2 ZDP" }
     ],
     "dividendyVLimitu": {
       "stav": "nejasne",
       "vyklad": "započítávají se (nejsou osvobozené ani sražené v ČR podle zvláštní sazby)",
       "oficialniStanovisko": "nenalezeno",
-      "zdroj": { "pravniZaklad": "§ 38g odst. 1 a 2 ZDP (odst. 2 vyjímá jen příjmy osvobozené a sražené podle § 36)", "url": "https://www.zakonyprolidi.cz/cs/1992-586" }
+      "zdroj": { "pravniZaklad": "§ 38g odst. 1 a 2 ZDP (odst. 2 vyjímá jen příjmy osvobozené a sražené podle § 36)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "pokud se nejedná o příjmy od daně osvobozené nebo o příjmy, z nichž je daň vybírána srážkou podle zvláštní sazby daně" }
     }
   },
   "stavy": {

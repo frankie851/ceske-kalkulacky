@@ -106,13 +106,13 @@ stitkyNavic: ['Za rok 2026']
         <thead><tr><th scope="col">Kdy</th><th scope="col" class="r">Za rok 2026</th><th scope="col" class="r">Od roku {{ d.priznani.prvni }}</th></tr></thead>
         <tbody>
           {%- for l in d.limity %}
-          <tr><th scope="row">{{ l.text }}</th><td class="r" data-label="Za rok 2026">{{ l.do2026 }}</td><td class="r" data-label="Od roku {{ d.priznani.prvni }}">{{ l.od2027 }}</td></tr>
+          <tr><th scope="row">{{ l.text }} <span class="src-meta">({{ l.pravniZaklad }})</span></th><td class="r" data-label="Za rok 2026">{{ l.do2026 }}</td><td class="r" data-label="Od roku {{ d.priznani.prvni }}">{{ l.od2027 }}</td></tr>
           {%- endfor %}
         </tbody>
       </table>
     </div>
     <ul class="zt-sporne zt-limity-pozn">
-      <li>{{ stitek({ typ: 'navrh', text: d.dividendyVLimitu.stavInfo.text }) }}<span>Zahraniční dividendy (i v režimu § 16a) do limitu počítáme: {{ d.dividendyVLimitu.vyklad }}. Oficiální stanovisko: {{ d.dividendyVLimitu.oficialniStanovisko }}. <span class="src-meta">Zdroj: <a href="{{ d.dividendyVLimitu.zdroj.url }}">{{ d.dividendyVLimitu.zdroj.pravniZaklad }}</a></span></span></li>
+      <li>{{ stitek({ typ: 'navrh', text: d.dividendyVLimitu.stavInfo.text }) }}<span>Zahraniční dividendy (i v režimu § 16a) do limitu počítáme: {{ d.dividendyVLimitu.vyklad }}. Zákon do limitu počítá příjmy, <q class="zt-citace">{{ d.dividendyVLimitu.zdroj.citace }}</q>; zahraniční dividendy nejsou ani jedno. Oficiální stanovisko: {{ d.dividendyVLimitu.oficialniStanovisko }}. <span class="src-meta">Zdroj: <a href="{{ d.dividendyVLimitu.zdroj.url }}">{{ d.dividendyVLimitu.zdroj.pravniZaklad }}</a></span></span></li>
     </ul>
     <p class="note">{{ ikona('ikona-info') }}<span>Zdroj limitů: <a href="{{ d.priznani.zdroj.url }}">{{ d.priznani.zdroj.pravniZaklad }}</a>. Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř postup u finanční správy</a>.</span></p>
   </section>

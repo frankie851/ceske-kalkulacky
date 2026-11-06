@@ -151,6 +151,20 @@ test('ztráta z krypta se neodečte od zisku z cenných papírů; záporný výs
   assert.ok(v.upozorneni.some((u) => u.id === 'ztraty' && u.druh === 'kryptoaktivum'));
 });
 
+test('osvobozený příjem nad 5 000 000 Kč → upozornění na oznámení (§ 38v), zdanitelný ne', () => {
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 6000000, 1000000), cp('2025-01-01', '2026-03-01', 7000000, 6000000)], 2026, rules);
+  const u = v.upozorneni.find((x) => x.id === 'oznameni');
+  assert.equal(u.stav, 'potvrzeno');
+  assert.deepEqual(u.polozky, [{ index: 0, castka: 6000000 }]);
+  const pod = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 5000000, 0)], 2026, rules);
+  assert.ok(!pod.upozorneni.some((x) => x.id === 'oznameni'), 'přesně 5 000 000 Kč se neoznamuje');
+});
+
+test('krypto nad 40 mil. Kč: oznamuje se jen osvobozená část', () => {
+  const v = osvobozeniProdeje([krypto('2020-01-01', '2026-02-01', 50000000, 0)], 2026, rules);
+  assert.deepEqual(v.upozorneni.find((x) => x.id === 'oznameni').polozky, [{ index: 0, castka: 40000000 }]);
+});
+
 test('zdanitelné krypto → upozornění „nejasné“ na kód druhu v příloze č. 2', () => {
   const v = osvobozeniProdeje([krypto('2025-01-01', '2026-03-01', 150000, 100000)], 2026, rules);
   assert.equal(v.upozorneni.find((u) => u.id === 'kod-krypta-p2').stav, 'nejasne');
@@ -175,6 +189,8 @@ test('pravidla odpovídají ověřovacímu souboru (6. 11. 2026)', () => {
   assert.ok(Object.values(rules.prodeje.typy).every((t) => t.terminovy === true), 'termínový prodej: § 4 odst. 1 písm. u) i zk)');
   assert.equal(rules.dane.sazba.hodnota, 0.15);
   assert.equal(rules.dane.sazba.zdroj.pravniZaklad, '§ 16 odst. 1 písm. a) ZDP');
+  assert.equal(rules.prodeje.oznameni.limit, 5000000);
+  assert.equal(rules.prodeje.oznameni.zdroj.pravniZaklad, '§ 38v odst. 1 ZDP');
   assert.equal(rules.prodeje.zapocteni.zapornyVysledekDruhu, 0);
   assert.equal(rules.prodeje.zapocteni.prevodZtraty, false);
 });

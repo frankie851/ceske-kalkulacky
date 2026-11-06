@@ -22,6 +22,7 @@ stitkyNavic: ['Za rok 2026']
   <section class="card zt-zadani" aria-labelledby="zt-zadani-nadpis">
     <h2 id="zt-zadani-nadpis">Tvoje prodeje za rok {{ zt.rok }}</h2>
     <p class="muted small">Každý nákup (tranši) zadej zvlášť. Částky v korunách, přepočtené kurzem ke dni obchodu. Nic se nikam neposílá ani neukládá.</p>
+    <p class="muted small">{{ p.naklady }}</p>
     <form id="zt-prodeje-form" novalidate>
       <ol class="zt-radky" data-radky>
         {%- for r in p.radky %}

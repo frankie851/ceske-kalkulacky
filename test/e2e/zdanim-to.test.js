@@ -83,6 +83,13 @@ test('prodeje: termínový prodej – zaškrtávátko u cenných papírů i kryp
   await page.close();
 });
 
+test('prodeje: osvobozený prodej nad 5 000 000 Kč → upozornění na oznámení (§ 38v)', async () => {
+  const { page } = await otevri(PRODEJE);
+  await vypln(page, '#p1-prijem', '6 000 000');
+  assert.match(await text(page, '[data-zt-detail]'), /Osvobozený příjem vyšší než 5 000 000 Kč musíš oznámit.*§ 38v odst\. 1 ZDP.*prodej 1 \(6 000 000 Kč\)/);
+  await page.close();
+});
+
 test('prodeje: „Jak počítáme“ cituje zákon', async () => {
   const { page } = await otevri(PRODEJE);
   const citace = await page.$$eval('.zt-postup q', (els) => els.map((e) => e.textContent));
@@ -257,7 +264,8 @@ test('dividendy: limity přiznání 2026 a od 2027, dividendy v limitu jako neja
   const t = await text(page, '#zt-limity-nadpis ~ .table-wrap');
   assert.match(t, /50 000 Kč.*100 000 Kč/);
   assert.match(t, /20 000 Kč.*40 000 Kč/);
-  assert.match(await text(page, '.zt-limity-pozn'), /Nejasné.*započítávají se/);
+  assert.match(await text(page, '.zt-limity-pozn'), /Nejasné.*započítávají se.*pokud se nejedná o příjmy od daně osvobozené/);
+  assert.match(t, /§ 38g odst\. 1 ZDP.*§ 38g odst\. 2 ZDP/);
   await page.close();
 });
 
