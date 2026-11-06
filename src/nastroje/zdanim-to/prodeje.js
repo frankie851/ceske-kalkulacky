@@ -1,8 +1,12 @@
 // Zdaním to? – osvobození příjmů z prodeje cenných papírů a kryptoaktiv (čisté funkce, bez DOM).
 // Žádné částky, limity ani lhůty tu nejsou natvrdo: vše přichází v parametru rules (rules.json).
-// Sporná pravidla (limit 40 mil. Kč u kryptoaktiv) se nepočítají, jen se z nich skládají upozornění.
-
-export const TYPY = ['cenny-papir', 'kryptoaktivum'];
+// Pořadí výpočtu (docs/zadani-zdanim-to.md):
+//   1. cenné papíry a kryptoaktiva zvlášť (dva úhrny, dva limity),
+//   2. hodnotový test z úhrnu všech hrubých příjmů druhu (bez elektronických peněžních tokenů),
+//   3. jinak časový test po prodejích (termínový prodej krypta sjednaný do 3 let se neosvobozuje),
+//   4. jen kryptoaktiva: časově osvobozené příjmy nad limit → neosvobozená poměrná část,
+//   5. zisky a ztráty jen uvnitř druhu, záporný výsledek druhu = 0, ztráta se nepřevádí.
+// Nejasná pravidla se počítají podle doporučení z rules a vždy z nich vznikne upozornění.
 
 const ISO = /^(\d{4})-(\d{2})-(\d{2})$/;
 
@@ -33,11 +37,13 @@ export function lhutaCasovehoTestu(nakupIso, let_) {
 }
 
 const jeCastka = (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0;
+const zaokrouhli = (n) => Math.round(n * 100) / 100;
+const secti = (polozky, f) => polozky.reduce((s, p) => s + f(p), 0);
 
 /** Kontrola jednoho prodeje. Vrátí pole chyb { pole, text } (prázdné = v pořádku). */
-export function zkontrolujProdej(p) {
+export function zkontrolujProdej(p, rules) {
   const chyby = [];
-  if (!TYPY.includes(p?.typ)) chyby.push({ pole: 'typ', text: 'Vyber, co se prodávalo.' });
+  if (!rules.prodeje.typy[p?.typ]) chyby.push({ pole: 'typ', text: 'Vyber, co se prodávalo.' });
   const nakup = rozeberDatum(p?.nakup);
   const prodej = rozeberDatum(p?.prodej);
   if (!nakup) chyby.push({ pole: 'nakup', text: 'Doplň datum nákupu.' });
@@ -50,69 +56,117 @@ export function zkontrolujProdej(p) {
 
 /**
  * Vyhodnotí prodeje za rok.
- * @param {Array<{typ, nakup, prodej, prijem, naklady}>} prodeje – data ISO, částky v Kč
+ * @param {Array<{typ, nakup, prodej, prijem, naklady, terminovy}>} prodeje – data ISO, částky v Kč;
+ *   terminovy: termínový (forwardový) prodej sjednaný do lhůty časového testu (jen typy s terminovy v rules)
  * @param {number} rok – zdaňovací období (rok prodeje)
  * @param {object} rules – celý rules.json
- * @returns {{ polozky, uhrny, zdanitelnyRozdil, orientacniDan, upozorneni }}
- *   polozka.stav: 'casovy' | 'hodnotovy' | 'zdanitelne' | 'mimo-rok' | 'neuplne'
+ * @returns {{ rok, polozky, uhrny, zdanitelnyRozdil, orientacniDan, upozorneni }}
+ *   polozka.stav: 'hodnotovy' | 'casovy' | 'castecne' | 'zdanitelne' | 'mimo-rok' | 'neuplne'
+ *   uhrny: podle druhu (rules.prodeje.druhy)
  */
 export function osvobozeniProdeje(prodeje, rok, rules) {
   const pr = rules.prodeje;
   const ht = pr.hodnotovyTest;
-  const klicUhrnu = (typ) => (ht.zvlastPodleTypu ? typ : 'vse');
+  const druhy = Object.keys(pr.druhy);
 
-  // 1. kontrola, rok a časový test
+  // Kontrola, rok a splnění časového testu (o osvobození se rozhodne až po hodnotovém testu)
   const polozky = (prodeje || []).map((p, index) => {
-    const chyby = zkontrolujProdej(p);
-    const zaklad = { index, typ: p?.typ, prijem: p?.prijem ?? null, naklady: p?.naklady ?? 0, rozdil: null, chyby };
+    const chyby = zkontrolujProdej(p, rules);
+    const typ = pr.typy[p?.typ];
+    const zaklad = {
+      index, typ: p?.typ, druh: typ?.druh ?? null, prijem: p?.prijem ?? null, naklady: p?.naklady ?? 0, rozdil: null, chyby,
+      terminovy: Boolean(typ?.terminovy && p?.terminovy),
+    };
     if (chyby.length) return { ...zaklad, stav: 'neuplne' };
-    const rozdil = p.prijem - (p.naklady ?? 0);
+    const naklady = p.naklady ?? 0;
     const lhuta = lhutaCasovehoTestu(p.nakup, pr.casovyTest.let);
-    const out = { ...zaklad, naklady: p.naklady ?? 0, rozdil, osvobozenoOd: lhuta.osvobozenoOd, nakup: p.nakup, prodej: p.prodej };
+    const out = {
+      ...zaklad, naklady, rozdil: p.prijem - naklady, nakup: p.nakup, prodej: p.prodej,
+      osvobozenoOd: lhuta.osvobozenoOd,
+      drzbaSplnena: p.prodej >= lhuta.osvobozenoOd,
+      vHodnotovemTestu: typ.hodnotovyTest !== false,
+    };
+    out.casovySplnen = out.drzbaSplnena && !out.terminovy;
     if (rozeberDatum(p.prodej).r !== rok) return { ...out, stav: 'mimo-rok' };
-    return { ...out, stav: p.prodej >= lhuta.osvobozenoOd ? 'casovy' : null };
+    return { ...out, stav: null };
   });
+  const vRoce = polozky.filter((p) => p.stav === null);
 
-  // 2. úhrny příjmů za rok (podle typu) a hodnotový test
+  // 1.–2. Hodnotový test zvlášť podle druhu: úhrn všech hrubých příjmů druhu za rok
   const uhrny = {};
-  for (const typ of TYPY) uhrny[typ] = { prijmy: 0, prijmyCasove: 0, limit: ht.limit, splneno: true, zdanitelnyRozdil: 0, pocet: 0 };
-  const vRoce = polozky.filter((p) => p.stav === 'casovy' || p.stav === null);
-  const soucet = {};
-  for (const p of vRoce) {
-    if (p.stav === 'casovy' && !ht.zahrnoutOsvobozeneCasovymTestem) continue;
-    soucet[klicUhrnu(p.typ)] = (soucet[klicUhrnu(p.typ)] || 0) + p.prijem;
-  }
-  for (const p of vRoce) {
-    uhrny[p.typ].pocet += 1;
-    uhrny[p.typ].prijmy += p.prijem;
-    if (p.stav === 'casovy') uhrny[p.typ].prijmyCasove += p.prijem;
-  }
-  for (const typ of TYPY) {
-    uhrny[typ].uhrnProTest = soucet[klicUhrnu(typ)] || 0;
-    uhrny[typ].splneno = uhrny[typ].uhrnProTest <= ht.limit;
-  }
-  for (const p of polozky) {
-    if (p.stav !== null) continue;
-    p.stav = uhrny[p.typ].splneno ? 'hodnotovy' : 'zdanitelne';
+  for (const d of druhy) {
+    const druhu = vRoce.filter((p) => p.druh === d);
+    const vTestu = druhu.filter((p) => p.vHodnotovemTestu);
+    const zapocitane = ht.zahrnoutOsvobozeneCasovymTestem ? vTestu : vTestu.filter((p) => !p.casovySplnen);
+    const uhrnProTest = secti(zapocitane, (p) => p.prijem);
+    const casove = zapocitane.filter((p) => p.casovySplnen);
+    uhrny[d] = {
+      limit: ht.limity[d],
+      uhrnProTest,
+      splneno: uhrnProTest <= ht.limity[d],
+      prijmy: secti(druhu, (p) => p.prijem),
+      pocet: druhu.length,
+      mimoTest: druhu.length - vTestu.length,
+      zapocitanoCasove: casove.length,
+      uhrnBezCasovych: uhrnProTest - secti(casove, (p) => p.prijem),
+      limit40: null,
+      vysledek: 0,
+      zdanitelnyRozdil: 0,
+    };
   }
 
-  // 3. zdanitelný rozdíl podle typu (zisky a ztráty stejného typu se započtou, celkem nejméně 0)
-  for (const typ of TYPY) {
-    const r = polozky.filter((p) => p.typ === typ && p.stav === 'zdanitelne').reduce((s, p) => s + p.rozdil, 0);
-    uhrny[typ].zdanitelnyRozdil = Math.max(0, r);
+  // 3. Jinak časový test po jednotlivých prodejích
+  for (const p of vRoce) {
+    if (p.vHodnotovemTestu && uhrny[p.druh].splneno) p.stav = 'hodnotovy';
+    else if (p.casovySplnen) p.stav = 'casovy';
+    else p.stav = 'zdanitelne';
   }
-  const zdanitelnyRozdil = TYPY.reduce((s, t) => s + uhrny[t].zdanitelnyRozdil, 0);
+
+  // 4. Horní limit časově osvobozených příjmů (jen druhy, které ho mají – kryptoaktiva)
+  for (const d of druhy) {
+    const limit = pr.limit40mil.limity[d];
+    if (limit == null) continue;
+    const casove = vRoce.filter((p) => p.druh === d && p.stav === 'casovy');
+    const uhrn = secti(casove, (p) => p.prijem);
+    if (uhrn <= limit) continue;
+    const pomer = (uhrn - limit) / uhrn;
+    uhrny[d].limit40 = { uhrn, limit, pomer };
+    for (const p of casove) {
+      p.stav = 'castecne';
+      const prijem = zaokrouhli(p.prijem * pomer);
+      const naklady = zaokrouhli(p.naklady * pomer);
+      p.zdanitelnaCast = { pomer, prijem, naklady, rozdil: zaokrouhli(prijem - naklady) };
+    }
+  }
+
+  // 5. Zdanitelný zbytek po druzích: zisky a ztráty jen uvnitř druhu, záporný výsledek = 0
+  const zdanitelnaCast = (p) => (p.stav === 'zdanitelne' ? p.rozdil : p.stav === 'castecne' ? p.zdanitelnaCast.rozdil : 0);
+  for (const d of druhy) {
+    const vysledek = zaokrouhli(secti(vRoce.filter((p) => p.druh === d), zdanitelnaCast));
+    uhrny[d].vysledek = vysledek;
+    uhrny[d].zdanitelnyRozdil = Math.max(pr.zapocteni.zapornyVysledekDruhu, vysledek);
+  }
+  const zdanitelnyRozdil = zaokrouhli(secti(druhy, (d) => uhrny[d].zdanitelnyRozdil));
   const orientacniDan = Math.round(zdanitelnyRozdil * rules.dane.sazba.hodnota);
 
-  // 4. upozornění ze sporných pravidel (nepočítají se)
+  // Upozornění: nejasná pravidla (počítaná podle doporučení) a důležité kroky výpočtu
   const upozorneni = [];
-  const krypto40 = pr.limit40mil?.kryptoaktiva;
-  if (krypto40?.hodnota != null && uhrny.kryptoaktivum.prijmyCasove > krypto40.hodnota) {
-    upozorneni.push({ id: 'krypto-40mil', stav: krypto40.stav, limit: krypto40.hodnota, castka: uhrny.kryptoaktivum.prijmyCasove });
+  for (const d of druhy) {
+    const u = uhrny[d];
+    if (u.zapocitanoCasove) {
+      upozorneni.push({
+        id: 'uhrn-casovy', stav: ht.zahrnuti.stav, druh: d, uhrn: u.uhrnProTest, uhrnBez: u.uhrnBezCasovych,
+        limit: u.limit, meniVysledek: !u.splneno && u.uhrnBezCasovych <= u.limit,
+      });
+    }
   }
-  if (polozky.some((p) => p.stav === 'zdanitelne' && p.rozdil < 0)) {
-    upozorneni.push({ id: 'ztraty', stav: pr.vzajemneZapocteni.stav });
+  for (const d of druhy) {
+    if (uhrny[d].limit40) upozorneni.push({ id: 'krypto-40mil', stav: pr.limit40mil.stav, druh: d, ...uhrny[d].limit40 });
   }
+  for (const d of druhy) {
+    if (vRoce.some((p) => p.druh === d && zdanitelnaCast(p) < 0)) upozorneni.push({ id: 'ztraty', stav: pr.zapocteni.stav, druh: d, vysledek: uhrny[d].vysledek });
+  }
+  if (uhrny.kryptoaktivum?.zdanitelnyRozdil > 0) upozorneni.push({ id: 'kod-krypta-p2', stav: pr.zapocteni.kodKryptaP2.stav });
 
   return { rok, polozky, uhrny, zdanitelnyRozdil, orientacniDan, upozorneni };
 }

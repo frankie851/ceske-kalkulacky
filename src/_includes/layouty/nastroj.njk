@@ -48,7 +48,7 @@ layout: layouty/zaklad.njk
 
     {%- if meta.neovereno and meta.neovereno.length %}
     <section class="card" aria-labelledby="neovereno-nadpis">
-      <h2 id="neovereno-nadpis" class="h-xl">{{ 'Co zatím neověřujeme a nepočítáme' }}</h2>
+      <h2 id="neovereno-nadpis" class="h-xl">{{ meta.neoverenoNadpis or 'Co zatím neověřujeme a nepočítáme' }}</h2>
       <ul class="watch">
         {%- for u in meta.neovereno %}
         <li>{{ ikona('ikona-vystraha') }}<span>{{ u.text or u }}</span></li>

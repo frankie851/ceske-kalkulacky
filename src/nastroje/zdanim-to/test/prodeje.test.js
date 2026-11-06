@@ -1,4 +1,5 @@
-// Kontrolní příklady prodejů (docs/zadani-zdanim-to.md).
+// Kontrolní příklady prodejů (docs/zadani-zdanim-to.md). Pořadí výpočtu a hodnoty podle
+// zdanim-to-overeni-2026.json (ověřeno 6. 11. 2026).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -6,7 +7,8 @@ import { osvobozeniProdeje, lhutaCasovehoTestu, zkontrolujProdej } from '../prod
 
 const rules = JSON.parse(fs.readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const cp = (nakup, prodej, prijem, naklady = 0) => ({ typ: 'cenny-papir', nakup, prodej, prijem, naklady });
-const krypto = (nakup, prodej, prijem, naklady = 0) => ({ typ: 'kryptoaktivum', nakup, prodej, prijem, naklady });
+const krypto = (nakup, prodej, prijem, naklady = 0, extra = {}) => ({ typ: 'kryptoaktivum', nakup, prodej, prijem, naklady, ...extra });
+const emt = (nakup, prodej, prijem, naklady = 0) => ({ typ: 'emt', nakup, prodej, prijem, naklady });
 
 test('nákup 1. 3. 2022, prodej 2. 3. 2025 → osvobozeno časovým testem', () => {
   const v = osvobozeniProdeje([cp('2022-03-01', '2025-03-02', 500000, 300000)], 2025, rules);
@@ -78,24 +80,91 @@ test('zisk a ztráta stejného druhu se započtou, celkem nejméně 0', () => {
   assert.ok(v.upozorneni.some((u) => u.id === 'ztraty'));
 });
 
-test('krypto nad 40 mil. Kč časově osvobozených příjmů → jen upozornění (sporné), výpočet beze změny', () => {
-  const v = osvobozeniProdeje([krypto('2020-01-01', '2026-02-01', rules.prodeje.limit40mil.kryptoaktiva.hodnota + 1, 0)], 2026, rules);
+test('hodnotový test má přednost: prodej po 3 letech v úhrnu do 100 000 Kč → hodnotový', () => {
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 60000, 10000), cp('2025-01-01', '2026-03-01', 30000, 20000)], 2026, rules);
+  assert.deepEqual(v.polozky.map((p) => p.stav), ['hodnotovy', 'hodnotovy']);
+  assert.equal(v.uhrny['cenny-papir'].uhrnProTest, 90000);
+});
+
+test('úhrn nad limit kvůli prodeji po 3 letech → upozornění „nejasné“, že by bez něj prošel', () => {
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 90000, 10000), cp('2025-01-01', '2026-03-01', 50000, 40000)], 2026, rules);
+  assert.deepEqual(v.polozky.map((p) => p.stav), ['casovy', 'zdanitelne']);
+  const u = v.upozorneni.find((x) => x.id === 'uhrn-casovy');
+  assert.equal(u.stav, 'nejasne');
+  assert.equal(u.uhrn, 140000);
+  assert.equal(u.uhrnBez, 50000);
+  assert.equal(u.meniVysledek, true);
+});
+
+test('elektronický peněžní token do úhrnu 100 000 Kč nevstupuje a hodnotovým testem se neosvobodí', () => {
+  const v = osvobozeniProdeje([emt('2025-01-01', '2026-02-01', 500000, 499000), krypto('2025-01-01', '2026-03-01', 50000, 20000)], 2026, rules);
+  assert.equal(v.uhrny.kryptoaktivum.uhrnProTest, 50000);
+  assert.deepEqual(v.polozky.map((p) => p.stav), ['zdanitelne', 'hodnotovy']);
+  assert.equal(v.uhrny.kryptoaktivum.zdanitelnyRozdil, 1000);
+});
+
+test('elektronický peněžní token po 3 letech → osvobozený časovým testem', () => {
+  const v = osvobozeniProdeje([emt('2020-01-01', '2026-02-01', 5000, 4000)], 2026, rules);
+  assert.equal(v.polozky[0].stav, 'casovy');
+});
+
+test('termínový prodej krypta sjednaný do 3 let se časovým testem neosvobodí', () => {
+  const v = osvobozeniProdeje([krypto('2020-01-01', '2026-02-01', 200000, 50000, { terminovy: true })], 2026, rules);
+  assert.equal(v.polozky[0].stav, 'zdanitelne');
+  assert.equal(v.zdanitelnyRozdil, 150000);
+  // U cenných papírů se příznak ignoruje
+  const cpV = osvobozeniProdeje([{ ...cp('2020-01-01', '2026-02-01', 200000, 50000), terminovy: true }], 2026, rules);
+  assert.equal(cpV.polozky[0].stav, 'casovy');
+});
+
+test('krypto: časově osvobozené příjmy 50 mil. Kč → neosvobozeno 20 %, náklady kráceny stejně', () => {
+  const v = osvobozeniProdeje([
+    krypto('2020-01-01', '2026-02-01', 30000000, 6000000),
+    krypto('2021-01-01', '2026-05-01', 20000000, 4000000),
+  ], 2026, rules);
+  assert.deepEqual(v.polozky.map((p) => p.stav), ['castecne', 'castecne']);
+  assert.deepEqual(v.uhrny.kryptoaktivum.limit40, { uhrn: 50000000, limit: 40000000, pomer: 0.2 });
+  assert.deepEqual(v.polozky[0].zdanitelnaCast, { pomer: 0.2, prijem: 6000000, naklady: 1200000, rozdil: 4800000 });
+  assert.equal(v.zdanitelnyRozdil, 8000000);
+  assert.equal(v.upozorneni.find((u) => u.id === 'krypto-40mil').stav, 'potvrzeno');
+});
+
+test('cenné papíry nad 40 mil. Kč: žádný horní limit', () => {
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 50000000, 10000000)], 2026, rules);
   assert.equal(v.polozky[0].stav, 'casovy');
   assert.equal(v.zdanitelnyRozdil, 0);
-  assert.equal(v.upozorneni[0].id, 'krypto-40mil');
-  assert.equal(v.upozorneni[0].stav, 'sporne');
+});
+
+test('ztráta z krypta se neodečte od zisku z cenných papírů; záporný výsledek druhu = 0', () => {
+  const v = osvobozeniProdeje([cp('2025-01-01', '2026-02-01', 150000, 100000), krypto('2025-01-01', '2026-03-01', 150000, 250000)], 2026, rules);
+  assert.equal(v.uhrny['cenny-papir'].zdanitelnyRozdil, 50000);
+  assert.equal(v.uhrny.kryptoaktivum.vysledek, -100000);
+  assert.equal(v.uhrny.kryptoaktivum.zdanitelnyRozdil, 0);
+  assert.equal(v.zdanitelnyRozdil, 50000);
+  assert.ok(v.upozorneni.some((u) => u.id === 'ztraty' && u.druh === 'kryptoaktivum'));
+});
+
+test('zdanitelné krypto → upozornění „nejasné“ na kód druhu v příloze č. 2', () => {
+  const v = osvobozeniProdeje([krypto('2025-01-01', '2026-03-01', 150000, 100000)], 2026, rules);
+  assert.equal(v.upozorneni.find((u) => u.id === 'kod-krypta-p2').stav, 'nejasne');
 });
 
 test('prodej mimo rok a neúplné řádky se nepočítají', () => {
   const v = osvobozeniProdeje([cp('2022-01-01', '2025-12-31', 500000), cp('', '2026-01-05', 1000), cp('2026-02-01', '2026-01-05', 1000)], 2026, rules);
   assert.deepEqual(v.polozky.map((p) => p.stav), ['mimo-rok', 'neuplne', 'neuplne']);
   assert.equal(v.uhrny['cenny-papir'].uhrnProTest, 0);
-  assert.deepEqual(zkontrolujProdej(cp('2026-02-01', '2026-01-05', 1000)).map((c) => c.pole), ['prodej']);
+  assert.deepEqual(zkontrolujProdej(cp('2026-02-01', '2026-01-05', 1000), rules).map((c) => c.pole), ['prodej']);
 });
 
-test('pravidla: časový test 3 roky, limit 100 000 Kč, 40 mil. u cenných papírů zrušen, u krypta sporné', () => {
+test('pravidla odpovídají ověřovacímu souboru (6. 11. 2026)', () => {
+  assert.equal(rules.meta.overeno, '2026-11-06');
   assert.equal(rules.prodeje.casovyTest.let, 3);
-  assert.equal(rules.prodeje.hodnotovyTest.limit, 100000);
-  assert.equal(rules.prodeje.limit40mil.cennePapiry, null);
-  assert.deepEqual(rules.prodeje.limit40mil.kryptoaktiva, { hodnota: 40000000, stav: 'sporne' });
+  assert.deepEqual(rules.prodeje.hodnotovyTest.limity, { 'cenny-papir': 100000, kryptoaktivum: 100000 });
+  assert.equal(rules.prodeje.hodnotovyTest.spolecny, false);
+  assert.equal(rules.prodeje.hodnotovyTest.zahrnuti.stav, 'nejasne');
+  assert.deepEqual(rules.prodeje.limit40mil.limity, { 'cenny-papir': null, kryptoaktivum: 40000000 });
+  assert.equal(rules.prodeje.krypto.ucinnostOd, '2025-02-15');
+  assert.equal(rules.prodeje.typy.emt.hodnotovyTest, false);
+  assert.equal(rules.prodeje.zapocteni.zapornyVysledekDruhu, 0);
+  assert.equal(rules.prodeje.zapocteni.prevodZtraty, false);
 });

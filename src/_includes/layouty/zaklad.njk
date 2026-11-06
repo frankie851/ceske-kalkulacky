@@ -28,7 +28,7 @@
 <main id="obsah">
 {{ content | safe }}
 </main>
-{{ paticka({ site: site, navigace: navigace, overeno: nastroje | posledniOvereni }) }}
+{{ paticka({ site: site, navigace: navigace, overeno: nastroje | posledniOvereni, poznamka: patickaPoznamka }) }}
 <script type="module" src="{{ '/js/tema.js' | url }}"></script>
 {%- for s in skripty %}
 <script type="module" src="{{ s | url }}"></script>

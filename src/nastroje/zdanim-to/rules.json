@@ -1,100 +1,204 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
-    "stav": "neovereno",
-    "stavText": "Pravidla z odborných zdrojů, sporná místa označujeme",
-    "poznamka": "Oficiální texty (financnisprava.gov.cz, e-Sbírka) se při přípravě nepodařilo otevřít. Pravidla jsou ověřená jen ze sekundárních zdrojů, viz docs/zadani-zdanim-to.md.",
+    "overeno": "2026-11-06",
+    "poznamka": "Hodnoty převzaté jen ze souboru zdanim-to-overeni-2026.json (ověření k 6. 11. 2026: ZDP v úplném znění z e-Sbírky od 1. 8. 2026, pokyny GFŘ, smlouvy o zamezení dvojího zdanění). Výjimka: sazba 15 % u § 8 a § 10 je ze schválené tabulky pravidel (docs/zadani-zdanim-to.md).",
     "zdroje": [
-      { "nazev": "ARROWS – Zdanění investičních příjmů 2026", "url": "https://arws.cz/novinky-v-arrows/zdaneni-investicnich-prijmu-2026", "poznamka": "časový test 3 roky, hodnotový test 100 000 Kč (hrubé příjmy, ne zisk)" },
-      { "nazev": "Crowe – Změna v limitech pro osvobození u investic", "url": "https://www.crowe.com/cz/cs-cz/news/zmena-v-limitech-pro-osvobozeni-u-investic", "poznamka": "od 2026 se ruší limit 40 mil. Kč u cenných papírů, u kryptoaktiv zůstává" },
-      { "nazev": "BusinessInfo – Prodeje nad 40 milionů se od ledna 2026 danit nebudou", "url": "https://www.businessinfo.cz/clanky/prodeje-firem-nad-40-milionu-se-uz-danit-nebudou-pravidla-se-zmeni-od-ledna-2026/" },
-      { "nazev": "Dostupný advokát – Zdanění kryptoměn v roce 2026", "url": "https://dostupnyadvokat.cz/en/blog/cryptocurrency-taxation", "poznamka": "kryptoaktiva: časový test 3 roky a hodnotový test 100 000 Kč" },
-      { "nazev": "Finanční správa – Kryptoaktiva (materiál KV KDP, 29. 4. 2026)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf", "poznamka": "nepodařilo se otevřít, známe jen výtah z vyhledávače" },
-      { "nazev": "Finex – Formulář W-8BEN", "url": "https://finex.cz/w-8ben-formular/", "poznamka": "srážka v USA 30 % bez W-8BEN, 15 % s ním" },
-      { "nazev": "Finex – Zdanění dividend v daňovém přiznání", "url": "https://finex.cz/zdaneni-dividend-jak-postupovat-pri-vyplneni-danoveho-priznani/", "poznamka": "prostý zápočet; dividendy v § 8 a příloze č. 3" },
-      { "nazev": "RuleCalc – Samostatný základ daně FO", "url": "https://rulecalc.com/cs/dan/dan-fo-samostatny-zaklad", "poznamka": "dividendy v § 16a a příloze č. 4" },
-      { "nazev": "DAUČ – Držba zahraničních akcií fyzickou osobou", "url": "https://www.dauc.cz/clanky/13545/drzba-zahranicnich-akcii-fyzickou-osobou-jak-zdanit-vyplacenou-dividendu", "poznamka": "denní kurz ČNB, nebo jednotný kurz; nekombinovat v jednom roce" },
-      { "nazev": "Podnikatel.cz – Limit pro podání přiznání vzroste na 100 tisíc", "url": "https://www.podnikatel.cz/clanky/vyse-prijmu-od-ktere-musite-podat-danove-priznani-vzroste-na-100-tisic-korun/", "poznamka": "od roku 2027 podle zdrojů; průchod legislativou nepotvrzen" }
+      { "nazev": "Zákon č. 360/2025 Sb. (novela ZDP, § 4 odst. 3)", "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf", "poznamka": "limit 40 mil. Kč platí od 1. 1. 2026 jen u kryptoaktiv osvobozených časovým testem" },
+      { "nazev": "Finanční správa – Kryptoaktiva (29. 4. 2026)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf", "poznamka": "samostatné limity 100 000 Kč pro cenné papíry a kryptoaktiva; elektronický peněžní token je z hodnotového testu vyňatý" },
+      { "nazev": "Zákon o daních z příjmů č. 586/1992 Sb. (Zákony pro lidi)", "url": "https://www.zakonyprolidi.cz/cs/1992-586", "poznamka": "úhrn pro hodnotový test (§ 4 odst. 1 písm. t a zj), zákaz kombinace kurzů (§ 38 odst. 1 a 7), limity přiznání (§ 38g)" },
+      { "nazev": "MF – Informace k zákonu č. 32/2025 Sb. (osvobození kryptoaktiv)", "url": "https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf", "poznamka": "účinnost od 15. 2. 2025, časový test 3 roky, termínový převod do 3 let se neosvobozuje" },
+      { "nazev": "GFŘ – Informace ke zdanění kryptoměn", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/Info_kryptomeny_GFR.pdf", "poznamka": "směna kryptoměny za jinou kryptoměnu je zdanitelná" },
+      { "nazev": "MF – Pokyny k příloze č. 2 přiznání (25 5405/P2)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf", "poznamka": "zisky a ztráty jen uvnitř druhu příjmu (§ 10 odst. 4)" },
+      { "nazev": "Pokyny k přiznání k dani z příjmů FO za rok 2025", "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf", "poznamka": "§ 8, nebo § 16a; řádky přiznání a příloh; zápočet zvlášť za každý stát" },
+      { "nazev": "MF – Přehled platných smluv o zamezení dvojího zdanění", "url": "https://mf.gov.cz/cs/zahranici-a-eu/smlouvy-o-zamezeni-dvojiho-zdaneni/prehled-platnych-smluv", "poznamka": "smluvní sazby pro portfoliové dividendy (čl. 10 odst. 2)" },
+      { "nazev": "Finanční zpravodaj 2/2026 – Pokyn GFŘ-D-75", "url": "https://www.mfcr.cz/assets/attachments/2026-01-14_Financni-zpravodaj-cislo-2-2026.pdf", "poznamka": "jednotný kurz za rok 2025; za rok 2026 zatím nevydán" },
+      { "nazev": "Zákon č. 180/2026 Sb. (limity pro podání přiznání)", "url": "https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf", "poznamka": "limity 100 000 Kč a 40 000 Kč od zdaňovacího období 2027" }
     ],
+    "neoverenoNadpis": "Co zákon ani finanční správa jasně neřeší",
     "neovereno": [
-      "Limit 40 mil. Kč u kryptoaktiv: většina zdrojů píše, že od roku 2026 zůstal, některé ho nezmiňují a liší se, zda je společný s cennými papíry. Nepočítáme ho, jen upozorníme.",
-      "Zda se do úhrnu 100 000 Kč počítají i příjmy osvobozené časovým testem. Počítáme je (méně osvobození, opatrnější varianta).",
-      "Vzájemné započtení zisků a ztrát z prodejů stejného druhu. Počítáme ho, celková ztráta se nepočítá.",
-      "Kam patří dividendy ze zahraničí v přiznání: dílčí základ § 8 a příloha č. 3, nebo samostatný základ § 16a a příloha č. 4. Zdroje se rozcházejí.",
-      "Smluvní sazby daně z dividend pro Německo, Velkou Británii, Nizozemsko, Irsko, Francii, Švýcarsko a Kanadu. Zápočet u nich omezujeme jen českou daní.",
-      "Jednotný kurz GFŘ za rok 2026 zatím nevyšel. Kurz se zadává ručně.",
-      "Limity pro povinné přiznání od roku 2027 (40 000 Kč a 100 000 Kč) a to, zda se do nich počítají zahraniční dividendy.",
-      "Zaokrouhlení základu a daně podle pokynů k přiznání a sazbu 23 % pro vysoké příjmy nepočítáme."
+      "Zda se do úhrnu 100 000 Kč počítají i prodeje, které splnily časový test. Oficiální metodiku finanční správy jsme nenašli. Počítáme je (opatrnější varianta) a ve výsledku na to upozorníme.",
+      "Zápočet zahraniční daně v režimu § 16a (příloha č. 4): pokyny k příloze se nepodařilo otevřít. Zápočet u § 16a ukazujeme jen orientačně.",
+      "Zda se zahraniční dividendy (i v § 16a) počítají do limitu pro podání přiznání. Oficiální stanovisko jsme nenašli. Podle výkladu zákona se započítávají.",
+      "Kód druhu příjmu pro kryptoaktiva v příloze č. 2: samostatný kód není.",
+      "Formulář W-8BEN je americký postup. Z českého zdroje jsme ho neověřili.",
+      "Řádky přiznání a příloh jsou podle tiskopisu za rok 2025. Pokyny za rok 2026 zatím nevyšly.",
+      "Smluvní sazby jsou podle přehledu Ministerstva financí. S textem v e-Sbírce jsme je neporovnávali.",
+      "Sazbu 23 % pro vysoké příjmy a zaokrouhlení základu a daně podle pokynů k přiznání nepočítáme."
     ]
   },
   "rok": 2026,
   "overitUrl": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/fyzicke-osoby",
   "dane": {
-    "sazba": { "hodnota": 0.15, "stav": "shoda" }
+    "sazba": { "hodnota": 0.15, "stav": "potvrzeno", "poznamka": "sazba podle schválené tabulky pravidel (§ 8 a § 10), není v ověřovacím souboru" }
   },
   "prodeje": {
     "typy": {
-      "cenny-papir": { "nazev": "Cenné papíry", "popis": "akcie, ETF" },
-      "kryptoaktivum": { "nazev": "Kryptoaktiva", "popis": null }
+      "cenny-papir": { "nazev": "Cenné papíry", "popis": "akcie, ETF", "druh": "cenny-papir", "hodnotovyTest": true, "terminovy": false },
+      "kryptoaktivum": { "nazev": "Kryptoaktiva", "popis": null, "druh": "kryptoaktivum", "hodnotovyTest": true, "terminovy": true },
+      "emt": { "nazev": "Elektronický peněžní token", "popis": "stablecoin typu EMT", "druh": "kryptoaktivum", "hodnotovyTest": false, "terminovy": true }
     },
-    "casovyTest": { "let": 3, "stav": "shoda" },
+    "druhy": {
+      "cenny-papir": { "nazev": "Cenné papíry", "paragraf": "§ 10/1/b/2" },
+      "kryptoaktivum": { "nazev": "Kryptoaktiva", "paragraf": "§ 10/1/b/3" }
+    },
+    "casovyTest": {
+      "let": 3,
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. zj), zk) ZDP (zák. č. 32/2025 Sb.)", "url": "https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf" }
+    },
     "hodnotovyTest": {
-      "limit": 100000,
-      "zvlastPodleTypu": true,
+      "limity": { "cenny-papir": 100000, "kryptoaktivum": 100000 },
+      "spolecny": false,
+      "elektronickyPenezniToken": "vyňat z hodnotového testu",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t) a zj) ZDP (znění 1. 8. 2026)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf" },
       "zahrnoutOsvobozeneCasovymTestem": true,
-      "stav": "shoda",
-      "stavZahrnuti": "neovereno"
+      "zahrnuti": {
+        "stav": "nejasne",
+        "doporuceni": "započítat všechny hrubé příjmy z prodejů daného druhu (konzervativně) + upozornění",
+        "oficialniMetodikaFS": "nenalezena",
+        "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t), zj) ZDP – „úhrn“ bez výjimky", "url": "https://www.zakonyprolidi.cz/cs/1992-586" }
+      }
     },
     "limit40mil": {
-      "cennePapiry": null,
-      "zrusenoOdRoku": 2026,
-      "kryptoaktiva": { "hodnota": 40000000, "stav": "sporne" }
+      "limity": { "cenny-papir": null, "kryptoaktivum": 40000000 },
+      "plati": "jen kryptoaktiva osvobozená časovým testem (§ 4/1/zk)",
+      "cennePapiryAPodily": "bez limitu od 1. 1. 2026",
+      "zaklad": "úhrn příjmů",
+      "nadLimit": "neosvobozena poměrná část (úhrn − 40 000 000) / úhrn",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 4 odst. 3 ZDP ve znění zák. č. 360/2025 Sb., účinnost 1. 1. 2026", "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf" }
     },
-    "vzajemneZapocteni": { "stav": "neovereno" }
+    "krypto": {
+      "ucinnostOd": "2025-02-15",
+      "zakon": "32/2025 Sb.",
+      "plati": "příjmy plynoucí od 15. 2. 2025 i u krypta nabytého dříve; doba držby před účinností se započítává",
+      "neosvobozujeSe": "budoucí úplatný převod kryptoaktiva uskutečněný do 3 let od nabytí (§ 4/1/zk)",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. zj), zk) ZDP (zák. č. 32/2025 Sb.)", "url": "https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf" },
+      "smena": {
+        "zdanitelna": true,
+        "oceneni": "podle předpisu o oceňování majetku",
+        "neprerusujeCasovyTest": [
+          "výměna kryptoaktiva jeho vydavatelem",
+          "sloučení/splynutí kryptoaktiv",
+          "dědění v řadě přímé / manžel (zkrácení o držbu zůstavitele)"
+        ],
+        "poznamka": "stanovisko GFŘ pochází z doby před novelou 2025",
+        "stav": "potvrzeno",
+        "zdroj": { "pravniZaklad": "§ 10 odst. 1 písm. b) bod 3 ZDP; Informace GFŘ č. j. 18809/22/7100-40050-205680", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/Info_kryptomeny_GFR.pdf" }
+      }
+    },
+    "zapocteni": {
+      "uvnitrDruhu": true,
+      "meziDruhy": false,
+      "zapornyVysledekDruhu": 0,
+      "prevodZtraty": false,
+      "castecneOsvobozeni": "výdaje krátit poměrem neosvobozené části",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 10 odst. 4 ZDP; pokyny k Příloze č. 2 DAP (25 5405/P2)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf" },
+      "kodKryptaP2": { "stav": "nejasne", "text": "kód druhu pro krypto v Příloze č. 2 (není samostatný kód)" }
+    }
   },
   "dividendy": {
     "zeme": {
-      "US": { "nazev": "USA", "smluvniSazba": { "hodnota": 0.15, "stav": "shoda" }, "w8ben": { "sazbaS": 0.15, "sazbaBez": 0.3, "stav": "shoda" } },
-      "DE": { "nazev": "Německo", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
-      "GB": { "nazev": "Velká Británie", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
-      "NL": { "nazev": "Nizozemsko", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
-      "IE": { "nazev": "Irsko", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
-      "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
-      "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
-      "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } },
+      "US": { "nazev": "USA", "smluvniSazba": { "hodnota": 0.15, "smlouva": "32/1994 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" }, "w8ben": { "stav": "nejasne", "text": "nejasné – US procedura, neověřeno z CZ zdroje" } },
+      "DE": { "nazev": "Německo", "smluvniSazba": { "hodnota": 0.15, "smlouva": "18/1984 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
+      "GB": { "nazev": "Velká Británie", "smluvniSazba": { "hodnota": 0.15, "smlouva": "89/1992 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
+      "NL": { "nazev": "Nizozemsko", "smluvniSazba": { "hodnota": 0.1, "smlouva": "138/1974 Sb.", "clanek": "čl. 10 odst. 2", "stav": "potvrzeno" } },
+      "IE": { "nazev": "Irsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "163/1996 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
+      "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": 0.1, "smlouva": "79/2005 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
+      "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "281/1996 Sb. + Protokol 99/2013 Sb.m.s.", "clanek": "čl. 10 odst. 2 (nové znění)", "stav": "potvrzeno" } },
+      "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": 0.15, "smlouva": "83/2002 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
       "XX": { "nazev": "Jiná země", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } }
     },
+    "stropZapoctu": {
+      "text": "uznatelná daň max. smluvní sazba × hrubá dividenda; opora § 38f odst. 3 (příjmy podléhající zdanění v zahraničí v souladu s mezinárodní smlouvou)",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "SZDZ, čl. 10 odst. 2; čísla Sbírky dle přehledu MF k 2. 11. 2026", "url": "https://mf.gov.cz/cs/zahranici-a-eu/smlouvy-o-zamezeni-dvojiho-zdaneni/prehled-platnych-smluv" }
+    },
     "meny": ["USD", "EUR", "GBP", "CHF", "CAD"],
-    "umisteni": {
-      "stav": "sporne",
-      "varianty": [
-        { "id": "par8", "nazev": "Dílčí základ podle § 8", "priloha": "příloha č. 3", "radekZaklad": "ř. 38, dílčí základ z kapitálového majetku", "radekDan": null, "zapocet": "zápočet daně zaplacené v zahraničí v příloze č. 3", "zdroj": { "nazev": "Finex", "url": "https://finex.cz/zdaneni-dividend-jak-postupovat-pri-vyplneni-danoveho-priznani/" } },
-        { "id": "par16a", "nazev": "Samostatný základ daně podle § 16a", "priloha": "příloha č. 4", "radekZaklad": null, "radekDan": "ř. 330, daň ze samostatného základu", "zapocet": "zápočet daně zaplacené v zahraničí podle pokynů k příloze č. 4", "zdroj": { "nazev": "RuleCalc", "url": "https://rulecalc.com/cs/dan/dan-fo-samostatny-zaklad" } }
-      ]
+    "rezimy": {
+      "vychozi": "par8",
+      "podminka": "všechny příjmy podle § 8 odst. 8 věty první, ne výběr",
+      "zapocet": "prostý zápočet samostatně za každý stát (§ 38f odst. 8)",
+      "radkyDle": "tiskopis za rok 2025 (pokyny 2026 zatím nevydány)",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 8 odst. 4 a 8, § 16a odst. 1–2, § 38f odst. 1, 2, 8 ZDP; Pokyny k DAP 2025", "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf" },
+      "varianty": {
+        "par8": {
+          "nazev": "§ 8",
+          "popis": "dílčí základ daně z kapitálového majetku",
+          "text": "§ 8 odst. 4 – dílčí základ ř. 38, zápočet Příloha č. 3 ř. 321–330 → ř. 58",
+          "sazba": null,
+          "kroky": [
+            "Hrubé dividendy přepočtené na koruny uveď v dílčím základu z kapitálového majetku na ř. 38.",
+            "Zápočet daně zaplacené v zahraničí spočítej v příloze č. 3 na ř. 321–330, zvlášť za každý stát.",
+            "Výsledek zápočtu přenes na ř. 58."
+          ]
+        },
+        "par16a": {
+          "nazev": "§ 16a (15 %)",
+          "popis": "samostatný základ daně se sazbou 15 %",
+          "text": "§ 16a (15 %) – Příloha č. 4 ř. 414 → ř. 74a; na ř. 38 neuvádět",
+          "sazba": 0.15,
+          "kroky": [
+            "Hrubé dividendy přepočtené na koruny uveď v příloze č. 4. Na ř. 38 je neuváděj.",
+            "Daň ze samostatného základu (ř. 414 přílohy č. 4) přenes na ř. 74a."
+          ],
+          "zapocet": {
+            "stav": "nejasne",
+            "hodnota": null,
+            "text": "zápočet zahraniční daně v režimu § 16a: pokyny k Příloze č. 4 neotevřeny",
+            "zdroj": { "pravniZaklad": "§ 38f ZDP; pokyny k Příloze č. 4 neotevřeny", "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf" }
+          }
+        }
+      }
     }
   },
   "kurzy": {
     "zpusoby": {
-      "denni": { "nazev": "Denní kurz ČNB", "popis": "Kurz ČNB ke dni výplaty. U každé výplaty jiný." },
-      "jednotny": { "nazev": "Jednotný kurz GFŘ", "popis": "Jeden kurz pro celý rok a měnu. Vyhlašuje ho Generální finanční ředitelství pokynem po skončení roku." }
+      "denni": { "nazev": "Denní kurz ČNB", "popis": "Kurz ČNB ke dni výplaty (kurz pro přepočet daně). U každé výplaty jiný." },
+      "jednotny": { "nazev": "Jednotný kurz", "popis": "Jeden kurz pro celé zdaňovací období a měnu. Vyhlašuje ho Generální finanční ředitelství pokynem po skončení roku." }
     },
+    "kombinovatLze": false,
+    "volba": "denní kurz ČNB (kurz pro přepočet daně) NEBO jednotný kurz pro celé zdaňovací období",
+    "stav": "potvrzeno",
+    "zdroj": { "pravniZaklad": "§ 38 odst. 1 písm. b) a odst. 7 ZDP (znění 1. 8. 2026)", "url": "https://www.zakonyprolidi.cz/cs/1992-586" },
     "jednotny": {
+      "2025": { "USD": 21.84, "EUR": 24.66, "GBP": 28.8, "CHF": 26.33, "CAD": 15.61 },
       "2026": null
     },
-    "jednotnyStav": { "2026": "nevydan", "posledniZnamyPokyn": "GFŘ-D-75 (za rok 2025)" }
+    "jednotnyPoznamka": {
+      "2026": "nevydán; podle § 38 odst. 7 jde o průměr kurzů ke konci každého měsíce, tedy nelze před 31. 12. 2026; obvykle leden následujícího roku"
+    },
+    "posledniJednotny": {
+      "pokyn": "GFŘ-D-75",
+      "rok": 2025,
+      "fz": "2/2026 (14. 1. 2026)",
+      "zdroj": { "pravniZaklad": "§ 38 odst. 7 ZDP; Pokyn GFŘ-D-75 č. j. 95534/25/7100-10111-802540", "url": "https://www.mfcr.cz/assets/attachments/2026-01-14_Financni-zpravodaj-cislo-2-2026.pdf" }
+    }
   },
   "priznani": {
+    "zakon": "180/2026 Sb.",
+    "ucinnost": "2027-01-01",
+    "prvniZdanovaciObdobi": 2027,
+    "stav": "potvrzeno",
+    "zdroj": { "pravniZaklad": "zák. č. 180/2026 Sb.; § 38g odst. 1 a 2 ZDP", "url": "https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf" },
     "limity": [
-      { "id": "vedle-zamestnani", "text": "Za rok 2026: zaměstnanec s podepsaným prohlášením u jednoho zaměstnavatele nemusí podat přiznání, když další příjmy podle § 7 až 10 nepřesáhnou", "hodnota": 20000, "obdobi": "2026", "stav": "shoda" },
-      { "id": "celkovy", "text": "Za rok 2026: přiznání musí podat ten, kdo měl roční příjmy podléhající dani nad", "hodnota": 50000, "obdobi": "2026", "stav": "shoda" },
-      { "id": "vedle-zamestnani-2027", "text": "Od roku 2027 se má limit dalších příjmů vedle zaměstnání zvýšit na", "hodnota": 40000, "obdobi": "od 2027", "stav": "sporne" },
-      { "id": "celkovy-2027", "text": "Od roku 2027 se má celkový limit zvýšit na", "hodnota": 100000, "obdobi": "od 2027", "stav": "sporne" }
+      { "id": "celkem", "text": "Přiznání musí podat ten, kdo měl roční příjmy podléhající dani nad", "do2026": 50000, "od2027": 100000 },
+      { "id": "vedle-zamestnani", "text": "Zaměstnanec s podepsaným prohlášením u jednoho zaměstnavatele nemusí podat přiznání, když další příjmy nepřesáhnou", "do2026": 20000, "od2027": 40000 }
     ],
-    "dividendyVzdy": { "stav": "sporne", "text": "Zda se zahraniční dividendy uvádějí v přiznání vždy, nebo jen nad limity výše, se zdroje rozcházejí." }
+    "dividendyVLimitu": {
+      "stav": "nejasne",
+      "vyklad": "započítávají se (nejsou osvobozené ani sražené v ČR podle zvláštní sazby)",
+      "oficialniStanovisko": "nenalezeno",
+      "zdroj": { "pravniZaklad": "§ 38g odst. 1 a 2 ZDP (odst. 2 vyjímá jen příjmy osvobozené a sražené podle § 36)", "url": "https://www.zakonyprolidi.cz/cs/1992-586" }
+    }
   },
   "stavy": {
-    "shoda": { "text": "Shoda zdrojů", "stitek": "plain" },
-    "sporne": { "text": "Sporné", "stitek": "navrh" },
+    "potvrzeno": { "text": "Potvrzeno", "stitek": "plain" },
+    "nejasne": { "text": "Nejasné", "stitek": "navrh" },
     "neovereno": { "text": "Neověřeno", "stitek": "navrh" },
     "nevydan": { "text": "Zatím nevydáno", "stitek": "navrh" }
   }

@@ -16,16 +16,27 @@ stitkyNavic: ['Za rok 2026']
 {%- from "komponenty/ikona.njk" import ikona -%}
 {%- set d = zt.dividendy -%}
 <div class="zt" id="zt-dividendy">
-  {% call upozorneni({ typ: 'navrh', titulek: zt.stavPravidel }) %}
-    <p class="small">Pravidla jsme zatím ověřili jen z článků daňových poradců, ne z oficiálních textů. Sporná místa označujeme. <a href="{{ zt.overitUrl }}">Ověř u finanční správy</a>.</p>
+  {% call upozorneni({ typ: 'info', titulek: 'Pravidla ověřená z oficiálních textů k ' + (zt.overeno | datum) }) %}
+    <p class="small">Zákon o daních z příjmů v úplném znění, pokyny finanční správy a smlouvy o zamezení dvojího zdanění. Místa, která zákon ani finanční správa jasně neřeší, počítáme podle doporučeného výkladu a označujeme je štítkem <strong>Nejasné</strong>.</p>
   {% endcall %}
 
   <section class="card zt-zadani" aria-labelledby="zt-div-zadani-nadpis">
     <h2 id="zt-div-zadani-nadpis">Dividendy za rok {{ zt.rok }}</h2>
     <p class="muted small">Opiš výplaty z výpisu brokera. Částky v měně výplaty, kurz v korunách za 1 jednotku měny. Nic se nikam neposílá ani neukládá.</p>
     <form id="zt-dividendy-form" novalidate>
+      {{ segmenty({ id: 'zdaneni', legenda: 'Kam dividendy v přiznání dáš', moznosti: d.rezimy, napoveda: d.napovedaRezimu }) }}
+      {%- if d.zpusoby.length > 1 %}
       {{ segmenty({ id: 'zpusob', legenda: 'Jak přepočítáš na koruny', moznosti: d.zpusoby, napoveda: d.napovedaZpusobu }) }}
-      <p class="note zt-jednotny-stav" data-jednotny-stav>{{ ikona('ikona-info') }}<span>{{ d.jednotnyStav }} V jednom roce nejde kombinovat jednotný kurz a denní kurzy.</span></p>
+      {%- else %}
+      <div class="field zt-zpusob-pevny">
+        <p class="zt-zpusob-nazev"><strong>Přepočet na koruny: {{ d.zpusoby[0].text }}</strong></p>
+        <input type="hidden" name="zpusob" value="{{ d.zpusob }}" data-zpusob>
+        <span class="hint" id="zpusob-napoveda">{{ d.napovedaZpusobu }}</span>
+      </div>
+      {%- endif %}
+      {%- if d.jednotnyStav %}
+      <p class="note zt-jednotny-stav" data-jednotny-stav>{{ ikona('ikona-info') }}<span>{{ stitek({ typ: 'navrh', text: d.jednotnyStav.stav.text }) }} {{ d.jednotnyStav.text }} {{ d.kombinace.text }}</span></p>
+      {%- endif %}
       <ol class="zt-radky" data-radky>
         {%- for r in d.radky %}
         {%- set n = loop.index %}
@@ -88,14 +99,22 @@ stitkyNavic: ['Za rok 2026']
 
   <section class="card" aria-labelledby="zt-limity-nadpis">
     <h2 id="zt-limity-nadpis">Musíš kvůli tomu podat přiznání?</h2>
-    <p class="muted small">Povinnost záleží na všech tvých příjmech, ne jen na dividendách. Tady jsou limity, jak je uvádějí zdroje.</p>
-    <ul class="zt-sporne">
-      {%- for l in d.limity %}
-      <li>{{ stitek({ typ: 'navrh' if l.stavInfo.stitek == 'navrh' else 'plain', text: l.stavInfo.text }) }}<span>{{ l.text }} <span class="num">{{ l.castka }}</span>.</span></li>
-      {%- endfor %}
-      <li>{{ stitek({ typ: 'navrh', text: d.dividendyVzdy.stavInfo.text }) }}<span>{{ d.dividendyVzdy.text }}</span></li>
+    <p class="muted small">Povinnost záleží na všech tvých příjmech, ne jen na dividendách. {{ stitek({ typ: 'plain', text: d.priznani.stav.text }) }} Limity od roku {{ d.priznani.prvni }} mění zákon č. {{ d.priznani.zakon }}.</p>
+    <div class="table-wrap" role="region" aria-label="Tabulka: limity pro podání přiznání" tabindex="0">
+      <table class="stack-table">
+        <caption>Limity pro podání přiznání</caption>
+        <thead><tr><th scope="col">Kdy</th><th scope="col" class="r">Za rok 2026</th><th scope="col" class="r">Od roku {{ d.priznani.prvni }}</th></tr></thead>
+        <tbody>
+          {%- for l in d.limity %}
+          <tr><th scope="row">{{ l.text }}</th><td class="r" data-label="Za rok 2026">{{ l.do2026 }}</td><td class="r" data-label="Od roku {{ d.priznani.prvni }}">{{ l.od2027 }}</td></tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+    <ul class="zt-sporne zt-limity-pozn">
+      <li>{{ stitek({ typ: 'navrh', text: d.dividendyVLimitu.stavInfo.text }) }}<span>Zahraniční dividendy (i v režimu § 16a) do limitu počítáme: {{ d.dividendyVLimitu.vyklad }}. Oficiální stanovisko: {{ d.dividendyVLimitu.oficialniStanovisko }}. <span class="src-meta">Zdroj: <a href="{{ d.dividendyVLimitu.zdroj.url }}">{{ d.dividendyVLimitu.zdroj.pravniZaklad }}</a></span></span></li>
     </ul>
-    <p class="note">{{ ikona('ikona-info') }}<span>Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř limity a postup u finanční správy</a>.</span></p>
+    <p class="note">{{ ikona('ikona-info') }}<span>Zdroj limitů: <a href="{{ d.priznani.zdroj.url }}">{{ d.priznani.zdroj.pravniZaklad }}</a>. Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř postup u finanční správy</a>.</span></p>
   </section>
 </div>
 {{ lepiva_lista({ cislo: d.lista.cislo, popis: d.lista.popis, cil: '#vysledek' }) }}

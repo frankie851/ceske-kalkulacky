@@ -8,149 +8,223 @@ Vychází z řádku „Zdaním to?“ v tabulce „Další nápady na aplikace�
 „Zadání pro Claude Code: Dividendy ze zahraničí“ v `docs/zadani.md` a z promptu vlny 3
 v `docs/zadani-faze-2.md`.
 
-> **Stav (6. 11. 2026):** tabulku pravidel níže **schválil uživatel** a nástroj je zveřejněný.
-> Sporné body zůstávají na stránce označené a nástroj je nepočítá, jen na ně upozorní. Oficiální weby
-> (financnisprava.gov.cz, e-Sbírka, zakonyprolidi.cz) se z cloudové relace otevřít nedaly,
-> pravidla jsou proto ověřená jen ze sekundárních zdrojů. Bez `ZOBRAZIT_SKRYTE=1` web ukazuje
-> kartu „Připravujeme“ ze `src/_data/pripravujeme.json`.
+> **Stav (6. 11. 2026):** pravidla jsou **ověřená z oficiálních textů** podle souboru
+> `zdanim-to-overeni-2026.json`, který dodal uživatel. Zdroje: ZDP v úplném znění z e-Sbírky
+> od 1. 8. 2026, pokyny GFŘ a smlouvy o zamezení dvojího zdanění. Hodnoty v `rules.json`
+> jsou převzaté jen z tohoto souboru. Jedinou výjimkou je sazba 15 % u § 8 a § 10, která je
+> ze schválené tabulky pravidel. Položky se stavem „nejasné“ se počítají podle doporučení
+> ze souboru a v UI mají vždy viditelné upozornění.
+> Předchozí verze tabulky ze sekundárních zdrojů je v historii gitu.
 
 ## Cíl
 
 Statická stránka v češtině ve dvou záložkách:
 
-1. **Prodeje** (`/penize/zdanim-to/`): ruční zadání prodejů (druh, datum nákupu, datum prodeje,
-   příjem v Kč, náklady v Kč). Výsledek po položkách: osvobozeno časovým testem (s datem, od kdy
-   test platí), osvobozeno hodnotovým testem, nebo zdanitelné. Souhrn „Zdaníš X Kč rozdílu“, nebo
-   „Nic nedaníš“.
-2. **Dividendy ze zahraničí** (`/penize/zdanim-to/dividendy/`): rok, způsob přepočtu (denní kurz
-   ČNB, nebo jednotný kurz GFŘ), řádky výplat (země, hrubá částka, měna, sražená daň, kurz).
-   Výsledek po zemích, „Doplatíš X Kč“ nebo „Nic nedoplácíš“, přeplacená zahraniční daň
-   s tipem na W-8BEN a návod k přiznání.
+1. **Prodeje** (`/penize/zdanim-to/`): ruční zadání prodejů. Řádek obsahuje:
+   - druh: cenné papíry, kryptoaktiva, nebo elektronický peněžní token,
+   - datum nákupu a datum prodeje,
+   - příjem v Kč a náklady v Kč,
+   - u krypta zaškrtávátko „termínový prodej sjednaný do 3 let“.
 
-Nic se neukládá ani neodesílá. Tón: tykání, rodově neutrálně, krátké věty.
+   Výsledek po položkách je jedna z možností:
+   - osvobozeno hodnotovým testem,
+   - osvobozeno časovým testem,
+   - částečně osvobozeno (krypto nad 40 mil. Kč),
+   - zdanitelné.
 
-## Pravidla k ověření a stav (tabulka ke schválení)
+   Souhrn je „Zdaníš X Kč rozdílu“, nebo „Nic nedaníš“.
+2. **Dividendy ze zahraničí** (`/penize/zdanim-to/dividendy/`). Vstupy:
+   - režim § 8, nebo § 16a (15 %), který platí pro všechny výplaty,
+   - způsob přepočtu (za rok 2026 jen denní kurz ČNB),
+   - řádky výplat: země, hrubá částka, měna, sražená daň, kurz.
 
-Stav: **shoda zdrojů** = víc nezávislých sekundárních zdrojů říká totéž (oficiální text se nepodařilo
-otevřít); **sporné** = zdroje se rozcházejí; **neověřeno** = zdroj jsme nenašli.
+   Výsledek:
+   - tabulka po zemích se stropem zápočtu podle smluv,
+   - „Doplatíš X Kč“, nebo „Nic nedoplácíš“,
+   - přeplacená zahraniční daň,
+   - návod k přiznání pro zvolený režim,
+   - limity pro podání přiznání.
 
-| # | Pravidlo | Zdroj | Stav | Co s tím nástroj dělá |
+Nic se neukládá ani neodesílá. Tón: tykání, rodově neutrálně, krátké věty. V patičce stránek
+nástroje je věta „Nejde o daňové poradenství. Pravidla ověřena k 6. 11. 2026.“ (datum
+z `meta.overeno`).
+
+## Pravidla (podle `zdanim-to-overeni-2026.json`, ověřeno 6. 11. 2026)
+
+| Bod | Pravidlo | Hodnota v `rules.json` | Právní základ, zdroj | Stav |
 | --- | --- | --- | --- | --- |
-| 1 | Prodej cenných papírů je osvobozený po **časovém testu > 3 roky** mezi nákupem a prodejem, každá tranše zvlášť (§ 4 odst. 1 ZDP) | TPA, az-data, Finemia, EURODANĚ (dohledal zadavatel), [ARROWS](https://arws.cz/novinky-v-arrows/zdaneni-investicnich-prijmu-2026), [Crowe](https://www.crowe.com/cz/cs-cz/news/zmena-v-limitech-pro-osvobozeni-u-investic) | shoda zdrojů | Počítá (`prodeje.casovyTest.let = 3`), u položky ukáže den, od kterého je prodej osvobozený |
-| 2 | **Hodnotový test:** osvobozené, když **úhrn příjmů (ne zisku)** z prodeje za rok nepřesáhne **100 000 Kč** | tytéž zdroje, [ARROWS](https://arws.cz/novinky-v-arrows/zdaneni-investicnich-prijmu-2026) („hrubé příjmy, nikoliv zisk“) | shoda zdrojů | Počítá (`prodeje.hodnotovyTest.limit`) |
-| 3 | Hodnotový test zvlášť pro cenné papíry a zvlášť pro kryptoaktiva | [Forvis Mazars](https://www.forvismazars.com/cz/), [Dostupný advokát](https://dostupnyadvokat.cz/en/blog/cryptocurrency-taxation), [BDO](https://www.bdo.cz/) | shoda zdrojů | Počítá dva úhrny |
-| 4 | Do úhrnu 100 000 Kč se počítají i příjmy osvobozené časovým testem | – | neověřeno | Počítá je (opatrnější varianta, méně osvobození), píše to u výsledku a v „neověřeno“ |
-| 5 | Kryptoaktiva (převody od 15. 2. 2025): časový test 3 roky a hodnotový test 100 000 Kč; neplatí pro kryptoaktiva v podnikání | [Forvis Mazars](https://www.forvismazars.com/cz/), [Dostupný advokát](https://dostupnyadvokat.cz/en/blog/cryptocurrency-taxation), [Crowe](https://www.crowe.com/cz/cs-cz/news/kryptomeny-a-osvobozeni-z-prodeje) | shoda zdrojů | Počítá; podnikání jen jako upozornění |
-| 6 | **Limit 40 mil. Kč** pro osvobození časovým testem se od 1. 1. 2026 u cenných papírů **ruší** | TPA, az-data, Finemia, EURODANĚ, [Crowe](https://www.crowe.com/cz/cs-cz/news/zmena-v-limitech-pro-osvobozeni-u-investic), [BusinessInfo](https://www.businessinfo.cz/clanky/prodeje-firem-nad-40-milionu-se-uz-danit-nebudou-pravidla-se-zmeni-od-ledna-2026/), [E15](https://www.e15.cz/finexpert/danove-priznani/od-ledna-plati-novy-limit-pro-zdaneni-prijmu-z-obchodovani-s-cennymi-papiry-a-podily-v-obchodnich-korporacich-1423019) | shoda zdrojů | `limit40mil.cennePapiry = null`, nepočítá se |
-| 7 | **Limit 40 mil. Kč u kryptoaktiv zůstává** | ano: TPA, az-data, [Crowe](https://www.crowe.com/cz/cs-cz/news/zmena-v-limitech-pro-osvobozeni-u-investic), [BusinessInfo](https://www.businessinfo.cz/clanky/prodeje-firem-nad-40-milionu-se-uz-danit-nebudou-pravidla-se-zmeni-od-ledna-2026/), [Divly](https://divly.com/cs/guides/zdaneni-kryptomen-v-cesku), [Money](https://money.cz/novinky-a-tipy/rychle-zpravy/limitni-osvobozeni-prijmu-z-prodeje-kryptoaktiva-ve-vysi-40-000-000-kc/) a materiál KV KDP na webu FS ([Krypto 29. 4. 2026](https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf), znám jen z výtahu vyhledávače); jiné články ho nezmiňují; BDO a EY se liší v tom, zda je limit společný s cennými papíry | **sporné** (převaha zdrojů: zůstává; po otevření materiálu FS lze přepnout na shodu) | Nepočítá. Jen upozornění, když časově osvobozené příjmy z krypta přesáhnou 40 mil. Kč |
-| 8 | Zisky a ztráty z prodejů stejného druhu se v roce vzájemně započtou, celkovou ztrátu uplatnit nejde | – | neověřeno | Zdanitelný rozdíl = součet (příjem − náklady) zdanitelných položek druhu, nejméně 0 |
-| 9 | Sazba daně 15 % (dividendy i orientační daň z rozdílu; 23 % pro vysoké příjmy se nepočítá) | ZDP § 16, § 36; všechny zdroje k dividendám | shoda zdrojů | `dane.sazba = 0.15` |
-| 10 | **Srážka v USA:** 30 % bez W-8BEN, 15 % s ním | [Finex](https://finex.cz/w-8ben-formular/) a další | shoda zdrojů | Tip na W-8BEN u přeplacené daně |
-| 11 | **Smluvní sazba USA 15 %** (portfolio dividendy) | Finex, RuleCalc, zadání | shoda zdrojů | `zeme.US.smluvniSazba = 0.15` |
-| 12 | Smluvní sazby Německo, Velká Británie, Nizozemsko, Irsko, Francie, Švýcarsko, Kanada | tabulka DAUČ a Patria se z relace nedaly otevřít | **neověřeno** | `null`. Zápočet omezí jen českou daní a upozorní, že může být nižší |
-| 13 | **Zápočet** = min(sražená daň, smluvní sazba × základ, česká daň), za každou zemi zvlášť (§ 38f, prostý zápočet) | [Finex](https://finex.cz/zdaneni-dividend-jak-postupovat-pri-vyplneni-danoveho-priznani/), [Finmag](https://www.finmag.cz/finance/309218-investice-a-dane-ii-dividendy), zadání | shoda zdrojů | Počítá, přeplatek nad smluvní sazbou ukáže zvlášť |
-| 14 | Přepočet buď **denním kurzem ČNB**, nebo **jednotným kurzem GFŘ**; v jednom roce **nekombinovat** | [DAUČ](https://www.dauc.cz/clanky/13545/drzba-zahranicnich-akcii-fyzickou-osobou-jak-zdanit-vyplacenou-dividendu), zadání | shoda zdrojů | Chyba při kombinaci; u jednotného kurzu musí mít všechny výplaty v jedné měně stejný kurz |
-| 15 | **Jednotný kurz GFŘ za 2026** | poslední nalezený pokyn je GFŘ-D-75 za rok 2025 ([Finanční zpravodaj 2/2026](https://www.dauc.cz/aktuality/1727/ministerstvo-financi-financni-zpravodaj-cislo-2-2026)); za 2026 vyjde až v roce 2027 | nevydán | `kurzy.jednotny["2026"] = null`, kurz se zadává ručně |
-| 16 | **Kam patří zahraniční dividendy v přiznání:** dílčí základ § 8 + příloha č. 3 (ř. 38), nebo samostatný základ § 16a + příloha č. 4 (ř. 330) | § 8 + př. 3: [Finex](https://finex.cz/zdaneni-dividend-jak-postupovat-pri-vyplneni-danoveho-priznani/); § 16a + př. 4: [RuleCalc](https://rulecalc.com/cs/dan/dan-fo-samostatny-zaklad) | **sporné** | Ukáže obě varianty („podle části zdrojů…“) s čísly a větu, že je třeba ověřit v pokynech k přiznání |
-| 17 | **Limity pro povinné přiznání:** dnes 20 000 Kč u příjmů podle § 7–10 vedle zaměstnání, celkový limit 50 000 Kč; od roku 2027 podle zdrojů 40 000 Kč a 100 000 Kč (schválila Sněmovna, další průchod nepotvrzen) | [Podnikatel.cz](https://www.podnikatel.cz/clanky/vyse-prijmu-od-ktere-musite-podat-danove-priznani-vzroste-na-100-tisic-korun/), [BusinessInfo](https://www.businessinfo.cz/clanky/mene-byrokracie-danove-priznani-budou-osvc-podavat-az-od-100-tisic-rocnich-prijmu/), [Money](https://money.cz/novinky-a-tipy/dane/pripravovane-zmeny-v-dani-z-prijmu-fyzickych-osob-pro-rok-2027/) | 2026: shoda zdrojů; 2027: **sporné** | Jen informace se štítkem stavu, nástroj sám povinnost nerozhoduje |
-| 18 | Zda se zahraniční dividendy uvádějí v přiznání vždy, nebo se započítávají do limitů v bodě 17 | zdroje se rozcházejí (RuleCalc × Finex) | **sporné** | Jen upozornění |
+| 1 | Limit 40 mil. Kč jen u kryptoaktiv osvobozených časovým testem, nad limit neosvobozená poměrná část (úhrn − 40 000 000) / úhrn; cenné papíry bez limitu od 1. 1. 2026 | `prodeje.limit40mil.limity = { cenny-papir: null, kryptoaktivum: 40000000 }` | § 4 odst. 3 ZDP ve znění zák. č. 360/2025 Sb. ([PDF](https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf)) | potvrzeno |
+| 2 | Samostatné limity 100 000 Kč pro cenné papíry a kryptoaktiva; elektronický peněžní token je z hodnotového testu vyňatý | `prodeje.hodnotovyTest.limity`, `spolecny: false`, typ `emt` s `hodnotovyTest: false` | § 4 odst. 1 písm. t) a zj) ZDP ([FS Krypto 29. 4. 2026](https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf)) | potvrzeno |
+| 2 | Do úhrnu 100 000 Kč se počítají i prodeje splňující časový test | `zahrnoutOsvobozeneCasovymTestem: true` (doporučení: konzervativně + upozornění) | § 4 odst. 1 písm. t), zj) ZDP – „úhrn“ bez výjimky; oficiální metodika FS nenalezena | **nejasné** |
+| 3 | Osvobození krypta od 15. 2. 2025 i u krypta nabytého dříve (držba před účinností se započítává); časový test 3 roky; termínový převod sjednaný do 3 let od nabytí se neosvobozuje | `prodeje.casovyTest.let = 3`, `prodeje.krypto`, pole `terminovy` | § 4 odst. 1 písm. zj), zk) ZDP, zák. č. 32/2025 Sb. ([MF](https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf)) | potvrzeno |
+| 3 | Směna krypto za krypto je zdanitelná (ocenění podle předpisu o oceňování); časový test nepřerušuje výměna vydavatelem, sloučení/splynutí, dědění v řadě přímé / manžel | `prodeje.krypto.smena` (návod u formuláře) | § 10 odst. 1 písm. b) bod 3 ZDP, Informace GFŘ ([PDF](https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/Info_kryptomeny_GFR.pdf)) | potvrzeno |
+| 4 | Zisky a ztráty jen uvnitř druhu (§ 10/1/b/2 cenné papíry, § 10/1/b/3 krypto), záporný výsledek druhu 0, žádný převod ztráty; u částečného osvobození krátit výdaje poměrem | `prodeje.zapocteni` | § 10 odst. 4 ZDP, pokyny k příloze č. 2 ([PDF](https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf)) | potvrzeno |
+| 4 | Kód druhu pro krypto v příloze č. 2 (není samostatný kód) | `prodeje.zapocteni.kodKryptaP2` | tamtéž | **nejasné** |
+| 5 | Výchozí § 8 odst. 4 (ř. 38, zápočet příloha č. 3 ř. 321–330 → ř. 58); volba § 16a (15 %, příloha č. 4 ř. 414 → ř. 74a, na ř. 38 neuvádět) jen pro všechny příjmy podle § 8 odst. 8 věty první; zápočet zvlášť za každý stát (§ 38f odst. 8); řádky podle tiskopisu 2025 | `dividendy.rezimy` | § 8 odst. 4 a 8, § 16a, § 38f ZDP; [Pokyny k DAP 2025](https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf) | potvrzeno |
+| 5 | Zápočet zahraniční daně v režimu § 16a (příloha č. 4) | `rezimy.varianty.par16a.zapocet` (hodnota null) – zápočet jen orientačně | § 38f ZDP; pokyny k příloze č. 4 neotevřeny | **nejasné** |
+| 6 | Smluvní sazby pro portfoliové dividendy: USA, Německo, Velká Británie, Irsko, Švýcarsko a Kanada 15 %; Nizozemsko a Francie 10 %; strop zápočtu = smluvní sazba × hrubá dividenda | `dividendy.zeme.*.smluvniSazba` se smlouvou a článkem | SZDZ čl. 10 odst. 2 ([přehled MF](https://mf.gov.cz/cs/zahranici-a-eu/smlouvy-o-zamezeni-dvojiho-zdaneni/prehled-platnych-smluv)), § 38f odst. 3 | potvrzeno (s e-Sbírkou neporovnáno) |
+| 6 | W-8BEN (USA) | `zeme.US.w8ben.stav = nejasne`, bez sazeb | „US procedura, neověřeno z CZ zdroje“ | **nejasné** |
+| 7 | Jednotný kurz za 2026 nevydán (průměr kurzů ke konci měsíců, nelze před 31. 12. 2026); poslední GFŘ-D-75 za 2025: USD 21,84, EUR 24,66, GBP 28,8, CHF 26,33, CAD 15,61 | `kurzy.jednotny = { 2025: {…}, 2026: null }` | § 38 odst. 7 ZDP, [Finanční zpravodaj 2/2026](https://www.mfcr.cz/assets/attachments/2026-01-14_Financni-zpravodaj-cislo-2-2026.pdf) | potvrzeno |
+| 8 | Denní kurz ČNB, nebo jednotný kurz; v jednom období nikdy obojí | `kurzy.kombinovatLze = false` | § 38 odst. 1 písm. b) a odst. 7 ZDP | potvrzeno |
+| 9 | Limity přiznání: celkem 50 000 Kč (do 2026) / 100 000 Kč (od 2027), vedle zaměstnání 20 000 / 40 000 Kč | `priznani.limity` | zák. č. 180/2026 Sb. ([PDF](https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf)), § 38g ZDP | potvrzeno |
+| 9 | Zahraniční dividendy a § 16a v limitu přiznání: započítávají se | `priznani.dividendyVLimitu` | § 38g odst. 1 a 2 ZDP; oficiální stanovisko nenalezeno | **nejasné** |
+| – | Sazba 15 % pro § 8 a § 10 (orientační daň), 23 % se nepočítá | `dane.sazba = 0.15` | schválená tabulka pravidel (není v ověřovacím souboru) | – |
 
-Co se nepotvrdí shodně z více zdrojů, nástroj nepočítá: ukáže to jako upozornění se štítkem
-„Neověřeno“ a odkazem „ověř u finanční správy“. Všechny sporné body jsou v `rules.json`
-v `meta.neovereno` (blok „Co zatím neověřujeme a nepočítáme“).
+Nejasné body jsou i v `meta.neovereno`, na stránce v bloku „Co zákon ani finanční správa jasně
+neřeší“.
 
 ## Výpočet
 
 ### Prodeje (`prodeje.js`, čisté funkce)
 
-`osvobozeniProdeje(prodeje, rok, rules)`; prodej = `{ typ: 'cenny-papir' | 'kryptoaktivum',
-nakup: 'RRRR-MM-DD', prodej: 'RRRR-MM-DD', prijem, naklady }` (Kč).
+`osvobozeniProdeje(prodeje, rok, rules)`. Prodej je objekt:
 
-1. Kontrola údajů: známý druh, platná data, prodej ne dřív než nákup, částky ≥ 0. Neúplná
-   položka dostane stav `neuplne` a do výpočtu se nepočítá.
-2. Prodej mimo zvolený rok: stav `mimo-rok`.
-3. **Časový test:** konec lhůty = stejný den o `casovyTest.let` let později (když den v měsíci
-   neexistuje, poslední den měsíce). Osvobozeno, když je prodej až po konci lhůty. Položka
-   dostane datum `osvobozenoOd` (den po konci lhůty).
-4. **Hodnotový test:** úhrn příjmů za rok zvlášť pro cenné papíry a kryptoaktiva (včetně příjmů
-   osvobozených časovým testem, viz bod 4 tabulky). Když úhrn ≤ limit, jsou ostatní položky druhu
-   osvobozené hodnotovým testem.
-5. Ostatní položky jsou zdanitelné. Zdanitelný rozdíl druhu = max(0, Σ (příjem − náklady)).
-   Orientační daň = sazba × zdanitelný rozdíl.
-6. Upozornění (nepočítá se): krypto nad 40 mil. Kč časově osvobozených příjmů (sporné).
+```
+{ typ: 'cenny-papir' | 'kryptoaktivum' | 'emt',
+  nakup: 'RRRR-MM-DD', prodej: 'RRRR-MM-DD',
+  prijem, naklady,     // Kč
+  terminovy }          // boolean, jen u typů s terminovy v rules
+```
+
+Kontrola údajů:
+- neúplná položka má stav `neuplne`,
+- prodej z jiného roku má stav `mimo-rok`.
+
+Pořadí výpočtu:
+
+1. **Dva druhy zvlášť** (`rules.prodeje.druhy`): cenné papíry a kryptoaktiva. Typ `emt` patří
+   do druhu kryptoaktiva.
+2. **Hodnotový test.** Úhrn tvoří všechny hrubé příjmy druhu v roce, i prodeje po 3 letech
+   (nejasné, upozornění `uhrn-casovy`). EMT do úhrnu nevstupuje. Když úhrn ≤ limit druhu, mají
+   všechny prodeje druhu kromě EMT stav `hodnotovy`.
+3. **Jinak časový test** po prodejích. Konec lhůty je stejný den o 3 roky později (když den
+   neexistuje, poslední den měsíce). Osvobozený je prodej až po konci lhůty (`osvobozenoOd`).
+   Termínový prodej krypta časový test nesplní. Stav je `casovy`, nebo `zdanitelne`.
+4. **Jen kryptoaktiva:**
+   - když úhrn příjmů ve stavu `casovy` > 40 mil. Kč, platí `pomer = (úhrn − limit) / úhrn`,
+   - tyto položky dostanou stav `castecne`,
+   - zdanitelná část = příjem × poměr − náklady × poměr.
+5. **Zdanitelný zbytek po druzích:**
+   - sečte se zdanitelný rozdíl položek `zdanitelne` a části `castecne`,
+   - záporný výsledek druhu = 0,
+   - mezi druhy se nic nezapočítává a ztráta se nepřevádí,
+   - orientační daň = sazba × součet druhů.
+6. **Směna krypto → krypto** se zadává jako prodej. Příjem je hodnota získaného krypta v Kč,
+   získané krypto má nový nákup s datem směny (návod u formuláře).
+
+Upozornění ve výsledku:
+
+| Upozornění | Stav |
+| --- | --- |
+| `uhrn-casovy` | nejasné |
+| `kod-krypta-p2` (zdanitelné krypto) | nejasné |
+| `krypto-40mil` | potvrzeno |
+| `ztraty` | potvrzeno |
 
 ### Dividendy (`dividendy.js`, čisté funkce)
 
-`spocitejDividendy(vyplaty, { rok }, rules)`; výplata = `{ zeme, hruba, mena, srazeno, kurz,
-zpusobKurzu: 'denni' | 'jednotny' }`.
+`spocitejDividendy(vyplaty, { rok, rezim }, rules)`.
+- Výplata je `{ zeme, hruba, mena, srazeno, kurz, zpusobKurzu }`.
+- `rezim` je `'par8'` (výchozí), nebo `'par16a'` a platí pro všechny výplaty.
 
-- Kombinace denního a jednotného kurzu v jednom roce → chyba s vysvětlením. Jednotný kurz musí
-  být pro všechny výplaty v jedné měně stejný → jinak chyba. Chybějící kurz se u jednotného
-  způsobu doplní z `kurzy.jednotny[rok]`, když existuje; jinak chyba.
-- Základ = hrubá dividenda × kurz (Kč). Česká daň = sazba × základ.
-- Zápočet = min(sražená daň v Kč, smluvní sazba × základ, česká daň); když smluvní sazba
-  není ověřená, jen min(sražená, česká daň) + upozornění.
-- Doplatek = česká daň − zápočet (min. 0). Přeplaceno v zahraničí = sražená daň − zápočet.
-- Výsledek po zemích a celkem. Zaokrouhlení podle pokynů k přiznání se nepočítá.
+Kurzy:
+- `dostupneZpusoby(rules, rok)` vrátí jednotný kurz jen tehdy, když je v `kurzy.jednotny[rok]`.
+  Za rok 2026 je to jen denní kurz.
+- Kombinace způsobů je chyba `kombinace-kurzu`.
+- Jednotný kurz za nevydaný rok je chyba `jednotny-nevydan`.
+- Jednotný kurz musí být v jedné měně stejný.
 
-V modulech nejsou žádné částky ani sazby, vše je v `rules.json`.
+Výpočet:
+- Základ = hrubá dividenda × kurz. Česká daň = sazba režimu × základ: § 16a má sazbu
+  v `rezimy.varianty.par16a.sazba`, § 8 bere `dane.sazba`.
+- Zápočet se počítá zvlášť za každý stát jako min(sražená daň, smluvní sazba × základ, česká
+  daň).
+- Země bez smluvní sazby („Jiná země“): zápočet jen do české daně + upozornění
+  `smluvni-sazba`.
+- V režimu § 16a má výsledek `zapocetOrientacni: true` a upozornění `zapocet-16a` (nejasné).
+- U přeplatku v USA vznikne upozornění `w8ben` (nejasné).
+- Doplatek = česká daň − zápočet (min. 0). Přeplaceno = sražená daň − zápočet.
+
+V modulech nejsou žádné částky ani sazby, vše je v `rules.json` (test `bez-cisel`).
 
 ## Obrazovky
 
-1. **Prodeje:** karta „Tvoje prodeje“ s řádky (druh, datum nákupu, datum prodeje, příjem,
-   náklady), tlačítka „Přidat prodej“ a „Odebrat“. Výsledek: velké číslo zdanitelného rozdílu,
-   věta „Zdaníš X Kč rozdílu“ / „Nic nedaníš“, seznam položek s důvodem („Časový test splněn od
-   2. 3. 2025“, „Hodnotový test: úhrn 30 000 Kč z limitu 100 000 Kč“), úhrny po druzích, karta
-   sporných bodů se štítkem „Neověřeno“ a odkazem „Ověř u finanční správy“.
-2. **Dividendy:** způsob přepočtu (denní / jednotný), řádky výplat, výsledek po zemích
-   (tabulka), „Doplatíš X Kč“, přeplaceno v zahraničí s tipem na W-8BEN, návod k přiznání ve
-   dvou variantách (§ 8 + příloha 3 / § 16a + příloha 4) s větou, že je třeba ověřit
-   v pokynech k přiznání, a limity pro povinné přiznání se štítky stavu.
+1. **Prodeje**
+   - Karta „Tvoje prodeje“ s řádky a tlačítky „Přidat“ a „Odebrat“. Zaškrtávátko pro
+     termínový prodej se ukazuje jen u krypta a EMT.
+   - Rozbalovací návod ke směně krypto za krypto.
+   - Výsledek: velké číslo, úhrny po druzích, upozornění se štítky stavu a položky s důvodem.
+   - Karta „Jak počítáme“: kroky se štítkem Potvrzeno/Nejasné a odkazem na právní základ.
+2. **Dividendy**
+   - Přepínač „§ 8 / § 16a (15 %)“ a pevný text „Přepočet na koruny: Denní kurz ČNB“
+     s poznámkou, že jednotný kurz za 2026 zatím nevyšel.
+   - Řádky výplat a tabulka po zemích (u § 16a „Zápočet (orientačně)“) se stropem podle smluv.
+   - Upozornění, návod pro zvolený režim s řádky přiznání a tabulka limitů přiznání
+     2026 / od 2027.
 3. Bez JavaScriptu obě stránky ukážou formulář s ukázkovými hodnotami a výsledek spočítaný při
    sestavení (`data-ukazka`). Po načtení JS se nic neposune, mění se jen čísla.
 
 ## Kontrolní příklady
 
-Dividendy, kurz 23 Kč/USD:
+Dividendy, kurz 23 Kč/USD, režim § 8:
 
 | Vstup | Základ | Česká daň | Zápočet | Doplatek | Přeplaceno |
 | --- | --- | --- | --- | --- | --- |
 | USA, 100 USD, sraženo 15 USD | 2 300 Kč | 345 Kč | 345 Kč | 0 Kč | 0 Kč |
-| USA, 100 USD, sraženo 30 USD (bez W-8BEN) | 2 300 Kč | 345 Kč | 345 Kč | 0 Kč | 345 Kč |
+| USA, 100 USD, sraženo 30 USD | 2 300 Kč | 345 Kč | 345 Kč | 0 Kč | 345 Kč |
 | 100 USD ze státu bez srážky | 2 300 Kč | 345 Kč | 0 Kč | 345 Kč | 0 Kč |
+| Nizozemsko, 100 EUR × 25, sraženo 15 EUR | 2 500 Kč | 375 Kč | 250 Kč (10 %) | 125 Kč | 125 Kč |
 | jednotný a denní kurz v jednom roce | chyba s vysvětlením | | | | |
 
 Prodeje:
 
 | Vstup | Výsledek |
 | --- | --- |
-| Cenný papír, nákup 1. 3. 2022, prodej 2. 3. 2025 | osvobozeno časovým testem (od 2. 3. 2025) |
+| Cenný papír, nákup 1. 3. 2022, prodej 2. 3. 2025 za 500 000 Kč | osvobozeno časovým testem (od 2. 3. 2025) |
 | Cenný papír, nákup 1. 3. 2022, prodej 1. 3. 2025 | časový test nesplněn (přesně 3 roky) |
-| Cenný papír po 2 letech, úhrn příjmů za rok 80 000 Kč | osvobozeno hodnotovým testem |
-| Cenný papír po 2 letech, úhrn příjmů 150 000 Kč | zdanitelné |
-| Krypto 60 000 Kč + cenné papíry 90 000 Kč v jednom roce | obojí osvobozeno hodnotovým testem (úhrny zvlášť) |
+| Prodej po 6 letech 60 000 Kč + prodej po 1 roce 30 000 Kč | obojí hodnotovým testem (úhrn 90 000 Kč) |
+| Prodej po 6 letech 90 000 Kč + po 1 roce 50 000 Kč | úhrn 140 000 Kč: první časovým testem, druhý zdanitelný; upozornění „nejasné“ (bez prvního by úhrn byl 50 000 Kč) |
+| EMT 500 000 Kč + krypto 50 000 Kč | krypto hodnotovým testem (úhrn 50 000 Kč), EMT zdanitelné |
+| Krypto po 6 letech, termínový prodej sjednaný do 3 let | zdanitelné |
+| Krypto časově osvobozené 30 + 20 mil. Kč, náklady 6 + 4 mil. Kč | poměr 20 %, zdanitelný rozdíl 8 000 000 Kč |
+| Cenné papíry po 6 letech 50 mil. Kč | osvobozeno (bez horního limitu) |
+| Cenné papíry zisk 50 000 Kč, krypto ztráta 100 000 Kč | zdaní se 50 000 Kč, krypto 0 |
 
-Ukázka na stránce (rok 2026): ETF koupené 1. 3. 2022 a prodané 2. 3. 2026 za 60 000 Kč (časový
-test), akcie po dvou letech za 120 000 Kč s náklady 100 000 Kč (zdanitelné, úhrn 180 000 Kč),
-krypto za 30 000 Kč (hodnotový test) → „Zdaníš 20 000 Kč rozdílu“.
-Dividendy: USA 100 USD se srážkou 15 USD a 100 USD se srážkou 30 USD, Velká Británie 100 GBP
-bez srážky → „Doplatíš 435 Kč“, přeplaceno v USA 345 Kč.
+Ukázka na stránce (rok 2026) → „Zdaníš 20 000 Kč rozdílu“:
+- ETF koupené 1. 3. 2022 a prodané 2. 3. 2026 za 60 000 Kč: časový test,
+- akcie po dvou letech za 120 000 Kč s náklady 100 000 Kč: zdanitelné, úhrn 180 000 Kč,
+- krypto za 30 000 Kč: hodnotový test.
+
+Dividendy → „Doplatíš 435 Kč“, přeplaceno v USA 345 Kč:
+- USA 100 USD se srážkou 15 USD,
+- USA 100 USD se srážkou 30 USD,
+- Velká Británie 100 GBP bez srážky.
 
 ## Kritéria hotovo
 
-- `node --test "src/nastroje/zdanim-to/test/*.test.js"` projde včetně kontrolních příkladů
-  a testu, že moduly neobsahují natvrdo zapsané částky ani sazby.
-- `npx eleventy`: `/penize/zdanim-to/` v `_site` neexistuje, karta „Připravujeme“ zůstává.
-- `ZOBRAZIT_SKRYTE=1 npx eleventy --output=_site-vse` a `SITE_DIR=_site-vse` kontrola webu
-  i e2e `test/e2e/skryte/zdanim-to.test.js` projdou: kontrolní příklady v UI, přidání a odebrání
-  řádku, 0 chyb konzole, ukázka bez JS, nic v `localStorage`.
-- Posun rozvržení po načtení CLS < 0,05 (mobil 412 × 823, CPU × 6).
+- `npm test` projde, včetně těchto testů:
+  - kontrolní příklady,
+  - test hodnot proti ověřovacímu souboru,
+  - test, že moduly neobsahují natvrdo zapsané částky.
+- `npm run test:e2e` projde (`test/e2e/zdanim-to.test.js`):
+  - § 16a a návod,
+  - termínový prodej a EMT,
+  - jen denní kurz,
+  - limity,
+  - patička,
+  - 0 chyb konzole,
+  - ukázka bez JS,
+  - CLS < 0,05.
+- `npm run kontrola` (axe ve světlém i tmavém režimu, 360 px) a Lighthouse výkon ≥ 90,
+  přístupnost 100.
 
 ## Další kroky
 
-1. Schválit tabulku pravidel (body 7, 12, 16, 17, 18 jsou sporné nebo neověřené), doplnit
-   smluvní sazby z oficiálních textů smluv a jednotný kurz GFŘ za 2026, až vyjde.
-2. Teprve pak odstranit `"skryty": true` a záznam v `pripravujeme.json`.
+1. Až GFŘ vyhlásí jednotný kurz za 2026, doplnit `kurzy.jednotny["2026"]`. Přepínač způsobu
+   přepočtu se pak ukáže sám.
+2. Až vyjdou pokyny k přiznání za 2026, ověřit řádky a zápočet v příloze č. 4. Pak zrušit
+   „nejasné“ u § 16a.
 3. Import CSV z XTB a Trading 212 (`parsers/xtb.js`, `parsers/trading212.js`) s anonymními
    testovacími soubory, později Interactive Brokers a Revolut.
-4. Denní kurzy ČNB skriptem do `data/cnb-RRRR.json` (web nevolá ČNB z prohlížeče).
+4. Denní kurzy ČNB skriptem do `data/cnb-RRRR.json` (web nevolá ČNB z prohlížeče). Z nich by
+   šel i průběžný odhad jednotného kurzu označený „předběžné“.

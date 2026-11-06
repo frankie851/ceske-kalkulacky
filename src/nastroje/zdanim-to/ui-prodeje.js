@@ -14,16 +14,25 @@ const jePrazdny = (h) => !h.nakup && !h.prodej && !String(h.prijem).trim() && !S
 
 let ovladani = null;
 
+/** Zaškrtávátko termínového prodeje ukáže jen u druhů, kterých se týká (option[data-terminovy]). */
+function terminovyPlati(li) {
+  const plati = Boolean($('[data-pole="typ"]', li)?.selectedOptions[0]?.hasAttribute('data-terminovy'));
+  const obal = $('[data-terminovy]', li);
+  if (obal && obal.hidden === plati) obal.hidden = !plati;
+  return plati;
+}
+
 function prepocitej() {
   const radky = ovladani.radky();
   const pouzite = [];
   const prodeje = [];
   radky.forEach((li, i) => {
+    const plati = terminovyPlati(li);
     const h = hodnotyRadku(li);
     if (jePrazdny(h)) { oznacChyby(li, []); return; }
     const prijem = nactiCislo(h.prijem);
     const naklady = nactiCislo(h.naklady);
-    prodeje.push({ typ: h.typ, nakup: h.nakup, prodej: h.prodej, prijem, naklady: naklady ?? 0 });
+    prodeje.push({ typ: h.typ, nakup: h.nakup, prodej: h.prodej, prijem, naklady: naklady ?? 0, terminovy: plati && h.terminovy === true });
     pouzite.push(i);
   });
   const v = osvobozeniProdeje(prodeje, rules.rok, rules);

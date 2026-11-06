@@ -393,3 +393,41 @@ Výsledky:
 - `npm test` 477/477, `npm run test:e2e` 129/129,
 - `npm run kontrola` 29 stránek bez chyb,
 - Lighthouse pro obě stránky Zdaním to?: výkon 100, přístupnost 100.
+
+## Zdaním to? podle ověřených pravidel 2026 (6. 11. 2026)
+
+Uživatel dodal `zdanim-to-overeni-2026.json`. Soubor obsahuje 13 bodů ověřených z ZDP v úplném
+znění (e-Sbírka, znění od 1. 8. 2026), pokynů GFŘ a smluv o zamezení dvojího zdanění. Přidal
+pořadí výpočtu u prodejů a pravidla pro dividendy, kurzy a limity přiznání.
+
+Rozhodnutí:
+- **Hodnoty jen z JSONu.** `rules.json` je přepsaný podle souboru, každé pravidlo má `stav`
+  a `zdroj`. Výjimka: sazba 15 % u § 8 a § 10 (orientační daň) zůstává ze schválené tabulky.
+  V JSONu je 15 % jen u § 16a.
+- **Hlavička** ukazuje „Pravidla ověřena k 6. 11. 2026“: `meta.stav: neovereno` je pryč.
+  Blok nejasných míst má nadpis „Co zákon ani finanční správa jasně neřeší“
+  (`meta.neoverenoNadpis`, layout ho umí nově).
+- **Nejasné body** se počítají podle doporučení a vždy mají viditelné upozornění se štítkem
+  „Nejasné“:
+  - úhrn 100 000 Kč včetně prodejů po 3 letech,
+  - kód krypta v příloze č. 2,
+  - zápočet v § 16a (jen orientačně),
+  - dividendy v limitu přiznání,
+  - W-8BEN.
+- **Sazba 30 % u W-8BEN zmizela.** V JSONu není: bod 6 uvádí W-8BEN jen jako „nejasné – US
+  procedura“. Tip na W-8BEN je teď bez čísel.
+- **Elektronický peněžní token** je samostatná volba v řádku prodeje. Do hodnotového testu
+  nevstupuje (bod 2), časový test a limit 40 mil. Kč se na něj vztahují jako na kryptoaktivum.
+  Soubor tuto výjimku nemá.
+- **Termínový prodej** je zaškrtávátko „sjednaný do 3 let od nákupu“, jen u krypta a EMT. Ruší
+  časový test, hodnotový test ne (pořadí podle zadání).
+- **Kurz za 2026:** jen denní kurz ČNB, přepínač se zobrazí, až bude jednotný kurz v
+  `kurzy.jednotny[rok]`. Průběžný odhad „předběžné“ zatím není: počítal by se z měsíčních kurzů
+  ČNB a ty v JSONu nejsou (web je nestahuje). Jednotný kurz za 2025 (GFŘ-D-75) je v rules jen
+  jako údaj a pro testy.
+- **„Jiná země“** zůstala bez smluvní sazby: zápočet jen do české daně a upozornění, že podle
+  smlouvy může být nižší, bez smlouvy žádný.
+- **Patička:** stránky nástroje mají v patičce webu větu „Nejde o daňové poradenství. Pravidla
+  ověřena k 6. 11. 2026.“. Data stránky `patickaPoznamka` → `paticka({ poznamka })`.
+- **Přepínač § 8 / § 16a** má název `zdaneni`. Název `rezim` už používá přepínač světlého
+  a tmavého režimu (`tema.js`) a jeho skript by volbu odznačil.

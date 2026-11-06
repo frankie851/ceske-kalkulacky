@@ -42,6 +42,7 @@ export function pripojRadky({ form, prefix, nazev, odebratPopis, priZmene }) {
   const vzor = $('[data-radek]', seznam).cloneNode(true);
   for (const el of $$('[data-pole]', vzor)) {
     if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else if (el.type === 'checkbox') el.checked = false;
     else el.value = '';
     el.removeAttribute('aria-invalid');
   }
@@ -88,10 +89,10 @@ export function pripojRadky({ form, prefix, nazev, odebratPopis, priZmene }) {
   return { radky: () => $$('[data-radek]', seznam) };
 }
 
-/** Hodnoty polí řádku jako objekt { pole: hodnota }. */
+/** Hodnoty polí řádku jako objekt { pole: hodnota } (zaškrtávátko → true/false). */
 export function hodnotyRadku(li) {
   const o = {};
-  for (const el of $$('[data-pole]', li)) o[el.dataset.pole] = el.value;
+  for (const el of $$('[data-pole]', li)) o[el.dataset.pole] = el.type === 'checkbox' ? el.checked : el.value;
   return o;
 }
 
