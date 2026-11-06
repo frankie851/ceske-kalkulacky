@@ -1,9 +1,9 @@
 {
-  "datum": "2026-11-06T02:39:23.477Z",
+  "datum": "2026-11-06T03:03:25.630Z",
   "behu": 3,
   "vysledky": [
     {
-      "stranka": "/dluhy/exekuce-nebo-oddluzeni/",
+      "stranka": "/penize/zdanim-to/",
       "median": {
         "performance": 100,
         "accessibility": 100,
@@ -19,11 +19,11 @@
             "seo": 100
           },
           "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
+            "first-contentful-paint": "1.4 s",
+            "largest-contentful-paint": "1.4 s",
             "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.5 s"
+            "speed-index": "1.4 s"
           }
         },
         {
@@ -34,11 +34,11 @@
             "seo": 100
           },
           "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
+            "first-contentful-paint": "1.4 s",
+            "largest-contentful-paint": "1.4 s",
             "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.5 s"
+            "speed-index": "1.4 s"
           }
         },
         {
@@ -49,17 +49,17 @@
             "seo": 100
           },
           "metriky": {
-            "first-contentful-paint": "1.5 s",
-            "largest-contentful-paint": "1.5 s",
+            "first-contentful-paint": "1.4 s",
+            "largest-contentful-paint": "1.4 s",
             "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.5 s"
+            "speed-index": "1.4 s"
           }
         }
       ]
     },
     {
-      "stranka": "/dluhy/",
+      "stranka": "/penize/zdanim-to/dividendy/",
       "median": {
         "performance": 100,
         "accessibility": 100,
@@ -75,11 +75,11 @@
             "seo": 100
           },
           "metriky": {
-            "first-contentful-paint": "1.1 s",
-            "largest-contentful-paint": "1.1 s",
+            "first-contentful-paint": "1.4 s",
+            "largest-contentful-paint": "1.4 s",
             "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.1 s"
+            "speed-index": "1.4 s"
           }
         },
         {
@@ -90,11 +90,11 @@
             "seo": 100
           },
           "metriky": {
-            "first-contentful-paint": "1.1 s",
-            "largest-contentful-paint": "1.1 s",
+            "first-contentful-paint": "1.4 s",
+            "largest-contentful-paint": "1.4 s",
             "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.1 s"
+            "speed-index": "1.4 s"
           }
         },
         {
@@ -105,11 +105,11 @@
             "seo": 100
           },
           "metriky": {
-            "first-contentful-paint": "1.1 s",
-            "largest-contentful-paint": "1.1 s",
+            "first-contentful-paint": "1.4 s",
+            "largest-contentful-paint": "1.4 s",
             "total-blocking-time": "0 ms",
             "cumulative-layout-shift": "0",
-            "speed-index": "1.1 s"
+            "speed-index": "1.4 s"
           }
         }
       ]

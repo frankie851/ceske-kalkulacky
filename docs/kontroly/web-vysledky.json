@@ -1,7 +1,7 @@
 {
-  "datum": "2026-11-06T02:38:12.811Z",
+  "datum": "2026-11-06T03:02:47.693Z",
   "prefix": "/ceske-kalkulacky/",
-  "stranek": 27,
+  "stranek": 29,
   "chyb": 0,
   "stranky": [
     {
@@ -82,6 +82,14 @@
     },
     {
       "stranka": "/penize/plan48/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/zdanim-to/",
+      "chyby": []
+    },
+    {
+      "stranka": "/penize/zdanim-to/dividendy/",
       "chyby": []
     },
     {

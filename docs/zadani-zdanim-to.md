@@ -8,8 +8,8 @@ Vychází z řádku „Zdaním to?“ v tabulce „Další nápady na aplikace�
 „Zadání pro Claude Code: Dividendy ze zahraničí“ v `docs/zadani.md` a z promptu vlny 3
 v `docs/zadani-faze-2.md`.
 
-> **Stav (5. 11. 2026):** nástroj je postavený, ale **nezveřejněný** (`"skryty": true`
-> v `nastroj.json`). Čeká na schválení tabulky pravidel níže. Oficiální weby
+> **Stav (6. 11. 2026):** tabulku pravidel níže **schválil uživatel** a nástroj je zveřejněný.
+> Sporné body zůstávají na stránce označené a nástroj je nepočítá, jen na ně upozorní. Oficiální weby
 > (financnisprava.gov.cz, e-Sbírka, zakonyprolidi.cz) se z cloudové relace otevřít nedaly,
 > pravidla jsou proto ověřená jen ze sekundárních zdrojů. Bez `ZOBRAZIT_SKRYTE=1` web ukazuje
 > kartu „Připravujeme“ ze `src/_data/pripravujeme.json`.

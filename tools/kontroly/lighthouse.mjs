@@ -10,7 +10,7 @@ import { spustitServer, KOREN } from './server.mjs';
 
 const STRANKY = process.argv.slice(2).length ? process.argv.slice(2) : ['', 'penize/plan48/', 'penize/penzijko-kompas/', 'penize/inflacni-kalkulacka/', 'dane-podnikani/mam-eet/', 'dane-podnikani/mam-eet/osvc-2027/',
   'dane-podnikani/slevy-2027/', 'dane-podnikani/cestovni-prikaz-2027/', 'prace-rodina/vypoved-2026/', 'prace-rodina/prijimacky/',
-  'prace-rodina/rodicovska/', 'prace-rodina/volno-2027/', 'bydleni-energie/bydlometr/', 'bydleni-energie/spot-nebo-fix/', 'dluhy/exekuce-nebo-oddluzeni/'];
+  'prace-rodina/rodicovska/', 'prace-rodina/volno-2027/', 'bydleni-energie/bydlometr/', 'bydleni-energie/spot-nebo-fix/', 'dluhy/exekuce-nebo-oddluzeni/', 'penize/zdanim-to/', 'penize/zdanim-to/dividendy/'];
 const LIMITY = { performance: 0.9, accessibility: 1 };
 const BEHY = Math.max(1, Number(process.env.LIGHTHOUSE_BEHY) || 3);
 const KATEGORIE = ['performance', 'accessibility', 'best-practices', 'seo'];
