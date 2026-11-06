@@ -167,7 +167,7 @@ výpočty a testy z 12 existujících repozitářů aplikací.
 | Odkaz | Provozovatel | Stav ověření |
 | --- | --- | --- |
 | https://mpsv.gov.cz/registr-poskytovatelu-sluzeb – registr poskytovatelů sociálních služeb (odborné sociální poradenství) | MPSV | Ověřeno přímým otevřením 5. 11. 2026, titulek „Registr poskytovatelů sociálních služeb \| MPSV“. Původně uvedená adresa `iregistr.mpsv.cz` neexistuje (doména nemá DNS záznam) a odkaz na webu nefungoval. Opraveno, hlídá to `test/sdilene/pomoc.test.js`. |
-| https://sako.justice.cz/ – seznam akreditovaných osob (bezplatný sepis návrhu na oddlužení) | Ministerstvo spravedlnosti | Ověřeno přímým otevřením 5. 11. 2026, titulek „Seznam akreditovaných osob“. |
+| https://insolvence.justice.cz/jak-vstoupit-do-oddluzeni/ – oficiální průvodce „Jak vstoupit do oddlužení“ (služba zdarma od neziskové organizace, varování před oddlužovacími šmejdy) | Ministerstvo spravedlnosti | Ověřeno vykreslením v prohlížeči 5. 11. 2026. Nahrazuje https://sako.justice.cz/ (seznam akreditovaných osob): ten vrací 200 i titulek, ale skripty se ze serveru nestáhnou celé (`ERR_CONTENT_LENGTH_MISMATCH`), takže se seznam nevykreslí a návštěvník vidí prázdnou stránku. Stejně je na tom vesta.justice.cz (placené služby), kterou jsme z bloku pomoci kalkulačky dluhů odebrali. |
 
 Přímým otevřením bylo 5. 11. 2026 ověřeno i všech 8 odkazů skryté kalkulačky Exekuce, nebo
 oddlužení? (`rules.json` → `pomoc` a další kroky). Všechny vrací 200 s odpovídajícím titulkem:
@@ -328,3 +328,20 @@ Sestavení proběhlo s `PATH_PREFIX=/ceske-kalkulacky/`.
   - ukázka funguje bez JS
 - Lighthouse (mobil, medián ze 3 běhů) na úvodu a 13 nástrojích: přístupnost 100, výkon 97–100.
 - Snímky: `docs/snimky/vlna-3/`, nezveřejněné Zdaním to? v `docs/snimky/vlna-3/nezverejneno/`.
+
+## Odkazy na pomoc: kontrola vykreslení (6. 11. 2026)
+
+HTTP 200 a titulek nestačí. sako.justice.cz je vracela, a přesto se návštěvníkům zobrazovala
+prázdná. Proto přibyla ruční kontrola `npm run kontrola:odkazy` (`tools/kontroly/odkazy-pomoci.mjs`).
+Každý odkaz na pomoc otevře ve skutečném prohlížeči a za chybu považuje:
+- jinou odpověď než 200,
+- nenačtené vlastní skripty nebo styly stránky,
+- skoro prázdnou stránku.
+
+Závisí na cizích serverech, proto neběží v CI. Spusť ji před zveřejněním kalkulačky dluhů
+a při každé změně odkazů.
+
+`test/sdilene/pomoc.test.js` zakazuje v bloku pomoci odkazy na sako.justice.cz a
+vesta.justice.cz, dokud se nevykreslují. Tlačítko „Najít neziskovku“ v průvodci ministerstva
+vede také na sako.justice.cz. Je proto vhodné upozornit ministerstvo přes kontakt na
+insolvence.justice.cz (Kontakt pro dlužníka).

@@ -1,6 +1,6 @@
 {
   "overeno": "2026-11-05",
-  "poznamka": "Odkazy jsou ověřené přímým otevřením stránek 5. 11. 2026.",
+  "poznamka": "Odkazy jsou ověřené přímým otevřením stránek 5. 11. 2026. Seznam akreditovaných osob na sako.justice.cz se 5. 11. 2026 nenačítal (prázdná stránka), proto odkazujeme na oficiální průvodce ministerstva.",
   "odkazy": [
     {
       "nazev": "Najít bezplatnou poradnu",
@@ -9,9 +9,9 @@
       "provozovatel": "Ministerstvo práce a sociálních věcí"
     },
     {
-      "nazev": "Kdo vám zdarma sepíše návrh na oddlužení",
-      "popis": "Seznam akreditovaných osob Ministerstva spravedlnosti. Akreditované osoby pomáhají s návrhem na oddlužení bezplatně.",
-      "url": "https://sako.justice.cz/",
+      "nazev": "Kdo vám zdarma pomůže s návrhem na oddlužení",
+      "popis": "Oficiální průvodce Ministerstva spravedlnosti. Vysvětlí, jak vám s návrhem na oddlužení zdarma pomůže nezisková organizace, a na co si dát pozor.",
+      "url": "https://insolvence.justice.cz/jak-vstoupit-do-oddluzeni/",
       "provozovatel": "Ministerstvo spravedlnosti"
     }
   ]
