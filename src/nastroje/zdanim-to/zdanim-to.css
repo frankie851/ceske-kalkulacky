@@ -22,6 +22,18 @@
   .zt-pridat { margin-top: var(--sp-4); }
   .zt-chyba { margin-top: var(--sp-4); }
   .zt-jednotny-stav { margin: 0 0 var(--sp-2); }
+  .zt-zpusob-pevny .zt-zpusob-nazev { margin: 0 0 var(--sp-1); }
+  .zt-jednotny-stav .badge { margin-right: var(--sp-1); }
+
+  /* Termínový prodej (jen krypto): zaškrtávátko přes celou šířku řádku */
+  .zt-terminovy { margin-bottom: var(--sp-3); }
+  .zt-check { display: flex; align-items: flex-start; gap: var(--sp-3); min-height: 48px; padding: var(--sp-2) 0; cursor: pointer; font-weight: 600; }
+  .zt-check input { flex: 0 0 auto; width: 24px; height: 24px; margin: 0.1em 0 0; accent-color: var(--c-accent); }
+
+  /* Směna krypto za krypto */
+  .zt-smena { margin-top: var(--sp-4); padding: var(--sp-3) var(--sp-4); border: 2px solid var(--c-border); border-radius: var(--r-md); background: var(--c-bg); }
+  .zt-smena summary { cursor: pointer; font-weight: 800; min-height: 32px; }
+  .zt-smena p, .zt-smena ul { margin: var(--sp-2) 0 0; }
 
   /* Mobil: pole pod sebou. Od 560 px: druh přes celou šířku, ostatní po dvou; od 1040 px tři sloupce ve dvou řádcích */
   @media (min-width: 560px) {
@@ -42,6 +54,7 @@
     border: 2px solid var(--c-border); border-left-width: 8px; background: var(--c-bg);
   }
   .zt-polozka-casovy, .zt-polozka-hodnotovy { border-left-color: var(--c-sage); }
+  .zt-polozka-castecne { border-left-color: var(--c-draft-line); }
   .zt-polozka-zdanitelne { border-left-color: var(--c-accent); }
   .zt-polozka-neuplne { border-left-color: var(--c-error); }
   .zt-polozka-hlava { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); }
@@ -50,7 +63,7 @@
   .zt-castky { font-size: var(--fs-sm); color: var(--c-text-muted); }
   .zt .tag { font-size: var(--fs-sm); }
   .zt-tag-casovy, .zt-tag-hodnotovy { background: var(--c-sage-soft); color: var(--c-sage-ink); }
-  .zt-tag-zdanitelne { background: var(--c-accent-soft); color: var(--c-text); }
+  .zt-tag-zdanitelne, .zt-tag-castecne { background: var(--c-accent-soft); color: var(--c-text); }
   .zt-tag-neuplne { background: var(--c-error-soft); color: var(--c-error); }
   .zt-prazdne { margin: 0; }
 
@@ -60,6 +73,9 @@
 
   .zt .result .table-wrap { margin-top: var(--sp-5); }
   .zt .result tfoot th, .zt .result tfoot td { font-weight: 800; }
+  .zt-stropy { margin: var(--sp-3) 0 0; }
+  .zt-citace { font-style: italic; color: var(--c-text-muted); }
+  .zt-sporne.zt-limity-pozn { margin-top: var(--sp-4); }
 
   /* ---------- Sporné body, limity, návod ---------- */
   .zt-sporne { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }

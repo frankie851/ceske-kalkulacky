@@ -1,8 +1,16 @@
 // Zdaním to? – dividendy ze zahraničí: přepočet na koruny, česká daň, zápočet zahraniční daně,
 // doplatek a přeplatek po zemích (čisté funkce, bez DOM).
 // Žádné sazby ani kurzy tu nejsou natvrdo: vše přichází v parametru rules (rules.json).
+// Režim (§ 8, nebo § 16a) platí pro všechny zahraniční příjmy z kapitálového majetku najednou.
+// Zápočet zvlášť za každý stát: min(sražená daň, smluvní sazba × hrubá dividenda, česká daň);
+// země bez smlouvy v přehledu (rules: bezSmlouvy) bez zápočtu (§ 38f odst. 1).
 
 export const ZPUSOBY = ['denni', 'jednotny'];
+
+/** Způsoby přepočtu, které jde pro rok použít: jednotný kurz jen když ho GFŘ vyhlásilo (v rules). */
+export function dostupneZpusoby(rules, rok) {
+  return ZPUSOBY.filter((z) => z !== 'jednotny' || Boolean(rules.kurzy.jednotny?.[String(rok)]));
+}
 
 /** Chyba vstupu s kódem (kombinace kurzů, chybějící kurz…), kterou UI ukáže jako text. */
 export class ChybaDividend extends Error {
@@ -40,6 +48,10 @@ export function pripravKurzy(vyplaty, rok, rules) {
   return vyplaty.map((v, i) => {
     let kurz = v.kurz;
     if (v.zpusobKurzu === 'jednotny') {
+      if (!rules.kurzy.jednotny?.[String(rok)]) {
+        throw new ChybaDividend('jednotny-nevydan',
+          `Jednotný kurz za rok ${rok} zatím nevyšel. Přepočítej výplaty denním kurzem ČNB.`, { index: i });
+      }
       if (kurz == null) kurz = jednotnyKurzZPravidel(rules, rok, v.mena);
       if (kurz != null) {
         if (jednotne[v.mena] != null && jednotne[v.mena] !== kurz) {
@@ -52,7 +64,7 @@ export function pripravKurzy(vyplaty, rok, rules) {
     if (!(typeof kurz === 'number' && Number.isFinite(kurz) && kurz > 0)) {
       throw new ChybaDividend('chybi-kurz',
         v.zpusobKurzu === 'jednotny'
-          ? `Jednotný kurz pro ${v.mena} za rok ${rok} zatím nevyšel. Zadej ho ručně.`
+          ? `Jednotný kurz pro ${v.mena} za rok ${rok} v pravidlech chybí. Zadej ho ručně.`
           : `U výplaty ${i + 1} chybí kurz ČNB ke dni výplaty.`, { index: i });
     }
     return { ...v, kurz };
@@ -70,16 +82,25 @@ export function zkontrolujVyplatu(v, rules) {
   return chyby;
 }
 
+/** Sazba české daně pro režim: § 16a má vlastní sazbu v rules, § 8 obecnou sazbu (rules.dane). */
+export function sazbaRezimu(rules, rezim) {
+  return rules.dividendy.rezimy.varianty[rezim]?.sazba ?? rules.dane.sazba.hodnota;
+}
+
 /**
  * Spočítá dividendy za rok po zemích.
  * @param {Array<{zeme, hruba, mena, srazeno, kurz, zpusobKurzu}>} vyplaty – částky v měně výplaty
- * @param {{ rok: number }} nastaveni
+ * @param {{ rok: number, rezim?: 'par8' | 'par16a' }} nastaveni – rezim platí pro všechny výplaty
  * @param {object} rules – celý rules.json
- * @returns {{ rok, zeme: Array, celkem, upozorneni }}
+ * @returns {{ rok, rezim, zpusob, zeme: Array, celkem, zapocetOrientacni, upozorneni }}
  * @throws {ChybaDividend} při kombinaci kurzů, chybějícím kurzu nebo neplatném vstupu
  */
-export function spocitejDividendy(vyplaty, { rok }, rules) {
-  const sazba = rules.dane.sazba.hodnota;
+export function spocitejDividendy(vyplaty, { rok, rezim }, rules) {
+  const rezimy = rules.dividendy.rezimy;
+  const r = rezim ?? rezimy.vychozi;
+  if (!rezimy.varianty[r]) throw new ChybaDividend('neplatny-vstup', 'Vyber, kam dividendy v přiznání dáš: § 8, nebo § 16a.');
+  const sazba = sazbaRezimu(rules, r);
+  const zapocet16a = rezimy.varianty[r].zapocet;
   for (const [i, v] of vyplaty.entries()) {
     const chyby = zkontrolujVyplatu(v, rules);
     if (chyby.length) throw new ChybaDividend('neplatny-vstup', `Výplata ${i + 1}: ${chyby[0].text}`, { index: i, chyby });
@@ -104,15 +125,19 @@ export function spocitejDividendy(vyplaty, { rok }, rules) {
     const srazenoKc = zaokrouhli(z.srazenoKc);
     const ceskaDan = zaokrouhli(zakladKc * sazba);
     const limitSmlouvy = smluvni == null ? null : zaokrouhli(zakladKc * smluvni);
-    const zapocet = Math.min(srazenoKc, limitSmlouvy ?? Infinity, ceskaDan);
+    // Země bez smlouvy v přehledu: zápočet podle § 38f jde jen podle smlouvy → z rules (0)
+    const bezSmlouvy = info.bezSmlouvy ?? null;
+    const zapocet = bezSmlouvy ? Math.min(bezSmlouvy.zapocet, srazenoKc) : Math.min(srazenoKc, limitSmlouvy ?? Infinity, ceskaDan);
     const doplatek = zaokrouhli(Math.max(0, ceskaDan - zapocet));
     const preplaceno = zaokrouhli(Math.max(0, srazenoKc - zapocet));
     const smluvniNeoverena = smluvni == null && srazenoKc > 0;
-    if (smluvniNeoverena) upozorneni.push({ id: 'smluvni-sazba', zeme: z.zeme, nazev: info.nazev, stav: info.smluvniSazba?.stav });
+    if (bezSmlouvy && srazenoKc > 0) upozorneni.push({ id: 'bez-smlouvy', zeme: z.zeme, nazev: info.nazev, stav: bezSmlouvy.stav });
+    else if (smluvniNeoverena) upozorneni.push({ id: 'smluvni-sazba', zeme: z.zeme, nazev: info.nazev, stav: info.smluvniSazba?.stav });
+    if (info.w8ben && preplaceno > 0) upozorneni.push({ id: 'w8ben', zeme: z.zeme, nazev: info.nazev, stav: info.w8ben.stav });
     return {
       zeme: z.zeme, nazev: info.nazev, pocet: z.pocet, meny: [...z.meny],
       zakladKc, srazenoKc, ceskaDan, smluvniSazba: smluvni, limitSmlouvy,
-      zapocet: zaokrouhli(zapocet), doplatek, preplaceno, smluvniNeoverena,
+      zapocet: zaokrouhli(zapocet), doplatek, preplaceno, smluvniNeoverena, bezSmlouvy: Boolean(bezSmlouvy),
       w8ben: Boolean(info.w8ben) && preplaceno > 0,
     };
   });
@@ -122,5 +147,9 @@ export function spocitejDividendy(vyplaty, { rok }, rules) {
     zakladKc: secti('zakladKc'), srazenoKc: secti('srazenoKc'), ceskaDan: secti('ceskaDan'),
     zapocet: secti('zapocet'), doplatek: secti('doplatek'), preplaceno: secti('preplaceno'),
   };
-  return { rok, zpusob: sKurzy[0]?.zpusobKurzu ?? null, zeme, celkem, upozorneni };
+  if (zapocet16a) upozorneni.unshift({ id: 'zapocet-16a', stav: zapocet16a.stav });
+  return {
+    rok, rezim: r, sazba, zpusob: sKurzy[0]?.zpusobKurzu ?? null, zeme, celkem,
+    zapocetOrientacni: Boolean(zapocet16a), upozorneni,
+  };
 }

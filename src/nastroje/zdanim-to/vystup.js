@@ -8,7 +8,7 @@ export const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (z) => ({ '&': '&a
 
 const pct = (podil) => procenta(Math.round(podil * 100 * 100) / 100, Number.isInteger(podil * 100) ? 0 : 1);
 
-/** Štítek stavu pravidla (Shoda zdrojů / Sporné / Neověřeno) jako HTML. */
+/** Štítek stavu pravidla (Potvrzeno / Nejasné / Neověřeno) jako HTML. */
 export function stitekStavu(stav, rules) {
   const s = rules.stavy[stav] || rules.stavy.neovereno;
   return `<span class="badge ${s.stitek === 'navrh' ? 'badge-draft' : 'badge-plain'} zt-stav">${esc(s.text)}</span>`;
@@ -17,26 +17,43 @@ export function stitekStavu(stav, rules) {
 /* ================= Prodeje ================= */
 
 const NAZVY_STAVU = {
-  casovy: 'Osvobozeno',
   hodnotovy: 'Osvobozeno',
+  casovy: 'Osvobozeno',
+  castecne: 'Částečně osvobozeno',
   zdanitelne: 'Zdanitelné',
   'mimo-rok': 'Jiný rok',
   neuplne: 'Chybí údaje',
 };
 
+const nazevDruhu = (druh, rules) => rules.prodeje.druhy[druh]?.nazev ?? '';
+
 function duvodPolozky(p, v, rules) {
-  const typ = rules.prodeje.typy[p.typ];
+  const pr = rules.prodeje;
+  const u = v.uhrny[p.druh];
+  const let_ = pr.casovyTest.let;
+  const nadLimitem = () => `Hodnotový test nesplněn: příjmy z prodejů (${nazevDruhu(p.druh, rules).toLowerCase()}) za rok ${kc(u.uhrnProTest)} jsou nad limitem ${kc(u.limit)}.`;
   switch (p.stav) {
-    case 'casovy':
-      return `Časový test splněn od ${datum(p.osvobozenoOd)} (nákup ${datum(p.nakup)}, držba přes ${rules.prodeje.casovyTest.let} roky).`;
     case 'hodnotovy':
-      return `Hodnotový test: příjmy z prodeje (${typ.nazev.toLowerCase()}) za rok ${kc(v.uhrny[p.typ].uhrnProTest)}, limit ${kc(rules.prodeje.hodnotovyTest.limit)}.`;
+      return `Hodnotový test: příjmy z prodejů (${nazevDruhu(p.druh, rules).toLowerCase()}) za rok ${kc(u.uhrnProTest)}, limit ${kc(u.limit)}.`;
+    case 'casovy':
+      return `${nadLimitem()} Časový test splněn od ${datum(p.osvobozenoOd)} (nákup ${datum(p.nakup)}, držba přes ${let_} roky).`;
+    case 'castecne': {
+      const c = p.zdanitelnaCast;
+      return `Časový test splněn od ${datum(p.osvobozenoOd)}, ale časově osvobozené příjmy z kryptoaktiv za rok (${kc(u.limit40.uhrn)}) přesahují ${kc(u.limit40.limit)}. `
+        + `Neosvobozená je poměrná část ${pct(c.pomer)}: příjem ${kc(c.prijem)}, náklady ${kc(c.naklady)}, rozdíl ${kc(c.rozdil)}.`;
+    }
     case 'zdanitelne':
-      return `Časový test splněn až od ${datum(p.osvobozenoOd)} a příjmy za rok ${kc(v.uhrny[p.typ].uhrnProTest)} jsou nad limitem ${kc(rules.prodeje.hodnotovyTest.limit)}.`;
+      if (p.terminovy && p.drzbaSplnena) {
+        return `Budoucí (termínový) prodej sjednaný do ${let_} let od nákupu se časovým testem neosvobozuje. ${p.vHodnotovemTestu ? nadLimitem() : ''}`.trim();
+      }
+      if (!p.vHodnotovemTestu) {
+        return `Elektronický peněžní token do hodnotového testu nevstupuje a časový test je splněn až od ${datum(p.osvobozenoOd)}.`;
+      }
+      return `${nadLimitem()} Časový test splněn až od ${datum(p.osvobozenoOd)}.`;
     case 'mimo-rok':
       return `Prodej není z roku ${v.rok}. Do výpočtu za tento rok se nepočítá.`;
     default:
-      return p.chyby.map((c) => c.text).join(' ');
+      return p.chyby.map((ch) => ch.text).join(' ');
   }
 }
 
@@ -57,23 +74,43 @@ export function polozkyHtml(v, rules) {
 
 /** Statistiky úhrnů (HTML <ul class="stats">). */
 export function uhrnyHtml(v, rules) {
-  const ht = rules.prodeje.hodnotovyTest;
-  const polozky = Object.entries(rules.prodeje.typy).map(([klic, t]) => {
+  const polozky = Object.entries(rules.prodeje.druhy).map(([klic, d]) => {
     const u = v.uhrny[klic];
-    return `<li class="stat${u.splneno ? ' sage' : ''}"><b>${kc(u.uhrnProTest)}</b><span>${esc(t.nazev)}: příjmy za rok pro hodnotový test (limit ${kc(ht.limit)})</span></li>`;
+    return `<li class="stat${u.splneno ? ' sage' : ''}"><b>${kc(u.uhrnProTest)}</b><span>${esc(d.nazev)}: příjmy za rok pro hodnotový test (limit ${kc(u.limit)})</span></li>`;
   });
   polozky.push(`<li class="stat${v.zdanitelnyRozdil ? '' : ' sage'}"><b>${kc(v.orientacniDan)}</b><span>orientační daň při sazbě ${pct(rules.dane.sazba.hodnota)}</span></li>`);
   return `<ul class="stats">${polozky.join('')}</ul>`;
 }
 
-/** Upozornění vzniklá z konkrétního výpočtu (sporná pravidla se nepočítají). */
+/** Upozornění z konkrétního výpočtu: nejasná pravidla (počítaná podle doporučení) a krácení. */
 export function upozorneniProdejuHtml(v, rules) {
+  const pr = rules.prodeje;
   const texty = v.upozorneni.map((u) => {
+    const s = stitekStavu(u.stav, rules);
+    const druh = esc(nazevDruhu(u.druh, rules));
+    if (u.id === 'uhrn-casovy') {
+      const dopad = u.meniVysledek
+        ? `Bez nich by úhrn byl ${kc(u.uhrnBez)} a prodeje by byly osvobozené hodnotovým testem.`
+        : 'Na tento výsledek to vliv nemá.';
+      return `<li><span>${s} ${druh}: do úhrnu ${kc(u.limit)} jsme započítali i prodeje, které splnily časový test (úhrn ${kc(u.uhrn)}). `
+        + `Zákon mluví o úhrnu bez výjimky, oficiální metodiku finanční správy jsme nenašli. Počítáme opatrnější variantu. ${dopad}</span></li>`;
+    }
     if (u.id === 'krypto-40mil') {
-      return `<li><span>${stitekStavu(u.stav, rules)} Časově osvobozené příjmy z kryptoaktiv jsou ${kc(u.castka)}. Podle části zdrojů platí u kryptoaktiv od roku ${rules.prodeje.limit40mil.zrusenoOdRoku} dál limit ${kc(u.limit)}: příjmy nad něj by osvobozené nebyly. Do výpočtu to nepočítáme.</span></li>`;
+      return `<li><span>${s} Časově osvobozené příjmy z kryptoaktiv jsou ${kc(u.uhrn)}, víc než ${kc(u.limit)}. `
+        + `Neosvobozená je poměrná část ${pct(u.pomer)} (úhrn − ${kc(u.limit)}) / úhrn a stejným poměrem jsme krátili náklady. `
+        + `Cenné papíry: ${esc(pr.limit40mil.cennePapiryAPodily)}.</span></li>`;
     }
     if (u.id === 'ztraty') {
-      return `<li><span>${stitekStavu(u.stav, rules)} Ztrátu z jednoho prodeje jsme odečetli od zisků z prodejů stejného druhu. Celkovou ztrátu uplatnit nejde.</span></li>`;
+      const zaporny = u.vysledek < 0 ? ' Výsledek druhu je záporný: počítá se jako 0 a do dalších let se ztráta nepřevádí.' : '';
+      return `<li><span>${s} ${druh}: ztrátu jsme odečetli jen od zisků stejného druhu. Mezi cennými papíry a kryptoaktivy se zisky a ztráty nezapočítávají.${zaporny}</span></li>`;
+    }
+    if (u.id === 'oznameni') {
+      const prodeje = u.polozky.map((x) => `prodej ${x.index + 1} (${kc(x.castka)})`).join(', ');
+      return `<li><span>${s} Osvobozený příjem vyšší než ${kc(u.limit)} musíš oznámit finančnímu úřadu do konce lhůty pro podání přiznání (${esc(pr.oznameni.zdroj.pravniZaklad)}). `
+        + `Týká se: ${prodeje}. V oznámení uvedeš výši příjmu, okolnosti jeho nabytí a datum, kdy vznikl.</span></li>`;
+    }
+    if (u.id === 'kod-krypta-p2') {
+      return `<li><span>${s} Pro kryptoaktiva není v příloze č. 2 přiznání samostatný kód druhu příjmu. Než přiznání podáš, ověř v pokynech, který kód použít.</span></li>`;
     }
     return '';
   }).filter(Boolean);
@@ -84,13 +121,13 @@ export function upozorneniProdejuHtml(v, rules) {
 export function vysledekProdeju(v, rules) {
   const zdanit = v.zdanitelnyRozdil > 0;
   const osvobozeno = v.polozky.filter((p) => p.stav === 'casovy' || p.stav === 'hodnotovy').length;
-  const zdanitelne = v.polozky.filter((p) => p.stav === 'zdanitelne').length;
+  const zdanitelne = v.polozky.filter((p) => p.stav === 'zdanitelne' || p.stav === 'castecne').length;
   const vRoce = osvobozeno + zdanitelne;
   let vysvetleni;
   if (!vRoce) vysvetleni = `Za rok ${v.rok} tu zatím není žádný úplný prodej.`;
   else if (!zdanitelne) vysvetleni = `Všechny prodeje za rok ${v.rok} jsou osvobozené. Daň z nich neplatíš.`;
   else if (!zdanit) vysvetleni = 'Některé prodeje nejsou osvobozené, ale po odečtení nákladů nevyšel žádný zisk.';
-  else vysvetleni = `Rozdíl mezi příjmem a náklady u neosvobozených prodejů patří do přiznání mezi ostatní příjmy (§ 10). Orientačně z něj zaplatíš ${kc(v.orientacniDan)} daně.`;
+  else vysvetleni = `Rozdíl mezi příjmem a náklady u neosvobozených prodejů patří do přiznání mezi ostatní příjmy (§ 10), cenné papíry a kryptoaktiva zvlášť. Orientačně z něj zaplatíš ${kc(v.orientacniDan)} daně.`;
   return {
     nadpis: zdanit ? `Zdaníš ${kc(v.zdanitelnyRozdil)} rozdílu` : 'Nic nedaníš',
     cislo: kc(v.zdanitelnyRozdil),
@@ -106,7 +143,7 @@ export function vysledekProdeju(v, rules) {
 
 /** Tabulka po zemích (HTML, stack-table jako makro tabulka). */
 export function tabulkaZemiHtml(v) {
-  const sloupce = ['Země', 'Základ', 'Česká daň', 'Sraženo v zahraničí', 'Zápočet', 'Doplatek', 'Přeplaceno'];
+  const sloupce = ['Země', 'Základ', 'Česká daň', 'Sraženo v zahraničí', v.zapocetOrientacni ? 'Zápočet (orientačně)' : 'Zápočet', 'Doplatek', 'Přeplaceno'];
   const bunky = (nazev, z, tridaRadku = '') => `<tr${tridaRadku}><th scope="row">${esc(nazev)}</th>`
     + ['zakladKc', 'ceskaDan', 'srazenoKc', 'zapocet', 'doplatek', 'preplaceno']
       .map((k, i) => `<td class="r" data-label="${sloupce[i + 1]}">${kc(z[k])}</td>`).join('') + '</tr>';
@@ -118,49 +155,77 @@ export function tabulkaZemiHtml(v) {
     + `<tfoot>${bunky('Celkem', v.celkem, ' class="hl"')}</tfoot></table></div>`;
 }
 
-/** Přeplacená daň a tip na W-8BEN, neověřené smluvní sazby (HTML). */
+/** Strop zápočtu po zemích z výpočtu: smluvní sazba, smlouva a článek (HTML). */
+export function stropyHtml(v, rules) {
+  const strop = rules.dividendy.stropZapoctu;
+  const zeme = v.zeme.map((z) => {
+    const s = rules.dividendy.zeme[z.zeme].smluvniSazba;
+    return s?.hodnota == null
+      ? `${esc(z.nazev)}: bez smlouvy v našem přehledu, zápočet ${kc(rules.dividendy.zeme[z.zeme].bezSmlouvy?.zapocet)}`
+      : `${esc(z.nazev)} ${pct(s.hodnota)} (smlouva ${esc(s.smlouva)}, ${esc(s.clanek)})`;
+  });
+  if (!zeme.length) return '';
+  return `<p class="small zt-stropy">${stitekStavu(strop.stav, rules)} Zápočet je nejvýš smluvní sazba × hrubá dividenda: ${zeme.join('; ')}.</p>`;
+}
+
+/** Přeplacená daň, W-8BEN, chybějící smluvní sazby a orientační zápočet u § 16a (HTML). */
 export function upozorneniDividendHtml(v, rules) {
   const casti = [];
-  for (const z of v.zeme.filter((x) => x.preplaceno > 0)) {
-    const w = rules.dividendy.zeme[z.zeme].w8ben;
-    const tip = z.w8ben && w
-      ? ` Tip: s formulářem W-8BEN u brokera ti USA strhnou jen ${pct(w.sazbaS)} místo ${pct(w.sazbaBez)}.`
-      : ' Přeplatek můžeš zkusit získat zpět v zemi, kde se daň strhla.';
-    casti.push(`<li><span><strong>${esc(z.nazev)}: přeplaceno v zahraničí ${kc(z.preplaceno)}.</strong> Tuhle část v Česku nezapočteš.${tip}</span></li>`);
+  for (const u of v.upozorneni.filter((x) => x.id === 'zapocet-16a')) {
+    casti.push(`<li><span>${stitekStavu(u.stav, rules)} Režim § 16a: jak se zahraniční daň započítává v příloze č. 4, se z pokynů ověřit nepodařilo. Zápočet ukazujeme jen orientačně.</span></li>`);
+  }
+  for (const z of v.zeme.filter((x) => x.preplaceno > 0 && !x.bezSmlouvy)) {
+    casti.push(`<li><span><strong>${esc(z.nazev)}: přeplaceno v zahraničí ${kc(z.preplaceno)}.</strong> Tuhle část v Česku nezapočteš. Přeplatek můžeš zkusit získat zpět v zemi, kde se daň strhla.</span></li>`);
   }
   for (const u of v.upozorneni) {
-    casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: smluvní sazbu jsme zatím neověřili. Zápočet jsme omezili jen českou daní, podle smlouvy může být nižší.</span></li>`);
+    if (u.id === 'w8ben') {
+      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: srážku u zdroje může snížit formulář W-8BEN u brokera. Je to americký postup, z českého zdroje jsme ho neověřili.</span></li>`);
+    }
+    if (u.id === 'bez-smlouvy') {
+      const zdroj = rules.dividendy.zeme[u.zeme].bezSmlouvy.zdroj;
+      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: zápočet zahraniční daně jsme nepočítali, doplácíš celou českou daň. `
+        + `Podle ${esc(zdroj.pravniZaklad)} se postupuje podle smlouvy o zamezení dvojího zdanění. Když ji země s Českem má, uplatníš zápočet podle sazby ve smlouvě.</span></li>`);
+    }
+    if (u.id === 'smluvni-sazba') {
+      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: smluvní sazbu v ověřených pravidlech nemáme. Zápočet jsme omezili jen českou daní. Podle smlouvy může být nižší, bez smlouvy žádný.</span></li>`);
+    }
   }
   return casti.length ? `<ul class="zt-upozorneni">${casti.join('')}</ul>` : '';
 }
 
-/** Návod k přiznání ve dvou variantách (umístění je sporné). */
+/** Návod k přiznání pro zvolený režim (§ 8, nebo § 16a). */
 export function navodHtml(v, rules) {
-  const u = rules.dividendy.umisteni;
+  const rz = rules.dividendy.rezimy;
+  const x = rz.varianty[v.rezim];
   const c = v.celkem;
-  const varianty = u.varianty.map((x) => `<li class="zt-varianta"><h3 class="h-lg">Podle části zdrojů: ${esc(x.nazev)}</h3>`
-    + `<p class="small">Zdroj: <a href="${esc(x.zdroj.url)}">${esc(x.zdroj.nazev)}</a></p>`
+  const orientacne = v.zapocetOrientacni ? ' (orientačně)' : '';
+  return `<p>${stitekStavu(rz.stav, rules)} Zvolený režim: <strong>${esc(x.nazev)}</strong>, ${esc(x.popis)}. `
+    + `Volba platí pro všechny tvoje zahraniční příjmy z kapitálového majetku najednou (${esc(rz.podminka)}). `
+    + `${esc(rz.zakon.pravniZaklad)}: <q class="zt-citace">${esc(rz.zakon.citace)}</q></p>`
     + '<ol class="zt-kroky">'
-    + `<li>Do přílohy (${esc(x.priloha)}) uveď hrubé dividendy přepočtené na koruny: <span class="num">${kc(c.zakladKc)}</span>${x.radekZaklad ? `, v přiznání ${esc(x.radekZaklad)}` : ''}.</li>`
-    + `<li>Česká daň z nich je <span class="num">${kc(c.ceskaDan)}</span>${x.radekDan ? `, v přiznání ${esc(x.radekDan)}` : ''}.</li>`
-    + `<li>Uplatni ${esc(x.zapocet)}: <span class="num">${kc(c.zapocet)}</span>, po zemích podle tabulky výše.</li>`
-    + `<li>K doplacení zůstává <span class="num">${kc(c.doplatek)}</span>.</li>`
-    + '</ol></li>');
-  return `<p>${stitekStavu(u.stav, rules)} Zdroje se neshodují, kam zahraniční dividendy v přiznání patří. Proto ukazujeme obě varianty. Než přiznání podáš, ověř to v aktuálních pokynech k přiznání na <a href="${esc(rules.overitUrl)}">webu finanční správy</a>.</p>`
-    + `<ul class="zt-varianty">${varianty.join('')}</ul>`;
+    + `<li>Základ (hrubé dividendy v korunách): <span class="num">${kc(c.zakladKc)}</span>, česká daň ${pct(v.sazba)}: <span class="num">${kc(c.ceskaDan)}</span>.</li>`
+    + x.kroky.map((k) => `<li>${esc(k)}</li>`).join('')
+    + `<li>Zápočet daně zaplacené v zahraničí${orientacne}: <span class="num">${kc(c.zapocet)}</span>, ${esc(rz.zapocet)}, po státech podle tabulky výše.</li>`
+    + `<li>K doplacení zůstává${orientacne} <span class="num">${kc(c.doplatek)}</span>.</li>`
+    + rules.dividendy.doklady.kroky.map((k) => `<li>${esc(k)}</li>`).join('')
+    + '</ol>'
+    + `<p class="small muted">Řádky podle: ${esc(rz.radkyDle)}. Zdroj: <a href="${esc(rz.zdroj.url)}">${esc(rz.zdroj.pravniZaklad)}</a>; `
+    + `doklady: <a href="${esc(rules.dividendy.doklady.zdroj.url)}">${esc(rules.dividendy.doklady.zdroj.pravniZaklad)}</a>.</p>`;
 }
 
 /** Hlavní čísla a texty výsledku dividend. */
 export function vysledekDividend(v, rules) {
   const doplatit = v.celkem.doplatek > 0;
   const zpusob = rules.kurzy.zpusoby[v.zpusob]?.nazev || '';
+  const rezim = rules.dividendy.rezimy.varianty[v.rezim].nazev;
   return {
     nadpis: doplatit ? `Doplatíš ${kc(v.celkem.doplatek)}` : 'Nic nedoplácíš',
     cislo: kc(v.celkem.doplatek),
-    popis: `česká daň z dividend k doplacení za rok ${v.rok}`,
-    vysvetleni: `Dividendy ${kc(v.celkem.zakladKc)} (přepočet: ${zpusob}), česká daň ${pct(rules.dane.sazba.hodnota)} je ${kc(v.celkem.ceskaDan)}. Zahraniční daň započteš do ${kc(v.celkem.zapocet)}.`,
+    popis: `česká daň z dividend k doplacení za rok ${v.rok}${v.zapocetOrientacni ? ' (orientačně)' : ''}`,
+    vysvetleni: `Dividendy ${kc(v.celkem.zakladKc)} (přepočet: ${zpusob}, režim ${rezim}), česká daň ${pct(v.sazba)} je ${kc(v.celkem.ceskaDan)}. `
+      + `Zahraniční daň započteš ${v.zapocetOrientacni ? 'orientačně ' : ''}do ${kc(v.celkem.zapocet)}.`,
     lista: { cislo: kc(v.celkem.doplatek), popis: doplatit ? 'Doplatíš' : 'Nic nedoplácíš' },
-    tabulka: tabulkaZemiHtml(v),
+    tabulka: tabulkaZemiHtml(v) + stropyHtml(v, rules),
     upozorneni: upozorneniDividendHtml(v, rules),
     navod: navodHtml(v, rules),
   };

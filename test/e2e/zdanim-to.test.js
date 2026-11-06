@@ -1,6 +1,7 @@
 // E2E: Zdaním to? ve skutečném UI.
 // Spuštění: npx eleventy && node --test test/e2e/zdanim-to.test.js
 // Kontrolní příklady z docs/zadani-zdanim-to.md (dividendy při kurzu 23 Kč/USD, prodeje).
+// Pravidla podle zdanim-to-overeni-2026.json (ověřeno 6. 11. 2026).
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { otevri, vypln, text, zavri } from './pomocnik.mjs';
@@ -50,6 +51,59 @@ test('prodeje: úhrn příjmů nad 100 000 Kč je zdanitelný, krypto zvlášť'
   await vypln(page, '#p2-naklady', '20 000');
   assert.equal(await text(page, '[data-zt-polozky] li:nth-child(2) .tag'), 'Osvobozeno');
   assert.match(await text(page, '[data-zt-polozky] li:nth-child(2) .zt-duvod'), /90 000 Kč, limit 100 000 Kč/);
+  await page.close();
+});
+
+test('prodeje: nejasné pravidlo (úhrn včetně prodejů po 3 letech) má viditelné upozornění', async () => {
+  const { page } = await otevri(PRODEJE);
+  const detail = await text(page, '[data-zt-detail]');
+  assert.match(detail, /Nejasné Cenné papíry: do úhrnu 100 000 Kč jsme započítali i prodeje, které splnily časový test/);
+  assert.match(await text(page, '#zt-postup-nadpis + .zt-postup'), /Nejasné/);
+  await page.close();
+});
+
+test('prodeje: termínový prodej – zaškrtávátko u cenných papírů i krypta, zruší časový test', async () => {
+  const { page } = await otevri(PRODEJE);
+  const skryte = (n) => page.$eval(`[data-radek]:nth-child(${n}) [data-terminovy]`, (el) => el.hidden);
+  assert.equal(await skryte(1), false);
+  assert.equal(await skryte(3), false);
+  // ETF po 4 letech (prodej 1): termínový prodej → zdanitelné
+  await page.click('#p1-terminovy');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(1) .tag'), 'Zdanitelné');
+  await page.click('#p1-terminovy');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(1) .tag'), 'Osvobozeno');
+  // krypto po víc než 3 letech a nad limitem 100 000 Kč → časový test
+  await vypln(page, '#p3-nakup', '2020-01-01');
+  await vypln(page, '#p3-prijem', '150 000');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(3) .tag'), 'Osvobozeno');
+  await page.click('#p3-terminovy');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(3) .tag'), 'Zdanitelné');
+  assert.match(await text(page, '[data-zt-polozky] li:nth-child(3) .zt-duvod'), /termínový\) prodej sjednaný do 3 let/);
+  assert.match(await text(page, '[data-zt-detail]'), /příloze č. 2/);
+  await page.close();
+});
+
+test('prodeje: osvobozený prodej nad 5 000 000 Kč → upozornění na oznámení (§ 38v)', async () => {
+  const { page } = await otevri(PRODEJE);
+  await vypln(page, '#p1-prijem', '6 000 000');
+  assert.match(await text(page, '[data-zt-detail]'), /Osvobozený příjem vyšší než 5 000 000 Kč musíš oznámit.*§ 38v odst\. 1 ZDP.*prodej 1 \(6 000 000 Kč\)/);
+  await page.close();
+});
+
+test('prodeje: „Jak počítáme“ cituje zákon', async () => {
+  const { page } = await otevri(PRODEJE);
+  const citace = await page.$$eval('.zt-postup q', (els) => els.map((e) => e.textContent));
+  assert.ok(citace.some((c) => /s výjimkou elektronického peněžního tokenu/.test(c)));
+  assert.ok(citace.some((c) => /15 % pro část základu daně do 36násobku průměrné mzdy/.test(c)));
+  assert.match(await text(page, '.zt-postup'), /§ 4 odst\. 3 ZDP/);
+  await page.close();
+});
+
+test('prodeje: elektronický peněžní token do hodnotového testu nevstupuje', async () => {
+  const { page } = await otevri(PRODEJE);
+  await page.select('#p3-typ', 'emt');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(3) .tag'), 'Zdanitelné');
+  assert.match(await text(page, '[data-zt-polozky] li:nth-child(3) .zt-duvod'), /do hodnotového testu nevstupuje/);
   await page.close();
 });
 
@@ -153,17 +207,65 @@ test('dividendy: stát bez srážky → doplatíš 345 Kč', async () => {
   await page.close();
 });
 
-test('dividendy: jednotný kurz musí být pro měnu stejný, jinak chyba', async () => {
+test('dividendy: za rok 2026 jen denní kurz, jednotný kurz zatím nevyšel', async () => {
   const { page } = await otevri(DIVIDENDY);
-  await page.click('label[for="zpusob-jednotny"]');
-  assert.equal(await page.$eval('[data-chyba]', (el) => el.hidden), true);
+  assert.equal(await page.$('#zpusob-jednotny'), null);
+  assert.equal(await page.$eval('[data-zpusob]', (el) => el.value), 'denni');
+  const stav = await text(page, '[data-jednotny-stav]');
+  assert.match(stav, /Zatím nevydáno/);
+  assert.match(stav, /GFŘ-D-75/);
+  assert.match(stav, /Kombinovat je nejde/);
+  await page.close();
+});
+
+test('dividendy: přepínač § 16a – návod pro přílohu č. 4 a zápočet jen orientačně', async () => {
+  const { page } = await otevri(DIVIDENDY);
+  assert.match(await text(page, '[data-zt-navod]'), /Zvolený režim: § 8.*ř\. 38.*ř\. 321–330.*ř\. 58/);
+  // Výchozí § 8 zůstane po načtení zaškrtnutý (přepínač motivu webu má vlastní skupinu rádií)
+  assert.equal(await page.$eval('#zdaneni-par8', (el) => el.checked), true);
+  await page.click('label[for="zdaneni-par16a"]');
+  const navod = await text(page, '[data-zt-navod]');
+  assert.match(navod, /Zvolený režim: § 16a \(15 %\)/);
+  assert.match(navod, /ř\. 414.*ř\. 74a/);
+  assert.match(navod, /orientačně/);
+  assert.match(await text(page, '[data-zt-upozorneni]'), /Nejasné Režim § 16a.*jen orientačně/);
+  assert.match(await text(page, '[data-zt-tabulka] thead'), /Zápočet \(orientačně\)/);
   assert.equal(await text(page, '#vysledek-nadpis'), 'Doplatíš 435 Kč');
-  await vypln(page, '#d2-kurz', '22');
-  assert.equal(await page.$eval('[data-chyba]', (el) => el.hidden), false);
-  assert.match(await text(page, '[data-chyba-text]'), /stejný kurz/);
-  assert.equal(await page.$eval('#d2-kurz', (el) => el.getAttribute('aria-invalid')), 'true');
-  await page.click('label[for="zpusob-denni"]');
-  assert.equal(await page.$eval('[data-chyba]', (el) => el.hidden), true);
+  await page.close();
+});
+
+test('dividendy: smluvní sazba Nizozemska 10 % omezí zápočet', async () => {
+  const { page } = await otevri(DIVIDENDY);
+  await jenPrvniVyplata(page);
+  await page.select('#d1-zeme', 'NL');
+  await page.select('#d1-mena', 'EUR');
+  await vypln(page, '#d1-kurz', '25');
+  // 100 EUR × 25 = 2 500 Kč, sraženo 15 EUR = 375 Kč, strop 10 % = 250 Kč
+  assert.equal(await bunka(page, 4), '250 Kč');
+  assert.equal(await bunka(page, 5), '125 Kč');
+  assert.match(await text(page, '[data-zt-tabulka]'), /Nizozemsko 10 % \(smlouva 138\/1974 Sb\., čl\. 10 odst\. 2\)/);
+  await page.close();
+});
+
+test('dividendy: jiná země – zápočet 0 a upozornění na smlouvu; návod s doklady', async () => {
+  const { page } = await otevri(DIVIDENDY);
+  await jenPrvniVyplata(page);
+  await page.select('#d1-zeme', 'XX');
+  // 100 USD × 23 = 2 300 Kč, česká daň 345 Kč, zápočet 0
+  assert.equal(await bunka(page, 4), '0 Kč');
+  assert.equal(await bunka(page, 5), '345 Kč');
+  assert.match(await text(page, '[data-zt-upozorneni]'), /Jiná země: zápočet zahraniční daně jsme nepočítali.*§ 38f odst\. 1/);
+  assert.match(await text(page, '[data-zt-navod]'), /potvrzením zahraničního správce daně.*seznam všech potvrzení/);
+  await page.close();
+});
+
+test('dividendy: limity přiznání 2026 a od 2027, dividendy v limitu jako nejasné', async () => {
+  const { page } = await otevri(DIVIDENDY);
+  const t = await text(page, '#zt-limity-nadpis ~ .table-wrap');
+  assert.match(t, /50 000 Kč.*100 000 Kč/);
+  assert.match(t, /20 000 Kč.*40 000 Kč/);
+  assert.match(await text(page, '.zt-limity-pozn'), /Nejasné.*započítávají se.*pokud se nejedná o příjmy od daně osvobozené/);
+  assert.match(t, /§ 38g odst\. 1 ZDP.*§ 38g odst\. 2 ZDP/);
   await page.close();
 });
 
@@ -185,11 +287,24 @@ test('dividendy: bez JavaScriptu ukázkový výsledek', async () => {
   assert.ok(await page.$('#vysledek[data-ukazka]'));
   assert.equal(await page.$eval('#d1-kurz', (el) => el.value), '23');
   assert.equal(await text(page, '[data-vysledek-cislo]'), '435 Kč');
-  assert.match(await text(page, '[data-zt-navod]'), /§ 8.*§ 16a/);
+  assert.match(await text(page, '[data-zt-navod]'), /Zvolený režim: § 8/);
   await page.close();
 });
 
 /* ---------- Společné ---------- */
+
+test('patička: věta o poradenství s datem ověření, hlavička bez varování', async () => {
+  for (const cesta of [PRODEJE, DIVIDENDY]) {
+    const { page } = await otevri(cesta);
+    assert.equal(await text(page, '[data-paticka-poznamka]'), 'Nejde o daňové poradenství. Pravidla ověřena k 6. 11. 2026.');
+    const html = await page.content();
+    assert.ok(!html.includes('Pravidla z odborných zdrojů'), cesta);
+    await page.close();
+  }
+  const { page } = await otevri('');
+  assert.equal(await page.$('[data-paticka-poznamka]'), null);
+  await page.close();
+});
 
 test('nic se neukládá ani nedává do adresy, 0 chyb v konzoli', async () => {
   for (const cesta of [PRODEJE, DIVIDENDY]) {

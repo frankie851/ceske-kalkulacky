@@ -15,13 +15,14 @@ stitkyNavic: ['Za rok 2026']
 {%- from "komponenty/ikona.njk" import ikona -%}
 {%- set p = zt.prodeje -%}
 <div class="zt" id="zt-prodeje">
-  {% call upozorneni({ typ: 'navrh', titulek: zt.stavPravidel }) %}
-    <p class="small">Pravidla jsme zatím ověřili jen z článků daňových poradců, ne z oficiálních textů. Sporná místa nepočítáme a označujeme je. <a href="{{ zt.overitUrl }}">Ověř u finanční správy</a>.</p>
+  {% call upozorneni({ typ: 'info', titulek: 'Pravidla ověřená z oficiálních textů k ' + (zt.overeno | datum) }) %}
+    <p class="small">Zákon o daních z příjmů v úplném znění, pokyny finanční správy a smlouvy o zamezení dvojího zdanění. Místa, která zákon ani finanční správa jasně neřeší, počítáme podle doporučeného výkladu a označujeme je štítkem <strong>Nejasné</strong>.</p>
   {% endcall %}
 
   <section class="card zt-zadani" aria-labelledby="zt-zadani-nadpis">
     <h2 id="zt-zadani-nadpis">Tvoje prodeje za rok {{ zt.rok }}</h2>
     <p class="muted small">Každý nákup (tranši) zadej zvlášť. Částky v korunách, přepočtené kurzem ke dni obchodu. Nic se nikam neposílá ani neukládá.</p>
+    <p class="muted small">{{ p.naklady }}</p>
     <form id="zt-prodeje-form" novalidate>
       <ol class="zt-radky" data-radky>
         {%- for r in p.radky %}
@@ -33,7 +34,7 @@ stitkyNavic: ['Za rok 2026']
               <label for="p{{ n }}-typ" data-for="typ">Co se prodávalo</label>
               <div class="input input-select">
                 <select id="p{{ n }}-typ" name="p{{ n }}-typ" data-pole="typ">
-                  {%- for t in zt.typy %}<option value="{{ t.hodnota }}"{% if t.hodnota == r.typ %} selected{% endif %}>{{ t.text }}</option>{% endfor %}
+                  {%- for t in zt.typy %}<option value="{{ t.hodnota }}"{% if t.terminovy %} data-terminovy{% endif %}{% if t.hodnota == r.typ %} selected{% endif %}>{{ t.text }}</option>{% endfor %}
                 </select>
               </div>
             </div>
@@ -53,6 +54,9 @@ stitkyNavic: ['Za rok 2026']
               <label for="p{{ n }}-naklady" data-for="naklady">Náklady na nákup</label>
               <div class="input"><input id="p{{ n }}-naklady" name="p{{ n }}-naklady" type="text" inputmode="numeric" value="{{ r.naklady }}" data-pole="naklady" autocomplete="off"><span class="unit" aria-hidden="true">Kč</span></div>
             </div>
+            <div class="zt-pole-cele zt-terminovy" data-terminovy{% if not r.terminovyPole %} hidden{% endif %}>
+              <label class="zt-check" for="p{{ n }}-terminovy" data-for="terminovy"><input id="p{{ n }}-terminovy" name="p{{ n }}-terminovy" type="checkbox" data-pole="terminovy"{% if r.terminovy %} checked{% endif %}><span>Termínový (budoucí) prodej sjednaný do {{ zt.lhuta }} let od nákupu</span></label>
+            </div>
             <div class="zt-radek-akce">
               <button type="button" class="btn btn-ghost zt-odebrat" data-odebrat>Odebrat<span class="sr-only" data-odebrat-popis> prodej {{ n }}</span></button>
             </div>
@@ -63,6 +67,15 @@ stitkyNavic: ['Za rok 2026']
       <div class="form-actions zt-pridat">
         <button type="button" class="btn btn-ghost" data-pridat>Přidat další prodej</button>
       </div>
+      <details class="zt-smena">
+        <summary>Směna kryptoaktiva za jiné kryptoaktivum</summary>
+        <p class="small">{{ stitek({ typ: 'navrh' if p.smena.stav.stitek == 'navrh' else 'plain', text: p.smena.stav.text }) }} Směna kryptoaktiva za jiné kryptoaktivum je prodej. Zadej ji jako prodej: příjem je hodnota získaného kryptoaktiva v korunách ke dni směny. Získané kryptoaktivum má nové datum nákupu, ode dne směny.</p>
+        <p class="small">Časový test nepřerušuje:</p>
+        <ul class="small">
+          {%- for t in p.smena.neprerusuje %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        <p class="small muted">Zdroj: <a href="{{ p.smena.zdroj.url }}">{{ p.smena.zdroj.pravniZaklad }}</a> ({{ p.smena.poznamka }}).</p>
+      </details>
       <noscript><p class="small muted">Bez JavaScriptu se výsledek nepřepočítá a řádky nejde přidat. Níže je spočítaný pro ukázkové prodeje.</p></noscript>
     </form>
   </section>
@@ -74,13 +87,13 @@ stitkyNavic: ['Za rok 2026']
     <p class="sr-only" aria-live="polite" data-oznameni></p>
   {%- endcall %}
 
-  <section class="card" aria-labelledby="zt-sporne-nadpis">
-    <h2 id="zt-sporne-nadpis">Co jsme neověřili a jak s tím počítáme</h2>
-    <ul class="zt-sporne">
-      {%- for s in p.sporne %}
-      <li>{{ stitek({ typ: 'navrh' if s.stav.stitek == 'navrh' else 'plain', text: s.stav.text }) }}<span>{{ s.text }}</span></li>
+  <section class="card" aria-labelledby="zt-postup-nadpis">
+    <h2 id="zt-postup-nadpis">Jak počítáme</h2>
+    <ol class="zt-sporne zt-postup">
+      {%- for s in p.kroky %}
+      <li>{{ stitek({ typ: 'navrh' if s.stav.stitek == 'navrh' else 'plain', text: s.stav.text }) }}<span>{{ s.text }}{% if s.zdroj %}{% if s.zdroj.citace %} <q class="zt-citace">{{ s.zdroj.citace }}</q>{% endif %} <span class="src-meta">Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.pravniZaklad }}</a></span>{% endif %}</span></li>
       {%- endfor %}
-    </ul>
+    </ol>
     <p class="note">{{ ikona('ikona-info') }}<span>Pravidla se mění skoro každý rok. Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř je u finanční správy</a>.</span></p>
   </section>
 </div>

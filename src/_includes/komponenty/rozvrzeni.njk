@@ -7,7 +7,7 @@
     url      – page.url aktuální stránky; přesná shoda = aria-current="page", podsekce = aria-current="true"
     Obsahuje logo, vyhledávání (form role=search → /hledat/?q=), přepínač režimu (#t-auto/#t-light/#t-dark).
 
-  paticka({ site, navigace, nastroje, overeno })
+  paticka({ site, navigace, nastroje, overeno, poznamka })  – poznamka: volitelná věta stránky (data stránky `patickaPoznamka`)
     overeno – ISO datum poslední kontroly pravidel (filtr posledniOvereni)
     Odkaz na bezplatnou dluhovou pomoc (/dluhy/, data-pomoc) je v patičce vždy.
 
@@ -67,6 +67,9 @@
       <h2>{{ p.site.nazev }}</h2>
       {% if p.overeno %}<ul class="badges">{{ stitek({ typ: 'overeno', text: 'Poslední kontrola pravidel ' + (p.overeno | datum), li: true }) }}</ul>{% endif %}
       <p><strong>{{ p.site.poradenstvi }}</strong></p>
+      {%- if p.poznamka %}
+      <p class="footer-poznamka" data-paticka-poznamka><strong>{{ p.poznamka }}</strong></p>
+      {%- endif %}
       <p>{{ p.site.soukromi }}</p>
       <p><a class="footer-help" href="{{ '/dluhy/' | url }}" data-pomoc>{{ ikona('ikona-srdce') }}Bezplatná pomoc s dluhy</a></p>
       <p class="print-note">Vytištěno z webu {{ p.site.nazev }}. Datum ověření pravidel je u každého nástroje.</p>

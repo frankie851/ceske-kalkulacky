@@ -393,3 +393,102 @@ Výsledky:
 - `npm test` 477/477, `npm run test:e2e` 129/129,
 - `npm run kontrola` 29 stránek bez chyb,
 - Lighthouse pro obě stránky Zdaním to?: výkon 100, přístupnost 100.
+
+## Zdaním to? podle ověřených pravidel 2026 (6. 11. 2026)
+
+Uživatel dodal `zdanim-to-overeni-2026.json`. Soubor obsahuje 13 bodů ověřených z ZDP v úplném
+znění (e-Sbírka, znění od 1. 8. 2026), pokynů GFŘ a smluv o zamezení dvojího zdanění. Přidal
+pořadí výpočtu u prodejů a pravidla pro dividendy, kurzy a limity přiznání.
+
+Rozhodnutí:
+- **Hodnoty jen z JSONu.** `rules.json` je přepsaný podle souboru, každé pravidlo má `stav`
+  a `zdroj`. Výjimka: sazba 15 % u § 8 a § 10 (orientační daň) zůstává ze schválené tabulky.
+  V JSONu je 15 % jen u § 16a.
+- **Hlavička** ukazuje „Pravidla ověřena k 6. 11. 2026“: `meta.stav: neovereno` je pryč.
+  Blok nejasných míst má nadpis „Co zákon ani finanční správa jasně neřeší“
+  (`meta.neoverenoNadpis`, layout ho umí nově).
+- **Nejasné body** se počítají podle doporučení a vždy mají viditelné upozornění se štítkem
+  „Nejasné“:
+  - úhrn 100 000 Kč včetně prodejů po 3 letech,
+  - kód krypta v příloze č. 2,
+  - zápočet v § 16a (jen orientačně),
+  - dividendy v limitu přiznání,
+  - W-8BEN.
+- **Sazba 30 % u W-8BEN zmizela.** V JSONu není: bod 6 uvádí W-8BEN jen jako „nejasné – US
+  procedura“. Tip na W-8BEN je teď bez čísel.
+- **Elektronický peněžní token** je samostatná volba v řádku prodeje. Do hodnotového testu
+  nevstupuje (bod 2), časový test a limit 40 mil. Kč se na něj vztahují jako na kryptoaktivum.
+  Soubor tuto výjimku nemá.
+- **Termínový prodej** je zaškrtávátko „sjednaný do 3 let od nákupu“, jen u krypta a EMT. Ruší
+  časový test, hodnotový test ne (pořadí podle zadání).
+- **Kurz za 2026:** jen denní kurz ČNB, přepínač se zobrazí, až bude jednotný kurz v
+  `kurzy.jednotny[rok]`. Průběžný odhad „předběžné“ zatím není: počítal by se z měsíčních kurzů
+  ČNB a ty v JSONu nejsou (web je nestahuje). Jednotný kurz za 2025 (GFŘ-D-75) je v rules jen
+  jako údaj a pro testy.
+- **„Jiná země“** zůstala bez smluvní sazby: zápočet jen do české daně a upozornění, že podle
+  smlouvy může být nižší, bez smlouvy žádný.
+- **Patička:** stránky nástroje mají v patičce webu větu „Nejde o daňové poradenství. Pravidla
+  ověřena k 6. 11. 2026.“. Data stránky `patickaPoznamka` → `paticka({ poznamka })`.
+- **Přepínač § 8 / § 16a** má název `zdaneni`. Název `rezim` už používá přepínač světlého
+  a tmavého režimu (`tema.js`) a jeho skript by volbu odznačil.
+
+### Doplnění: ověření podle textu ZDP (6. 11. 2026)
+
+Uživatel dodal doslovný výběr ZDP v úplném znění od 1. 8. 2026 (e-Sbírka). Výběr obsahuje
+§ 4 odst. 1 písm. t), u), zj), zk), § 4 odst. 3, § 16, § 16a, § 16ab a § 38f. Je uložený
+v `docs/zdroje/zdp-2026-08-01-vyber.md`. Text zákona není podle § 3 autorského zákona chráněný.
+
+- **EMT je potvrzený.** Písm. zj) vyjímá elektronický peněžní token jen z hodnotového testu.
+  Písm. zk) a § 4 odst. 3 výjimku nemají, takže časový test i limit 40 mil. Kč platí.
+- **Termínový prodej platí i pro cenné papíry.** Písm. u) má stejnou větu o budoucím převodu
+  jako zk). Zadání mluvilo jen o kryptu, ale opora je v zákoně. Zaškrtávátko je teď u všech
+  druhů.
+- **Sazba 15 %** je doložená z § 16 odst. 1 písm. a), už není jen ze schválené tabulky. 23 %
+  (písm. b) a zaokrouhlení základu na sta Kč dolů (§ 16 odst. 2, § 16a odst. 2) dál nepočítáme
+  a obojí je uvedené v `meta.neovereno`.
+- **Jiná země má zápočet 0** (volba uživatele). Podle § 38f odst. 1 se dvojí zdanění vylučuje
+  podle mezinárodní smlouvy. Pro zemi mimo přehled 8 smluv sazbu nemáme, proto počítáme
+  opatrně bez zápočtu a upozorníme, že při smlouvě s ČR jde zápočet uplatnit podle ní.
+- **Návod k přiznání** má nové kroky o dokladech podle § 38f odst. 5 a 10: potvrzení správce
+  daně nebo brokera a seznam potvrzení.
+- **Citace:** pravidla mají v `rules.json` pole `zdroj.citace` s doslovným úryvkem. Stránka
+  ho ukazuje v části „Jak počítáme“. U ustanovení ze ZDP je odkaz na e-Sbírku
+  (`https://e-sbirka.gov.cz/sb/1992/586`).
+- **Beze změny zůstává** úhrn 100 000 Kč včetně prodejů po 3 letech. Písm. t) a zj) mluví
+  o „úhrnu“ bez výjimky, ale ověřovací JSON bod vede jako nejasný a oficiální metodika
+  chybí. Proto má dál štítek „Nejasné“, teď s citací zákona.
+
+### Doplnění: úplné znění ZDP (6. 11. 2026)
+
+Uživatel nahrál celé znění ZDP od 1. 8. 2026. Do `docs/zdroje/zdp-2026-08-01-vyber.md` jsem
+přidal další ustanovení: § 8 odst. 4 a 8, § 10 odst. 4 a 5, § 38 odst. 1, 5 a 7, § 38g
+odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké.
+
+**Potvrzeno beze změny výpočtu**
+- § 10 odst. 4: k rozdílu, o který výdaje druhu převyšují příjem, se nepřihlíží. U částečně
+  osvobozeného příjmu se výdaje krátí poměrem.
+- § 8 odst. 4 a 8:
+  - zahraniční dividendy jsou základem daně nesníženým o výdaje,
+  - když se do § 16a zahrne jeden takový příjem, musí tam být všechny.
+- § 38 odst. 1 písm. b), 5 a 7:
+  - přepočet denním kurzem ČNB ke dni příjmu, nebo jednotným kurzem,
+  - obojí v jednom období současně použít nelze.
+- § 38g odst. 1 a 2: limity za rok 2026 jsou 50 000 Kč a 20 000 Kč (jiné příjmy podle § 7
+  až 10). Limity od roku 2027 mění zák. č. 180/2026 Sb. a v tomto znění ještě nejsou.
+
+**Nejasné zůstává**
+- Dividendy v limitu přiznání. Text § 38g z limitu vyjímá jen osvobozené příjmy a příjmy
+  sražené zvláštní sazbou, což výklad podporuje. Stav ale zůstává podle ověřovacího JSONu,
+  stránka teď ukazuje citaci.
+
+**Nové**
+- § 38v: osvobozený příjem vyšší než 5 000 000 Kč je nutné oznámit správci daně do konce
+  lhůty pro přiznání. Kalkulačka upozorní u každého prodeje, jehož osvobozená část limit
+  přesahuje.
+  - U krypta nad 40 mil. Kč se počítá jen osvobozená část.
+  - Zákon neříká, zda se příjmy sčítají. Kalkulačka posuzuje každý prodej zvlášť, podle textu
+    „obdrží příjem“.
+- § 10 odst. 5: k formuláři přibyla nápověda, co patří do nákladů:
+  - nabývací cena,
+  - u cenných papírů poplatky za nákup a výdaje spojené s prodejem,
+  - u krypta ze směny cena podle zákona o oceňování.

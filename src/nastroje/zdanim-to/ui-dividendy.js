@@ -11,7 +11,10 @@ const oznam = oznamovac($('[data-oznameni]'));
 const chyba = $('[data-chyba]');
 
 const jePrazdny = (h) => !String(h.hruba).trim() && !String(h.srazeno).trim() && !String(h.kurz).trim();
-const zpusob = () => form.querySelector('input[name="zpusob"]:checked')?.value;
+// Způsob přepočtu: rádia, nebo jediný dostupný způsob ve skrytém poli (jednotný kurz za rok nevyšel)
+const zpusob = () => form.querySelector('input[name="zpusob"]:checked')?.value ?? form.querySelector('[data-zpusob]')?.value;
+// Režim § 8 / § 16a platí pro všechny výplaty najednou
+const rezim = () => form.querySelector('input[name="zdaneni"]:checked')?.value;
 
 function ukazChybu(text) {
   nastavText($('[data-chyba-text]'), text || '');
@@ -53,7 +56,7 @@ function prepocitej() {
     return;
   }
   try {
-    const v = spocitejDividendy(vyplaty, { rok: rules.rok }, rules);
+    const v = spocitejDividendy(vyplaty, { rok: rules.rok, rezim: rezim() }, rules);
     ukazChybu('');
     const t = vysledekDividend(v, rules);
     aktualizujVysledek(t);
@@ -72,6 +75,6 @@ function prepocitej() {
   }
 }
 
-// Přepínač způsobu přepočtu je ve stejném formuláři: změnu zachytí pripojRadky (událost change).
+// Přepínače režimu a způsobu přepočtu jsou ve stejném formuláři: změnu zachytí pripojRadky (událost change).
 ovladani = pripojRadky({ form, prefix: 'd', nazev: 'Výplata', odebratPopis: 'výplatu', priZmene: prepocitej });
 prepocitej();
