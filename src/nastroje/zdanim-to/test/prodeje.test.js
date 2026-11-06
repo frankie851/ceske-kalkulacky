@@ -108,13 +108,20 @@ test('elektronický peněžní token po 3 letech → osvobozený časovým teste
   assert.equal(v.polozky[0].stav, 'casovy');
 });
 
-test('termínový prodej krypta sjednaný do 3 let se časovým testem neosvobodí', () => {
+test('termínový prodej sjednaný do 3 let se časovým testem neosvobodí – krypto (zk) i cenné papíry (u)', () => {
   const v = osvobozeniProdeje([krypto('2020-01-01', '2026-02-01', 200000, 50000, { terminovy: true })], 2026, rules);
   assert.equal(v.polozky[0].stav, 'zdanitelne');
   assert.equal(v.zdanitelnyRozdil, 150000);
-  // U cenných papírů se příznak ignoruje
   const cpV = osvobozeniProdeje([{ ...cp('2020-01-01', '2026-02-01', 200000, 50000), terminovy: true }], 2026, rules);
-  assert.equal(cpV.polozky[0].stav, 'casovy');
+  assert.equal(cpV.polozky[0].stav, 'zdanitelne');
+  assert.equal(cpV.zdanitelnyRozdil, 150000);
+});
+
+test('elektronický peněžní token osvobozený časovým testem se počítá do limitu 40 mil. Kč (§ 4 odst. 3)', () => {
+  const v = osvobozeniProdeje([emt('2020-01-01', '2026-02-01', 30000000, 30000000), krypto('2020-01-01', '2026-03-01', 20000000, 0)], 2026, rules);
+  assert.deepEqual(v.polozky.map((p) => p.stav), ['castecne', 'castecne']);
+  assert.equal(v.uhrny.kryptoaktivum.limit40.uhrn, 50000000);
+  assert.equal(v.zdanitelnyRozdil, 4000000);
 });
 
 test('krypto: časově osvobozené příjmy 50 mil. Kč → neosvobozeno 20 %, náklady kráceny stejně', () => {
@@ -165,6 +172,9 @@ test('pravidla odpovídají ověřovacímu souboru (6. 11. 2026)', () => {
   assert.deepEqual(rules.prodeje.limit40mil.limity, { 'cenny-papir': null, kryptoaktivum: 40000000 });
   assert.equal(rules.prodeje.krypto.ucinnostOd, '2025-02-15');
   assert.equal(rules.prodeje.typy.emt.hodnotovyTest, false);
+  assert.ok(Object.values(rules.prodeje.typy).every((t) => t.terminovy === true), 'termínový prodej: § 4 odst. 1 písm. u) i zk)');
+  assert.equal(rules.dane.sazba.hodnota, 0.15);
+  assert.equal(rules.dane.sazba.zdroj.pravniZaklad, '§ 16 odst. 1 písm. a) ZDP');
   assert.equal(rules.prodeje.zapocteni.zapornyVysledekDruhu, 0);
   assert.equal(rules.prodeje.zapocteni.prevodZtraty, false);
 });

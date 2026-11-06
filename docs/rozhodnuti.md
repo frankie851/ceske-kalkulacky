@@ -431,3 +431,29 @@ Rozhodnutí:
   ověřena k 6. 11. 2026.“. Data stránky `patickaPoznamka` → `paticka({ poznamka })`.
 - **Přepínač § 8 / § 16a** má název `zdaneni`. Název `rezim` už používá přepínač světlého
   a tmavého režimu (`tema.js`) a jeho skript by volbu odznačil.
+
+### Doplnění: ověření podle textu ZDP (6. 11. 2026)
+
+Uživatel dodal doslovný výběr ZDP v úplném znění od 1. 8. 2026 (e-Sbírka). Výběr obsahuje
+§ 4 odst. 1 písm. t), u), zj), zk), § 4 odst. 3, § 16, § 16a, § 16ab a § 38f. Je uložený
+v `docs/zdroje/zdp-2026-08-01-vyber.md`. Text zákona není podle § 3 autorského zákona chráněný.
+
+- **EMT je potvrzený.** Písm. zj) vyjímá elektronický peněžní token jen z hodnotového testu.
+  Písm. zk) a § 4 odst. 3 výjimku nemají, takže časový test i limit 40 mil. Kč platí.
+- **Termínový prodej platí i pro cenné papíry.** Písm. u) má stejnou větu o budoucím převodu
+  jako zk). Zadání mluvilo jen o kryptu, ale opora je v zákoně. Zaškrtávátko je teď u všech
+  druhů.
+- **Sazba 15 %** je doložená z § 16 odst. 1 písm. a), už není jen ze schválené tabulky. 23 %
+  (písm. b) a zaokrouhlení základu na sta Kč dolů (§ 16 odst. 2, § 16a odst. 2) dál nepočítáme
+  a obojí je uvedené v `meta.neovereno`.
+- **Jiná země má zápočet 0** (volba uživatele). Podle § 38f odst. 1 se dvojí zdanění vylučuje
+  podle mezinárodní smlouvy. Pro zemi mimo přehled 8 smluv sazbu nemáme, proto počítáme
+  opatrně bez zápočtu a upozorníme, že při smlouvě s ČR jde zápočet uplatnit podle ní.
+- **Návod k přiznání** má nové kroky o dokladech podle § 38f odst. 5 a 10: potvrzení správce
+  daně nebo brokera a seznam potvrzení.
+- **Citace:** pravidla mají v `rules.json` pole `zdroj.citace` s doslovným úryvkem. Stránka
+  ho ukazuje v části „Jak počítáme“. U ustanovení ze ZDP je odkaz na e-Sbírku
+  (`https://e-sbirka.gov.cz/sb/1992/586`).
+- **Beze změny zůstává** úhrn 100 000 Kč včetně prodejů po 3 letech. Písm. t) a zj) mluví
+  o „úhrnu“ bez výjimky, ale ověřovací JSON bod vede jako nejasný a oficiální metodika
+  chybí. Proto má dál štítek „Nejasné“, teď s citací zákona.

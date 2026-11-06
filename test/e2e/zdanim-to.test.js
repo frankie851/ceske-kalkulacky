@@ -62,21 +62,33 @@ test('prodeje: nejasné pravidlo (úhrn včetně prodejů po 3 letech) má vidit
   await page.close();
 });
 
-test('prodeje: termínový prodej krypta – zaškrtávátko jen u krypta, zruší časový test', async () => {
+test('prodeje: termínový prodej – zaškrtávátko u cenných papírů i krypta, zruší časový test', async () => {
   const { page } = await otevri(PRODEJE);
   const skryte = (n) => page.$eval(`[data-radek]:nth-child(${n}) [data-terminovy]`, (el) => el.hidden);
-  assert.equal(await skryte(1), true);
+  assert.equal(await skryte(1), false);
   assert.equal(await skryte(3), false);
+  // ETF po 4 letech (prodej 1): termínový prodej → zdanitelné
+  await page.click('#p1-terminovy');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(1) .tag'), 'Zdanitelné');
+  await page.click('#p1-terminovy');
+  assert.equal(await text(page, '[data-zt-polozky] li:nth-child(1) .tag'), 'Osvobozeno');
   // krypto po víc než 3 letech a nad limitem 100 000 Kč → časový test
   await vypln(page, '#p3-nakup', '2020-01-01');
   await vypln(page, '#p3-prijem', '150 000');
   assert.equal(await text(page, '[data-zt-polozky] li:nth-child(3) .tag'), 'Osvobozeno');
   await page.click('#p3-terminovy');
   assert.equal(await text(page, '[data-zt-polozky] li:nth-child(3) .tag'), 'Zdanitelné');
-  assert.match(await text(page, '[data-zt-polozky] li:nth-child(3) .zt-duvod'), /Termínový prodej sjednaný do 3 let/);
+  assert.match(await text(page, '[data-zt-polozky] li:nth-child(3) .zt-duvod'), /termínový\) prodej sjednaný do 3 let/);
   assert.match(await text(page, '[data-zt-detail]'), /příloze č. 2/);
-  await page.select('#p1-typ', 'kryptoaktivum');
-  assert.equal(await skryte(1), false);
+  await page.close();
+});
+
+test('prodeje: „Jak počítáme“ cituje zákon', async () => {
+  const { page } = await otevri(PRODEJE);
+  const citace = await page.$$eval('.zt-postup q', (els) => els.map((e) => e.textContent));
+  assert.ok(citace.some((c) => /s výjimkou elektronického peněžního tokenu/.test(c)));
+  assert.ok(citace.some((c) => /15 % pro část základu daně do 36násobku průměrné mzdy/.test(c)));
+  assert.match(await text(page, '.zt-postup'), /§ 4 odst\. 3 ZDP/);
   await page.close();
 });
 
@@ -225,6 +237,18 @@ test('dividendy: smluvní sazba Nizozemska 10 % omezí zápočet', async () => {
   assert.equal(await bunka(page, 4), '250 Kč');
   assert.equal(await bunka(page, 5), '125 Kč');
   assert.match(await text(page, '[data-zt-tabulka]'), /Nizozemsko 10 % \(smlouva 138\/1974 Sb\., čl\. 10 odst\. 2\)/);
+  await page.close();
+});
+
+test('dividendy: jiná země – zápočet 0 a upozornění na smlouvu; návod s doklady', async () => {
+  const { page } = await otevri(DIVIDENDY);
+  await jenPrvniVyplata(page);
+  await page.select('#d1-zeme', 'XX');
+  // 100 USD × 23 = 2 300 Kč, česká daň 345 Kč, zápočet 0
+  assert.equal(await bunka(page, 4), '0 Kč');
+  assert.equal(await bunka(page, 5), '345 Kč');
+  assert.match(await text(page, '[data-zt-upozorneni]'), /Jiná země: zápočet zahraniční daně jsme nepočítali.*§ 38f odst\. 1/);
+  assert.match(await text(page, '[data-zt-navod]'), /potvrzením zahraničního správce daně.*seznam všech potvrzení/);
   await page.close();
 });
 

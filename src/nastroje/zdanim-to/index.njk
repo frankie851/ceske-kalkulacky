@@ -54,7 +54,7 @@ stitkyNavic: ['Za rok 2026']
               <div class="input"><input id="p{{ n }}-naklady" name="p{{ n }}-naklady" type="text" inputmode="numeric" value="{{ r.naklady }}" data-pole="naklady" autocomplete="off"><span class="unit" aria-hidden="true">Kč</span></div>
             </div>
             <div class="zt-pole-cele zt-terminovy" data-terminovy{% if not r.terminovyPole %} hidden{% endif %}>
-              <label class="zt-check" for="p{{ n }}-terminovy" data-for="terminovy"><input id="p{{ n }}-terminovy" name="p{{ n }}-terminovy" type="checkbox" data-pole="terminovy"{% if r.terminovy %} checked{% endif %}><span>Termínový (forwardový) prodej sjednaný do {{ zt.lhuta }} let od nákupu</span></label>
+              <label class="zt-check" for="p{{ n }}-terminovy" data-for="terminovy"><input id="p{{ n }}-terminovy" name="p{{ n }}-terminovy" type="checkbox" data-pole="terminovy"{% if r.terminovy %} checked{% endif %}><span>Termínový (budoucí) prodej sjednaný do {{ zt.lhuta }} let od nákupu</span></label>
             </div>
             <div class="zt-radek-akce">
               <button type="button" class="btn btn-ghost zt-odebrat" data-odebrat>Odebrat<span class="sr-only" data-odebrat-popis> prodej {{ n }}</span></button>
@@ -90,7 +90,7 @@ stitkyNavic: ['Za rok 2026']
     <h2 id="zt-postup-nadpis">Jak počítáme</h2>
     <ol class="zt-sporne zt-postup">
       {%- for s in p.kroky %}
-      <li>{{ stitek({ typ: 'navrh' if s.stav.stitek == 'navrh' else 'plain', text: s.stav.text }) }}<span>{{ s.text }}{% if s.zdroj %} <span class="src-meta">Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.pravniZaklad }}</a></span>{% endif %}</span></li>
+      <li>{{ stitek({ typ: 'navrh' if s.stav.stitek == 'navrh' else 'plain', text: s.stav.text }) }}<span>{{ s.text }}{% if s.zdroj %}{% if s.zdroj.citace %} <q class="zt-citace">{{ s.zdroj.citace }}</q>{% endif %} <span class="src-meta">Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.pravniZaklad }}</a></span>{% endif %}</span></li>
       {%- endfor %}
     </ol>
     <p class="note">{{ ikona('ikona-info') }}<span>Pravidla se mění skoro každý rok. Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř je u finanční správy</a>.</span></p>

@@ -74,6 +74,7 @@
   .zt .result .table-wrap { margin-top: var(--sp-5); }
   .zt .result tfoot th, .zt .result tfoot td { font-weight: 800; }
   .zt-stropy { margin: var(--sp-3) 0 0; }
+  .zt-citace { font-style: italic; color: var(--c-text-muted); }
   .zt-sporne.zt-limity-pozn { margin-top: var(--sp-4); }
 
   /* ---------- Sporné body, limity, návod ---------- */

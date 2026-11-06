@@ -44,7 +44,7 @@ function duvodPolozky(p, v, rules) {
     }
     case 'zdanitelne':
       if (p.terminovy && p.drzbaSplnena) {
-        return `Termínový prodej sjednaný do ${let_} let od nákupu se časovým testem neosvobozuje. ${p.vHodnotovemTestu ? nadLimitem() : ''}`.trim();
+        return `Budoucí (termínový) prodej sjednaný do ${let_} let od nákupu se časovým testem neosvobozuje. ${p.vHodnotovemTestu ? nadLimitem() : ''}`.trim();
       }
       if (!p.vHodnotovemTestu) {
         return `Elektronický peněžní token do hodnotového testu nevstupuje a časový test je splněn až od ${datum(p.osvobozenoOd)}.`;
@@ -156,7 +156,7 @@ export function stropyHtml(v, rules) {
   const zeme = v.zeme.map((z) => {
     const s = rules.dividendy.zeme[z.zeme].smluvniSazba;
     return s?.hodnota == null
-      ? `${esc(z.nazev)}: smluvní sazbu nemáme`
+      ? `${esc(z.nazev)}: bez smlouvy v našem přehledu, zápočet ${kc(rules.dividendy.zeme[z.zeme].bezSmlouvy?.zapocet)}`
       : `${esc(z.nazev)} ${pct(s.hodnota)} (smlouva ${esc(s.smlouva)}, ${esc(s.clanek)})`;
   });
   if (!zeme.length) return '';
@@ -169,12 +169,17 @@ export function upozorneniDividendHtml(v, rules) {
   for (const u of v.upozorneni.filter((x) => x.id === 'zapocet-16a')) {
     casti.push(`<li><span>${stitekStavu(u.stav, rules)} Režim § 16a: jak se zahraniční daň započítává v příloze č. 4, se z pokynů ověřit nepodařilo. Zápočet ukazujeme jen orientačně.</span></li>`);
   }
-  for (const z of v.zeme.filter((x) => x.preplaceno > 0)) {
+  for (const z of v.zeme.filter((x) => x.preplaceno > 0 && !x.bezSmlouvy)) {
     casti.push(`<li><span><strong>${esc(z.nazev)}: přeplaceno v zahraničí ${kc(z.preplaceno)}.</strong> Tuhle část v Česku nezapočteš. Přeplatek můžeš zkusit získat zpět v zemi, kde se daň strhla.</span></li>`);
   }
   for (const u of v.upozorneni) {
     if (u.id === 'w8ben') {
       casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: srážku u zdroje může snížit formulář W-8BEN u brokera. Je to americký postup, z českého zdroje jsme ho neověřili.</span></li>`);
+    }
+    if (u.id === 'bez-smlouvy') {
+      const zdroj = rules.dividendy.zeme[u.zeme].bezSmlouvy.zdroj;
+      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: zápočet zahraniční daně jsme nepočítali, doplácíš celou českou daň. `
+        + `Podle ${esc(zdroj.pravniZaklad)} se postupuje podle smlouvy o zamezení dvojího zdanění. Když ji země s Českem má, uplatníš zápočet podle sazby ve smlouvě.</span></li>`);
     }
     if (u.id === 'smluvni-sazba') {
       casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: smluvní sazbu v ověřených pravidlech nemáme. Zápočet jsme omezili jen českou daní. Podle smlouvy může být nižší, bez smlouvy žádný.</span></li>`);
@@ -196,8 +201,10 @@ export function navodHtml(v, rules) {
     + x.kroky.map((k) => `<li>${esc(k)}</li>`).join('')
     + `<li>Zápočet daně zaplacené v zahraničí${orientacne}: <span class="num">${kc(c.zapocet)}</span>, ${esc(rz.zapocet)}, po státech podle tabulky výše.</li>`
     + `<li>K doplacení zůstává${orientacne} <span class="num">${kc(c.doplatek)}</span>.</li>`
+    + rules.dividendy.doklady.kroky.map((k) => `<li>${esc(k)}</li>`).join('')
     + '</ol>'
-    + `<p class="small muted">Řádky podle: ${esc(rz.radkyDle)}. Zdroj: <a href="${esc(rz.zdroj.url)}">${esc(rz.zdroj.pravniZaklad)}</a>.</p>`;
+    + `<p class="small muted">Řádky podle: ${esc(rz.radkyDle)}. Zdroj: <a href="${esc(rz.zdroj.url)}">${esc(rz.zdroj.pravniZaklad)}</a>; `
+    + `doklady: <a href="${esc(rules.dividendy.doklady.zdroj.url)}">${esc(rules.dividendy.doklady.zdroj.pravniZaklad)}</a>.</p>`;
 }
 
 /** Hlavní čísla a texty výsledku dividend. */

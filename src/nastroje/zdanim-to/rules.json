@@ -1,8 +1,9 @@
 {
   "meta": {
     "overeno": "2026-11-06",
-    "poznamka": "Hodnoty převzaté jen ze souboru zdanim-to-overeni-2026.json (ověření k 6. 11. 2026: ZDP v úplném znění z e-Sbírky od 1. 8. 2026, pokyny GFŘ, smlouvy o zamezení dvojího zdanění). Výjimka: sazba 15 % u § 8 a § 10 je ze schválené tabulky pravidel (docs/zadani-zdanim-to.md).",
+    "poznamka": "Hodnoty převzaté jen ze souboru zdanim-to-overeni-2026.json (ověření k 6. 11. 2026: ZDP v úplném znění z e-Sbírky od 1. 8. 2026, pokyny GFŘ, smlouvy o zamezení dvojího zdanění) a z doslovného výběru ZDP v úplném znění od 1. 8. 2026 (docs/zdroje/zdp-2026-08-01-vyber.md, převedeno 6. 11. 2026).",
     "zdroje": [
+      { "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů – úplné znění od 1. 8. 2026 (e-Sbírka)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "poznamka": "§ 4 odst. 1 písm. t), u), zj), zk) a odst. 3, § 16, § 16a, § 38f – doslovný výběr v docs/zdroje/zdp-2026-08-01-vyber.md" },
       { "nazev": "Zákon č. 360/2025 Sb. (novela ZDP, § 4 odst. 3)", "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf", "poznamka": "limit 40 mil. Kč platí od 1. 1. 2026 jen u kryptoaktiv osvobozených časovým testem" },
       { "nazev": "Finanční správa – Kryptoaktiva (29. 4. 2026)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf", "poznamka": "samostatné limity 100 000 Kč pro cenné papíry a kryptoaktiva; elektronický peněžní token je z hodnotového testu vyňatý" },
       { "nazev": "Zákon o daních z příjmů č. 586/1992 Sb. (Zákony pro lidi)", "url": "https://www.zakonyprolidi.cz/cs/1992-586", "poznamka": "úhrn pro hodnotový test (§ 4 odst. 1 písm. t a zj), zákaz kombinace kurzů (§ 38 odst. 1 a 7), limity přiznání (§ 38g)" },
@@ -23,17 +24,23 @@
       "Formulář W-8BEN je americký postup. Z českého zdroje jsme ho neověřili.",
       "Řádky přiznání a příloh jsou podle tiskopisu za rok 2025. Pokyny za rok 2026 zatím nevyšly.",
       "Smluvní sazby jsou podle přehledu Ministerstva financí. S textem v e-Sbírce jsme je neporovnávali.",
-      "Sazbu 23 % pro vysoké příjmy a zaokrouhlení základu a daně podle pokynů k přiznání nepočítáme."
+      "Sazbu 23 % pro část základu daně přesahující 36násobek průměrné mzdy (§ 16 odst. 1 písm. b) nepočítáme.",
+      "Zaokrouhlení základu daně na celá sta Kč dolů (§ 16 odst. 2, § 16a odst. 2) nepočítáme. Výpočet je orientační."
     ]
   },
   "rok": 2026,
   "overitUrl": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/fyzicke-osoby",
   "dane": {
-    "sazba": { "hodnota": 0.15, "stav": "potvrzeno", "poznamka": "sazba podle schválené tabulky pravidel (§ 8 a § 10), není v ověřovacím souboru" }
+    "sazba": {
+      "hodnota": 0.15,
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 16 odst. 1 písm. a) ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "15 % pro část základu daně do 36násobku průměrné mzdy" },
+      "vyssiSazba": { "text": "23 % pro část základu daně přesahující 36násobek průměrné mzdy", "pravniZaklad": "§ 16 odst. 1 písm. b) ZDP", "pocita": false }
+    }
   },
   "prodeje": {
     "typy": {
-      "cenny-papir": { "nazev": "Cenné papíry", "popis": "akcie, ETF", "druh": "cenny-papir", "hodnotovyTest": true, "terminovy": false },
+      "cenny-papir": { "nazev": "Cenné papíry", "popis": "akcie, ETF", "druh": "cenny-papir", "hodnotovyTest": true, "terminovy": true },
       "kryptoaktivum": { "nazev": "Kryptoaktiva", "popis": null, "druh": "kryptoaktivum", "hodnotovyTest": true, "terminovy": true },
       "emt": { "nazev": "Elektronický peněžní token", "popis": "stablecoin typu EMT", "druh": "kryptoaktivum", "hodnotovyTest": false, "terminovy": true }
     },
@@ -44,20 +51,27 @@
     "casovyTest": {
       "let": 3,
       "stav": "potvrzeno",
-      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. zj), zk) ZDP (zák. č. 32/2025 Sb.)", "url": "https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf" }
+      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. u) a zk) ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "přesáhne-li doba mezi nabytím a úplatným převodem tohoto kryptoaktiva při jeho úplatném převodu dobu 3 let" }
+    },
+    "cennePapiry": {
+      "terminovy": "osvobození se nevztahuje na příjem, který plyne poplatníkovi z budoucího úplatného převodu cenného papíru, uskutečněného v době do 3 let od nabytí",
+      "kmenovyList": "jedná-li se o kmenový list, činí doba místo 3 let 5 let",
+      "opce": "osvobození se neuplatní pro cenné papíry nabyté uplatněním kvalifikované zaměstnanecké opce podle § 6a",
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. u) ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586" }
     },
     "hodnotovyTest": {
       "limity": { "cenny-papir": 100000, "kryptoaktivum": 100000 },
       "spolecny": false,
       "elektronickyPenezniToken": "vyňat z hodnotového testu",
       "stav": "potvrzeno",
-      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t) a zj) ZDP (znění 1. 8. 2026)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf" },
+      "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t) a zj) ZDP (znění 1. 8. 2026)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "příjmy z úplatného převodu kryptoaktiva s výjimkou elektronického peněžního tokenu, pokud jejich úhrn u poplatníka nepřesáhne ve zdaňovacím období částku 100 000 Kč" },
       "zahrnoutOsvobozeneCasovymTestem": true,
       "zahrnuti": {
         "stav": "nejasne",
         "doporuceni": "započítat všechny hrubé příjmy z prodejů daného druhu (konzervativně) + upozornění",
         "oficialniMetodikaFS": "nenalezena",
-        "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t), zj) ZDP – „úhrn“ bez výjimky", "url": "https://www.zakonyprolidi.cz/cs/1992-586" }
+        "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t), zj) ZDP – „úhrn“ bez výjimky", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "pokud jejich úhrn u poplatníka nepřesáhne ve zdaňovacím období částku 100 000 Kč" }
       }
     },
     "limit40mil": {
@@ -67,13 +81,15 @@
       "zaklad": "úhrn příjmů",
       "nadLimit": "neosvobozena poměrná část (úhrn − 40 000 000) / úhrn",
       "stav": "potvrzeno",
-      "zdroj": { "pravniZaklad": "§ 4 odst. 3 ZDP ve znění zák. č. 360/2025 Sb., účinnost 1. 1. 2026", "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf" }
+      "zdroj": { "pravniZaklad": "§ 4 odst. 3 ZDP ve znění zák. č. 360/2025 Sb., účinnost 1. 1. 2026", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "není osvobozen v poměrné části vypočítané podle podílu části úhrnu těchto příjmů převyšující 40 000 000 Kč a úhrnu těchto příjmů" }
     },
     "krypto": {
       "ucinnostOd": "2025-02-15",
       "zakon": "32/2025 Sb.",
       "plati": "příjmy plynoucí od 15. 2. 2025 i u krypta nabytého dříve; doba držby před účinností se započítává",
       "neosvobozujeSe": "budoucí úplatný převod kryptoaktiva uskutečněný do 3 let od nabytí (§ 4/1/zk)",
+      "terminovyCitace": "osvobození se nevztahuje na příjem, který plyne poplatníkovi z budoucího úplatného převodu kryptoaktiva, uskutečněného v době do 3 let od nabytí",
+      "emt": "elektronický peněžní token je vyňatý jen z hodnotového testu (písm. zj); časový test (písm. zk) a limit podle § 4 odst. 3 výjimku nemají",
       "stav": "potvrzeno",
       "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. zj), zk) ZDP (zák. č. 32/2025 Sb.)", "url": "https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf" },
       "smena": {
@@ -110,18 +126,32 @@
       "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": 0.1, "smlouva": "79/2005 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
       "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "281/1996 Sb. + Protokol 99/2013 Sb.m.s.", "clanek": "čl. 10 odst. 2 (nové znění)", "stav": "potvrzeno" } },
       "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": 0.15, "smlouva": "83/2002 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
-      "XX": { "nazev": "Jiná země", "smluvniSazba": { "hodnota": null, "stav": "neovereno" } }
+      "XX": {
+        "nazev": "Jiná země",
+        "smluvniSazba": { "hodnota": null, "stav": "neovereno" },
+        "bezSmlouvy": { "zapocet": 0, "stav": "potvrzeno", "zdroj": { "pravniZaklad": "§ 38f odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Při vyloučení dvojího zdanění příjmu plynoucího daňovému rezidentovi České republiky ze zdrojů v zahraničí se postupuje podle mezinárodní smlouvy." } }
+      }
     },
     "stropZapoctu": {
       "text": "uznatelná daň max. smluvní sazba × hrubá dividenda; opora § 38f odst. 3 (příjmy podléhající zdanění v zahraničí v souladu s mezinárodní smlouvou)",
+      "ceskaDan": { "pravniZaklad": "§ 38f odst. 2 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "nejvýše však o částku daně z příjmů vypočtenou podle tohoto zákona, která připadá na příjmy ze zdrojů v zahraničí" },
       "stav": "potvrzeno",
       "zdroj": { "pravniZaklad": "SZDZ, čl. 10 odst. 2; čísla Sbírky dle přehledu MF k 2. 11. 2026", "url": "https://mf.gov.cz/cs/zahranici-a-eu/smlouvy-o-zamezeni-dvojiho-zdaneni/prehled-platnych-smluv" }
+    },
+    "doklady": {
+      "kroky": [
+        "Sraženou daň doložíš potvrzením zahraničního správce daně, v odůvodněných případech potvrzením plátce příjmu nebo depozitáře (brokera) o sražení daně.",
+        "K přiznání přilož seznam všech potvrzení: stát zdroje, daň zaplacená v místní měně a v korunách a výše příjmů z daného státu."
+      ],
+      "stav": "potvrzeno",
+      "zdroj": { "pravniZaklad": "§ 38f odst. 5 a 10 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586" }
     },
     "meny": ["USD", "EUR", "GBP", "CHF", "CAD"],
     "rezimy": {
       "vychozi": "par8",
       "podminka": "všechny příjmy podle § 8 odst. 8 věty první, ne výběr",
       "zapocet": "prostý zápočet samostatně za každý stát (§ 38f odst. 8)",
+      "zapocetZdroj": { "pravniZaklad": "§ 38f odst. 8 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "vyloučení dvojího zdanění metodou prostého zápočtu se provede samostatně za každý stát" },
       "radkyDle": "tiskopis za rok 2025 (pokyny 2026 zatím nevydány)",
       "stav": "potvrzeno",
       "zdroj": { "pravniZaklad": "§ 8 odst. 4 a 8, § 16a odst. 1–2, § 38f odst. 1, 2, 8 ZDP; Pokyny k DAP 2025", "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf" },
@@ -142,6 +172,7 @@
           "popis": "samostatný základ daně se sazbou 15 %",
           "text": "§ 16a (15 %) – Příloha č. 4 ř. 414 → ř. 74a; na ř. 38 neuvádět",
           "sazba": 0.15,
+          "sazbaZdroj": { "pravniZaklad": "§ 16a odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Sazba daně pro samostatný základ daně činí 15 %." },
           "kroky": [
             "Hrubé dividendy přepočtené na koruny uveď v příloze č. 4. Na ř. 38 je neuváděj.",
             "Daň ze samostatného základu (ř. 414 přílohy č. 4) přenes na ř. 74a."

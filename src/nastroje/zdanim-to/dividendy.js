@@ -2,7 +2,8 @@
 // doplatek a přeplatek po zemích (čisté funkce, bez DOM).
 // Žádné sazby ani kurzy tu nejsou natvrdo: vše přichází v parametru rules (rules.json).
 // Režim (§ 8, nebo § 16a) platí pro všechny zahraniční příjmy z kapitálového majetku najednou.
-// Zápočet zvlášť za každý stát: min(sražená daň, smluvní sazba × hrubá dividenda, česká daň).
+// Zápočet zvlášť za každý stát: min(sražená daň, smluvní sazba × hrubá dividenda, česká daň);
+// země bez smlouvy v přehledu (rules: bezSmlouvy) bez zápočtu (§ 38f odst. 1).
 
 export const ZPUSOBY = ['denni', 'jednotny'];
 
@@ -124,16 +125,19 @@ export function spocitejDividendy(vyplaty, { rok, rezim }, rules) {
     const srazenoKc = zaokrouhli(z.srazenoKc);
     const ceskaDan = zaokrouhli(zakladKc * sazba);
     const limitSmlouvy = smluvni == null ? null : zaokrouhli(zakladKc * smluvni);
-    const zapocet = Math.min(srazenoKc, limitSmlouvy ?? Infinity, ceskaDan);
+    // Země bez smlouvy v přehledu: zápočet podle § 38f jde jen podle smlouvy → z rules (0)
+    const bezSmlouvy = info.bezSmlouvy ?? null;
+    const zapocet = bezSmlouvy ? Math.min(bezSmlouvy.zapocet, srazenoKc) : Math.min(srazenoKc, limitSmlouvy ?? Infinity, ceskaDan);
     const doplatek = zaokrouhli(Math.max(0, ceskaDan - zapocet));
     const preplaceno = zaokrouhli(Math.max(0, srazenoKc - zapocet));
     const smluvniNeoverena = smluvni == null && srazenoKc > 0;
-    if (smluvniNeoverena) upozorneni.push({ id: 'smluvni-sazba', zeme: z.zeme, nazev: info.nazev, stav: info.smluvniSazba?.stav });
+    if (bezSmlouvy && srazenoKc > 0) upozorneni.push({ id: 'bez-smlouvy', zeme: z.zeme, nazev: info.nazev, stav: bezSmlouvy.stav });
+    else if (smluvniNeoverena) upozorneni.push({ id: 'smluvni-sazba', zeme: z.zeme, nazev: info.nazev, stav: info.smluvniSazba?.stav });
     if (info.w8ben && preplaceno > 0) upozorneni.push({ id: 'w8ben', zeme: z.zeme, nazev: info.nazev, stav: info.w8ben.stav });
     return {
       zeme: z.zeme, nazev: info.nazev, pocet: z.pocet, meny: [...z.meny],
       zakladKc, srazenoKc, ceskaDan, smluvniSazba: smluvni, limitSmlouvy,
-      zapocet: zaokrouhli(zapocet), doplatek, preplaceno, smluvniNeoverena,
+      zapocet: zaokrouhli(zapocet), doplatek, preplaceno, smluvniNeoverena, bezSmlouvy: Boolean(bezSmlouvy),
       w8ben: Boolean(info.w8ben) && preplaceno > 0,
     };
   });

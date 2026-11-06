@@ -53,15 +53,19 @@ export default {
       ...vysledekProdeju(vp, rules),
       // Postup výpočtu (pořadí podle zadání) se stavem a zdrojem každého kroku
       kroky: [
-        { stav: stav(ht.stav), zdroj: ht.zdroj, text: `Cenné papíry a kryptoaktiva počítáme zvlášť: dva úhrny a dva samostatné limity (${limityHt}).` },
+        { stav: stav(ht.stav), zdroj: { ...ht.zdroj, citace: null }, text: `Cenné papíry a kryptoaktiva počítáme zvlášť: dva úhrny a dva samostatné limity (${limityHt}).` },
         { stav: stav(ht.stav), zdroj: ht.zdroj, text: `Hodnotový test: když úhrn všech hrubých příjmů z prodejů daného druhu za rok nepřesáhne limit, je osvobozené všechno. Elektronické peněžní tokeny (stablecoiny typu EMT) jsou z hodnotového testu vyňaté, do úhrnu nevstupují.` },
         { stav: stav(ht.zahrnuti.stav), zdroj: ht.zahrnuti.zdroj, text: `Do úhrnu počítáme i prodeje po ${pr.casovyTest.let} letech. Zákon mluví o úhrnu bez výjimky, oficiální metodiku finanční správy jsme nenašli. Je to opatrnější varianta a ve výsledku na ni vždy upozorníme.` },
-        { stav: stav(pr.casovyTest.stav), zdroj: pr.casovyTest.zdroj, text: `Jinak časový test po jednotlivých prodejích: držba přes ${pr.casovyTest.let} roky = osvobozeno. U krypta se neosvobozuje ${pr.krypto.neosvobozujeSe}.` },
+        { stav: stav(pr.casovyTest.stav), zdroj: pr.casovyTest.zdroj, text: `Jinak časový test po jednotlivých prodejích: držba přes ${pr.casovyTest.let} roky = osvobozeno.` },
+        { stav: stav(pr.cennePapiry.stav), zdroj: { ...pr.cennePapiry.zdroj, pravniZaklad: '§ 4 odst. 1 písm. u) a zk) ZDP', citace: pr.krypto.terminovyCitace }, text: `U cenných papírů i kryptoaktiv se časovým testem neosvobozuje budoucí (termínový) prodej sjednaný do ${pr.casovyTest.let} let od nákupu, i když kupní smlouva vznikne až později.` },
+        { stav: stav(pr.casovyTest.stav), zdroj: { ...pr.limit40mil.zdroj, pravniZaklad: '§ 4 odst. 1 písm. zj), zk) a odst. 3 ZDP', citace: null }, text: `Elektronický peněžní token: ${pr.krypto.emt}.` },
         { stav: stav(pr.limit40mil.stav), zdroj: pr.limit40mil.zdroj, text: `Jen u kryptoaktiv: časově osvobozené příjmy nad ${kc(limit40)} za rok nejsou osvobozené v poměru (úhrn − ${kc(limit40)}) / úhrn, náklady krátíme stejným poměrem. Cenné papíry: ${pr.limit40mil.cennePapiryAPodily}.` },
         { stav: stav(pr.zapocteni.stav), zdroj: pr.zapocteni.zdroj, text: 'Zisky a ztráty započítáme jen uvnitř druhu (cenné papíry zvlášť, kryptoaktiva zvlášť). Záporný výsledek druhu je 0 a ztráta se do dalších let nepřevádí.' },
         { stav: stav(pr.zapocteni.kodKryptaP2.stav), zdroj: pr.zapocteni.zdroj, text: 'Příloha č. 2 přiznání: pro kryptoaktiva tam není samostatný kód druhu příjmu. Který kód použít, ověř v pokynech k přiznání.' },
         { stav: stav(pr.krypto.stav), zdroj: pr.krypto.zdroj, text: `Osvobození kryptoaktiv platí od ${datum(pr.krypto.ucinnostOd)} (zákon č. ${pr.krypto.zakon}): ${pr.krypto.plati}.` },
-        { stav: stav('potvrzeno'), zdroj: null, text: 'Kryptoaktiva, se kterými podnikáš, se osvobodit nedají. Nástroj počítá jen s osobními investicemi.' },
+        { stav: stav(pr.cennePapiry.stav), zdroj: pr.cennePapiry.zdroj, text: `Cenné papíry: ${pr.cennePapiry.kmenovyList}; ${pr.cennePapiry.opce}. Nástroj počítá s běžnými akciemi a ETF.` },
+        { stav: stav(rules.dane.sazba.stav), zdroj: rules.dane.sazba.zdroj, text: `Orientační daň počítáme sazbou ${pct(rules.dane.sazba.hodnota)}. Sazbu ${rules.dane.sazba.vyssiSazba.text} nepočítáme.` },
+        { stav: stav('potvrzeno'), zdroj: null, text: 'Kryptoaktiva a cenné papíry v obchodním majetku (podnikání) se osvobodit nedají. Nástroj počítá jen s osobními investicemi.' },
       ],
       smena: {
         stav: stav(pr.krypto.smena.stav),

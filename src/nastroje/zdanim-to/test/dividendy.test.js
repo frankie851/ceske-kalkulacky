@@ -116,12 +116,15 @@ test('USA s přeplatkem → upozornění „nejasné“ k W-8BEN', () => {
   assert.equal(v.upozorneni.find((u) => u.id === 'w8ben').stav, 'nejasne');
 });
 
-test('jiná země bez smluvní sazby: zápočet jen do české daně a upozornění', () => {
+test('jiná země (bez smlouvy v přehledu): zápočet 0, doplatek celá česká daň, upozornění (§ 38f odst. 1)', () => {
   const v = spocitejDividendy([{ zeme: 'XX', hruba: 100, mena: 'EUR', srazeno: 26.375, kurz: 25, zpusobKurzu: 'denni' }], { rok: ROK }, rules);
   const z = v.zeme[0];
   assert.equal(z.smluvniSazba, null);
-  assert.equal(z.zapocet, z.ceskaDan);
-  assert.equal(v.upozorneni[0].id, 'smluvni-sazba');
+  assert.equal(z.zapocet, 0);
+  assert.equal(z.doplatek, z.ceskaDan);
+  assert.equal(z.bezSmlouvy, true);
+  assert.equal(v.upozorneni[0].id, 'bez-smlouvy');
+  assert.ok(!v.upozorneni.some((u) => u.id === 'smluvni-sazba'));
 });
 
 test('neplatný vstup → chyba', () => {
@@ -145,4 +148,7 @@ test('pravidla odpovídají ověřovacímu souboru: smluvní sazby, jednotný ku
   assert.deepEqual(rules.kurzy.jednotny['2025'], { USD: 21.84, EUR: 24.66, GBP: 28.8, CHF: 26.33, CAD: 15.61 });
   assert.deepEqual(rules.priznani.limity.map((l) => [l.id, l.do2026, l.od2027]), [['celkem', 50000, 100000], ['vedle-zamestnani', 20000, 40000]]);
   assert.equal(rules.priznani.dividendyVLimitu.stav, 'nejasne');
+  assert.equal(rules.dividendy.zeme.XX.bezSmlouvy.zapocet, 0);
+  assert.equal(rules.dividendy.zeme.XX.bezSmlouvy.zdroj.pravniZaklad, '§ 38f odst. 1 ZDP');
+  assert.equal(rules.dividendy.rezimy.varianty.par16a.sazbaZdroj.pravniZaklad, '§ 16a odst. 1 ZDP');
 });

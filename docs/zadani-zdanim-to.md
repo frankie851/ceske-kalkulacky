@@ -15,6 +15,12 @@ v `docs/zadani-faze-2.md`.
 > ze schválené tabulky pravidel. Položky se stavem „nejasné“ se počítají podle doporučení
 > ze souboru a v UI mají vždy viditelné upozornění.
 > Předchozí verze tabulky ze sekundárních zdrojů je v historii gitu.
+>
+> **Doplněno 6. 11. 2026:** pravidla jsou porovnaná s doslovným textem ZDP v úplném znění
+> od 1. 8. 2026 (výběr v [`docs/zdroje/zdp-2026-08-01-vyber.md`](zdroje/zdp-2026-08-01-vyber.md):
+> § 4 odst. 1 písm. t), u), zj), zk), § 4 odst. 3, § 16, § 16a, § 38f). Pravidla v `rules.json`
+> mají citaci (`zdroj.citace`) a stránka ji ukazuje v části „Jak počítáme“. Sazba 15 % je tím
+> doložená z § 16 odst. 1 písm. a).
 
 ## Cíl
 
@@ -54,9 +60,9 @@ z `meta.overeno`).
 | Bod | Pravidlo | Hodnota v `rules.json` | Právní základ, zdroj | Stav |
 | --- | --- | --- | --- | --- |
 | 1 | Limit 40 mil. Kč jen u kryptoaktiv osvobozených časovým testem, nad limit neosvobozená poměrná část (úhrn − 40 000 000) / úhrn; cenné papíry bez limitu od 1. 1. 2026 | `prodeje.limit40mil.limity = { cenny-papir: null, kryptoaktivum: 40000000 }` | § 4 odst. 3 ZDP ve znění zák. č. 360/2025 Sb. ([PDF](https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_360_PZZ.pdf)) | potvrzeno |
-| 2 | Samostatné limity 100 000 Kč pro cenné papíry a kryptoaktiva; elektronický peněžní token je z hodnotového testu vyňatý | `prodeje.hodnotovyTest.limity`, `spolecny: false`, typ `emt` s `hodnotovyTest: false` | § 4 odst. 1 písm. t) a zj) ZDP ([FS Krypto 29. 4. 2026](https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf)) | potvrzeno |
+| 2 | Samostatné limity 100 000 Kč pro cenné papíry a kryptoaktiva; elektronický peněžní token je z hodnotového testu vyňatý (písm. zj); časový test (zk) a limit 40 mil. Kč (§ 4 odst. 3) výjimku pro EMT nemají | `prodeje.hodnotovyTest.limity`, `spolecny: false`, typ `emt` s `hodnotovyTest: false` | § 4 odst. 1 písm. t) a zj) ZDP ([FS Krypto 29. 4. 2026](https://financnisprava.gov.cz/assets/cs/prilohy/d-placeni-dani/Krypto-29_4_2026.pdf)) | potvrzeno |
 | 2 | Do úhrnu 100 000 Kč se počítají i prodeje splňující časový test | `zahrnoutOsvobozeneCasovymTestem: true` (doporučení: konzervativně + upozornění) | § 4 odst. 1 písm. t), zj) ZDP – „úhrn“ bez výjimky; oficiální metodika FS nenalezena | **nejasné** |
-| 3 | Osvobození krypta od 15. 2. 2025 i u krypta nabytého dříve (držba před účinností se započítává); časový test 3 roky; termínový převod sjednaný do 3 let od nabytí se neosvobozuje | `prodeje.casovyTest.let = 3`, `prodeje.krypto`, pole `terminovy` | § 4 odst. 1 písm. zj), zk) ZDP, zák. č. 32/2025 Sb. ([MF](https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf)) | potvrzeno |
+| 3 | Osvobození krypta od 15. 2. 2025 i u krypta nabytého dříve (držba před účinností se započítává); časový test 3 roky; budoucí (termínový) převod uskutečněný do 3 let od nabytí se neosvobozuje – podle § 4 odst. 1 písm. u) **i u cenných papírů** | `prodeje.casovyTest.let = 3`, `prodeje.krypto`, `prodeje.cennePapiry`, pole `terminovy` u všech typů | § 4 odst. 1 písm. zj), zk) ZDP, zák. č. 32/2025 Sb. ([MF](https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf)) | potvrzeno |
 | 3 | Směna krypto za krypto je zdanitelná (ocenění podle předpisu o oceňování); časový test nepřerušuje výměna vydavatelem, sloučení/splynutí, dědění v řadě přímé / manžel | `prodeje.krypto.smena` (návod u formuláře) | § 10 odst. 1 písm. b) bod 3 ZDP, Informace GFŘ ([PDF](https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/Info_kryptomeny_GFR.pdf)) | potvrzeno |
 | 4 | Zisky a ztráty jen uvnitř druhu (§ 10/1/b/2 cenné papíry, § 10/1/b/3 krypto), záporný výsledek druhu 0, žádný převod ztráty; u částečného osvobození krátit výdaje poměrem | `prodeje.zapocteni` | § 10 odst. 4 ZDP, pokyny k příloze č. 2 ([PDF](https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf)) | potvrzeno |
 | 4 | Kód druhu pro krypto v příloze č. 2 (není samostatný kód) | `prodeje.zapocteni.kodKryptaP2` | tamtéž | **nejasné** |
@@ -68,7 +74,9 @@ z `meta.overeno`).
 | 8 | Denní kurz ČNB, nebo jednotný kurz; v jednom období nikdy obojí | `kurzy.kombinovatLze = false` | § 38 odst. 1 písm. b) a odst. 7 ZDP | potvrzeno |
 | 9 | Limity přiznání: celkem 50 000 Kč (do 2026) / 100 000 Kč (od 2027), vedle zaměstnání 20 000 / 40 000 Kč | `priznani.limity` | zák. č. 180/2026 Sb. ([PDF](https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf)), § 38g ZDP | potvrzeno |
 | 9 | Zahraniční dividendy a § 16a v limitu přiznání: započítávají se | `priznani.dividendyVLimitu` | § 38g odst. 1 a 2 ZDP; oficiální stanovisko nenalezeno | **nejasné** |
-| – | Sazba 15 % pro § 8 a § 10 (orientační daň), 23 % se nepočítá | `dane.sazba = 0.15` | schválená tabulka pravidel (není v ověřovacím souboru) | – |
+| – | Sazba 15 % pro část základu do 36násobku průměrné mzdy; 23 % nad něj se nepočítá; zaokrouhlení základu na sta Kč dolů se nepočítá | `dane.sazba = 0.15`, `dane.sazba.vyssiSazba` | § 16 odst. 1 a 2 ZDP | potvrzeno |
+| – | Jiná země (smlouva není v přehledu): dvojí zdanění se vylučuje podle mezinárodní smlouvy, bez ní zápočet podle § 38f nevzniká | `dividendy.zeme.XX.bezSmlouvy.zapocet = 0` + upozornění | § 38f odst. 1 ZDP | potvrzeno (volba uživatele: opatrně 0) |
+| – | Doklady k zápočtu: potvrzení zahraničního správce daně, v odůvodněných případech plátce nebo depozitáře; seznam potvrzení k přiznání | `dividendy.doklady` (kroky návodu) | § 38f odst. 5 a 10 ZDP | potvrzeno |
 
 Nejasné body jsou i v `meta.neovereno`, na stránce v bloku „Co zákon ani finanční správa jasně
 neřeší“.
@@ -99,7 +107,7 @@ Pořadí výpočtu:
    všechny prodeje druhu kromě EMT stav `hodnotovy`.
 3. **Jinak časový test** po prodejích. Konec lhůty je stejný den o 3 roky později (když den
    neexistuje, poslední den měsíce). Osvobozený je prodej až po konci lhůty (`osvobozenoOd`).
-   Termínový prodej krypta časový test nesplní. Stav je `casovy`, nebo `zdanitelne`.
+   Budoucí (termínový) prodej sjednaný do 3 let časový test nesplní (u cenných papírů i krypta). Stav je `casovy`, nebo `zdanitelne`.
 4. **Jen kryptoaktiva:**
    - když úhrn příjmů ve stavu `casovy` > 40 mil. Kč, platí `pomer = (úhrn − limit) / úhrn`,
    - tyto položky dostanou stav `castecne`,
@@ -139,8 +147,8 @@ Výpočet:
   v `rezimy.varianty.par16a.sazba`, § 8 bere `dane.sazba`.
 - Zápočet se počítá zvlášť za každý stát jako min(sražená daň, smluvní sazba × základ, česká
   daň).
-- Země bez smluvní sazby („Jiná země“): zápočet jen do české daně + upozornění
-  `smluvni-sazba`.
+- Země bez smlouvy v přehledu („Jiná země“, `bezSmlouvy`): zápočet 0 + upozornění `bez-smlouvy`
+  (§ 38f odst. 1: postupuje se podle smlouvy; když ji země s ČR má, zápočet jde podle ní).
 - V režimu § 16a má výsledek `zapocetOrientacni: true` a upozornění `zapocet-16a` (nejasné).
 - U přeplatku v USA vznikne upozornění `w8ben` (nejasné).
 - Doplatek = česká daň − zápočet (min. 0). Přeplaceno = sražená daň − zápočet.
