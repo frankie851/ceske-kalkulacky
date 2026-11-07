@@ -86,7 +86,11 @@ test('prodeje: termínový prodej – zaškrtávátko u cenných papírů i kryp
 test('prodeje: osvobozený prodej nad 5 000 000 Kč → upozornění na oznámení (§ 38v)', async () => {
   const { page } = await otevri(PRODEJE);
   await vypln(page, '#p1-prijem', '6 000 000');
-  assert.match(await text(page, '[data-zt-detail]'), /Osvobozený příjem vyšší než 5 000 000 Kč musíš oznámit.*§ 38v odst\. 1 ZDP.*prodej 1 \(6 000 000 Kč\)/);
+  const detail = await text(page, '[data-zt-detail]');
+  assert.match(detail, /Osvobozený příjem vyšší než 5 000 000 Kč musíš oznámit.*§ 38v odst\. 1 ZDP.*prodej 1 \(6 000 000 Kč\)/);
+  // Součet osvobozených příjmů (ETF 6 000 000 + krypto 30 000) a pokuta podle § 38w
+  assert.match(detail, /Nejasné Osvobozené příjmy za rok jsme sečetli: 6 030 000 Kč/);
+  assert.match(detail, /0,1 % \(6 030 Kč\).*10 % \(603 000 Kč\).*15 % \(904 500 Kč\)/);
   await page.close();
 });
 

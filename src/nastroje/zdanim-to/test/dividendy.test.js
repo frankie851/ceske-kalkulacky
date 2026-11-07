@@ -138,6 +138,9 @@ test('pravidla odpovídají ověřovacímu souboru: smluvní sazby, jednotný ku
   for (const [kod, sazba] of Object.entries(sazby)) {
     assert.equal(rules.dividendy.zeme[kod].smluvniSazba.hodnota, sazba, kod);
     assert.equal(rules.dividendy.zeme[kod].smluvniSazba.stav, 'potvrzeno', kod);
+    // Ověřeno z textu smlouvy (čl. 10 odst. 2), doslovně v docs/zdroje/smlouvy-cl10.md
+    assert.match(rules.dividendy.zeme[kod].smluvniSazba.zdroj.url, /^https:\/\/www\.zakonyprolidi\.cz\//, kod);
+    assert.match(rules.dividendy.zeme[kod].smluvniSazba.zdroj.citace, new RegExp(`${sazba * 100} (%|procent) hrubé částky dividend`), kod);
   }
   assert.equal(rules.dividendy.zeme.US.w8ben.stav, 'nejasne');
   assert.equal(rules.dividendy.rezimy.vychozi, 'par8');

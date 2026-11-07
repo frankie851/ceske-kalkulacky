@@ -167,11 +167,22 @@ export function osvobozeniProdeje(prodeje, rok, rules) {
     if (vRoce.some((p) => p.druh === d && zdanitelnaCast(p) < 0)) upozorneni.push({ id: 'ztraty', stav: pr.zapocteni.stav, druh: d, vysledek: uhrny[d].vysledek });
   }
   if (uhrny.kryptoaktivum?.zdanitelnyRozdil > 0) upozorneni.push({ id: 'kod-krypta-p2', stav: pr.zapocteni.kodKryptaP2.stav });
-  // Osvobozený příjem nad limit je třeba oznámit správci daně (§ 38v)
+  // Osvobozený příjem nad limit je třeba oznámit správci daně (§ 38v). Podle rules se osvobozené
+  // příjmy všech prodejů v roce sčítají (opatrná varianta), jinak se posuzuje každý prodej zvlášť.
+  const oz = pr.oznameni;
   const osvobozenaCast = (p) => (p.stav === 'hodnotovy' || p.stav === 'casovy' ? p.prijem : p.stav === 'castecne' ? p.prijem - p.zdanitelnaCast.prijem : 0);
-  const kOznameni = vRoce.filter((p) => osvobozenaCast(p) > pr.oznameni.limit);
+  const osvobozene = vRoce.filter((p) => osvobozenaCast(p) > 0);
+  const soucetOsvobozenych = zaokrouhli(secti(osvobozene, osvobozenaCast));
+  const kOznameni = oz.scitani
+    ? (soucetOsvobozenych > oz.limit ? osvobozene : [])
+    : osvobozene.filter((p) => osvobozenaCast(p) > oz.limit);
   if (kOznameni.length) {
-    upozorneni.push({ id: 'oznameni', stav: pr.oznameni.stav, limit: pr.oznameni.limit, polozky: kOznameni.map((p) => ({ index: p.index, castka: osvobozenaCast(p) })) });
+    const castka = zaokrouhli(secti(kOznameni, osvobozenaCast));
+    upozorneni.push({
+      id: 'oznameni', stav: oz.stav, limit: oz.limit, scitani: Boolean(oz.scitani), scitaniStav: oz.scitaniStav,
+      castka, polozky: kOznameni.map((p) => ({ index: p.index, castka: osvobozenaCast(p) })),
+      pokuty: Object.fromEntries(Object.entries(oz.pokuta).filter(([, v]) => typeof v === 'number').map(([k, v]) => [k, Math.round(castka * v)])),
+    });
   }
 
   return { rok, polozky, uhrny, zdanitelnyRozdil, orientacniDan, upozorneni };

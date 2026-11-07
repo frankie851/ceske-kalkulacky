@@ -160,6 +160,28 @@ test('osvobozený příjem nad 5 000 000 Kč → upozornění na oznámení (§ 
   assert.ok(!pod.upozorneni.some((x) => x.id === 'oznameni'), 'přesně 5 000 000 Kč se neoznamuje');
 });
 
+test('oznámení: osvobozené příjmy se sčítají – akcie 3 mil. + krypto 2,5 mil. → 5,5 mil., pokuta 0,1 / 10 / 15 %', () => {
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 3000000, 1000000), krypto('2020-01-01', '2026-03-01', 2500000, 500000)], 2026, rules);
+  const u = v.upozorneni.find((x) => x.id === 'oznameni');
+  assert.equal(u.scitani, true);
+  assert.equal(u.scitaniStav, 'nejasne');
+  assert.equal(u.castka, 5500000);
+  assert.deepEqual(u.polozky.map((x) => x.index), [0, 1]);
+  assert.deepEqual(u.pokuty, { bezVyzvy: 5500, poVyzve: 550000, nesplneno: 825000 });
+});
+
+test('oznámení: součet přesně 5 000 000 Kč se neoznamuje („vyšší než“)', () => {
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 3000000, 0), krypto('2020-01-01', '2026-03-01', 2000000, 0)], 2026, rules);
+  assert.ok(!v.upozorneni.some((x) => x.id === 'oznameni'));
+});
+
+test('oznámení: bez sčítání (rules.scitani = false) se posuzuje každý prodej zvlášť', () => {
+  const r = structuredClone(rules);
+  r.prodeje.oznameni.scitani = false;
+  const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 3000000, 0), krypto('2020-01-01', '2026-03-01', 2500000, 0)], 2026, r);
+  assert.ok(!v.upozorneni.some((x) => x.id === 'oznameni'));
+});
+
 test('krypto nad 40 mil. Kč: oznamuje se jen osvobozená část', () => {
   const v = osvobozeniProdeje([krypto('2020-01-01', '2026-02-01', 50000000, 0)], 2026, rules);
   assert.deepEqual(v.upozorneni.find((x) => x.id === 'oznameni').polozky, [{ index: 0, castka: 40000000 }]);

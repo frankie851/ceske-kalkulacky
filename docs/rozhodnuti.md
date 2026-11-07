@@ -492,3 +492,24 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
   - nabývací cena,
   - u cenných papírů poplatky za nákup a výdaje spojené s prodejem,
   - u krypta ze směny cena podle zákona o oceňování.
+
+### Doplnění: oznámení se sčítá, smlouvy ověřené z textu (7. 11. 2026)
+
+- **Sčítání pro oznámení (§ 38v).** Na přání uživatele se osvobozené příjmy všech prodejů
+  v roce sčítají, cenné papíry i krypto dohromady. Je to přísnější varianta, příklad: akcie
+  3 mil. + krypto 2,5 mil. = 5,5 mil. Kč, tedy oznámit. Zákon mluví o „příjmu“ vyšším než
+  5 000 000 Kč a o sčítání nic neříká, proto má upozornění štítek „Nejasné“. Přesně
+  5 000 000 Kč se neoznamuje. Volba `oznameni.scitani` v rules vrací posouzení po prodejích.
+- **Pokuta za neoznámení (§ 38w odst. 1):**
+  - 0,1 % z příjmu, když oznámení podá bez výzvy,
+  - 10 % po výzvě úřadu,
+  - 15 %, když ho nepodá ani v náhradní lhůtě.
+
+  Upozornění výši pokuty vyčíslí ze součtu.
+- **Smluvní sazby** jsou ověřené z textu smluv: čl. 10 odst. 2 všech 8 smluv, stažený
+  ze zakonyprolidi.cz ve znění Sbírky. Doslovný text je v `docs/zdroje/smlouvy-cl10.md`,
+  u každé země je v rules `smluvniSazba.zdroj` s odkazem a citací. U Švýcarska platí nové
+  znění čl. 10 podle Protokolu 99/2013 Sb.m.s. Všechny sazby odpovídají ověřovacímu JSONu.
+- **Prokazování původu majetku** do kalkulačky nepatří. Uživatel zmínil předpis, podle kterého
+  musí člověk doložit majetek nad 5 mil. Kč. Úplné znění ZDP takové ustanovení neobsahuje
+  (prohlášení o majetku je v jiném předpisu) a nástroj ho nepočítá.
