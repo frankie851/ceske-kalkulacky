@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-11",
     "zdroje": [
       {
         "nazev": "ČSÚ – Indexy spotřebitelských cen, otevřená data (sada CEN0101E, od roku 2026)",
@@ -31,7 +31,7 @@
   },
   "data": {
     "zakladni": "průměr 2015 = 100",
-    "posledniMesic": "2026-09"
+    "posledniMesic": "2026-10"
   },
   "vychozi": {
     "prepocet": {
