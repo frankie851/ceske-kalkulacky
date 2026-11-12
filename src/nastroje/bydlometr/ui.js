@@ -47,25 +47,28 @@ function nastavChybu(id, zprava) {
   }
 }
 
-const MEZE = { 'nk-splatnost': [1, 50], 'nk-horizont': [1, 50], 'rf-zbyva': [0, 50], 'rf-prah': [0, 100] };
-
-/** Přečte pole podle konfigurace z vystup.js. Vrací { vstup, chyba }. */
+/** Přečte pole podle konfigurace z vystup.js (kontrola je čistá funkce v.zkontrolujPole). */
 function nactiPole(seznam) {
-  const vstup = {};
-  let chyba = false;
-  for (const p of seznam) {
-    const n = nactiCislo(p.id);
-    let zprava = '';
-    if (n === null) zprava = 'Vyplň číslo.';
-    else if (Number.isNaN(n)) zprava = 'Zadej číslo, bez písmen.';
-    else if (n < 0 && !p.zaporne) zprava = 'Číslo nemůže být záporné.';
-    else if (p.kladne && n === 0) zprava = 'Zadej číslo větší než 0.';
-    else if (MEZE[p.id] && (n < MEZE[p.id][0] || n > MEZE[p.id][1])) zprava = `Zadej číslo od ${MEZE[p.id][0]} do ${MEZE[p.id][1]}.`;
-    nastavChybu(p.id, zprava);
-    if (zprava) chyba = true;
-    else vstup[p.klic] = n / (p.meritko || 1);
+  const texty = Object.fromEntries(seznam.map((p) => [p.id, $(`#${p.id}`).value]));
+  const { vstup, chyby } = v.zkontrolujPole(seznam, texty);
+  const podle = new Map(chyby.map((c) => [c.id, c.zprava]));
+  for (const p of seznam) nastavChybu(p.id, podle.get(p.id) || '');
+  return { vstup, chyby };
+}
+
+/** Při chybě ve formuláři výsledky skryje a ukáže hlášku (BYD-03). Vrací true, když je vstup platný. */
+function stavPanelu(prefix, chyby) {
+  const stav = v.stavVysledku(chyby);
+  const hlaska = $(`[data-neplatne="${prefix}"]`);
+  text(hlaska, stav.zprava);
+  hlaska.hidden = stav.platny;
+  $(prefix === 'rf' ? '#vysledek' : '#vysledek-najem').hidden = !stav.platny;
+  for (const el of $$(`[data-vysledky="${prefix}"]`)) el.hidden = !stav.platny;
+  if (!stav.platny) {
+    lista[prefix === 'rf' ? 'refixace' : 'najem'] = { cislo: '–', popis: 'Oprav zadání' };
+    aktualizujListu();
   }
-  return { vstup, chyba };
+  return stav.platny;
 }
 
 /* ---------- výsledková karta ---------- */
@@ -109,8 +112,9 @@ function aktualizujListu() {
 /* ---------- Refixace ---------- */
 
 function prepocitejRefixaci() {
-  const { vstup, chyba } = nactiPole(v.POLE_REFIXACE);
-  if (chyba) return;
+  const { vstup, chyby } = nactiPole(v.POLE_REFIXACE);
+  if (!stavPanelu('rf', chyby)) return;
+  vstup.pre2021 = Boolean($('input[name="rf-volby"][value="pred2021"]')?.checked);
   const r = v.refixace(vstup, data.pravidla);
   zobrazVysledek('vysledek', r.vysledek);
   nastavHtml($('[data-tabulka-variant]'), r.tabulkaVariant);
@@ -129,16 +133,22 @@ const escText = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').re
 
 let casovacPoplatku = null;
 function prepocitejPoplatek() {
-  const { vstup, chyba } = nactiPole(v.POLE_POPLATEK);
-  let chybaData = false;
+  const { vstup, chyby } = nactiPole(v.POLE_POPLATEK);
   for (const p of v.DATA_POPLATKU) {
     const hodnota = $(`#${p.id}`).value;
     const ok = /^\d{4}-\d{2}-\d{2}$/.test(hodnota);
     nastavChybu(p.id, ok ? '' : 'Vyplň datum.');
     if (ok) vstup[p.klic] = hodnota;
-    else chybaData = true;
+    else chyby.push({ id: p.id, label: p.label, zprava: 'Vyplň datum.' });
   }
-  if (chyba || chybaData) return;
+  const stav = v.stavVysledku(chyby);
+  $('#pp-vysledek').classList.toggle('bm-neplatne-vysledek', !stav.platny);
+  if (!stav.platny) {
+    text($('[data-poplatek-popis]'), 'Poplatek');
+    text($('[data-poplatek-cislo]'), '–');
+    text($('[data-poplatek-duvod]'), stav.zprava);
+    return;
+  }
   vstup.freeUsedThisYear = Boolean($('input[name="pp-volby"][value="vyuzito"]')?.checked);
   const r = v.poplatek(vstup, data.pravidla);
   text($('[data-poplatek-popis]'), r.popis);
@@ -178,8 +188,8 @@ function prepocitejDan() {
 
 let posledniNajem = null;
 function prepocitejNajem() {
-  const { vstup, chyba } = nactiPole(v.POLE_NAJEM);
-  if (chyba) return;
+  const { vstup, chyby } = nactiPole(v.POLE_NAJEM);
+  if (!stavPanelu('nk', chyby)) return;
   vstup.city = mesto();
   vstup.taxRate = Number($('#nk-sazba-dane').value);
   vstup.deductInterest = Boolean($('input[name="nk-volby"][value="odpocet"]')?.checked);
@@ -190,6 +200,16 @@ function prepocitejNajem() {
   const varovani = $('[data-varovani]');
   nastavHtml(varovani, r.varovani.map((t) => `<li>${ikonaVystrahy}<span>${escText(t)}</span></li>`).join(''));
   varovani.hidden = r.varovani.length === 0;
+  // Úvěr nad limitem LTV: porovnání se nepočítá, statistiky, graf a tabulky se skryjí (BYD-05)
+  $('#vysledek-najem .stats').hidden = !r.platny;
+  for (const el of $$('[data-nk-detail]')) el.hidden = !r.platny;
+  if (!r.platny) {
+    shrnuti('nk', v.shrnutiNajmu(vstup, data));
+    lista.najem = r.lista;
+    aktualizujListu();
+    posledniNajem = null;
+    return;
+  }
   nastavHtml($('[data-tabulka-let]'), r.tabulkaLet);
   text($('[data-uvod-citlivosti]'), r.uvodCitlivosti);
   nastavHtml($('[data-tabulka-citlivosti]'), r.tabulkaCitlivosti);
@@ -211,6 +231,7 @@ const klicVstupu = (o) => JSON.stringify(Object.keys(o).sort().map((k) => [k, o[
 let klicGrafu = '';
 function vykresliGraf() {
   if (aktivni !== 'najem' || !posledniNajem) return;
+  if ($('[data-nk-detail]')?.hidden) return;
   const obal = $('[data-graf]');
   const svg = $('svg', obal);
   const box = svg?.getBoundingClientRect();
