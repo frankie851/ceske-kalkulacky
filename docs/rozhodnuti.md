@@ -556,3 +556,25 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
 - Zdroje: přidány úřední předpisy (ZP § 52, § 67, § 271ca, zákon č. 120/2025 Sb., ZoZ § 39
   a § 50, sdělení MPSV č. 537/2025 Sb.), epravo.cz odebráno.
 - Testy 13 a 14 z původního repozitáře (d → 12×, e → 0) chybu konzervovaly, jsou přepsané.
+
+## Rodičovská (ROD-01 až ROD-04, s nimi ROD-05 a ROD-06)
+
+- **Měsíc 3. narozenin se počítá celý** (§ 30b odst. 1 písm. d) ZSSP). Plán, čerpání
+  i kontrolní seznam končí posledním dnem měsíce 3. narozenin. Věk se bere z
+  `rules.rodicovsky[].vekMesicu`, ne z konstanty v kódu.
+- **Rodičovská souběžně s mateřskou** (§ 30b odst. 3 ZSSP): náleží od měsíce narození, v měsících
+  s mateřskou jen ve výši rozdílu, když je zvolená výše vyšší. Před narozením nenáleží.
+  Návrh výše „Vyčerpat do 3 let“ hledá nejnižší výši po stovkách, se kterou se vyčerpá
+  i se souběhem (`navrhVyseSOdectem`).
+- **Mateřská a otcovská přes 1. leden** se od 1. 1. přepočítají podle redukčních hranic nového
+  roku (§ 22 odst. 2 ZNP). DVZ se nemění. Částka v měsíci je součet po dnech. Výstup ukazuje
+  druhou sazbu, jen když se liší. Strop rodičovské se počítá z DVZ redukovaného hranicemi roku
+  narození dítěte.
+- **Jesle: 120 hodin** (§ 31 odst. 3 písm. a) ZSSP), dřív 92.
+- **Zbytek nižší než měsíční částka** se vyplatí spolu s poslední výplatou (§ 30 odst. 6 ZSSP).
+  Je to střední nález ROD-05, opravený společně s ROD-01, protože jde o stejnou funkci
+  `cerpaniRp`. Proto 350 000 Kč po 15 000 Kč = 23 měsíců (poslední 20 000 Kč), ne 24.
+- **400 000 Kč** pro děti narozené od 1. 1. 2027 je zákon č. 152/2026 Sb. (čl. II), štítek
+  „schváleno“ místo „návrh“ (ROD-06).
+- Přepsané testy, které chybu konzervovaly: 240 000 / 110 000 Kč, 24 měsíců / 5 000 Kč,
+  `navrhVyse` 11 700 Kč, 2 000 Kč denně po celou mateřskou přes Nový rok.

@@ -73,7 +73,7 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
 
   <div class="calc-main">
     {%- call vysledek({ id: 'vysledek', kicker: 'Plán do 3 let dítěte', nadpis: 'Tady je plán pro tvoji rodinu', cislo: r.vysledek.cislo, popis: r.vysledek.popis, vysvetleni: r.vysledek.vysvetleni, ilustrace: 'situace-rodina', ukazka: true }) %}
-      <p class="rodicovska-novela" data-novela{% if not r.rp.novela %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: r.rp.novela or 'Schváleno, zatím ne ve Sbírce' }) }}</p>
+      <p class="rodicovska-novela" data-novela{% if not r.rp.novela %} hidden{% endif %}>{{ stitek({ typ: 'schvaleno', text: r.rp.novela or 'Zákon č. 152/2026 Sb.' }) }}</p>
       {{ statistiky(r.vysledek.statistiky) }}
       <div class="rodicovska-varovani" data-varovani>
         {%- for w in r.varovani %}
