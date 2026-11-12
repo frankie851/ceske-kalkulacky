@@ -150,7 +150,8 @@ function rozpis(c, v, h) {
   const jedn = PALIVA[h.vozidlo.palivo]?.jednotka ?? 'l';
   const radky = [];
   if (c.km > 0) {
-    radky.push(`Základní náhrada: ${km(c.km)} km × ${kc(v.sazbaKm, 2)}/km = <strong>${hal(v.zakladniHal)}</strong>`);
+    const prives = v.privesPct ? ` + ${procenta(v.privesPct)} za přívěs` : '';
+    radky.push(`Základní náhrada: ${km(c.km)} km × ${kc(v.sazbaKm, 2)}/km${prives} = <strong>${hal(v.zakladniHal)}</strong>`);
     const zdroj = v.cena.zdroj === 'doklad' ? 'cena z dokladu' : `průměrná cena podle vyhlášky od ${datum(v.cena.od)}`;
     radky.push(`Pohonné hmoty: ${km(c.km)} km × ${desetinne(h.vozidlo.spotreba)} ${jedn}/100 km × ${hal(v.cena.cenaHal)}/${jedn} (${zdroj}) = <strong>${hal(v.phmHal)}</strong>`);
   }
@@ -159,7 +160,11 @@ function rozpis(c, v, h) {
     const kr = d.jidla ? `, ${d.jidla} ${d.jidla === 1 ? 'jídlo' : 'jídla'} × −${procenta(d.pct)}` : '';
     return `${datum(d.datum)} ${formatMinuty(d.minuty)} (${nazevPasma(d.pasmo)}): ${hal(d.zakladHal)}${kr} = <strong>${hal(d.stravneHal)}</strong>`;
   });
-  radky.push(`Stravné: ${dny.join('; ')}`);
+  if (v.posouzeni === 'spolecne') {
+    const s = v.spolecne;
+    const kr = s.jidla ? `, ${s.jidla} ${s.jidla === 1 ? 'jídlo' : 'jídla'} × −${procenta(s.pct)}` : '';
+    radky.push(`Stravné posouzené dohromady za oba dny (§ 163 odst. 4 zákoníku práce, výhodnější než po dnech): ${formatMinuty(s.minuty)} (${nazevPasma(s.pasmo)}): ${hal(s.zakladHal)}${kr} = <strong>${hal(s.stravneHal)}</strong>`);
+  } else radky.push(`Stravné: ${dny.join('; ')}`);
   return radky.map((r) => `<li>${r}</li>`).join('');
 }
 

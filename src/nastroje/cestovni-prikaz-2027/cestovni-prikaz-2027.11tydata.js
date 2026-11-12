@@ -62,6 +62,7 @@ export default {
     druhy: vyber(DRUHY_VOZIDEL, h.vozidlo.druh),
     paliva: vyber(PALIVA, h.vozidlo.palivo),
     jednotka: PALIVA[h.vozidlo.palivo].jednotka,
+    privesPct: pravidla.zakonik.prives.pct,
     pasma: v.PASMA,
     kraceniMax: r.kraceniMaxPct,
     verejnaRozpeti: [0, 1, 2].map((i) => `${cislo(r.stravne.verejnaMin[i])}–${kc(r.stravne.verejnaMax[i])}`),

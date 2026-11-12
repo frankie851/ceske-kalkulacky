@@ -108,7 +108,7 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
         <div class="kompas-graf" data-graf="nominal">{{ k.html.grafNominal | safe }}</div>
         <div data-tabulka>{{ k.html.tabulka | safe }}</div>
       </div>
-      <p class="note">{{ ikona('ikona-info') }}<span>Výnosy jsou předpoklad, ne slib, a můžou být i záporné. Transformovaný fond po {{ k.tf.konci | datum }} počítáme jako fond „{{ k.tf.nastupce }}“.</span></p>
+      <p class="note">{{ ikona('ikona-info') }}<span>Výnosy jsou předpoklad, ne slib, a můžou být i záporné. Transformovaný fond počítáme podle platných pravidel po celou dobu. Jen s pravidly „{{ k.tf.sadaNavrhu }}“ ho po {{ k.tf.konci | datum }} počítáme jako fond „{{ k.tf.nastupce }}“, protože tak to navrhuje zatím neschválená novela.</span></p>
     </section>
 
     <section class="card card-draft" aria-labelledby="poplatky-nadpis">
@@ -122,7 +122,8 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
     <section class="card" id="karta-tf" aria-labelledby="tf-nadpis" data-karta-tf{% if not k.maTF %} hidden{% endif %}>
       <h2 id="tf-nadpis">Transformovaný fond: zůstat, nebo přejít?</h2>
       <div data-tf>{{ k.html.tf | safe }}</div>
-      <p class="mt-4">Podle návrhu Lepší penzijko mají transformované fondy skončit {{ k.tf.konci | datum }} a peníze pak přejdou do fondu „{{ k.tf.nastupce }}“. Výhodou transformovaného fondu je, že nesmí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos.</p>
+      <p class="mt-4 kompas-navrh-stitek">{{ stitek({ typ: 'navrh' }) }}</p>
+      <p>Platný zákon konec transformovaných fondů nestanoví. Podle návrhu Lepší penzijko (sněmovní tisk 285) mají skončit {{ k.tf.konci | datum }} a peníze pak přejdou do fondu „{{ k.tf.nastupce }}“. Výhodou transformovaného fondu je, že nesmí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos.</p>
       <h3>Jak přejít ve 3 krocích</h3>
       <ol class="kompas-postup">
         <li><strong>Vyber účastnický fond nebo strategii u své současné penzijní společnosti.</strong> Přechod v rámci stejné společnosti je zdarma. Ke konkurenci se dá jít až potom.</li>

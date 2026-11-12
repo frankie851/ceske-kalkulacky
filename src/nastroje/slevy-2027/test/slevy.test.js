@@ -15,6 +15,8 @@ import {
   vyhodnot,
 } from '../slevy.js';
 
+import { odpovediZeStavu } from '../vystup.js';
+
 const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 
 const celyRok = { od: 1, do: 12 };
@@ -118,7 +120,15 @@ test('invalidita III. stupně a ZTP/P se sčítají', () => {
   assert.equal(r.reduce((s, p) => s + p.rocne, 0), 5040 + 16140);
 });
 
-test('penzijko 24 000 Kč → odpočet 3 600 Kč (nad 20 400)', () => {
+// Revize 5. 11. 2026, SLV-05: § 15 odst. 7 ZDP – po měsících, ne ročně minus 20 400 Kč.
+test('SLV-05: mimořádný vklad 48 000 Kč v prosinci → odpočet 46 300 Kč', () => {
+  assert.equal(odpocetStari({ penzijko: 48000, penzijkoMimoradny: 48000 }, rules).odpocet, 46300);
+  // 12 × 1 000 Kč + mimořádně 30 000 Kč: prosinec 31 000 Kč → 29 300 Kč
+  assert.equal(odpocetStari({ penzijko: 42000, penzijkoMimoradny: 30000 }, rules).odpocet, 29300);
+  assert.equal(rules.odpocty.stari.penzijkoHraniceMesicne, 1700);
+});
+
+test('penzijko 24 000 Kč → odpočet 3 600 Kč (nad 1 700 Kč měsíčně)', () => {
   assert.equal(odpocetStari({ penzijko: 24000 }, rules).odpocet, 3600);
 });
 
@@ -227,4 +237,60 @@ test('vyhodnot: se mzdou spočítá reálný efekt (daň nejvýš na nulu)', () 
   // daň 36 000 → sleva na poplatníka 30 840 → zbývá 5 160; zvýhodnění 15 204 → sleva 5 160 + bonus 10 044
   assert.equal(v.dan.bonus, 10044);
   assert.equal(v.realne, 36000 + 10044);
+});
+
+// Revize 5. 11. 2026, SLV-02: § 35c odst. 6 ZDP – zletilé dítě jen do dovršení 26 let a jen když
+// se soustavně připravuje na budoucí povolání; jinak jen do 18 let. 1/12 za každý měsíc,
+// na jehož počátku jsou podmínky splněny (§ 35c odst. 10).
+test('SLV-02: dítě, které v roce 2027 dovrší 26 let → jen měsíce před dovršením', () => {
+  const r = zvyhodneniDeti([{ narozeni: { rok: 2001, mesic: 3 }, od: 1, do: 12, studuje: true }], rules);
+  assert.equal(r.rocne, 3 * 1267);
+  assert.equal(rules.deti.vekMax, 26);
+  assert.equal(rules.deti.vekMaxBezStudia, 18);
+  assert.match(rules.deti.zdroj.pravniZaklad, /§ 35c odst\. 6/);
+});
+
+test('SLV-02: dítě, které v roce 2027 dovrší 18 let a nestuduje → jen měsíce před dovršením', () => {
+  assert.equal(zvyhodneniDeti([{ narozeni: { rok: 2009, mesic: 6 }, od: 1, do: 12, studuje: false }], rules).rocne, 6 * 1267);
+  assert.equal(zvyhodneniDeti([{ narozeni: { rok: 2009, mesic: 6 }, od: 1, do: 12, studuje: true }], rules).rocne, 15204);
+  assert.equal(zvyhodneniDeti([{ narozeni: { rok: 2018, mesic: 4 }, od: 1, do: 12 }], rules).rocne, 15204);
+});
+
+test('SLV-02: pořadí dětí se počítá jen mezi dětmi, na které je v měsíci nárok', () => {
+  // Starší dítě dovrší 26 v březnu → od dubna je mladší dítě první v pořadí.
+  const r = zvyhodneniDeti([
+    { narozeni: { rok: 2001, mesic: 3 }, od: 1, do: 12, studuje: true },
+    { narozeni: { rok: 2018, mesic: 4 }, od: 1, do: 12 },
+  ], rules);
+  assert.deepEqual(r.polozky.map((p) => p.rocne), [3 * 1267, 3 * 1860 + 9 * 1267]);
+});
+
+// Revize 5. 11. 2026, SLV-01: školkovné jen pro dítě v předškolním věku, i když ve formuláři
+// zůstala zaškrtnutá školka ze starší odpovědi.
+test('SLV-01: školkovné se nezapočte dítěti mimo předškolní věk', () => {
+  assert.equal(skolkovne([{ narozeni: { rok: 2012, mesic: 1 }, skolka: true, skolne: 20000 }], rules).rocne, 0);
+  assert.equal(skolkovne([{ narozeni: { rok: 2023, mesic: 1 }, skolka: true, skolne: 20000 }], rules).rocne, 20000);
+  assert.ok(Number.isInteger(rules.slevy.skolkovne.maxVekDitete));
+});
+
+test('SLV-01: převod stavu formuláře – dítě 2012 se zbylou školkou jde do výpočtu bez školky', () => {
+  const stav = {
+    narozeni: { rok: '1990', mesic: 1 },
+    mzda: { mesicne: '', mesice: 12 },
+    studium: { studuje: false, od: 1, do: 12, druh: 'vs' },
+    deti: [{ narozeni: { rok: '2012', mesic: 1 }, ztpp: false, od: 1, do: 12, studuje: false, skolka: true, skolne: '20 000', dveDomacnosti: false, dohodaStrop: '' }],
+    manzel: { ma: false, prijem: '', peceODite: false, ztpp: false },
+    invalidita: { stupen: 0, ztpp: false },
+    hypoteka: { uroky: '', stareSmlouva: false },
+    stari: { penzijko: '', dip: '', zivotni: '', dlouhodobaPece: '' },
+    dary: { dary: '', krev: '' },
+    odbory: false,
+    prijmy: { maleDohody: '', soubezne: '', ostatni: '' },
+  };
+  const o = odpovediZeStavu(stav, rules);
+  assert.equal(o.deti[0].skolka, false);
+  assert.equal(o.deti[0].skolne, 0);
+  assert.equal(o.deti[0].narozeni.rok, 2012);
+  stav.deti[0].narozeni.rok = '2023';
+  assert.equal(odpovediZeStavu(stav, rules).deti[0].skolne, 20000);
 });

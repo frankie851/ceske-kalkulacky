@@ -1,7 +1,19 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-12",
     "zdroje": [
+      {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 157 (základní náhrada, přívěs +15 %)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p157"
+      },
+      {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 163 (stravné, cesta přes 2 kalendářní dny)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p163"
+      },
+      {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 176 (stravné ve veřejné sféře)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p176"
+      },
       {
         "nazev": "Práce a mzda – vyhláška č. 573/2025 Sb. o změně sazeb základní náhrady a stravného",
         "url": "https://www.praceamzda.cz/predpisy/573-2025-sb",
@@ -19,11 +31,27 @@
     ],
     "neovereno": [
       "Sazby pro rok 2026 a změny cen pohonných hmot (vyhlášky 78/2026 Sb. a 175/2026 Sb.) jsme ověřili jen shodou sekundárních zdrojů (MPSV, SME Union, ČMKOS, Money, iustoria, mzdy.cz). Plné znění ve Sbírce zákonů jsme neměli k dispozici.",
-      "Navýšení náhrady za přívěs nepočítáme. Pravidlo se v platném zákoníku práce nepodařilo ověřit.",
       "Zahraniční pracovní cesty nepočítáme.",
-      "Náhrady pro OSVČ, která jezdí za sebe (stravné podle § 24 zákona o daních z příjmů, auto mimo obchodní majetek, paušální výdaj na dopravu), nepočítáme.",
-      "Případné zvláštní pravidlo pro cestu přes půlnoc (méně než 5 hodin v každém dni) nepoužíváme. Stravné počítáme za každý kalendářní den zvlášť."
+      "Náhrady pro OSVČ, která jezdí za sebe (stravné podle § 24 zákona o daních z příjmů, auto mimo obchodní majetek, paušální výdaj na dopravu), nepočítáme."
     ]
+  },
+  "zakonik": {
+    "overeno": "2026-11-12",
+    "prives": {
+      "pct": 15,
+      "zdroj": {
+        "pravniZaklad": "§ 157 odst. 4 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p157",
+        "citace": "Při použití přívěsu k silničnímu motorovému vozidlu zaměstnavatel sazbu základní náhrady za 1 km jízdy zvýší nejméně o 15 %."
+      }
+    },
+    "dvaDny": {
+      "zdroj": {
+        "pravniZaklad": "§ 163 odst. 4 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p163",
+        "citace": "Při pracovní cestě, která spadá do 2 kalendářních dnů, se upustí od odděleného posuzování doby trvání pracovní cesty v kalendářním dnu, je-li to pro zaměstnance výhodnější."
+      }
+    }
   },
   "2026": {
     "vyhlaska": "573/2025 Sb.",

@@ -84,3 +84,16 @@ test('bez JS je vidět ukázkový výsledek 45 600 Kč', async () => {
   assert.ok(await page.$('#vysledek[data-ukazka]'));
   await page.close();
 });
+
+// Revize 5. 11. 2026, P48-01: § 15 odst. 7 ZDP – odpočet DPS po měsících.
+test('DPS 1 000 Kč, 10 měsíců za námi → rada „48 000 Kč mimořádně na penzijko“, ne 55 000 Kč', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#dps', '1 000');
+  await vypln(page, '#zp', '0');
+  await page.select('#mesicu', '10');
+  const akce = await text(page, '[data-akce]');
+  assert.match(akce, /48 000 Kč/);
+  assert.doesNotMatch(akce, /55 000 Kč/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

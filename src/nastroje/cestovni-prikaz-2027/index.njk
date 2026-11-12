@@ -8,7 +8,7 @@ uvod: Vyplň hlavičku, přidej cesty a máš vyúčtování k tisku. Sazby se v
 skripty: ['/nastroje/cestovni-prikaz-2027/app.js']
 styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
 ---
-{%- from "komponenty/formular.njk" import pole, segmenty, krok, ulozeni -%}
+{%- from "komponenty/formular.njk" import pole, segmenty, volby, krok, ulozeni -%}
 {%- from "komponenty/vysledky.njk" import vysledek, tabulka, lepiva_lista -%}
 {%- from "komponenty/obsah.njk" import upozorneni -%}
 {%- from "komponenty/ikona.njk" import ikona -%}
@@ -75,6 +75,7 @@ styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
       </div>
       {{ pole({ id: 'ucel', label: 'Účel cesty', typ: 'text', inputmode: 'text', chybaMisto: true }) }}
       {{ pole({ id: 'km', label: 'Ujeté km vlastním autem', jednotka: 'km', inputmode: 'decimal', napoveda: 'Tam i zpět dohromady. Bez auta napiš 0.', chybaMisto: true }) }}
+      {{ volby({ id: 'prives', legenda: 'Přívěs', napoveda: 'S přívěsem je sazba za km o ' + p.privesPct + ' % vyšší (§ 157 odst. 4 zákoníku práce).', moznosti: [{ hodnota: 'ano', text: 'Jedu s přívěsem' }] }) }}
       {{ pole({ id: 'cena', label: 'Cena paliva z dokladu (nepovinné)', jednotka: 'Kč/' + p.jednotka, inputmode: 'decimal', napoveda: 'Bez dokladu počítáme s průměrnou cenou z vyhlášky.', chybaMisto: true }) }}
 
       <fieldset class="cp-jidla-obal" aria-describedby="cp-jidla-napoveda">
@@ -151,7 +152,8 @@ styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
   <section class="card" aria-labelledby="cp-pozor-nadpis">
     <h2 id="cp-pozor-nadpis">Na co si dát pozor</h2>
     <ul class="watch">
-      <li>{{ ikona('ikona-vystraha') }}<span>Stravné počítáme za každý kalendářní den cesty zvlášť. Den kratší než 5 hodin nemá nárok.</span></li>
+      <li>{{ ikona('ikona-vystraha') }}<span>Stravné počítáme za každý kalendářní den cesty zvlášť. Den kratší než 5 hodin nemá nárok. Cestu, která spadá do 2 kalendářních dnů, posoudíme i jako celek a použijeme výhodnější výsledek (§ 163 odst. 4 zákoníku práce).</span></li>
+      <li>{{ ikona('ikona-vystraha') }}<span>S přívěsem je sazba za km nejméně o {{ p.privesPct }} % vyšší (§ 157 odst. 4 zákoníku práce).</span></li>
       <li>{{ ikona('ikona-vystraha') }}<span>Nižší krácení za jídlo platí, jen když ho firma určí předem. Jinak se krátí nejvyšší zákonnou sazbou.</span></li>
       <li>{{ ikona('ikona-vystraha') }}<span>Cenu paliva z dokladu použij jen s dokladem o nákupu. Jinak platí průměrná cena z vyhlášky ke dni odjezdu.</span></li>
       <li>{{ ikona('ikona-vystraha') }}<span>Vyhláška se sazbami vychází každý rok, obvykle koncem prosince. Cesty v novém roce spočítáš, až ji doplníme.</span></li>

@@ -36,11 +36,13 @@ export function params(rules) {
   const t = o.incomeTax;
   const minBaseMain = ceilKc(avg * s.minBaseShareMain);
   const minBaseSide = ceilKc(avg * s.minBaseShareSide);
+  const minBaseStarting = ceilKc(avg * s.minBaseShareStarting);
   const healthMinBase = ceilKc(avg * z.minBaseShareMain);
   return {
     months: o.monthsPerYear,
     socialMinBaseMain: minBaseMain,
     socialMinBaseSide: minBaseSide,
+    socialMinBaseStarting: minBaseStarting,
     socialMinAdvanceMain: ceilKc(minBaseMain * s.rate),
     socialMinAdvanceSide: ceilKc(minBaseSide * s.rate),
     socialMaxBaseAnnual: avg * s.maxBaseAverageWageMultiple,
@@ -101,7 +103,11 @@ export function incomeTax({ profit: zisk, income, children = 0 }, rules) {
   return { base, highPart, taxGross, credit: t.taxpayerCredit, afterCredit, childTotal, bonus, bonusBlocked, tax };
 }
 
-/** Sociální pojištění za rok: max(55 % zisku, roční minimum), nejvýš maximální základ. */
+/**
+ * Sociální pojištění za rok: max(55 % zisku, roční minimum), nejvýš maximální základ.
+ * Minimum podle druhu činnosti: hlavní, vedlejší, nebo hlavní v roce zahájení a 2 dalších
+ * letech (§ 14 odst. 5 věta druhá zákona č. 589/1992 Sb.).
+ */
 export function socialIns(zisk, activityId, rules) {
   const o = rules.osvc2027;
   const a = byId(o.activities, activityId);
@@ -110,7 +116,8 @@ export function socialIns(zisk, activityId, rules) {
   if (a.socialSide && zisk <= p.sideThreshold) {
     return { none: true, threshold: p.sideThreshold, min: 0, base: 0, amount: 0 };
   }
-  const min = (a.socialSide ? p.socialMinBaseSide : p.socialMinBaseMain) * p.months;
+  const minBase = { main: p.socialMinBaseMain, side: p.socialMinBaseSide, starting: p.socialMinBaseStarting }[a.socialMinimum];
+  const min = minBase * p.months;
   const base = Math.min(Math.max(ceilKc(zisk * o.social.profitShare), min), p.socialMaxBaseAnnual);
   return { none: false, threshold: p.sideThreshold, min, base, amount: ceilKc(base * o.social.rate) };
 }
@@ -289,6 +296,10 @@ export function compare(input, rules) {
   const band1 = byId(o.flatTax.bands, rules.eetOff.eligibleBandId);
   if (band1.status === 'derived' && (flat.band?.id === band1.id || off.available)) {
     notes.push(fill(tx.noteBand1Status, { year: o.year, verified: formatDate(band1.verified) }));
+  }
+  if (byId(o.activities, input.activityId)?.socialMinimum === 'starting') {
+    const p = params(rules);
+    notes.push(fill(tx.noteStarting, { advance: k(ceilKc(p.socialMinBaseStarting * o.social.rate)) }));
   }
   notes.push(tx.noteNotIncluded);
 

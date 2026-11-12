@@ -141,6 +141,8 @@ výpočty a testy z 12 existujících repozitářů aplikací.
    stejně jako původní `calc.js`. Podle zadání je to součást návrhu 2027, proto je to na
    stránce označené jako návrh. K rozhodnutí ve vlně 2: má projekce s pravidly 2026
    transformovaný fond neukončit?
+   **Rozhodnuto 12. 11. 2026** (revize PEN-01): s pravidly 2026 transformovaný fond nekončí,
+   konec 2036 platí jen v sadě „Návrh 2027“. Viz „Opravy podle revize 5. 11. 2026“.
 6. **Texty jsou rodově neutrální.** „Jsem zaměstnanec“ → „Mám zaměstnání“. V Mám EET? se
    tvary jako „Ty jsi zadal“ přepsaly na „Zadáno:“. Čísla ani zdroje se neměnily. Sekce
    Dluhy vyká.
@@ -533,7 +535,112 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 
 Revize v `docs/revize/2026-11-05/` hodnotila původní repozitáře. Stav každého nálezu na webu
 je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké nálezy, které na
-webu platí. Každá hodnota je ověřená v textu předpisu a v datech má citaci.
+webu platí. Každá hodnota je ověřená v textu předpisu na zakonyprolidi.cz (e-Sbírka se z prostředí
+neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
+
+## Výpověď 2026 (VYP-01, VYP-02, VYP-08)
+
+- **§ 52 písm. d) a e) podle znění od 1. 6. 2025** (zákon č. 120/2025 Sb.). Písm. d) je jednotný
+  zdravotní důvod, písm. e) je dosažení nejvyšší přípustné expozice. Odstupné 12× náleží jen
+  u písm. e) (§ 67 odst. 3 ZP). U písm. d) odstupné nenáleží.
+- **Jednorázová náhrada podle § 271ca ZP** je samostatný řádek, ne odstupné. Náleží u písm. d)
+  při výpovědi i dohodě, když zdravotní nezpůsobilost způsobil pracovní úraz, nemoc z povolání
+  nebo její ohrožení. Formulář se na příčinu zeptá jen u písm. d). Výchozí je „Jiné zdravotní
+  důvody“, aby kalkulačka neslibovala peníze, na které nárok není.
+- **Podpora a § 39 odst. 2 zákona o zaměstnanosti.** Když pracovní poměr ukončí zaměstnavatel
+  podle § 52 písm. h), nebo podle písm. g) pro zvlášť hrubé porušení, podpora nenáleží.
+  Kalkulačka místo tabulky ukáže 0 Kč s odůvodněním. U písm. g) se ptá zaškrtnutím, protože
+  písm. g) zahrnuje i méně závažná porušení. Dohodu ani výpověď od zaměstnance § 39 odst. 2
+  nevylučuje. Úřad práce bere v úvahu skončení za posledních 6 měsíců. Kalkulačka počítá
+  s posledním pracovním poměrem.
+- Věta „způsob skončení podporu neovlivňuje“ nahrazena přesným pravidlem včetně podmínky,
+  že nepobíráš starobní důchod (§ 39 odst. 1 písm. c).
+- Zdroje: přidány úřední předpisy (ZP § 52, § 67, § 271ca, zákon č. 120/2025 Sb., ZoZ § 39
+  a § 50, sdělení MPSV č. 537/2025 Sb.), epravo.cz odebráno.
+- Testy 13 a 14 z původního repozitáře (d → 12×, e → 0) chybu konzervovaly, jsou přepsané.
+
+## Rodičovská (ROD-01 až ROD-04, s nimi ROD-05 a ROD-06)
+
+- **Měsíc 3. narozenin se počítá celý** (§ 30b odst. 1 písm. d) ZSSP). Plán, čerpání
+  i kontrolní seznam končí posledním dnem měsíce 3. narozenin. Věk se bere z
+  `rules.rodicovsky[].vekMesicu`, ne z konstanty v kódu.
+- **Rodičovská souběžně s mateřskou** (§ 30b odst. 3 ZSSP): náleží od měsíce narození, v měsících
+  s mateřskou jen ve výši rozdílu, když je zvolená výše vyšší. Před narozením nenáleží.
+  Návrh výše „Vyčerpat do 3 let“ hledá nejnižší výši po stovkách, se kterou se vyčerpá
+  i se souběhem (`navrhVyseSOdectem`).
+- **Mateřská a otcovská přes 1. leden** se od 1. 1. přepočítají podle redukčních hranic nového
+  roku (§ 22 odst. 2 ZNP). DVZ se nemění. Částka v měsíci je součet po dnech. Výstup ukazuje
+  druhou sazbu, jen když se liší. Strop rodičovské se počítá z DVZ redukovaného hranicemi roku
+  narození dítěte.
+- **Jesle: 120 hodin** (§ 31 odst. 3 písm. a) ZSSP), dřív 92.
+- **Zbytek nižší než měsíční částka** se vyplatí spolu s poslední výplatou (§ 30 odst. 6 ZSSP).
+  Je to střední nález ROD-05, opravený společně s ROD-01, protože jde o stejnou funkci
+  `cerpaniRp`. Proto 350 000 Kč po 15 000 Kč = 23 měsíců (poslední 20 000 Kč), ne 24.
+- **400 000 Kč** pro děti narozené od 1. 1. 2027 je zákon č. 152/2026 Sb. (čl. II), štítek
+  „schváleno“ místo „návrh“ (ROD-06).
+- Přepsané testy, které chybu konzervovaly: 240 000 / 110 000 Kč, 24 měsíců / 5 000 Kč,
+  `navrhVyse` 11 700 Kč, 2 000 Kč denně po celou mateřskou přes Nový rok.
+
+## OSVČ 2027 a Slevy 2027 (EET-01, SLV-01, SLV-02, s nimi EET-08)
+
+- **Začínající OSVČ** (§ 14 odst. 5 věta druhá zákona č. 589/1992 Sb.): v roce zahájení hlavní
+  činnosti a ve 2 dalších letech je minimum sociálního pojištění 25 % průměrné mzdy (12 916 Kč
+  měsíčně v roce 2027). Neplatí, když člověk podnikal v předchozích 20 letech. Na webu je to
+  třetí druh činnosti „Hlavní činnost, začínám“, takže se propíše do srovnání, grafu i bodu
+  zvratu bez dalšího pole. Zdravotní minimum ani paušální daň se nemění. Pravidlo je
+  v `rules.json` (`social.minBaseShareStarting`, `startingCitation`), odkaz vede na e-Sbírku,
+  protože integritní test Mám EET? povoluje jen úřední domény.
+- **Minimální mzda 2027** cituje sdělení MPSV č. 171/2026 Sb. (24 900 Kč), ne nařízení vlády
+  č. 164/2026 Sb. (EET-08, sjednocení se Slevami 2027).
+- **Školkovné** (SLV-01): `skolkovne()` započte jen dítě v předškolním věku. Hranice je v
+  `rules.json` (`slevy.skolkovne.maxVekDitete`, 7 let) a označená jako praktické zjednodušení,
+  protože zákon rozhoduje podle předškolního zařízení. Převod odpovědí z formuláře je čistá
+  funkce `odpovediZeStavu()` ve `vystup.js` s testem. Krok školky navíc maže staré odpovědi
+  u dětí, které už v předškolním věku nejsou.
+- **Daňové zvýhodnění na zletilé dítě** (SLV-02, § 35c odst. 6 a 10 ZDP): nárok jen za měsíce,
+  na jejichž počátku dítě nedovršilo 18 let, nebo 26 let, když studuje (soustavně se připravuje
+  na povolání). U dítěte přibylo zaškrtávátko „Studuje…“. Pořadí dětí se dál určuje po měsících
+  jen mezi dětmi s nárokem.
+
+## Penze a odpočet (P48-01, PEN-01, s nimi SLV-05, P48-05, PEN-08)
+
+- **Odpočet DPS po měsících ve všech třech nástrojích** (§ 15 odst. 7 ZDP): sdílená funkce
+  `src/js/odpocet-dps.js` (`odpocitatelnaCastDps`) sečte v každém měsíci část vkladu nad
+  hranicí 1 700 Kč. Hranice je v `rules.json` každého nástroje (Plán48
+  `odpocet.dpsMesicniHranice`, Penzijko kompas `odpocet.nadVklad`, Slevy
+  `odpocty.stari.penzijkoHraniceMesicne`). Shodu hlídá `test/sdilene/konzistence.test.js`.
+  - Plán48 počítá z měsíčního profilu: proběhlé měsíce s dnešním vkladem, zbylé s navýšeným.
+    Rada „mimořádně na penzijko“ = nevyužitý limit + rozdíl do hranice v prosinci. Při
+    navýšení na 1 700 Kč je to přesně nevyužitý limit (48 000 Kč místo 55 000 Kč).
+  - Slevy se ptají na roční úhrn a nově i na mimořádný vklad. Pravidelnou část rozloží do
+    12 měsíců, mimořádný vklad přičtou k prosinci (SLV-05). Kdo platí nepravidelně jinak,
+    dostane odhad, a to je v nápovědě kroku.
+- **Zaokrouhlení státního příspěvku** zůstává rozdílné (Plán48 na celé Kč, Penzijko kompas
+  na haléře). Rozdíl je nejvýš 0,50 Kč měsíčně a `konzistence.test.js` ho hlídá. Sjednocení
+  by měnilo převzaté a otestované moduly bez dopadu na výsledek pro uživatele.
+- **Pásma „Lepší penzijko“** mají v Plánu48 zápis `vekDo` 17/29 včetně, v Penzijko kompasu
+  18/30 bez. Pro celé roky věku je to totéž, zápis se nesjednocuje.
+- **Konec transformovaných fondů 2036** je jen ve vládním návrhu (sněmovní tisk 285), ne
+  v zákoně č. 427/2011 Sb. Údaj je v `sady.navrh2027.transformovaneFondy` se zdrojem a projekce
+  ho používá jen s touto sadou. Text na kartě a v předpokladech má štítek návrhu. S pravidly
+  2026 se proto v transformovaném fondu nenabízí krok „navyš vklad“, protože se při výnosu
+  1,5 % v dnešních penězích nevyplatí (test doporučení upraven).
+- **Citace „§ 15a ZDP“** opraveny na „§ 15 odst. 6 a 7 ZDP“ v Plánu48 i Penzijko kompasu.
+
+## Cestovní příkaz (CES-01, CES-02)
+
+- **Cesta přes 2 kalendářní dny** (§ 163 odst. 4 ZP, pro veřejnou sféru platí taky, § 176 odst. 1
+  vylučuje jen odst. 1–3): `spocitejCestu` spočítá stravné po dnech i dohromady a použije vyšší
+  částku. Výsledek nese `posouzeni` (`oddelene` / `spolecne`), vyúčtování to vypíše. Zákon neříká,
+  jak při společném posouzení počítat jídla. Sčítáme jídla obou dnů (nejvýš 3) a krátíme podle
+  společného pásma a sazeb dne odjezdu. U cesty přes 2 dny formulář nabídne jídla i u dne kratšího
+  než 5 hodin. Cesty přes 3 a více dní se posuzují po dnech jako dřív.
+- **Přívěs** (§ 157 odst. 4 ZP): sazba za km nejméně o 15 % vyšší. Procento je v `rules.json`
+  (`zakonik.prives`), náhrada se počítá z přesného součinu km × sazba × 1,15, ne ze zaokrouhlené
+  sazby. Ve formuláři je u cesty zaškrtávátko „Jedu s přívěsem“. Body o přívěsu a o cestě přes
+  půlnoc zmizely z `meta.neovereno`.
+- Do `meta.zdroje` přibyly paragrafy zákoníku práce na zakonyprolidi.cz. Sekundární zdroje vyhlášky
+  zůstávají v seznamu, jejich nahrazení je v seznamu k další práci (CES-08).
 
 ## Spot, nebo fix? (SPOT-01, SPOT-02, s nimi SPOT-05)
 
