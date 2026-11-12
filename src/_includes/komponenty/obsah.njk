@@ -1,8 +1,9 @@
 {#
   Obsahové bloky.
 
-  zdroje({ zdroje, nadpis = 'Odkud to víme', overeno, uroven = 2, id = 'zdroje-nadpis' })
+  zdroje({ zdroje, nadpis = 'Odkud to víme', overeno, uroven = 2, id = 'zdroje-nadpis', sbalitelne = false })
     zdroje – pole { nazev, url, poznamka? } (meta.zdroje z rules.json); prázdné pole = věta „Zdroje doplníme.“
+    sbalitelne – true: blok je <details> sbalený na kliknutí (stránky nástrojů); při tisku se otevře (js/tema.js)
 
   upozorneni({ typ = 'poradenstvi', titulek, text, vykani = false })  + volitelně {% call %} pro vlastní obsah
     typ 'poradenstvi' – výchozí text „Nejde o investiční, daňové ani právní poradenství…“
@@ -22,8 +23,21 @@
 {% macro zdroje(p) %}
 {%- set uroven = p.uroven or 2 -%}
 {%- set id = p.id or 'zdroje-nadpis' -%}
+{%- set pocet = (p.zdroje or []).length -%}
+{%- if p.sbalitelne %}
+<details class="card zdroje-sbalene" data-tisk-otevrit>
+  <summary>
+    <span class="zdroje-souhrn">
+      <h{{ uroven }} id="{{ id }}" class="h-xl">{{ p.nadpis or 'Odkud to víme' }}</h{{ uroven }}>
+      <span class="small muted">{% if p.overeno %}Pravidla ověřena {{ p.overeno | datum }}{% if pocet %} · {% endif %}{% endif %}{% if pocet %}{{ pocet }} {{ 'zdroj' if pocet == 1 else ('zdroje' if pocet < 5 else 'zdrojů') }}{% endif %}</span>
+    </span>
+    <span class="zdroje-akce" aria-hidden="true">{{ ikona('ikona-sipka') }}</span>
+  </summary>
+  <div class="zdroje-obsah">
+{%- else %}
 <section class="card" aria-labelledby="{{ id }}">
   <h{{ uroven }} id="{{ id }}" class="h-xl">{{ p.nadpis or 'Odkud to víme' }}</h{{ uroven }}>
+{%- endif %}
   {% if p.overeno %}<p class="muted">Pravidla jsme naposledy ověřili {{ p.overeno | datum }}.</p>{% endif %}
   {% if p.zdroje and p.zdroje.length %}
   <ul class="sources">
@@ -34,7 +48,12 @@
   {% else %}
   <p class="mb-0">Seznam zdrojů doplníme spolu s nástrojem.</p>
   {% endif %}
+{%- if p.sbalitelne %}
+  </div>
+</details>
+{%- else %}
 </section>
+{%- endif %}
 {% endmacro %}
 
 {% macro upozorneni(p = {}) %}

@@ -224,8 +224,6 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
   </section>
 
   <div class="stack mt-6">
-    {{ zdroje({ zdroje: meta.zdroje, overeno: meta.overeno, id: 'zdroje-nastroje' }) }}
-
     {%- if meta.neovereno and meta.neovereno.length %}
     <section class="card" aria-labelledby="neovereno-nadpis">
       <h2 id="neovereno-nadpis" class="h-xl">Co zatím neověřujeme a nepočítáme</h2>
@@ -236,6 +234,8 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
       </ul>
     </section>
     {%- endif %}
+
+    {{ zdroje({ zdroje: meta.zdroje, overeno: meta.overeno, id: 'zdroje-nastroje', sbalitelne: true }) }}
 
     {{ upozorneni({ typ: 'info', titulek: 'Orientační informace', text: 'Nejde o právní poradenství. Vaši situaci závazně posoudí poradna, exekutor nebo insolvenční soud.' }) }}
   </div>

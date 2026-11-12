@@ -586,7 +586,7 @@
   .input-select::after { content: ""; position: absolute; right: 18px; top: 50%; width: 10px; height: 10px; border-right: 3px solid var(--c-text); border-bottom: 3px solid var(--c-text); transform: translateY(-70%) rotate(45deg); pointer-events: none; border-radius: 2px; }
 
   /* Segmentový výběr (rádia jako pilulky) */
-  .seg { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 4px; background: var(--c-surface-2); border-radius: var(--r-pill); max-width: 100%; }
+  .seg { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 4px; background: var(--c-surface-2); border: 1px solid var(--c-border); border-radius: var(--r-pill); max-width: 100%; }
   .seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
   .seg label { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 var(--sp-4); border-radius: var(--r-pill); font-weight: 800; cursor: pointer; color: var(--c-text); }
   .seg input:checked + label { background: var(--c-primary); color: var(--c-on-primary); box-shadow: var(--shadow-sm); }
@@ -616,9 +616,9 @@
   .opt label {
     display: flex; align-items: center; gap: var(--sp-3); min-height: 64px; height: 100%;
     padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md); cursor: pointer;
-    border: 2px solid var(--c-border-strong); background: var(--c-surface); font-weight: 700;
+    border: 2px solid var(--c-border-strong); background: var(--c-surface-2); font-weight: 700;
   }
-  .opt label:hover { background: var(--c-surface-2); }
+  .opt label:hover { background: color-mix(in oklab, var(--c-surface-2), var(--c-accent-soft) 45%); }
   .opt .box { width: 28px; height: 28px; border-radius: 9px; flex: none; display: grid; place-items: center; border: 2px solid var(--c-border-strong); background: var(--c-surface); color: var(--c-on-primary); }
   .opt input[type="radio"] + label .box { border-radius: 50%; }
   .opt .box .ikona { width: 18px; height: 18px; opacity: 0; }
@@ -770,6 +770,36 @@
   .sources a { font-weight: 700; display: inline-block; padding: 2px 0; }
   .sources .src-meta { display: block; font-size: var(--fs-sm); color: var(--c-text-muted); }
 
+  /* Zdroje sbalené na kliknutí (stránky nástrojů) */
+  .zdroje-sbalene, .zdroje-sbalene.card { padding: 0; }
+  .zdroje-sbalene > summary {
+    list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+    min-height: 48px; padding: var(--sp-4) var(--sp-5); border-radius: var(--r-lg);
+  }
+  .zdroje-sbalene > summary::-webkit-details-marker { display: none; }
+  .zdroje-sbalene > summary:hover { background: var(--c-surface-2); }
+  .zdroje-sbalene > summary:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+  .zdroje-souhrn { display: grid; gap: 2px; }
+  .zdroje-souhrn h2, .zdroje-souhrn h3 { margin: 0; }
+  .zdroje-akce { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--c-surface-2); color: var(--c-text); }
+  .zdroje-akce .ikona { width: 20px; height: 20px; transform: rotate(90deg); transition: transform 0.15s; }
+  .zdroje-sbalene[open] .zdroje-akce .ikona { transform: rotate(-90deg); }
+  .zdroje-obsah { padding: 0 var(--sp-5) var(--sp-5); }
+  @media (min-width: 560px) {
+    .zdroje-sbalene > summary { padding: var(--sp-5) var(--sp-6); }
+    .zdroje-obsah { padding: 0 var(--sp-6) var(--sp-6); }
+  }
+  @media (prefers-reduced-motion: reduce) { .zdroje-akce .ikona { transition: none; } }
+
+  /* Legenda štítků: štítek a vysvětlení (mobil pod sebou, širší displej vedle sebe) */
+  .legenda { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); }
+  .legenda li { display: grid; gap: var(--sp-2); align-items: center; }
+  .legenda .badge { justify-self: start; }
+  @media (min-width: 560px) {
+    .legenda { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--sp-4); }
+    .legenda li { grid-column: 1 / -1; grid-template-columns: subgrid; }
+  }
+
   .reasons { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-3); counter-reset: duvod; }
   .reasons li { counter-increment: duvod; display: grid; grid-template-columns: 40px 1fr; gap: var(--sp-3); background: var(--c-surface); border: 2px solid var(--c-border); border-radius: var(--r-md); padding: var(--sp-4); }
   .reasons li::before { content: counter(duvod); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--c-sage-soft); color: var(--c-sage-ink); font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
@@ -878,7 +908,7 @@
   @media print {
     :root, :root[data-theme="dark"], :root:has(#t-dark:checked) { color-scheme: light !important; }
     body { background: #fff !important; color: #000 !important; font-size: 11pt; padding-bottom: 0 !important; }
-    .main-nav, .theme-switch, .search, .skip-link, .quiz-actions, .form-actions, .btn, .hero-art, .step-edit, .jump, .lepiva-lista, .tabs { display: none !important; }
+    .main-nav, .theme-switch, .search, .skip-link, .quiz-actions, .form-actions, .btn, .hero-art, .step-edit, .jump, .lepiva-lista, .tabs, .zdroje-akce { display: none !important; }
     .site-header { border: 0; }
     * { background: transparent !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
     .card, .result, .step, .table-wrap, .change, .tool-card, .reasons li, .checklist label, .notice, .debt, .quiz { border: 1px solid #000 !important; break-inside: avoid; }

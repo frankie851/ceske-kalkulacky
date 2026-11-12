@@ -43,4 +43,12 @@ function init() {
   }
 }
 
-if (typeof document !== 'undefined') init();
+/** Před tiskem otevře sbalené bloky (např. „Odkud to víme“), aby se zdroje vytiskly. */
+function otevritProTisk() {
+  for (const d of document.querySelectorAll('details[data-tisk-otevrit]')) d.open = true;
+}
+
+if (typeof document !== 'undefined') {
+  init();
+  window.addEventListener('beforeprint', otevritProTisk);
+}

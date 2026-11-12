@@ -44,8 +44,6 @@ layout: layouty/zaklad.njk
   </div>
 
   <div class="stack mt-6">
-    {{ zdroje({ zdroje: meta.zdroje, overeno: meta.overeno, id: 'zdroje-nastroje' }) }}
-
     {%- if meta.neovereno and meta.neovereno.length %}
     <section class="card" aria-labelledby="neovereno-nadpis">
       <h2 id="neovereno-nadpis" class="h-xl">{{ meta.neoverenoNadpis or 'Co zatím neověřujeme a nepočítáme' }}</h2>
@@ -56,6 +54,8 @@ layout: layouty/zaklad.njk
       </ul>
     </section>
     {%- endif %}
+
+    {{ zdroje({ zdroje: meta.zdroje, overeno: meta.overeno, id: 'zdroje-nastroje', sbalitelne: true }) }}
 
     {{ upozorneni({ vykani: vykani }) }}
   </div>
