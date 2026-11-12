@@ -513,3 +513,18 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 - **Prokazování původu majetku** do kalkulačky nepatří. Uživatel zmínil předpis, podle kterého
   musí člověk doložit majetek nad 5 mil. Kč. Úplné znění ZDP takové ustanovení neobsahuje
   (prohlášení o majetku je v jiném předpisu) a nástroj ho nepočítá.
+
+## Úpravy vzhledu podle připomínek uživatele (12. 11. 2026)
+
+- **„Odkud to víme“** je na stránkách nástrojů sbalené na kliknutí: `zdroje({ sbalitelne: true })`
+  vykreslí `<details>` se souhrnem „Pravidla ověřena … · N zdrojů“. Před tiskem se blok
+  otevře (`beforeprint` v `js/tema.js`), takže se zdroje vytisknou. Stránka Všechny zdroje
+  (`/zdroje/`) zůstává rozbalená.
+- **„Co zatím neověřujeme a nepočítáme“** je nad zdroji, a to v layoutu nástroje i na stránce
+  Dluhů.
+- **Dlaždice voleb** (`.opt`) mají jemné podbarvení `--c-surface-2` místo bílé, takže
+  na bílé kartě nesplývají. Najetí myší míchá barvu s `--c-accent-soft`. Pilulky `.seg`
+  mají tenký rámeček.
+- **„Jak číst štítky“** (Co se mění v roce 2027) dostaly vlastní seznam `.legenda`. Původní
+  `.watch` je pro ikonu 28 px, takže se do něj štítek nevešel, překrýval text a pravidlo
+  `.watch .ikona` mu přebarvilo ikonu.
