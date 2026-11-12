@@ -23,11 +23,11 @@
     "id": "pausalni-dan",
     "titulek": "Paušální daň v 1. pásmu stoupá",
     "datum": "přihláška do 11. 1. 2027",
-    "text": "1. pásmo paušální daně stoupá na 9 662 Kč měsíčně.",
+    "text": "1. pásmo paušální daně stoupá podle zákona na 9 661 Kč měsíčně. Tabulku pro rok 2027 Finanční správa zatím nezveřejnila.",
     "nastroj": "osvc-2027",
     "akce": "Porovnat v OSVČ 2027",
     "stav": "schvaleno",
-    "zdroj": { "nazev": "Pohoda – paušální daň 2027", "kratce": "Pohoda", "url": "https://portal.pohoda.cz/?p=45627" }
+    "zdroj": { "nazev": "Zákon č. 589/1992 Sb., § 14 odst. 3 – vyměřovací základ v paušálním režimu", "kratce": "Zákon č. 589/1992 Sb.", "url": "https://www.zakonyprolidi.cz/cs/1992-589#p14" }
   },
   {
     "id": "sleva-student-skolkovne",
