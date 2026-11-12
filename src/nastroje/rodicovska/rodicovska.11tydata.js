@@ -73,7 +73,7 @@ export default {
       hodnota: plan.rp.vyse,
       text: kc(plan.rp.vyse),
       napoveda: v.napovedaRp(plan, pravidla),
-      novela: plan.rp.pozn ? `${kc(plan.rp.celkem)}: schváleno, zatím ne ve Sbírce` : null,
+      novela: plan.rp.pozn ? `${kc(plan.rp.celkem)}: zákon č. ${plan.rp.zakon}` : null,
     },
     // Výsledek
     vysledek,

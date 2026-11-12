@@ -36,6 +36,8 @@ function vstupKonce() {
     doruceni: $('doruceni').value,
     kdo: k,
     duvod: k === 'zamestnanec' ? undefined : duvod.value,
+    pricinaUraz: form.querySelector('input[name="pricina"]:checked')?.value === 'uraz',
+    zvlastHrube: k === 'zamestnavatel' && form.querySelector('input[name="zvlastHrube"]:checked')?.value === 'ano',
     zkusebniDoba: k !== 'dohoda' && form.querySelector('input[name="zkusebni"]:checked')?.value === 'ano',
     konecDohody: k === 'dohoda' ? $('konecDohody').value : undefined,
   };
@@ -79,7 +81,10 @@ function ukazChyby(chyby) {
 
 function aktualizujPole() {
   const k = kdo();
-  for (const blok of form.querySelectorAll('[data-pro]')) blok.hidden = !blok.dataset.pro.split(' ').includes(k);
+  for (const blok of form.querySelectorAll('[data-pro]')) {
+    const proDuvod = !blok.dataset.duvod || blok.dataset.duvod.split(' ').includes(duvod.value);
+    blok.hidden = !blok.dataset.pro.split(' ').includes(k) || !proDuvod;
+  }
   const dohoda = k === 'dohoda';
   volbaJiny.hidden = !dohoda;
   volbaJiny.disabled = !dohoda;
@@ -115,7 +120,9 @@ function vykresli({ fokus = false } = {}) {
       for (const id of zaskrtnute) { const i = $(id); if (i) i.checked = true; }
       const lista = document.querySelector('[data-lista-cislo]');
       if (lista) lista.textContent = datum(m.konec);
-      oznameni.textContent = `Poslední den ${datum(m.konec)}, odstupné ${kc(m.od.castka)}, podpora celkem ${kc(m.p.hlavni.celkem)}.`;
+      const nahrada = m.nahrada.castka > 0 ? `, jednorázová náhrada ${kc(m.nahrada.castka)}` : '';
+      const podporaText = m.p.vylouceno ? 'podpora nenáleží' : `podpora celkem ${kc(m.p.hlavni.celkem)}`;
+      oznameni.textContent = `Poslední den ${datum(m.konec)}, odstupné ${kc(m.od.castka)}${nahrada}, ${podporaText}.`;
     } catch (e) {
       chyby.datumZadosti = e.message;
     }

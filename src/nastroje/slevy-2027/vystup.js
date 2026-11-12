@@ -1,9 +1,47 @@
 // Slevy 2027 – texty kroků dotazníku a HTML výsledku. Sdílí je build (slevy-2027.11tydata.js,
 // ukázka bez JavaScriptu) i prohlížeč (app.js), takže obě podoby vypadají stejně.
 // Žádný DOM a žádné částky natvrdo: čísla jdou z rules.json a z výsledku slevy.js.
-import { vyhodnot } from './slevy.js';
+import { vyhodnot, predskolniVek } from './slevy.js';
 import { kc, procenta, datum } from '../../js/format.js';
 import { esc } from '../../js/graf.js';
+
+/* =====================================================================
+   Odpovědi z formuláře → vstup pro slevy.js (bez DOM, testovatelné)
+   ===================================================================== */
+
+const bezMezer = (t) => String(t ?? '').replace(/[\s\u00a0\u202f]/g, '');
+const cele = (t) => (bezMezer(t) === '' ? 0 : Number(bezMezer(t)));
+
+/**
+ * Převede stav průvodce (řetězce z polí) na vstup pro vyhodnot(). Školka se započte jen
+ * u dítěte v předškolním věku, i když ve stavu zůstala ze starší odpovědi (revize SLV-01).
+ */
+export function odpovediZeStavu(s, rules) {
+  return {
+    narozeni: { rok: cele(s.narozeni.rok), mesic: s.narozeni.mesic },
+    mzda: cele(s.mzda.mesicne) ? { mesicne: cele(s.mzda.mesicne), mesice: s.mzda.mesice } : null,
+    studium: { ...s.studium, druh: s.studium.druh === 'doktorskeJine' ? 'vs' : s.studium.druh },
+    deti: s.deti.map((d) => {
+      const narozeni = { rok: cele(d.narozeni.rok), mesic: d.narozeni.mesic };
+      const skolka = Boolean(d.skolka) && predskolniVek(narozeni, rules);
+      return {
+        narozeni,
+        ztpp: d.ztpp, od: d.od, do: d.do, studuje: Boolean(d.studuje),
+        skolka,
+        skolne: skolka ? cele(d.skolne) : 0,
+        domacnosti: skolka && d.dveDomacnosti ? 2 : 1,
+        dohodaStrop: skolka && d.dveDomacnosti ? cele(d.dohodaStrop) : 0,
+      };
+    }),
+    manzel: { ...s.manzel, prijem: cele(s.manzel.prijem) },
+    invalidita: s.invalidita,
+    hypoteka: { uroky: cele(s.hypoteka.uroky), stareSmlouva: s.hypoteka.stareSmlouva },
+    stari: Object.fromEntries(Object.entries(s.stari).map(([k, v]) => [k, cele(v)])),
+    dary: { dary: cele(s.dary.dary), krev: cele(s.dary.krev) },
+    odbory: s.odbory,
+    prijmy: Object.fromEntries(Object.entries(s.prijmy).map(([k, v]) => [k, cele(v)])),
+  };
+}
 
 export const MESICE = ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 

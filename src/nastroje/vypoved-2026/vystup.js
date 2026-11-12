@@ -1,7 +1,7 @@
 // Výpověď 2026 – výpočet výsledku a jeho HTML. Sdílí ho build (vypoved-2026.11tydata.js,
 // ukázka bez JavaScriptu) i prohlížeč (app.js), takže obě podoby vypadají stejně.
 // Žádný DOM a žádné částky natvrdo: čísla jdou z rules.json přes vypoved.js.
-import { konecPomeru, vypovedniDoba, odstupne, podpora, kontrolniSeznam, denVTydnu } from './vypoved.js';
+import { konecPomeru, vypovedniDoba, odstupne, nahradaUraz, podpora, kontrolniSeznam, denVTydnu } from './vypoved.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { esc, sloupcovyGraf } from '../../js/graf.js';
 
@@ -10,12 +10,12 @@ export const DUVODY = [
   { hodnota: 'a', text: 'a) Zrušení zaměstnavatele nebo jeho části' },
   { hodnota: 'b', text: 'b) Přemístění zaměstnavatele nebo jeho části' },
   { hodnota: 'c', text: 'c) Nadbytečnost (organizační změna)' },
-  { hodnota: 'd', text: 'd) Pracovní úraz nebo nemoc z povolání' },
-  { hodnota: 'e', text: 'e) Zdravotní nezpůsobilost z jiných důvodů' },
+  { hodnota: 'd', text: 'd) Zdraví: lékařský posudek, nemůžu dál dělat svou práci' },
+  { hodnota: 'e', text: 'e) Nejvyšší přípustná expozice na pracovišti' },
   { hodnota: 'f', text: 'f) Nesplněné požadavky, slabé výsledky' },
   { hodnota: 'g', text: 'g) Porušení pracovních povinností' },
-  { hodnota: 'h', text: 'h) Porušení režimu při pracovní neschopnosti' },
-  { hodnota: 'jiny', text: 'Jiný důvod (dohoda bez organizačního či zdravotního důvodu)' },
+  { hodnota: 'h', text: 'h) Zvlášť hrubé porušení režimu nemocného' },
+  { hodnota: 'jiny', text: 'Jiný důvod (dohoda bez důvodu z § 52)' },
 ];
 
 export const KDO = [
@@ -46,10 +46,11 @@ const POPISY = {
   'zdravotni-pojistovna': 'V evidenci úřadu práce za tebe pojistné platí stát. Bez registrace a bez jiného příjmu oznam pojišťovně do 8 dnů změnu a plať pojistné jako osoba bez zdanitelných příjmů. Ověř si to u své pojišťovny.',
   odstupne: 'Odstupné se vyplácí po skončení pracovního poměru v nejbližším výplatním termínu, pokud není dohodnuto jinak. Výplatu podpory neodkládá.',
 };
+const POPIS_URAD_BEZ_PODPORY = 'Podpora ti podle zákona nenáleží, registrace se ale vyplatí: v evidenci úřadu práce za tebe platí zdravotní pojištění stát a úřad ti pomůže s hledáním práce.';
 const PEVNE = new Set(['urad-prace', 'zdravotni-pojistovna']);
 
 /**
- * Spočítá výsledek. vstup = { doruceni, kdo, duvod, zkusebniDoba, konecDohody, delkaLet, vek, hruby, cisty, datumZadosti }.
+ * Spočítá výsledek. vstup = { doruceni, kdo, duvod, pricinaUraz, zvlastHrube, zkusebniDoba, konecDohody, delkaLet, vek, hruby, cisty, datumZadosti }.
  * Při neplatném vstupu vyhodí chybu z vypoved.js.
  */
 export function spocitej(vstup, rules) {
@@ -63,7 +64,15 @@ export function spocitej(vstup, rules) {
   const konec = konecPomeru(v, rules);
   const doba = vypovedniDoba(v, rules);
   const od = odstupne({ ...v, delkaLet: vstup.delkaLet, prumernyHruby: vstup.hruby }, rules);
-  const p = podpora({ vek: vstup.vek, cistyVydelek: vstup.cisty, datumZadosti: vstup.datumZadosti }, rules);
+  const nahrada = nahradaUraz({ ...v, pricinaUraz: Boolean(vstup.pricinaUraz), prumernyHruby: vstup.hruby }, rules);
+  const p = podpora({
+    vek: vstup.vek,
+    cistyVydelek: vstup.cisty,
+    datumZadosti: vstup.datumZadosti,
+    kdo: v.kdo,
+    duvod: v.duvod,
+    zvlastHrube: Boolean(vstup.zvlastHrube),
+  }, rules);
 
   let popisKonce;
   if (v.zkusebniDoba) popisKonce = 'Zrušení ve zkušební době: pracovní poměr končí dnem doručení, pokud v oznámení není pozdější den.';
@@ -73,10 +82,10 @@ export function spocitej(vstup, rules) {
   const roky = Object.keys(rules.podpora).filter((k) => /^\d{4}$/.test(k)).sort();
   const vekHranice = rules.podpora[p.rok].pasma.map((x) => x.odVeku).filter((x) => x > 0);
   const poznamky = [];
-  if (p.hlavni.mesice.some((m) => m.omezenoStropem) || p.navrh?.mesice.some((m) => m.omezenoStropem)) {
+  if (!p.vylouceno && (p.hlavni.mesice.some((m) => m.omezenoStropem) || p.navrh?.mesice.some((m) => m.omezenoStropem))) {
     poznamky.push('Částka s hvězdičkou (*) je omezená maximální měsíční výší podpory.');
   }
-  if (p.hlavni.predbezne) {
+  if (p.hlavni.predbezne && !p.vylouceno) {
     poznamky.push(`Strop podpory pro rok ${p.rok} zatím nebyl vyhlášen. Počítáme s částkou ${kc(p.hlavni.strop)} z roku ${roky[0]}, skutečná částka se bude lišit.`);
   }
   if (p.navrh) {
@@ -86,19 +95,22 @@ export function spocitej(vstup, rules) {
   if (p.mimoRozsah) {
     poznamky.push(`Pro rok ${vstup.datumZadosti.slice(0, 4)} zatím pravidla nemáme, počítáme s pravidly pro rok ${p.rok}.`);
   }
-  if (vekHranice.includes(vstup.vek)) {
+  if (vekHranice.includes(vstup.vek) && !p.vylouceno) {
     poznamky.push(`Hraniční věk ${vstup.vek} let: počítáme s delší podpůrčí dobou (dosavadní praxe úřadu práce). Ověř si to na úřadu práce.`);
   }
   if (v.kdo === 'zamestnavatel' && !v.zkusebniDoba) {
     poznamky.push('Když výpovědní doba skončí v ochranné době (třeba při pracovní neschopnosti nebo mateřské), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP). U některých důvodů to neplatí (§ 54 ZP).');
   }
-  poznamky.push('Podpora náleží při aspoň 12 měsících důchodového pojištění za poslední 2 roky. Způsob skončení ani odstupné výši podpory podle tohoto výpočtu neovlivňují.');
+  if (v.kdo === rules.vylouceniPodpory.kdo && rules.vylouceniPodpory.priZvlastHrubem.includes(v.duvod) && !vstup.zvlastHrube) {
+    poznamky.push('Když výpověď podle písm. g) dostaneš za zvlášť hrubé porušení povinností, podpora ti nenáleží (§ 39 odst. 2 zákona o zaměstnanosti). Zaškrtni to ve formuláři.');
+  }
+  poznamky.push('Podpora náleží při aspoň 12 měsících důchodového pojištění za poslední 2 roky, a když nepobíráš starobní důchod (§ 39 odst. 1 zákona o zaměstnanosti). Dohoda ani odstupné podporu nesnižují ani neodkládají. Výjimkou je skončení ze strany zaměstnavatele pro zvlášť hrubé porušení povinností (§ 39 odst. 2).');
 
   const seznam = kontrolniSeznam({ konec })
     .filter((u) => u.id !== 'odstupne' || od.castka > 0)
-    .map((u) => ({ ...u, popis: POPISY[u.id] ?? u.popis, pevny: PEVNE.has(u.id) }));
+    .map((u) => ({ ...u, popis: (p.vylouceno && u.id === 'urad-prace' ? POPIS_URAD_BEZ_PODPORY : POPISY[u.id]) ?? u.popis, pevny: PEVNE.has(u.id) }));
 
-  return { vstup, konec, den: denVTydnu(konec), doba, v, popisKonce, od, p, poznamky, seznam };
+  return { vstup, konec, den: denVTydnu(konec), doba, v, popisKonce, od, nahrada, p, poznamky, seznam };
 }
 
 /** Hlavní karta výsledku: poslední den velkým písmem, statistiky. */
@@ -107,8 +119,11 @@ export function kartaHtml(m, { sprite, ukazka = false } = {}) {
   const delka = m.v.zkusebniDoba ? 'zrušení ve zkušební době' : m.v.kdo === 'dohoda' ? 'dohoda, bez výpovědní doby' : `výpovědní doba ${mesicu(m.doba)}`;
   const stat = [
     { hodnota: kc(m.od.castka), popis: 'odstupné (zákonné minimum)', zvyraznit: m.od.castka > 0 },
-    { hodnota: kc(m.p.hlavni.celkem), popis: `podpora v nezaměstnanosti celkem za ${mesicu(m.p.hlavni.podpurciDoba)}`, zvyraznit: true },
   ];
+  if (m.nahrada.castka > 0) stat.push({ hodnota: kc(m.nahrada.castka), popis: 'jednorázová náhrada podle § 271ca (není to odstupné)', zvyraznit: true });
+  stat.push(m.p.vylouceno
+    ? { hodnota: kc(0), popis: 'podpora v nezaměstnanosti nenáleží (§ 39 odst. 2 zákona o zaměstnanosti)', zvyraznit: false }
+    : { hodnota: kc(m.p.hlavni.celkem), popis: `podpora v nezaměstnanosti celkem za ${mesicu(m.p.hlavni.podpurciDoba)}`, zvyraznit: true });
   if (uradPrace) stat.push({ hodnota: datum(uradPrace.termin), popis: 'nejpozději na úřad práce, aby podpora běžela hned', zvyraznit: false });
   return `<section class="result" id="vysledek" aria-labelledby="vysledek-nadpis"${ukazka ? ' data-ukazka' : ''}>
   <div class="result-top">
@@ -132,6 +147,27 @@ function castkaBunka(mesic, label) {
 /** Odstupné, podpora (graf + tabulka), poznámky. */
 export function detailyHtml(m, rules, { sprite, sirkaGrafu = 640 } = {}) {
   const p = m.p;
+  const odstupneHtml = `<section class="card" aria-labelledby="odstupne-nadpis">
+  <h2 id="odstupne-nadpis">Odstupné</h2>
+  <p class="vyp-castka">${esc(kc(m.od.castka))}</p>
+  <p class="mb-0">${esc(m.od.duvod)}${m.od.castka > 0 ? ' Kolektivní smlouva nebo vnitřní předpis může určit víc.' : ''}</p>
+  ${m.nahrada.castka > 0 ? `<h3 class="vyp-nahrada-nadpis">Jednorázová náhrada podle § 271ca</h3>
+  <p class="vyp-castka">${esc(kc(m.nahrada.castka))}</p>
+  <p class="mb-0">${esc(`${m.nahrada.nasobek}× průměrný měsíční výdělek. ${m.nahrada.text} Zaměstnavatel ji vyplatí po skončení v nejbližším výplatním termínu.`)}</p>` : ''}
+</section>`;
+  const poznamkyHtml = `<section class="card" aria-labelledby="poznamky-nadpis">
+  <h2 id="poznamky-nadpis">Na co si dát pozor</h2>
+  <ul class="watch">${m.poznamky.map((t) => `<li>${ikona('ikona-vystraha', sprite)}<span>${esc(t)}</span></li>`).join('')}</ul>
+</section>`;
+  if (p.vylouceno) {
+    return `${odstupneHtml}
+<section class="card" aria-labelledby="podpora-nadpis">
+  <h2 id="podpora-nadpis">Podpora v nezaměstnanosti</h2>
+  <p class="vyp-castka">${esc(kc(0))}</p>
+  <p class="mb-0">${esc(p.duvodVylouceni)} Ověř si to na úřadu práce.</p>
+</section>
+${poznamkyHtml}`;
+  }
   const navrhStitek = '<span class="badge badge-draft">' + ikona('ikona-tuzka', sprite) + 'Návrh, zatím neschváleno</span>';
   const hlavniNazev = `Platný zákon ${p.rok}${p.hlavni.predbezne ? ' (předběžně)' : ''}`;
   const sloupce = ['Měsíc', p.navrh ? hlavniNazev : `Podpora ${p.rok}`, ...(p.navrh ? ['Pokud projde návrh'] : [])];
@@ -147,11 +183,7 @@ export function detailyHtml(m, rules, { sprite, sirkaGrafu = 640 } = {}) {
     vyska: Math.round(Math.min(300, Math.max(220, sirkaGrafu * 0.55))),
   });
 
-  return `<section class="card" aria-labelledby="odstupne-nadpis">
-  <h2 id="odstupne-nadpis">Odstupné</h2>
-  <p class="vyp-castka">${esc(kc(m.od.castka))}</p>
-  <p class="mb-0">${esc(m.od.duvod)}${m.od.castka > 0 ? ' Kolektivní smlouva nebo vnitřní předpis může určit víc.' : ''}</p>
-</section>
+  return `${odstupneHtml}
 <section class="card" aria-labelledby="podpora-nadpis">
   <div class="card-head">
     <h2 id="podpora-nadpis">Podpora v nezaměstnanosti</h2>
@@ -168,10 +200,7 @@ export function detailyHtml(m, rules, { sprite, sirkaGrafu = 640 } = {}) {
     </table>
   </div>
 </section>
-<section class="card" aria-labelledby="poznamky-nadpis">
-  <h2 id="poznamky-nadpis">Na co si dát pozor</h2>
-  <ul class="watch">${m.poznamky.map((t) => `<li>${ikona('ikona-vystraha', sprite)}<span>${esc(t)}</span></li>`).join('')}</ul>
-</section>`;
+${poznamkyHtml}`;
 }
 
 /** Kontrolní seznam s termíny (úřad práce, pojišťovna…). */

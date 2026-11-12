@@ -86,10 +86,24 @@ export function stropSkolkovneho(dite, rules) {
   return Math.floor(strop / domacnosti);
 }
 
-/** Školkovné: min(zaplacené školné, strop) na každé dítě; jen ročně. */
+/**
+ * Je dítě v předškolním věku pro školkovné? Hranice je praktické zjednodušení
+ * v rules.json (slevy.skolkovne.maxVekDitete), zákon rozhoduje podle předškolního zařízení.
+ * Bez zadaného roku narození se dítě nevylučuje.
+ */
+export function predskolniVek(narozeni, rules) {
+  if (!narozeni?.rok) return true;
+  return Number(narozeni.rok) >= rules.rok - rules.slevy.skolkovne.maxVekDitete;
+}
+
+/** Školkovné: min(zaplacené školné, strop) na každé dítě v předškolním věku; jen ročně. */
 export function skolkovne(deti = [], rules) {
   const polozky = deti
-    .map((d, index) => ({ index, strop: stropSkolkovneho(d, rules), rocne: d?.skolka ? Math.min(cislo(d.skolne), stropSkolkovneho(d, rules)) : 0 }))
+    .map((d, index) => ({
+      index,
+      strop: stropSkolkovneho(d, rules),
+      rocne: d?.skolka && predskolniVek(d.narozeni, rules) ? Math.min(cislo(d.skolne), stropSkolkovneho(d, rules)) : 0,
+    }))
     .filter((p) => p.rocne > 0);
   return { polozky, rocne: polozky.reduce((s, p) => s + p.rocne, 0) };
 }
@@ -99,6 +113,8 @@ export function skolkovne(deti = [], rules) {
 /**
  * Pořadí dítěte se určuje v každém měsíci podle pořadí v seznamu mezi dětmi,
  * na které je v tom měsíci nárok. Nárok je i za měsíc narození.
+ * Nárok je jen za měsíce, na jejichž počátku dítě nedovršilo 18 let, nebo 26 let,
+ * když se soustavně připravuje na povolání (d.studuje) – § 35c odst. 6 a 10 ZDP.
  */
 export function zvyhodneniDeti(deti = [], rules) {
   const z = rules.deti;
@@ -109,6 +125,7 @@ export function zvyhodneniDeti(deti = [], rules) {
       if (!d?.narozeni?.rok) return;
       if (porovnej(rules.rok, m, d.narozeni.rok, d.narozeni.mesic) < 0) return;
       if (m < (d.od ?? 1) || m > (d.do ?? 12)) return;
+      if (!mladsiNez(d.narozeni, d.studuje ? z.vekMax : z.vekMaxBezStudia, rules.rok, m)) return;
       const sazba = z.mesicne[Math.min(poradi, z.mesicne.length - 1)] * (d.ztpp ? z.nasobekZtpp : 1);
       polozky[index].mesice += 1;
       polozky[index].rocne += sazba;

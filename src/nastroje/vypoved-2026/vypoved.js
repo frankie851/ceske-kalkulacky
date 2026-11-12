@@ -150,25 +150,42 @@ export function odstupne({ kdo, duvod, zkusebniDoba = false, delkaLet, prumernyH
   if (zkusebniDoba) return nic('Při zrušení ve zkušební době odstupné nenáleží.');
   if (kdo === 'zamestnanec') return nic('Při výpovědi ze strany zaměstnance odstupné nenáleží.');
   if (kdo !== 'zamestnavatel' && kdo !== 'dohoda') throw new Error(`Neznámá strana: ${kdo}`);
-  if (duvod === o.duvodUraz) {
+  if (duvod === o.duvodExpozice) {
     return {
-      castka: o.nasobekUraz * prumernyHruby,
-      nasobek: o.nasobekUraz,
-      duvod: 'Pracovní úraz nebo nemoc z povolání (§ 52 písm. d) – nejméně 12× průměrný výdělek.',
+      castka: o.nasobekExpozice * prumernyHruby,
+      nasobek: o.nasobekExpozice,
+      duvod: `Dosažení nejvyšší přípustné expozice, § 52 písm. ${duvod}): nejméně ${o.nasobekExpozice}× průměrný výdělek podle ${o.zdroj.pravniZaklad.replace(/ 1 a /, ' ')}.`,
     };
+  }
+  if (duvod === rules.zakonikPrace.nahrada271ca.duvod) {
+    return nic(`Zdravotní důvod, § 52 písm. ${duvod}): zákonné odstupné nenáleží. Když jde o pracovní úraz nebo nemoc z povolání, náleží jednorázová náhrada podle § 271ca.`);
   }
   if (!o.duvody.includes(duvod)) {
     return nic(kdo === 'dohoda'
-      ? 'Dohoda z jiných než organizačních nebo zdravotních (úraz) důvodů – zákonné odstupné nenáleží.'
-      : `Výpověď podle § 52 písm. ${duvod}) – zákonné odstupné nenáleží.`);
+      ? 'Dohoda z jiného důvodu než organizačního (§ 52 písm. a–c) nebo kvůli expozici (§ 52 písm. e): zákonné odstupné nenáleží.'
+      : `Výpověď podle § 52 písm. ${duvod}): zákonné odstupné nenáleží.`);
   }
   if (!(delkaLet >= 0)) throw new Error('Délka pracovního poměru musí být nezáporné číslo.');
   const pasmo = o.nasobky.find((p) => p.doLet === null || delkaLet < p.doLet);
   return {
     castka: pasmo.nasobek * prumernyHruby,
     nasobek: pasmo.nasobek,
-    duvod: `Organizační důvod (§ 52 písm. ${duvod}) – ${pasmo.nasobek}× průměrný výdělek.`,
+    duvod: `Organizační důvod, § 52 písm. ${duvod}): ${pasmo.nasobek}× průměrný výdělek.`,
   };
+}
+
+/**
+ * Jednorázová náhrada při skončení pracovního poměru (§ 271ca ZP). Náleží při výpovědi
+ * od zaměstnavatele nebo dohodě podle § 52 písm. d), když zdravotní nezpůsobilost
+ * způsobil pracovní úraz, nemoc z povolání nebo ohrožení touto nemocí. Není to odstupné.
+ * @returns {{castka:number, nasobek:number, text:string}}
+ */
+export function nahradaUraz({ kdo, duvod, zkusebniDoba = false, pricinaUraz = false, prumernyHruby }, rules) {
+  const n = rules.zakonikPrace.nahrada271ca;
+  const nalezi = !zkusebniDoba && (kdo === 'zamestnavatel' || kdo === 'dohoda') && duvod === n.duvod && pricinaUraz;
+  if (!nalezi) return { castka: 0, nasobek: 0, text: '' };
+  if (!(prumernyHruby >= 0)) throw new Error('Průměrný hrubý výdělek musí být nezáporné číslo.');
+  return { castka: n.nasobek * prumernyHruby, nasobek: n.nasobek, text: n.text };
 }
 
 // --- Podpora v nezaměstnanosti -----------------------------------------------
@@ -219,15 +236,40 @@ export function vypocetPodpory(vek, cistyVydelek, sada) {
 }
 
 /**
- * Podpora podle data podání žádosti. Věk = dovršený věk ke dni podání žádosti.
- * @returns {{rok:string, mimoRozsah:boolean, hlavni:object, navrh:object|null}}
+ * Je podpora vyloučená podle § 39 odst. 2 zákona o zaměstnanosti? Jen když pracovní poměr
+ * ukončil zaměstnavatel pro zvlášť hrubé porušení povinností (§ 52 písm. h) vždy,
+ * písm. g) jen při zvlášť hrubém porušení).
  */
-export function podpora({ vek, cistyVydelek, datumZadosti }, rules) {
+export function vyloucenaPodpora({ kdo, duvod, zvlastHrube = false }, rules) {
+  const v = rules.vylouceniPodpory;
+  if (kdo !== v.kdo) return false;
+  return v.vzdy.includes(duvod) || (v.priZvlastHrubem.includes(duvod) && Boolean(zvlastHrube));
+}
+
+/**
+ * Podpora podle data podání žádosti. Věk = dovršený věk ke dni podání žádosti.
+ * kdo, duvod a zvlastHrube rozhodují o vyloučení podle § 39 odst. 2 zákona o zaměstnanosti.
+ * @returns {{rok:string, mimoRozsah:boolean, vylouceno:boolean, duvodVylouceni:string|null, hlavni:object, navrh:object|null}}
+ */
+export function podpora({ vek, cistyVydelek, datumZadosti, kdo, duvod, zvlastHrube = false }, rules) {
   const v = vyberPravidel(rules, datumZadosti);
+  const hlavni = vypocetPodpory(vek, cistyVydelek, v.sada);
+  if (vyloucenaPodpora({ kdo, duvod, zvlastHrube }, rules)) {
+    return {
+      rok: v.rok,
+      mimoRozsah: v.mimoRozsah,
+      vylouceno: true,
+      duvodVylouceni: `${rules.vylouceniPodpory.text.replace(/\.$/, '')} (${rules.vylouceniPodpory.zdroj.pravniZaklad.replace(/ písm\..*? zákona/, ' zákona')}).`,
+      hlavni: { ...hlavni, mesice: [], celkem: 0 },
+      navrh: null,
+    };
+  }
   return {
     rok: v.rok,
     mimoRozsah: v.mimoRozsah,
-    hlavni: vypocetPodpory(vek, cistyVydelek, v.sada),
+    vylouceno: false,
+    duvodVylouceni: null,
+    hlavni,
     navrh: v.navrh ? vypocetPodpory(vek, cistyVydelek, v.navrh) : null,
   };
 }

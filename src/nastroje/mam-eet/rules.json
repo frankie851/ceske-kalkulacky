@@ -71,8 +71,8 @@
         "url": "https://e-sbirka.gov.cz/sb/1992/592"
       },
       {
-        "nazev": "Nařízení vlády č. 164/2026 Sb. (minimální mzda 2027)",
-        "url": "https://e-sbirka.gov.cz/sb/2026/164"
+        "nazev": "Sdělení MPSV č. 171/2026 Sb. (minimální mzda 2027)",
+        "url": "https://e-sbirka.gov.cz/sb/2026/171"
       },
       {
         "nazev": "financnisprava.gov.cz – Paušální daň, obecné informace",
@@ -718,6 +718,7 @@
       "profitShare": 0.55,
       "minBaseShareMain": 0.35,
       "minBaseShareSide": 0.11,
+      "minBaseShareStarting": 0.25,
       "maxBaseAverageWageMultiple": 48,
       "sideThresholdAverageWageMultiple": 2.4,
       "expected": {
@@ -726,15 +727,19 @@
         "minBaseMain": 18083,
         "minBaseSide": 5683,
         "maxBaseAnnual": 2479824,
-        "sideThreshold": 123991
+        "sideThreshold": 123991,
+        "minBaseStarting": 12916
       },
       "note": "Rozhodná částka pro vedlejší činnost (2,4 × průměrná mzda) je přepočet ze zákona, ČSSZ ji zatím nebylo možné ověřit.",
       "status": "secondary",
       "source": "https://e-sbirka.gov.cz/sb/1992/589",
       "sourceTitle": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení",
-      "verified": "2026-11-05",
+      "verified": "2026-11-12",
       "sideSource": "https://e-sbirka.gov.cz/sb/1995/155",
-      "sideSourceTitle": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9"
+      "sideSourceTitle": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9",
+      "startingSource": "https://e-sbirka.gov.cz/sb/1992/589",
+      "startingSourceTitle": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 14 odst. 5 věta druhá",
+      "startingCitation": "V kalendářním roce, v němž osoba samostatně výdělečně činná vykonávající hlavní samostatnou výdělečnou činnost zahájila samostatnou výdělečnou činnost, a v bezprostředně následujících 2 kalendářních letech činí měsíční vyměřovací základ této osoby samostatně výdělečně činné nejméně 25 % průměrné mzdy; to však neplatí, pokud osoba samostatně výdělečně činná v období 20 kalendářních let před kalendářním rokem, v němž zahájila samostatnou výdělečnou činnost, již byla osobou samostatně výdělečně činnou."
     },
     "health": {
       "rate": 0.135,
@@ -763,13 +768,13 @@
       "bonusMinIncomeMinimumWageMultiple": 6,
       "bonusMinAnnual": 100,
       "minimumWage": 24900,
-      "minimumWageSource": "https://e-sbirka.gov.cz/sb/2026/164",
-      "minimumWageSourceTitle": "Nařízení vlády č. 164/2026 Sb. (minimální mzda 2027)",
+      "minimumWageSource": "https://e-sbirka.gov.cz/sb/2026/171",
+      "minimumWageSourceTitle": "Sdělení MPSV č. 171/2026 Sb. (minimální mzda 2027: 24 900 Kč)",
       "note": "Podmínku pro daňový bonus (příjmy aspoň 6 × minimální mzda) posuzujeme z příjmů, ne ze zisku.",
       "status": "secondary",
       "source": "https://e-sbirka.gov.cz/sb/1992/586",
       "sourceTitle": "Zákon č. 586/1992 Sb., o daních z příjmů (§ 7, § 16, § 35ba, § 35c)",
-      "verified": "2026-11-05"
+      "verified": "2026-11-12"
     },
     "expenseFlatRates": [
       {
@@ -806,21 +811,32 @@
         "label": "Hlavní činnost",
         "flatTaxAllowed": true,
         "healthMinimum": true,
-        "socialSide": false
+        "socialSide": false,
+        "socialMinimum": "main"
+      },
+      {
+        "id": "mainStart",
+        "label": "Hlavní činnost, začínám (rok zahájení a 2 další roky, předtím 20 let bez podnikání)",
+        "flatTaxAllowed": true,
+        "healthMinimum": true,
+        "socialSide": false,
+        "socialMinimum": "starting"
       },
       {
         "id": "sideEmployed",
         "label": "Vedlejší – zároveň jsem zaměstnanec",
         "flatTaxAllowed": false,
         "healthMinimum": false,
-        "socialSide": true
+        "socialSide": true,
+        "socialMinimum": "side"
       },
       {
         "id": "sideOther",
         "label": "Vedlejší – studuji, pobírám důchod nebo jsem na rodičovské",
         "flatTaxAllowed": true,
         "healthMinimum": false,
-        "socialSide": true
+        "socialSide": true,
+        "socialMinimum": "side"
       }
     ],
     "flatTax": {
@@ -1046,6 +1062,7 @@
       "noteChildrenFlat": "V paušálním režimu nepodáváš přiznání, takže si neuplatníš slevu na poplatníka ani daňové zvýhodnění na děti ({children} ročně). Proto přiznání vychází s dětmi výhodněji.",
       "noteEvidence": "Přijímáš kontaktní platby, takže u paušální daně bez EET OFF i u přiznání budeš od {launch} evidovat tržby. Aplikace MOJE eet je zdarma.",
       "notePrevYear": "Limity pásem i EET OFF se posuzují podle příjmů za rok {prevYear}. Počítáme, že byly podobné jako zadané příjmy.",
+      "noteStarting": "Začínající OSVČ: v roce zahájení hlavní činnosti a ve 2 dalších letech je minimum sociálního pojištění 25 % průměrné mzdy, tedy záloha aspoň {advance} měsíčně (§ 14 odst. 5 zákona o pojistném na sociální zabezpečení). Neplatí při jiném podnikání v posledních 20 letech. Paušální daň se tím nemění.",
       "noteNotIncluded": "Nepočítáme slevu za evidenci tržeb (až 5 000 Kč), slevu na manžela nebo manželku, na studenta, školkovné, nemocenské pojištění ani odčitatelné položky (penzijní spoření, dary, úroky z hypotéky).",
       "noteBand1Status": "Výše 1. pásma pro rok {year} je dopočtená ze zákona. Finanční správa ji k {verified} ještě nezveřejnila.",
       "noteActualChart": "Graf počítá přiznání s výdajovým paušálem {rate}, i když jsou zadané skutečné výdaje.",
@@ -1073,7 +1090,7 @@
       "statusSecondary": "oficiální web nebyl dostupný, ověřeno shodou více zdrojů a přepočtem",
       "statusDerived": "dopočteno ze zákona, úřad zatím nezveřejnil",
       "statusItemAverageWage": "Průměrná mzda 2027: {value}",
-      "statusItemSocial": "Sociální pojištění: min. záloha {main} (vedlejší {side}), rozhodná částka {threshold}",
+      "statusItemSocial": "Sociální pojištění: min. záloha {main} (začínající {starting}, vedlejší {side}), rozhodná částka {threshold}",
       "statusItemHealth": "Zdravotní pojištění: min. záloha {main}",
       "statusItemTax": "Daň: sleva na poplatníka {credit}, děti {children}, 23 % nad {threshold}",
       "statusItemBand": "{band}: {monthly} měsíčně",
