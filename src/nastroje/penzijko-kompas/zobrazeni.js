@@ -197,6 +197,21 @@ export function htmlPoplatky(rules, v) {
   ]) + `<p class="table-note">Obě varianty počítají se stejnými vklady a výnosy. Částky jsou nominální, do ${vekPenze} let.</p>`;
 }
 
+/** Popis výnosu fondu pro větu o předpokladech: „7,5 %“, u strategie „7,5 % u akcií a 4 % u dluhopisů“. */
+function popisVynosu(fond) {
+  return fond.cyklus
+    ? `${pct(fond.cyklus.vynosAkcie)} u akcií a ${pct(fond.cyklus.vynosDluhopisy)} u dluhopisů`
+    : pct(fond.vynos);
+}
+
+/** Věta pod srovnáním „zůstat, nebo přejít“: s jakými výnosy počítáme (PEN-06). */
+export function pouziteVynosyTF(rules, cil) {
+  const tf = rules.fondy.transformovany;
+  const c = rules.fondy[cil];
+  return `Počítáme s výnosem ${pct(tf.vynos)} ročně v transformovaném fondu a ${popisVynosu(c)} ve fondu „${c.nazev}“. `
+    + 'Jsou to předpoklady, ne slib. Rozdíl mezi „zůstat“ a „přejít“ stojí právě na nich.';
+}
+
 /** Karta „Transformovaný fond“: zůstat vs. přejít, poplatek za převod ke konkurenci. */
 export function htmlTF(rules, v) {
   const vekPenze = rules.predpoklady.vekPenze;
@@ -213,6 +228,7 @@ export function htmlTF(rules, v) {
     html += lepsi
       ? `<p class="mt-4">Přechod ti podle předpokladů přinese o <strong class="num">${esc(kc(t.rozdilRealne))}</strong> víc v dnešních penězích.</p>`
       : `<p class="mt-4">Při tvém horizontu vychází lépe zůstat. Rozdíl je <span class="num">${esc(kc(-t.rozdilRealne))}</span>.</p>`;
+    html += `<p class="table-note">${esc(pouziteVynosyTF(rules, t.cil))}</p>`;
   }
   html += `<p class="table-note">Převod ke konkurenci: ${(v.delkaSmlouvy ?? 0) < zdarmaPoLetech
     ? `smlouva trvá méně než ${zdarmaPoLetech} let, převod by stál až ${esc(kc(poplatek))}. Přechod v rámci stejné společnosti je zdarma.`
@@ -314,10 +330,32 @@ export function predpoklady(rules) {
   const cyklus = Object.values(f).find((x) => x.cyklus);
   const sadaTf = Object.values(rules.sady).find((x) => x.transformovaneFondy);
   const se = Object.values(rules.sady).find((s) => s.stropPoplatku);
-  const polozky = [
-    `Předpokládané roční výnosy před poplatky: ${Object.values(f).filter((x) => !x.cyklus).map((x) => `${x.nazev.toLowerCase()} ${pct(x.vynos)}`).join(', ')}.`,
-    `Inflace ${pct(p.inflace)} ročně. „V dnešních penězích“ znamená přepočteno touto inflací.`,
-  ];
+  // Původ výnosů (PEN-06): model MF k návrhu Lepší penzijko, nebo vlastní předpoklad kalkulačky.
+  const fondy = Object.values(f).filter((x) => !x.cyklus);
+  const vycet = (seznam) => {
+    const casti = seznam.map((x) => `${x.nazev.toLowerCase()} fond ${pct(x.vynos)}`);
+    return casti.length > 1 ? `${casti.slice(0, -1).join(', ')} a ${casti.at(-1)}` : (casti[0] ?? '');
+  };
+  const zMf = fondy.filter((x) => x.vynosZdroj?.puvod === 'mf');
+  const vlastni = fondy.filter((x) => x.vynosZdroj?.puvod !== 'mf');
+  const tridyMf = cyklus && cyklus.cyklus.zdrojAkcie?.puvod === 'mf'
+    ? [`akcie ${pct(cyklus.cyklus.vynosAkcie)}`, `dluhopisy ${pct(cyklus.cyklus.vynosDluhopisy)}`]
+    : [];
+  const polozky = [];
+  if (zMf.length || tridyMf.length) {
+    polozky.push(`Předpokládané roční výnosy před poplatky bereme z modelu MF k návrhu Lepší penzijko: ${[...zMf.map((x) => `${x.nazev.toLowerCase()} fond ${pct(x.vynos)}`), ...tridyMf].join(', ')}.`
+      + zMf.filter((x) => /výnos akcií/.test(x.vynosZdroj.citace ?? ''))
+        .map((x) => ` ${x.nazev} fond počítáme, jako by byl celý v akciích.`).join(''));
+  }
+  if (vlastni.length) {
+    const text = vycet(vlastni);
+    polozky.push(`${text.charAt(0).toUpperCase()}${text.slice(1)} ${vlastni.length > 1 ? 'jsou' : 'je'} předpoklad kalkulačky, ne úřední údaj. MF tyto výnosy neuvádí.`);
+  }
+  const tf = f.transformovany;
+  if (tf) {
+    polozky.push(`Výnos transformovaného fondu (${pct(tf.vynos)}) rozhoduje o radě „přejít“. Kdyby byl vyšší, přechod by vycházel méně výhodně.`);
+  }
+  polozky.push(`Inflace ${pct(p.inflace)} ročně${p.inflaceZdroj?.puvod === 'mf' ? ' (model MF)' : ''}. „V dnešních penězích“ znamená přepočteno touto inflací.`);
   if (cyklus) {
     const c = cyklus.cyklus;
     polozky.push(`Strategie životního cyklu je předpoklad kalkulačky, ne zákon: do ${c.plneAkcieDoVeku} let 100 % akcie (výnos ${pct(c.vynosAkcie)}), pak postupně na ${pct(c.podilAkciiNaKonci * PROCENT)} akcií v ${c.vekKonec} letech, zbytek dluhopisy (${pct(c.vynosDluhopisy)}).`);
