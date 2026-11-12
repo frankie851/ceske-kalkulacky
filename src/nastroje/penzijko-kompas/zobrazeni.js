@@ -312,7 +312,7 @@ export function predpoklady(rules) {
   const f = rules.fondy;
   const p = rules.predpoklady;
   const cyklus = Object.values(f).find((x) => x.cyklus);
-  const tf = Object.values(f).find((x) => x.konci);
+  const sadaTf = Object.values(rules.sady).find((x) => x.transformovaneFondy);
   const se = Object.values(rules.sady).find((s) => s.stropPoplatku);
   const polozky = [
     `Předpokládané roční výnosy před poplatky: ${Object.values(f).filter((x) => !x.cyklus).map((x) => `${x.nazev.toLowerCase()} ${pct(x.vynos)}`).join(', ')}.`,
@@ -322,7 +322,10 @@ export function predpoklady(rules) {
     const c = cyklus.cyklus;
     polozky.push(`Strategie životního cyklu je předpoklad kalkulačky, ne zákon: do ${c.plneAkcieDoVeku} let 100 % akcie (výnos ${pct(c.vynosAkcie)}), pak postupně na ${pct(c.podilAkciiNaKonci * PROCENT)} akcií v ${c.vekKonec} letech, zbytek dluhopisy (${pct(c.vynosDluhopisy)}).`);
   }
-  if (tf) polozky.push(`Transformovaný fond počítáme do ${datum(tf.konci)}, potom jako fond „${f[tf.nastupce].nazev}“.`);
+  if (sadaTf) {
+    const tf = sadaTf.transformovaneFondy;
+    polozky.push(`Transformovaný fond počítáme s platnými pravidly po celou dobu. S pravidly „${kratkyNazev(sadaTf)}“ (${tf.stitek}) ho po ${datum(tf.konci)} počítáme jako fond „${f[tf.nastupce].nazev}“.`);
+  }
   if (se) {
     const dospeli = se.statniPrispevek.pasma.find((x) => x.vekDo === null || x.vekDo === undefined);
     polozky.push(`${kratkyNazev(se)}: strop poplatku za správu ${pct(se.stropPoplatku.sprava)}`

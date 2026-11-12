@@ -1,6 +1,8 @@
 // Plán48 – výpočetní modul. Bez vazby na DOM; všechny zákonné parametry
 // přicházejí v objektu `sada` načteném z rules.json.
 
+import { odpocitatelnaCastDps } from '../../js/odpocet-dps.js';
+
 const MESICU_V_ROCE = 12;
 
 const cislo = (x) => {
@@ -36,14 +38,16 @@ export function statniPrispevekMesicni(vklad, vek, sada, { starobniDuchod = fals
 }
 
 /**
- * Odpočet od základu daně (§ 15a ZDP) z ročních úhrnů vkladů.
- * DPS se snižuje o roční hranici (u poživatele starobního důchodu ne),
- * DIP a ŽP se počítají od první koruny, vše dohromady do ročního limitu.
+ * Odpočet od základu daně (§ 15 odst. 6 a 7 ZDP).
+ * DPS po měsících: v každém měsíci jen část vkladu nad měsíční hranicí (u poživatele
+ * starobního důchodu bez hranice). DIP a ŽP se počítají od první koruny z ročních úhrnů,
+ * vše dohromady do ročního limitu.
+ * @param {{dpsMesicne?: number[]}} vstup dpsMesicne = vklady na DPS za jednotlivé měsíce roku
  */
-export function odpocet({ dpsRocne = 0, dipRocne = 0, zpRocne = 0, starobniDuchod = false }, sada) {
+export function odpocet({ dpsMesicne = [], dipRocne = 0, zpRocne = 0, starobniDuchod = false }, sada) {
   const o = sada.odpocet;
-  const hranice = starobniDuchod && o.duchodceBezHranice ? 0 : o.dpsRocniHranice;
-  const dpsCast = Math.max(0, cislo(dpsRocne) - hranice);
+  const hranice = starobniDuchod && o.duchodceBezHranice ? 0 : o.dpsMesicniHranice;
+  const dpsCast = odpocitatelnaCastDps(dpsMesicne, hranice);
   const dip = cislo(dipRocne);
   const zp = cislo(zpRocne);
   const hruby = dpsCast + dip + zp;
@@ -74,14 +78,14 @@ export function spocitejRok(vstup, sada) {
   const statniPrispevekRocne = prispevekMesicne * MESICU_V_ROCE;
 
   const o = odpocet(
-    { dpsRocne: dps * MESICU_V_ROCE, dipRocne: dip * MESICU_V_ROCE, zpRocne: zp * MESICU_V_ROCE, starobniDuchod },
+    { dpsMesicne: Array(MESICU_V_ROCE).fill(dps), dipRocne: dip * MESICU_V_ROCE, zpRocne: zp * MESICU_V_ROCE, starobniDuchod },
     sada,
   );
   const uspora = danovaUspora(o.vyuzity, sazbaDane);
 
   // 1) Státní příspěvek: navýšit vklad na zbývající měsíce.
   let prispevek = null;
-  let dpsRocnePoNavyseni = dps * MESICU_V_ROCE;
+  let dpsPoNavyseni = Array(MESICU_V_ROCE).fill(dps);
   if (maNarokNaPrispevek(sada, starobniDuchod)) {
     const cil = maxUzitecnyVklad(vek, sada);
     if (dps < cil) {
@@ -92,18 +96,20 @@ export function spocitejRok(vstup, sada) {
         ziskate: zbyva * (maxMesicne - prispevekMesicne),
         propadlo: probehlo * (maxMesicne - prispevekMesicne),
       };
-      dpsRocnePoNavyseni = dps * probehlo + cil * zbyva;
+      dpsPoNavyseni = [...Array(probehlo).fill(dps), ...Array(zbyva).fill(cil)];
     }
   }
 
-  // 2) Odpočet: jednorázově doplatit mezeru v limitu do 31. 12.
+  // 2) Odpočet: jednorázově doplatit mezeru v limitu do 31. 12. Mimořádný vklad na DPS
+  //    se přičte k prosincovému příspěvku, takže se započte celý, jen pokud už pravidelný
+  //    prosincový vklad dosáhl hranice; jinak je potřeba přidat i rozdíl do hranice.
   const oPo = odpocet(
-    { dpsRocne: dpsRocnePoNavyseni, dipRocne: dip * MESICU_V_ROCE, zpRocne: zp * MESICU_V_ROCE, starobniDuchod },
+    { dpsMesicne: dpsPoNavyseni, dipRocne: dip * MESICU_V_ROCE, zpRocne: zp * MESICU_V_ROCE, starobniDuchod },
     sada,
   );
   let odpocetRada = null;
   if (oPo.nevyuzity > 0) {
-    const doHranice = Math.max(0, oPo.hranice - dpsRocnePoNavyseni);
+    const doHranice = Math.max(0, oPo.hranice - dpsPoNavyseni[MESICU_V_ROCE - 1]);
     odpocetRada = {
       doplatekDipZp: oPo.nevyuzity,
       doplatekDps: oPo.nevyuzity + doHranice,

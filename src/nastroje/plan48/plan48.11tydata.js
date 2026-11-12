@@ -98,7 +98,7 @@ export default {
     stitekSady: v.stitekSady(sada),
     nazevSady: sada.nazev,
     napovedy: {
-      dps: `Do odpočtu jde jen část nad ${kc(sada.odpocet.dpsRocniHranice / 12)} měsíčně. Na maximální státní příspěvek stačí ${kc(najdiPasmo(vstup.vek, sada).maxZaklad)}.`,
+      dps: `Do odpočtu jde jen část nad ${kc(sada.odpocet.dpsMesicniHranice)} měsíčně. Na maximální státní příspěvek stačí ${kc(najdiPasmo(vstup.vek, sada).maxZaklad)}.`,
       sazba: `${procenta(sada.sazbyDane.at(-1) * 100)} jen pro vysoké příjmy (část nad 36násobek průměrné mzdy).`,
     },
     shrnuti: v.shrnutiKroku(vstup, sada),

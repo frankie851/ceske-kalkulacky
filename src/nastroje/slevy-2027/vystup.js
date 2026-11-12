@@ -101,7 +101,7 @@ export function textyKroku(rules) {
     {
       id: 'stari', nazev: 'Spoření na stáří',
       nadpis: 'Spoření na stáří',
-      napoveda: `Penzijko, DIP, životní pojištění a pojištění dlouhodobé péče mají společný limit ${kc(o.stari.limit)} ročně. U penzijka se počítá jen to, co za rok vložíš nad ${kc(o.stari.penzijkoNezapocitane)} (při pravidelných měsíčních vkladech). Příspěvky zaměstnavatele sem nepatří.`,
+      napoveda: `Penzijko, DIP, životní pojištění a pojištění dlouhodobé péče mají společný limit ${kc(o.stari.limit)} ročně. U penzijka se v každém měsíci počítá jen část vkladu nad ${kc(o.stari.penzijkoHraniceMesicne)}. Mimořádný vklad zadej zvlášť, počítáme ho do prosince. Příspěvky zaměstnavatele sem nepatří.`,
     },
     {
       id: 'dary', nazev: 'Dary a krev',
@@ -140,7 +140,7 @@ export function situace(odp, rules) {
   if (odp.invalidita?.stupen) st.push(`Invalidita ${odp.invalidita.stupen}. stupně`);
   if (odp.invalidita?.ztpp) st.push('Průkaz ZTP/P');
   if (odp.hypoteka?.uroky) st.push(`Úroky z úvěru na bydlení ${kc(odp.hypoteka.uroky)}`);
-  const stari = Object.values(odp.stari ?? {}).reduce((a, b) => a + (Number(b) || 0), 0);
+  const stari = Object.entries(odp.stari ?? {}).filter(([k]) => k !== 'penzijkoMimoradny').reduce((a, [, b]) => a + (Number(b) || 0), 0);
   if (stari) st.push(`Spoření na stáří ${kc(stari)} ročně`);
   if (odp.dary?.dary || odp.dary?.krev) st.push('Dary nebo odběry krve');
   const pr = odp.prijmy ?? {};
