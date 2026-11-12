@@ -528,3 +528,25 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 - **„Jak číst štítky“** (Co se mění v roce 2027) dostaly vlastní seznam `.legenda`. Původní
   `.watch` je pro ikonu 28 px, takže se do něj štítek nevešel, překrýval text a pravidlo
   `.watch .ikona` mu přebarvilo ikonu.
+
+# Opravy podle revize 5. 11. 2026 (12. 11. 2026)
+
+Revize v `docs/revize/2026-11-05/` hodnotila původní repozitáře. Stav každého nálezu na webu
+je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké nálezy, které na
+webu platí. Každá hodnota je ověřená v textu předpisu na zakonyprolidi.cz (e-Sbírka se z prostředí
+neotevře) a v `rules.json` má citaci.
+
+## Cestovní příkaz (CES-01, CES-02)
+
+- **Cesta přes 2 kalendářní dny** (§ 163 odst. 4 ZP, pro veřejnou sféru platí taky, § 176 odst. 1
+  vylučuje jen odst. 1–3): `spocitejCestu` spočítá stravné po dnech i dohromady a použije vyšší
+  částku. Výsledek nese `posouzeni` (`oddelene` / `spolecne`), vyúčtování to vypíše. Zákon neříká,
+  jak při společném posouzení počítat jídla. Sčítáme jídla obou dnů (nejvýš 3) a krátíme podle
+  společného pásma a sazeb dne odjezdu. U cesty přes 2 dny formulář nabídne jídla i u dne kratšího
+  než 5 hodin. Cesty přes 3 a více dní se posuzují po dnech jako dřív.
+- **Přívěs** (§ 157 odst. 4 ZP): sazba za km nejméně o 15 % vyšší. Procento je v `rules.json`
+  (`zakonik.prives`), náhrada se počítá z přesného součinu km × sazba × 1,15, ne ze zaokrouhlené
+  sazby. Ve formuláři je u cesty zaškrtávátko „Jedu s přívěsem“. Body o přívěsu a o cestě přes
+  půlnoc zmizely z `meta.neovereno`.
+- Do `meta.zdroje` přibyly paragrafy zákoníku práce na zakonyprolidi.cz. Sekundární zdroje vyhlášky
+  zůstávají v seznamu, jejich nahrazení je v seznamu k další práci (CES-08).

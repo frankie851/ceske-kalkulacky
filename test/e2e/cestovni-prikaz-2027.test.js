@@ -176,3 +176,29 @@ test('žádné chyby v konzoli', async () => {
   assert.deepEqual(chyby, []);
   await page.close();
 });
+
+// Revize 5. 11. 2026: CES-01 (§ 163 odst. 4 ZP) a CES-02 (§ 157 odst. 4 ZP).
+test('cesta 20:00–2:00 přes půlnoc → stravné 155 Kč posouzené dohromady', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await nacisto(page);
+  await pridejCestu(page, { odjezd: '2026-03-15T20:00', navrat: '2026-03-16T02:00', km: '0' });
+  assert.equal(await statistika(page, 3), '155,00 Kč');
+  assert.match(await text(page, '[data-cp-vyuctovani]'), /posouzené dohromady za oba dny \(§ 163 odst\. 4/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('100 km s přívěsem → základní náhrada 678,50 Kč', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await nacisto(page);
+  await vypln(page, '#spotreba', '6');
+  await klik(page, '#prives-1');
+  await pridejCestu(page, { odjezd: '2026-03-15T06:00', navrat: '2026-03-15T19:00', km: '100' });
+  assert.equal(await statistika(page, 1), '678,50 Kč');
+  assert.match(await text(page, '[data-cp-vyuctovani]'), /\+ 15 % za přívěs/);
+  // Úprava cesty zachová přívěs
+  await klik(page, '[data-akce="upravit"]');
+  assert.equal(await page.$eval('#prives-1', (el) => el.checked), true);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

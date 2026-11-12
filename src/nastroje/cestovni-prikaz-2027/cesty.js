@@ -22,6 +22,7 @@ export const DRUHY_VOZIDEL = {
 };
 
 const PASMA = ['5–12 h', '12–18 h', 'nad 18 h'];
+const MAX_JIDEL = 3;
 export const nazevPasma = (p) => (p < 0 ? 'pod 5 h' : PASMA[p]);
 
 // --- pomocné ---
@@ -93,11 +94,14 @@ export function cenaPHM(r, palivo, datum, cenaDoklad) {
 
 // --- náhrady za vozidlo ---
 
-/** Základní náhrada = km × sazba (Kč/km). Km na desetiny, výsledek v haléřích. */
-export function zakladniNahrada(km, sazbaKc) {
+/**
+ * Základní náhrada = km × sazba (Kč/km), s přívěsem zvýšená o navyseniPct (§ 157 odst. 4 ZP).
+ * Km na desetiny, výsledek v haléřích z přesného součinu (ne ze zaokrouhlené zvýšené sazby).
+ */
+export function zakladniNahrada(km, sazbaKc, navyseniPct = 0) {
   const km10 = naCele(km, 10, 'Počet km');
   const sazbaHal = Math.round(sazbaKc * 100);
-  return delZaokr(km10 * sazbaHal, 10);
+  return delZaokr(km10 * sazbaHal * (100 + navyseniPct), 10 * 100);
 }
 
 /** Náhrada za PHM = km × spotřeba / 100 × cena. Spotřeba na setiny, cena v haléřích. */
@@ -144,7 +148,7 @@ export function pasmo(minuty) {
 export function stravneDen(minuty, jidla, hlavicka, r) {
   const p = pasmo(minuty);
   const pocetJidel = Number(jidla ?? 0);
-  if (!Number.isInteger(pocetJidel) || pocetJidel < 0 || pocetJidel > 3) {
+  if (!Number.isInteger(pocetJidel) || pocetJidel < 0 || pocetJidel > MAX_JIDEL) {
     throw new ChybaVstupu('Počet poskytnutých jídel za den musí být 0 až 3.');
   }
   if (p < 0) return { pasmo: p, zakladHal: 0, pct: 0, jidla: pocetJidel, stravneHal: 0 };
@@ -187,10 +191,7 @@ export function spocitejCestu(hlavicka, cesta, rules) {
   const pravidlaDnu = dny.map((d) => pravidlaProDatum(rules, d.datum));
   const r = pravidlaDnu[0];
 
-  if (cesta.prives) {
-    throw new ChybaVstupu(
-      'Navýšení náhrady za přívěs aplikace nepočítá – pravidlo v platném zákoníku práce se nepodařilo ověřit.');
-  }
+  const privesPct = cesta.prives ? rules.zakonik.prives.pct : 0;
 
   const km = Number(cesta.km ?? 0);
   let zakladniHal = 0;
@@ -201,7 +202,7 @@ export function spocitejCestu(hlavicka, cesta, rules) {
     const sazba = r.sazbaKm[v.druh];
     if (sazba === undefined) throw new ChybaVstupu('Zvolte druh vozidla.');
     if (!(Number(v.spotreba) > 0)) throw new ChybaVstupu('Zadejte spotřebu vozidla z technického průkazu.');
-    zakladniHal = zakladniNahrada(km, sazba);
+    zakladniHal = zakladniNahrada(km, sazba, privesPct);
     cena = cenaPHM(r, v.palivo, dny[0].datum, cesta.cenaDoklad);
     phmHal = nahradaPHM(km, v.spotreba, cena.cenaHal);
   } else if (!(km === 0)) {
@@ -212,11 +213,25 @@ export function spocitejCestu(hlavicka, cesta, rules) {
     ...d,
     ...stravneDen(d.minuty, cesta.jidla?.[d.datum] ?? 0, hlavicka, pravidlaDnu[i]),
   }));
-  const stravneHal = dnyVysledek.reduce((s, d) => s + d.stravneHal, 0);
+  const oddeleneHal = dnyVysledek.reduce((s, d) => s + d.stravneHal, 0);
+
+  // § 163 odst. 4 ZP: cesta, která spadá do 2 kalendářních dnů, se posoudí jako celek,
+  // je-li to pro zaměstnance výhodnější. Jídla obou dnů se sečtou (nejvýš 3 za pásmo),
+  // sazby a krácení podle dne odjezdu.
+  let spolecne = null;
+  if (dny.length === 2) {
+    const jidla = Math.min(MAX_JIDEL, dny.reduce((s, d) => s + Number(cesta.jidla?.[d.datum] ?? 0), 0));
+    const celkem = stravneDen(dny[0].minuty + dny[1].minuty, jidla, hlavicka, r);
+    if (celkem.stravneHal > oddeleneHal) spolecne = { ...celkem, minuty: dny[0].minuty + dny[1].minuty };
+  }
+  const stravneHal = spolecne ? spolecne.stravneHal : oddeleneHal;
 
   return {
     vyhlaska: r.vyhlaska,
     dny: dnyVysledek,
+    posouzeni: spolecne ? 'spolecne' : 'oddelene',
+    spolecne,
+    privesPct,
     sazbaKm: km > 0 ? r.sazbaKm[hlavicka.vozidlo.druh] : null,
     cena,
     zakladniHal,
