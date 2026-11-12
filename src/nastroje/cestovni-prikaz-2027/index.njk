@@ -55,11 +55,11 @@ styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
       {{ pole({ id: 'spz', label: 'SPZ auta', hodnota: p.pole.spz, typ: 'text', inputmode: 'text' }) }}
       {{ pole({ id: 'druh', label: 'Druh vozidla', moznosti: p.druhy }) }}
       {{ pole({ id: 'palivo', label: 'Palivo', moznosti: p.paliva }) }}
-      {{ pole({ id: 'spotreba', label: 'Spotřeba z technického průkazu', hodnota: p.pole.spotreba, jednotka: p.jednotka + '/100 km', inputmode: 'decimal', napoveda: 'Má-li technický průkaz víc údajů o spotřebě, použij jejich průměr.', chybaMisto: true }) }}
+      {{ pole({ id: 'spotreba', label: 'Spotřeba z technického průkazu', hodnota: p.pole.spotreba, jednotka: p.jednotka + '/100 km', inputmode: 'decimal', napoveda: 'Použij údaj pro kombinovaný provoz. Když ho technický průkaz nemá, použij aritmetický průměr všech uvedených údajů (§ 158 odst. 4 zákoníku práce).', chybaMisto: true }) }}
     </form>
     <details class="cp-osvc">
       <summary>Podnikáš jako OSVČ a jezdíš za sebe?</summary>
-      <p class="small">Tady počítáme náhrady pro zaměstnance podle zákoníku práce. Stravné OSVČ podle § 24 zákona o daních z příjmů, auto mimo obchodní majetek ani paušální výdaj na dopravu nepočítáme. Tato pravidla jsme zatím spolehlivě neověřili.</p>
+      <p class="small">Tady počítáme náhrady pro zaměstnance podle zákoníku práce. Náhrady OSVČ, která jezdí za sebe, jsou mimo rozsah této kalkulačky. Řídí se <a href="https://www.zakonyprolidi.cz/cs/1992-586#p24">§ 24 odst. 2 písm. k) a zt) zákona o daních z příjmů</a> (stravné, auto mimo obchodní majetek, paušální výdaj na dopravu).</p>
     </details>
     {%- endcall %}
 

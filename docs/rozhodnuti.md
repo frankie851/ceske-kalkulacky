@@ -679,3 +679,46 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   to u ní uvádí: 51 663 Kč (NV č. 177/2026 Sb.) pro daně a pojistné 2027 v Mám EET? a Slevách,
   48 171 Kč (sdělení č. 537/2025 Sb.) pro strop podpory 2026 ve Výpovědi, 3 × 48 967 Kč pro
   hranici 23% daně 2026 v čisté mzdě Rodičovské.
+
+# Střední nálezy revize 5. 11. 2026 (12. 11. 2026)
+
+## Slevy 2027, Inflační kalkulačka, Cestovní příkaz – střední nálezy (SLV-06, INF-04, CES-04, CES-05, s nimi SLV-08)
+
+- **Úroky z hypotéky – název vstupu** (SLV-06): vstup `stareSmlouva` se jmenuje
+  `bytovaPotrebaPred2021`, klíč `limitStareSmlouvy` je `limitPred2021`. Rozhoduje, kdy byla
+  bytová potřeba obstarána, ne datum smlouvy (zákon č. 386/2020 Sb., čl. IV bod 3,
+  https://www.zakonyprolidi.cz/cs/2020-386). Citace je v `odpocty.uroky.zdroj`. Testy pokrývají
+  refinancování (byt 2019, úvěr 2023, úroky 180 000 Kč → 180 000 Kč) a cestu od zaškrtávátka
+  v dotazníku (`odpovediZeStavu`) až do výpočtu.
+- **Strop darů ze základu daně** (SLV-08, odhalil ho test z SLV-06): § 15 odst. 1 ZDP (znění od
+  1. 1. 2027) dovoluje odečíst „nejvýše 15 % ze základu daně“; minimum je úhrn nad 2 % základu
+  nebo aspoň 1 000 Kč. `vyhodnot()` dřív bral základ snížený o odpočet na stáří a úroky
+  (ZD 600 000, stáří 48 000, úroky 150 000, dary 100 000 → 60 300 Kč). Teď bere základ daně před
+  odpočty → 90 000 Kč. Strop všech odpočtů dohromady (nejvýš do výše základu) hlídá dál
+  `uplatnitDan`. Citace v `odpocty.dary.zdroj`.
+- **Inflační kalkulačka – vstup a směr přepočtu bez DOM** (INF-04): `vystup.js` má čisté funkce
+  `castkaZTextu`, `vynosZTextu`, `mesicZPoli`, `smerPrepoctu` (`dopredu` / `zpet` / `stejne`,
+  měsíce vždy chronologicky), `prohodMesice` a `vstupPrepoctu` / `vstupVynosu` / `vstupMzdy`
+  (vrací `{ vstup, chyby }`, chyby podle id pole). `ui.js` je jen volá a vypisuje chyby k polím.
+  Čísla dál čte sdílené `prectiCislo`. Texty hlášek se nezměnily. Výsledek `prepocet()` nově nese
+  `smer`, `zmena` a `rocne`, aby šel směr ověřit testem.
+- **Spotřeba z technického průkazu** (CES-04): nápověda teď říká „údaj pro kombinovaný provoz,
+  jinak aritmetický průměr všech údajů“. Pozor: je to § 158 **odst. 4** zákoníku práce (odst. 3
+  upravuje cenu pohonné hmoty). Citace v `zakonik.spotreba.zdroj`.
+- **Ověření sazeb 2026 proti vyhláškám** (CES-05): texty vyhlášek č. 573/2025 Sb., 78/2026 Sb.
+  a 175/2026 Sb. jsme stáhli ze zakonyprolidi.cz. Hodnoty v `rules.json["2026"]` sedí: 5,90 a
+  1,60 Kč/km, stravné 155/236/370 Kč, veřejná sféra 155–185/236–284/370–442 Kč, benzin 95 34,70 Kč
+  (od 1. 10. 2026 41,80 Kč), benzin 98 39 Kč, nafta 34,10 Kč (od 1. 6. 2026 44,50 Kč), elektřina
+  7,20 Kč/kWh. Původní znění vyhlášky 573/2025 Sb. (verze 1) se stáhnout nepodařilo (stránka znění k 1. 1. 2026 je bez textu);
+  původní ceny benzinu 95 a nafty plynou z textu novel („34,70 Kč“ → „41,80 Kč“, „34,10“ →
+  „44,50“). `meta.zdroje` vedou na zakonyprolidi.cz místo praceamzda.cz a epravo.cz. Věta
+  o sekundárních zdrojích zmizela z `meta.neovereno` i z `poznamkaOvereni`. Odkaz „vyhlášky
+  č. 573/2025 Sb.“ u tabulky sazeb vedl na § 157 zákoníku práce (první položka zdrojů), teď
+  vede na vyhlášku (`rules.json["2026"].zdroj.url`).
+- **Zaokrouhlení** (CES-05): § 183 odst. 5 zákoníku práce: částka, kterou zaměstnavatel poskytuje
+  zaměstnanci v Kč, se zaokrouhlí na celé koruny nahoru (vratka zálohy zaměstnancem také nahoru,
+  § 183 odst. 3). Zaokrouhlení jednotlivých položek zákon neupravuje – kalkulačka je počítá na
+  haléře (polovina haléře nahoru), to je její konvence. Výtisk to tak teď píše; citace je
+  v `zakonik.zaokrouhleni`.
+- **OSVČ** (CES-05): místo „pravidla jsme spolehlivě neověřili“ stránka říká, že náhrady OSVČ jsou
+  mimo rozsah kalkulačky, a odkazuje na § 24 odst. 2 písm. k) a zt) ZDP.
