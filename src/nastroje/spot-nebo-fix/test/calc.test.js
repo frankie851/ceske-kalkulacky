@@ -239,3 +239,51 @@ test('dynamický tarif odpovídá výpočtu podle ceníku ČEZ Prodej (D02d i D2
     close(r.variants.dynamic.total, expected, 1); // rozdíl jen ze zaokrouhlení cen v ceníku
   }
 });
+
+// --- Revize 5. 11. 2026: SPOT-01, SPOT-02, SPOT-05 -----------------------------
+
+const tarify = JSON.parse(readFileSync(new URL('../tariffs.json', import.meta.url), 'utf8'));
+
+test('SPOT-01: přiřazení sazeb k třídám TDD odpovídá příloze č. 6 vyhlášky 408/2015 Sb.', () => {
+  const ocekavano = {
+    D01d: 'TDD4', D02d: 'TDD4', D61d: 'TDD4',
+    D25d: 'TDD5', D26d: 'TDD5', D27d: 'TDD5',
+    D35d: 'TDD6',
+    D45d: 'TDD7', D56d: 'TDD7', D57d: 'TDD7',
+  };
+  for (const [s, tdd] of Object.entries(ocekavano)) assert.equal(tarify.sazbyInfo[s].tdd, tdd, s);
+  assert.match(tarify.sazbyInfoZdroj.url, /2015-408/);
+});
+
+test('SPOT-02: D61d má nízký tarif jen od pátku 12:00 do neděle 22:00, svátky bez vlivu', () => {
+  const okna = tarify.ntHours.D61d;
+  const nt = (datum, hodina, minuta = 0) => {
+    const grid = buildQuarterGrid(datum, datum);
+    const i = grid.findIndex((q) => q.hour === hodina && q.minute === minuta);
+    return ntMaskFor(grid, okna)[i];
+  };
+  assert.equal(nt('2026-02-06', 11, 45), 0); // pátek 11:45
+  assert.equal(nt('2026-02-06', 12, 0), 1); // pátek 12:00
+  assert.equal(nt('2026-02-07', 3, 0), 1); // sobota
+  assert.equal(nt('2026-02-08', 21, 45), 1); // neděle 21:45
+  assert.equal(nt('2026-02-08', 22, 0), 0); // neděle 22:00
+  assert.equal(nt('2026-02-05', 3, 0), 0); // čtvrtek v noci
+  assert.equal(nt('2026-02-03', 23, 0), 0); // úterý večer
+  assert.equal(nt('2026-07-06', 6, 0), 0); // svátek v pondělí
+  const tyden = buildQuarterGrid('2026-02-02', '2026-02-08');
+  assert.equal(ntMaskFor(tyden, okna).filter(Boolean).length, 58 * 4);
+  assert.match(tarify.ntHours._zdrojD61d.url, /erv182025/);
+});
+
+test('SPOT-05: délky nízkého tarifu za den odpovídají CV ERÚ 14/2025', () => {
+  const delka = (okna) => okna.reduce((s, [od, doH]) => s + (doH - od), 0);
+  const ocekavano = { D25d: 8, D26d: 8, D27d: 8, D35d: 20, D45d: 20, D56d: 20, D57d: 20 };
+  for (const [s, h] of Object.entries(ocekavano)) {
+    assert.equal(delka(tarify.ntHours[s].workday), h, `${s} pracovní den`);
+    assert.equal(delka(tarify.ntHours[s].weekend), h, `${s} víkend`);
+  }
+  // D27d: nízký tarif jen v době 18:00–8:00
+  for (const [od, doH] of tarify.ntHours.D27d.workday) assert.ok(doH <= 8 || od >= 18, `${od}–${doH}`);
+  assert.match(tarify.sazbyInfo.D35d.label, /20 h/);
+  assert.match(tarify.sazbyInfo.D56d.label, /20 h/);
+});

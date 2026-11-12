@@ -81,7 +81,8 @@ export function isHoliday(dateStr) {
 
 /**
  * Čtvrthodinová mřížka v lokálním čase od `from` do `to` (včetně, YYYY-MM-DD).
- * Vrací pole objektů { date, month: 'YYYY-MM', hour, minute, weekend, summer, dayIdx }.
+ * Vrací pole objektů { date, month: 'YYYY-MM', hour, minute, weekend, dow, summer, dayIdx }.
+ * dow = den v týdnu (0 = neděle … 6 = sobota), weekend = sobota, neděle nebo svátek.
  * Den přechodu na letní čas má 92 čtvrthodin, na zimní 100.
  */
 export function buildQuarterGrid(from, to) {
@@ -99,7 +100,7 @@ export function buildQuarterGrid(from, to) {
       const ms = start + q * QUARTER_MS;
       // Lokální čas stačí počítat jednou za hodinu UTC (posun se mění jen na celou hodinu).
       if (q % 4 === 0) lp = localParts(ms);
-      grid.push({ date, month: date.slice(0, 7), hour: lp.hour, minute: (q % 4) * 15, weekend, summer, dayIdx });
+      grid.push({ date, month: date.slice(0, 7), hour: lp.hour, minute: (q % 4) * 15, weekend, dow, summer, dayIdx });
     }
   });
   return grid;
@@ -178,9 +179,14 @@ function inWindows(hour, windows) {
   return windows.some(([from, to]) => hour >= from && hour < to);
 }
 
-/** Maska nízkého tarifu podle oken NT ({ workday: [[od, do]…], weekend: […] }). */
+/**
+ * Maska nízkého tarifu podle oken NT: { workday: [[od, do]…], weekend: […] }, nebo okna podle
+ * dne v týdnu { byWeekday: { '5': [[12, 24]], … } } (0 = neděle). U byWeekday svátky nemají vliv
+ * (sazba D61d: pátek 12:00 až neděle 22:00, cenový výměr ERÚ č. 14/2025).
+ */
 export function ntMaskFor(grid, windows) {
   if (!windows) return null;
+  if (windows.byWeekday) return grid.map((q) => (inWindows(q.hour, windows.byWeekday[q.dow] ?? []) ? 1 : 0));
   return grid.map((q) => (inWindows(q.hour, q.weekend ? windows.weekend : windows.workday) ? 1 : 0));
 }
 

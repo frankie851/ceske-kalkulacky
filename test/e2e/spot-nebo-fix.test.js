@@ -91,12 +91,13 @@ test('předvolba „Dům s tepelným čerpadlem“ načte jinou třídu TDD jen 
   await page.click('label[for="predvolba-3"]');
   await spocitano(page);
   const o = ocekavej({ sazba: tc.sazba, mwh: tc.mwh, jistic: tc.jistic });
-  assert.equal(o.tdd, 'TDD6');
+  // Revize 5. 11. 2026, SPOT-01: D56d patří do TDD7 (příloha č. 6 vyhlášky 408/2015 Sb.), dřív TDD6.
+  assert.equal(o.tdd, 'TDD7');
   assert.equal(await page.$eval('#sazba', (el) => el.value), tc.sazba);
   assert.equal(await page.$eval('#mwh', (el) => el.value), '9');
   const tdd = pozadavky.filter((u) => u.includes('/data/tdd/'));
   assert.equal(tdd.length, 1, `požadavky na TDD: ${tdd.join(', ')}`);
-  assert.match(tdd[0], /\/nastroje\/spot-nebo-fix\/data\/tdd\/TDD6\.json$/);
+  assert.match(tdd[0], /\/nastroje\/spot-nebo-fix\/data\/tdd\/TDD7\.json$/);
   const host = new URL(url).host;
   assert.deepEqual(pozadavky.filter((u) => new URL(u).host !== host), [], 'žádný požadavek mimo vlastní web');
   assert.deepEqual((await zobrazeno(page)).karty, o.karty);

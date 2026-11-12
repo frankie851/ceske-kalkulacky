@@ -69,7 +69,7 @@
   "predvolby": [
     { "id": "byt", "nazev": "Byt", "sazba": "D02d", "mwh": 1.8, "jistic": "3x25", "napoveda": "Byt: typicky sazba D02d a 1 až 2,5 MWh za rok." },
     { "id": "dum", "nazev": "Rodinný dům", "sazba": "D02d", "mwh": 3.5, "jistic": "3x25", "napoveda": "Rodinný dům bez elektrického vytápění: typicky sazba D02d." },
-    { "id": "tc", "nazev": "Dům s tepelným čerpadlem", "sazba": "D56d", "mwh": 9, "jistic": "3x25", "napoveda": "Tepelné čerpadlo: sazba D56d (22 hodin nízkého tarifu) nebo D57d." },
+    { "id": "tc", "nazev": "Dům s tepelným čerpadlem", "sazba": "D56d", "mwh": 9, "jistic": "3x25", "napoveda": "Tepelné čerpadlo: sazba D56d (20 hodin nízkého tarifu) nebo D57d." },
     { "id": "fve", "nazev": "Dům s fotovoltaikou", "sazba": "D02d", "mwh": 2.5, "jistic": "3x25", "napoveda": "Zadej jen spotřebu odebranou ze sítě. Výrobu FVE nemodelujeme, profil je stejný jako bez FVE (TDD4)." }
   ]
 }
