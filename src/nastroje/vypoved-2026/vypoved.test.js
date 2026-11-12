@@ -74,6 +74,16 @@ test('dohoda → konec sjednaným dnem', () => {
   assert.throws(() => konecPomeru({ doruceni: '2026-07-10', kdo: 'dohoda' }, rules));
 });
 
+// Revize 5. 11. 2026, VYP-04: kontrola byla jen v app.js; patří do výpočetního modulu.
+test('dohoda: sjednaný den skončení dřív než den uzavření dohody → chyba', () => {
+  assert.throws(
+    () => konecPomeru({ doruceni: '2026-07-10', kdo: 'dohoda', konecDohody: '2026-07-01' }, rules),
+    /nemůže být dřív než den uzavření dohody/,
+  );
+  // Týž den je v pořádku: pracovní poměr může skončit dnem uzavření dohody.
+  assert.equal(konecPomeru({ doruceni: '2026-07-10', kdo: 'dohoda', konecDohody: '2026-07-10' }, rules), '2026-07-10');
+});
+
 test('neplatné datum vyhodí chybu', () => {
   assert.throws(() => pricistMesice('2026-02-30', 1));
   assert.throws(() => pricistMesice('10. 7. 2026', 1));
@@ -151,6 +161,19 @@ test('§ 52 písm. f) až h) a zkušební doba → odstupné 0', () => {
   );
 });
 
+// Revize 5. 11. 2026, VYP-05: § 67 odst. 2 ZP – započtení předchozího pracovního poměru u téhož zaměstnavatele.
+test('pravidla odstupného citují § 67 odst. 2 (předchozí pracovní poměr, pauza nejvýš 6 měsíců)', () => {
+  const p = rules.zakonikPrace.odstupne.predchoziPomer;
+  assert.ok(p, 'chybí zakonikPrace.odstupne.predchoziPomer');
+  assert.equal(p.mesicu, 6);
+  assert.match(p.zdroj.pravniZaklad, /§ 67 odst\. 2/);
+  assert.equal(p.zdroj.url, 'https://www.zakonyprolidi.cz/cs/2006-262#p67');
+  assert.match(p.zdroj.citace, /předchozího pracovního poměru u téhož zaměstnavatele/);
+  assert.match(p.zdroj.citace, /6 měsíců/);
+  const stranka = readFileSync(new URL('./vypoved-2026.11tydata.js', import.meta.url), 'utf8');
+  assert.match(stranka, /predchoziPomer/, 'nápověda k délce pracovního poměru má brát § 67 odst. 2 z rules.json');
+});
+
 test('pravidla odstupného a náhrady citují zákoník práce s odkazem', () => {
   const o = rules.zakonikPrace.odstupne;
   assert.match(o.zdroj.pravniZaklad, /§ 67 odst. 1 a 3/);
@@ -211,6 +234,23 @@ test('věk 57 → 11 měsíců (3 × 80 %, 3 × 50 %, 5 × 40 %)', () => {
   assert.equal(r.hlavni.podpurciDoba, 11);
   assert.deepEqual(r.hlavni.mesice.map((m) => m.procento), [80, 80, 80, 50, 50, 50, 40, 40, 40, 40, 40]);
   assert.equal(podpora({ vek: 56, cistyVydelek: 30000, datumZadosti: '2026-06-01' }, rules).hlavni.podpurciDoba, 8);
+});
+
+// Revize 5. 11. 2026, VYP-04: věk 52 a 57 ve spojení se stropem (§ 43 a § 50 zákona o zaměstnanosti).
+// 60 000 Kč × 80 % = 48 000 Kč > strop 38 537 Kč; 50 % = 30 000 Kč; 40 % = 24 000 Kč.
+test('věk 52, čistý výdělek 60 000 Kč → 8 měsíců, první 3 omezeny stropem, celkem 253 611 Kč', () => {
+  const r = podpora({ vek: 52, cistyVydelek: 60000, datumZadosti: '2026-09-11' }, rules);
+  assert.equal(r.hlavni.podpurciDoba, 8);
+  assert.deepEqual(castky(r.hlavni), [38537, 38537, 38537, 30000, 30000, 30000, 24000, 24000]);
+  assert.deepEqual(r.hlavni.mesice.map((m) => m.omezenoStropem), [true, true, true, false, false, false, false, false]);
+  assert.equal(r.hlavni.celkem, 253611);
+});
+
+test('věk 57, čistý výdělek 60 000 Kč → 11 měsíců, první 3 omezeny stropem, celkem 325 611 Kč', () => {
+  const r = podpora({ vek: 57, cistyVydelek: 60000, datumZadosti: '2026-09-11' }, rules);
+  assert.equal(r.hlavni.podpurciDoba, 11);
+  assert.deepEqual(castky(r.hlavni), [38537, 38537, 38537, 30000, 30000, 30000, 24000, 24000, 24000, 24000, 24000]);
+  assert.equal(r.hlavni.celkem, 325611);
 });
 
 test('zaokrouhlení podpory na celé koruny nahoru', () => {

@@ -49,7 +49,10 @@ function precti() {
   if (!jeDatum(v.doruceni)) chyby.doruceni = 'Zadej den doručení výpovědi.';
   if (v.kdo === 'dohoda') {
     if (!jeDatum(v.konecDohody)) chyby.konecDohody = 'Zadej sjednaný den skončení podle dohody.';
-    else if (jeDatum(v.doruceni) && v.konecDohody < v.doruceni) chyby.konecDohody = 'Den skončení nemůže být dřív než den uzavření dohody.';
+    else if (jeDatum(v.doruceni)) {
+      // Pořadí dat hlídá výpočetní modul (konecPomeru), tady jen ukážeme jeho hlášku u pole.
+      try { konecPomeru(v, rules); } catch (e) { chyby.konecDohody = e.message; }
+    }
   }
   if (Number.isNaN(vstup.delkaLet)) chyby.delka = 'Zadej délku v letech, třeba 1,5.';
   if (Number.isNaN(vstup.hruby)) chyby.hruby = 'Zadej průměrný hrubý výdělek v Kč.';
