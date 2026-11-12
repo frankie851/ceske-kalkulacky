@@ -195,6 +195,8 @@
     "skolkovne": {
       "nazev": "Sleva za umístění dítěte (školkovné)",
       "stropNaDite": 24900,
+      "maxVekDitete": 7,
+      "maxVekPoznamka": "Praktické zjednodušení: předškolní zařízení navštěvují děti nejvýš do 7 let (rok narození nejméně rok 2027 − 7). Zákon pevnou věkovou hranici nemá, rozhoduje umístění v předškolním zařízení (§ 35bd odst. 1 ZDP).",
       "zdroje": [
         "zdp-2027",
         "zakon-180-2026",
@@ -218,6 +220,13 @@
       27840
     ],
     "nasobekZtpp": 2,
+    "vekMax": 26,
+    "vekMaxBezStudia": 18,
+    "zdroj": {
+      "pravniZaklad": "§ 35c odst. 6 a 10 zákona č. 586/1992 Sb., o daních z příjmů",
+      "url": "https://www.zakonyprolidi.cz/cs/1992-586#p35c",
+      "citace": "Za vyživované dítě poplatníka se … považuje … dítě …, pokud je a) nezletilým dítětem, b) zletilým dítětem až do dovršení věku 26 let, jestliže mu není přiznán invalidní důchod pro invaliditu třetího stupně a 1. soustavně se připravuje na budoucí povolání …, 2. nemůže se soustavně připravovat na budoucí povolání nebo vykonávat výdělečnou činnost pro nemoc nebo úraz, nebo 3. z důvodu dlouhodobě nepříznivého zdravotního stavu je neschopno vykonávat soustavnou výdělečnou činnost."
+    },
     "bonusMinRocniPrijemNasobekMinMzdy": 6,
     "bonusMinMesicniPrijemPodilMinMzdy": 0.5,
     "zdroje": [

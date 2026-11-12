@@ -528,3 +528,31 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 - **„Jak číst štítky“** (Co se mění v roce 2027) dostaly vlastní seznam `.legenda`. Původní
   `.watch` je pro ikonu 28 px, takže se do něj štítek nevešel, překrýval text a pravidlo
   `.watch .ikona` mu přebarvilo ikonu.
+
+# Opravy podle revize 5. 11. 2026 (12. 11. 2026)
+
+Revize v `docs/revize/2026-11-05/` hodnotila původní repozitáře. Stav každého nálezu na webu
+je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké nálezy, které na
+webu platí. Každá hodnota je ověřená v textu předpisu na zakonyprolidi.cz (e-Sbírka se z prostředí
+neotevře) a v `rules.json` má citaci.
+
+## OSVČ 2027 a Slevy 2027 (EET-01, SLV-01, SLV-02, s nimi EET-08)
+
+- **Začínající OSVČ** (§ 14 odst. 5 věta druhá zákona č. 589/1992 Sb.): v roce zahájení hlavní
+  činnosti a ve 2 dalších letech je minimum sociálního pojištění 25 % průměrné mzdy (12 916 Kč
+  měsíčně v roce 2027). Neplatí, když člověk podnikal v předchozích 20 letech. Na webu je to
+  třetí druh činnosti „Hlavní činnost, začínám“, takže se propíše do srovnání, grafu i bodu
+  zvratu bez dalšího pole. Zdravotní minimum ani paušální daň se nemění. Pravidlo je
+  v `rules.json` (`social.minBaseShareStarting`, `startingCitation`), odkaz vede na e-Sbírku,
+  protože integritní test Mám EET? povoluje jen úřední domény.
+- **Minimální mzda 2027** cituje sdělení MPSV č. 171/2026 Sb. (24 900 Kč), ne nařízení vlády
+  č. 164/2026 Sb. (EET-08, sjednocení se Slevami 2027).
+- **Školkovné** (SLV-01): `skolkovne()` započte jen dítě v předškolním věku. Hranice je v
+  `rules.json` (`slevy.skolkovne.maxVekDitete`, 7 let) a označená jako praktické zjednodušení,
+  protože zákon rozhoduje podle předškolního zařízení. Převod odpovědí z formuláře je čistá
+  funkce `odpovediZeStavu()` ve `vystup.js` s testem. Krok školky navíc maže staré odpovědi
+  u dětí, které už v předškolním věku nejsou.
+- **Daňové zvýhodnění na zletilé dítě** (SLV-02, § 35c odst. 6 a 10 ZDP): nárok jen za měsíce,
+  na jejichž počátku dítě nedovršilo 18 let, nebo 26 let, když studuje (soustavně se připravuje
+  na povolání). U dítěte přibylo zaškrtávátko „Studuje…“. Pořadí dětí se dál určuje po měsících
+  jen mezi dětmi s nárokem.

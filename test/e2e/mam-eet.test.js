@@ -177,6 +177,17 @@ describe('OSVČ 2027', () => {
     await page.close();
   });
 
+  // Revize 5. 11. 2026, EET-01: § 14 odst. 5 věta druhá zákona č. 589/1992 Sb.
+  test('začínající hlavní činnost → přiznání 110 400 Kč vychází levněji než paušální daň', async () => {
+    const { page, chyby } = await otevri(OSVC, { sirka: 1440, vyska: 900 });
+    await page.click('input[name="osvc-activity"][value="mainStart"] + label');
+    assert.match(await radek(page, 'classic'), /110 400 Kč/);
+    assert.match(await text(page, '#osvc-vysledek-karta'), /Přiznání/);
+    assert.match(await text(page, '#osvc-vysledek'), /25 % průměrné mzdy/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
   test('plátce DPH → paušální daň ani EET OFF nejsou dostupné', async () => {
     const { page, chyby } = await otevri(OSVC, { sirka: 1440, vyska: 900 });
     await page.click('#osvc-vat-yes + label');
