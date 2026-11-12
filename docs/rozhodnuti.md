@@ -528,3 +528,22 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 - **„Jak číst štítky“** (Co se mění v roce 2027) dostaly vlastní seznam `.legenda`. Původní
   `.watch` je pro ikonu 28 px, takže se do něj štítek nevešel, překrýval text a pravidlo
   `.watch .ikona` mu přebarvilo ikonu.
+
+# Opravy podle revize 5. 11. 2026 (12. 11. 2026)
+
+Revize v `docs/revize/2026-11-05/` hodnotila původní repozitáře. Stav každého nálezu na webu
+je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké nálezy, které na
+webu platí. Každá hodnota je ověřená v textu předpisu a v datech má citaci.
+
+## Spot, nebo fix? (SPOT-01, SPOT-02, s nimi SPOT-05)
+
+- **Třídy TDD podle přílohy č. 6 vyhlášky č. 408/2015 Sb.** (aktuální znění od 1. 9. 2026, ověřeno
+  na zakonyprolidi.cz): TDD4 = D01d, D02d, D61d; TDD5 = D25d, D26d, D27d; TDD6 = D35d;
+  TDD7 = D45d, D56d, D57d. Zdroj je v `tariffs.json` → `sazbyInfoZdroj` (mimo `sazbyInfo`,
+  protože to se vypisuje do výběru sazeb).
+- **D61d: nízký tarif jen od pátku 12:00 do neděle 22:00** (cenový výměr ERÚ č. 14/2025, staženo
+  z eru.gov.cz). Okna NT umí nově i zápis podle dne v týdnu (`byWeekday`, 0 = neděle), svátky na
+  něj nemají vliv. Mřížka čtvrthodin proto nese i `dow`.
+- **Délky NT podle podmínek sazeb v CV ERÚ 14/2025** (SPOT-05, stejná data): D35d a D56d 20 h
+  denně, D27d 8 h jen v době 18:00–8:00. Okna jsou dál typická (skutečné časy určuje HDO
+  distributora), sedí jen délka a rozmezí.
