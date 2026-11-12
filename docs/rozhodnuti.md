@@ -720,3 +720,42 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   a 29/30 let, věk bez pásma, minimální vklad), větve doporučení „poplatky“ a test 6 teď
   ověřuje přesnou hodnotu měsíčního modelu 100 000 × (1 − 0,01/12)^120 = 90 479,97 Kč
   místo tolerance 0,5 % kolem 90 438 Kč (to je roční strhávání ze zadání, 100 000 × 0,99^10).
+
+## Přijímačky bez paniky – střední nálezy (PRI-02, PRI-03, PRI-04, PRI-05)
+
+- **Škála bodů (PRI-02).** Jednotná zkouška má dva testy po nejvýš 50 bodech, celkem 0–100.
+  Zdroj: vyhláška č. 422/2023 Sb., příloha č. 1, poznámka 1 („standardní 50bodová hodnotící
+  škála“ testu) a stránka CERMAT „Jednotná přijímací zkouška“ („Maximální možný počet
+  dosažených bodů … je 50 bodů“), obojí přečteno 12. 11. 2026. Hodnoty jsou v `rules.json`
+  → `body` (`testMax`, `pocetTestu`) s citací. Meze polí skládá `mezePoli()` v `simulace.js`:
+  body v simulátoru i ve strategii 0–100, jeden pokus 0–50. Počet míst ve škole 0–50 (celé
+  číslo) je jen pojistka proti překlepu v modelové třídě (`rules.json` → `formular`).
+- **Kontrola polí (PRI-02).** `kontrolaCisla()` čte číslo sdíleným `prectiCislo` a vrací
+  hodnotu, nebo text hlášky. Hláška je u pole (`.error-msg`, `aria-invalid`, `aria-describedby`),
+  ve strategii přes makro `pole({ chybaMisto: true })`, v tabulkách simulátoru stejným HTML
+  z `vystup.js`. Chybné číslo se do výpočtu nepustí: simulátor ukáže „Některé číslo v tabulce
+  není v pořádku“, skryje tabuli, kola i výsledek a zamkne Přehrát a Krok. Strategie místo
+  výsledku napíše, že se ukáže po opravě. Prázdné body v simulátoru jsou teď chyba (dřív
+  se tiše počítaly jako 0). Prázdný pokus je dál v pořádku (nemoc), prázdné „Při shodě bodů“
+  taky.
+- **Desetinná čísla (PRI-03).** Všechna číselná pole jsou `type="text"` s `inputmode`
+  (`decimal`, u počtu míst `numeric`). „62,5“ i „62.5“ je 62,5 bez ohledu na jazyk prohlížeče.
+  Úřední zdroje neříkají, že body z jednotné zkoušky jsou vždy celé, proto pole desetinná
+  čísla přijímají (je to v `meta.neovereno`). Výpis bodů je česky („62,5 b.“, „o 2,5 b. nad
+  ním“), věty z `explain()` dostanou desetinnou čárku v `upravVetu()`. Převzaté moduly
+  (`matching.js`, `strategy.js`) zůstaly beze změny.
+- **Stejná škála ve strategii (PRI-04).** Formulář chce body i loňské minimum jen z jednotné
+  zkoušky (0–100) a říká to v upozornění nad poli i v nápovědě u minima. Volbu „celkové body
+  školy“ jsme nepřidali: každá škola má celkové hodnocení na jiné škále (jednotná zkouška
+  aspoň 60 %, zbytek si určí ředitel, § 60i odst. 3 školského zákona), takže jedno číslo
+  „čekaných bodů“ nejde porovnat se třemi různými škálami. Hodnocení jednotné zkoušky musí
+  být v seznamu výsledků každé školy zvlášť (§ 60j odst. 5), uživatel ho tedy najde.
+- **Testy (PRI-05).** Přibyly testy kapacity 0 (i `explain` „škola nemá žádné volné místo“),
+  `minScore` (důvod „kriteria“ a věta v `explain`), uchazeče bez priorit, školy bez uchazečů,
+  prázdného vstupu, shody v `rankApplicants`, řetězového vytlačení přes 3 školy, strategie
+  bez škol a se třemi prázdnými školami (zapsané dnešní chování `no-safe`, nízký PRI-07 se
+  neopravoval) a hranic kategorií. Nový `tests/vstup.test.js` testuje kontrolu polí, HTML
+  editoru s hláškou a text o škále.
+- **`meta.overeno` zůstává 5. 11. 2026.** Nová pravidla mají vlastní `body.overeno`
+  (12. 11. 2026). `meta.overeno` je datum štítku „Pravidla ověřena“ pro celý nástroj
+  i pevný `DTSTAMP` v .ics a termíny jsme 12. 11. znovu neověřovali.
