@@ -40,6 +40,7 @@ stitkyNavic: ['Paušální daň, přiznání, nebo EET OFF']
 
   <div class="calc-main">
     <p class="sr-only" id="osvc-hlaseni" aria-live="polite"></p>
+    <p class="osvc-neplatne" id="osvc-neplatne" hidden>{{ ikona('ikona-vystraha') }}<span>{{ osvc.neplatne }}</span></p>
     <div id="osvc-vysledek" class="osvc-vysledek">
       {{ osvc.vysledek(sprite) | safe }}
     </div>

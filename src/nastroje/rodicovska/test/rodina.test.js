@@ -230,6 +230,49 @@ test('otcovská 14 dní, 70 % redukovaného DVZ otce', () => {
   assert.equal(plan.souhrn.otcovska, 14 * 691);
 });
 
+// Revize 5. 11. 2026, ROD-09: § 38a odst. 4 zákona č. 187/2006 Sb. – nástup na otcovskou
+// „v období 6 týdnů ode dne narození“ (0.–41. den), § 38b odst. 1 – podpůrčí doba 2 týdny.
+// Dřív modul posunul každý nástup po 28. dni na 28. den.
+test('otcovská od 35. a 41. dne se neposune na 28. den, později se omezí na 41. den', () => {
+  const zaklad = { terminPorodu: '2026-03-15', prijemMatka: 30000, prijemOtec: 30000, kdoPpm: 'matka', otcovska: true };
+  assert.equal(rules.otcovska.nastupDoDne, 41);
+  assert.match(rules.otcovska.zdroj.pravniZaklad, /§ 38a odst\. 4/);
+  assert.match(rules.otcovska.zdroj.citace, /v období 6 týdnů ode dne narození/);
+  const p35 = planRodiny({ ...zaklad, otcovskaOdDne: 35 }, rules);
+  assert.equal(p35.otec.otcovska.start, '2026-04-19');
+  assert.equal(p35.otec.otcovska.konec, '2026-05-02');
+  assert.equal(p35.souhrn.otcovska, 14 * 691);
+  const p41 = planRodiny({ ...zaklad, otcovskaOdDne: 41 }, rules);
+  assert.equal(p41.otec.otcovska.start, '2026-04-25');
+  assert.equal(p41.otec.otcovska.konec, '2026-05-08');
+  assert.equal(p41.souhrn.otcovska, 14 * 691);
+  assert.equal(planRodiny({ ...zaklad, otcovskaOdDne: 42 }, rules).otec.otcovska.start, '2026-04-25');
+});
+
+// § 48 odst. 1 písm. a) zákona č. 187/2006 Sb.: z jednoho pojištění má přednost mateřská.
+// Když otec převezme mateřskou od 42. dne a otcovská ještě běží, za společné dny se vyplácí jen mateřská.
+test('otcovská překrytá mateřskou otce: za společné dny jen mateřská, s upozorněním', () => {
+  const plan = planRodiny({
+    terminPorodu: '2026-03-15', prijemMatka: 30000, prijemOtec: 30000, kdoPpm: 'otec', otcovska: true, otcovskaOdDne: 35,
+  }, rules);
+  // otcovská 35.–48. den, mateřská otce od 42. dne → otcovská se vyplatí za 35.–41. den (7 dní)
+  assert.equal(plan.souhrn.otcovska, 7 * 691);
+  assert.ok(plan.varovani.some((x) => x.typ === 'otcovskaSMaterskou'));
+  const bez = planRodiny({
+    terminPorodu: '2026-03-15', prijemMatka: 30000, prijemOtec: 30000, kdoPpm: 'otec', otcovska: true, otcovskaOdDne: 20,
+  }, rules);
+  assert.equal(bez.souhrn.otcovska, 14 * 691);
+  assert.ok(!bez.varovani.some((x) => x.typ === 'otcovskaSMaterskou'));
+});
+
+test('formulář dovolí nástup na otcovskou do dne z rules.otcovska.nastupDoDne', async () => {
+  const { default: data } = await import('../rodicovska.11tydata.js');
+  assert.equal(data.rodicovska.otcovskaMax, rules.otcovska.nastupDoDne);
+  assert.match(data.rodicovska.napovedy.otcovskaOd, /nejvýš 41/);
+  const app = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  assert.match(app, /OTCOVSKA_MAX = pravidla\.otcovska\.nastupDoDne/);
+});
+
 test('střídání: otec převezme mateřskou nejdříve od 7. týdne a RP pak pobírá on', () => {
   const plan = planRodiny({
     terminPorodu: '2026-03-15', prijemMatka: 30000, prijemOtec: 60000, kdoPpm: 'matka',
