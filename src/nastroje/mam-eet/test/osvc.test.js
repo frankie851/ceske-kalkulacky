@@ -34,19 +34,21 @@ const inp = (extra) => ({ ...base, ...extra });
 const variant = (r, id) => r.variants.find((v) => v.id === id);
 
 describe('povinné případy ze zadání', () => {
-  test('paušál 1. pásmo za rok = 115 944 Kč (12 × 9 662)', () => {
+  // Revize 5. 11. 2026, EET-03: § 14 odst. 3 písm. a) zákona č. 589/1992 Sb. dává 9 661 Kč,
+  // zadání (média) uvádělo 9 662 Kč / 115 944 Kč / 132 744 Kč.
+  test('paušál 1. pásmo za rok = 115 932 Kč (12 × 9 661)', () => {
     const f = flatTax(inp({ income: 800000 }), rules);
     assert.equal(f.available, true);
     assert.equal(f.band.id, 'band1');
-    assert.equal(f.monthly, 9662);
-    assert.equal(f.annual, 115944);
+    assert.equal(f.monthly, 9661);
+    assert.equal(f.annual, 115932);
   });
 
-  test('EET OFF za rok = 115 944 + 16 800 = 132 744 Kč', () => {
+  test('EET OFF za rok = 115 932 + 16 800 = 132 732 Kč', () => {
     const e = eetOffVariant(inp({ income: 800000 }), rules);
     assert.equal(e.available, true);
-    assert.equal(e.monthly, 11062);
-    assert.equal(e.annual, 132744);
+    assert.equal(e.monthly, 11061);
+    assert.equal(e.annual, 132732);
   });
 
   test('plátce DPH → paušální daň i EET OFF nedostupné, s důvodem', () => {
@@ -95,11 +97,33 @@ describe('parametry 2027 odpovídají ověřeným hodnotám', () => {
     assert.equal(p.healthMinAdvance, o.health.expected.minAdvanceMain);
   });
 
-  test('1. pásmo = 100 + min. soc. záloha × 1,15 (nahoru) + min. zdrav. záloha', () => {
-    const b1 = o.flatTax.bands[0];
-    assert.equal(b1.social, ceilKc(p.socialMinAdvanceMain * b1.socialFromMinAdvanceMultiple));
-    assert.equal(b1.health, p.healthMinAdvance);
-    for (const b of o.flatTax.bands) assert.equal(b.monthly, b.tax + b.social + b.health, b.id);
+  // Revize 5. 11. 2026, EET-03: o 15 % se zvyšuje vyměřovací základ, ne záloha
+  // (§ 14 odst. 3 písm. a) a odst. 13 a § 7 odst. 3 zákona č. 589/1992 Sb., § 8a zákona č. 592/1992 Sb.).
+  test('1. pásmo = 100 + 29,2 % z (min. VZ × 1,15, nahoru) + 13,5 % z 1/12 min. VZ zdrav.', () => {
+    const b1 = flatTax(inp({}), rules).band;
+    const zaklad = ceilKc(p.socialMinBaseMain * 1.15);
+    assert.equal(zaklad, 20796);
+    assert.equal(b1.social, ceilKc(zaklad * o.social.rate));
+    assert.equal(b1.social, 6073);
+    assert.equal(b1.health, ceilKc(((12 * o.health.minBaseShareMain * o.averageWage.monthly) / 12) * o.health.rate));
+    assert.equal(b1.health, 3488);
+    assert.equal(b1.tax, 100);
+    assert.equal(b1.monthly, 9661);
+    const ex = o.flatTax.bands[0].expected;
+    assert.deepEqual([b1.social, b1.health, b1.monthly], [ex.social, ex.health, ex.monthly]);
+    for (const b of compare(inp({ income: 1900000, flatRateId: 'p40' }), rules).bands) {
+      assert.equal(b.band.monthly, b.band.tax + b.band.social + b.band.health, b.band.id);
+    }
+  });
+
+  // Revize 5. 11. 2026, EET-11: průměrná mzda (§ 23b odst. 4 ZPSZ) a rozhodná částka
+  // (§ 10 odst. 2 zákona č. 155/1995 Sb.) z VVZ a koeficientu podle NV č. 177/2026 Sb.
+  test('průměrná mzda = VVZ × koeficient nahoru, rozhodná částka z nezaokrouhleného součinu', () => {
+    const a = o.averageWage;
+    assert.equal(a.generalAssessmentBase, 48900);
+    assert.equal(a.conversionCoefficient, 1.0565);
+    assert.equal(a.monthly, ceilKc(a.generalAssessmentBase * a.conversionCoefficient));
+    assert.equal(p.sideThreshold, 123991);
   });
 
   test('hranice 23% sazby = 36 × průměrná mzda = 1 859 868 Kč', () => {
@@ -249,7 +273,7 @@ describe('porovnání a graf', () => {
     const r = compare(inp({ income: 800000 }), rules);
     assert.equal(r.cheapestId, 'flat');
     assert.equal(variant(r, 'flat').diff, 0);
-    assert.equal(variant(r, 'eetOff').diff, eetOffVariant(inp({}), rules).annual - 115944);
+    assert.equal(variant(r, 'eetOff').diff, eetOffVariant(inp({}), rules).annual - 115932);
     assert.ok(variant(r, 'classic').diff > 0);
     assert.match(r.summary, /Ušetříš/);
   });
@@ -294,5 +318,73 @@ describe('integrita sekce osvc2027', () => {
     assert.equal(d.notice, '2027-01-11');
     assert.equal(d.firstPayment, '2027-01-20');
     assert.equal(d.notice, rules.eetOff.registrationDeadline);
+  });
+});
+
+describe('revize 5. 11. 2026 – střední nálezy', () => {
+  // EET-07: § 10 odst. 2 zákona č. 155/1995 Sb. – účast vzniká, pokud příjem „dosáhl … aspoň
+  // rozhodné částky“. Bez pojistného je jen zisk pod rozhodnou částkou.
+  test('vedlejší činnost: hranice rozhodné částky 123 990 / 123 991 / 123 992 Kč', () => {
+    assert.equal(socialIns(123990, 'sideOther', rules).none, true);
+    const presne = socialIns(123991, 'sideOther', rules);
+    assert.equal(presne.none, false);
+    assert.equal(presne.amount, 19914);
+    assert.equal(socialIns(123992, 'sideOther', rules).none, false);
+    assert.equal(socialIns(123991, 'sideEmployed', rules).none, false);
+  });
+
+  test('vedlejší činnost, zisk přesně 123 991 Kč → sociální 19 914 Kč, celkem 28 284 Kč', () => {
+    const c = classic(inp({ income: 300000, actualExpenses: 176009, activityId: 'sideOther' }), rules);
+    assert.equal(c.profit, 123991);
+    assert.equal(c.social.amount, 19914);
+    assert.equal(c.annual, 28284);
+    const pod = classic(inp({ income: 300000, actualExpenses: 176010, activityId: 'sideOther' }), rules);
+    assert.equal(pod.social.amount, 0);
+    assert.match(compare(inp({ income: 300000, actualExpenses: 176010, activityId: 'sideOther' }), rules).breakdown.join(' '),
+      /nedosáhl rozhodné částky 123\s991\sKč/);
+  });
+
+  // EET-11: rozhodná částka = 2,4 × (VVZ × koeficient), ne 2,4 × zaokrouhlená průměrná mzda.
+  test('rozhodná částka se počítá z nezaokrouhleného součinu VVZ × koeficient', () => {
+    const mod = structuredClone(rules);
+    Object.assign(mod.osvc2027.averageWage, { generalAssessmentBase: 10000, conversionCoefficient: 1.00003, monthly: 10001 });
+    // 2,4 × 10 000,3 = 24 000,72; floor(2,4 × 10 001) by dal 24 002 Kč
+    assert.equal(params(mod).sideThreshold, 24001);
+    assert.equal(socialIns(24000, 'sideOther', mod).none, true);
+    assert.equal(socialIns(24001, 'sideOther', mod).none, false);
+  });
+
+  // EET-06: § 2a odst. 5 zákona č. 586/1992 Sb. – vyšší limity pásem jen při aspoň 75 % příjmů
+  // s paušálem 80 % (nebo 60 %); kalkulačka předpokládá jednu činnost a musí to říct.
+  test('pásmo nad obecným limitem → poznámka o podmínce 75 % příjmů z jedné činnosti', () => {
+    const nad = compare(inp({ income: 1200000 }), rules);
+    assert.equal(variant(nad, 'flat').band.id, 'band1');
+    assert.ok(nad.notes.some((n) => /aspoň 75\s% příjmů/.test(n) && /jedné činnosti/.test(n) && /80\s% nebo 60\s%/.test(n)), nad.notes.join(' | '));
+    const pod = compare(inp({ income: 800000 }), rules);
+    assert.ok(!pod.notes.some((n) => /75\s%/.test(n)));
+    const osmdesat = compare(inp({ income: 1800000, flatRateId: 'p80' }), rules);
+    assert.ok(osmdesat.notes.some((n) => /Limit 2\s000\s000\sKč pro 1\. pásmo/.test(n) && /paušálem 80\s%\./.test(n)), osmdesat.notes.join(' | '));
+    const druhe = compare(inp({ income: 1600000 }), rules);
+    assert.equal(variant(druhe, 'flat').band.id, 'band2');
+    assert.ok(druhe.notes.some((n) => /75\s%/.test(n)));
+  });
+
+  test('nápověda k druhu činnosti zmiňuje jednu činnost a podmínku 75 %', () => {
+    assert.match(o.texts.fieldFlatRateHelp, /aspoň \{share\} příjmů/);
+    assert.match(o.texts.fieldFlatRateHelp, /jedné činnosti/);
+    assert.equal(o.flatTax.singleActivity.share, 0.75);
+    const z = o.flatTax.singleActivity.zdroj;
+    assert.match(z.pravniZaklad, /§ 2a odst\. 5/);
+    assert.match(z.url, /^https:\/\/www\.zakonyprolidi\.cz\/cs\/1992-586#p2a$/);
+    assert.match(z.citace, /alespoň 75 % příjmů ze samostatné činnosti/);
+  });
+
+  test('1. pásmo má citaci zákonného vzorce a stav „derived“', () => {
+    const b1 = o.flatTax.bands[0];
+    assert.equal(b1.status, 'derived');
+    assert.match(b1.note, /dopočteno podle zákonného vzorce, tabulka Finanční správy pro rok 2027 zatím nevyšla/i);
+    assert.match(b1.zdroj.pravniZaklad, /§ 14 odst\. 3 písm\. a\)/);
+    assert.match(b1.zdroj.citace, /zvýšeného o 15 %/);
+    assert.deepEqual(b1.expected, { social: 6073, health: 3488, monthly: 9661, annual: 115932, eetOffAnnual: 132732 });
   });
 });

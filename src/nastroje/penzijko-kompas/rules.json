@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-04",
+    "overeno": "2026-11-12",
     "zdroje": [
       {
         "nazev": "Zákon č. 427/2011 Sb., o doplňkovém penzijním spoření (§ 14 státní příspěvek)",
@@ -13,14 +13,14 @@
         "poznamka": "Platná pravidla 2026"
       },
       {
-        "nazev": "MF ČR – Státní podpora penzijního spoření",
-        "url": "https://mf.gov.cz/cs/financni-trh/penzijni-sporeni",
+        "nazev": "MF ČR – Základní informace k doplňkovému penzijnímu spoření (III. pilíř)",
+        "url": "https://mf.gov.cz/cs/financni-trh/soukrome-penzijni-systemy/iii-pilir-doplnkove-penzijni-sporeni-a-p/zakladni-informace",
         "poznamka": "Platná pravidla 2026"
       },
       {
         "nazev": "MF ČR – prezentace Lepší penzijko (3. 6. 2026)",
         "url": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf",
-        "poznamka": "Návrh „Lepší penzijko“ (od 2027)"
+        "poznamka": "Návrh „Lepší penzijko“ (od 2027) a předpoklady výnosů (akcie, dluhopisy, transformovaný fond, inflace)"
       },
       {
         "nazev": "Finance.cz – Penzijní spoření čeká revoluce, schválila vláda",
@@ -45,16 +45,16 @@
       "Zvolená sada pravidel (2026, nebo návrh 2027) platí v projekci po celou dobu až do 65 let.",
       "Vklady ani příspěvek zaměstnavatele se v projekci nemění a nezvyšují s inflací.",
       "Daňový odpočet ukazujeme jen informativně. Limit 48 000 Kč je společný s DIP a životním pojištěním, plný výpočet udělá Plán48.",
-      "Výnosy fondů jsou předpoklad, ne slib. Skutečné výnosy se budou lišit a mohou být i záporné."
+      "Výnosy fondů jsou předpoklad, ne slib. Výnos transformovaného fondu, akcií, dluhopisů a inflaci bereme z modelu MF (prezentace 3. 6. 2026). Výnos konzervativního a vyváženého fondu je předpoklad kalkulačky, ne úřední údaj. Skutečné výnosy se budou lišit a mohou být i záporné."
     ]
   },
-  "verze": "2026-11-04",
+  "verze": "2026-11-12",
   "sady": {
     "2026": {
       "nazev": "Platná pravidla 2026",
       "stav": "platne",
       "platnostOd": "2026-01-01",
-      "overeno": "2026-11-04",
+      "overeno": "2026-11-12",
       "zdroje": [
         {
           "nazev": "Zákon č. 427/2011 Sb., o doplňkovém penzijním spoření (§ 14 státní příspěvek)",
@@ -65,8 +65,8 @@
           "url": "https://www.zakonyprolidi.cz/cs/1992-586"
         },
         {
-          "nazev": "MF ČR – Státní podpora penzijního spoření",
-          "url": "https://mf.gov.cz/cs/financni-trh/penzijni-sporeni"
+          "nazev": "MF ČR – Základní informace k doplňkovému penzijnímu spoření (III. pilíř)",
+          "url": "https://mf.gov.cz/cs/financni-trh/soukrome-penzijni-systemy/iii-pilir-doplnkove-penzijni-sporeni-a-p/zakladni-informace"
         }
       ],
       "statniPrispevek": {
@@ -165,28 +165,52 @@
       "typ": "transformovany",
       "sprava": 0.8,
       "zhodnoceni": 10,
-      "vynos": 1.5
+      "vynos": 1.5,
+      "vynosZdroj": {
+        "puvod": "mf",
+        "nazev": "MF ČR – prezentace Lepší penzijko (3. 6. 2026), snímek „Snížení poplatků si penzijní společnosti mohou dovolit“ (s. 17)",
+        "url": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf#page=17",
+        "citace": "Předpoklady: výnos SŽC a nového DPS 7,8%; výnos TF: 1,5%; …",
+        "overeno": "2026-11-12",
+        "poznamka": "Předpoklad z modelu MF k návrhu Lepší penzijko, ne zákon ani slib. Rozhoduje o radě „přejít“: čím nižší výnos transformovaného fondu, tím víc vychází přechod."
+      }
     },
     "konzervativni": {
       "nazev": "Konzervativní",
       "typ": "ucastnicky",
       "sprava": 0.4,
       "zhodnoceni": 10,
-      "vynos": 3
+      "vynos": 3,
+      "vynosZdroj": {
+        "puvod": "kalkulacka",
+        "poznamka": "Předpoklad kalkulačky, ne úřední údaj. MF v modelu uvádí výnosy tříd aktiv (dluhopisy 4,0 %, peněžní trh 2,5 %), výnos konzervativního fondu ne."
+      }
     },
     "vyvazeny": {
       "nazev": "Vyvážený",
       "typ": "ucastnicky",
       "sprava": 1,
       "zhodnoceni": 15,
-      "vynos": 4.5
+      "vynos": 4.5,
+      "vynosZdroj": {
+        "puvod": "kalkulacka",
+        "poznamka": "Předpoklad kalkulačky, ne úřední údaj. MF výnos smíšeného (vyváženého) fondu neuvádí."
+      }
     },
     "akciovy": {
       "nazev": "Akciový",
       "typ": "ucastnicky",
       "sprava": 1,
       "zhodnoceni": 15,
-      "vynos": 7
+      "vynos": 7.5,
+      "vynosZdroj": {
+        "puvod": "mf",
+        "nazev": "MF ČR – prezentace Lepší penzijko (3. 6. 2026), snímek „Klient za 35 let uspoří milion navíc“ (s. 12)",
+        "url": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf#page=12",
+        "citace": "Předpoklady: výnos akcií 7,5% pa., výnos dluhopisů 4,0% pa., výnos peněžního trhu 2,5% pa., inflace 2,5% pa., …",
+        "overeno": "2026-11-12",
+        "poznamka": "Výnos akcií z modelu MF. Že je akciový fond celý v akciích, je předpoklad kalkulačky."
+      }
     },
     "zivotniCyklus": {
       "nazev": "Životní cyklus",
@@ -197,10 +221,24 @@
         "plneAkcieDoVeku": 45,
         "vekKonec": 65,
         "podilAkciiNaKonci": 0.2,
-        "vynosAkcie": 7,
-        "vynosDluhopisy": 3
+        "vynosAkcie": 7.5,
+        "vynosDluhopisy": 4,
+        "zdrojAkcie": {
+          "puvod": "mf",
+          "nazev": "MF ČR – prezentace Lepší penzijko (3. 6. 2026), snímek „Klient za 35 let uspoří milion navíc“ (s. 12)",
+          "url": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf#page=12",
+          "citace": "Předpoklady: výnos akcií 7,5% pa., výnos dluhopisů 4,0% pa., výnos peněžního trhu 2,5% pa., inflace 2,5% pa., …",
+          "overeno": "2026-11-12"
+        },
+        "zdrojDluhopisy": {
+          "puvod": "mf",
+          "nazev": "MF ČR – prezentace Lepší penzijko (3. 6. 2026), snímek „Klient za 35 let uspoří milion navíc“ (s. 12)",
+          "url": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf#page=12",
+          "citace": "Předpoklady: výnos akcií 7,5% pa., výnos dluhopisů 4,0% pa., výnos peněžního trhu 2,5% pa., inflace 2,5% pa., …",
+          "overeno": "2026-11-12"
+        }
       },
-      "poznamka": "Předpoklad aplikace, ne zákon: do 45 let 100 % akcie, pak lineárně na 20 % akcií v 65 letech, zbytek dluhopisy."
+      "poznamka": "Rozložení podle věku je předpoklad kalkulačky, ne úřední údaj ani zákon: do 45 let 100 % akcie, pak lineárně na 20 % akcií v 65 letech, zbytek dluhopisy. MF v modelu počítá s 98 % akcií do 55 let a pak s postupným snížením na 30 %. Výnosy akcií a dluhopisů jsou z modelu MF."
     }
   },
   "zdrojePoplatku": [
@@ -215,6 +253,13 @@
   ],
   "predpoklady": {
     "inflace": 2.5,
+    "inflaceZdroj": {
+      "puvod": "mf",
+      "nazev": "MF ČR – prezentace Lepší penzijko (3. 6. 2026), snímek „Klient za 35 let uspoří milion navíc“ (s. 12)",
+      "url": "https://mf.gov.cz/assets/attachments/2026-06-03_Prezentace-Lepsi-penzijko-3-vyhody-nejvetsiho-zlepseni-penzijniho-sporeni-v-historii_v02.pdf#page=12",
+      "citace": "Předpoklady: výnos akcií 7,5% pa., výnos dluhopisů 4,0% pa., výnos peněžního trhu 2,5% pa., inflace 2,5% pa., …",
+      "overeno": "2026-11-12"
+    },
     "vekPenze": 65,
     "prevodKonkurence": {
       "poplatek": 800,

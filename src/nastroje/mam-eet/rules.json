@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-12",
     "zdroje": [
       {
         "nazev": "eet.gov.cz – Online služby a infolinka",
@@ -63,7 +63,7 @@
         "url": "https://e-sbirka.gov.cz/sb/1992/589"
       },
       {
-        "nazev": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9",
+        "nazev": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9 a 10",
         "url": "https://e-sbirka.gov.cz/sb/1995/155"
       },
       {
@@ -97,14 +97,35 @@
       {
         "nazev": "Všechny daňové tiskopisy",
         "url": "https://financnisprava.gov.cz/cs/dane/danove-tiskopisy"
+      },
+      {
+        "nazev": "Zákon č. 589/1992 Sb., § 14 (vyměřovací základ OSVČ a paušální režim) – zakonyprolidi.cz",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-589#p14"
+      },
+      {
+        "nazev": "Zákon č. 592/1992 Sb., § 8a (záloha na zdravotní pojištění v paušálním režimu) – zakonyprolidi.cz",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-592#p8a"
+      },
+      {
+        "nazev": "Zákon č. 586/1992 Sb., § 2a (rozhodné příjmy pásem paušálního režimu) – zakonyprolidi.cz",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-586#p2a"
+      },
+      {
+        "nazev": "Zákon č. 155/1995 Sb., § 10 (rozhodná částka u vedlejší činnosti) – zakonyprolidi.cz",
+        "url": "https://www.zakonyprolidi.cz/cs/1995-155#p10"
+      },
+      {
+        "nazev": "Nařízení vlády č. 177/2026 Sb., § 1 (všeobecný vyměřovací základ 2025 a přepočítací koeficient) – zakonyprolidi.cz",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-177#p1"
       }
     ],
     "neovereno": [
       "Výjimka pro malé hotovostní tržby – oficiální zdroje ji nepotvrdily, proto ji průvodce neuvádí.",
       "Limit dvou zaměstnanců pro aplikaci MOJE eet – oficiální zdroje ho nepotvrdily.",
       "Obecná výjimka pro držitele průkazu ZTP/P – zákon ji dává jen při průkazu kvůli nevidomosti, těžké ztrátě zraku nebo hluchoslepotě.",
-      "OSVČ 2027: tabulku paušální daně pro rok 2027 (1. pásmo je dopočtené ze zákona), rozhodnou částku pro vedlejší činnost a posouzení podmínky daňového bonusu z příjmů je potřeba ještě ověřit u finanční správy a ČSSZ.",
-      "OSVČ 2027: kalkulačka nepočítá slevu za evidenci tržeb, další slevy (manžel/ka, student, školkovné), nemocenské pojištění, odčitatelné položky ani děti se ZTP/P."
+      "OSVČ 2027: tabulku paušální daně pro rok 2027 Finanční správa k 12. 11. 2026 nezveřejnila, 1. pásmo (9 661 Kč) je dopočtené podle § 14 odst. 3 písm. a) zákona č. 589/1992 Sb. Rozhodnou částku pro vedlejší činnost (zákon neurčuje zaokrouhlení) a posouzení podmínky daňového bonusu z příjmů je potřeba ještě ověřit u finanční správy a ČSSZ.",
+      "OSVČ 2027: kalkulačka nepočítá slevu za evidenci tržeb, další slevy (manžel/ka, student, školkovné), nemocenské pojištění, odčitatelné položky ani děti se ZTP/P.",
+      "OSVČ 2027: pásmo paušální daně počítáme pro jednu činnost. Podíl příjmů s různými výdajovými paušály (podmínka 75 % v § 2a odst. 5 zákona o daních z příjmů) kalkulačka nezjišťuje, jen na ni upozorní."
     ],
     "title": "Mám EET?",
     "subtitle": "Průvodce EET 2.0 pro podnikatele",
@@ -707,11 +728,18 @@
     "verificationNote": "Hodnoty se stavem „official“ jsou přečtené přímo na oficiálním webu. Stav „secondary“ znamená, že oficiální web (ČSSZ, VZP, e-Sbírka) nebyl z prostředí dostupný a hodnota je ověřená shodou více zdrojů a přepočtem ze zákonného vzorce. Stav „derived“ je dopočet ze zákona, který úřad zatím nezveřejnil.",
     "averageWage": {
       "monthly": 51663,
-      "note": "Průměrná mzda pro rok 2027 = 48 900 Kč × 1,0565, zaokrouhleno nahoru.",
+      "generalAssessmentBase": 48900,
+      "conversionCoefficient": 1.0565,
+      "note": "Průměrná mzda pro rok 2027 = všeobecný vyměřovací základ 2025 (48 900 Kč) × přepočítací koeficient 1,0565, zaokrouhleno nahoru (§ 23b odst. 4 zákona č. 589/1992 Sb.). Rozhodná částka pro vedlejší činnost se počítá z nezaokrouhleného součinu.",
       "status": "secondary",
       "source": "https://e-sbirka.gov.cz/sb/2026/177",
       "sourceTitle": "Nařízení vlády č. 177/2026 Sb.",
-      "verified": "2026-11-05"
+      "verified": "2026-11-12",
+      "zdroj": {
+        "pravniZaklad": "§ 1 nařízení vlády č. 177/2026 Sb.; § 23b odst. 4 zákona č. 589/1992 Sb.",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-177#p1",
+        "citace": "(1) Výše všeobecného vyměřovacího základu za rok 2025 činí 48900 Kč. (2) Výše přepočítacího koeficientu pro úpravu všeobecného vyměřovacího základu za rok 2025 činí 1,0565. – § 23b odst. 4 ZPSZ: „Za průměrnou mzdu se pro účely tohoto zákona považuje částka, která se vypočte jako součin všeobecného vyměřovacího základu … a přepočítacího koeficientu …; vypočtená částka se zaokrouhluje na celé koruny nahoru.“"
+      }
     },
     "social": {
       "rate": 0.292,
@@ -730,16 +758,21 @@
         "sideThreshold": 123991,
         "minBaseStarting": 12916
       },
-      "note": "Rozhodná částka pro vedlejší činnost (2,4 × průměrná mzda) je přepočet ze zákona, ČSSZ ji zatím nebylo možné ověřit.",
+      "note": "Rozhodná částka pro vedlejší činnost = 2,4 × (všeobecný vyměřovací základ × přepočítací koeficient), tedy 123 990,84 Kč. Pojistné se platí, když zisk rozhodné částky dosáhne. Zákon zaokrouhlení neurčuje, zobrazujeme ji zaokrouhlenou nahoru. ČSSZ ji zatím nebylo možné ověřit.",
       "status": "secondary",
       "source": "https://e-sbirka.gov.cz/sb/1992/589",
       "sourceTitle": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení",
       "verified": "2026-11-12",
       "sideSource": "https://e-sbirka.gov.cz/sb/1995/155",
-      "sideSourceTitle": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9",
+      "sideSourceTitle": "Zákon č. 155/1995 Sb., o důchodovém pojištění, § 9 odst. 6 a § 10 odst. 2",
       "startingSource": "https://e-sbirka.gov.cz/sb/1992/589",
       "startingSourceTitle": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 14 odst. 5 věta druhá",
-      "startingCitation": "V kalendářním roce, v němž osoba samostatně výdělečně činná vykonávající hlavní samostatnou výdělečnou činnost zahájila samostatnou výdělečnou činnost, a v bezprostředně následujících 2 kalendářních letech činí měsíční vyměřovací základ této osoby samostatně výdělečně činné nejméně 25 % průměrné mzdy; to však neplatí, pokud osoba samostatně výdělečně činná v období 20 kalendářních let před kalendářním rokem, v němž zahájila samostatnou výdělečnou činnost, již byla osobou samostatně výdělečně činnou."
+      "startingCitation": "V kalendářním roce, v němž osoba samostatně výdělečně činná vykonávající hlavní samostatnou výdělečnou činnost zahájila samostatnou výdělečnou činnost, a v bezprostředně následujících 2 kalendářních letech činí měsíční vyměřovací základ této osoby samostatně výdělečně činné nejméně 25 % průměrné mzdy; to však neplatí, pokud osoba samostatně výdělečně činná v období 20 kalendářních let před kalendářním rokem, v němž zahájila samostatnou výdělečnou činnost, již byla osobou samostatně výdělečně činnou.",
+      "sideZdroj": {
+        "pravniZaklad": "§ 10 odst. 2 zákona č. 155/1995 Sb., o důchodovém pojištění",
+        "url": "https://www.zakonyprolidi.cz/cs/1995-155#p10",
+        "citace": "Osoba samostatně výdělečně činná je v kalendářním roce účastna pojištění po dobu, po kterou vykonávala vedlejší samostatnou výdělečnou činnost, pokud její příjem z vedlejší samostatné výdělečné činnosti dosáhl v kalendářním roce aspoň rozhodné částky; rozhodná částka činí 2,4násobek částky, která se stanoví jako součin všeobecného vyměřovacího základu (§ 17 odst. 2) za kalendářní rok, který o dva roky předchází kalendářnímu roku, za který se posuzuje účast na pojištění, a přepočítacího koeficientu (§ 17 odst. 4) pro úpravu tohoto všeobecného vyměřovacího základu."
+      }
     },
     "health": {
       "rate": 0.135,
@@ -845,11 +878,15 @@
         {
           "id": "band1",
           "label": "1. pásmo",
-          "monthly": 9662,
           "tax": 100,
-          "social": 6074,
-          "health": 3488,
-          "socialFromMinAdvanceMultiple": 1.15,
+          "socialBaseFromMinBaseMultiple": 1.15,
+          "expected": {
+            "social": 6073,
+            "health": 3488,
+            "monthly": 9661,
+            "annual": 115932,
+            "eetOffAnnual": 132732
+          },
           "limits": {
             "p80": 2000000,
             "p60": 1500000,
@@ -857,10 +894,25 @@
             "p30": 1000000
           },
           "status": "derived",
-          "note": "Finanční správa tabulku pro rok 2027 zatím nezveřejnila. Částka je dopočtená stejně jako oficiální částky 2026: daň 100 Kč + minimální záloha na sociální pojištění × 1,15 (zaokrouhleno nahoru) + minimální záloha na zdravotní pojištění.",
-          "source": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/zajem-o-pausalni-dan-roste-letos",
-          "sourceTitle": "FS, tisková zpráva 19. 1. 2026 (výpočet 1. pásma 2026)",
-          "verified": "2026-11-05"
+          "note": "Dopočteno podle zákonného vzorce, tabulka Finanční správy pro rok 2027 zatím nevyšla. Sociální část: nejnižší měsíční vyměřovací základ (35 % průměrné mzdy, 18 083 Kč) zvýšený o 15 % = 20 796 Kč, z toho 29,2 % = 6 073 Kč. Zdravotní část: 13,5 % z dvanáctiny minimálního vyměřovacího základu = 3 488 Kč. Daň 100 Kč. Celkem 9 661 Kč měsíčně.",
+          "source": "https://e-sbirka.gov.cz/sb/1992/589",
+          "sourceTitle": "Zákon č. 589/1992 Sb., § 14 odst. 3 písm. a); zákon č. 592/1992 Sb., § 8a; zákon č. 586/1992 Sb., § 38lk odst. 7",
+          "verified": "2026-11-12",
+          "zdroj": {
+            "pravniZaklad": "§ 14 odst. 3 písm. a), odst. 5 věta první a odst. 13 a § 7 odst. 3 zákona č. 589/1992 Sb.; § 3a odst. 5 písm. a) a § 8a zákona č. 592/1992 Sb.; § 38lk odst. 7 písm. a) zákona č. 586/1992 Sb.",
+            "url": "https://www.zakonyprolidi.cz/cs/1992-589#p14",
+            "citace": "Výše měsíčního vyměřovacího základu osoby samostatně výdělečně činné, která je poplatníkem v paušálním režimu, činí pro a) první pásmo paušálního režimu částku nejnižšího měsíčního vyměřovacího základu podle odstavce 5 věty první zvýšeného o 15 % … (13) Měsíční vyměřovací základ se zaokrouhluje na celé koruny směrem nahoru."
+          },
+          "zdrojZdravotni": {
+            "pravniZaklad": "§ 8a a § 3a odst. 2 a 5 písm. a) zákona č. 592/1992 Sb.",
+            "url": "https://www.zakonyprolidi.cz/cs/1992-592#p8a",
+            "citace": "Záloha na pojistné osoby samostatně výdělečně činné, která je poplatníkem v paušálním režimu, se pro zvolené pásmo paušálního režimu stanoví procentní sazbou uvedenou v § 2 z jedné dvanáctiny vyměřovacího základu stanoveného v § 3a odst. 5 pro dané zvolené pásmo paušálního režimu. – § 3a odst. 5: … pro a) první pásmo paušálního režimu minimální vyměřovací základ podle odstavce 2."
+          },
+          "zdrojDan": {
+            "pravniZaklad": "§ 38lk odst. 7 písm. a) zákona č. 586/1992 Sb.",
+            "url": "https://www.zakonyprolidi.cz/cs/1992-586#p38lk",
+            "citace": "Záloha poplatníka v paušálním režimu na daň z příjmů činí a) 100 Kč pro první pásmo paušálního režimu."
+          }
         },
         {
           "id": "band2",
@@ -899,9 +951,19 @@
           "verified": "2026-11-05"
         }
       ],
+      "singleActivity": {
+        "share": 0.75,
+        "note": "Kalkulačka počítá s jednou činností. Vyšší limity pásem (nad 1 mil. Kč v 1. pásmu a nad 1,5 mil. Kč ve 2. pásmu) platí jen tehdy, když aspoň 75 % příjmů ze samostatné činnosti tvoří příjmy s výdajovým paušálem 80 % nebo 60 % (2 mil. Kč v 1. pásmu jen 80 %).",
+        "verified": "2026-11-12",
+        "zdroj": {
+          "pravniZaklad": "§ 2a odst. 5 zákona č. 586/1992 Sb., o daních z příjmů",
+          "url": "https://www.zakonyprolidi.cz/cs/1992-586#p2a",
+          "citace": "Rozhodnými příjmy pro a) první pásmo paušálního režimu jsou příjmy ze samostatné činnosti do výše 1. 1000000 Kč, a to bez ohledu na to, z jaké samostatné činnosti plynou, 2. 1500000 Kč, pokud alespoň 75 % příjmů ze samostatné činnosti poplatníka tvoří příjmy, k nimž lze uplatnit výdaje ve výši 80 % z příjmů nebo 60 % z příjmů, a 3. 2000000 Kč, pokud alespoň 75 % příjmů ze samostatné činnosti poplatníka tvoří příjmy, k nimž lze uplatnit výdaje ve výši 80 % z příjmů, b) druhé pásmo paušálního režimu jsou příjmy ze samostatné činnosti do výše 1. 1500000 Kč, a to bez ohledu na to, z jaké samostatné činnosti plynou, a 2. 2000000 Kč, pokud alespoň 75 % příjmů ze samostatné činnosti poplatníka tvoří příjmy, k nimž lze uplatnit výdaje ve výši 80 % z příjmů nebo 60 % z příjmů …"
+        }
+      },
       "conditionsSource": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
       "conditionsSourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
-      "verified": "2026-11-05"
+      "verified": "2026-11-12"
     },
     "deadlines": [
       {
@@ -1007,7 +1069,7 @@
       "fieldIncome": "Roční příjmy z podnikání v roce {year}",
       "fieldIncomeHelp": "Celkové příjmy (tržby) bez odečtení výdajů.",
       "fieldFlatRate": "Druh činnosti (výdajový paušál)",
-      "fieldFlatRateHelp": "Podle druhu činnosti se určí výdajový paušál i pásmo paušální daně.",
+      "fieldFlatRateHelp": "Podle druhu činnosti se určí výdajový paušál i pásmo paušální daně. Počítáme, že všechny příjmy máš z této jedné činnosti. Při více činnostech platí vyšší limit pásma, jen když aspoň {share} příjmů ze samostatné činnosti spadá pod výdajový paušál 80 % nebo 60 %.",
       "fieldExpenses": "Jak uplatníš výdaje v přiznání?",
       "optExpensesFlat": "Výdajovým paušálem",
       "optExpensesActual": "Skutečnými výdaji",
@@ -1022,6 +1084,7 @@
       "validationIncome": "Zadej roční příjmy jako celé číslo, nejméně {min}.",
       "validationActual": "Zadej skutečné výdaje jako celé číslo (0 nebo víc).",
       "validationChildren": "Zadej počet dětí jako celé číslo (0 nebo víc).",
+      "invalidResult": "V zadání je chyba. Výsledek a graf se ukážou, až ji opravíš.",
       "resultTitle": "Výsledek",
       "colVariant": "Varianta",
       "colAnnual": "Ročně",
@@ -1045,7 +1108,7 @@
       "lineBonus": ", daňový bonus {bonus} (stát ti ho vyplatí, ve výpočtu snižuje odvody)",
       "lineNoBonus": "Daňový bonus se nevyplatí: příjmy nedosahují {limit} (6 × minimální mzda).",
       "lineSocial": "Sociální pojištění: max(55 % zisku, minimum {min}) = základ {base} × 29,2 % = {amount}",
-      "lineSocialNone": "Sociální pojištění: 0 Kč, zisk z vedlejší činnosti nepřesáhl rozhodnou částku {threshold}.",
+      "lineSocialNone": "Sociální pojištění: 0 Kč, zisk z vedlejší činnosti nedosáhl rozhodné částky {threshold}.",
       "lineHealth": "Zdravotní pojištění: max(50 % zisku, minimum {min}) = základ {base} × 13,5 % = {amount}",
       "lineFlatParts": "{band}: {monthly} měsíčně = daň {tax} + sociální {social} + zdravotní {health}.",
       "lineEetOff": "EET OFF: {band1} + přirážka {surcharge} měsíčně = {monthly} měsíčně.",
@@ -1065,6 +1128,7 @@
       "noteStarting": "Začínající OSVČ: v roce zahájení hlavní činnosti a ve 2 dalších letech je minimum sociálního pojištění 25 % průměrné mzdy, tedy záloha aspoň {advance} měsíčně (§ 14 odst. 5 zákona o pojistném na sociální zabezpečení). Neplatí při jiném podnikání v posledních 20 letech. Paušální daň se tím nemění.",
       "noteNotIncluded": "Nepočítáme slevu za evidenci tržeb (až 5 000 Kč), slevu na manžela nebo manželku, na studenta, školkovné, nemocenské pojištění ani odčitatelné položky (penzijní spoření, dary, úroky z hypotéky).",
       "noteBand1Status": "Výše 1. pásma pro rok {year} je dopočtená ze zákona. Finanční správa ji k {verified} ještě nezveřejnila.",
+      "noteSingleActivity": "Pásmo počítáme, jako by všechny tvoje příjmy ze samostatné činnosti byly z jedné činnosti. Limit {limit} pro {band} platí, jen když aspoň {share} příjmů ze samostatné činnosti tvoří příjmy s výdajovým paušálem {rates}. Jinak je limit pro {band} {base}.",
       "noteActualChart": "Graf počítá přiznání s výdajovým paušálem {rate}, i když jsou zadané skutečné výdaje.",
       "chartTitle": "Roční odvody podle výše příjmů",
       "chartDesc": "Daň + sociální + zdravotní pojištění za rok {year}, výdajový paušál {rate}, počet dětí: {children}, {activity}.",
@@ -1099,6 +1163,7 @@
       "chartHelp": "Najetím nebo šipkami na grafu zobrazíš hodnoty pro konkrétní příjmy.",
       "colIncome": "Příjmy",
       "yes": "Ano",
+      "or": "nebo",
       "no": "Ne",
       "emptyResult": "Zadej roční příjmy a výsledek se spočítá.",
       "panelPrivacy": "Zadané údaje zůstávají jen v tomto okně prohlížeče. Nic se neukládá ani neodesílá."

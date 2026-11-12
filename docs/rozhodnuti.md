@@ -682,6 +682,83 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
 
 # Střední nálezy revize 5. 11. 2026 (12. 11. 2026)
 
+## Plán48 a Penzijko kompas – střední nálezy (P48-04, PEN-05, PEN-06, PEN-07)
+
+- **Podmínky daňové podpory (P48-04).** Podle § 15b odst. 1 písm. a) bod 1 ZDP je produkt
+  daňově podporovaný, jen když se z něj vyplácí nejdřív po 120 kalendářních měsících a nejdřív
+  v roce 60 let (u penzijka i od věku 5 let před důchodovým věkem). Při výplatě nebo zániku
+  dřív se podpora vrací (§ 15b odst. 4): odpočty za předchozích 10 zdaňovacích období se
+  zdaní jako ostatní příjem (§ 15b odst. 5 písm. a)). Čísla jsou v `rules.json` →
+  `sady.*.odpocet.podminkyPodpory` s citací, text skládá `vystup.js` → `upozorneniPodpory`.
+  Upozornění je v poznámce pod radou „Co udělat do 31. 12.“ (jen když rada radí vložit peníze),
+  v seznamu „Na co si dát pozor“ a v nápovědě pole DIP. Dřívější věta „trvání aspoň 10 let“
+  byla nepřesná: zákon počítá 120 měsíců od vzniku produktu do výplaty, ne délku placení.
+  Podmínky soukromého životního pojištění podle § 15a odst. 3 (pojistná částka, věk 60)
+  nástroj dál nekontroluje, je to v `meta.neovereno`.
+- **Odkaz MF (PEN-05).** Stránka `mf.gov.cz/cs/financni-trh/penzijni-sporeni` vrací 404.
+  Nahrazena stránkou MF „Základní informace“ k III. pilíři (HTTP 200, titulek „Základní
+  informace | Ministerstvo financí ČR“, 12. 11. 2026). Odkazy na kb.cz, finance.cz, finex.cz,
+  dumfinanci.cz, csps.cz a psp.cz se z prostředí nedají otevřít (proxy je blokuje), proto
+  zůstávají beze změny a jsou uvedené v PR k ruční kontrole.
+- **Výnosy fondů (PEN-06).** Prezentace MF z 3. 6. 2026 uvádí předpoklady svého modelu: na
+  s. 12–15 výnos akcií 7,5 %, dluhopisů 4,0 %, peněžního trhu 2,5 % a inflaci 2,5 %, na s. 17
+  výnos transformovaného fondu 1,5 %. Ty jsou teď v `rules.json` s citací (`vynosZdroj`,
+  `cyklus.zdrojAkcie`, `cyklus.zdrojDluhopisy`, `predpoklady.inflaceZdroj`):
+  - transformovaný fond 1,5 % (beze změny, teď se zdrojem),
+  - akcie ve strategii životního cyklu 7 → 7,5 %, dluhopisy 3 → 4 %,
+  - akciový fond 7 → 7,5 % (počítáme ho celý v akciích, to je předpoklad kalkulačky),
+  - inflace 2,5 % (beze změny, teď se zdrojem).
+  Výnos konzervativního (3 %) a vyváženého (4,5 %) fondu MF neuvádí. Hodnoty zůstávají a mají
+  poznámku „předpoklad kalkulačky, ne úřední údaj“. Rozložení životního cyklu (100 % akcií
+  do 45 let, 20 % v 65) zůstává vlastním předpokladem. MF v modelu počítá s 98 % akcií do
+  55 let a pak se snížením na 30 %, to je v poznámce fondu. Stránka v „S čím počítáme“ říká,
+  odkud který výnos je, a výslovně, že výnos transformovaného fondu rozhoduje o radě „přejít“.
+  Karta transformovaného fondu ukazuje použité výnosy pod výsledkem. Vyšší výnosy akcií
+  a dluhopisů zvýší projekce akciového fondu a životního cyklu a s nimi přínos přechodu
+  z transformovaného fondu (výchozí ukázka: 392 791 Kč v dnešních penězích).
+- **Testy (PEN-07).** Přibyly testy `vkladProMaxPrispevek` (obě sady, hranice pásem 17/18
+  a 29/30 let, věk bez pásma, minimální vklad), větve doporučení „poplatky“ a test 6 teď
+  ověřuje přesnou hodnotu měsíčního modelu 100 000 × (1 − 0,01/12)^120 = 90 479,97 Kč
+  místo tolerance 0,5 % kolem 90 438 Kč (to je roční strhávání ze zadání, 100 000 × 0,99^10).
+
+## Mám EET? + OSVČ 2027 – střední nálezy (EET-03, EET-05, EET-06, EET-07, EET-09, s nimi EET-11)
+
+- **1. pásmo paušální daně 2027 podle zákonného vzorce** (EET-03, rozhodnutí uživatele): o 15 % se
+  zvyšuje vyměřovací základ, ne záloha (§ 14 odst. 3 písm. a) a odst. 13 zákona č. 589/1992 Sb.).
+  35 % × 51 663 = 18 083 Kč, × 1,15 = 20 796 Kč, pojistné 29,2 % = 6 073 Kč (§ 7 odst. 3, nahoru).
+  Zdravotní část je 13,5 % z dvanáctiny minimálního VZ = 3 488 Kč (§ 8a a § 3a odst. 5 zákona
+  č. 592/1992 Sb.), daň 100 Kč (§ 38lk odst. 7 ZDP). Celkem **9 661 Kč** měsíčně, 115 932 Kč ročně,
+  EET OFF 132 732 Kč. Stejný postup dává oficiální částky FS pro rok 2026 (5 756 / 3 306 Kč).
+  `osvc.js` → `flatBands()` 1. pásmo dopočítá z parametrů. `rules.json` drží jen daň, násobek 1,15,
+  kontrolní hodnoty v `expected` a citace (`zdroj`, `zdrojZdravotni`, `zdrojDan`). Stav zůstává
+  „derived“: tabulka Finanční správy pro rok 2027 k 12. 11. 2026 nevyšla (ověřeno na
+  financnisprava.gov.cz, je tam jen rok 2026). Po zveřejnění tabulky přepnout na „official“.
+  Zdroj 1. pásma už neodkazuje na tiskovou zprávu FS bez výpočtu (část EET-13). Karta na úvodní
+  stránce (`zmeny2027.json`) uvádí 9 661 Kč se zdrojem v zákoně.
+- **Neplatné zadání v OSVČ 2027** (EET-05): výsledek, graf, lepivá lišta i částka první zálohy se
+  skryjí a místo nich je upozornění „V zadání je chyba…“. Hlášku u pole formulář ukazuje už při
+  psaní, čtečka ji oznámí jednou. Po opravě se vše přepočítá.
+- **Jedna činnost a podmínka 75 %** (EET-06, § 2a odst. 5 ZDP): kalkulačka se dál ptá jen na jeden
+  výdajový paušál. Nápověda pole to říká. Výsledek přidá poznámku, když pásmo vychází jen díky
+  vyššímu limitu (1,5 nebo 2 mil. Kč): ten platí, jen když aspoň 75 % příjmů tvoří příjmy
+  s paušálem 80 % nebo 60 % (2 mil. Kč jen 80 %). Jinak je limit 1. pásma 1 mil. Kč (2. pásma
+  1,5 mil. Kč). Doplňkovou otázku na podíl příjmů jsme nepřidali, zjednodušení je v `meta.neovereno`.
+- **Rozhodná částka u vedlejší činnosti** (EET-07, § 10 odst. 2 zákona č. 155/1995 Sb.): účast
+  vzniká, když zisk rozhodné částky „dosáhl“. Bez pojistného je jen zisk pod ní (dřív `<=`).
+  Rozhodná částka se počítá z nezaokrouhleného součinu VVZ × koeficient (NV č. 177/2026 Sb.:
+  48 900 Kč × 1,0565), ne z průměrné mzdy zaokrouhlené nahoru (EET-11, stejná funkce). Zákon
+  zaokrouhlení neurčuje: porovnává se přesná hodnota 123 990,84 Kč, zobrazuje se 123 991 Kč.
+  Pro rok 2027: 123 990 Kč → bez pojistného, 123 991 Kč → 19 914 Kč. Průměrná mzda 51 663 Kč
+  se kontroluje testem jako VVZ × koeficient nahoru (§ 23b odst. 4 ZPSZ).
+- **Zadání** (EET-09, rozhodnutí uživatele): `docs/zadani.md` opraveno s poznámkou „(opraveno podle
+  revize 5. 11. 2026, EET-09)“: 1. pásmo 9 661 Kč a kritéria 115 932 / 132 732 Kč, minimální
+  zálohy 35 % PM nejsou návrh, 25 % PM pro začínající, výjimka jen pro průkaz ZTP nebo ZTP/P kvůli
+  nevidomosti, těžké ztrátě zraku nebo hluchoslepotě (§ 11 odst. 4 zákona č. 180/2026 Sb.),
+  MOJE eet „zejména pro nejvýše 2 evidenční jednotky“ bez limitu zaměstnanců (eet.gov.cz).
+- Přepsané testy, které chybu konzervovaly: 115 944 → 115 932 Kč, 132 744 → 132 732 Kč, měsíčně
+  9 662 → 9 661 Kč a EET OFF 11 062 → 11 061 Kč (`test/osvc.test.js`, `test/e2e/mam-eet.test.js`
+  včetně ukázky bez JS). Test „1. pásmo = min. soc. záloha × 1,15“ nahradil test zákonného vzorce.
+
 ## Výpověď 2026 a Rodičovská – střední nálezy (VYP-04, VYP-05, ROD-07, ROD-09, ROD-11)
 
 - **VYP-04 (zbytek):** kontrola „sjednaný den skončení nemůže být dřív než den uzavření dohody“

@@ -92,15 +92,29 @@ export function vetaCoUdelat(d, limit) {
   return pevneDatum(vety.join(' '));
 }
 
-/** Drobná poznámka pod akční větou (propadlý příspěvek, termín mimořádného vkladu). */
-export function poznamkaCoUdelat(d, vychozi) {
+/**
+ * Upozornění na podmínky daňové podpory a její navrácení (§ 15b ZDP).
+ * Čísla jdou z rules.json (sada.odpocet.podminkyPodpory). Bez nich vrací prázdný text.
+ */
+export function upozorneniPodpory(sada) {
+  const p = sada.odpocet.podminkyPodpory;
+  if (!p) return '';
+  const vety = [`Odpočet platí jen u smlouvy, ze které jde peníze vybrat nejdřív po ${cislo(p.mesicu)} měsících a nejdřív v roce, kdy ti bude ${cislo(p.vek)} let.`];
+  if (p.dpsLetPredDuchodovymVekem) vety.push(`U penzijka podporu neruší ani výplata ${cislo(p.dpsLetPredDuchodovymVekem)} let před důchodovým věkem.`);
+  vety.push(`Když peníze vybereš dřív nebo smlouvu zrušíš bez převodu na stejný druh spoření, odpočty za posledních ${cislo(p.vraceniZaObdobi)} let dodaníš.`);
+  return vety.join(' ');
+}
+
+/** Drobná poznámka pod akční větou (propadlý příspěvek, termín mimořádného vkladu, podmínky podpory). */
+export function poznamkaCoUdelat(d, vychozi, sada) {
   const p = [];
   if (d.prispevek?.propadlo > 0) p.push(`Za uplynulé měsíce už propadlo ${kc(d.prispevek.propadlo)} státního příspěvku.`);
   if (d.odpocet) {
     p.push(`Mimořádný vklad na penzijko označ jako mimořádný, jinak se může počítat do dalšího roku. Obvykle musí dorazit do ${vychozi.mimoradnyVkladPripsatDo}`);
     p.push('Odpočet ušetří jen tolik daně, kolik jí opravdu platíš.');
+    if (sada) p.push(upozorneniPodpory(sada));
   }
-  return pevneDatum(p.join(' '));
+  return pevneDatum(p.filter(Boolean).join(' '));
 }
 
 /** Krátký komentář nad grafem limitu. */
