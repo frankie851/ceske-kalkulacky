@@ -87,6 +87,58 @@ describe('Slevy 2027 – kontrolní příklady', () => {
   });
 });
 
+// Revize 5. 11. 2026: SLV-01 (zastaralé školkovné) a SLV-02 (věk 18/26 let).
+describe('Slevy 2027 – opravy podle revize', () => {
+  test('SLV-01: školka zaškrtnutá u dítěte 2023, pak rok změněn na 2012 → žádné školkovné', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1990);
+    await pokracovat(page);
+    await pokracovat(page);
+    await page.click('[data-akce="pridat"]');
+    await vypln(page, '#ditRok0', 2023);
+    await pokracovat(page);
+    await zvol(page, 'skolka0');
+    await vypln(page, '#skolne0', '20 000');
+    await pokracovat(page);
+    await zpet(page);
+    await zpet(page);
+    assert.match(await nadpis(page), /^Máš děti/);
+    await vypln(page, '#ditRok0', 2012);
+    await pokracovat(page);
+    assert.match(await text(page, '.quiz'), /Žádné dítě v předškolním věku/);
+    await dokonce(page);
+    assert.equal(await page.$('tr[data-polozka="skolkovne"]'), null);
+    assert.doesNotMatch(await text(page, '#vysledek'), /školkovné/i);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  test('SLV-02: dítě nar. 6/2009 bez studia → zvýhodnění jen do 18 let (7 602 Kč), se studiem 15 204 Kč', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1980);
+    await pokracovat(page);
+    await pokracovat(page);
+    await page.click('[data-akce="pridat"]');
+    await vypln(page, '#ditRok0', 2009);
+    await page.select('#ditMesic0', '6');
+    await dokonce(page);
+    assert.match(await rocne(page, 'deti'), /^7 602 Kč$/);
+    await page.close();
+    const druha = await otevri(CESTA);
+    await vypln(druha.page, '#narRok', 1980);
+    await pokracovat(druha.page);
+    await pokracovat(druha.page);
+    await druha.page.click('[data-akce="pridat"]');
+    await vypln(druha.page, '#ditRok0', 2009);
+    await druha.page.select('#ditMesic0', '6');
+    await zvol(druha.page, 'ditStuduje0');
+    await dokonce(druha.page);
+    assert.match(await rocne(druha.page, 'deti'), /^15 204 Kč$/);
+    assert.deepEqual([...chyby, ...druha.chyby], []);
+    await druha.page.close();
+  });
+});
+
 describe('Slevy 2027 – ovládání', () => {
   test('chybějící rok narození ukáže chybu u pole', async () => {
     const { page } = await otevri(CESTA);
