@@ -1,10 +1,34 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-12",
     "zdroje": [
       {
-        "nazev": "Zákon č. 120/2025 Sb. (flexinovela zákoníku práce)",
-        "url": "https://www.epravo.cz/top/zakony/sbirka-zakonu/sb/2025/120"
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 51 a § 52 (výpovědní doba a důvody)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p52"
+      },
+      {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 67 (odstupné)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67"
+      },
+      {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 271ca (jednorázová náhrada při skončení pracovního poměru)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p271ca"
+      },
+      {
+        "nazev": "Zákon č. 120/2025 Sb., novela zákoníku práce (znění § 52 od 1. 6. 2025)",
+        "url": "https://www.zakonyprolidi.cz/cs/2025-120"
+      },
+      {
+        "nazev": "Zákon č. 435/2004 Sb., o zaměstnanosti, § 39 (nárok na podporu)",
+        "url": "https://www.zakonyprolidi.cz/cs/2004-435#p39"
+      },
+      {
+        "nazev": "Zákon č. 435/2004 Sb., o zaměstnanosti, § 43 a § 50 (podpůrčí doba a výše podpory)",
+        "url": "https://www.zakonyprolidi.cz/cs/2004-435#p50"
+      },
+      {
+        "nazev": "Sdělení MPSV č. 537/2025 Sb., průměrná mzda za 1.–3. čtvrtletí 2025: 48 171 Kč (strop podpory 2026)",
+        "url": "https://www.zakonyprolidi.cz/cs/2025-537"
       },
       {
         "nazev": "ÚP ČR – Změny v oblasti zaměstnanosti a podpory v nezaměstnanosti od 1. 1. 2026",
@@ -35,7 +59,7 @@
       "Délka pracovního poměru, průměrný výdělek a věk se zadávají ručně. Úřad práce bere čistý výdělek ze zápočtového listu."
     ]
   },
-  "overeno": "2026-11-05",
+  "overeno": "2026-11-12",
   "poznamka": "Parametry ověřeny k datu 'overeno'. Výpočet podpory se řídí rokem podání žádosti o podporu.",
   "zakonikPrace": {
     "predpis": "Zákon č. 262/2006 Sb., zákoník práce, ve znění zákona č. 120/2025 Sb.",
@@ -76,9 +100,23 @@
           "nasobek": 3
         }
       ],
-      "duvodUraz": "d",
-      "nasobekUraz": 12,
-      "zdroj": "§ 67 odst. 1 zákoníku práce"
+      "duvodExpozice": "e",
+      "nasobekExpozice": 12,
+      "zdroj": {
+        "pravniZaklad": "§ 67 odst. 1 a 3 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67",
+        "citace": "(3) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem z důvodu uvedeného v § 52 písm. e) nebo dohodou z téhož důvodu, přísluší od zaměstnavatele při skončení pracovního poměru odstupné ve výši nejméně dvanáctinásobku průměrného výdělku."
+      }
+    },
+    "nahrada271ca": {
+      "duvod": "d",
+      "nasobek": 12,
+      "text": "Jednorázová náhrada při skončení pracovního poměru pro pracovní úraz, nemoc z povolání nebo ohrožení touto nemocí. Není to odstupné.",
+      "zdroj": {
+        "pravniZaklad": "§ 271ca odst. 1 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p271ca",
+        "citace": "Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem podle § 52 písm. d) z důvodu, že pozbyl … dlouhodobě způsobilost konat dále dosavadní práci pro pracovní úraz, onemocnění nemocí z povolání nebo pro ohrožení touto nemocí, přísluší při skončení pracovního poměru jednorázová náhrada ve výši dvanáctinásobku průměrného měsíčního výdělku. Zaměstnanci přísluší náhrada podle věty první rovněž v případě, že k rozvázání pracovního poměru došlo dohodou uzavřenou z téhož důvodu."
+      }
     },
     "dovolena": {
       "zdroj": "§ 222 odst. 2 zákoníku práce",
@@ -251,10 +289,49 @@
       "zdroj": "psp.cz – sněmovní tisk 300; mpsv.gov.cz – Vláda schválila změny podpory v nezaměstnanosti"
     }
   },
+  "vylouceniPodpory": {
+    "kdo": "zamestnavatel",
+    "vzdy": [
+      "h"
+    ],
+    "priZvlastHrubem": [
+      "g"
+    ],
+    "text": "Při skončení pracovního poměru ze strany zaměstnavatele pro zvlášť hrubé porušení povinností v posledních 6 měsících před zařazením do evidence nárok na podporu nevzniká.",
+    "zdroj": {
+      "pravniZaklad": "§ 39 odst. 2 písm. a) a b) zákona o zaměstnanosti",
+      "url": "https://www.zakonyprolidi.cz/cs/2004-435#p39",
+      "citace": "(2) Nárok na podporu v nezaměstnanosti nemá uchazeč o zaměstnání, a) se kterým byl v době posledních 6 měsíců před zařazením do evidence uchazečů o zaměstnání zaměstnavatelem skončen pracovněprávní vztah z důvodu porušení povinnosti vyplývající z právních předpisů vztahujících se k jím vykonávané práci zvlášť hrubým způsobem …, b) se kterým byl v době posledních 6 měsíců před zařazením do evidence uchazečů o zaměstnání zaměstnavatelem skončen pracovněprávní vztah z důvodu porušení jiné povinnosti zaměstnance podle § 301a zákoníku práce zvlášť hrubým způsobem."
+    }
+  },
   "zdroje": [
     {
-      "nazev": "Zákon č. 120/2025 Sb. (flexinovela zákoníku práce)",
-      "url": "https://www.epravo.cz/top/zakony/sbirka-zakonu/sb/2025/120"
+      "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 51 a § 52 (výpovědní doba a důvody)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-262#p52"
+    },
+    {
+      "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 67 (odstupné)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67"
+    },
+    {
+      "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 271ca (jednorázová náhrada při skončení pracovního poměru)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-262#p271ca"
+    },
+    {
+      "nazev": "Zákon č. 120/2025 Sb., novela zákoníku práce (znění § 52 od 1. 6. 2025)",
+      "url": "https://www.zakonyprolidi.cz/cs/2025-120"
+    },
+    {
+      "nazev": "Zákon č. 435/2004 Sb., o zaměstnanosti, § 39 (nárok na podporu)",
+      "url": "https://www.zakonyprolidi.cz/cs/2004-435#p39"
+    },
+    {
+      "nazev": "Zákon č. 435/2004 Sb., o zaměstnanosti, § 43 a § 50 (podpůrčí doba a výše podpory)",
+      "url": "https://www.zakonyprolidi.cz/cs/2004-435#p50"
+    },
+    {
+      "nazev": "Sdělení MPSV č. 537/2025 Sb., průměrná mzda za 1.–3. čtvrtletí 2025: 48 171 Kč (strop podpory 2026)",
+      "url": "https://www.zakonyprolidi.cz/cs/2025-537"
     },
     {
       "nazev": "ÚP ČR – Změny v oblasti zaměstnanosti a podpory v nezaměstnanosti od 1. 1. 2026",

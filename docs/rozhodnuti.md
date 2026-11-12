@@ -536,6 +536,27 @@ je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké 
 webu platí. Každá hodnota je ověřená v textu předpisu na zakonyprolidi.cz (e-Sbírka se z prostředí
 neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
 
+## Výpověď 2026 (VYP-01, VYP-02, VYP-08)
+
+- **§ 52 písm. d) a e) podle znění od 1. 6. 2025** (zákon č. 120/2025 Sb.). Písm. d) je jednotný
+  zdravotní důvod, písm. e) je dosažení nejvyšší přípustné expozice. Odstupné 12× náleží jen
+  u písm. e) (§ 67 odst. 3 ZP). U písm. d) odstupné nenáleží.
+- **Jednorázová náhrada podle § 271ca ZP** je samostatný řádek, ne odstupné. Náleží u písm. d)
+  při výpovědi i dohodě, když zdravotní nezpůsobilost způsobil pracovní úraz, nemoc z povolání
+  nebo její ohrožení. Formulář se na příčinu zeptá jen u písm. d). Výchozí je „Jiné zdravotní
+  důvody“, aby kalkulačka neslibovala peníze, na které nárok není.
+- **Podpora a § 39 odst. 2 zákona o zaměstnanosti.** Když pracovní poměr ukončí zaměstnavatel
+  podle § 52 písm. h), nebo podle písm. g) pro zvlášť hrubé porušení, podpora nenáleží.
+  Kalkulačka místo tabulky ukáže 0 Kč s odůvodněním. U písm. g) se ptá zaškrtnutím, protože
+  písm. g) zahrnuje i méně závažná porušení. Dohodu ani výpověď od zaměstnance § 39 odst. 2
+  nevylučuje. Úřad práce bere v úvahu skončení za posledních 6 měsíců. Kalkulačka počítá
+  s posledním pracovním poměrem.
+- Věta „způsob skončení podporu neovlivňuje“ nahrazena přesným pravidlem včetně podmínky,
+  že nepobíráš starobní důchod (§ 39 odst. 1 písm. c).
+- Zdroje: přidány úřední předpisy (ZP § 52, § 67, § 271ca, zákon č. 120/2025 Sb., ZoZ § 39
+  a § 50, sdělení MPSV č. 537/2025 Sb.), epravo.cz odebráno.
+- Testy 13 a 14 z původního repozitáře (d → 12×, e → 0) chybu konzervovaly, jsou přepsané.
+
 ## Rodičovská (ROD-01 až ROD-04, s nimi ROD-05 a ROD-06)
 
 - **Měsíc 3. narozenin se počítá celý** (§ 30b odst. 1 písm. d) ZSSP). Plán, čerpání
