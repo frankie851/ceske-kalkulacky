@@ -4,6 +4,7 @@
 import { spocitej, kartaHtml, detailyHtml, seznamHtml, denPo } from './vystup.js';
 import { konecPomeru } from './vypoved.js';
 import { kc, datum } from '../../js/format.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const $ = (id) => document.getElementById(id);
 const rules = JSON.parse($('pravidla').textContent);
@@ -25,9 +26,7 @@ const kdo = () => form.querySelector('input[name="kdo"]:checked')?.value ?? 'zam
 const jeDatum = (t) => /^\d{4}-\d{2}-\d{2}$/.test(t);
 
 function cislo(id) {
-  const t = $(id).value.replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return NaN;
-  return /^\d+(\.\d+)?$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(id).value, { zaporne: false }) ?? NaN;
 }
 
 function vstupKonce() {

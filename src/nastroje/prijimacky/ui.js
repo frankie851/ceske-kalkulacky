@@ -8,6 +8,7 @@ import { buildICS, downloadICS } from './ics.js';
 import { stavZeScenare, normalizujDite, rozdelBody, spust, vyberTerminy, udalostiProIcs, casExportu } from './simulace.js';
 import * as v from './vystup.js';
 import { ty } from './texty.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const pravidla = JSON.parse(document.getElementById('pravidla').textContent);
 const koren = document.getElementById('prij');
@@ -19,9 +20,7 @@ const TEMPO = 1300; // ms mezi koly při přehrávání
 
 /** Číslo z pole: prázdné → null, čárka i mezery povolené, nesmysl → null. */
 function cislo(hodnota) {
-  const t = String(hodnota ?? '').replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  const n = Number(t);
+  const n = prectiCislo(hodnota);
   return Number.isFinite(n) ? n : null;
 }
 

@@ -4,6 +4,7 @@
 // po načtení neposkočí. Graf se překreslí do stejného rámečku (pevný poměr stran v CSS).
 // Hash adresy jen vybírá záložku (#refixace, #najem-vs-koupe). Nic se neukládá ani neodesílá.
 import * as v from './vystup.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const data = {
   pravidla: JSON.parse(document.getElementById('pravidla').textContent),
@@ -28,9 +29,7 @@ function nastavHtml(el, html) {
 /* ---------- čtení a kontrola polí ---------- */
 
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value);
 }
 
 function nastavChybu(id, zprava) {

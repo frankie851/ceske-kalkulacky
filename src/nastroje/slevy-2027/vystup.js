@@ -58,7 +58,7 @@ export function textyKroku(rules) {
     {
       id: 'hypoteka', nazev: 'Hypotéka',
       nadpis: 'Hypotéka nebo úvěr na bydlení',
-      napoveda: `Zaplacené úroky si odečteš ze základu daně: u smluv od roku 2021 nejvýš ${kc(o.uroky.limit)} ročně, u starších ${kc(o.uroky.limitStareSmlouvy)}. Limit platí na celou domácnost – když úroky uplatňujete dva, dělíte si ho.`,
+      napoveda: `Zaplacené úroky si odečteš ze základu daně: u bydlení pořízeného od roku 2021 nejvýš ${kc(o.uroky.limit)} ročně, u bydlení pořízeného dřív ${kc(o.uroky.limitStareSmlouvy)}. Rozhoduje, kdy bylo bydlení pořízené, ne datum podpisu smlouvy. Limit platí na celou domácnost – když úroky uplatňujete dva, dělíte si ho.`,
     },
     {
       id: 'stari', nazev: 'Spoření na stáří',

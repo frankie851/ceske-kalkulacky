@@ -7,6 +7,7 @@ import { fill, formatCzk } from './rules.js';
 import { compare, series, chartIncomes, breakEven, osvcVars, formatPercent } from './osvc.js';
 import { h, put, s, html } from './dom.js';
 import { modelOsvc, vysledekOsvcHtml, prvniPlatba } from './vystup.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -26,9 +27,8 @@ const radio = (name) => form.querySelector(`input[name="${name}"]:checked`)?.val
 /* ---------- Stav formuláře ---------- */
 
 function parseInt0(raw) {
-  const str = String(raw ?? '').replace(/\s/g, '');
-  if (str === '') return null;
-  const n = Number(str);
+  const n = prectiCislo(raw, { zaporne: false });
+  if (n === null) return null;
   return Number.isInteger(n) ? n : NaN;
 }
 

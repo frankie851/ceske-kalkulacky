@@ -13,6 +13,7 @@ import {
   seznamHtml,
   textOdpovedi,
 } from './vystup.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -151,9 +152,8 @@ function readAnswer(q, form) {
     return vals.length ? { ok: true, value: vals } : { ok: false, msg: rules.ui.validationMulti };
   }
   if (q.type === 'number') {
-    const raw = form.querySelector(`#${name}`).value.replace(/\s/g, '');
-    const n = Number(raw);
-    if (raw === '' || !Number.isInteger(n) || n < q.min) {
+    const n = prectiCislo(form.querySelector(`#${name}`).value, { zaporne: false });
+    if (n === null || !Number.isInteger(n) || n < q.min) {
       return { ok: false, msg: fill(rules.ui.validationNumber, { min: q.min }) };
     }
     return { ok: true, value: n };
@@ -232,8 +232,7 @@ function renderCalc(sec, result) {
     const mode = sec.querySelector('input[type="radio"]:checked')?.value;
     const useMojeEet = mode === 'moje';
     pole.hidden = useMojeEet;
-    const raw = costInput.value.replace(/\s/g, '');
-    const own = raw === '' ? null : Number(raw);
+    const own = prectiCislo(costInput.value, { zaporne: false });
     const k = modelKalkulacky(result, rules, { useMojeEet, ownCostAnnual: Number.isFinite(own) ? own : null });
     html(tabulka, kalkulackaTabulkaHtml(k));
     put(veta, h('strong', { text: k.veta }));

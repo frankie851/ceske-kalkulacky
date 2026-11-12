@@ -4,6 +4,7 @@
 import { spocitejRok, projekce, najdiPasmo } from './calc.js';
 import * as v from './vystup.js';
 import { kc, procenta } from '../../js/format.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const pravidla = JSON.parse(document.getElementById('pravidla').textContent);
 const formular = document.getElementById('plan48-formular');
@@ -14,9 +15,7 @@ const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
 
 /** Číslo z textového pole: mezery pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value);
 }
 
 function nastavChybu(id, text) {

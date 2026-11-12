@@ -42,3 +42,14 @@ test('odpočet: Plán48 a Penzijko kompas se shodnou pro samotné penzijko', () 
     assert.equal(a, b, `vklad ${vklad}: Plán48 ${a} ≠ Kompas ${b}`);
   }
 });
+
+// Revize 5. 11. 2026 (SOUHRN, část 3; BYD-07, SLV-04): vyšší limit úroků 300 000 Kč patří
+// k bytové potřebě obstarané před 1. 1. 2021 (zákon č. 386/2020 Sb., čl. IV bod 3), ne ke smlouvě.
+test('úroky z hypotéky: Bydlometr i Slevy mluví o pořízeném bydlení, ne o smlouvě', () => {
+  const byd = JSON.stringify(nacti('bydlometr'));
+  const slevy = JSON.stringify(nacti('slevy-2027'));
+  for (const t of [byd, slevy]) {
+    assert.doesNotMatch(t, /smlouvy (od|do) /);
+    assert.match(t, /386\/2020 Sb\./);
+  }
+});

@@ -8,6 +8,7 @@
 import * as v from './vystup.js';
 import { parseCsv, profileFromCsv, normalize, sum } from './calc.js';
 import { cislo } from '../../js/format.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const $ = (sel, koren = document) => koren.querySelector(sel);
 const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
@@ -50,9 +51,7 @@ function nactiTdd(klic) {
 
 /** Číslo z pole: mezery pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value);
 }
 
 function nastavChybu(id, zprava) {

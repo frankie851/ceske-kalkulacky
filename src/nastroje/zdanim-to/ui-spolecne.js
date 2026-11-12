@@ -1,15 +1,14 @@
 // Zdaním to? – společné pomůcky obou klientských modulů: čtení čísel, řádky formuláře
 // (přidat, odebrat, přečíslovat) a aktualizace výsledku bez posunu stránky.
 // Nic se neukládá (žádný localStorage) ani neposílá.
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 export const $ = (sel, koren = document) => koren.querySelector(sel);
 export const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
 
 /** Číslo z textového pole: mezery pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
 export function nactiCislo(hodnota) {
-  const t = String(hodnota ?? '').replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo(hodnota);
 }
 
 /** Nastaví text, jen když se liší (žádné zbytečné překreslení). */
