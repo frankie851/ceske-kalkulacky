@@ -758,3 +758,44 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
 - Přepsané testy, které chybu konzervovaly: 115 944 → 115 932 Kč, 132 744 → 132 732 Kč, měsíčně
   9 662 → 9 661 Kč a EET OFF 11 062 → 11 061 Kč (`test/osvc.test.js`, `test/e2e/mam-eet.test.js`
   včetně ukázky bez JS). Test „1. pásmo = min. soc. záloha × 1,15“ nahradil test zákonného vzorce.
+
+## Exekuce, nebo oddlužení? – střední nálezy (DLU-01, DLU-02, DLU-03, DLU-06, s nimi DLU-07)
+
+- **Úrok z prodlení podle pololetí (DLU-01).** Podle NV č. 351/2013 Sb. § 2 odst. 1 je sazba
+  repo sazba ČNB k prvnímu dni pololetí, v němž prodlení vzniklo, + 8 bodů, a po celou dobu
+  prodlení se nemění. Jedna sazba 11,75 % s textem „zákonná sazba“ proto platila jen pro dluh
+  po splatnosti od 1. 7. 2026. Historie je v `rules.json` → `urokZProdleni.pololeti` (1. pololetí
+  2022 až 2. pololetí 2026) s repo sazbou a dnem, od kdy platila, podle souboru ČNB
+  `vyvoj_repo_historie.txt` (stažen 12. 11. 2026): 2022/1 11,75 %, 2022/2–2023/2 15 %,
+  2024/1 14,75 %, 2024/2 12,75 %, 2025/1 12 %, 2025/2 a 2026/1 11,5 %, 2026/2 11,75 %.
+  Formulář má volbu „Od kdy dluh nesplácíte?“ (nejnovější pololetí vybrané), sazba se doplní
+  z pravidel; vlastní sazba (smlouva, starší dluh) přepne volbu na „Jindy, nebo mám sazbu ze
+  smlouvy“. Nápověda už neobsahuje číslo. Repo sazba je od 6. 11. 2026 4,00 %; sazbu pro
+  prodlení od 1. 1. 2027 doplníme až po 1. 1. 2027 (`meta.neovereno`).
+- **Životní minimum (DLU-02).** 4 860 Kč k 1. 1. 2026 plyne z NV č. 361/2025 Sb. § 1 (účinné
+  1. 10. 2025, pozbylo platnosti 30. 9. 2026), NV č. 436/2022 Sb. bylo zrušeno k 1. 10. 2025.
+  Od 1. 10. 2026 je 5 500 Kč přímo v § 2 zákona č. 110/2006 Sb. (novela č. 152/2025 Sb.);
+  nařízení o zvýšení částek účinné k 12. 11. 2026 neexistuje. Pro srážky platí po celý rok
+  částky k 1. lednu (NV č. 595/2006 Sb. § 4, znění od 1. 1. 2026, bez budoucího znění), takže
+  rok 2026 počítá se 4 860 Kč a 5 500 Kč patří k roku 2027. Hodnoty se nemění.
+  Normativní nájemné 9 430 Kč je ze sdělení č. 526/2025 Sb. platného k 1. 1. 2026; od
+  1. 10. 2026 ho nahradilo sdělení č. 169/2026 Sb. s částkami podle okresů (zákon č. 152/2026
+  Sb.). Pro srážky 2026 to nic nemění (§ 4), pro rok 2027 zůstává výpočet neúplný, protože
+  nařízení dál odkazuje na „obec s alespoň 70 000 obyvateli“. Energetický paušál 2 300 Kč
+  je v § 32 odst. 2 písm. a) zákona č. 151/2025 Sb. Změněné položky mají citaci
+  `zdroj: { pravniZaklad, url, citace }`.
+- **Úřední kalkulačky (DLU-03).** Ověřeno ze zdrojového kódu stránek 12. 11. 2026:
+  exekuce.justice.cz nabízí jako první volbu „2026 výpočet od 1. 10.“ s životním minimem
+  5 500 Kč, což § 4 NV č. 595/2006 Sb. neodpovídá; kalkulátor splátek insolvence.justice.cz
+  strhává celý zbytek mzdy nad 1násobkem součtu místo 1,9násobku (§ 2). U odkazů je teď
+  vykající upozornění; hranici 30 692 Kč (nezabavitelná částka + 1 × součet, bez vyživovaných
+  osob) počítá `vystup.js` z pravidel. Zjištění jsou v `rules.json` → `uredniKalkulacky`.
+  Konkrétní rozdíly ve výsledcích (2 784 vs 2 966 Kč atd.) přebíráme z revize, znovu jsme je
+  nepočítali, a proto je na stránce neuvádíme.
+- **Testy (DLU-06) a okrajové texty (DLU-07).** Nové `test/vystup.test.js` (větve
+  „prilis-dlouho“, „zadna-srazka“, úrok vyšší než splátka, `delkaSlovy`, volby pololetí,
+  upozornění u kalkulaček) a `test/bez-cisel.test.js` (žádná sazba ani desetinné číslo natvrdo
+  v `ui.js`, `vystup.js`, `11tydata` a `index.njk`). E2E ověřuje čtení „23.000“, „150.000“,
+  „1.500.000“ a „23000,50“ ve formuláři přes sdílené `prectiCislo`. Při srážce, kterou celou
+  dostane zaměstnavatel (mzda 14 105 Kč), stránka místo „déle než 50 let“ píše, že věřitelům
+  nic nezbude; bez dluhu místo „0 měsíců“ píše, že dluh nebyl zadán.

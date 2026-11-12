@@ -21,7 +21,8 @@ const js = jsSoubory.map((f) => cti(`nastroje/exekuce-nebo-oddluzeni/${f}`)).joi
 const rules = JSON.parse(fs.readFileSync(path.join(NASTROJ, 'rules.json'), 'utf8'));
 const VYHRADA = 'Orientační výpočet. Závazně to posoudí poradna, exekutor nebo insolvenční soud.';
 
-const POVOLENE = [/(^|\.)justice\.cz$/, /^mpsv\.gov\.cz$/, /^e-sbirka\.gov\.cz$/, /^(www\.)?ceecr\.cz$/, /^(www\.)?ochrance\.cz$/];
+// cnb.cz: úřední zdroj repo sazby pro úrok z prodlení (DLU-01)
+const POVOLENE = [/(^|\.)justice\.cz$/, /^mpsv\.gov\.cz$/, /^e-sbirka\.gov\.cz$/, /^(www\.)?ceecr\.cz$/, /^(www\.)?ochrance\.cz$/, /^www\.cnb\.cz$/];
 const externi = (h) => [...h.matchAll(/href="(https?:[^"]+)"/g)].map((m) => new URL(m[1]).hostname);
 
 test('stránka nástroje existuje v sestavení webu', () => {
@@ -116,4 +117,40 @@ test('čtivost: krátké věty a žádné nevysvětlené zkratky', () => {
 test('hlavička uvádí datum ověření shodné s rules.json', () => {
   assert.equal(rules.meta.overeno, rules.overeno);
   assert.match(html, new RegExp(`<time datetime="${rules.meta.overeno}"`));
+});
+
+// DLU-02: životní minimum 2026 cituje NV č. 361/2025 Sb., ne zrušené NV č. 436/2022 Sb.
+test('zdroje na stránce necitují zrušené nařízení 436/2022', () => {
+  assert.doesNotMatch(html, /436\/2022|sb\/2022\/436/);
+  assert.match(html, /href="https:\/\/e-sbirka\.gov\.cz\/sb\/2025\/361"/);
+});
+
+// DLU-01: sazba úroku z prodlení podle pololetí, výchozí hodnota z rules.json
+test('úrok z prodlení: nápověda mluví o pololetí a sazba v poli je z pravidel', () => {
+  const napoveda = html.match(/id="urok-napoveda">([^<]*)</)[1];
+  assert.match(napoveda, /pololetí/);
+  assert.doesNotMatch(napoveda, /\d/);
+  const nejnovejsi = rules.urokZProdleni.pololeti.at(-1);
+  const sazba = html.match(/<input id="sazba"[^>]*value="([^"]*)"/)[1];
+  assert.equal(sazba, String(nejnovejsi.procenta).replace('.', ','));
+  const select = html.match(/<select id="pololeti"[\s\S]*?<\/select>/)[0];
+  const volby = [...select.matchAll(/<option value="([^"]+)"( selected)?>/g)];
+  assert.equal(volby.length, rules.urokZProdleni.pololeti.length + 1);
+  assert.deepEqual([volby[0][1], Boolean(volby[0][2])], [nejnovejsi.od, true]);
+  assert.equal(volby.at(-1)[1], 'jina');
+  assert.match(html, /<label for="pololeti">/);
+});
+
+// DLU-03: u odkazů na úřední kalkulačky je vysvětlení, proč mohou ukázat jiné číslo
+test('u úředních kalkulaček je upozornění na jiné číslo', () => {
+  const pomoc = html.match(/<section[^>]*id="pomoc"[\s\S]*?<\/section>/)[0];
+  const polozka = (url) => pomoc.match(new RegExp(`<li>\\s*<a[^>]*href="${url.replace(/[.?/]/g, '\\$&')}"[\\s\\S]*?</li>`))[0];
+  const k = rules.uredniKalkulacky;
+  const srazky = textZHtml(polozka('https://exekuce.justice.cz/vypocet-srazek-ze-mzdy/')).replace(/\s+/g, ' ');
+  assert.ok(srazky.includes(k.srazky.variantaOdchylna), 'chybí název odchylné volby');
+  assert.ok(srazky.includes(k.srazky.variantaPodleNarizeni), 'chybí název správné volby');
+  assert.match(srazky, /k 1\. lednu/);
+  const splatky = textZHtml(polozka('https://insolvence.justice.cz/')).replace(/\s+/g, ' ');
+  assert.match(splatky, /vyšší splátku/);
+  assert.match(splatky, /30 692 Kč/);
 });
