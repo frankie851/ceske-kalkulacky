@@ -534,7 +534,50 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 Revize v `docs/revize/2026-11-05/` hodnotila původní repozitáře. Stav každého nálezu na webu
 je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké nálezy, které na
 webu platí. Každá hodnota je ověřená v textu předpisu na zakonyprolidi.cz (e-Sbírka se z prostředí
-neotevře) a v `rules.json` má citaci.
+neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
+
+## Výpověď 2026 (VYP-01, VYP-02, VYP-08)
+
+- **§ 52 písm. d) a e) podle znění od 1. 6. 2025** (zákon č. 120/2025 Sb.). Písm. d) je jednotný
+  zdravotní důvod, písm. e) je dosažení nejvyšší přípustné expozice. Odstupné 12× náleží jen
+  u písm. e) (§ 67 odst. 3 ZP). U písm. d) odstupné nenáleží.
+- **Jednorázová náhrada podle § 271ca ZP** je samostatný řádek, ne odstupné. Náleží u písm. d)
+  při výpovědi i dohodě, když zdravotní nezpůsobilost způsobil pracovní úraz, nemoc z povolání
+  nebo její ohrožení. Formulář se na příčinu zeptá jen u písm. d). Výchozí je „Jiné zdravotní
+  důvody“, aby kalkulačka neslibovala peníze, na které nárok není.
+- **Podpora a § 39 odst. 2 zákona o zaměstnanosti.** Když pracovní poměr ukončí zaměstnavatel
+  podle § 52 písm. h), nebo podle písm. g) pro zvlášť hrubé porušení, podpora nenáleží.
+  Kalkulačka místo tabulky ukáže 0 Kč s odůvodněním. U písm. g) se ptá zaškrtnutím, protože
+  písm. g) zahrnuje i méně závažná porušení. Dohodu ani výpověď od zaměstnance § 39 odst. 2
+  nevylučuje. Úřad práce bere v úvahu skončení za posledních 6 měsíců. Kalkulačka počítá
+  s posledním pracovním poměrem.
+- Věta „způsob skončení podporu neovlivňuje“ nahrazena přesným pravidlem včetně podmínky,
+  že nepobíráš starobní důchod (§ 39 odst. 1 písm. c).
+- Zdroje: přidány úřední předpisy (ZP § 52, § 67, § 271ca, zákon č. 120/2025 Sb., ZoZ § 39
+  a § 50, sdělení MPSV č. 537/2025 Sb.), epravo.cz odebráno.
+- Testy 13 a 14 z původního repozitáře (d → 12×, e → 0) chybu konzervovaly, jsou přepsané.
+
+## Rodičovská (ROD-01 až ROD-04, s nimi ROD-05 a ROD-06)
+
+- **Měsíc 3. narozenin se počítá celý** (§ 30b odst. 1 písm. d) ZSSP). Plán, čerpání
+  i kontrolní seznam končí posledním dnem měsíce 3. narozenin. Věk se bere z
+  `rules.rodicovsky[].vekMesicu`, ne z konstanty v kódu.
+- **Rodičovská souběžně s mateřskou** (§ 30b odst. 3 ZSSP): náleží od měsíce narození, v měsících
+  s mateřskou jen ve výši rozdílu, když je zvolená výše vyšší. Před narozením nenáleží.
+  Návrh výše „Vyčerpat do 3 let“ hledá nejnižší výši po stovkách, se kterou se vyčerpá
+  i se souběhem (`navrhVyseSOdectem`).
+- **Mateřská a otcovská přes 1. leden** se od 1. 1. přepočítají podle redukčních hranic nového
+  roku (§ 22 odst. 2 ZNP). DVZ se nemění. Částka v měsíci je součet po dnech. Výstup ukazuje
+  druhou sazbu, jen když se liší. Strop rodičovské se počítá z DVZ redukovaného hranicemi roku
+  narození dítěte.
+- **Jesle: 120 hodin** (§ 31 odst. 3 písm. a) ZSSP), dřív 92.
+- **Zbytek nižší než měsíční částka** se vyplatí spolu s poslední výplatou (§ 30 odst. 6 ZSSP).
+  Je to střední nález ROD-05, opravený společně s ROD-01, protože jde o stejnou funkci
+  `cerpaniRp`. Proto 350 000 Kč po 15 000 Kč = 23 měsíců (poslední 20 000 Kč), ne 24.
+- **400 000 Kč** pro děti narozené od 1. 1. 2027 je zákon č. 152/2026 Sb. (čl. II), štítek
+  „schváleno“ místo „návrh“ (ROD-06).
+- Přepsané testy, které chybu konzervovaly: 240 000 / 110 000 Kč, 24 měsíců / 5 000 Kč,
+  `navrhVyse` 11 700 Kč, 2 000 Kč denně po celou mateřskou přes Nový rok.
 
 ## OSVČ 2027 a Slevy 2027 (EET-01, SLV-01, SLV-02, s nimi EET-08)
 

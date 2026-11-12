@@ -58,6 +58,48 @@ describe('Výpověď 2026 – kontrolní příklady', () => {
   });
 });
 
+// Revize 5. 11. 2026: VYP-01 (§ 52 písm. d/e od 1. 6. 2025, § 271ca) a VYP-02 (§ 39 odst. 2 ZoZ).
+describe('Výpověď 2026 – zdravotní důvody a zvlášť hrubé porušení', () => {
+  test('d) bez úrazu → odstupné 0, s úrazem náhrada § 271ca; e) → 12× odstupné', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#delka', '5');
+    await vypln(page, '#hruby', '40 000');
+    const pricina = () => page.$eval('#pricina-uraz', (el) => el.closest('[data-pro]').hidden);
+    assert.equal(await pricina(), true, 'u důvodu c) se příčina neukazuje');
+    await page.select('#duvod', 'd');
+    assert.equal(await pricina(), false);
+    assert.match(await text(page, '#vypoved-vysledky .vyp-castka'), /^0 Kč$/);
+    assert.doesNotMatch(await text(page, '#vysledek .stats'), /271ca/);
+    await page.click('#pricina-uraz + label');
+    assert.match(await text(page, '#vysledek .stats'), /480 000 Kč\s*jednorázová náhrada podle § 271ca/);
+    assert.match(await text(page, '#odstupne-nadpis + .vyp-castka'), /^0 Kč$/);
+    await page.select('#duvod', 'e');
+    assert.match(await text(page, '#vypoved-vysledky .vyp-castka'), /^480 000 Kč$/);
+    assert.match(await text(page, '#odstupne-nadpis ~ p.mb-0'), /§ 67 odst\. 3/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  test('h) → podpora nenáleží; g) jen se zaškrtnutým zvlášť hrubým porušením', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#doruceni', '2026-07-10');
+    await vypln(page, '#vek', 40);
+    await vypln(page, '#cisty', 30000);
+    await page.select('#duvod', 'h');
+    assert.equal(await page.$('.vyp-podpora'), null, 'bez tabulky podpory');
+    assert.match(await text(page, '#podpora-nadpis + .vyp-castka + p'), /§ 39 odst\. 2/);
+    assert.match(await text(page, '#vysledek .stats'), /nenáleží/);
+    await page.select('#duvod', 'g');
+    assert.deepEqual(await podpora(page), ['24 000 Kč', '24 000 Kč', '15 000 Kč', '15 000 Kč', '12 000 Kč']);
+    await page.click('#zvlastHrube-ano + label');
+    assert.equal(await page.$('.vyp-podpora'), null);
+    await page.click('#kdo-dohoda + label');
+    assert.equal(await page.$eval('#zvlastHrube-ano', (el) => el.closest('[data-pro]').hidden), true);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+});
+
 describe('Výpověď 2026 – ovládání', () => {
   test('dohoda ukáže sjednaný den, chybný věk ukáže chybu u pole', async () => {
     const { page, chyby } = await otevri(CESTA);

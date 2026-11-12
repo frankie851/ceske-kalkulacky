@@ -1,7 +1,23 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-12",
     "zdroje": [
+      {
+        "nazev": "Zákon č. 117/1995 Sb., o státní sociální podpoře, § 30 až § 31 (rodičovský příspěvek)",
+        "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30"
+      },
+      {
+        "nazev": "Zákon č. 152/2026 Sb. (rodičovský příspěvek 400 000 Kč pro děti narozené od 1. 1. 2027)",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-152"
+      },
+      {
+        "nazev": "Zákon č. 187/2006 Sb., o nemocenském pojištění, § 21 a § 22 (redukce DVZ, přepočet dávek od 1. ledna)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-187#p22"
+      },
+      {
+        "nazev": "Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-185"
+      },
       {
         "nazev": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
         "url": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
@@ -15,20 +31,12 @@
         "url": "https://mpsv.gov.cz/nemocenske-pojisteni"
       },
       {
-        "nazev": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
-        "url": "https://e-sbirka.gov.cz/sb/2026/185"
-      },
-      {
         "nazev": "MPSV / ÚP ČR – Rodičovský příspěvek",
         "url": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
       },
       {
         "nazev": "MPSV – Volba výše rodičovského příspěvku",
         "url": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
-      },
-      {
-        "nazev": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
-        "url": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
       },
       {
         "nazev": "MPSV – Péče o dítě a finance",
@@ -44,12 +52,11 @@
       "Předpokládáme porod v den termínu a stejný měsíční příjem v celém rozhodném období, bez vyloučených dob (nemoc, předchozí mateřská).",
       "Rodičovský příspěvek počítáme v jedné měsíční výši po celou dobu. Úřad práce dovolí změnu jednou za 3 měsíce.",
       "Čistá mzda je orientační: bez daňového zvýhodnění na dítě a bez dalších slev a odpočtů.",
-      "400 000 Kč (u vícerčat 800 000 Kč) pro děti narozené od 1. 1. 2027: novelu schválil Senát 29. 7. 2026, ve Sbírce zákonů zatím není.",
       "Redukční hranice a sazby pro čistou mzdu na rok, který v pravidlech ještě není, odhadujeme podle posledního známého roku.",
-      "Souběh mateřské a rodičovské, jednorázovou výplatu zbytku při narození dalšího dítěte ani převzetí dítěte do péče nepočítáme."
+      "Jednorázovou výplatu zbytku při narození dalšího dítěte ani převzetí dítěte do péče nepočítáme."
     ]
   },
-  "overeno": "2026-11-05",
+  "overeno": "2026-11-12",
   "poznamka": "Parametry pro výpočet. Každý rok doplňte nový rok do redukcniHranice a cistaMzda (viz README.md).",
   "redukcniHranice": {
     "2025": {
@@ -71,7 +78,7 @@
       "h2": 2584,
       "h3": 5167,
       "zdroj": "Sdělení MPSV č. 185/2026 Sb. (podepsáno 8. 10. 2026, vyhlášeno 13. 10. 2026)",
-      "url": "https://e-sbirka.gov.cz/sb/2026/185"
+      "url": "https://www.zakonyprolidi.cz/cs/2026-185"
     }
   },
   "ppm": {
@@ -108,8 +115,8 @@
       "minStropVicercata": 30000,
       "nasobekVicercata": 2,
       "vekMesicu": 36,
-      "zdroj": "mpsv.gov.cz – Rodičovský příspěvek (ÚP ČR)",
-      "url": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+      "zdroj": "Zákon č. 117/1995 Sb., § 30 odst. 1 a § 30b odst. 1 písm. d) (do 3 let věku včetně měsíce 3. narozenin)",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30"
     },
     {
       "narozeniOd": "2027-01-01",
@@ -119,15 +126,46 @@
       "minStropVicercata": 30000,
       "nasobekVicercata": 2,
       "vekMesicu": 36,
-      "pozn": "Novela zákona o státní sociální podpoře schválená Senátem 29. 7. 2026, pro děti narozené od 1. 1. 2027. Měsíční stropy se nemění.",
-      "zdroj": "mpsv.gov.cz – Senát schválil zvýšení rodičovského příspěvku na 400 000 korun",
-      "url": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
+      "pozn": "Pro děti narozené od 1. 1. 2027 je celková částka 400 000 Kč (u vícerčat 800 000 Kč) podle zákona č. 152/2026 Sb. Měsíční stropy se nemění.",
+      "zdroj": "Zákon č. 152/2026 Sb., čl. I a čl. II (přechodné ustanovení)",
+      "url": "https://www.zakonyprolidi.cz/cs/2026-152",
+      "zakon": "152/2026 Sb."
     }
   ],
   "rpPodilDvz": 0.7,
   "rpDnu": 30,
   "rpZmenaMesicu": 3,
-  "jesleHodinMesicne": 92,
+  "soubehSPpm": {
+    "zdroj": {
+      "pravniZaklad": "§ 30b odst. 3 zákona č. 117/1995 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30b",
+      "citace": "Má-li v rodině jeden z rodičů v kalendářním měsíci nárok na peněžitou pomoc v mateřství nebo nemocenské poskytované v souvislosti s porodem, rodičovský příspěvek náleží, jen je-li vyšší, a to ve výši rozdílu mezi rodičovským příspěvkem a těmito dávkami nemocenského pojištění."
+    }
+  },
+  "prepocetOdLedna": {
+    "zdroj": {
+      "pravniZaklad": "§ 22 odst. 2 zákona č. 187/2006 Sb., o nemocenském pojištění",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-187#p22",
+      "citace": "Výše dávek, na které vznikl nárok před 1. lednem kalendářního roku a tento nárok trvá ještě tohoto dne, se upraví bez žádosti od tohoto dne podle nové výše denního vyměřovacího základu stanoveného podle částek redukčních hranic platných od 1. ledna tohoto kalendářního roku."
+    }
+  },
+  "zbytekRp": {
+    "zdroj": {
+      "pravniZaklad": "§ 30 odst. 6 zákona č. 117/1995 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30",
+      "citace": "Jestliže by po odpočtu úhrnu částky rodičovského příspěvku, která náleží za aktuální kalendářní měsíc, a všech částek rodičovského příspěvku již vyplacených za předchozí období od celkové částky rodičovského příspěvku zbývala částka, která je nižší než částka, která náleží za aktuální kalendářní měsíc, vyplatí se tato zbývající částka rodičovského příspěvku spolu s částkou náležející za aktuální kalendářní měsíc."
+    }
+  },
+  "jesleHodinMesicne": 120,
+  "jesle": {
+    "hodinMesicne": 120,
+    "vekLet": 2,
+    "zdroj": {
+      "pravniZaklad": "§ 31 odst. 3 písm. a) zákona č. 117/1995 Sb., o státní sociální podpoře",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p31",
+      "citace": "Podmínka osobní celodenní péče se též považuje za splněnou a rodičovský příspěvek náleží, jestliže a) dítě, které nedosáhlo 2 let věku, navštěvuje dětskou skupinu, mateřskou školu nebo jiné obdobné zařízení pro děti v rozsahu nepřevyšujícím 120 hodin v kalendářním měsíci"
+    }
+  },
   "cistaMzda": {
     "2026": {
       "sp": 0.071,
@@ -142,6 +180,22 @@
   },
   "zdroje": [
     {
+      "nazev": "Zákon č. 117/1995 Sb., o státní sociální podpoře, § 30 až § 31 (rodičovský příspěvek)",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30"
+    },
+    {
+      "nazev": "Zákon č. 152/2026 Sb. (rodičovský příspěvek 400 000 Kč pro děti narozené od 1. 1. 2027)",
+      "url": "https://www.zakonyprolidi.cz/cs/2026-152"
+    },
+    {
+      "nazev": "Zákon č. 187/2006 Sb., o nemocenském pojištění, § 21 a § 22 (redukce DVZ, přepočet dávek od 1. ledna)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-187#p22"
+    },
+    {
+      "nazev": "Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
+      "url": "https://www.zakonyprolidi.cz/cs/2026-185"
+    },
+    {
       "nazev": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
       "url": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
     },
@@ -154,20 +208,12 @@
       "url": "https://mpsv.gov.cz/nemocenske-pojisteni"
     },
     {
-      "nazev": "e-Sbírka – Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
-      "url": "https://e-sbirka.gov.cz/sb/2026/185"
-    },
-    {
       "nazev": "MPSV / ÚP ČR – Rodičovský příspěvek",
       "url": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
     },
     {
       "nazev": "MPSV – Volba výše rodičovského příspěvku",
       "url": "https://mpsv.gov.cz/volba-vyse-rodicovskeho-prispevku"
-    },
-    {
-      "nazev": "MPSV – Senát schválil zvýšení rodičovského příspěvku na 400 000 Kč",
-      "url": "https://mpsv.gov.cz/senat-schvalil-zvyseni-rodicovskeho-prispevku-na-400-000-korun-i-upravy-superdavky"
     },
     {
       "nazev": "MPSV – Péče o dítě a finance",
