@@ -7,7 +7,7 @@
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p52"
       },
       {
-        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 67 (odstupné)",
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 67 (odstupné; odst. 2 předchozí pracovní poměr u téhož zaměstnavatele)",
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67"
       },
       {
@@ -106,6 +106,16 @@
         "pravniZaklad": "§ 67 odst. 1 a 3 zákoníku práce",
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67",
         "citace": "(3) Zaměstnanci, u něhož dochází k rozvázání pracovního poměru výpovědí danou zaměstnavatelem z důvodu uvedeného v § 52 písm. e) nebo dohodou z téhož důvodu, přísluší od zaměstnavatele při skončení pracovního poměru odstupné ve výši nejméně dvanáctinásobku průměrného výdělku."
+      },
+      "predchoziPomer": {
+        "mesicu": 6,
+        "text": "Do délky pracovního poměru pro odstupné se počítá i předchozí pracovní poměr u téhož zaměstnavatele, pokud od jeho skončení do vzniku nového neuplynulo víc než 6 měsíců. Délku zadává uživatel, výpočet se nemění.",
+        "overeno": "2026-11-12",
+        "zdroj": {
+          "pravniZaklad": "§ 67 odst. 2 zákoníku práce",
+          "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67",
+          "citace": "(2) Za dobu trvání pracovního poměru se pro účely odstavce 1 považuje i doba trvání předchozího pracovního poměru u téhož zaměstnavatele, pokud doba od jeho skončení do vzniku následujícího pracovního poměru nepřesáhla dobu 6 měsíců."
+        }
       }
     },
     "nahrada271ca": {
@@ -310,7 +320,7 @@
       "url": "https://www.zakonyprolidi.cz/cs/2006-262#p52"
     },
     {
-      "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 67 (odstupné)",
+      "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 67 (odstupné; odst. 2 předchozí pracovní poměr u téhož zaměstnavatele)",
       "url": "https://www.zakonyprolidi.cz/cs/2006-262#p67"
     },
     {

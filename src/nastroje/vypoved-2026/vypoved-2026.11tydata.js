@@ -23,6 +23,7 @@ const vstup = {
 const m = spocitej(vstup, rules);
 if (m.od.castka !== 2 * vstup.hruby) throw new Error('Výpověď 2026: ukázka má mít odstupné 2× průměrný výdělek.');
 
+const predchozi = rules.zakonikPrace.odstupne.predchoziPomer;
 const pole = (n) => cislo(n, Number.isInteger(n) ? 0 : 1).replace(/ /g, ' ');
 
 export default {
@@ -41,6 +42,8 @@ export default {
     zkusebni: [{ hodnota: 'ne', text: 'Ne', vybrano: true }, { hodnota: 'ano', text: 'Ano', vybrano: false }],
     pricina: [{ hodnota: 'jine', text: 'Jiné zdravotní důvody', vybrano: true }, { hodnota: 'uraz', text: 'Pracovní úraz nebo nemoc z povolání', vybrano: false }],
     zvlastHrube: [{ hodnota: 'ne', text: 'Ne', vybrano: true }, { hodnota: 'ano', text: 'Ano', vybrano: false }],
+    // § 67 odst. 2 ZP: předchozí pracovní poměr u téhož zaměstnavatele (revize 5. 11. 2026, VYP-05).
+    napovedaDelka: `Ke dni skončení. Půl roku = 0,5. Započítej i předchozí pracovní poměr u stejného zaměstnavatele, když mezi nimi nebyla pauza delší než ${predchozi.mesicu} měsíců (${predchozi.zdroj.pravniZaklad.replace('zákoníku práce', 'ZP')}).`,
     nahradaDuvod: rules.zakonikPrace.nahrada271ca.duvod,
     nahradaNasobek: rules.zakonikPrace.nahrada271ca.nasobek,
     zvlastHrubeDuvody: rules.vylouceniPodpory.priZvlastHrubem.join(' '),

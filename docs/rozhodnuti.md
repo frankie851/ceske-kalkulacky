@@ -679,3 +679,38 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   to u ní uvádí: 51 663 Kč (NV č. 177/2026 Sb.) pro daně a pojistné 2027 v Mám EET? a Slevách,
   48 171 Kč (sdělení č. 537/2025 Sb.) pro strop podpory 2026 ve Výpovědi, 3 × 48 967 Kč pro
   hranici 23% daně 2026 v čisté mzdě Rodičovské.
+
+# Střední nálezy revize 5. 11. 2026 (12. 11. 2026)
+
+## Výpověď 2026 a Rodičovská – střední nálezy (VYP-04, VYP-05, ROD-07, ROD-09, ROD-11)
+
+- **VYP-04 (zbytek):** kontrola „sjednaný den skončení nemůže být dřív než den uzavření dohody“
+  je v `konecPomeru` (`vypoved.js`), ne jen ve formuláři. Modul vyhodí `Error` s neutrální větou
+  bez tykání i vykání, `app.js` ji jen ukáže u pole `konecDohody`. Týž den uzavření a skončení
+  je v pořádku. Testy věku 52 a 57 s čistým výdělkem 60 000 Kč: 8 a 11 měsíců, první 3 měsíce
+  strop 38 537 Kč (0,8 × 48 171 Kč, sdělení č. 537/2025 Sb.), celkem 253 611 a 325 611 Kč
+  (§ 43 a § 50 zákona č. 435/2004 Sb.). Tyto dva testy prošly už před opravou, jsou pojistkou.
+- **VYP-05:** § 67 odst. 2 zákoníku práce (předchozí pracovní poměr u téhož zaměstnavatele,
+  pauza nejvýš 6 měsíců) je v `rules.json` → `zakonikPrace.odstupne.predchoziPomer` s citací.
+  Nápověda k délce pracovního poměru se skládá v `vypoved-2026.11tydata.js` z těchto dat.
+  Výpočet se nemění, délku zadává uživatel.
+- **ROD-07:** při chybě ve formuláři (termín, příjem, dny a měsíce) se plán skryje celý:
+  karta výsledku, časová osa, souhrn, kontrolní seznam i lepivá lišta. Místo nich je upozornění
+  „Plán se nepřepočítal“ v živé oblasti (`role="status"`). Po opravě se plán vrátí. Skrytí jsme
+  zvolili místo zašednutí: zašedlá čísla k jinému zadání se dají omylem opsat.
+- **ROD-09:** nástup na otcovskou jde zadat do 41. dne (`rules.otcovska.nastupDoDne`, § 38a
+  odst. 4 zákona č. 187/2006 Sb.: „v období 6 týdnů ode dne narození“; den porodu = 0. den).
+  Délka 14 dní (§ 38b odst. 1) a sazba 70 % (§ 38c) beze změny. Dřívější strop 28. den byl
+  42 − 14, aby se otcovská nepotkala s mateřskou otce od 7. týdne. Ten střet teď řeší výpočet
+  podle § 48 odst. 1 písm. a) zákona č. 187/2006 Sb.: z jednoho pojištění má přednost mateřská,
+  takže za společné dny se vyplácí jen mateřská a otcovská se neprodlužuje. Aplikace na to
+  upozorní (`otcovskaSMaterskou`). Prodloužení lhůty o dny hospitalizace (§ 38a odst. 4 věta
+  třetí) nepočítáme.
+- **ROD-11:** odkazy ČSSZ vedou přímo na stránky „Peněžitá pomoc v mateřství“ a „Otcovská“
+  na cssz.gov.cz (curl 12. 11. 2026: HTTP 200, titulek odpovídá). Tisková zpráva Finanční
+  správy k čisté mzdě je nahrazená předpisy na zakonyprolidi.cz: zákon č. 586/1992 Sb. § 16
+  a § 35ba, č. 589/1992 Sb. § 7 a č. 48/1997 Sb. § 9 odst. 2. Přibyly zdroje § 38a a § 48
+  zákona č. 187/2006 Sb. Kontrolní seznam bere název i adresu odkazu na úřad z `rules.json`
+  (`ppm.urad`, `otcovska`, `rodicovskyUrad`). Dřív odkaz „MPSV / ÚP ČR – Rodičovský příspěvek“
+  vedl na text zákona. Test `test/zdroje.test.js` hlídá jen úřední domény (gov.cz,
+  zakonyprolidi.cz), žádné tiskové zprávy a shodu `zdroje` s `meta.zdroje`.

@@ -37,7 +37,7 @@ uvod: Vyplň datum doručení a pár údajů z výplatní pásky. Hned uvidíš 
         <div data-pro="zamestnavatel zamestnanec">
           {{ segmenty({ id: 'zkusebni', legenda: 'Ruší se pracovní poměr ve zkušební době?', moznosti: v.zkusebni, napoveda: 'Ve zkušební době výpovědní doba neběží a poměr končí dnem doručení (§ 66 ZP).' }) }}
         </div>
-        {{ pole({ id: 'delka', label: 'Jak dlouho pracovní poměr trvá', hodnota: v.pole.delka, jednotka: 'let', inputmode: 'decimal', napoveda: 'Ke dni skončení. Půl roku = 0,5.', chybaMisto: true }) }}
+        {{ pole({ id: 'delka', label: 'Jak dlouho pracovní poměr trvá', hodnota: v.pole.delka, jednotka: 'let', inputmode: 'decimal', napoveda: v.napovedaDelka, chybaMisto: true }) }}
         {{ pole({ id: 'hruby', label: 'Průměrný hrubý měsíční výdělek', hodnota: v.pole.hruby, jednotka: 'Kč', napoveda: 'Pro odstupné. Sdělí ho mzdová účetní.', chybaMisto: true }) }}
         {{ pole({ id: 'cisty', label: 'Průměrný čistý měsíční výdělek', hodnota: v.pole.cisty, jednotka: 'Kč', napoveda: 'Pro podporu. Úřad práce ho vezme ze zápočtového listu.', chybaMisto: true }) }}
         {{ pole({ id: 'vek', label: 'Věk v den podání žádosti o podporu', hodnota: v.pole.vek, jednotka: 'let', napoveda: 'Podle věku se řídí, jak dlouho podpora trvá.', chybaMisto: true }) }}
