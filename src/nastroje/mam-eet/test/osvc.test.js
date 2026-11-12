@@ -174,6 +174,33 @@ describe('pojistné', () => {
     assert.equal(s.base, o.social.expected.maxBaseAnnual);
   });
 
+  // Revize 5. 11. 2026, EET-01: § 14 odst. 5 věta druhá zákona č. 589/1992 Sb. – v roce zahájení
+  // hlavní činnosti a ve 2 následujících letech je minimum 25 % průměrné mzdy
+  // (neplatí, když byl člověk OSVČ v předchozích 20 letech).
+  test('začínající OSVČ: minimum sociálního pojištění 25 % průměrné mzdy', () => {
+    const p = params(rules);
+    assert.equal(p.socialMinBaseStarting, o.social.expected.minBaseStarting);
+    assert.equal(p.socialMinBaseStarting, 12916);
+    const s = socialIns(320000, 'mainStart', rules);
+    assert.equal(s.min, 154992);
+    assert.equal(s.base, 176000);
+    assert.equal(s.amount, 51392);
+    // zdravotní minimum a paušální daň se nemění
+    assert.equal(healthIns(320000, 'mainStart', rules).amount, healthIns(320000, 'main', rules).amount);
+    assert.equal(flatTax(inp({ activityId: 'mainStart' }), rules).annual, flatTax(inp(), rules).annual);
+    assert.match(o.social.startingSourceTitle, /§ 14 odst\. 5/);
+  });
+
+  test('začínající OSVČ: 800 000 Kč, paušál 60 % → přiznání vychází levněji než paušální daň', () => {
+    const r = compare(inp({ activityId: 'mainStart' }), rules);
+    assert.equal(r.cheapestId, 'classic');
+    assert.equal(variant(r, 'classic').annual, 110400);
+    // bez příznaku začínající zůstává doporučení paušál
+    const b = compare(inp(), rules);
+    assert.equal(b.cheapestId, 'flat');
+    assert.equal(variant(b, 'classic').annual, 122371);
+  });
+
   test('vedlejší činnost: do rozhodné částky bez sociálního, zdravotní bez minima', () => {
     assert.equal(socialIns(100000, 'sideOther', rules).amount, 0);
     assert.equal(socialIns(130000, 'sideOther', rules).base, 71500);

@@ -341,7 +341,7 @@ export function stavyOvereni(rules) {
   const stav = (s) => ({ official: tx.statusOfficial, secondary: tx.statusSecondary, derived: tx.statusDerived }[s] ?? s);
   const polozky = [
     { text: fill(tx.statusItemAverageWage, { value: kc(o.averageWage.monthly) }), item: o.averageWage },
-    { text: fill(tx.statusItemSocial, { main: kc(p.socialMinAdvanceMain), side: kc(p.socialMinAdvanceSide), threshold: kc(p.sideThreshold) }), item: o.social },
+    { text: fill(tx.statusItemSocial, { main: kc(p.socialMinAdvanceMain), starting: kc(Math.ceil(p.socialMinBaseStarting * o.social.rate)), side: kc(p.socialMinAdvanceSide), threshold: kc(p.sideThreshold) }), item: o.social },
     { text: fill(tx.statusItemHealth, { main: kc(p.healthMinAdvance) }), item: o.health },
     { text: fill(tx.statusItemTax, { credit: kc(ti.taxpayerCredit), children: ti.childCredits.map((x) => kc(x)).join(' / '), threshold: kc(p.highRateThreshold) }), item: ti },
     ...o.flatTax.bands.map((b) => ({ text: fill(tx.statusItemBand, { band: b.label, monthly: kc(b.monthly) }), item: b })),

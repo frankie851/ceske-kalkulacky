@@ -3,7 +3,7 @@
 // Žádné částky ani sazby tu nejsou natvrdo: všechno se bere z výsledku planRodiny a z rules.json.
 // Texty tykají a jsou rodově neutrální; „matka“ a „otec“ jsou jen popisky rolí z původní aplikace.
 import { kc, cislo, datum } from '../../js/format.js';
-import { pridejDny, prvniDenMesice, navrhVyse, cistaMzda, parametryMzdy } from './rodina.js';
+import { pridejDny, prvniDenMesice, cistaMzda, parametryMzdy } from './rodina.js';
 import { TYPY } from './timeline.js';
 
 export const NBSP = ' ';
@@ -35,6 +35,13 @@ const nazevMesiceIso = (iso) => `${MESICE[Number(iso.slice(5, 7)) - 1]}${NBSP}${
 /** Pravidla RP pro dítě (vekMesicu, celkem…) – z výsledku planRodiny. */
 const vekMesicu = (plan) => plan.rp.vekMesicu;
 
+/** Denní výše dávky; když dávka trvá přes 1. leden, i sazba po přepočtu (§ 22 odst. 2 ZNP). */
+const zmenySazby = (info) => (info.sazby || []).filter((x, i, a) => i > 0 && x.denni !== a[i - 1].denni);
+const denne = (info) => zmenySazby(info).reduce(
+  (t, x) => `${t}, od 1. 1. ${x.rok} ${kc(x.denni)}`,
+  `${kc(info.denni)} denně`,
+);
+
 /* ---------- karta výsledku ---------- */
 
 export function vysledek(plan) {
@@ -46,8 +53,8 @@ export function vysledek(plan) {
     : `Rodičovský příspěvek po ${kc(r.vyse)} měsíčně se do 3 let dítěte nevyčerpá. Z ${kc(r.celkem)} rodina dostane ${kc(r.vycerpano)}.`;
 
   const ppmPopis = [
-    plan.matka.ppm && `matka ${kc(plan.matka.ppm.denni)} denně`,
-    plan.otec.ppm && `otec ${kc(plan.otec.ppm.denni)} denně`,
+    plan.matka.ppm && `matka ${denne(plan.matka.ppm)}`,
+    plan.otec.ppm && `otec ${denne(plan.otec.ppm)}`,
   ].filter(Boolean).join(', ');
 
   return {
@@ -65,7 +72,7 @@ export function vysledek(plan) {
       { hodnota: kc(s.ppm), popis: ppmPopis ? `mateřská (${ppmPopis})` : 'mateřská (bez nároku)', zvyraznit: s.ppm > 0 },
       {
         hodnota: kc(s.otcovska),
-        popis: plan.otec.otcovska ? `otcovská (${kc(plan.otec.otcovska.denni)} denně)` : 'otcovská (nečerpá se)',
+        popis: plan.otec.otcovska ? `otcovská (${denne(plan.otec.otcovska)})` : 'otcovská (nečerpá se)',
         zvyraznit: s.otcovska > 0,
       },
       {
@@ -92,7 +99,7 @@ export function varovani(plan, zadano, rules) {
   return plan.varovani.map((v) => {
     switch (v.typ) {
       case 'propadnuti': {
-        const potreba = navrhVyse(r.celkem, r.odMesice, vekMesicu(plan));
+        const potreba = r.navrhProVycerpani;
         return {
           ...v,
           titulek: 'Část rodičovského příspěvku propadne.',
@@ -191,10 +198,10 @@ export function radkySouhrnu(plan, rules) {
   const s = plan.souhrn;
   const r = plan.rp;
   const radky = [];
-  if (plan.matka.ppm) radky.push(['Mateřská – matka', kc(s.ppmMatka), `${kc(plan.matka.ppm.denni)} denně od ${datum(plan.matka.ppm.datum)}`]);
-  if (plan.otec.ppm) radky.push(['Mateřská – otec', kc(s.ppmOtec), `${kc(plan.otec.ppm.denni)} denně od ${datum(plan.otec.ppm.datum)}`]);
+  if (plan.matka.ppm) radky.push(['Mateřská – matka', kc(s.ppmMatka), `${denne(plan.matka.ppm)}, nástup ${datum(plan.matka.ppm.datum)}`]);
+  if (plan.otec.ppm) radky.push(['Mateřská – otec', kc(s.ppmOtec), `${denne(plan.otec.ppm)}, nástup ${datum(plan.otec.ppm.datum)}`]);
   if (!plan.matka.ppm && !plan.otec.ppm) radky.push(['Mateřská', kc(0), 'bez nároku nebo nikdo nečerpá']);
-  radky.push(['Otcovská', kc(s.otcovska), plan.otec.otcovska ? `${kc(plan.otec.otcovska.denni)} denně, ${cislo(rules.otcovska.dny)} dní` : 'nečerpá se']);
+  radky.push(['Otcovská', kc(s.otcovska), plan.otec.otcovska ? `${denne(plan.otec.otcovska)}, ${cislo(rules.otcovska.dny)} dní` : 'nečerpá se']);
   radky.push(['Rodičovský příspěvek', kc(r.vycerpano), `z ${kc(r.celkem)}, po ${kc(r.vyse)} měsíčně`]);
   radky.push(['Dávky celkem', kc(s.davky), r.propadne > 0 ? `propadne ${kc(r.propadne)}` : 'nic nepropadne']);
   radky.push(['Orientační čisté mzdy', kc(s.mzdy), 'kdo zrovna pracuje, bez slevy na dítě']);
@@ -211,6 +218,7 @@ export function jakPocitame(plan, rules) {
   const r = plan.rp;
   const radek = (nazev, info) => (info
     ? `${nazev}: rozhodné období ${cislo(info.dny)} dní, denní vyměřovací základ ${kc(info.dvz, 2)}, po redukci ${kc(info.redDvz)} (hranice ${info.hranice.rok}: ${cislo(info.hranice.h1)} / ${cislo(info.hranice.h2)} / ${cislo(info.hranice.h3)} Kč). ${cislo(rules.ppm.sazba * 100)} % z toho je ${kc(info.denni)} denně, nástup ${datum(info.datum)}.`
+      + zmenySazby(info).map((x) => ` Od 1. 1. ${x.rok} se dávka přepočítá podle hranic ${x.hranice.rok} (${cislo(x.hranice.h1)} / ${cislo(x.hranice.h2)} / ${cislo(x.hranice.h3)} Kč): základ po redukci ${kc(x.redDvz)}, ${kc(x.denni)} denně (§ 22 odst. 2 zákona o nemocenském pojištění).`).join('')
     : null);
   const min = plan.vstup.vicercata ? r.minStropVicercata : r.minStrop;
   const nasobek = plan.vstup.vicercata ? `${cislo(r.nasobekVicercata)} × ` : '';
@@ -219,8 +227,9 @@ export function jakPocitame(plan, rules) {
     radek('Mateřská – otec', plan.otec.ppm),
     radek('Otcovská', plan.otec.otcovska),
     plan.ppm ? `Období mateřské: ${datum(plan.ppm.start)} až ${datum(plan.ppm.konec)}.` : null,
-    `Strop rodičovského příspěvku = vyšší z částek ${kc(min)} a ${nasobek}${cislo(rules.rpPodilDvz * 100)} % × ${cislo(rules.rpDnu)} × vyšší redukovaný základ rodičů = ${kc(r.strop)} měsíčně.`,
-    'Rodičovský příspěvek se nevyplácí souběžně s mateřskou. Začíná v kalendářním měsíci po jejím konci a čerpá se nejdéle do 3 let dítěte. Co se do té doby nevyčerpá, propadne.',
+    `Strop rodičovského příspěvku = vyšší z částek ${kc(min)} a ${nasobek}${cislo(rules.rpPodilDvz * 100)} % × ${cislo(rules.rpDnu)} × vyšší redukovaný základ rodičů k datu narození = ${kc(r.strop)} měsíčně.`,
+    'Rodičovský příspěvek náleží od měsíce narození. V měsících, kdy rodina pobírá mateřskou, náleží jen rozdíl mezi zvolenou výší a mateřskou za ten měsíc, a jen když je zvolená výše vyšší (§ 30b odst. 3 zákona o státní sociální podpoře).',
+    'Čerpá se nejdéle do 3 let dítěte, včetně celého měsíce 3. narozenin (§ 30b odst. 1 písm. d). Co se do té doby nevyčerpá, propadne. Zbytek menší než měsíční částka se vyplatí spolu s poslední výplatou (§ 30 odst. 6).',
     'Čistá mzda je orientační: pojistné zaměstnance a záloha na daň po slevě na poplatníka, bez daňového zvýhodnění na dítě a dalších slev.',
   ].filter(Boolean);
 }
@@ -269,8 +278,8 @@ export function kontrolniSeznam(plan, rules) {
   polozky.push({ ukol: 'Daňové zvýhodnění na dítě uplatni u zaměstnavatele. V čisté mzdě tady započtené není.', termin: 'Po narození', typ: 'doporuceny' });
   polozky.push({ ukol: 'Když se narodí další dítě, nahlas to Úřadu práce. Rodičovský příspěvek na starší dítě končí, nevyčerpaný zbytek jde vyplatit jednorázově.', termin: 'Při narození dalšího dítěte', typ: 'doporuceny', zdroj: zdrojRp });
   polozky.push({
-    ukol: 'Poslední měsíc čerpání rodičovského příspěvku. Co se do té doby nevyčerpá, propadne.',
-    termin: `Do ${datum(pridejDny(prvniDenMesice(B, vekMesicu(plan)), -1))}`, typ: 'hard',
+    ukol: 'Poslední měsíc čerpání rodičovského příspěvku je měsíc 3. narozenin dítěte. Co se do té doby nevyčerpá, propadne.',
+    termin: `Do ${datum(pridejDny(prvniDenMesice(B, vekMesicu(plan) + 1), -1))}`, typ: 'hard',
   });
   return polozky;
 }

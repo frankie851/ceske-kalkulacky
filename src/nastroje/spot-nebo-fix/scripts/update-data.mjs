@@ -28,7 +28,8 @@ const SRC = {
   tddPage: 'https://www.ote-cr.cz/cs/statistika/typove-diagramy-dodavek-elektriny/normalizovane-tdd',
 };
 
-// Sloupce XLSX → klíče souborů. TDD4 = D01d/D02d, TDD5 = akumulace (regionálně), TDD6 = přímotop/TČ, TDD7 = D61d.
+// Sloupce XLSX → klíče souborů. Třídy podle přílohy č. 6 vyhlášky 408/2015 Sb.: TDD4 = D01d/D02d/D61d,
+// TDD5 = akumulace D25d/D26d/D27d (regionálně), TDD6 = hybridní vytápění D35d, TDD7 = přímotop D45d/D57d a TČ D56d.
 const TDD_COLUMNS = {
   'TDD4 ČR': 'TDD4',
   'TDD5 Jižní Čechy': 'TDD5-JC', 'TDD5 Jižní Morava': 'TDD5-JM', 'TDD5 Praha': 'TDD5-P',

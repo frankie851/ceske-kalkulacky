@@ -184,11 +184,15 @@ function vykresliJidla() {
       : 'Nejdřív vyplň odjezd a návrat. Pak se tu ukážou dny cesty.'}</p>`;
     return;
   }
+  // Cestu přes 2 kalendářní dny jde posoudit dohromady (§ 163 odst. 4 ZP), jídla se pak počítají
+  // i ze dne kratšího než 5 hodin.
+  const dvaDny = dny.length === 2;
   box.innerHTML = `<ul class="cp-dny">${dny.map((d) => {
     const p = pasmo(d.minuty);
     const j = jidlaRozpracovana[d.datum] ?? {};
-    const popis = `${formatMinuty(d.minuty)} · ${p < 0 ? 'pod 5 h, stravné nenáleží' : nazevPasma(p)}`;
-    if (p < 0) return `<li class="cp-den"><p class="mb-0"><strong>${datum(d.datum)}</strong> <span class="muted">${popis}</span></p></li>`;
+    const pod5 = dvaDny ? 'pod 5 h, posoudíme ho i s druhým dnem' : 'pod 5 h, stravné nenáleží';
+    const popis = `${formatMinuty(d.minuty)} · ${p < 0 ? pod5 : nazevPasma(p)}`;
+    if (p < 0 && !dvaDny) return `<li class="cp-den"><p class="mb-0"><strong>${datum(d.datum)}</strong> <span class="muted">${popis}</span></p></li>`;
     return `<li class="cp-den"><fieldset><legend><strong>${datum(d.datum)}</strong> <span class="muted">${popis}</span></legend>
       <div class="cp-jidla">${v.JIDLA.map(([k, n]) => {
         const id = `jidlo-${d.datum}-${k}`;
@@ -254,6 +258,7 @@ function prectiCestu() {
     navrat: $('#navrat').value,
     odkud, kam, km, ucel,
     cenaDoklad: cena,
+    prives: $('#prives-1').checked,
     jidla,
   };
 }
@@ -270,6 +275,7 @@ function upravCestu(id) {
   $('#ucel').value = c.ucel || '';
   $('#km').value = naText(c.km);
   $('#cena').value = naText(c.cenaDoklad);
+  $('#prives-1').checked = Boolean(c.prives);
   jidlaRozpracovana = structuredClone(c.jidla ?? {});
   $('[data-cp-pridat]').textContent = 'Uložit změny';
   $('[data-cp-zrusit]').hidden = false;

@@ -37,10 +37,22 @@ test('odpočet: Plán48 a Penzijko kompas se shodnou pro samotné penzijko', () 
   const s48 = pravidlaPlan48.sady['2026'];
   const sk = pravidlaKompas.sady['2026'];
   for (const vklad of [0, 1000, 1700, 1701, 3000, 5700, 8000]) {
-    const a = plan48.odpocet({ dpsRocne: vklad * 12, dipRocne: 0, zpRocne: 0, starobniDuchod: false }, s48).vyuzity;
+    const a = plan48.odpocet({ dpsMesicne: Array(12).fill(vklad), dipRocne: 0, zpRocne: 0, starobniDuchod: false }, s48).vyuzity;
     const b = kompas.danovyOdpocet(sk, { vklad }).rocne;
     assert.equal(a, b, `vklad ${vklad}: Plán48 ${a} ≠ Kompas ${b}`);
   }
+});
+
+// Revize 5. 11. 2026 (SOUHRN, část 3): odpočet DPS se ve všech třech nástrojích počítá
+// po měsících jednou sdílenou funkcí a se stejnou hranicí (§ 15 odst. 7 ZDP).
+test('odpočet: Plán48, Penzijko kompas a Slevy 2027 mají stejnou měsíční hranici', () => {
+  const slevy = nacti('slevy-2027');
+  const h48 = pravidlaPlan48.sady['2026'].odpocet.dpsMesicniHranice;
+  assert.equal(pravidlaKompas.sady['2026'].odpocet.nadVklad, h48);
+  assert.equal(slevy.odpocty.stari.penzijkoHraniceMesicne, h48);
+  // Nepravidelné vklady: 11 × 1 000 Kč + prosinec 30 000 Kč → 28 300 Kč
+  const profil = [...Array(11).fill(1000), 30000];
+  assert.equal(plan48.odpocet({ dpsMesicne: profil }, pravidlaPlan48.sady['2026']).vyuzity, 28300);
 });
 
 // Revize 5. 11. 2026 (SOUHRN, část 3; BYD-07, SLV-04): vyšší limit úroků 300 000 Kč patří

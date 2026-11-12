@@ -159,7 +159,7 @@ function prepocitej() {
   const s = v.shrnutiKroku(vstup, sada);
   text('#krok-o-tobe .step-sum', s.oTobe);
   text('#krok-vklady .step-sum', s.vklady);
-  nastavNapovedu('dps', `Do odpočtu jde jen část nad ${kc(sada.odpocet.dpsRocniHranice / 12)} měsíčně. Na maximální státní příspěvek stačí ${kc(najdiPasmo(vstup.vek, sada).maxZaklad)}.`);
+  nastavNapovedu('dps', `Do odpočtu jde jen část nad ${kc(sada.odpocet.dpsMesicniHranice)} měsíčně. Na maximální státní příspěvek stačí ${kc(najdiPasmo(vstup.vek, sada).maxZaklad)}.`);
 
   // Karta výsledku
   text('#vysledek .result-kicker', `Počítáme podle: ${sada.nazev}`);

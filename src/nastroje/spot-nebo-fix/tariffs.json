@@ -123,28 +123,34 @@
       "tdd": "TDD5"
     },
     "D35d": {
-      "label": "D35d – akumulace 16 h",
+      "label": "D35d – akumulace 20 h",
       "tdd": "TDD6"
     },
     "D45d": {
       "label": "D45d – přímotop 20 h",
-      "tdd": "TDD6"
+      "tdd": "TDD7"
     },
     "D56d": {
-      "label": "D56d – tepelné čerpadlo 22 h",
-      "tdd": "TDD6"
+      "label": "D56d – tepelné čerpadlo 20 h",
+      "tdd": "TDD7"
     },
     "D57d": {
       "label": "D57d – elektrické topení 20 h",
-      "tdd": "TDD6"
+      "tdd": "TDD7"
     },
     "D61d": {
       "label": "D61d – víkendová",
-      "tdd": "TDD7"
+      "tdd": "TDD4"
     }
   },
+  "sazbyInfoZdroj": {
+    "pravniZaklad": "Vyhláška č. 408/2015 Sb., o Pravidlech trhu s elektřinou, příloha č. 6 (třídy typových diagramů dodávek)",
+    "url": "https://www.zakonyprolidi.cz/cs/2015-408",
+    "citace": "TDD 4: D01d; D02d; D61d. TDD 5: D25d; D26d; D27d. TDD 6: D35d. TDD 7: D45d; D57d; D56d.",
+    "overeno": "2026-11-12"
+  },
   "ntHours": {
-    "_comment": "Zjednodušení: skutečné časy NT určuje distributor (HDO) individuálně. Zde typická okna v lokálních hodinách [od, do). Zdroj délky NT: podmínky distribučních sazeb (vyhláška ERÚ 408/2015 Sb. a ceníky distributorů).",
+    "_comment": "Zjednodušení: skutečné časy NT určuje distributor (HDO) individuálně. Zde typická okna v lokálních hodinách [od, do). Délky NT odpovídají podmínkám sazeb v cenovém výměru ERÚ č. 14/2025 (ověřeno 12. 11. 2026). byWeekday = okna podle dne v týdnu (0 = neděle … 6 = sobota), svátky nemají vliv.",
     "D25d": {
       "workday": [
         [
@@ -196,8 +202,8 @@
           6
         ],
         [
-          13,
-          15
+          22,
+          24
         ]
       ],
       "weekend": [
@@ -206,8 +212,8 @@
           6
         ],
         [
-          13,
-          15
+          22,
+          24
         ]
       ]
     },
@@ -215,15 +221,19 @@
       "workday": [
         [
           0,
-          7
+          8
         ],
         [
           9,
-          11
+          12
         ],
         [
           13,
           17
+        ],
+        [
+          18,
+          20
         ],
         [
           21,
@@ -233,15 +243,19 @@
       "weekend": [
         [
           0,
-          7
+          8
         ],
         [
           9,
-          11
+          12
         ],
         [
           13,
           17
+        ],
+        [
+          18,
+          20
         ],
         [
           21,
@@ -303,10 +317,18 @@
         ],
         [
           9,
+          12
+        ],
+        [
+          13,
           17
         ],
         [
           18,
+          20
+        ],
+        [
+          21,
           24
         ]
       ],
@@ -317,10 +339,18 @@
         ],
         [
           9,
+          12
+        ],
+        [
+          13,
           17
         ],
         [
           18,
+          20
+        ],
+        [
+          21,
           24
         ]
       ]
@@ -372,22 +402,31 @@
       ]
     },
     "D61d": {
-      "workday": [
-        [
-          0,
-          6
+      "byWeekday": {
+        "5": [
+          [
+            12,
+            24
+          ]
         ],
-        [
-          22,
-          24
+        "6": [
+          [
+            0,
+            24
+          ]
+        ],
+        "0": [
+          [
+            0,
+            22
+          ]
         ]
-      ],
-      "weekend": [
-        [
-          0,
-          24
-        ]
-      ]
+      }
+    },
+    "_zdrojD61d": {
+      "pravniZaklad": "Cenový výměr ERÚ č. 14/2025, sazba D 61d – podmínky uplatnění",
+      "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf",
+      "citace": "Doba platnosti nízkého tarifu je stanovena celoročně od pátku 12.00 hodin do neděle 22.00 hodin."
     }
   },
   "tdd5RegionLabels": {

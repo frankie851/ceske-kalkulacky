@@ -124,6 +124,16 @@ test('bez JavaScriptu je vidět ukázkový výsledek', async () => {
   await page.close();
 });
 
+// Revize 5. 11. 2026, PEN-01: konec transformovaných fondů 2036 je jen návrh (sněmovní tisk 285).
+test('transformovaný fond: konec 2036 je označený jako návrh', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  assert.match(await text(page, '#karta-tf'), /Návrh, zatím neschváleno/);
+  assert.match(await text(page, '#karta-tf'), /Platný zákon konec transformovaných fondů nestanoví/);
+  assert.match(await text(page, 'body'), /počítáme podle platných pravidel po celou dobu/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
 // Revize 5. 11. 2026, PEN-02: „0,85“ i „0.85“ = 0,85 %, „85“ je překlep a ukáže chybu.
 test('poplatek za správu: desetinná čárka i tečka, 85 % ukáže chybu', async () => {
   const { page, chyby } = await otevri(CESTA);

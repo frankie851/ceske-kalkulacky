@@ -229,7 +229,7 @@ function prepocitej() {
   if (r.pozn) {
     const badge = $('.badge', novela);
     const uzel = [...badge.childNodes].reverse().find((n) => n.nodeType === Node.TEXT_NODE);
-    if (uzel) uzel.textContent = `${kc(r.celkem)}: schváleno, zatím ne ve Sbírce`;
+    if (uzel) uzel.textContent = `${kc(r.celkem)}: zákon č. ${r.zakon}`;
   }
   vykresliVarovani(v.varovani(plan, vstup, pravidla));
   text('[data-lista-cislo]', vys.lista);

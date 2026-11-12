@@ -1,9 +1,47 @@
 // Slevy 2027 – texty kroků dotazníku a HTML výsledku. Sdílí je build (slevy-2027.11tydata.js,
 // ukázka bez JavaScriptu) i prohlížeč (app.js), takže obě podoby vypadají stejně.
 // Žádný DOM a žádné částky natvrdo: čísla jdou z rules.json a z výsledku slevy.js.
-import { vyhodnot } from './slevy.js';
+import { vyhodnot, predskolniVek } from './slevy.js';
 import { kc, procenta, datum } from '../../js/format.js';
 import { esc } from '../../js/graf.js';
+
+/* =====================================================================
+   Odpovědi z formuláře → vstup pro slevy.js (bez DOM, testovatelné)
+   ===================================================================== */
+
+const bezMezer = (t) => String(t ?? '').replace(/[\s\u00a0\u202f]/g, '');
+const cele = (t) => (bezMezer(t) === '' ? 0 : Number(bezMezer(t)));
+
+/**
+ * Převede stav průvodce (řetězce z polí) na vstup pro vyhodnot(). Školka se započte jen
+ * u dítěte v předškolním věku, i když ve stavu zůstala ze starší odpovědi (revize SLV-01).
+ */
+export function odpovediZeStavu(s, rules) {
+  return {
+    narozeni: { rok: cele(s.narozeni.rok), mesic: s.narozeni.mesic },
+    mzda: cele(s.mzda.mesicne) ? { mesicne: cele(s.mzda.mesicne), mesice: s.mzda.mesice } : null,
+    studium: { ...s.studium, druh: s.studium.druh === 'doktorskeJine' ? 'vs' : s.studium.druh },
+    deti: s.deti.map((d) => {
+      const narozeni = { rok: cele(d.narozeni.rok), mesic: d.narozeni.mesic };
+      const skolka = Boolean(d.skolka) && predskolniVek(narozeni, rules);
+      return {
+        narozeni,
+        ztpp: d.ztpp, od: d.od, do: d.do, studuje: Boolean(d.studuje),
+        skolka,
+        skolne: skolka ? cele(d.skolne) : 0,
+        domacnosti: skolka && d.dveDomacnosti ? 2 : 1,
+        dohodaStrop: skolka && d.dveDomacnosti ? cele(d.dohodaStrop) : 0,
+      };
+    }),
+    manzel: { ...s.manzel, prijem: cele(s.manzel.prijem) },
+    invalidita: s.invalidita,
+    hypoteka: { uroky: cele(s.hypoteka.uroky), stareSmlouva: s.hypoteka.stareSmlouva },
+    stari: Object.fromEntries(Object.entries(s.stari).map(([k, v]) => [k, cele(v)])),
+    dary: { dary: cele(s.dary.dary), krev: cele(s.dary.krev) },
+    odbory: s.odbory,
+    prijmy: Object.fromEntries(Object.entries(s.prijmy).map(([k, v]) => [k, cele(v)])),
+  };
+}
 
 export const MESICE = ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 
@@ -63,7 +101,7 @@ export function textyKroku(rules) {
     {
       id: 'stari', nazev: 'Spoření na stáří',
       nadpis: 'Spoření na stáří',
-      napoveda: `Penzijko, DIP, životní pojištění a pojištění dlouhodobé péče mají společný limit ${kc(o.stari.limit)} ročně. U penzijka se počítá jen to, co za rok vložíš nad ${kc(o.stari.penzijkoNezapocitane)} (při pravidelných měsíčních vkladech). Příspěvky zaměstnavatele sem nepatří.`,
+      napoveda: `Penzijko, DIP, životní pojištění a pojištění dlouhodobé péče mají společný limit ${kc(o.stari.limit)} ročně. U penzijka se v každém měsíci počítá jen část vkladu nad ${kc(o.stari.penzijkoHraniceMesicne)}. Mimořádný vklad zadej zvlášť, počítáme ho do prosince. Příspěvky zaměstnavatele sem nepatří.`,
     },
     {
       id: 'dary', nazev: 'Dary a krev',
@@ -102,7 +140,7 @@ export function situace(odp, rules) {
   if (odp.invalidita?.stupen) st.push(`Invalidita ${odp.invalidita.stupen}. stupně`);
   if (odp.invalidita?.ztpp) st.push('Průkaz ZTP/P');
   if (odp.hypoteka?.uroky) st.push(`Úroky z úvěru na bydlení ${kc(odp.hypoteka.uroky)}`);
-  const stari = Object.values(odp.stari ?? {}).reduce((a, b) => a + (Number(b) || 0), 0);
+  const stari = Object.entries(odp.stari ?? {}).filter(([k]) => k !== 'penzijkoMimoradny').reduce((a, [, b]) => a + (Number(b) || 0), 0);
   if (stari) st.push(`Spoření na stáří ${kc(stari)} ročně`);
   if (odp.dary?.dary || odp.dary?.krev) st.push('Dary nebo odběry krve');
   const pr = odp.prijmy ?? {};

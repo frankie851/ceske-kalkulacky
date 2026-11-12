@@ -1,6 +1,8 @@
 // Penzijko kompas – výpočty. Čisté funkce bez vazby na DOM.
 // Všechny částky, sazby a hranice přicházejí z rules.json (parametr `rules` nebo `sada`).
 
+import { odpocitatelnaCastDps } from '../../js/odpocet-dps.js';
+
 const MESICU_V_ROCE = 12;
 const PROCENT = 100;
 
@@ -32,10 +34,13 @@ export function vkladProMaxPrispevek(sada, vek) {
   return pasmo ? Math.max(pasmo.minVklad, pasmo.maxPrispevek / pasmo.sazba) : 0;
 }
 
-/** Informativní odpočet od základu daně (§ 15a ZDP): jen vlastní vklady nad hranicí, se stropem. */
+/**
+ * Informativní odpočet od základu daně (§ 15 odst. 6 a 7 ZDP): v každém měsíci jen část
+ * vlastního vkladu nad hranicí, se stropem. Vklad je tu stejný po celý rok.
+ */
 export function danovyOdpocet(sada, { vklad }) {
   const { nadVklad, maxRocne, sazbaDane } = sada.odpocet;
-  const rocne = Math.min(Math.max(0, vklad - nadVklad) * MESICU_V_ROCE, maxRocne);
+  const rocne = Math.min(odpocitatelnaCastDps(Array(MESICU_V_ROCE).fill(vklad), nadVklad), maxRocne);
   return { rocne, uspora: zaokrouhli(rocne * sazbaDane), maxRocne };
 }
 
@@ -90,10 +95,13 @@ export function projekce(rules, p) {
 
   const fondDef = rules.fondy[p.fond];
   const hlavni = parametryFondu(fondDef, p.parametry, strop);
-  const nastupce = fondDef.nastupce && !p.bezNastupce
-    ? parametryFondu(rules.fondy[fondDef.nastupce], null, strop)
+  // Konec transformovaných fondů je jen v návrhu „Lepší penzijko“ (sněmovní tisk 285).
+  // Platný zákon č. 427/2011 Sb. ho nezná, proto ho uplatníme jen se sadou, která ho obsahuje.
+  const konecTf = fondDef.typ === 'transformovany' ? sada.transformovaneFondy : null;
+  const nastupce = konecTf && !p.bezNastupce
+    ? parametryFondu(rules.fondy[konecTf.nastupce], null, strop)
     : null;
-  const posledniRok = nastupce ? rokKonce(fondDef.konci) : Infinity;
+  const posledniRok = nastupce ? rokKonce(konecTf.konci) : Infinity;
 
   let zustatek = p.zustatek ?? 0;
   const souhrn = {
@@ -206,7 +214,7 @@ export function transformovanyFond(rules, vstup, cil = rules.predpoklady.doporuc
     rozdilNominal: prejit.souhrn.nominal - zustat.souhrn.nominal,
     rozdilRealne: prejit.souhrn.realne - zustat.souhrn.realne,
     poplatekKonkurence: (vstup.delkaSmlouvy ?? 0) < zdarmaPoLetech ? poplatek : 0,
-    konci: rules.fondy.transformovany.konci,
+    konci: rules.sady[vstup.sada]?.transformovaneFondy?.konci ?? null,
   };
 }
 
