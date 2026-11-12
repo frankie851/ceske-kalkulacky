@@ -3,6 +3,7 @@
 // (žádný fetch); výchozí hodnoty formulářů vykreslil build z rules.json. Hash adresy jen vybírá záložku.
 import { createSeries } from './inflation.js';
 import * as v from './vystup.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const series = createSeries(JSON.parse(document.getElementById('data-cpi').textContent));
 
@@ -19,9 +20,7 @@ const posledni = {}; // nástroj → poslední platný výsledek
 
 /** Číslo z pole: mezery pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value);
 }
 
 function nastavChybu(id, zprava) {

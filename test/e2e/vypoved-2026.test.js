@@ -139,3 +139,14 @@ describe('Výpověď 2026 – ovládání', () => {
     await page.close();
   });
 });
+
+// Revize 5. 11. 2026, VYP-03 a část 3 souhrnu: sdílené čtení čísel (src/js/cislo-vstup.js).
+test('„40.000“ se čte jako 40 000 Kč, ne 40 Kč', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await page.select('#duvod', 'c');
+  await vypln(page, '#delka', '1,5');
+  await vypln(page, '#hruby', '40.000');
+  assert.match(await text(page, '#vypoved-vysledky .vyp-castka'), /^80 000 Kč$/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

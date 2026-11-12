@@ -5,6 +5,7 @@ import { PALIVA, pravidlaProDatum, hodinyPoDnech, pasmo, nazevPasma, formatMinut
 import * as v from './vystup.js';
 import { datum } from '../../js/format.js';
 import { pripojUlozeni } from '../../js/uloziste.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const $ = (sel, koren = document) => koren.querySelector(sel);
 const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
@@ -29,9 +30,7 @@ const noveId = () => {
 
 /** Číslo z textového pole: mezery pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value);
 }
 
 const naText = (n) => (n === null || n === undefined ? '' : String(n).replace('.', ','));

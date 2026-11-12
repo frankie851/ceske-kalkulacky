@@ -3,6 +3,7 @@
 // Nic se neukládá ani neodesílá a zadané hodnoty se nedávají do adresy stránky.
 import { pravidlaProRok } from './dluhy.js';
 import { rokPravidel, vysledek } from './vystup.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const rules = JSON.parse(document.getElementById('pravidla').textContent);
 const rok = rokPravidel(rules, new Date().getFullYear());
@@ -15,9 +16,7 @@ const $ = (sel, koren = document) => koren.querySelector(sel);
 
 /** Číslo z textového pole: mezery a „Kč“ pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(/kč$/i, '').replace(',', '.');
-  if (t === '') return null;
-  return /^\d+(\.\d+)?$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value, { zaporne: false });
 }
 
 function nastavChybu(id, text) {

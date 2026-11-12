@@ -654,3 +654,28 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
 - **Délky NT podle podmínek sazeb v CV ERÚ 14/2025** (SPOT-05, stejná data): D35d a D56d 20 h
   denně, D27d 8 h jen v době 18:00–8:00. Okna jsou dál typická (skutečné časy určuje HDO
   distributora), sedí jen délka a rozmezí.
+
+## Sdílené čtení čísel a sjednocení napříč nástroji (PEN-02 a část 3 souhrnu)
+
+- **Jedna funkce pro čísla z formulářů** `src/js/cislo-vstup.js` (`prectiCislo`). Používá ji
+  12 nástrojů místo vlastních kopií. Pravidla:
+  - mezery (i pevné a úzké) a „Kč“ na konci se ignorují,
+  - čárka je desetinná,
+  - tečka, za kterou následují přesně tři číslice, odděluje tisíce („40.000“ = 40 000,
+    „1.500“ = 1 500); jiná tečka je desetinná („1.5“, „0.850“),
+  - prázdné pole = `null`, nečitelný zápis = `NaN` a pole ukáže hlášku,
+  - záporné číslo jen tam, kde ho pole dovolí (`{ zaporne: false }`).
+
+  Dřív se „40.000“ všude četlo jako 40 a Mám EET? bralo „1e6“ jako milion. Slevy 2027 dál
+  přijímají jen celá čísla a „40.000“ odmítnou s hláškou. Bydlometr si nechává vlastní
+  `parseNumber` v `js/format.js`, formulář ho nepoužívá.
+- **Penzijko kompas:** horní meze polí pro kontrolu překlepu jsou v `rules.json` → `formular.max`
+  (věk 100, poplatek za správu 5 %, ze zhodnocení 30 %). Nejsou to zákonné stropy, jen pojistka
+  proti „85“ místo „0,85“ %.
+- **Úroky z hypotéky:** vyšší limit 300 000 Kč patří k bytové potřebě obstarané před 1. 1. 2021
+  (zákon č. 386/2020 Sb., čl. IV bod 3), ne k datu smlouvy. Bydlometr i Slevy to tak píšou,
+  hlídá to `test/sdilene/konzistence.test.js`.
+- **Průměrná mzda:** tři různé hodnoty jsou správně, každá slouží k jinému účelu a nástroj
+  to u ní uvádí: 51 663 Kč (NV č. 177/2026 Sb.) pro daně a pojistné 2027 v Mám EET? a Slevách,
+  48 171 Kč (sdělení č. 537/2025 Sb.) pro strop podpory 2026 ve Výpovědi, 3 × 48 967 Kč pro
+  hranici 23% daně 2026 v čisté mzdě Rodičovské.

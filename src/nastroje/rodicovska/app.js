@@ -8,6 +8,7 @@ import { svgOsa } from './timeline.js';
 import * as v from './vystup.js';
 import { kc, datum } from '../../js/format.js';
 import { pripojUlozeni } from '../../js/uloziste.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const pravidla = JSON.parse(document.getElementById('pravidla').textContent);
 const formular = document.getElementById('rodicovska-formular');
@@ -27,9 +28,7 @@ let plan = null;
 /* ---------- čtení a kontrola vstupů ---------- */
 
 function nactiCislo(id) {
-  const t = String($(`#${id}`).value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (t === '') return null;
-  return /^[-+]?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+  return prectiCislo($(`#${id}`).value);
 }
 
 function nastavChybu(id, text) {

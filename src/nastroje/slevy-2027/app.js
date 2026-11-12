@@ -239,7 +239,7 @@ const KROKY = {
   },
   hypoteka: {
     html: (s, ch) => `${pole({ id: 'uroky', label: `Úroky zaplacené za rok ${ROK}`, hodnota: s.hypoteka.uroky, jednotka: 'Kč', napoveda: 'Najdeš je v potvrzení od banky. Bez úvěru nech pole prázdné.', chyba: ch.uroky })}
-    ${zaskrtnuti('stareSmlouva', 'Úvěrová smlouva je uzavřená před 1. 1. 2021', s.hypoteka.stareSmlouva)}`,
+    ${zaskrtnuti('stareSmlouva', 'Bydlení, na které je úvěr, bylo pořízené před 1. 1. 2021', s.hypoteka.stareSmlouva)}`,
     cti: (fd, s) => { s.hypoteka = { uroky: fd.get('uroky') ?? '', stareSmlouva: ano(fd, 'stareSmlouva') }; },
     over: (s) => overCisla([['uroky', s.hypoteka.uroky]]),
   },

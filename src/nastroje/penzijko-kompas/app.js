@@ -2,6 +2,7 @@
 // výsledky. Pravidla bere z <script type="application/json" id="pravidla">, žádný fetch.
 // Žádné částky ani sazby natvrdo: vše jde z rules.json.
 import { vypocet, doPole } from './zobrazeni.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const PROCENT = 100;
 const CISELNA = ['vek', 'delkaSmlouvy', 'vklad', 'zamestnavatel', 'zustatek', 'sprava', 'zhodnoceni'];
@@ -13,23 +14,24 @@ const CHYBY = {
   vklad: 'Zadej měsíční vklad v korunách. Když zatím nespoříš, napiš 0.',
   zamestnavatel: 'Zadej příspěvek zaměstnavatele v korunách. Když nepřispívá, napiš 0.',
   zustatek: 'Zadej naspořenou částku v korunách. Když začínáš, napiš 0.',
-  sprava: 'Zadej poplatek v procentech, například 0,8.',
+  sprava: 'Zadej poplatek v procentech, například 0,8. Desetinnou část odděl čárkou.',
   zhodnoceni: 'Zadej poplatek v procentech, například 10.',
 };
 
 const $ = (sel, el = document) => el.querySelector(sel);
 const form = document.getElementById('kompas-formular');
 const pravidlaEl = document.getElementById('pravidla');
+// Horní meze polí pro kontrolu překlepu (např. „85“ místo „0,85“ %), z rules.json → formular.max.
+const MAXIMA = pravidlaEl ? JSON.parse(pravidlaEl.textContent).formular?.max ?? {} : {};
 
 /** Přečte číslo z pole: { hodnota } | { prazdne: true } | { chyba: true }. Bere mezery i desetinnou čárku. */
 function precti(id) {
-  const surove = String(form.elements[id].value).replace(/[\s  ]/g, '').replace(',', '.');
-  if (surove === '') return { prazdne: true };
-  if (!/^\d+(\.\d+)?$/.test(surove)) return { chyba: true };
-  const n = Number(surove);
+  const n = prectiCislo(form.elements[id].value, { zaporne: false });
+  if (n === null) return { prazdne: true };
   if (!Number.isFinite(n)) return { chyba: true };
   if (CELA.has(id) && !Number.isInteger(n)) return { chyba: true };
   if (PROCENTNI.has(id) && n > PROCENT) return { chyba: true };
+  if (MAXIMA[id] !== undefined && n > MAXIMA[id]) return { chyba: true };
   return { hodnota: n };
 }
 

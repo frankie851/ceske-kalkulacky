@@ -224,5 +224,13 @@
       "prispevekZamestnavatele": 500,
       "cilovyFond": "zivotniCyklus"
     }
+  },
+  "formular": {
+    "poznamka": "Horní meze polí jen jako kontrola překlepu (například 85 místo 0,85 %). Nejsou to zákonné stropy.",
+    "max": {
+      "vek": 100,
+      "sprava": 5,
+      "zhodnoceni": 30
+    }
   }
 }

@@ -133,3 +133,16 @@ test('transformovaný fond: konec 2036 je označený jako návrh', async () => {
   assert.deepEqual(chyby, []);
   await page.close();
 });
+
+// Revize 5. 11. 2026, PEN-02: „0,85“ i „0.85“ = 0,85 %, „85“ je překlep a ukáže chybu.
+test('poplatek za správu: desetinná čárka i tečka, 85 % ukáže chybu', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#sprava', '85');
+  assert.equal(await page.$eval('#sprava', (el) => el.getAttribute('aria-invalid')), 'true');
+  await vypln(page, '#sprava', '0,85');
+  assert.equal(await page.$eval('#sprava', (el) => el.hasAttribute('aria-invalid')), false);
+  await vypln(page, '#vklad', '1.500');
+  assert.equal(await page.$eval('#vklad', (el) => el.hasAttribute('aria-invalid')), false);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
