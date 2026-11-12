@@ -85,15 +85,17 @@ describe('státní příspěvek – návrh 2027', () => {
 });
 
 describe('daňový odpočet', () => {
-  test('DPS se počítá jen nad roční hranici 20 400 Kč', () => {
-    const o = odpocet({ dpsRocne: 1700 * 12 }, R2026);
+  test('DPS se počítá jen nad 1 700 Kč měsíčně (§ 15 odst. 7 ZDP)', () => {
+    const o = odpocet({ dpsMesicne: Array(12).fill(1700) }, R2026);
     assert.equal(o.vyuzity, 0);
-    assert.equal(odpocet({ dpsRocne: 2000 * 12 }, R2026).vyuzity, 3600);
+    assert.equal(odpocet({ dpsMesicne: Array(12).fill(2000) }, R2026).vyuzity, 3600);
   });
 
-  test('mimořádný vklad v prosinci se započte celý (roční výpočet)', () => {
-    // 11 × 1 000 Kč + 30 000 Kč v prosinci = 41 000 Kč → 20 600 Kč nad hranici
-    assert.equal(odpocet({ dpsRocne: 11 * 1000 + 30000 }, R2026).vyuzity, 20600);
+  // Revize 5. 11. 2026, P48-01/P48-02: původní test čekal 20 600 Kč (roční odečet 20 400 Kč).
+  test('mimořádný vklad v prosinci se počítá po měsících', () => {
+    // 11 × 1 000 Kč (pod hranicí) + prosinec 30 000 Kč → 30 000 − 1 700 = 28 300 Kč
+    assert.equal(odpocet({ dpsMesicne: [...Array(11).fill(1000), 30000] }, R2026).vyuzity, 28300);
+    assert.equal(odpocet({ dpsMesicne: [...Array(11).fill(0), 48000] }, R2026).vyuzity, 46300);
   });
 
   test('DIP a ŽP od první koruny', () => {
@@ -108,7 +110,7 @@ describe('daňový odpočet', () => {
   });
 
   test('starobní důchodce: DPS od první koruny', () => {
-    assert.equal(odpocet({ dpsRocne: 1000 * 12, starobniDuchod: true }, R2026).vyuzity, 12000);
+    assert.equal(odpocet({ dpsMesicne: Array(12).fill(1000), starobniDuchod: true }, R2026).vyuzity, 12000);
   });
 
   test('příspěvek zaměstnavatele odpočet neovlivní', () => {
@@ -139,9 +141,22 @@ describe('doporučení do 31. 12.', () => {
     assert.equal(d.prispevek.navysitNa, 1700);
     assert.equal(d.prispevek.mesicu, 2);
     assert.equal(d.prispevek.ziskate, 2 * (340 - 200));
-    // DPS po navýšení: 10 × 1 000 + 2 × 1 700 = 13 400 → na DPS chybí 7 000 do hranice
+    // Po navýšení listopadu a prosince na 1 700 Kč se prosincový mimořádný vklad započte celý.
+    // Revize 5. 11. 2026, P48-01: dřív 48 000 + 7 000 Kč (roční odečet 20 400 Kč).
     assert.equal(d.odpocet.doplatekDipZp, 48000);
-    assert.equal(d.odpocet.doplatekDps, 48000 + 7000);
+    assert.equal(d.odpocet.doplatekDps, 48000);
+  });
+
+  test('P48-01: rada „mimořádně na penzijko“ je 48 000 Kč i při nulovém nebo nízkém vkladu', () => {
+    assert.equal(rok({ dps: 0, mesicuProbehlo: 10 }).doporuceni.odpocet.doplatekDps, 48000);
+    assert.equal(rok({ dps: 1000, mesicuProbehlo: 11 }).doporuceni.odpocet.doplatekDps, 48000);
+    // Starobní důchodce bez státního příspěvku: hranice 0, vše se započte.
+    assert.equal(rok({ dps: 0, mesicuProbehlo: 10, starobniDuchod: true }).doporuceni.odpocet.doplatekDps, 48000);
+  });
+
+  test('P48-01: hranice odpočtu v pravidlech je měsíční a cituje § 15 odst. 7 ZDP', () => {
+    assert.equal(R2026.odpocet.dpsMesicniHranice, 1700);
+    assert.match(R2026.odpocet.zdroj.pravniZaklad, /§ 15 odst\. 6 a 7/);
   });
 
   test('vše vyčerpáno → hotovo', () => {

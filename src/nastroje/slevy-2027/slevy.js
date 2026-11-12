@@ -2,6 +2,8 @@
 // Čisté funkce bez DOM – všechny částky a termíny přicházejí z rules.json.
 // Měsíce se číslují 1–12; datum narození je { rok, mesic }.
 
+import { odpocitatelnaCastDps, rovnomerne } from '../../js/odpocet-dps.js';
+
 const MESICE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 /** Porovná (rok, měsíc) a (rok, měsíc): záporné, 0, kladné. */
@@ -84,10 +86,24 @@ export function stropSkolkovneho(dite, rules) {
   return Math.floor(strop / domacnosti);
 }
 
-/** Školkovné: min(zaplacené školné, strop) na každé dítě; jen ročně. */
+/**
+ * Je dítě v předškolním věku pro školkovné? Hranice je praktické zjednodušení
+ * v rules.json (slevy.skolkovne.maxVekDitete), zákon rozhoduje podle předškolního zařízení.
+ * Bez zadaného roku narození se dítě nevylučuje.
+ */
+export function predskolniVek(narozeni, rules) {
+  if (!narozeni?.rok) return true;
+  return Number(narozeni.rok) >= rules.rok - rules.slevy.skolkovne.maxVekDitete;
+}
+
+/** Školkovné: min(zaplacené školné, strop) na každé dítě v předškolním věku; jen ročně. */
 export function skolkovne(deti = [], rules) {
   const polozky = deti
-    .map((d, index) => ({ index, strop: stropSkolkovneho(d, rules), rocne: d?.skolka ? Math.min(cislo(d.skolne), stropSkolkovneho(d, rules)) : 0 }))
+    .map((d, index) => ({
+      index,
+      strop: stropSkolkovneho(d, rules),
+      rocne: d?.skolka && predskolniVek(d.narozeni, rules) ? Math.min(cislo(d.skolne), stropSkolkovneho(d, rules)) : 0,
+    }))
     .filter((p) => p.rocne > 0);
   return { polozky, rocne: polozky.reduce((s, p) => s + p.rocne, 0) };
 }
@@ -97,6 +113,8 @@ export function skolkovne(deti = [], rules) {
 /**
  * Pořadí dítěte se určuje v každém měsíci podle pořadí v seznamu mezi dětmi,
  * na které je v tom měsíci nárok. Nárok je i za měsíc narození.
+ * Nárok je jen za měsíce, na jejichž počátku dítě nedovršilo 18 let, nebo 26 let,
+ * když se soustavně připravuje na povolání (d.studuje) – § 35c odst. 6 a 10 ZDP.
  */
 export function zvyhodneniDeti(deti = [], rules) {
   const z = rules.deti;
@@ -107,6 +125,7 @@ export function zvyhodneniDeti(deti = [], rules) {
       if (!d?.narozeni?.rok) return;
       if (porovnej(rules.rok, m, d.narozeni.rok, d.narozeni.mesic) < 0) return;
       if (m < (d.od ?? 1) || m > (d.do ?? 12)) return;
+      if (!mladsiNez(d.narozeni, d.studuje ? z.vekMax : z.vekMaxBezStudia, rules.rok, m)) return;
       const sazba = z.mesicne[Math.min(poradi, z.mesicne.length - 1)] * (d.ztpp ? z.nasobekZtpp : 1);
       polozky[index].mesice += 1;
       polozky[index].rocne += sazba;
@@ -116,11 +135,19 @@ export function zvyhodneniDeti(deti = [], rules) {
   return { polozky, rocne: polozky.reduce((s, p) => s + p.rocne, 0) };
 }
 
-// --- Odpočty od základu daně (§ 15, § 15a) -----------------------------------
+// --- Odpočty od základu daně (§ 15) -------------------------------------------
 
+/**
+ * Odpočet na produkty spoření na stáří (§ 15 odst. 6 a 7 ZDP). U penzijka se počítá po měsících
+ * jen část měsíčního příspěvku nad hranicí: pravidelnou část rozložíme rovnoměrně do 12 měsíců,
+ * mimořádný vklad (část ročního úhrnu) přičteme k prosinci.
+ */
 export function odpocetStari(vklady = {}, rules) {
   const o = rules.odpocty.stari;
-  const penzijko = Math.max(0, cislo(vklady.penzijko) - o.penzijkoNezapocitane);
+  const mimoradny = Math.min(cislo(vklady.penzijkoMimoradny), cislo(vklady.penzijko));
+  const profil = rovnomerne(cislo(vklady.penzijko) - mimoradny);
+  profil[profil.length - 1] += mimoradny;
+  const penzijko = odpocitatelnaCastDps(profil, o.penzijkoHraniceMesicne);
   const celkem = penzijko + cislo(vklady.dip) + cislo(vklady.zivotni) + cislo(vklady.dlouhodobaPece);
   return { odpocet: Math.min(celkem, o.limit), celkem };
 }

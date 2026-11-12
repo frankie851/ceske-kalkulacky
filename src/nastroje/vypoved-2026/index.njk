@@ -25,6 +25,12 @@ uvod: Vyplň datum doručení a pár údajů z výplatní pásky. Hned uvidíš 
         <div data-pro="zamestnavatel dohoda">
           {{ pole({ id: 'duvod', label: 'Důvod podle výpovědi nebo dohody', moznosti: v.duvody, napoveda: 'Písmeno z § 52 zákoníku práce najdeš přímo ve výpovědi. Podle něj se řídí výpovědní doba a odstupné.' }) }}
         </div>
+        <div data-pro="zamestnavatel dohoda" data-duvod="{{ v.nahradaDuvod }}" hidden>
+          {{ segmenty({ id: 'pricina', legenda: 'Proč nemůžeš svou práci dál dělat?', moznosti: v.pricina, napoveda: 'Při pracovním úrazu, nemoci z povolání nebo jejím ohrožení náleží jednorázová náhrada ' + v.nahradaNasobek + '× průměrného výdělku (§ 271ca zákoníku práce).' }) }}
+        </div>
+        <div data-pro="zamestnavatel" data-duvod="{{ v.zvlastHrubeDuvody }}" hidden>
+          {{ segmenty({ id: 'zvlastHrube', legenda: 'Šlo o porušení povinností zvlášť hrubým způsobem?', moznosti: v.zvlastHrube, napoveda: 'Tedy tak vážné, že by zaměstnavatel mohl pracovní poměr okamžitě zrušit. Pak podpora nenáleží (§ 39 odst. 2 zákona o zaměstnanosti).' }) }}
+        </div>
         <div data-pro="dohoda" hidden>
           {{ pole({ id: 'konecDohody', typ: 'date', label: 'Sjednaný den skončení podle dohody', hodnota: v.pole.konecDohody, chybaMisto: true }) }}
         </div>

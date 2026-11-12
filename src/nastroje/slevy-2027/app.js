@@ -1,7 +1,7 @@
 // Slevy 2027 – průvodce po krocích (jedna skupina otázek na obrazovku, Zpět / Pokračovat).
 // Výpočet je v slevy.js, texty kroků a HTML výsledku ve vystup.js (sdílí je i build).
 // Odpovědi drží jen proměnná `stav` v paměti stránky: nic se neukládá ani neodesílá.
-import { textyKroku, modelVysledku, vysledekHtml, seznamHtml, ikona, MESICE } from './vystup.js';
+import { textyKroku, modelVysledku, vysledekHtml, seznamHtml, ikona, MESICE, odpovediZeStavu } from './vystup.js';
 import { esc } from '../../js/graf.js';
 import { kc } from '../../js/format.js';
 
@@ -26,14 +26,14 @@ function novyStav() {
     manzel: { ma: false, prijem: '', peceODite: false, ztpp: false },
     invalidita: { stupen: 0, ztpp: false },
     hypoteka: { uroky: '', stareSmlouva: false },
-    stari: { penzijko: '', dip: '', zivotni: '', dlouhodobaPece: '' },
+    stari: { penzijko: '', penzijkoMimoradny: '', dip: '', zivotni: '', dlouhodobaPece: '' },
     dary: { dary: '', krev: '' },
     odbory: false,
     prijmy: { maleDohody: '', soubezne: '', ostatni: '' },
   };
 }
 
-const noveDite = () => ({ narozeni: { rok: '', mesic: 1 }, ztpp: false, od: 1, do: 12, skolka: false, skolne: '', dveDomacnosti: false, dohodaStrop: '' });
+const noveDite = () => ({ narozeni: { rok: '', mesic: 1 }, ztpp: false, od: 1, do: 12, studuje: false, skolka: false, skolne: '', dveDomacnosti: false, dohodaStrop: '' });
 
 /* ---------- Čísla z polí ---------- */
 
@@ -111,11 +111,12 @@ function diteHtml(d, i, ch) {
     ${mesic(`ditDo${i}`, 'do', d.do, ch[`ditDo${i}`])}
   </div>
   ${zaskrtnuti(`ditZtpp${i}`, 'Dítě má průkaz ZTP/P', d.ztpp)}
+  ${zaskrtnuti(`ditStuduje${i}`, `Studuje nebo se jinak soustavně připravuje na povolání (rozhoduje od ${rules.deti.vekMaxBezStudia} let)`, d.studuje)}
   <button type="button" class="btn btn-ghost slevy-odebrat" data-akce="odebrat" data-index="${i}">Odebrat ${i + 1}. dítě</button>
 </fieldset>`;
 }
 
-const predskolni = (s) => s.deti.map((d, i) => ({ d, i })).filter(({ d }) => cele(d.narozeni.rok) >= ROK - 7);
+const predskolni = (s) => s.deti.map((d, i) => ({ d, i })).filter(({ d }) => cele(d.narozeni.rok) >= ROK - rules.slevy.skolkovne.maxVekDitete);
 
 const KROKY = {
   zaklad: {
@@ -169,13 +170,14 @@ const KROKY = {
         d.od = Number(fd.get(`ditOd${i}`)) || 1;
         d.do = Number(fd.get(`ditDo${i}`)) || 12;
         d.ztpp = ano(fd, `ditZtpp${i}`);
+        d.studuje = ano(fd, `ditStuduje${i}`);
       });
     },
     over: (s) => {
       const ch = {};
       s.deti.forEach((d, i) => {
         const r = bezMezer(d.narozeni.rok);
-        if (!/^\d{4}$/.test(r) || cele(r) > ROK || cele(r) < ROK - 26) ch[`ditRok${i}`] = `Zadej rok narození dítěte (${ROK - 26} až ${ROK}).`;
+        if (!/^\d{4}$/.test(r) || cele(r) > ROK || cele(r) < ROK - rules.deti.vekMax) ch[`ditRok${i}`] = `Zadej rok narození dítěte (${ROK - rules.deti.vekMax} až ${ROK}).`;
         if (d.od > d.do) ch[`ditDo${i}`] = 'Měsíc „do“ musí být stejný nebo pozdější než měsíc „od“.';
       });
       return ch;
@@ -199,7 +201,11 @@ const KROKY = {
     },
     cti: (fd, s) => {
       s.deti.forEach((d, i) => {
-        if (!fd.has(`skolne${i}`)) return;
+        if (!fd.has(`skolne${i}`)) {
+          // Pole se nevykreslilo (dítě není v předškolním věku): starou odpověď smaž.
+          Object.assign(d, { skolka: false, skolne: '', dveDomacnosti: false, dohodaStrop: '' });
+          return;
+        }
         d.skolka = ano(fd, `skolka${i}`);
         d.skolne = fd.get(`skolne${i}`) ?? '';
         d.dveDomacnosti = ano(fd, `dveDom${i}`);
@@ -240,15 +246,22 @@ const KROKY = {
   stari: {
     html: (s, ch) => `<div class="slevy-mrizka">
       ${pole({ id: 'penzijko', label: 'Penzijní spoření za rok', hodnota: s.stari.penzijko, jednotka: 'Kč', chyba: ch.penzijko })}
+      ${pole({ id: 'penzijkoMimoradny', label: 'Z toho jednorázový (mimořádný) vklad', hodnota: s.stari.penzijkoMimoradny, jednotka: 'Kč', napoveda: 'Nepovinné. Počítáme ho do prosince.', chyba: ch.penzijkoMimoradny })}
       ${pole({ id: 'dip', label: 'DIP za rok', hodnota: s.stari.dip, jednotka: 'Kč', chyba: ch.dip })}
       ${pole({ id: 'zivotni', label: 'Životní pojištění za rok', hodnota: s.stari.zivotni, jednotka: 'Kč', chyba: ch.zivotni })}
       ${pole({ id: 'dlouhodobaPece', label: 'Pojištění dlouhodobé péče za rok', hodnota: s.stari.dlouhodobaPece, jednotka: 'Kč', chyba: ch.dlouhodobaPece })}
     </div>
     <p class="note">${ikona('ikona-info', sprite)}<span>Kolik ti stát přidá na penzijko a jak využít celý limit, spočítá <a href="${esc(plan48)}">Plán48</a>.</span></p>`,
     cti: (fd, s) => {
-      s.stari = { penzijko: fd.get('penzijko') ?? '', dip: fd.get('dip') ?? '', zivotni: fd.get('zivotni') ?? '', dlouhodobaPece: fd.get('dlouhodobaPece') ?? '' };
+      s.stari = { penzijko: fd.get('penzijko') ?? '', penzijkoMimoradny: fd.get('penzijkoMimoradny') ?? '', dip: fd.get('dip') ?? '', zivotni: fd.get('zivotni') ?? '', dlouhodobaPece: fd.get('dlouhodobaPece') ?? '' };
     },
-    over: (s) => overCisla(Object.entries(s.stari)),
+    over: (s) => {
+      const ch = overCisla(Object.entries(s.stari));
+      if (!ch.penzijkoMimoradny && cele(s.stari.penzijkoMimoradny) > cele(s.stari.penzijko)) {
+        ch.penzijkoMimoradny = 'Mimořádný vklad je součást ročního úhrnu, nemůže být vyšší.';
+      }
+      return ch;
+    },
   },
   dary: {
     html: (s, ch) => `<div class="slevy-mrizka">
@@ -344,30 +357,8 @@ function zpet() {
 
 /* ---------- Výsledek ---------- */
 
-/** Převede odpovědi z formuláře na vstup pro slevy.js. */
-function odpovedi() {
-  const s = stav;
-  return {
-    narozeni: { rok: cele(s.narozeni.rok), mesic: s.narozeni.mesic },
-    mzda: cele(s.mzda.mesicne) ? { mesicne: cele(s.mzda.mesicne), mesice: s.mzda.mesice } : null,
-    studium: { ...s.studium, druh: s.studium.druh === 'doktorskeJine' ? 'vs' : s.studium.druh },
-    deti: s.deti.map((d) => ({
-      narozeni: { rok: cele(d.narozeni.rok), mesic: d.narozeni.mesic },
-      ztpp: d.ztpp, od: d.od, do: d.do,
-      skolka: d.skolka && cele(d.narozeni.rok) >= ROK - 7,
-      skolne: cele(d.skolne),
-      domacnosti: d.dveDomacnosti ? 2 : 1,
-      dohodaStrop: d.dveDomacnosti ? cele(d.dohodaStrop) : 0,
-    })),
-    manzel: { ...s.manzel, prijem: cele(s.manzel.prijem) },
-    invalidita: s.invalidita,
-    hypoteka: { uroky: cele(s.hypoteka.uroky), stareSmlouva: s.hypoteka.stareSmlouva },
-    stari: Object.fromEntries(Object.entries(s.stari).map(([k, v]) => [k, cele(v)])),
-    dary: { dary: cele(s.dary.dary), krev: cele(s.dary.krev) },
-    odbory: s.odbory,
-    prijmy: Object.fromEntries(Object.entries(s.prijmy).map(([k, v]) => [k, cele(v)])),
-  };
-}
+/** Převede odpovědi z formuláře na vstup pro slevy.js (vystup.js, bez DOM). */
+const odpovedi = () => odpovediZeStavu(stav, rules);
 
 function vykresliVysledek() {
   const odp = odpovedi();

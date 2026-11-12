@@ -5,6 +5,7 @@ import { vypocet, predpoklady, doPole, kratkyNazev, platnaSada, pct } from './zo
 
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 const typicky = pravidla.fondy.transformovany;
+const konecTf = Object.values(pravidla.sady).find((s) => s.transformovaneFondy).transformovaneFondy;
 
 // Výchozí vstup z původní aplikace. Start projekce je pevný, aby byl build deterministický.
 const vstup = {
@@ -45,8 +46,10 @@ export default {
       vybrano: klic === vstup.sada,
     })),
     tf: {
-      konci: typicky.konci,
-      nastupce: pravidla.fondy[typicky.nastupce].nazev,
+      // Konec transformovaných fondů je jen v návrhu (sněmovní tisk 285), ne v platném zákoně.
+      konci: konecTf.konci,
+      nastupce: pravidla.fondy[konecTf.nastupce].nazev,
+      sadaNavrhu: kratkyNazev(Object.values(pravidla.sady).find((s) => s.transformovaneFondy)),
       cil: pravidla.fondy[pravidla.predpoklady.doporuceni.cilovyFond].nazev,
     },
     vekPenze: pravidla.predpoklady.vekPenze,

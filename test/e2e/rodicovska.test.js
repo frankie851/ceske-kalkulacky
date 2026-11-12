@@ -18,13 +18,15 @@ async function terminDo2026(page) {
   await vypln(page, '#termin', '2026-12-15');
 }
 
-test('RP 15 000 Kč měsíčně → 350 000 Kč vyčerpáno za 24 měsíců', async () => {
+// Revize 5. 11. 2026, ROD-05: zbytek 5 000 Kč se vyplatí s posledním měsícem (§ 30 odst. 6 ZSSP),
+// proto 23 měsíců, ne 24 jako v zadání.
+test('RP 15 000 Kč měsíčně → 350 000 Kč vyčerpáno za 23 měsíců', async () => {
   const { page } = await otevri(CESTA);
   await terminDo2026(page);
   await vypln(page, '#rp-vyse', '15000');
   assert.equal(await text(page, '[data-rp-text]'), '15 000 Kč');
-  assert.match(await statistika(page, 1), /350 000 Kč za 24 měsíců čerpání/);
-  assert.match(await text(page, '#vysledek [data-vysledek-vysvetleni]'), /350 000 Kč po 15 000 Kč měsíčně vystačí na 24 měsíců/);
+  assert.match(await statistika(page, 1), /350 000 Kč za 23 měsíců čerpání/);
+  assert.match(await text(page, '#vysledek [data-vysledek-vysvetleni]'), /350 000 Kč po 15 000 Kč měsíčně vystačí na 23 měsíců/);
   assert.match(await text(page, '#tabulka-souhrnu tbody tr:nth-child(3)'), /^Rodičovský příspěvek\s*350 000 Kč/);
   assert.equal(await page.$eval('[data-rp-navrh]', (el) => el.getAttribute('aria-pressed')), 'false');
   await page.close();
@@ -120,5 +122,26 @@ test('bez JavaScriptu: ukázkový výsledek a časová osa', async () => {
   assert.match(await text(page, '#vysledek [data-vysledek-cislo]'), /\d Kč$/);
   assert.ok(await page.$('[data-osa] svg .seg-rp'));
   assert.equal(await page.$eval('[data-ulozeni]', (el) => el.hidden), true);
+  await page.close();
+});
+
+// Revize 5. 11. 2026: ROD-01 (měsíc 3. narozenin), ROD-02 (souběh s mateřskou), ROD-04 (120 hodin).
+test('rodičovská i v měsíci 3. narozenin, souběžně s nízkou mateřskou a limit jeslí 120 hodin', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#termin', '2026-03-15');
+  await vypln(page, '#prijem-matka', '15 000');
+  await page.click('label[for="otcovska-ne"]');
+  await vypln(page, '#rp-vyse', '15000');
+  const radky = await page.$$eval('#tabulka-mesicu tbody tr', (tr) => tr.map((r) => r.textContent.replace(/\s+/g, ' ').trim()));
+  assert.match(radky.find((r) => r.startsWith('březen 2026')), /porod/);
+  // březen 2026: mateřská 31 × 346 = 10 726 Kč + rozdíl rodičovské 4 274 Kč = 15 000 Kč dávek
+  assert.match(radky.find((r) => r.startsWith('březen 2026')), /15 000 Kč/);
+  assert.match(await text(page, '[data-jak-pocitame]'), /§ 30b odst\. 3/);
+  // Poslední úkol: do konce měsíce 3. narozenin (březen 2029)
+  assert.match(await text(page, '[data-kontrolni-seznam]'), /Do 31\. 3\. 2029/);
+  await page.click('label[for="navrat-ano"]');
+  await vypln(page, '#navrat-od', '10');
+  assert.match(await text(page, '[data-varovani]'), /120 hodin/);
+  assert.deepEqual(chyby, []);
   await page.close();
 });
