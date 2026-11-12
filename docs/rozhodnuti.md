@@ -141,6 +141,8 @@ výpočty a testy z 12 existujících repozitářů aplikací.
    stejně jako původní `calc.js`. Podle zadání je to součást návrhu 2027, proto je to na
    stránce označené jako návrh. K rozhodnutí ve vlně 2: má projekce s pravidly 2026
    transformovaný fond neukončit?
+   **Rozhodnuto 12. 11. 2026** (revize PEN-01): s pravidly 2026 transformovaný fond nekončí,
+   konec 2036 platí jen v sadě „Návrh 2027“. Viz „Opravy podle revize 5. 11. 2026“.
 6. **Texty jsou rodově neutrální.** „Jsem zaměstnanec“ → „Mám zaměstnání“. V Mám EET? se
    tvary jako „Ty jsi zadal“ přepsaly na „Zadáno:“. Čísla ani zdroje se neměnily. Sekce
    Dluhy vyká.
@@ -528,3 +530,35 @@ odst. 1 až 3 a § 38v. Celé znění v repozitáři není, je zbytečně velké
 - **„Jak číst štítky“** (Co se mění v roce 2027) dostaly vlastní seznam `.legenda`. Původní
   `.watch` je pro ikonu 28 px, takže se do něj štítek nevešel, překrýval text a pravidlo
   `.watch .ikona` mu přebarvilo ikonu.
+
+# Opravy podle revize 5. 11. 2026 (12. 11. 2026)
+
+Revize v `docs/revize/2026-11-05/` hodnotila původní repozitáře. Stav každého nálezu na webu
+je v `docs/revize/2026-11-05/stav-na-webu.md`. Opravují se kritické a vysoké nálezy, které na
+webu platí. Každá hodnota je ověřená v textu předpisu na zakonyprolidi.cz (e-Sbírka se z prostředí
+neotevře) a v `rules.json` má citaci.
+
+## Penze a odpočet (P48-01, PEN-01, s nimi SLV-05, P48-05, PEN-08)
+
+- **Odpočet DPS po měsících ve všech třech nástrojích** (§ 15 odst. 7 ZDP): sdílená funkce
+  `src/js/odpocet-dps.js` (`odpocitatelnaCastDps`) sečte v každém měsíci část vkladu nad
+  hranicí 1 700 Kč. Hranice je v `rules.json` každého nástroje (Plán48
+  `odpocet.dpsMesicniHranice`, Penzijko kompas `odpocet.nadVklad`, Slevy
+  `odpocty.stari.penzijkoHraniceMesicne`). Shodu hlídá `test/sdilene/konzistence.test.js`.
+  - Plán48 počítá z měsíčního profilu: proběhlé měsíce s dnešním vkladem, zbylé s navýšeným.
+    Rada „mimořádně na penzijko“ = nevyužitý limit + rozdíl do hranice v prosinci. Při
+    navýšení na 1 700 Kč je to přesně nevyužitý limit (48 000 Kč místo 55 000 Kč).
+  - Slevy se ptají na roční úhrn a nově i na mimořádný vklad. Pravidelnou část rozloží do
+    12 měsíců, mimořádný vklad přičtou k prosinci (SLV-05). Kdo platí nepravidelně jinak,
+    dostane odhad, a to je v nápovědě kroku.
+- **Zaokrouhlení státního příspěvku** zůstává rozdílné (Plán48 na celé Kč, Penzijko kompas
+  na haléře). Rozdíl je nejvýš 0,50 Kč měsíčně a `konzistence.test.js` ho hlídá. Sjednocení
+  by měnilo převzaté a otestované moduly bez dopadu na výsledek pro uživatele.
+- **Pásma „Lepší penzijko“** mají v Plánu48 zápis `vekDo` 17/29 včetně, v Penzijko kompasu
+  18/30 bez. Pro celé roky věku je to totéž, zápis se nesjednocuje.
+- **Konec transformovaných fondů 2036** je jen ve vládním návrhu (sněmovní tisk 285), ne
+  v zákoně č. 427/2011 Sb. Údaj je v `sady.navrh2027.transformovaneFondy` se zdrojem a projekce
+  ho používá jen s touto sadou. Text na kartě a v předpokladech má štítek návrhu. S pravidly
+  2026 se proto v transformovaném fondu nenabízí krok „navyš vklad“, protože se při výnosu
+  1,5 % v dnešních penězích nevyplatí (test doporučení upraven).
+- **Citace „§ 15a ZDP“** opraveny na „§ 15 odst. 6 a 7 ZDP“ v Plánu48 i Penzijko kompasu.

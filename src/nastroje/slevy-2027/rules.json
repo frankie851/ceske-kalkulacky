@@ -234,14 +234,19 @@
     "stari": {
       "nazev": "Produkty spoření na stáří (penzijko, DIP, životní pojištění, pojištění dlouhodobé péče)",
       "limit": 48000,
-      "penzijkoNezapocitane": 20400,
+      "penzijkoHraniceMesicne": 1700,
+      "penzijkoZdroj": {
+        "pravniZaklad": "§ 15 odst. 7 zákona č. 586/1992 Sb., o daních z příjmů",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-586#p15",
+        "citace": "… lze odečíst od základu daně podle odstavce 6 pouze část měsíčního příspěvku, která převyšuje částku, od které náleží nejvyšší státní příspěvek …"
+      },
       "zdroje": [
         "zdp-2027",
         "fs-dpfo-2025"
       ],
       "overeno": "2026-11-05",
       "novinka2027": false,
-      "poznamka": "§ 15 odst. 6 ZDP ve znění od 1. 1. 2027: společný limit 48 000 Kč; u penzijka jen část měsíčního příspěvku nad částku, od které náleží nejvyšší státní příspěvek (1 700 Kč). Výpočet předpokládá pravidelné měsíční vklady. Novela „Lepší penzijko“ nebyla k 5. 11. 2026 ve Sbírce vyhlášena – při příští aktualizaci zkontrolovat."
+      "poznamka": "§ 15 odst. 6 ZDP ve znění od 1. 1. 2027: společný limit 48 000 Kč; u penzijka jen část měsíčního příspěvku nad částku, od které náleží nejvyšší státní příspěvek (1 700 Kč). Počítá se po měsících: pravidelný vklad rozložíme do 12 měsíců, mimořádný vklad přičteme k prosinci. Novela „Lepší penzijko“ nebyla k 5. 11. 2026 ve Sbírce vyhlášena – při příští aktualizaci zkontrolovat."
     },
     "uroky": {
       "nazev": "Úroky z úvěru na bydlení",

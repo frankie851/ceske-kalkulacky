@@ -118,7 +118,15 @@ test('invalidita III. stupně a ZTP/P se sčítají', () => {
   assert.equal(r.reduce((s, p) => s + p.rocne, 0), 5040 + 16140);
 });
 
-test('penzijko 24 000 Kč → odpočet 3 600 Kč (nad 20 400)', () => {
+// Revize 5. 11. 2026, SLV-05: § 15 odst. 7 ZDP – po měsících, ne ročně minus 20 400 Kč.
+test('SLV-05: mimořádný vklad 48 000 Kč v prosinci → odpočet 46 300 Kč', () => {
+  assert.equal(odpocetStari({ penzijko: 48000, penzijkoMimoradny: 48000 }, rules).odpocet, 46300);
+  // 12 × 1 000 Kč + mimořádně 30 000 Kč: prosinec 31 000 Kč → 29 300 Kč
+  assert.equal(odpocetStari({ penzijko: 42000, penzijkoMimoradny: 30000 }, rules).odpocet, 29300);
+  assert.equal(rules.odpocty.stari.penzijkoHraniceMesicne, 1700);
+});
+
+test('penzijko 24 000 Kč → odpočet 3 600 Kč (nad 1 700 Kč měsíčně)', () => {
   assert.equal(odpocetStari({ penzijko: 24000 }, rules).odpocet, 3600);
 });
 

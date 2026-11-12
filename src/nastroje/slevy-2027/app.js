@@ -26,7 +26,7 @@ function novyStav() {
     manzel: { ma: false, prijem: '', peceODite: false, ztpp: false },
     invalidita: { stupen: 0, ztpp: false },
     hypoteka: { uroky: '', stareSmlouva: false },
-    stari: { penzijko: '', dip: '', zivotni: '', dlouhodobaPece: '' },
+    stari: { penzijko: '', penzijkoMimoradny: '', dip: '', zivotni: '', dlouhodobaPece: '' },
     dary: { dary: '', krev: '' },
     odbory: false,
     prijmy: { maleDohody: '', soubezne: '', ostatni: '' },
@@ -240,15 +240,22 @@ const KROKY = {
   stari: {
     html: (s, ch) => `<div class="slevy-mrizka">
       ${pole({ id: 'penzijko', label: 'Penzijní spoření za rok', hodnota: s.stari.penzijko, jednotka: 'Kč', chyba: ch.penzijko })}
+      ${pole({ id: 'penzijkoMimoradny', label: 'Z toho jednorázový (mimořádný) vklad', hodnota: s.stari.penzijkoMimoradny, jednotka: 'Kč', napoveda: 'Nepovinné. Počítáme ho do prosince.', chyba: ch.penzijkoMimoradny })}
       ${pole({ id: 'dip', label: 'DIP za rok', hodnota: s.stari.dip, jednotka: 'Kč', chyba: ch.dip })}
       ${pole({ id: 'zivotni', label: 'Životní pojištění za rok', hodnota: s.stari.zivotni, jednotka: 'Kč', chyba: ch.zivotni })}
       ${pole({ id: 'dlouhodobaPece', label: 'Pojištění dlouhodobé péče za rok', hodnota: s.stari.dlouhodobaPece, jednotka: 'Kč', chyba: ch.dlouhodobaPece })}
     </div>
     <p class="note">${ikona('ikona-info', sprite)}<span>Kolik ti stát přidá na penzijko a jak využít celý limit, spočítá <a href="${esc(plan48)}">Plán48</a>.</span></p>`,
     cti: (fd, s) => {
-      s.stari = { penzijko: fd.get('penzijko') ?? '', dip: fd.get('dip') ?? '', zivotni: fd.get('zivotni') ?? '', dlouhodobaPece: fd.get('dlouhodobaPece') ?? '' };
+      s.stari = { penzijko: fd.get('penzijko') ?? '', penzijkoMimoradny: fd.get('penzijkoMimoradny') ?? '', dip: fd.get('dip') ?? '', zivotni: fd.get('zivotni') ?? '', dlouhodobaPece: fd.get('dlouhodobaPece') ?? '' };
     },
-    over: (s) => overCisla(Object.entries(s.stari)),
+    over: (s) => {
+      const ch = overCisla(Object.entries(s.stari));
+      if (!ch.penzijkoMimoradny && cele(s.stari.penzijkoMimoradny) > cele(s.stari.penzijko)) {
+        ch.penzijkoMimoradny = 'Mimořádný vklad je součást ročního úhrnu, nemůže být vyšší.';
+      }
+      return ch;
+    },
   },
   dary: {
     html: (s, ch) => `<div class="slevy-mrizka">

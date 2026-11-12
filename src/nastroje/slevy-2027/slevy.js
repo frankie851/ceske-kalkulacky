@@ -2,6 +2,8 @@
 // Čisté funkce bez DOM – všechny částky a termíny přicházejí z rules.json.
 // Měsíce se číslují 1–12; datum narození je { rok, mesic }.
 
+import { odpocitatelnaCastDps, rovnomerne } from '../../js/odpocet-dps.js';
+
 const MESICE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 /** Porovná (rok, měsíc) a (rok, měsíc): záporné, 0, kladné. */
@@ -116,11 +118,19 @@ export function zvyhodneniDeti(deti = [], rules) {
   return { polozky, rocne: polozky.reduce((s, p) => s + p.rocne, 0) };
 }
 
-// --- Odpočty od základu daně (§ 15, § 15a) -----------------------------------
+// --- Odpočty od základu daně (§ 15) -------------------------------------------
 
+/**
+ * Odpočet na produkty spoření na stáří (§ 15 odst. 6 a 7 ZDP). U penzijka se počítá po měsících
+ * jen část měsíčního příspěvku nad hranicí: pravidelnou část rozložíme rovnoměrně do 12 měsíců,
+ * mimořádný vklad (část ročního úhrnu) přičteme k prosinci.
+ */
 export function odpocetStari(vklady = {}, rules) {
   const o = rules.odpocty.stari;
-  const penzijko = Math.max(0, cislo(vklady.penzijko) - o.penzijkoNezapocitane);
+  const mimoradny = Math.min(cislo(vklady.penzijkoMimoradny), cislo(vklady.penzijko));
+  const profil = rovnomerne(cislo(vklady.penzijko) - mimoradny);
+  profil[profil.length - 1] += mimoradny;
+  const penzijko = odpocitatelnaCastDps(profil, o.penzijkoHraniceMesicne);
   const celkem = penzijko + cislo(vklady.dip) + cislo(vklady.zivotni) + cislo(vklady.dlouhodobaPece);
   return { odpocet: Math.min(celkem, o.limit), celkem };
 }

@@ -163,16 +163,28 @@ test('projekce: strop poplatků z návrhu 2027 se uplatní', () => {
   assert.ok(navrh.souhrn.nominal > dnes.souhrn.nominal);
 });
 
-test('projekce: transformovaný fond po roce 2036 přejde do konzervativního', () => {
+// Revize 5. 11. 2026, PEN-01: konec transformovaných fondů 2036 je jen v návrhu (tisk 285).
+// Původní test ho čekal i v sadě „Platná pravidla 2026“.
+test('projekce: s platnými pravidly 2026 zůstává transformovaný fond až do konce', () => {
   const r = projekce(rules, {
     zustatek: 100000, vklad: 0, zamestnavatel: 0, vek: 40,
     fond: 'transformovany', sada: '2026', mesicu: 12 * 15, start: { rok: 2026, mesic: 1 },
   });
+  assert.equal(r.mesicePoNastupci, 0);
+  assert.equal(transformovanyFond(rules, { vek: 40, sada: '2026', fond: 'transformovany', zustatek: 100000, vklad: 0 }).konci, null);
+});
+
+test('projekce: podle návrhu 2027 transformovaný fond po roce 2036 přejde do konzervativního', () => {
+  const r = projekce(rules, {
+    zustatek: 100000, vklad: 0, zamestnavatel: 0, vek: 40,
+    fond: 'transformovany', sada: 'navrh2027', mesicu: 12 * 15, start: { rok: 2026, mesic: 1 },
+  });
   // 2026–2036 (11 let) v TF, 2037–2040 (4 roky) v konzervativním fondu
   assert.equal(r.mesicePoNastupci, 48);
+  assert.equal(rules.sady.navrh2027.transformovaneFondy.konci, '2036-12-31');
   const tf = projekce(rules, {
     zustatek: 100000, vklad: 0, zamestnavatel: 0, vek: 40,
-    fond: 'transformovany', sada: '2026', mesicu: 12 * 15, start: { rok: 2026, mesic: 1 },
+    fond: 'transformovany', sada: 'navrh2027', mesicu: 12 * 15, start: { rok: 2026, mesic: 1 },
     parametry: { vynos: rules.fondy.transformovany.vynos }, bezNastupce: true,
   });
   assert.ok(r.souhrn.nominal > tf.souhrn.nominal, 'konzervativní fond má vyšší předpokládaný výnos');
@@ -228,9 +240,14 @@ test('doporučení: max. 3 kroky, seřazené podle přínosu, všechny kladné',
   for (let i = 1; i < d.length; i++) assert.ok(d[i - 1].prinos >= d[i].prinos);
   for (const k of d) assert.ok(k.prinos > 0);
   const id = d.map((k) => k.id);
-  assert.ok(id.includes('vklad'));
+  // Revize 5. 11. 2026, PEN-01/PEN-07: v transformovaném fondu (1,5 %) bez konce v roce 2036
+  // se navýšení vkladu v dnešních penězích nevyplatí, krok se proto nenabízí.
+  assert.ok(!id.includes('vklad'));
   assert.ok(id.includes('fond'));
   assert.ok(id.includes('zamestnavatel'));
+  // V účastnickém fondu se navýšení na maximální státní příspěvek nabídne.
+  const u = doporuceni(rules, { ...VSTUP, fond: 'zivotniCyklus', poplatky: { sprava: 1, zhodnoceni: 15 } }).map((k) => k.id);
+  assert.ok(u.includes('vklad'));
 });
 
 test('doporučení: kdo už má vše nastavené, nedostane zbytečné kroky', () => {
