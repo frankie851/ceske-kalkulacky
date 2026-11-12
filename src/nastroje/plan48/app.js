@@ -173,7 +173,7 @@ function prepocitej() {
     li.classList.toggle('sage', Boolean(stat[i].zvyraznit));
   });
   text('[data-akce]', v.vetaCoUdelat(r.doporuceni, o.limit));
-  const poznamka = v.poznamkaCoUdelat(r.doporuceni, pravidla.vychozi);
+  const poznamka = v.poznamkaCoUdelat(r.doporuceni, pravidla.vychozi, sada);
   text('[data-akce-poznamka]', poznamka);
   $('[data-akce-poznamka-obal]').hidden = !poznamka;
   text('[data-lista-cislo]', kc(o.vyuzity));
