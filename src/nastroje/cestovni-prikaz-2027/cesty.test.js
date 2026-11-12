@@ -164,10 +164,39 @@ test('celá cesta: základ + PHM + stravné; jednostopé vozidlo 1,60 Kč/km', (
   assert.equal(spocitejCestu(moto, { odjezd: '2026-03-15T08:00', navrat: '2026-03-15T10:00', km: 50 }, rules).zakladniHal, 8000);
 });
 
-test('přívěs není ověřený → výpočet ho odmítne', () => {
-  assert.throws(() => spocitejCestu(hlavicka(), {
-    odjezd: '2026-03-15T06:00', navrat: '2026-03-15T19:00', km: 100, prives: true,
-  }, rules), ChybaVstupu);
+// Revize 5. 11. 2026, CES-02: § 157 odst. 4 ZP – při použití přívěsu se sazba za km zvýší
+// nejméně o 15 %. Původní test výpočet s přívěsem odmítal.
+test('přívěs: sazba za km zvýšená o 15 % (§ 157 odst. 4 ZP)', () => {
+  const cesta = { odjezd: '2026-03-15T06:00', navrat: '2026-03-15T19:00', km: 100 };
+  const v = spocitejCestu(hlavicka(), { ...cesta, prives: true }, rules);
+  assert.equal(v.zakladniHal, 67850);
+  assert.equal(v.privesPct, 15);
+  // z přesného součinu: 12,5 × 5,90 × 1,15 = 84,8125 → 84,81 Kč (ne 12,5 × 6,79)
+  assert.equal(spocitejCestu(hlavicka(), { ...cesta, km: 12.5, prives: true }, rules).zakladniHal, 8481);
+  const moto = hlavicka({ vozidlo: { spz: 'X', druh: 'jednostope', palivo: 'benzin95', spotreba: 4 } });
+  assert.equal(spocitejCestu(moto, { ...cesta, km: 50, prives: true }, rules).zakladniHal, 9200);
+  assert.equal(spocitejCestu(hlavicka(), cesta, rules).zakladniHal, 59000);
+  assert.equal(rules.zakonik.prives.pct, 15);
+  assert.match(rules.zakonik.prives.zdroj.url, /2006-262#p157/);
+});
+
+// Revize 5. 11. 2026, CES-01: § 163 odst. 4 ZP – cesta, která spadá do 2 kalendářních dnů,
+// se posoudí dohromady, je-li to pro zaměstnance výhodnější.
+test('cesta přes 2 kalendářní dny se posoudí dohromady, je-li to výhodnější (§ 163 odst. 4)', () => {
+  const st = (odjezd, navrat, extra = {}, h = hlavicka()) => spocitejCestu(h, { odjezd, navrat, km: 0, ...extra }, rules);
+  const a = st('2026-03-15T20:00', '2026-03-16T02:00');
+  assert.equal(a.stravneHal, 15500);
+  assert.equal(a.posouzeni, 'spolecne');
+  assert.equal(st('2026-04-10T06:00', '2026-04-11T00:30').stravneHal, 37000);
+  assert.equal(st('2026-03-15T22:00', '2026-03-16T11:00').stravneHal, 23600);
+  const odd = st('2026-03-15T19:00', '2026-03-16T10:00');
+  assert.equal(odd.stravneHal, 31000);
+  assert.equal(odd.posouzeni, 'oddelene');
+  assert.equal(st('2026-02-28T22:00', '2026-03-01T04:00').stravneHal, 15500);
+  assert.equal(st('2026-03-15T21:00', '2026-03-16T09:00', { jidla: { '2026-03-16': 1 } }).stravneHal, 4650);
+  assert.equal(st('2026-03-15T20:00', '2026-03-16T02:00', {}, hlavicka({ sfera: 'verejna' })).stravneHal, 15500);
+  // Cesty přes 3 a více dní se nemění.
+  assert.equal(st('2026-03-15T14:00', '2026-03-17T10:30', { jidla: { '2026-03-16': 1 } }).posouzeni, 'oddelene');
 });
 
 test('desetinné km a haléřové zaokrouhlení', () => {
