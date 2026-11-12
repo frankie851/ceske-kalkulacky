@@ -12,6 +12,7 @@
       { "nazev": "MF – Pokyny k příloze č. 2 přiznání (25 5405/P2)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf", "poznamka": "zisky a ztráty jen uvnitř druhu příjmu (§ 10 odst. 4)" },
       { "nazev": "Pokyny k přiznání k dani z příjmů FO za rok 2025", "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf", "poznamka": "§ 8, nebo § 16a; řádky přiznání a příloh; zápočet zvlášť za každý stát" },
       { "nazev": "MF – Přehled platných smluv o zamezení dvojího zdanění", "url": "https://mf.gov.cz/cs/zahranici-a-eu/smlouvy-o-zamezeni-dvojiho-zdaneni/prehled-platnych-smluv", "poznamka": "smluvní sazby pro portfoliové dividendy (čl. 10 odst. 2)" },
+      { "nazev": "Texty smluv o zamezení dvojího zdanění (Zákony pro lidi, znění Sbírky)", "url": "https://www.zakonyprolidi.cz/cs/1994-32", "poznamka": "čl. 10 odst. 2 všech 8 smluv ověřen 7. 11. 2026, doslovně v docs/zdroje/smlouvy-cl10.md" },
       { "nazev": "Finanční zpravodaj 2/2026 – Pokyn GFŘ-D-75", "url": "https://www.mfcr.cz/assets/attachments/2026-01-14_Financni-zpravodaj-cislo-2-2026.pdf", "poznamka": "jednotný kurz za rok 2025; za rok 2026 zatím nevydán" },
       { "nazev": "Zákon č. 180/2026 Sb. (limity pro podání přiznání)", "url": "https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf", "poznamka": "limity 100 000 Kč a 40 000 Kč od zdaňovacího období 2027" }
     ],
@@ -23,7 +24,7 @@
       "Kód druhu příjmu pro kryptoaktiva v příloze č. 2: samostatný kód není.",
       "Formulář W-8BEN je americký postup. Z českého zdroje jsme ho neověřili.",
       "Řádky přiznání a příloh jsou podle tiskopisu za rok 2025. Pokyny za rok 2026 zatím nevyšly.",
-      "Smluvní sazby jsou podle přehledu Ministerstva financí. S textem v e-Sbírce jsme je neporovnávali.",
+      "Zda se osvobozené příjmy pro oznámení podle § 38v sčítají. Zákon mluví o „příjmu“ vyšším než 5 000 000 Kč. Počítáme opatrně součet všech osvobozených prodejů v roce.",
       "Sazbu 23 % pro část základu daně přesahující 36násobek průměrné mzdy (§ 16 odst. 1 písm. b) nepočítáme.",
       "Zaokrouhlení základu daně na celá sta Kč dolů (§ 16 odst. 2, § 16a odst. 2) nepočítáme. Výpočet je orientační."
     ]
@@ -112,6 +113,15 @@
     },
     "oznameni": {
       "limit": 5000000,
+      "scitani": true,
+      "scitaniStav": "nejasne",
+      "scitaniText": "Zákon mluví o „příjmu“ vyšším než 5 000 000 Kč a o sčítání nic neříká. Počítáme opatrně součet všech osvobozených prodejů v roce.",
+      "pokuta": {
+        "bezVyzvy": 0.001,
+        "poVyzve": 0.1,
+        "nesplneno": 0.15,
+        "zdroj": { "pravniZaklad": "§ 38w odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "0,1 % z částky neoznámeného příjmu, pokud tuto povinnost splní, aniž by k tomu byl vyzván" }
+      },
       "stav": "potvrzeno",
       "zdroj": { "pravniZaklad": "§ 38v odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Pokud poplatník daně z příjmů fyzických osob obdrží příjem, který je od daně z příjmů fyzických osob osvobozen a je vyšší než 5 000 000 Kč, je povinen oznámit správci daně tuto skutečnost do konce lhůty pro podání daňového přiznání" }
     },
@@ -129,14 +139,14 @@
   },
   "dividendy": {
     "zeme": {
-      "US": { "nazev": "USA", "smluvniSazba": { "hodnota": 0.15, "smlouva": "32/1994 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" }, "w8ben": { "stav": "nejasne", "text": "nejasné – US procedura, neověřeno z CZ zdroje" } },
-      "DE": { "nazev": "Německo", "smluvniSazba": { "hodnota": 0.15, "smlouva": "18/1984 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
-      "GB": { "nazev": "Velká Británie", "smluvniSazba": { "hodnota": 0.15, "smlouva": "89/1992 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
-      "NL": { "nazev": "Nizozemsko", "smluvniSazba": { "hodnota": 0.1, "smlouva": "138/1974 Sb.", "clanek": "čl. 10 odst. 2", "stav": "potvrzeno" } },
-      "IE": { "nazev": "Irsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "163/1996 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
-      "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": 0.1, "smlouva": "79/2005 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
-      "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "281/1996 Sb. + Protokol 99/2013 Sb.m.s.", "clanek": "čl. 10 odst. 2 (nové znění)", "stav": "potvrzeno" } },
-      "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": 0.15, "smlouva": "83/2002 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno" } },
+      "US": { "nazev": "USA", "smluvniSazba": { "hodnota": 0.15, "smlouva": "32/1994 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1994-32", "citace": "b) 15 % hrubé částky dividend ve všech ostatních případech." } }, "w8ben": { "stav": "nejasne", "text": "nejasné – US procedura, neověřeno z CZ zdroje" } },
+      "DE": { "nazev": "Německo", "smluvniSazba": { "hodnota": 0.15, "smlouva": "18/1984 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1984-18", "citace": "b) 15 % hrubé částky dividend ve všech ostatních případech." } } },
+      "GB": { "nazev": "Velká Británie", "smluvniSazba": { "hodnota": 0.15, "smlouva": "89/1992 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1992-89", "citace": "15 % hrubé částky dividend ve všech ostatních případech" } } },
+      "NL": { "nazev": "Nizozemsko", "smluvniSazba": { "hodnota": 0.1, "smlouva": "138/1974 Sb.", "clanek": "čl. 10 odst. 2", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1974-138", "citace": "Daň takto stanovená však nemůže přesáhnout 10 % hrubé částky dividend." } } },
+      "IE": { "nazev": "Irsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "163/1996 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1996-163", "citace": "15 % hrubé částky dividend ve všech ostatních případech" } } },
+      "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": 0.1, "smlouva": "79/2005 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2005-79", "citace": "b) 10 procent hrubé částky dividend ve všech ostatních případech." } } },
+      "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "281/1996 Sb. + Protokol 99/2013 Sb.m.s.", "clanek": "čl. 10 odst. 2 (nové znění)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2013-99", "citace": "daň takto stanovená nepřesáhne 15 procent hrubé částky dividend." } } },
+      "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": 0.15, "smlouva": "83/2002 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2002-83", "citace": "b) 15 procent hrubé částky dividend ve všech ostatních případech." } } },
       "XX": {
         "nazev": "Jiná země",
         "smluvniSazba": { "hodnota": null, "stav": "neovereno" },

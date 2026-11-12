@@ -6,7 +6,7 @@ import { kc, cislo, procenta, datum } from '../../js/format.js';
 /** Escapování textu do HTML. */
 export const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (z) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[z]);
 
-const pct = (podil) => procenta(Math.round(podil * 100 * 100) / 100, Number.isInteger(podil * 100) ? 0 : 1);
+const pct = (podil) => { const p = Math.round(podil * 100 * 100) / 100; return procenta(p, Number.isInteger(p) ? 0 : 1); };
 
 /** Štítek stavu pravidla (Potvrzeno / Nejasné / Neověřeno) jako HTML. */
 export function stitekStavu(stav, rules) {
@@ -105,9 +105,15 @@ export function upozorneniProdejuHtml(v, rules) {
       return `<li><span>${s} ${druh}: ztrátu jsme odečetli jen od zisků stejného druhu. Mezi cennými papíry a kryptoaktivy se zisky a ztráty nezapočítávají.${zaporny}</span></li>`;
     }
     if (u.id === 'oznameni') {
+      const oz = pr.oznameni;
       const prodeje = u.polozky.map((x) => `prodej ${x.index + 1} (${kc(x.castka)})`).join(', ');
-      return `<li><span>${s} Osvobozený příjem vyšší než ${kc(u.limit)} musíš oznámit finančnímu úřadu do konce lhůty pro podání přiznání (${esc(pr.oznameni.zdroj.pravniZaklad)}). `
-        + `Týká se: ${prodeje}. V oznámení uvedeš výši příjmu, okolnosti jeho nabytí a datum, kdy vznikl.</span></li>`;
+      const scitani = u.scitani
+        ? ` ${stitekStavu(u.scitaniStav, rules)} Osvobozené příjmy za rok jsme sečetli: ${kc(u.castka)}. ${esc(oz.scitaniText)}`
+        : '';
+      return `<li><span>${s} Osvobozený příjem vyšší než ${kc(u.limit)} musíš oznámit finančnímu úřadu do konce lhůty pro podání přiznání (${esc(oz.zdroj.pravniZaklad)}). `
+        + `Týká se: ${prodeje}. V oznámení uvedeš výši příjmu, okolnosti jeho nabytí a datum, kdy vznikl.${scitani} `
+        + `Za neoznámení hrozí pokuta (${esc(oz.pokuta.zdroj.pravniZaklad)}): ${pct(oz.pokuta.bezVyzvy)} (${kc(u.pokuty.bezVyzvy)}), když oznámení podáš bez výzvy, `
+        + `${pct(oz.pokuta.poVyzve)} (${kc(u.pokuty.poVyzve)}) po výzvě úřadu a ${pct(oz.pokuta.nesplneno)} (${kc(u.pokuty.nesplneno)}), když ho nepodáš ani potom.</span></li>`;
     }
     if (u.id === 'kod-krypta-p2') {
       return `<li><span>${s} Pro kryptoaktiva není v příloze č. 2 přiznání samostatný kód druhu příjmu. Než přiznání podáš, ověř v pokynech, který kód použít.</span></li>`;
@@ -162,7 +168,7 @@ export function stropyHtml(v, rules) {
     const s = rules.dividendy.zeme[z.zeme].smluvniSazba;
     return s?.hodnota == null
       ? `${esc(z.nazev)}: bez smlouvy v našem přehledu, zápočet ${kc(rules.dividendy.zeme[z.zeme].bezSmlouvy?.zapocet)}`
-      : `${esc(z.nazev)} ${pct(s.hodnota)} (smlouva ${esc(s.smlouva)}, ${esc(s.clanek)})`;
+      : `${esc(z.nazev)} ${pct(s.hodnota)} (smlouva ${s.zdroj?.url ? `<a href="${esc(s.zdroj.url)}">${esc(s.smlouva)}</a>` : esc(s.smlouva)}, ${esc(s.clanek)})`;
   });
   if (!zeme.length) return '';
   return `<p class="small zt-stropy">${stitekStavu(strop.stav, rules)} Zápočet je nejvýš smluvní sazba × hrubá dividenda: ${zeme.join('; ')}.</p>`;

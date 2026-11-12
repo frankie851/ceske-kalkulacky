@@ -32,7 +32,7 @@ const vd = spocitejDividendy(vyplaty, { rok, rezim }, rules);
 const stav = (s) => rules.stavy[s] || rules.stavy.neovereno;
 const pr = rules.prodeje;
 const ht = pr.hodnotovyTest;
-const pct = (podil) => procenta(podil * 100);
+const pct = (podil) => { const p = Math.round(podil * 10000) / 100; return procenta(p, Number.isInteger(p) ? 0 : 1); };
 const limityHt = Object.entries(pr.druhy).map(([k, d]) => `${d.nazev.toLowerCase()} ${kc(ht.limity[k])}`).join(', ');
 const limit40 = pr.limit40mil.limity.kryptoaktivum;
 const jednotny = rules.kurzy.jednotny[String(rok)];
@@ -65,7 +65,8 @@ export default {
         { stav: stav(pr.krypto.stav), zdroj: pr.krypto.zdroj, text: `Osvobození kryptoaktiv platí od ${datum(pr.krypto.ucinnostOd)} (zákon č. ${pr.krypto.zakon}): ${pr.krypto.plati}.` },
         { stav: stav(pr.cennePapiry.stav), zdroj: pr.cennePapiry.zdroj, text: `Cenné papíry: ${pr.cennePapiry.kmenovyList}; ${pr.cennePapiry.opce}. Nástroj počítá s běžnými akciemi a ETF.` },
         { stav: stav(pr.naklady.stav), zdroj: { ...pr.naklady.zdroj, citace: null }, text: pr.naklady.text },
-        { stav: stav(pr.oznameni.stav), zdroj: pr.oznameni.zdroj, text: `Osvobozený příjem vyšší než ${kc(pr.oznameni.limit)} je třeba oznámit finančnímu úřadu. Kalkulačka na to upozorní u každého takového prodeje.` },
+        { stav: stav(pr.oznameni.stav), zdroj: pr.oznameni.zdroj, text: `Osvobozený příjem vyšší než ${kc(pr.oznameni.limit)} je třeba oznámit finančnímu úřadu. Za neoznámení hrozí pokuta ${pct(pr.oznameni.pokuta.bezVyzvy)} až ${pct(pr.oznameni.pokuta.nesplneno)} z příjmu (${pr.oznameni.pokuta.zdroj.pravniZaklad}).` },
+        { stav: stav(pr.oznameni.scitaniStav), zdroj: { ...pr.oznameni.zdroj, citace: null }, text: pr.oznameni.scitaniText },
         { stav: stav(rules.dane.sazba.stav), zdroj: rules.dane.sazba.zdroj, text: `Orientační daň počítáme sazbou ${pct(rules.dane.sazba.hodnota)}. Sazbu ${rules.dane.sazba.vyssiSazba.text} nepočítáme.` },
         { stav: stav('potvrzeno'), zdroj: null, text: 'Kryptoaktiva a cenné papíry v obchodním majetku (podnikání) se osvobodit nedají. Nástroj počítá jen s osobními investicemi.' },
       ],
