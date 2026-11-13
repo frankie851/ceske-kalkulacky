@@ -2,7 +2,7 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { rules } from './helpers.js';
 import { simulateRentBuy, sensitivity } from '../js/rentbuy.js';
-import { annuityPayment, balanceAfter, totalInterest } from '../js/mortgage.js';
+import { annuityPayment, balanceAfter, totalInterest, interestDeductionSaving } from '../js/mortgage.js';
 
 const near = (a, e, tol, msg) => assert.ok(Math.abs(a - e) <= tol, `${msg ?? ''} očekáváno ${e} ± ${tol}, je ${a}`);
 
@@ -147,5 +147,64 @@ describe('citlivost 3 × 3', () => {
   test('vyšší růst cen pomáhá koupi, vyšší výnos nájmu', () => {
     for (let j = 0; j < 3; j++) assert.ok(s.grid[0][j] < s.grid[1][j] && s.grid[1][j] < s.grid[2][j]);
     for (let i = 0; i < 3; i++) assert.ok(s.grid[i][0] > s.grid[i][2]);
+  });
+});
+
+// ---------- Revize 5. 11. 2026: BYD-05 (nad limitem LTV), BYD-04 (DTI, úspora na dani) ----------
+describe('BYD-05: úvěr nad limitem LTV', () => {
+  // Brno, 60 m² × 124 954 Kč = 7 497 240 Kč; vlastní zdroje 1 500 000 − náklady 12 000 = 1 488 000 Kč
+  // → úvěr 6 009 240 Kč, LTV 80,15 %; limit 80 % → chybí 6 009 240 − 5 997 792 = 11 448 Kč.
+  const brno = { ...flat, area: 60, pricePerM2: 124_954, ownFunds: 1_500_000, purchaseCosts: 12_000, age: 40, rate: 5 };
+
+  test('věk 40: LTV 80,15 % > 80 % → ltvExceeded, hláška „80,2 %“ a chybějících 11 448 Kč', () => {
+    const r = simulateRentBuy(brno, rules);
+    assert.equal(r.ltvExceeded, true);
+    assert.equal(Math.round(r.missingOwnFunds), 11_448);
+    const w = r.warnings.find((t) => /LTV/.test(t)).replace(/[\s\u00a0\u202f]/g, ' ');
+    assert.match(w, /80,2 %/);
+    assert.match(w, /11 448 Kč/);
+    assert.doesNotMatch(w, /LTV 80 %/);
+  });
+
+  test('těsně nad limitem se LTV v hlášce zaokrouhlí nahoru, nikdy na „80,0 %“', () => {
+    // úvěr o 100 Kč nad limit 80 %: LTV 80,0033 % → „80,1 %“
+    const r = simulateRentBuy({ ...flat, age: 40, ownFunds: 600_000 - 100 }, rules);
+    assert.equal(r.ltvExceeded, true);
+    assert.match(r.warnings.find((t) => /LTV/.test(t)), /LTV 80,1 %/);
+  });
+
+  test('věk 30 (limit 90 %) → bez překročení, bez varování', () => {
+    const r = simulateRentBuy({ ...brno, age: 30 }, rules);
+    assert.equal(r.ltvExceeded, false);
+    assert.equal(r.missingOwnFunds, 0);
+    assert.deepEqual(r.warnings, []);
+  });
+});
+
+describe('BYD-04: úspora na dani a DTI v nájmu vs. koupi', () => {
+  test('úspora na dani za 1. rok a celkem = interestDeductionSaving z úroků každého roku', () => {
+    const r = simulateRentBuy({ ...flat, rate: 5, deductInterest: true }, rules);
+    const principalY1 = 2_400_000 - balanceAfter(2_400_000, 5, 240, 12);
+    const interestY1 = annuityPayment(2_400_000, 5, 240) * 12 - principalY1;
+    near(r.taxSavingYear1, interestDeductionSaving(interestY1, 0.15, rules.interestDeduction.limit.value), 0.01);
+    near(r.taxSavingTotal, r.years.reduce((s, y) => s + y.taxSaving, 0), 0.01);
+    assert.ok(r.taxSavingTotal > r.taxSavingYear1);
+  });
+
+  test('úroky nad limit 150 000 Kč → úspora 22 500 Kč při sazbě 15 %', () => {
+    // úvěr 5 mil. Kč při 7 % → úroky 1. roku přes 150 000 Kč
+    const r = simulateRentBuy({ ...flat, ownFunds: 0, pricePerM2: 100_000, rate: 7, age: 30, deductInterest: true }, rules);
+    assert.ok(r.years[1].interest > 150_000);
+    assert.equal(r.taxSavingYear1, 22_500);
+  });
+
+  test('investiční byt → odpočet se neuplatní, úspora 0', () => {
+    const r = simulateRentBuy({ ...flat, rate: 5, deductInterest: true, investment: true, ownFunds: 1_000_000 }, rules);
+    assert.equal(r.taxSavingYear1, 0);
+  });
+
+  test('DTI = úvěr / roční čistý příjem (bez příjmu null)', () => {
+    near(simulateRentBuy({ ...flat, income: 50_000 }, rules).dti, 2_400_000 / 600_000, 1e-9);
+    assert.equal(simulateRentBuy(flat, rules).dti, null);
   });
 });

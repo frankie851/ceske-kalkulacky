@@ -5,9 +5,23 @@ import { scoreOf, bestOfTwo } from './matching.js';
 import { pocetKol, rozsahTerminu, denMesic, denVTydnu, poMesicich } from './simulace.js';
 import { ty, KATEGORIE, KATEGORIE_POPIS, textUpozorneni, SKUPINY, STAV_TERMINU } from './texty.js';
 import { esc } from '../../js/graf.js';
+import { cislo as formatCislo } from '../../js/format.js';
 
 const NBSP = ' ';
-const b = (n) => `${n}${NBSP}b.`;
+
+/** Body zaokrouhlené na setiny a počet desetinných míst pro výpis (62 → 0, 62,5 → 1). */
+function setiny(n) {
+  const r = Math.round(n * 100) / 100;
+  const des = Number.isInteger(r) ? 0 : Math.abs(r * 10 - Math.round(r * 10)) < 1e-9 ? 1 : 2;
+  return { r, des };
+}
+
+/** Body česky: 62 → „62 b.“, 62.5 → „62,5 b.“ (desetinná čárka, revize PRI-03). */
+export function b(n) {
+  if (typeof n !== 'number' || !Number.isFinite(n)) return `–${NBSP}b.`;
+  const { r, des } = setiny(n);
+  return `${formatCislo(r, des)}${NBSP}b.`;
+}
 
 /** SVG ikona ze spritu (sprite = URL souboru sprite.svg včetně pathPrefix). */
 export function ikona(id, sprite, trida = '') {
@@ -29,20 +43,41 @@ export function scenarInfoHtml(sc) {
 
 /* ---------- Editor škol a dětí ---------- */
 
-const cislo = (v) => (v === null || v === undefined ? '' : String(v));
+/** Hodnota číselného pole: prázdné, nebo číslo s desetinnou čárkou („62,5“). */
+const cislo = (v) => {
+  if (typeof v !== 'number' || !Number.isFinite(v)) return '';
+  return String(setiny(v).r).replace('.', ',');
+};
 
-function vstup({ id, label, sr = '', hodnota, typ = 'number', min, max, pole, maxlength, extra = '' }) {
-  const atributy = typ === 'number'
-    ? ` type="number" inputmode="numeric"${min !== undefined ? ` min="${min}"` : ''}${max !== undefined ? ` max="${max}"` : ''}`
-    : ` type="text"${maxlength ? ` maxlength="${maxlength}"` : ''}`;
-  return `<label class="prij-pole" for="${id}"><span class="prij-lbl">${esc(label)}</span>${sr ? `<span class="sr-only" data-sr-jmeno> – ${esc(sr)}</span>` : ''}</label>`
-    + `<input id="${id}"${atributy} value="${esc(hodnota)}" data-pole="${pole}" autocomplete="off"${extra}>`;
+/**
+ * Hláška u pole stejně jako makro pole() (třída error-msg, id „<id>-chyba“). Bez chyby je skrytá,
+ * ui.js ji při psaní jen přepíná, aby pole neztratilo fokus.
+ */
+export function chybaPoleHtml(id, text = '', sprite = '') {
+  return `<p class="error-msg" id="${esc(id)}-chyba"${text ? '' : ' hidden'}>${sprite ? ikona('ikona-vystraha', sprite) : ''}`
+    + `<span><span class="sr-only">Chyba: </span><span class="error-text">${esc(text)}</span></span></p>`;
 }
 
-export function editorSkolHtml(stav) {
+/**
+ * Pole editoru. Číselná pole jsou type="text" s inputmode, takže desetinná čárka nezávisí na jazyku
+ * prohlížeče (PRI-03). chyba = { text, hodnota } z ui.js: pole ukáže zapsaný text a hlášku (PRI-02).
+ */
+function vstup({ id, label, sr = '', hodnota, typ = 'cislo', cele = false, pole, maxlength, chyba, sprite = '' }) {
+  const ciselne = typ === 'cislo';
+  const atributy = ciselne
+    ? ` type="text" inputmode="${cele ? 'numeric' : 'decimal'}" class="prij-cislo"`
+    : ` type="text"${maxlength ? ` maxlength="${maxlength}"` : ''}`;
+  const chybaAtr = chyba ? ` aria-invalid="true" aria-describedby="${id}-chyba"` : '';
+  return `<label class="prij-pole" for="${id}"><span class="prij-lbl">${esc(label)}</span>${sr ? `<span class="sr-only" data-sr-jmeno> – ${esc(sr)}</span>` : ''}</label>`
+    + `<input id="${id}"${atributy} value="${esc(chyba ? chyba.hodnota : hodnota)}" data-pole="${pole}" autocomplete="off"${chybaAtr}>`
+    + (ciselne ? chybaPoleHtml(id, chyba?.text, sprite) : '');
+}
+
+/** volby: { chyby: Map(id pole → { text, hodnota }), sprite } – předává jen ui.js. */
+export function editorSkolHtml(stav, { chyby = new Map(), sprite = '' } = {}) {
   const radky = stav.skoly.map((s) => `<tr data-skola="${esc(s.id)}">`
     + `<td>${vstup({ id: `skola-${s.id}-nazev`, label: 'Název školy', hodnota: s.name, typ: 'text', maxlength: 40, pole: 'name' })}</td>`
-    + `<td>${vstup({ id: `skola-${s.id}-mist`, label: 'Počet míst', sr: s.name, hodnota: cislo(s.capacity), min: 0, max: 50, pole: 'capacity' })}</td>`
+    + `<td>${vstup({ id: `skola-${s.id}-mist`, label: 'Počet míst', sr: s.name, hodnota: cislo(s.capacity), cele: true, pole: 'capacity', chyba: chyby.get(`skola-${s.id}-mist`), sprite })}</td>`
     + `<td class="prij-akce-bunka"><button type="button" class="prij-odebrat" data-odebrat-skolu="${esc(s.id)}"${stav.skoly.length <= 1 ? ' disabled' : ''}>Odebrat<span class="sr-only" data-sr-jmeno> – ${esc(s.name)}</span></button></td>`
     + '</tr>').join('');
   return '<div class="table-wrap prij-edit-obal" role="region" aria-label="Tabulka: školy a počet míst" tabindex="0">'
@@ -56,24 +91,26 @@ function volbyPriority(stav, vybrano) {
     `<option value="${esc(s.id)}"${s.id === vybrano ? ' selected' : ''}>${esc(s.name || s.id)}</option>`).join('');
 }
 
-export function editorDetiHtml(stav) {
+export function editorDetiHtml(stav, { chyby = new Map(), sprite = '' } = {}) {
   const pokusy = stav.rezim === 'attempts';
   const hlavicka = ['Jméno',
     ...(pokusy ? ['ČJL 1. pokus', 'ČJL 2. pokus', 'M 1. pokus', 'M 2. pokus', 'Započte se'] : ['Body']),
     '1. priorita', '2. priorita', '3. priorita', 'Při shodě bodů'];
   const radky = stav.deti.map((a) => {
     const p = `dite-${a.id}`;
+    const pole = (id, dalsi) => ({ id, sr: a.name, chyba: chyby.get(id), sprite, ...dalsi });
+    const idPokusu = ['cj0', 'cj1', 'm0', 'm1'].map((k) => `${p}-${k}`);
     const body = pokusy
       ? [['cj', 0, 'ČJL 1. pokus'], ['cj', 1, 'ČJL 2. pokus'], ['m', 0, 'M 1. pokus'], ['m', 1, 'M 2. pokus']].map(([pr, k, l]) =>
-        `<td>${vstup({ id: `${p}-${pr}${k}`, label: l, sr: a.name, hodnota: cislo(a.attempts[pr][k]), min: 0, max: 50, pole: `${pr}${k}` })}</td>`).join('')
-        + `<td class="prij-zapocte"><span class="prij-lbl" aria-hidden="true">Započte se</span><output data-zapocte for="${p}-cj0 ${p}-cj1 ${p}-m0 ${p}-m1">${b(bestOfTwo(a.attempts))}</output></td>`
-      : `<td>${vstup({ id: `${p}-body`, label: 'Body', sr: a.name, hodnota: cislo(a.score), min: 0, max: 100, pole: 'score' })}</td>`;
+        `<td>${vstup(pole(`${p}-${pr}${k}`, { label: l, hodnota: cislo(a.attempts[pr][k]), pole: `${pr}${k}` }))}</td>`).join('')
+        + `<td class="prij-zapocte"><span class="prij-lbl" aria-hidden="true">Započte se</span><output data-zapocte for="${idPokusu.join(' ')}">${idPokusu.some((id) => chyby.has(id)) ? '–' : b(bestOfTwo(a.attempts))}</output></td>`
+      : `<td>${vstup(pole(`${p}-body`, { label: 'Body', hodnota: cislo(a.score), pole: 'score' }))}</td>`;
     const priority = [0, 1, 2].map((k) => `<td><label class="prij-pole" for="${p}-pr${k}"><span class="prij-lbl">${k + 1}. priorita</span><span class="sr-only" data-sr-jmeno> – ${esc(a.name)}</span></label>`
       + `<select id="${p}-pr${k}" data-pole="pr${k}">${volbyPriority(stav, a.priorities[k])}</select></td>`).join('');
     return `<tr data-dite="${esc(a.id)}">`
       + `<td>${vstup({ id: `${p}-jmeno`, label: 'Jméno', hodnota: a.name, typ: 'text', maxlength: 30, pole: 'name' })}</td>`
       + body + priority
-      + `<td>${vstup({ id: `${p}-shoda`, label: 'Při shodě bodů', sr: a.name, hodnota: cislo(a.tiebreak), pole: 'tiebreak' })}</td>`
+      + `<td>${vstup(pole(`${p}-shoda`, { label: 'Při shodě bodů', hodnota: cislo(a.tiebreak), pole: 'tiebreak' }))}</td>`
       + `<td class="prij-akce-bunka"><button type="button" class="prij-odebrat" data-odebrat-dite="${esc(a.id)}">Odebrat<span class="sr-only" data-sr-jmeno> – ${esc(a.name)}</span></button></td>`
       + '</tr>';
   }).join('');
@@ -179,7 +216,8 @@ export function kolaHtml(stav, beh, kolo, hotovo) {
 
 /** Drobná jazyková úprava vět z explain() (modul je převzatý beze změny). */
 export function upravVetu(veta) {
-  return veta.replace(/všech (\d+) míst obsadili uchazeči s lepším pořadím/, (cele, n) => {
+  // Desetinná tečka v bodech → čárka („59.5 b.“ → „59,5 b.“); „1. priorita“ se nezmění.
+  return veta.replace(/(\d)\.(\d)/g, '$1,$2').replace(/všech (\d+) míst obsadili uchazeči s lepším pořadím/, (cele, n) => {
     const k = Number(n);
     if (k === 1) return 'jediné místo obsadil někdo s lepším pořadím';
     if (k === 2) return 'obě místa obsadili uchazeči s lepším pořadím';
@@ -235,6 +273,11 @@ export function strategieHtml(res, rezerva, sprite) {
   return `<ol class="prij-strategie">${radky}</ol>`
     + (upozorneni ? `<ul class="prij-upozorneni">${upozorneni}</ul>` : '')
     + '<p class="note">Pořadí na přihlášce dej podle toho, kam dítě chce nejvíc. Nižší priorita mu šanci na vyšší nevezme.</p>';
+}
+
+/** Místo výsledku strategie, když některé pole není v pořádku (starý výsledek se neukazuje). */
+export function strategieNeplatnaHtml() {
+  return '<p class="prij-str-neplatne" data-strategie-neplatne>Výsledek se ukáže, až budou čísla v zadání v pořádku. Oprav pole s hláškou.</p>';
 }
 
 /* ---------- Kalendář ---------- */

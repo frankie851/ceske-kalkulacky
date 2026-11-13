@@ -203,19 +203,21 @@ styly: ['/nastroje/prijimacky/prijimacky.css']
   {#- ========== 3. Strategie ========== #}
   <section id="strategie" class="prij-sekce" aria-labelledby="strategie-nadpis">
     <h2 id="strategie-nadpis">Strategie přihlášky</h2>
-    <p class="prij-perex">Napiš tři školy v pořadí, jak je chceš dát na přihlášku, a k nim loňské minimum bodů (bývá na webu školy u výsledků přijímacího řízení). Pomůcka upozorní, když mezi nimi není žádná jistota.</p>
+    <p class="prij-perex">Napiš tři školy v pořadí, jak je chceš dát na přihlášku, a k nim loňské minimum bodů z jednotné zkoušky (bývá na webu školy u výsledků přijímacího řízení). Pomůcka upozorní, když mezi nimi není žádná jistota.</p>
     <div class="split prij-strategie-obal">
       <form class="card" id="strategie-formular" action="#strategie" method="get" novalidate autocomplete="off">
         <h3 class="h-lg">Zadání</h3>
         <p class="small muted">Vyplněné hodnoty jsou ukázka. Přepiš je svými, nic se neukládá ani neodesílá.</p>
-        {{ pole({ id: 'str-ocekavane', label: 'Kolik bodů dítě zhruba čeká (ze 100)', hodnota: p.strategie.vstup.expected, jednotka: 'b.', napoveda: 'Třeba z testů nanečisto. Jde jen o odhad.' }) }}
+        {#- PRI-04: body a minimum porovnáváme jen na stejné škále (§ 60i odst. 3 a § 60j odst. 5 školského zákona, rules.json → body.skala). #}
+        <p class="note prij-skala" id="str-skala">{{ ikona('ikona-info') }}<span>Body i minimum zadej na stejné škále: jen body z jednotné zkoušky, 0 až 100. Školy často zveřejňují celkové body, ve kterých je i vysvědčení nebo školní zkouška. Takové číslo s body z jednotné zkoušky nesrovnávej. Škola ve výsledcích uvádí i hodnocení jednotné zkoušky zvlášť. Když ho nenajdeš, nech minimum prázdné.</span></p>
+        {{ pole({ id: 'str-ocekavane', label: 'Kolik bodů z jednotné zkoušky dítě zhruba čeká (ze 100)', hodnota: p.strategie.vstup.expected, jednotka: 'b.', inputmode: 'decimal', napoveda: 'Třeba z testů nanečisto. Jde jen o odhad.', chybaMisto: true }) }}
         {{ segmenty({ id: 'str-rezerva', legenda: 'Jistota je, když je rezerva nad loňským minimem aspoň', moznosti: p.strategie.rezervy }) }}
         {%- for s in p.strategie.vstup.schools %}
         <fieldset class="prij-str-skola">
           <legend>{{ loop.index }}. priorita</legend>
           <div class="prij-str-pole">
             {{ pole({ id: 'str-nazev-' + loop.index, label: 'Škola nebo obor', hodnota: s.name, typ: 'text', inputmode: 'text' }) }}
-            {{ pole({ id: 'str-min-' + loop.index, label: 'Loňské minimum', hodnota: s.lastMin, jednotka: 'b.' }) }}
+            {{ pole({ id: 'str-min-' + loop.index, label: 'Loňské minimum', hodnota: s.lastMin, jednotka: 'b.', inputmode: 'decimal', napoveda: 'Jen jednotná zkouška, 0–100.', chybaMisto: true }) }}
           </div>
         </fieldset>
         {%- endfor %}

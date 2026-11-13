@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Výchozí hodnoty formulářů. Uprav value, source, url a date. Položky se source „předpoklad“ nejsou měřená data, ale rozumný odhad.",
-    "updated": "2026-11-05"
+    "updated": "2026-11-12"
   },
   "rates": {
     "averageOffer": {
@@ -55,10 +55,11 @@
       "value": 4000,
       "unit": "Kč",
       "label": "Katastr: vklad nového zástavního práva + výmaz starého (2 × 2 000 Kč)",
-      "source": "banky.cz – poradna „Refinancování hypotéky a přepis zástavy na KN“ (správní poplatek 2 000 Kč od 1. 1. 2020)",
-      "url": "https://www.banky.cz/poradna/refinancovani-hypoteky-a-prepis-zastavy-na-kn/",
-      "date": "2020-01-01",
-      "note": "Ověř aktuální sazebník správních poplatků (ČÚZK)."
+      "source": "Zákon č. 634/2004 Sb., o správních poplatcích, sazebník, položka 120 písm. a): vklad do katastru 2 000 Kč",
+      "short": "sazebník správních poplatků, zákon č. 634/2004 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/2004-634",
+      "date": "2026-11-12",
+      "note": "Vklad nového zástavního práva i výmaz starého jsou dvě řízení o vkladu, každé za 2 000 Kč. Ověřeno ve znění od 1. 9. 2026."
     },
     "valuation": {
       "value": 5000,
@@ -151,6 +152,15 @@
       "url": "",
       "date": "2026-11-05",
       "note": ""
+    },
+    "contractRate": {
+      "value": 4.89,
+      "unit": "%",
+      "label": "Smluvní úroková sazba (kalkulačka poplatku)",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-12",
+      "note": "Sazba současné fixace. Přepiš podle smlouvy."
     }
   },
   "cities": {
@@ -178,11 +188,11 @@
         "value": 38.43,
         "unit": "Kč/m²/rok",
         "label": "Daň z nemovitosti (byt) – Praha",
-        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 (upravená plocha) × koeficient 4,5 × místní koeficient 2; inflační koeficient 2026 = 1,0 (mesec.cz)",
+        "source": "Zákon č. 338/1992 Sb., § 10 odst. 3, § 11 odst. 1 písm. j) a odst. 4, § 12: 3,50 Kč/m² × 1,22 (upravená plocha) × koeficient 4,5 × místní koeficient 2; inflační koeficient 2026 = 1,0",
         "short": "odhad dle zák. 338/1992 Sb.",
-        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
-        "date": "2026-01-01",
-        "note": "Odhad. Ověř obecně závaznou vyhlášku své obce."
+        "url": "https://www.zakonyprolidi.cz/cs/1992-338#p11",
+        "date": "2026-11-12",
+        "note": "Odhad. Místní a inflační koeficient jsme neověřili, ověř obecně závaznou vyhlášku své obce."
       }
     },
     "brno": {
@@ -209,11 +219,11 @@
         "value": 14.95,
         "unit": "Kč/m²/rok",
         "label": "Daň z nemovitosti (byt) – Brno",
-        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 × koeficient 3,5 (obec nad 50 000 obyv.) × místní koeficient 1 (předpoklad)",
+        "source": "Zákon č. 338/1992 Sb., § 10 odst. 3, § 11 odst. 1 písm. j) a odst. 4, § 12: 3,50 Kč/m² × 1,22 × koeficient 3,5 (obec nad 50 000 obyv.) × místní koeficient 1 (předpoklad)",
         "short": "odhad dle zák. 338/1992 Sb.",
-        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
-        "date": "2026-01-01",
-        "note": "Místní koeficient pro rok 2026 neověřen."
+        "url": "https://www.zakonyprolidi.cz/cs/1992-338#p11",
+        "date": "2026-11-12",
+        "note": "Odhad. Místní a inflační koeficient jsme neověřili, ověř obecně závaznou vyhlášku své obce."
       }
     },
     "ostrava": {
@@ -240,11 +250,11 @@
         "value": 14.95,
         "unit": "Kč/m²/rok",
         "label": "Daň z nemovitosti (byt) – Ostrava",
-        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 × koeficient 3,5 (obec nad 50 000 obyv.) × místní koeficient 1 (předpoklad)",
+        "source": "Zákon č. 338/1992 Sb., § 10 odst. 3, § 11 odst. 1 písm. j) a odst. 4, § 12: 3,50 Kč/m² × 1,22 × koeficient 3,5 (obec nad 50 000 obyv.) × místní koeficient 1 (předpoklad)",
         "short": "odhad dle zák. 338/1992 Sb.",
-        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
-        "date": "2026-01-01",
-        "note": "Místní koeficient pro rok 2026 neověřen."
+        "url": "https://www.zakonyprolidi.cz/cs/1992-338#p11",
+        "date": "2026-11-12",
+        "note": "Odhad. Místní a inflační koeficient jsme neověřili, ověř obecně závaznou vyhlášku své obce."
       }
     },
     "cr": {
@@ -271,11 +281,11 @@
         "value": 8.54,
         "unit": "Kč/m²/rok",
         "label": "Daň z nemovitosti (byt) – typická obec",
-        "source": "Zákon č. 338/1992 Sb.: 3,50 Kč/m² × 1,22 × koeficient 2,0 (obec 10–25 tis. obyv.) × místní koeficient 1 (předpoklad)",
+        "source": "Zákon č. 338/1992 Sb., § 10 odst. 3, § 11 odst. 1 písm. j) a odst. 4, § 12: 3,50 Kč/m² × 1,22 × koeficient 2,0 (obec 10–25 tis. obyv.) × místní koeficient 1 (předpoklad)",
         "short": "odhad dle zák. 338/1992 Sb.",
-        "url": "https://www.mesec.cz/kalkulacky/vypocet-dane-z-nemovitosti/",
-        "date": "2026-01-01",
-        "note": "Hrubý odhad."
+        "url": "https://www.zakonyprolidi.cz/cs/1992-338#p11",
+        "date": "2026-11-12",
+        "note": "Odhad. Místní a inflační koeficient jsme neověřili, ověř obecně závaznou vyhlášku své obce."
       }
     }
   },
@@ -311,9 +321,9 @@
       "value": 12000,
       "unit": "Kč",
       "label": "Jednorázové náklady koupě (vklad do KN 2 × 2 000 Kč, odhad, ověření podpisů)",
-      "source": "předpoklad; správní poplatek za vklad 2 000 Kč (banky.cz)",
-      "url": "https://www.banky.cz/poradna/refinancovani-hypoteky-a-prepis-zastavy-na-kn/",
-      "date": "2026-11-05",
+      "source": "předpoklad; správní poplatek za vklad 2 000 Kč podle zákona č. 634/2004 Sb., položka 120 písm. a)",
+      "url": "https://www.zakonyprolidi.cz/cs/2004-634",
+      "date": "2026-11-12",
       "note": "Bez provize realitní kanceláře."
     }
   },
@@ -420,6 +430,15 @@
       "url": "",
       "date": "2026-11-05",
       "note": ""
+    },
+    "income": {
+      "value": 75000,
+      "unit": "Kč/měs.",
+      "label": "Čistý měsíční příjem domácnosti",
+      "source": "ukázková hodnota",
+      "url": "",
+      "date": "2026-11-12",
+      "note": "Jen pro DTI. Pole může zůstat prázdné."
     }
   }
 }

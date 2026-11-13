@@ -66,6 +66,9 @@ export default {
     },
     posun: pravidla.vychozi.posun,
     tarifyRok: tarify.year,
+    // Revize 5. 11. 2026, SPOT-03/SPOT-07: datum ověření regulovaných cen a úřední zdroj distribuce (CV ERÚ 14/2025).
+    regulovaneOvereno: datum(tarify.overeno),
+    zdrojDistribuce: distributor.source,
     // Data pro prohlížeč (vloží se jako <script type="application/json">)
     data: { ceny: v.zakodujCeny(ceny), kurzy, meta, tarify, dynamicky },
   },

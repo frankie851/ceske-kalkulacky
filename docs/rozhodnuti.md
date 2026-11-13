@@ -759,6 +759,308 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   9 662 → 9 661 Kč a EET OFF 11 062 → 11 061 Kč (`test/osvc.test.js`, `test/e2e/mam-eet.test.js`
   včetně ukázky bez JS). Test „1. pásmo = min. soc. záloha × 1,15“ nahradil test zákonného vzorce.
 
+## Výpověď 2026 a Rodičovská – střední nálezy (VYP-04, VYP-05, ROD-07, ROD-09, ROD-11)
+
+- **VYP-04 (zbytek):** kontrola „sjednaný den skončení nemůže být dřív než den uzavření dohody“
+  je v `konecPomeru` (`vypoved.js`), ne jen ve formuláři. Modul vyhodí `Error` s neutrální větou
+  bez tykání i vykání, `app.js` ji jen ukáže u pole `konecDohody`. Týž den uzavření a skončení
+  je v pořádku. Testy věku 52 a 57 s čistým výdělkem 60 000 Kč: 8 a 11 měsíců, první 3 měsíce
+  strop 38 537 Kč (0,8 × 48 171 Kč, sdělení č. 537/2025 Sb.), celkem 253 611 a 325 611 Kč
+  (§ 43 a § 50 zákona č. 435/2004 Sb.). Tyto dva testy prošly už před opravou, jsou pojistkou.
+- **VYP-05:** § 67 odst. 2 zákoníku práce (předchozí pracovní poměr u téhož zaměstnavatele,
+  pauza nejvýš 6 měsíců) je v `rules.json` → `zakonikPrace.odstupne.predchoziPomer` s citací.
+  Nápověda k délce pracovního poměru se skládá v `vypoved-2026.11tydata.js` z těchto dat.
+  Výpočet se nemění, délku zadává uživatel.
+- **ROD-07:** při chybě ve formuláři (termín, příjem, dny a měsíce) se plán skryje celý:
+  karta výsledku, časová osa, souhrn, kontrolní seznam i lepivá lišta. Místo nich je upozornění
+  „Plán se nepřepočítal“ v živé oblasti (`role="status"`). Po opravě se plán vrátí. Skrytí jsme
+  zvolili místo zašednutí: zašedlá čísla k jinému zadání se dají omylem opsat.
+- **ROD-09:** nástup na otcovskou jde zadat do 41. dne (`rules.otcovska.nastupDoDne`, § 38a
+  odst. 4 zákona č. 187/2006 Sb.: „v období 6 týdnů ode dne narození“; den porodu = 0. den).
+  Délka 14 dní (§ 38b odst. 1) a sazba 70 % (§ 38c) beze změny. Dřívější strop 28. den byl
+  42 − 14, aby se otcovská nepotkala s mateřskou otce od 7. týdne. Ten střet teď řeší výpočet
+  podle § 48 odst. 1 písm. a) zákona č. 187/2006 Sb.: z jednoho pojištění má přednost mateřská,
+  takže za společné dny se vyplácí jen mateřská a otcovská se neprodlužuje. Aplikace na to
+  upozorní (`otcovskaSMaterskou`). Prodloužení lhůty o dny hospitalizace (§ 38a odst. 4 věta
+  třetí) nepočítáme.
+- **ROD-11:** odkazy ČSSZ vedou přímo na stránky „Peněžitá pomoc v mateřství“ a „Otcovská“
+  na cssz.gov.cz (curl 12. 11. 2026: HTTP 200, titulek odpovídá). Tisková zpráva Finanční
+  správy k čisté mzdě je nahrazená předpisy na zakonyprolidi.cz: zákon č. 586/1992 Sb. § 16
+  a § 35ba, č. 589/1992 Sb. § 7 a č. 48/1997 Sb. § 9 odst. 2. Přibyly zdroje § 38a a § 48
+  zákona č. 187/2006 Sb. Kontrolní seznam bere název i adresu odkazu na úřad z `rules.json`
+  (`ppm.urad`, `otcovska`, `rodicovskyUrad`). Dřív odkaz „MPSV / ÚP ČR – Rodičovský příspěvek“
+  vedl na text zákona. Test `test/zdroje.test.js` hlídá jen úřední domény (gov.cz,
+  zakonyprolidi.cz), žádné tiskové zprávy a shodu `zdroje` s `meta.zdroje`.
+
+## Spot, nebo fix? – střední nálezy (SPOT-03, SPOT-06, SPOT-07)
+
+- **Zdroj distribuce je cenový výměr ERÚ č. 14/2025** (SPOT-07, ERV 18/2025,
+  https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf). `tariffs.json` →
+  `distributors.*.source` má tvar `{ pravniZaklad, url (#page=30), citace, stranyPdf, overeno }`,
+  `stranyPdf` dává stranu PDF pro každou sazbu (D 01d str. 30 … D 61d str. 46). Ceník ČEZ Prodej
+  zůstal jen jako `kontrolniZdroj`. Všech 300 hodnot (10 sazeb × 3 distributoři × VT, NT a
+  8 pásem jističe) jsme 12. 11. 2026 strojově porovnali s textem PDF (`pdftotext -layout`):
+  žádný rozdíl, hodnoty se neměnily.
+- **POZE ve výstupu ukazuje to, co se účtuje** (SPOT-03). Dřív předpoklady psaly 0,60 Kč/kWh
+  (strop 495 Kč/MWh s DPH), i když výpočet účtuje 0 Kč. Teď `vystup.js` počítá roční POZE stejnou
+  funkcí jako výpočet (`pozeAnnual`, nižší z obou plateb). Při nule ukáže „0 Kč“ a důvod
+  z `tariffs.json` → `common.poze.vysvetleniNuly`. Důvod: CV ERÚ č. 15/2025 (ERV 19/2025, bod 2)
+  mění v CV 13/2025 bod (5.1.2) z 8,32 na 0 Kč/A/měsíc. Podle odůvodnění pokryjí náklady na
+  podporu v roce 2026 prostředky státního rozpočtu. Strop 495 Kč/MWh je ze zákona č. 165/2012 Sb.,
+  § 28a odst. 2. Citace jsou v `common.poze.zdroj`.
+- **Datum ověření regulovaných cen** je v `tariffs.json` → `overeno` (12. 11. 2026). Stránka ho
+  ukazuje v části „Předpoklady výpočtu“ s odkazem na CV ERÚ 14/2025. `rules.json` → `meta.zdroje`
+  má nově CV 14/2025 a zákon č. 165/2012 Sb. § 28a.
+- **Testy** (SPOT-06): `src/nastroje/spot-nebo-fix/test/regulovane.test.js` – pásma jističe
+  (1× 25 A a 3× 10 A až 3× 63 A), cena za jistič a VT/NT v `regulatedFor` pro D02d, D56d, D57d
+  a D61d u všech tří distributorů a všech 9 jističů, VT/NT a jistič 3× 25 A pro všech 10 sazeb
+  ČEZ. Očekávané hodnoty jsou opsané z PDF, ne z `tariffs.json`. Testy hodnot prošly už na `main`,
+  hodnoty byly správně. E2E `test/e2e/spot-nebo-fix.test.js`: změna jističe, distributora, sazby
+  a jejich kombinace přepočítá karty i předpoklady stejně jako `vystup.js` v Node.
+
+## Slevy 2027, Inflační kalkulačka, Cestovní příkaz – střední nálezy (SLV-06, INF-04, CES-04, CES-05, s nimi SLV-08)
+
+- **Úroky z hypotéky – název vstupu** (SLV-06): vstup `stareSmlouva` se jmenuje
+  `bytovaPotrebaPred2021`, klíč `limitStareSmlouvy` je `limitPred2021`. Rozhoduje, kdy byla
+  bytová potřeba obstarána, ne datum smlouvy (zákon č. 386/2020 Sb., čl. IV bod 3,
+  https://www.zakonyprolidi.cz/cs/2020-386). Citace je v `odpocty.uroky.zdroj`. Testy pokrývají
+  refinancování (byt 2019, úvěr 2023, úroky 180 000 Kč → 180 000 Kč) a cestu od zaškrtávátka
+  v dotazníku (`odpovediZeStavu`) až do výpočtu.
+- **Strop darů ze základu daně** (SLV-08, odhalil ho test z SLV-06): § 15 odst. 1 ZDP (znění od
+  1. 1. 2027) dovoluje odečíst „nejvýše 15 % ze základu daně“; minimum je úhrn nad 2 % základu
+  nebo aspoň 1 000 Kč. `vyhodnot()` dřív bral základ snížený o odpočet na stáří a úroky
+  (ZD 600 000, stáří 48 000, úroky 150 000, dary 100 000 → 60 300 Kč). Teď bere základ daně před
+  odpočty → 90 000 Kč. Strop všech odpočtů dohromady (nejvýš do výše základu) hlídá dál
+  `uplatnitDan`. Citace v `odpocty.dary.zdroj`.
+- **Inflační kalkulačka – vstup a směr přepočtu bez DOM** (INF-04): `vystup.js` má čisté funkce
+  `castkaZTextu`, `vynosZTextu`, `mesicZPoli`, `smerPrepoctu` (`dopredu` / `zpet` / `stejne`,
+  měsíce vždy chronologicky), `prohodMesice` a `vstupPrepoctu` / `vstupVynosu` / `vstupMzdy`
+  (vrací `{ vstup, chyby }`, chyby podle id pole). `ui.js` je jen volá a vypisuje chyby k polím.
+  Čísla dál čte sdílené `prectiCislo`. Texty hlášek se nezměnily. Výsledek `prepocet()` nově nese
+  `smer`, `zmena` a `rocne`, aby šel směr ověřit testem.
+- **Spotřeba z technického průkazu** (CES-04): nápověda teď říká „údaj pro kombinovaný provoz,
+  jinak aritmetický průměr všech údajů“. Pozor: je to § 158 **odst. 4** zákoníku práce (odst. 3
+  upravuje cenu pohonné hmoty). Citace v `zakonik.spotreba.zdroj`.
+- **Ověření sazeb 2026 proti vyhláškám** (CES-05): texty vyhlášek č. 573/2025 Sb., 78/2026 Sb.
+  a 175/2026 Sb. jsme stáhli ze zakonyprolidi.cz. Hodnoty v `rules.json["2026"]` sedí: 5,90 a
+  1,60 Kč/km, stravné 155/236/370 Kč, veřejná sféra 155–185/236–284/370–442 Kč, benzin 95 34,70 Kč
+  (od 1. 10. 2026 41,80 Kč), benzin 98 39 Kč, nafta 34,10 Kč (od 1. 6. 2026 44,50 Kč), elektřina
+  7,20 Kč/kWh. Původní znění vyhlášky 573/2025 Sb. (verze 1) se stáhnout nepodařilo (stránka znění k 1. 1. 2026 je bez textu);
+  původní ceny benzinu 95 a nafty plynou z textu novel („34,70 Kč“ → „41,80 Kč“, „34,10“ →
+  „44,50“). `meta.zdroje` vedou na zakonyprolidi.cz místo praceamzda.cz a epravo.cz. Věta
+  o sekundárních zdrojích zmizela z `meta.neovereno` i z `poznamkaOvereni`. Odkaz „vyhlášky
+  č. 573/2025 Sb.“ u tabulky sazeb vedl na § 157 zákoníku práce (první položka zdrojů), teď
+  vede na vyhlášku (`rules.json["2026"].zdroj.url`).
+- **Zaokrouhlení** (CES-05): § 183 odst. 5 zákoníku práce: částka, kterou zaměstnavatel poskytuje
+  zaměstnanci v Kč, se zaokrouhlí na celé koruny nahoru (vratka zálohy zaměstnancem také nahoru,
+  § 183 odst. 3). Zaokrouhlení jednotlivých položek zákon neupravuje – kalkulačka je počítá na
+  haléře (polovina haléře nahoru), to je její konvence. Výtisk to tak teď píše; citace je
+  v `zakonik.zaokrouhleni`.
+- **OSVČ** (CES-05): místo „pravidla jsme spolehlivě neověřili“ stránka říká, že náhrady OSVČ jsou
+  mimo rozsah kalkulačky, a odkazuje na § 24 odst. 2 písm. k) a zt) ZDP.
+
+## Bydlometr – střední nálezy (BYD-01 až BYD-07)
+
+- **Poplatek za mimořádnou splátku = nejnižší ze tří stropů** (zákon č. 257/2016 Sb., znění od
+  1. 9. 2024, ověřeno na zakonyprolidi.cz): § 117 odst. 4 (0,25 % za započatý rok do konce fixace,
+  nejvýš 1 %), § 117 odst. 5 (úrok do konce fixace) a § 117 odst. 5 věta druhá s § 117a
+  (administrativní náklady nejvýš 1 000 Kč + kladný úrokový rozdíl). Kalkulačka se nově ptá na
+  smluvní sazbu (předvyplněná ukázková) a nepovinně na průměr sazeb ČNB podle § 117a. Bez průměru
+  ČNB výsledek připomene, že při průměru ≥ smluvní sazbě je strop 1 000 Kč.
+  - Úrok i úrokový rozdíl počítáme z mimořádné splátky, jako by se z ní do konce fixace platil jen
+    úrok. Pro anuitní úvěr je to horní mez (vyšší splátka úrok i rozdíl jen zmenší), takže věta
+    „Poplatek nejvýš …“ zůstává pravdivá bez dalších polí (zůstatek, splátka). Když průměr ČNB
+    není nižší než smluvní sazba, rozdíl není kladný a strop je 1 000 Kč.
+  - Průměr ČNB nepředvyplňujeme: ČNB ho zveřejňuje pro 20 skupin úvěrů a skupinu určuje banka.
+- **Starší smlouvy** (před 1. 9. 2024 a bez fixace začaté po tomto dni, zákon č. 462/2023 Sb.,
+  čl. XV bod 2: „ode dne, kdy po dni nabytí účinnosti … započne běžet nové období“): splátka ke
+  konci fixace a do 25 % v měsíci před výročím jsou zdarma i podle dřívějšího znění (§ 117 odst. 3
+  písm. c), d), f) a odst. 5 ve znění do 31. 8. 2024). Jinak procentní strop neplatil, banka smí
+  chtít skutečné náklady, nejvýš úrok do konce fixace – se smluvní sazbou ukážeme tuto mez.
+  Odečtení bezplatné části od vyšší splátky přinesla až novela (čl. XIV bod 7), u starších smluv
+  se proto neodečítá. Fixace začatá přesně 1. 9. 2024 se podle textu přechodného ustanovení řídí
+  dřívějším zněním (dřív kód bral „od 1. 9.“).
+- Pod kalkulačkou poplatku je výčet dalších bezplatných případů § 117 odst. 3 písm. a), b), e),
+  f), g) (seznam v `rules.json` → `prepayment.otherFreeReasons`, e) a f) jen pro nové znění).
+- **Neplatný vstup** (BYD-03): výsledek, tabulky a zátěžový test se skryjí, místo nich je hláška
+  s `role="alert"` a výčtem polí, lepivá lišta ukáže „–“. Kalkulačka poplatku ukáže „–“ a hlášku.
+  Kontrola polí je čistá funkce `zkontrolujPole` ve `vystup.js` (meze polí jsou v definici pole,
+  ne v `ui.js`), stav výsledku `stavVysledku`.
+- **DTI a úspora na dani** (BYD-04): refixace ukazuje DTI (zbývající dluh / roční čistý příjem)
+  s poznámkou, že pro vlastní bydlení ČNB limit nestanovila (záznam bankovní rady 4. 6. 2026), a
+  úsporu na dani za 1. rok nové fixace u nejlevnější varianty: min(úroky, limit) × 15 %. Limit
+  150 000 Kč (§ 15 odst. 4 ZDP), se zaškrtnutím „Bydlení je pořízené před 1. 1. 2021“ 300 000 Kč
+  (zákon č. 386/2020 Sb., čl. IV body 3 a 4). Nájem vs. koupě má nepovinné pole příjmu pro DTI,
+  u investičního bytu připomíná doporučení ČNB DTI 7 (TZ 27. 11. 2025) a nad ním varuje. Úspora na
+  dani v 1. roce a celkem je vidět ve výsledku. DTI počítáme jen z této hypotéky.
+- **Nad limitem LTV se porovnání nepočítá** (BYD-05): výsledek ukáže, kolik vlastních zdrojů
+  chybí; statistiky, graf, tabulky a citlivost jsou skryté. Platí i pro investiční byt (doporučení
+  ČNB 70 %), text tam mluví o doporučení. LTV v hlášce má jedno desetinné místo zaokrouhlené
+  nahoru, takže nad limitem nikdy neukáže „80 %“.
+- **Zdroje** (BYD-07): zákonná pravidla v `rules.json` mají úřední url (zakonyprolidi.cz s
+  paragrafem, cnb.cz) a citaci `zdroj: { pravniZaklad, url, citace }`. Komerční weby zůstaly jen
+  u tržních údajů a v `meta.zdroje` mají poznámku „Tržní údaj“. Poplatek za vklad do katastru
+  ověřen v zákoně č. 634/2004 Sb., položka 120 písm. a) (2 000 Kč), daň z nemovitosti v zákoně
+  č. 338/1992 Sb. (§ 10 odst. 3, § 11). Limit 150 000 Kč cituje § 15 odst. 4 ZDP.
+- **Testy** (BYD-06): `test/format.test.js` (parseNumber a formátování), `test/vystup.test.js`
+  (čtení formuláře, neplatný vstup, výstupy). Dva „bankovní“ testy anuity porovnávají přesnou
+  hodnotu ze vzorce (21 077,04 Kč; 16 385,50 Kč) místo tolerance.
+
+## Plán48 a Penzijko kompas – střední nálezy (P48-04, PEN-05, PEN-06, PEN-07)
+
+- **Podmínky daňové podpory (P48-04).** Podle § 15b odst. 1 písm. a) bod 1 ZDP je produkt
+  daňově podporovaný, jen když se z něj vyplácí nejdřív po 120 kalendářních měsících a nejdřív
+  v roce 60 let (u penzijka i od věku 5 let před důchodovým věkem). Při výplatě nebo zániku
+  dřív se podpora vrací (§ 15b odst. 4): odpočty za předchozích 10 zdaňovacích období se
+  zdaní jako ostatní příjem (§ 15b odst. 5 písm. a)). Čísla jsou v `rules.json` →
+  `sady.*.odpocet.podminkyPodpory` s citací, text skládá `vystup.js` → `upozorneniPodpory`.
+  Upozornění je v poznámce pod radou „Co udělat do 31. 12.“ (jen když rada radí vložit peníze),
+  v seznamu „Na co si dát pozor“ a v nápovědě pole DIP. Dřívější věta „trvání aspoň 10 let“
+  byla nepřesná: zákon počítá 120 měsíců od vzniku produktu do výplaty, ne délku placení.
+  Podmínky soukromého životního pojištění podle § 15a odst. 3 (pojistná částka, věk 60)
+  nástroj dál nekontroluje, je to v `meta.neovereno`.
+- **Odkaz MF (PEN-05).** Stránka `mf.gov.cz/cs/financni-trh/penzijni-sporeni` vrací 404.
+  Nahrazena stránkou MF „Základní informace“ k III. pilíři (HTTP 200, titulek „Základní
+  informace | Ministerstvo financí ČR“, 12. 11. 2026). Odkazy na kb.cz, finance.cz, finex.cz,
+  dumfinanci.cz, csps.cz a psp.cz se z prostředí nedají otevřít (proxy je blokuje), proto
+  zůstávají beze změny a jsou uvedené v PR k ruční kontrole.
+- **Výnosy fondů (PEN-06).** Prezentace MF z 3. 6. 2026 uvádí předpoklady svého modelu: na
+  s. 12–15 výnos akcií 7,5 %, dluhopisů 4,0 %, peněžního trhu 2,5 % a inflaci 2,5 %, na s. 17
+  výnos transformovaného fondu 1,5 %. Ty jsou teď v `rules.json` s citací (`vynosZdroj`,
+  `cyklus.zdrojAkcie`, `cyklus.zdrojDluhopisy`, `predpoklady.inflaceZdroj`):
+  - transformovaný fond 1,5 % (beze změny, teď se zdrojem),
+  - akcie ve strategii životního cyklu 7 → 7,5 %, dluhopisy 3 → 4 %,
+  - akciový fond 7 → 7,5 % (počítáme ho celý v akciích, to je předpoklad kalkulačky),
+  - inflace 2,5 % (beze změny, teď se zdrojem).
+  Výnos konzervativního (3 %) a vyváženého (4,5 %) fondu MF neuvádí. Hodnoty zůstávají a mají
+  poznámku „předpoklad kalkulačky, ne úřední údaj“. Rozložení životního cyklu (100 % akcií
+  do 45 let, 20 % v 65) zůstává vlastním předpokladem. MF v modelu počítá s 98 % akcií do
+  55 let a pak se snížením na 30 %, to je v poznámce fondu. Stránka v „S čím počítáme“ říká,
+  odkud který výnos je, a výslovně, že výnos transformovaného fondu rozhoduje o radě „přejít“.
+  Karta transformovaného fondu ukazuje použité výnosy pod výsledkem. Vyšší výnosy akcií
+  a dluhopisů zvýší projekce akciového fondu a životního cyklu a s nimi přínos přechodu
+  z transformovaného fondu (výchozí ukázka: 392 791 Kč v dnešních penězích).
+- **Testy (PEN-07).** Přibyly testy `vkladProMaxPrispevek` (obě sady, hranice pásem 17/18
+  a 29/30 let, věk bez pásma, minimální vklad), větve doporučení „poplatky“ a test 6 teď
+  ověřuje přesnou hodnotu měsíčního modelu 100 000 × (1 − 0,01/12)^120 = 90 479,97 Kč
+  místo tolerance 0,5 % kolem 90 438 Kč (to je roční strhávání ze zadání, 100 000 × 0,99^10).
+
+## Přijímačky bez paniky – střední nálezy (PRI-02, PRI-03, PRI-04, PRI-05)
+
+- **Škála bodů (PRI-02).** Jednotná zkouška má dva testy po nejvýš 50 bodech, celkem 0–100.
+  Zdroj: vyhláška č. 422/2023 Sb., příloha č. 1, poznámka 1 („standardní 50bodová hodnotící
+  škála“ testu) a stránka CERMAT „Jednotná přijímací zkouška“ („Maximální možný počet
+  dosažených bodů … je 50 bodů“), obojí přečteno 12. 11. 2026. Hodnoty jsou v `rules.json`
+  → `body` (`testMax`, `pocetTestu`) s citací. Meze polí skládá `mezePoli()` v `simulace.js`:
+  body v simulátoru i ve strategii 0–100, jeden pokus 0–50. Počet míst ve škole 0–50 (celé
+  číslo) je jen pojistka proti překlepu v modelové třídě (`rules.json` → `formular`).
+- **Kontrola polí (PRI-02).** `kontrolaCisla()` čte číslo sdíleným `prectiCislo` a vrací
+  hodnotu, nebo text hlášky. Hláška je u pole (`.error-msg`, `aria-invalid`, `aria-describedby`),
+  ve strategii přes makro `pole({ chybaMisto: true })`, v tabulkách simulátoru stejným HTML
+  z `vystup.js`. Chybné číslo se do výpočtu nepustí: simulátor ukáže „Některé číslo v tabulce
+  není v pořádku“, skryje tabuli, kola i výsledek a zamkne Přehrát a Krok. Strategie místo
+  výsledku napíše, že se ukáže po opravě. Prázdné body v simulátoru jsou teď chyba (dřív
+  se tiše počítaly jako 0). Prázdný pokus je dál v pořádku (nemoc), prázdné „Při shodě bodů“
+  taky.
+- **Desetinná čísla (PRI-03).** Všechna číselná pole jsou `type="text"` s `inputmode`
+  (`decimal`, u počtu míst `numeric`). „62,5“ i „62.5“ je 62,5 bez ohledu na jazyk prohlížeče.
+  Úřední zdroje neříkají, že body z jednotné zkoušky jsou vždy celé, proto pole desetinná
+  čísla přijímají (je to v `meta.neovereno`). Výpis bodů je česky („62,5 b.“, „o 2,5 b. nad
+  ním“), věty z `explain()` dostanou desetinnou čárku v `upravVetu()`. Převzaté moduly
+  (`matching.js`, `strategy.js`) zůstaly beze změny.
+- **Stejná škála ve strategii (PRI-04).** Formulář chce body i loňské minimum jen z jednotné
+  zkoušky (0–100) a říká to v upozornění nad poli i v nápovědě u minima. Volbu „celkové body
+  školy“ jsme nepřidali: každá škola má celkové hodnocení na jiné škále (jednotná zkouška
+  aspoň 60 %, zbytek si určí ředitel, § 60i odst. 3 školského zákona), takže jedno číslo
+  „čekaných bodů“ nejde porovnat se třemi různými škálami. Hodnocení jednotné zkoušky musí
+  být v seznamu výsledků každé školy zvlášť (§ 60j odst. 5), uživatel ho tedy najde.
+- **Testy (PRI-05).** Přibyly testy kapacity 0 (i `explain` „škola nemá žádné volné místo“),
+  `minScore` (důvod „kriteria“ a věta v `explain`), uchazeče bez priorit, školy bez uchazečů,
+  prázdného vstupu, shody v `rankApplicants`, řetězového vytlačení přes 3 školy, strategie
+  bez škol a se třemi prázdnými školami (zapsané dnešní chování `no-safe`, nízký PRI-07 se
+  neopravoval) a hranic kategorií. Nový `tests/vstup.test.js` testuje kontrolu polí, HTML
+  editoru s hláškou a text o škále.
+- **`meta.overeno` zůstává 5. 11. 2026.** Nová pravidla mají vlastní `body.overeno`
+  (12. 11. 2026). `meta.overeno` je datum štítku „Pravidla ověřena“ pro celý nástroj
+  i pevný `DTSTAMP` v .ics a termíny jsme 12. 11. znovu neověřovali.
+
+## Plán48 a Penzijko kompas – střední nálezy (P48-04, PEN-05, PEN-06, PEN-07)
+
+- **Podmínky daňové podpory (P48-04).** Podle § 15b odst. 1 písm. a) bod 1 ZDP je produkt
+  daňově podporovaný, jen když se z něj vyplácí nejdřív po 120 kalendářních měsících a nejdřív
+  v roce 60 let (u penzijka i od věku 5 let před důchodovým věkem). Při výplatě nebo zániku
+  dřív se podpora vrací (§ 15b odst. 4): odpočty za předchozích 10 zdaňovacích období se
+  zdaní jako ostatní příjem (§ 15b odst. 5 písm. a)). Čísla jsou v `rules.json` →
+  `sady.*.odpocet.podminkyPodpory` s citací, text skládá `vystup.js` → `upozorneniPodpory`.
+  Upozornění je v poznámce pod radou „Co udělat do 31. 12.“ (jen když rada radí vložit peníze),
+  v seznamu „Na co si dát pozor“ a v nápovědě pole DIP. Dřívější věta „trvání aspoň 10 let“
+  byla nepřesná: zákon počítá 120 měsíců od vzniku produktu do výplaty, ne délku placení.
+  Podmínky soukromého životního pojištění podle § 15a odst. 3 (pojistná částka, věk 60)
+  nástroj dál nekontroluje, je to v `meta.neovereno`.
+- **Odkaz MF (PEN-05).** Stránka `mf.gov.cz/cs/financni-trh/penzijni-sporeni` vrací 404.
+  Nahrazena stránkou MF „Základní informace“ k III. pilíři (HTTP 200, titulek „Základní
+  informace | Ministerstvo financí ČR“, 12. 11. 2026). Odkazy na kb.cz, finance.cz, finex.cz,
+  dumfinanci.cz, csps.cz a psp.cz se z prostředí nedají otevřít (proxy je blokuje), proto
+  zůstávají beze změny a jsou uvedené v PR k ruční kontrole.
+- **Výnosy fondů (PEN-06).** Prezentace MF z 3. 6. 2026 uvádí předpoklady svého modelu: na
+  s. 12–15 výnos akcií 7,5 %, dluhopisů 4,0 %, peněžního trhu 2,5 % a inflaci 2,5 %, na s. 17
+  výnos transformovaného fondu 1,5 %. Ty jsou teď v `rules.json` s citací (`vynosZdroj`,
+  `cyklus.zdrojAkcie`, `cyklus.zdrojDluhopisy`, `predpoklady.inflaceZdroj`):
+  - transformovaný fond 1,5 % (beze změny, teď se zdrojem),
+  - akcie ve strategii životního cyklu 7 → 7,5 %, dluhopisy 3 → 4 %,
+  - akciový fond 7 → 7,5 % (počítáme ho celý v akciích, to je předpoklad kalkulačky),
+  - inflace 2,5 % (beze změny, teď se zdrojem).
+  Výnos konzervativního (3 %) a vyváženého (4,5 %) fondu MF neuvádí. Hodnoty zůstávají a mají
+  poznámku „předpoklad kalkulačky, ne úřední údaj“. Rozložení životního cyklu (100 % akcií
+  do 45 let, 20 % v 65) zůstává vlastním předpokladem. MF v modelu počítá s 98 % akcií do
+  55 let a pak se snížením na 30 %, to je v poznámce fondu. Stránka v „S čím počítáme“ říká,
+  odkud který výnos je, a výslovně, že výnos transformovaného fondu rozhoduje o radě „přejít“.
+  Karta transformovaného fondu ukazuje použité výnosy pod výsledkem. Vyšší výnosy akcií
+  a dluhopisů zvýší projekce akciového fondu a životního cyklu a s nimi přínos přechodu
+  z transformovaného fondu (výchozí ukázka: 392 791 Kč v dnešních penězích).
+- **Testy (PEN-07).** Přibyly testy `vkladProMaxPrispevek` (obě sady, hranice pásem 17/18
+  a 29/30 let, věk bez pásma, minimální vklad), větve doporučení „poplatky“ a test 6 teď
+  ověřuje přesnou hodnotu měsíčního modelu 100 000 × (1 − 0,01/12)^120 = 90 479,97 Kč
+  místo tolerance 0,5 % kolem 90 438 Kč (to je roční strhávání ze zadání, 100 000 × 0,99^10).
+
+## Mám EET? + OSVČ 2027 – střední nálezy (EET-03, EET-05, EET-06, EET-07, EET-09, s nimi EET-11)
+
+- **1. pásmo paušální daně 2027 podle zákonného vzorce** (EET-03, rozhodnutí uživatele): o 15 % se
+  zvyšuje vyměřovací základ, ne záloha (§ 14 odst. 3 písm. a) a odst. 13 zákona č. 589/1992 Sb.).
+  35 % × 51 663 = 18 083 Kč, × 1,15 = 20 796 Kč, pojistné 29,2 % = 6 073 Kč (§ 7 odst. 3, nahoru).
+  Zdravotní část je 13,5 % z dvanáctiny minimálního VZ = 3 488 Kč (§ 8a a § 3a odst. 5 zákona
+  č. 592/1992 Sb.), daň 100 Kč (§ 38lk odst. 7 ZDP). Celkem **9 661 Kč** měsíčně, 115 932 Kč ročně,
+  EET OFF 132 732 Kč. Stejný postup dává oficiální částky FS pro rok 2026 (5 756 / 3 306 Kč).
+  `osvc.js` → `flatBands()` 1. pásmo dopočítá z parametrů. `rules.json` drží jen daň, násobek 1,15,
+  kontrolní hodnoty v `expected` a citace (`zdroj`, `zdrojZdravotni`, `zdrojDan`). Stav zůstává
+  „derived“: tabulka Finanční správy pro rok 2027 k 12. 11. 2026 nevyšla (ověřeno na
+  financnisprava.gov.cz, je tam jen rok 2026). Po zveřejnění tabulky přepnout na „official“.
+  Zdroj 1. pásma už neodkazuje na tiskovou zprávu FS bez výpočtu (část EET-13). Karta na úvodní
+  stránce (`zmeny2027.json`) uvádí 9 661 Kč se zdrojem v zákoně.
+- **Neplatné zadání v OSVČ 2027** (EET-05): výsledek, graf, lepivá lišta i částka první zálohy se
+  skryjí a místo nich je upozornění „V zadání je chyba…“. Hlášku u pole formulář ukazuje už při
+  psaní, čtečka ji oznámí jednou. Po opravě se vše přepočítá.
+- **Jedna činnost a podmínka 75 %** (EET-06, § 2a odst. 5 ZDP): kalkulačka se dál ptá jen na jeden
+  výdajový paušál. Nápověda pole to říká. Výsledek přidá poznámku, když pásmo vychází jen díky
+  vyššímu limitu (1,5 nebo 2 mil. Kč): ten platí, jen když aspoň 75 % příjmů tvoří příjmy
+  s paušálem 80 % nebo 60 % (2 mil. Kč jen 80 %). Jinak je limit 1. pásma 1 mil. Kč (2. pásma
+  1,5 mil. Kč). Doplňkovou otázku na podíl příjmů jsme nepřidali, zjednodušení je v `meta.neovereno`.
+- **Rozhodná částka u vedlejší činnosti** (EET-07, § 10 odst. 2 zákona č. 155/1995 Sb.): účast
+  vzniká, když zisk rozhodné částky „dosáhl“. Bez pojistného je jen zisk pod ní (dřív `<=`).
+  Rozhodná částka se počítá z nezaokrouhleného součinu VVZ × koeficient (NV č. 177/2026 Sb.:
+  48 900 Kč × 1,0565), ne z průměrné mzdy zaokrouhlené nahoru (EET-11, stejná funkce). Zákon
+  zaokrouhlení neurčuje: porovnává se přesná hodnota 123 990,84 Kč, zobrazuje se 123 991 Kč.
+  Pro rok 2027: 123 990 Kč → bez pojistného, 123 991 Kč → 19 914 Kč. Průměrná mzda 51 663 Kč
+  se kontroluje testem jako VVZ × koeficient nahoru (§ 23b odst. 4 ZPSZ).
+- **Zadání** (EET-09, rozhodnutí uživatele): `docs/zadani.md` opraveno s poznámkou „(opraveno podle
+  revize 5. 11. 2026, EET-09)“: 1. pásmo 9 661 Kč a kritéria 115 932 / 132 732 Kč, minimální
+  zálohy 35 % PM nejsou návrh, 25 % PM pro začínající, výjimka jen pro průkaz ZTP nebo ZTP/P kvůli
+  nevidomosti, těžké ztrátě zraku nebo hluchoslepotě (§ 11 odst. 4 zákona č. 180/2026 Sb.),
+  MOJE eet „zejména pro nejvýše 2 evidenční jednotky“ bez limitu zaměstnanců (eet.gov.cz).
+- Přepsané testy, které chybu konzervovaly: 115 944 → 115 932 Kč, 132 744 → 132 732 Kč, měsíčně
+  9 662 → 9 661 Kč a EET OFF 11 062 → 11 061 Kč (`test/osvc.test.js`, `test/e2e/mam-eet.test.js`
+  včetně ukázky bez JS). Test „1. pásmo = min. soc. záloha × 1,15“ nahradil test zákonného vzorce.
+
 ## Exekuce, nebo oddlužení? – střední nálezy (DLU-01, DLU-02, DLU-03, DLU-06, s nimi DLU-07)
 
 - **Úrok z prodlení podle pololetí (DLU-01).** Podle NV č. 351/2013 Sb. § 2 odst. 1 je sazba

@@ -32,7 +32,20 @@
 
   /* Volby v úzkém formuláři pod sebou, čtyři statistiky nájmu 2 × 2 */
   .bydlometr .calc-side .options { grid-template-columns: minmax(0, 1fr); }
-  @media (min-width: 560px) { #vysledek-najem .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 560px) {
+    .bydlometr .result .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bydlometr .result .stats > li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  }
+
+  /* Neplatný vstup: výsledek je skrytý, místo něj hláška. Neplatný výsledek kalkulačky poplatku. */
+  .bm-neplatne {
+    margin: 0 0 var(--sp-4); padding: var(--sp-4) var(--sp-5); border-radius: var(--r-lg);
+    background: var(--c-error-soft); color: var(--c-error); font-weight: 700; border: 2px solid var(--c-error);
+  }
+  .bm-poplatek.bm-neplatne-vysledek { background: var(--c-error-soft); }
+  .bm-poplatek.bm-neplatne-vysledek p.muted { color: var(--c-error); font-weight: 700; }
+  .bm-dalsi-duvody { margin-top: var(--sp-5); }
+  .bm-dalsi-duvody h3 { margin: 0; font-size: var(--fs-md); }
 
   .bm-panel-uvod { font-size: var(--fs-lg); max-width: 46rem; margin: 0 0 var(--sp-5); }
   .bm-panel:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 4px; border-radius: var(--r-sm); }

@@ -241,7 +241,7 @@ export function spocitejCestu(hlavicka, cesta, rules) {
   };
 }
 
-/** Součty po položkách; celková částka zaokrouhlená nahoru na celé koruny (konvence aplikace). */
+/** Součty po položkách (v haléřích); částka k výplatě zaokrouhlená nahoru na celé koruny (§ 183 odst. 5 zákoníku práce). */
 export function souhrn(vysledky) {
   const s = { zakladniHal: 0, phmHal: 0, stravneHal: 0, celkemHal: 0 };
   for (const v of vysledky) {

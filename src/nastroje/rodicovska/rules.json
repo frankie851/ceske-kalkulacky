@@ -15,19 +15,27 @@
         "url": "https://www.zakonyprolidi.cz/cs/2006-187#p22"
       },
       {
+        "nazev": "Zákon č. 187/2006 Sb., o nemocenském pojištění, § 38a až § 38c (otcovská: nástup do 6 týdnů od narození, 2 týdny, 70 % DVZ)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-187#p38a"
+      },
+      {
+        "nazev": "Zákon č. 187/2006 Sb., o nemocenském pojištění, § 48 (souběh dávek: přednost mateřské)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-187#p48"
+      },
+      {
         "nazev": "Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
         "url": "https://www.zakonyprolidi.cz/cs/2026-185"
       },
       {
-        "nazev": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
-        "url": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+        "nazev": "ČSSZ – Peněžitá pomoc v mateřství",
+        "url": "https://www.cssz.gov.cz/web/cz/penezita-pomoc-v-materstvi"
       },
       {
         "nazev": "ČSSZ – Otcovská",
-        "url": "https://cssz.cz/otcovska"
+        "url": "https://www.cssz.gov.cz/web/cz/otcovska"
       },
       {
-        "nazev": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+        "nazev": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice, polovina průměrné mzdy 24 484 Kč)",
         "url": "https://mpsv.gov.cz/nemocenske-pojisteni"
       },
       {
@@ -43,8 +51,16 @@
         "url": "https://mpsv.gov.cz/pece-o-dite-a-finance"
       },
       {
-        "nazev": "Finanční správa – Daňové novinky pro rok 2026",
-        "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+        "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů, § 16 a § 35ba (sazba daně 15 a 23 %, sleva na poplatníka) – orientační čistá mzda",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16"
+      },
+      {
+        "nazev": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 7 (pojistné zaměstnance 7,1 %)",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-589#p7"
+      },
+      {
+        "nazev": "Zákon č. 48/1997 Sb., o veřejném zdravotním pojištění, § 9 odst. 2 (zaměstnanec hradí třetinu z 13,5 % podle § 2 zákona č. 592/1992 Sb.)",
+        "url": "https://www.zakonyprolidi.cz/cs/1997-48#p9"
       }
     ],
     "neovereno": [
@@ -96,15 +112,30 @@
     "otecMaxTydny": 22,
     "otecMaxTydnyVicercata": 31,
     "narokDnyPojisteni": 270,
-    "zdroj": "mpsv.gov.cz – Péče o dítě a finance; cssz.cz; z. č. 187/2006 Sb. § 21, § 32–37",
-    "url": "https://mpsv.gov.cz/pece-o-dite-a-finance"
+    "zdroj": "mpsv.gov.cz – Péče o dítě a finance; cssz.gov.cz – Peněžitá pomoc v mateřství; z. č. 187/2006 Sb. § 21, § 32–37",
+    "url": "https://mpsv.gov.cz/pece-o-dite-a-finance",
+    "urad": {
+      "nazev": "ČSSZ – Peněžitá pomoc v mateřství",
+      "url": "https://www.cssz.gov.cz/web/cz/penezita-pomoc-v-materstvi"
+    }
   },
   "otcovska": {
     "sazba": 0.7,
     "dny": 14,
     "nastupDoDne": 41,
-    "zdroj": "cssz.cz – Otcovská",
-    "url": "https://cssz.cz/otcovska"
+    "zdroj": {
+      "pravniZaklad": "§ 38a odst. 4 a § 38b odst. 1 zákona č. 187/2006 Sb., o nemocenském pojištění",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-187#p38a",
+      "citace": "§ 38a (4) Otcovská podle odstavce 1 náleží, pokud nástup na otcovskou nastal v období 6 týdnů ode dne narození dítěte nebo ode dne převzetí dítěte do péče. … § 38b (1) Podpůrčí doba u otcovské činí 2 týdny.",
+      "overeno": "2026-11-12"
+    },
+    "soubehSPpm": {
+      "pravniZaklad": "§ 48 odst. 1 písm. a) zákona č. 187/2006 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-187#p48",
+      "citace": "(1) Vznikne-li z jednoho pojištění současně nárok na výplatu více dávek, má a) nárok na výplatu peněžité pomoci v mateřství přednost před nárokem na výplatu ostatních dávek …"
+    },
+    "nazev": "ČSSZ – Otcovská",
+    "url": "https://www.cssz.gov.cz/web/cz/otcovska"
   },
   "rodicovsky": [
     {
@@ -132,6 +163,10 @@
       "zakon": "152/2026 Sb."
     }
   ],
+  "rodicovskyUrad": {
+    "nazev": "MPSV / ÚP ČR – Rodičovský příspěvek",
+    "url": "https://mpsv.gov.cz/up-cz/rodicovsky-prispevek"
+  },
   "rpPodilDvz": 0.7,
   "rpDnu": 30,
   "rpZmenaMesicu": 3,
@@ -174,8 +209,8 @@
       "dan2": 0.23,
       "hraniceDan2Mesic": 146901,
       "slevaMesic": 2570,
-      "zdroj": "mpsv.gov.cz – Sociální pojištění v roce 2026; financnisprava.gov.cz – Daňové novinky 2026; z. č. 592/1992 Sb.",
-      "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+      "zdroj": "Zákon č. 586/1992 Sb. § 16 (15 %, 23 % nad 36násobkem průměrné mzdy) a § 35ba (sleva 30 840 Kč ročně); zákon č. 589/1992 Sb. § 7 odst. 1 písm. d) (7,1 %); zákon č. 592/1992 Sb. § 2 a zákon č. 48/1997 Sb. § 9 odst. 2 (třetina z 13,5 %); průměrná mzda 2026 48 967 Kč (mpsv.gov.cz – Nemocenské pojištění v roce 2026: polovina průměrné mzdy 24 484 Kč)",
+      "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16"
     }
   },
   "zdroje": [
@@ -192,19 +227,27 @@
       "url": "https://www.zakonyprolidi.cz/cs/2006-187#p22"
     },
     {
+      "nazev": "Zákon č. 187/2006 Sb., o nemocenském pojištění, § 38a až § 38c (otcovská: nástup do 6 týdnů od narození, 2 týdny, 70 % DVZ)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-187#p38a"
+    },
+    {
+      "nazev": "Zákon č. 187/2006 Sb., o nemocenském pojištění, § 48 (souběh dávek: přednost mateřské)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-187#p48"
+    },
+    {
       "nazev": "Sdělení MPSV č. 185/2026 Sb. (redukční hranice 2027)",
       "url": "https://www.zakonyprolidi.cz/cs/2026-185"
     },
     {
-      "nazev": "ČSSZ – Peněžitá pomoc v mateřství a dávky nemocenského pojištění",
-      "url": "https://www.cssz.cz/cz/pojisteni-osvc/davky/davky-nemocenskeho-pojisteni.htm"
+      "nazev": "ČSSZ – Peněžitá pomoc v mateřství",
+      "url": "https://www.cssz.gov.cz/web/cz/penezita-pomoc-v-materstvi"
     },
     {
       "nazev": "ČSSZ – Otcovská",
-      "url": "https://cssz.cz/otcovska"
+      "url": "https://www.cssz.gov.cz/web/cz/otcovska"
     },
     {
-      "nazev": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice)",
+      "nazev": "MPSV – Nemocenské pojištění v roce 2026 (redukční hranice, polovina průměrné mzdy 24 484 Kč)",
       "url": "https://mpsv.gov.cz/nemocenske-pojisteni"
     },
     {
@@ -220,8 +263,16 @@
       "url": "https://mpsv.gov.cz/pece-o-dite-a-finance"
     },
     {
-      "nazev": "Finanční správa – Daňové novinky pro rok 2026",
-      "url": "https://financnisprava.gov.cz/cs/financni-sprava/media-a-verejnost/tiskove-zpravy-gfr/tiskove-zpravy-2026/danove-novinky-pro-rok-2026"
+      "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů, § 16 a § 35ba (sazba daně 15 a 23 %, sleva na poplatníka) – orientační čistá mzda",
+      "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16"
+    },
+    {
+      "nazev": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 7 (pojistné zaměstnance 7,1 %)",
+      "url": "https://www.zakonyprolidi.cz/cs/1992-589#p7"
+    },
+    {
+      "nazev": "Zákon č. 48/1997 Sb., o veřejném zdravotním pojištění, § 9 odst. 2 (zaměstnanec hradí třetinu z 13,5 % podle § 2 zákona č. 592/1992 Sb.)",
+      "url": "https://www.zakonyprolidi.cz/cs/1997-48#p9"
     }
   ]
 }

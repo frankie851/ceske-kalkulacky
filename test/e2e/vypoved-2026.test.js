@@ -150,3 +150,29 @@ test('„40.000“ se čte jako 40 000 Kč, ne 40 Kč', async () => {
   assert.deepEqual(chyby, []);
   await page.close();
 });
+
+// Revize 5. 11. 2026, VYP-04: kontrola „den skončení před uzavřením dohody“ je ve výpočetním modulu
+// (konecPomeru), stránka jen ukáže jeho hlášku u pole.
+test('dohoda: den skončení před uzavřením dohody → chyba u pole, výsledek se nepřepočítá', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await page.click('#kdo-dohoda + label');
+  await vypln(page, '#doruceni', '2026-07-10');
+  await vypln(page, '#konecDohody', '2026-07-31');
+  assert.equal(await text(page, '#vysledek [data-vysledek-cislo]'), '31. 7. 2026');
+  await vypln(page, '#konecDohody', '2026-07-01');
+  assert.equal(await page.$eval('#konecDohody', (el) => el.getAttribute('aria-invalid')), 'true');
+  assert.match(await text(page, '#konecDohody-chyba'), /nemůže být dřív než den uzavření dohody/);
+  assert.equal(await page.$eval('#datumZadosti', (el) => el.hasAttribute('aria-invalid')), false);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+// Revize 5. 11. 2026, VYP-05: § 67 odst. 2 zákoníku práce – předchozí pracovní poměr u téhož zaměstnavatele.
+test('nápověda k délce pracovního poměru zmiňuje § 67 odst. 2 (pauza nejvýš 6 měsíců)', async () => {
+  const { page } = await otevri(CESTA);
+  const napoveda = await text(page, '#delka-napoveda');
+  assert.match(napoveda, /předchozí pracovní poměr u stejného zaměstnavatele/);
+  assert.match(napoveda, /6 měsíců/);
+  assert.match(napoveda, /§ 67 odst\. 2/);
+  await page.close();
+});

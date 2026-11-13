@@ -23,6 +23,8 @@ export function mesicu(n) {
   return `${cislo(n)} měsíců`;
 }
 
+const dnu = (n) => (n === 1 ? '1 den' : n >= 2 && n <= 4 ? `${n} dny` : `${cislo(n)} dní`);
+
 /** „březen 2030“ pro index měsíce věku dítěte (0 = měsíc narození). */
 export function nazevMesice(plan, index) {
   const m = plan.mesice.find((x) => x.index === index);
@@ -120,6 +122,8 @@ export function varovani(plan, zadano, rules) {
         return { ...v, text: `Druhý rodič může převzít péči s mateřskou nejdřív od 7. týdne po porodu. Střídání proto počítáme od ${datum(plan.stridaniOd)}.` };
       case 'navratPredStridanim':
         return { ...v, text: 'Návrat do práce je dřív než střídání, takže se střídání neprojeví.' };
+      case 'otcovskaSMaterskou':
+        return { ...v, text: `Otcovská se ${dnu(v.dni)} kryje s mateřskou otce. Za tyto dny se vyplácí jen mateřská, otcovská se neprodlužuje (§ 48 odst. 1 písm. a) zákona o nemocenském pojištění). Chceš celou otcovskou? Nastup na ni dřív.` };
       case 'otcovskaBezNaroku':
         return { ...v, text: 'Otec podle zadání nemá příjem z nemocensky pojištěného zaměstnání, otcovskou proto nepočítáme.' };
       case 'nadStrop':
@@ -238,9 +242,10 @@ export function jakPocitame(plan, rules) {
 
 export function kontrolniSeznam(plan, rules) {
   const B = plan.terminPorodu;
-  const zdrojPpm = { nazev: 'MPSV – Péče o dítě a finance', url: rules.ppm.url };
-  const zdrojOtc = { nazev: 'ČSSZ – Otcovská', url: rules.otcovska.url };
-  const zdrojRp = { nazev: 'MPSV / ÚP ČR – Rodičovský příspěvek', url: plan.rp.url };
+  // Odkazy na úřady, kde se o dávku žádá (revize 5. 11. 2026, ROD-11: název odpovídá cíli odkazu).
+  const zdrojPpm = { nazev: rules.ppm.urad.nazev, url: rules.ppm.urad.url };
+  const zdrojOtc = { nazev: rules.otcovska.nazev, url: rules.otcovska.url };
+  const zdrojRp = { nazev: rules.rodicovskyUrad.nazev, url: rules.rodicovskyUrad.url };
   const polozky = [];
   if (plan.ppm && plan.vstup.kdoPpm === 'matka') {
     polozky.push({

@@ -154,12 +154,15 @@ export function odpocetStari(vklady = {}, rules) {
 
 export function odpocetUroky(hypoteka = {}, rules) {
   const o = rules.odpocty.uroky;
-  const limit = hypoteka.stareSmlouva ? o.limitStareSmlouvy : o.limit;
+  const limit = hypoteka.bytovaPotrebaPred2021 ? o.limitPred2021 : o.limit;
   const mesice = hypoteka.mesice ?? 12;
   return { odpocet: Math.min(cislo(hypoteka.uroky), Math.round((limit * mesice) / 12)) };
 }
 
-/** Dary: úhrn aspoň 1 000 Kč nebo nad 2 % základu daně, nejvýš 15 % základu. Bez známého základu daně strop neuplatní. */
+/**
+ * Dary (§ 15 odst. 1 ZDP): úhrn aspoň 1 000 Kč nebo nad 2 % základu daně, nejvýš 15 % základu daně.
+ * zakladDane = základ před ostatními odpočty. Bez známého základu daně strop neuplatní.
+ */
 export function odpocetDary(dary = {}, zakladDane, rules) {
   const o = rules.odpocty.dary;
   const uhrn = cislo(dary.dary) + cislo(dary.krev) * o.darKrve;
@@ -224,7 +227,7 @@ const MESICNI = 'prohlaseni';
  * odpovedi = {
  *   narozeni: {rok, mesic}, mzda: {mesicne, mesice}, studium: {studuje, od, do, druh},
  *   deti: [{narozeni, ztpp, od, do, skolka, skolne}], manzel: {ma, prijem, peceODite, ztpp},
- *   invalidita: {stupen, ztpp}, hypoteka: {uroky, stareSmlouva}, stari: {penzijko, dip, zivotni, dlouhodobaPece},
+ *   invalidita: {stupen, ztpp}, hypoteka: {uroky, bytovaPotrebaPred2021}, stari: {penzijko, dip, zivotni, dlouhodobaPece},
  *   dary: {dary, krev}, prijmy: {soubezne, maleDohody, ostatni}, odbory: bool
  * }
  */
@@ -298,8 +301,9 @@ export function vyhodnot(odpovedi = {}, rules) {
     pridej('uroky', { typ: 'odpocet', mesicne: null, rocne: uroky.odpocet, uspora: Math.round(uroky.odpocet * sazba), kde: rocniKde }, rules.odpocty.uroky);
   }
 
-  const zakladProDary = zakladDane === null ? null : Math.max(0, zakladDane - stari.odpocet - uroky.odpocet);
-  const dary = odpocetDary(odpovedi.dary, zakladProDary, rules);
+  // Strop i minimum darů se počítají ze základu daně, ne ze základu sníženého o jiné odpočty
+  // (§ 15 odst. 1 ZDP: „nejvýše 15 % ze základu daně“; revize SLV-08).
+  const dary = odpocetDary(odpovedi.dary, zakladDane, rules);
   if (dary.uhrn > 0) {
     pridej('dary', {
       typ: 'odpocet', mesicne: null, rocne: dary.odpocet, uspora: Math.round(dary.odpocet * sazba),

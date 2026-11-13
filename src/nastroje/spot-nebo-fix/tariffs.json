@@ -1,6 +1,8 @@
 {
   "_comment": "Všechny ceny jsou BEZ DPH (v ceníku v závorce). DPH se přičítá ve výpočtu. Návod na aktualizaci je v README.",
   "year": 2026,
+  "_overenoComment": "Datum, ke kterému jsou regulované ceny (distribuce, poplatky, POZE) ověřené proti cenovým výměrům ERÚ. Ukazuje se na stránce u předpokladů výpočtu.",
+  "overeno": "2026-11-12",
   "vat": {
     "value": 0.21,
     "source": "Zákon č. 235/2004 Sb., o dani z přidané hodnoty – základní sazba 21 %",
@@ -31,8 +33,29 @@
       "perMWh": 495,
       "perAmpPhase": 0,
       "unit": "Kč/MWh nebo Kč/A/fáze/měsíc – účtuje se nižší z obou",
-      "source": "Cenový výměr ERÚ č. 15/2025 (ERV 19/2025); ceník ČEZ Prodej ř. 23–24",
+      "source": "Cenový výměr ERÚ č. 15/2025 (ERV 19/2025), cenový výměr ERÚ č. 13/2025 bod (5), zákon č. 165/2012 Sb. § 28a odst. 2; ceník ČEZ Prodej ř. 23–24",
       "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv192025.pdf",
+      "vysvetleniNuly": "Cenový výměr ERÚ č. 15/2025 snížil platbu podle jističe na 0 Kč, protože podporu obnovitelných zdrojů v roce 2026 celou platí stát.",
+      "zdroj": [
+        {
+          "pravniZaklad": "Cenový výměr ERÚ č. 15/2025, kterým se mění cenový výměr č. 13/2025 (Energetický regulační věstník 19/2025), bod 2",
+          "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv192025.pdf#page=1",
+          "citace": "V bodě (5.1.2) se text „8,32 Kč/A/měsíc“ nahrazuje textem „0 Kč/A/měsíc“. Odůvodnění: prostředky státního rozpočtu umožňují plně pokrýt plánované náklady operátora trhu související s podporou v roce 2026, složka ceny na podporu elektřiny je proto na všech napěťových hladinách nulová.",
+          "overeno": "2026-11-12"
+        },
+        {
+          "pravniZaklad": "Cenový výměr ERÚ č. 13/2025 (Energetický regulační věstník 17/2025), bod (5.2)",
+          "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv172025.pdf#page=28",
+          "citace": "Pokud je předávací místo … připojeno k distribuční soustavě trojfázově, účtuje se trojnásobek ceny podle bodu (5.1.2).",
+          "overeno": "2026-11-12"
+        },
+        {
+          "pravniZaklad": "Zákon č. 165/2012 Sb., o podporovaných zdrojích energie, § 28a odst. 2",
+          "url": "https://www.zakonyprolidi.cz/cs/2012-165#p28a",
+          "citace": "Maximální platba na podporu elektřiny zákazníka za odběrné místo za zúčtovací období je určena součinem částky 495 Kč/MWh a celkového odebraného množství elektřiny z přenosové nebo distribuční soustavy …",
+          "overeno": "2026-11-12"
+        }
+      ],
       "year": 2026
     }
   },
@@ -425,8 +448,9 @@
     },
     "_zdrojD61d": {
       "pravniZaklad": "Cenový výměr ERÚ č. 14/2025, sazba D 61d – podmínky uplatnění",
-      "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf",
-      "citace": "Doba platnosti nízkého tarifu je stanovena celoročně od pátku 12.00 hodin do neděle 22.00 hodin."
+      "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf#page=46",
+      "citace": "Doba platnosti nízkého tarifu je stanovena celoročně od pátku 12.00 hodin do neděle 22.00 hodin.",
+      "overeno": "2026-11-12"
     }
   },
   "tdd5RegionLabels": {
@@ -450,10 +474,29 @@
         "ZC"
       ],
       "source": {
-        "title": "Ceník ČEZ Prodej – Dynamický tarif, distribuční území ČEZ Distribuce (distribuční část ceny, ř. 3–12)",
-        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_cez_dynamicky_tarif_01062026_012026.pdf",
+        "pravniZaklad": "Cenový výměr ERÚ č. 14/2025, kterým se stanovují ceny za související službu v elektroenergetice odběratelům ze sítí nízkého napětí (Energetický regulační věstník 18/2025), část čtvrtá – sazby kategorie D, sloupec ČEZ",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf#page=30",
+        "citace": "Sazba D 02d, sloupec ČEZ: jistič do 3x10 A a do 1x25 A včetně 102 Kč/měsíc, nad 3x20 A do 3x25 A včetně 256 Kč/měsíc, nad 3x50 A do 3x63 A včetně 644 Kč/měsíc; cena za distribuované množství elektřiny 2 078,58 Kč/MWh. Ceny bez DPH a daně z elektřiny.",
+        "stranyPdf": {
+          "D01d": 30,
+          "D02d": 32,
+          "D25d": 33,
+          "D26d": 34,
+          "D27d": 36,
+          "D35d": 38,
+          "D45d": 40,
+          "D56d": 42,
+          "D57d": 44,
+          "D61d": 46
+        },
+        "overeno": "2026-11-12",
         "validFrom": "2026-01-01",
         "year": 2026
+      },
+      "kontrolniZdroj": {
+        "title": "Ceník ČEZ Prodej – Dynamický tarif, distribuční území ČEZ Distribuce (distribuční část ceny, ř. 3–12)",
+        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_cez_dynamicky_tarif_01062026_012026.pdf",
+        "poznamka": "Ceník dodavatele; distribuční část ceny se shoduje s CV ERÚ 14/2025 (kontrola 12. 11. 2026)."
       },
       "sazby": {
         "D01d": {
@@ -605,10 +648,29 @@
         "JC"
       ],
       "source": {
-        "title": "Ceník ČEZ Prodej – Dynamický tarif, distribuční území EG.D (distribuční část ceny, ř. 3–12)",
-        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_egd_dynamicky_tarif_01062026_012026.pdf",
+        "pravniZaklad": "Cenový výměr ERÚ č. 14/2025, kterým se stanovují ceny za související službu v elektroenergetice odběratelům ze sítí nízkého napětí (Energetický regulační věstník 18/2025), část čtvrtá – sazby kategorie D, sloupec EG.D",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf#page=30",
+        "citace": "Sazba D 02d, sloupec EG.D: jistič do 3x10 A a do 1x25 A včetně 100 Kč/měsíc, nad 3x20 A do 3x25 A včetně 250 Kč/měsíc, nad 3x50 A do 3x63 A včetně 629 Kč/měsíc; cena za distribuované množství elektřiny 2 295,34 Kč/MWh. Ceny bez DPH a daně z elektřiny.",
+        "stranyPdf": {
+          "D01d": 30,
+          "D02d": 32,
+          "D25d": 33,
+          "D26d": 34,
+          "D27d": 36,
+          "D35d": 38,
+          "D45d": 40,
+          "D56d": 42,
+          "D57d": 44,
+          "D61d": 46
+        },
+        "overeno": "2026-11-12",
         "validFrom": "2026-01-01",
         "year": 2026
+      },
+      "kontrolniZdroj": {
+        "title": "Ceník ČEZ Prodej – Dynamický tarif, distribuční území EG.D (distribuční část ceny, ř. 3–12)",
+        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_egd_dynamicky_tarif_01062026_012026.pdf",
+        "poznamka": "Ceník dodavatele; distribuční část ceny se shoduje s CV ERÚ 14/2025 (kontrola 12. 11. 2026)."
       },
       "sazby": {
         "D01d": {
@@ -759,10 +821,29 @@
         "P"
       ],
       "source": {
-        "title": "Ceník ČEZ Prodej – Dynamický tarif, distribuční území PREdistribuce (distribuční část ceny, ř. 3–12)",
-        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_pre_dynamicky_tarif_01062026_012026.pdf",
+        "pravniZaklad": "Cenový výměr ERÚ č. 14/2025, kterým se stanovují ceny za související službu v elektroenergetice odběratelům ze sítí nízkého napětí (Energetický regulační věstník 18/2025), část čtvrtá – sazby kategorie D, sloupec PRE",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf#page=30",
+        "citace": "Sazba D 02d, sloupec PRE: jistič do 3x10 A a do 1x25 A včetně 87 Kč/měsíc, nad 3x20 A do 3x25 A včetně 217 Kč/měsíc, nad 3x50 A do 3x63 A včetně 546 Kč/měsíc; cena za distribuované množství elektřiny 1 516,53 Kč/MWh. Ceny bez DPH a daně z elektřiny.",
+        "stranyPdf": {
+          "D01d": 30,
+          "D02d": 32,
+          "D25d": 33,
+          "D26d": 34,
+          "D27d": 36,
+          "D35d": 38,
+          "D45d": 40,
+          "D56d": 42,
+          "D57d": 44,
+          "D61d": 46
+        },
+        "overeno": "2026-11-12",
         "validFrom": "2026-01-01",
         "year": 2026
+      },
+      "kontrolniZdroj": {
+        "title": "Ceník ČEZ Prodej – Dynamický tarif, distribuční území PREdistribuce (distribuční část ceny, ř. 3–12)",
+        "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_pre_dynamicky_tarif_01062026_012026.pdf",
+        "poznamka": "Ceník dodavatele; distribuční část ceny se shoduje s CV ERÚ 14/2025 (kontrola 12. 11. 2026)."
       },
       "sazby": {
         "D01d": {
