@@ -117,6 +117,102 @@ test('strategie: kategorie podle evaluateStrategy a varování bez jistoty', asy
   await page.close();
 });
 
+// ---------- Revize 5. 11. 2026: PRI-02 (rozsah a hlášky), PRI-03 (desetinná čárka), PRI-04 (škála) ----------
+
+const neplatne = (page, sel) => page.$eval(sel, (el) => ({
+  invalid: el.getAttribute('aria-invalid'),
+  popis: el.getAttribute('aria-describedby') ?? '',
+  hlaska: document.getElementById(`${el.id}-chyba`)?.hidden === false ? document.getElementById(`${el.id}-chyba`).textContent.trim() : '',
+}));
+
+test('strategie: 150, −5 nebo „1 500“ → hláška u pole a žádná kategorie; „62,5“ → o 2,5 b. nad minimem', async () => {
+  const { page, chyby } = await otevri(CESTA, { sirka: 360 });
+  assert.match(await text(page, '#strategie'), /stejné škále: jen body z jednotné zkoušky/);
+  await vypln(page, '#str-min-1', '60');
+  for (const spatne of ['150', '-5', '1 500', 'abc']) {
+    await vypln(page, '#str-ocekavane', spatne);
+    const s = await neplatne(page, '#str-ocekavane');
+    assert.equal(s.invalid, 'true', spatne);
+    assert.match(s.popis, /str-ocekavane-chyba/);
+    assert.match(s.hlaska, spatne === 'abc' ? /Zadej číslo/ : /od 0 do 100/, spatne);
+    assert.equal(await page.$$eval('[data-strategie-vystup] [data-kategorie]', (l) => l.length), 0, `${spatne}: starý výsledek zmizel`);
+    assert.equal(await page.$$eval('[data-strategie-vystup] [data-strategie-neplatne]', (l) => l.length), 1);
+  }
+  await vypln(page, '#str-min-2', '101');
+  assert.equal((await neplatne(page, '#str-min-2')).invalid, 'true');
+  await vypln(page, '#str-min-2', '');
+  await vypln(page, '#str-ocekavane', '62,5');
+  assert.equal((await neplatne(page, '#str-ocekavane')).invalid, null);
+  assert.equal((await neplatne(page, '#str-ocekavane')).hlaska, '');
+  assert.equal(await page.$eval('#str-ocekavane', (el) => el.type), 'text');
+  const prvni = await text(page, '[data-strategie-vystup] [data-kategorie]:first-child');
+  assert.match(prvni, /o 2,5 b\. nad ním/);
+  assert.equal(await page.$eval('[data-strategie-vystup] [data-kategorie]', (el) => el.dataset.kategorie), 'tesne');
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('simulátor: body „62,5“ → 62,5 b.; 150 nebo prázdné → hláška a výpočet se nespustí', async () => {
+  const { page, chyby } = await otevri(CESTA, { sirka: 1440, vyska: 900 });
+  assert.equal(await page.$eval('#dite-a4-body', (el) => `${el.type}|${el.inputMode}`), 'text|decimal');
+  await vypln(page, '#dite-a4-body', '62,5'); // Dana
+  await prehraj(page);
+  assert.match(await text(page, '#vysledek [data-uchazec="a4"]'), /62,5 b\./);
+
+  for (const [spatne, hlaska] of [['150', /od 0 do 100/], ['', /Vyplň body/], ['-10', /od 0 do 100/]]) {
+    await vypln(page, '#dite-a4-body', spatne);
+    const s = await neplatne(page, '#dite-a4-body');
+    assert.equal(s.invalid, 'true', `„${spatne}“`);
+    assert.equal(s.popis, 'dite-a4-body-chyba');
+    assert.match(s.hlaska, hlaska);
+    assert.equal(await page.$eval('#vysledek', (el) => el.hidden), true, 'starý výsledek se neukazuje');
+    assert.equal(await page.$eval('[data-krok]', (el) => el.disabled), true);
+    assert.equal(await page.$eval('[data-prehrat]', (el) => el.disabled), true);
+    assert.equal(await page.$eval('[data-sim-chyba]', (el) => el.hidden), false);
+    assert.equal(await page.$$eval('.prij-kolo', (l) => l.length), 0);
+  }
+  // Chyba přežije překreslení tabulky (přidání dítěte) a zmizí po opravě.
+  await page.click('[data-pridat-dite]');
+  assert.equal((await neplatne(page, '#dite-a4-body')).invalid, 'true');
+  await vypln(page, '#dite-a4-body', '80');
+  assert.equal((await neplatne(page, '#dite-a4-body')).invalid, null);
+  assert.equal(await page.$eval('[data-sim-chyba]', (el) => el.hidden), true);
+
+  await vypln(page, '#skola-O-mist', '1,5');
+  assert.match((await neplatne(page, '#skola-O-mist')).hlaska, /celé číslo od 0 do 50/);
+  assert.equal(await page.$eval('[data-prehrat]', (el) => el.disabled), true);
+  await vypln(page, '#skola-O-mist', '3');
+  await page.click('#rezim-pokusy');
+  await vypln(page, '#dite-a1-cj1', '51');
+  assert.match((await neplatne(page, '#dite-a1-cj1')).hlaska, /0 až 50/);
+  assert.equal(await text(page, 'tr[data-dite="a1"] [data-zapocte]'), '–');
+  await vypln(page, '#dite-a1-cj1', '49,5');
+  assert.equal((await neplatne(page, '#dite-a1-cj1')).invalid, null);
+  assert.match(await text(page, 'tr[data-dite="a1"] [data-zapocte]'), /,5 b\./);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('axe s hláškami u polí (360 px, světlý i tmavý režim): 0 serious/critical', async () => {
+  const { page, chyby } = await otevri(CESTA, { sirka: 360 });
+  await vypln(page, '#dite-a2-body', '150');
+  await vypln(page, '#skola-G-mist', 'x');
+  await vypln(page, '#str-ocekavane', '150');
+  await vypln(page, '#str-min-3', '-1');
+  for (const rezim of ['light', 'dark']) {
+    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: rezim }]);
+    await new Promise((r) => setTimeout(r, 600));
+    const r = await new AxePuppeteer(page).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
+    const vazne = r.violations.filter((x) => x.impact === 'serious' || x.impact === 'critical')
+      .map((x) => `${x.id}: ${x.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
+    assert.deepEqual(vazne, [], rezim);
+    const preteka = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+    assert.equal(preteka, false, `${rezim}: bez vodorovného posuvníku`);
+  }
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
 test('kalendář: filtry a export .ics (Blob i stažený soubor s BEGIN:VCALENDAR)', async () => {
   const { page, chyby } = await otevri(CESTA, { sirka: 1440, vyska: 900 });
   const ctyrlete = pravidla.events.filter((e) => e.group === 'ss').length;

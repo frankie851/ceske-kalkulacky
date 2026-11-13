@@ -133,3 +133,78 @@ test('kroky: první kolo = všichni na 1. prioritu', () => {
   assert.deepEqual(r.rounds[1].proposals.map(p => [p.applicant, p.school, p.priority]), [['Z', 'A', 2]]);
   assert.deepEqual(r.rounds[1].rejected.map(x => [x.applicant, x.displacedBy]), [['Y', 'Z']]);
 });
+
+// ---------- Okrajové větve (PRI-05, revize 5. 11. 2026; případy V1–V19 z přepočtu revize) ----------
+
+test('kapacita 0: X 90 (A, B), A 0 míst, B 1 → X do B; explain: škola nemá žádné volné místo', () => {
+  const skoly = [{ id: 'A', name: 'A', capacity: 0 }, { id: 'B', name: 'B', capacity: 1 }];
+  const deti = [{ id: 'X', name: 'X', score: 90, priorities: ['A', 'B'] }];
+  const r = deferredAcceptance(deti, skoly);
+  assert.deepEqual(r.assignment, { X: 'B' });
+  assert.deepEqual(r.schools.A, []);
+  assert.deepEqual(r.rounds[0].rejected, [{ applicant: 'X', school: 'A', reason: 'kapacita', displacedBy: null }]);
+  const why = explain(r, deti, skoly);
+  assert.match(why.X[0], /1\. priorita A: škola nemá žádné volné místo/);
+  assert.match(why.X.at(-1), /2\. prioritu: B/);
+});
+
+test('minScore: A minimum 60; P 59 b. (A, B), Q 60 b. (A) → P do B, Q do A; důvod „kriteria“', () => {
+  const skoly = [{ id: 'A', name: 'A', capacity: 1, minScore: 60 }, { id: 'B', name: 'B', capacity: 1 }];
+  const deti = [
+    { id: 'P', name: 'P', score: 59, priorities: ['A', 'B'] },
+    { id: 'Q', name: 'Q', score: 60, priorities: ['A'] },
+  ];
+  const r = deferredAcceptance(deti, skoly);
+  assert.deepEqual(r.assignment, { P: 'B', Q: 'A' });
+  assert.deepEqual(r.rounds[0].rejected, [{ applicant: 'P', school: 'A', reason: 'kriteria' }]);
+  const why = explain(r, deti, skoly);
+  assert.match(why.P[0], /minimum 60 b\., má 59 b\./);
+  assert.ok(!why.Q.some((t) => /kritéria/.test(t)), 'Q minimum splnil (60 = 60)');
+});
+
+test('minScore platí i pro uchazeče s jedinou prioritou: pod minimem → nepřijat, i když je místo volné', () => {
+  const skoly = [{ id: 'A', name: 'A', capacity: 3, minScore: 40 }];
+  const r = deferredAcceptance([{ id: 'P', score: 39.5, priorities: ['A'] }], skoly);
+  assert.deepEqual(r.assignment, { P: null });
+});
+
+test('uchazeč bez priorit → nepřijat, nikam se nehlásí; explain: nemá zadanou žádnou školu', () => {
+  const deti = [{ id: 'X', name: 'X', score: 90, priorities: [] }, { id: 'Y', name: 'Y', score: 80, priorities: ['A'] }];
+  const r = deferredAcceptance(deti, AB);
+  assert.deepEqual(r.assignment, { X: null, Y: 'A' });
+  assert.ok(r.rounds.every((rd) => rd.proposals.every((p) => p.applicant !== 'X')));
+  assert.deepEqual(explain(r, deti, AB).X, ['Nemá zadanou žádnou školu.']);
+});
+
+test('uchazeč jen s prázdnými prioritami ("", neznámá škola) → nepřijat', () => {
+  const r = deferredAcceptance([{ id: 'X', score: 90, priorities: ['', '', 'NEEX'] }], AB);
+  assert.deepEqual(r.assignment, { X: null });
+  assert.equal(r.rounds.length, 0);
+});
+
+test('škola bez uchazečů → prázdné přiřazení školy; prázdný vstup → žádná kola', () => {
+  const r = deferredAcceptance([{ id: 'X', score: 50, priorities: ['A'] }], AB);
+  assert.deepEqual(r.schools.B, []);
+  const prazdne = deferredAcceptance([], AB);
+  assert.deepEqual(prazdne.assignment, {});
+  assert.deepEqual(prazdne.rounds, []);
+  assert.deepEqual(prazdne.schools, { A: [], B: [] });
+});
+
+test('rankApplicants: shoda bodů bez kritéria → TieError i bez deferredAcceptance', () => {
+  assert.throws(() => rankApplicants([{ id: 'p', score: 70 }, { id: 'q', score: 70 }]), TieError);
+  assert.throws(() => rankApplicants([{ id: 'p', score: 70, tiebreak: 1 }, { id: 'q', score: 70, tiebreak: 1 }]), TieError);
+});
+
+test('řetězové vytlačení přes 3 školy: P→A, Q→B, R→C, S nepřijat', () => {
+  const skoly = [{ id: 'A', capacity: 1 }, { id: 'B', capacity: 1 }, { id: 'C', capacity: 1 }];
+  const r = deferredAcceptance([
+    { id: 'P', score: 90, priorities: ['A'] },
+    { id: 'Q', score: 80, priorities: ['A', 'B'] },
+    { id: 'R', score: 70, priorities: ['B', 'C'] },
+    { id: 'S', score: 60, priorities: ['C'] },
+  ], skoly);
+  assert.deepEqual(r.assignment, { P: 'A', Q: 'B', R: 'C', S: null });
+  assert.equal(r.rounds.length, 3);
+  assert.deepEqual(r.rounds.map((rd) => rd.rejected.map((x) => x.applicant)), [['Q'], ['R'], ['S']]);
+});

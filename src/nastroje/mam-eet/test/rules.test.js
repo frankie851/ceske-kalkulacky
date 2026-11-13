@@ -321,3 +321,37 @@ describe('integrita rules.json a kódu', () => {
     });
   }
 });
+
+// Revize 5. 11. 2026, EET-13: e-Sbírka zůstává jako úřední odkaz (www.e-sbirka.cz přesměrovává
+// kódem 308 na e-sbirka.gov.cz/sb/RRRR/ČÍSLO); stránka se skládá až v prohlížeči, proto musí
+// paragraf nést titulek odkazu. Popis zdroje 1. pásma nesmí slibovat „výpočet“ z tiskové zprávy.
+describe('odkazy na e-Sbírku a popis zdroje 1. pásma (EET-13)', () => {
+  const ESBIRKA = /^https:\/\/e-sbirka\.gov\.cz\/sb\/\d{4}\/\d+$/;
+
+  test('každý odkaz na e-Sbírku má kanonický tvar a paragraf v titulku', () => {
+    let count = 0;
+    (function walk(node, path) {
+      if (Array.isArray(node)) return node.forEach((n, i) => walk(n, `${path}[${i}]`));
+      if (!node || typeof node !== 'object') return;
+      for (const [key, val] of Object.entries(node)) {
+        if (typeof val === 'string' && val.includes('e-sbirka')) {
+          count++;
+          assert.match(val, ESBIRKA, `${path}.${key}`);
+          const title = key === 'url' ? node.nazev : node[`${key}Title`];
+          assert.ok(title, `${path}.${key}: chybí titulek`);
+          // Sdělení o minimální mzdě má jediný bod, paragraf nemá.
+          if (!/^Sdělení/.test(title)) assert.match(title, /§ \d/, `${path}.${key}: ${title}`);
+        }
+      }
+      for (const [k, v] of Object.entries(node)) walk(v, `${path}.${k}`);
+    })(rules, 'rules');
+    assert.ok(count >= 10, `nalezeno ${count} odkazů`);
+  });
+
+  test('zdroj 1. pásma cituje zákonný vzorec, ne „výpočet“ z tiskové zprávy', () => {
+    const b1 = rules.osvc2027.flatTax.bands[0];
+    assert.doesNotMatch(b1.sourceTitle, /výpočet|tiskov/i);
+    assert.match(b1.sourceTitle, /§ 14 odst\. 3 písm\. a\)/);
+    assert.doesNotMatch(JSON.stringify(rules), /výpočet 1\. pásma/);
+  });
+});

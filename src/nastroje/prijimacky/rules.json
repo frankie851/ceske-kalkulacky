@@ -9,17 +9,41 @@
       { "nazev": "MŠMT – Sdělení o termínech jednotné přijímací zkoušky 2026/2027 (č. j. MSMT-525/2026-13)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Sdeleni-o-terminech_2026-2027.pdf" },
       { "nazev": "MŠMT – Změny v přijímacím řízení do SŠ od 1. 9. 2026 (č. j. MSMT-525/2026-17)", "url": "https://edu.gov.cz/wp-content/uploads/2026/09/Zmeny-v-prijimacim-rizeni-do-SS-od-1.-9.-2026-dopis-MSMT.pdf" },
       { "nazev": "CERMAT – Průvodce pro uchazeče k DiPSy 2027", "url": "https://prijimacky.cermat.gov.cz/files/files/Pruvodce_pro_uchazece_2027.pdf" },
-      { "nazev": "CERMAT – Jednotná přijímací zkouška", "url": "https://prijimacky.cermat.gov.cz/menu/jednotna-prijimaci-zkouska.html" }
+      { "nazev": "CERMAT – Jednotná přijímací zkouška", "url": "https://prijimacky.cermat.gov.cz/menu/jednotna-prijimaci-zkouska.html" },
+      { "nazev": "Zákon č. 561/2004 Sb. (školský zákon), § 60i a § 60j", "url": "https://www.zakonyprolidi.cz/cs/2004-561#p60i" },
+      { "nazev": "Vyhláška č. 422/2023 Sb., o přijímacím řízení ke střednímu vzdělávání, příloha č. 1", "url": "https://www.zakonyprolidi.cz/cs/2023-422#f7837121" }
     ],
     "neovereno": [
       "Skutečné přijetí na konkrétní školu. Simulátor ho nepředpovídá, jen ukazuje, jak pravidla rozřazení fungují na modelové třídě. O ostatních uchazečích ani o letošních výsledcích nic nevíme.",
-      "Připravovanou reformu „nejdřív testy, pak přihlášky“. Pro přijímačky 2027 podle MŠMT neplatí, a proto s ní nepočítáme. Kdy by mohla začít platit, zatím neověřujeme."
+      "Připravovanou reformu „nejdřív testy, pak přihlášky“. Pro přijímačky 2027 podle MŠMT neplatí, a proto s ní nepočítáme. Kdy by mohla začít platit, zatím neověřujeme.",
+      "Jestli jsou body z jednotné zkoušky vždy celé. Úřední zdroje uvádějí jen nejvyšší počet 50 bodů za test, proto pole přijmou i desetinné číslo (např. 62,5).",
+      "Škálu celkového hodnocení na konkrétní škole. Každá škola si ji určuje sama (jednotná zkouška tvoří aspoň 60 %), proto ji pomůcka nepřepočítává a v „Strategii přihlášky“ chce jen body z jednotné zkoušky."
     ],
     "statusLegend": {
       "confirmed": "Ověřeno v oficiálním zdroji",
       "unverified": "Neověřeno – sledujte CERMAT a web školy",
       "tip": "Doporučení této pomůcky, nejde o úřední termín"
     }
+  },
+  "body": {
+    "testMax": 50,
+    "pocetTestu": 2,
+    "overeno": "2026-11-12",
+    "zdroj": {
+      "pravniZaklad": "Vyhláška č. 422/2023 Sb., příloha č. 1, poznámka 1; CERMAT – Jednotná přijímací zkouška",
+      "url": "https://www.zakonyprolidi.cz/cs/2023-422#f7837121",
+      "citace": "„… bodový zisk následně přepočítán na standardní 50bodovou hodnotící škálu neupraveného testu.“ CERMAT (prijimacky.cermat.gov.cz/menu/jednotna-prijimaci-zkouska.html): „Maximální možný počet dosažených bodů v testech z matematiky i českého jazyka a literatury je 50 bodů.“"
+    },
+    "skala": {
+      "pravniZaklad": "§ 60i odst. 3 a § 60j odst. 5 zákona č. 561/2004 Sb. (školský zákon)",
+      "url": "https://www.zakonyprolidi.cz/cs/2004-561#p60i-3",
+      "citace": "§ 60i odst. 3: „Hodnocení jednotné zkoušky se na celkovém hodnocení splnění kritérií přijímacího řízení uchazečem podílí nejméně 60 % … Další hodnocení splnění kritérií stanoví ředitel školy.“ § 60j odst. 5: „Seznam obsahuje také hodnocení jednotné zkoušky, školní přijímací zkoušky, talentové zkoušky a hodnocení ostatních kritérií …“"
+    },
+    "poznamka": "Body z jednotné zkoušky: 0–50 za každý test, 0–100 celkem. To je jediná jednotná škála. Celkové body školy (jednotná zkouška aspoň 60 % + vlastní kritéria) mají na každé škole jinou škálu, proto je pomůcka nepřepočítává."
+  },
+  "formular": {
+    "kapacitaMax": 50,
+    "poznamka": "Horní mez počtu míst ve škole v simulátoru jen chrání proti překlepu (modelová třída). Nejde o úřední údaj."
   },
   "sources": {
     "msmt-harmonogram": { "name": "MŠMT – Časový harmonogram přijímacího řízení 2026/2027 (1. a 2. kolo)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf", "date": "2026-08" },

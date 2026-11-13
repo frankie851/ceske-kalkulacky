@@ -81,6 +81,7 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
           <li class="opt"><input type="checkbox" name="urok" id="urok" value="ano" aria-describedby="urok-napoveda" aria-controls="urok-pole"><label for="urok"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Počítat i s úrokem z prodlení<span class="dluhy-opt-popis" id="urok-napoveda">{{ d.urokNapoveda }}</span></span></label></li>
         </ul>
         <div class="dluhy-sazba" id="urok-pole" hidden>
+          {{ pole({ id: 'pololeti', label: 'Od kdy dluh nesplácíte?', moznosti: d.urokMoznosti, napoveda: 'Podle pololetí doplníme zákonnou sazbu. Sazbu ze smlouvy můžete napsat níže.' }) }}
           {{ pole({ id: 'sazba', label: 'Roční sazba úroku', hodnota: d.pole.sazba, jednotka: '%', inputmode: 'decimal', chybaMisto: true }) }}
         </div>
       </fieldset>
@@ -210,6 +211,9 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
         <li>
           <a class="help-secondary" href="{{ o.url }}" data-pomoc>{{ o.nazev }}</a>
           <p class="help-desc">{{ o.popis }}</p>
+          {%- if o.rozdil and d.rozdily[o.rozdil] %}
+          <p class="help-desc dluhy-rozdil">{{ d.rozdily[o.rozdil] }}</p>
+          {%- endif %}
           <span class="help-who">Provozuje: {{ o.provozovatel }}</span>
         </li>
         {%- endfor %}

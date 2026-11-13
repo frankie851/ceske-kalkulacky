@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-12",
+    "overeno": "2026-11-13",
     "zdroje": [
       {
         "nazev": "OTE – výsledky denního trhu s elektřinou",
@@ -33,6 +33,11 @@
         "poznamka": "Energetický regulační věstník 19/2025. Platba podle jističe je v roce 2026 0 Kč/A měsíčně, podporu platí stát. Ověřeno 12. 11. 2026."
       },
       {
+        "nazev": "ERÚ – cenové rozhodnutí č. 11/2024 (POZE v roce 2025)",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22",
+        "poznamka": "Energetický regulační věstník 13/2024, body (5.1.2) až (5.3): 84,70 Kč/A/měsíc, u trojfázového připojení trojnásobek, nejvýš 495 Kč/MWh. Platilo v roce 2025, tedy i pro listopad a prosinec 2025 v období dat. Ověřeno 13. 11. 2026."
+      },
+      {
         "nazev": "Zákon č. 165/2012 Sb., o podporovaných zdrojích energie, § 28a odst. 2 (strop POZE 495 Kč/MWh)",
         "url": "https://www.zakonyprolidi.cz/cs/2012-165#p28a",
         "poznamka": "Platba na podporu elektřiny je nejvýš 495 Kč/MWh odebrané elektřiny. Účtuje se nižší z obou výpočtů."
@@ -56,9 +61,9 @@
     "neovereno": [
       "Spotřebu po čtvrthodinách odhadujeme z typového diagramu dodávky (TDD) OTE pro tvoji sazbu, bez teplotního přepočtu. Skutečná zima nebo léto se může lišit.",
       "Časy nízkého tarifu (HDO) určuje distributor pro každé odběrné místo jinak. Počítáme s typickými okny podle sazby.",
-      "Distribuci, poplatky a ceník dynamického tarifu z roku 2026 používáme na celé období, i na listopad a prosinec 2025.",
+      "Distribuci, poplatky a ceník dynamického tarifu z roku 2026 používáme na celé období, i na listopad a prosinec 2025. V roce 2025 se navíc platila POZE (84,70 Kč bez DPH měsíčně za ampér jističe, u trojfázového připojení trojnásobek, nejvýš 495 Kč/MWh), kterou za tyto měsíce nepočítáme. Měsíce mimo rok 2026 vyjmenujeme u výsledku.",
       "Spot počítáme z 15minutové ceny denního trhu a kurzu ČNB. Dodavatelé ho můžou účtovat jinak, například hodinovým průměrem nebo s poplatkem za odchylky.",
-      "Posun spotřeby: zvolený podíl spotřeby každého dne přesuneme rovným dílem do 16 nejlevnějších čtvrthodin téhož dne (u spotu podle ceny na burze, u dynamického tarifu podle pásma).",
+      "Posun spotřeby: zvolený podíl spotřeby každého dne přesuneme rovným dílem do 16 nejlevnějších čtvrthodin téhož dne (u spotu podle ceny na burze, u dynamického tarifu podle pásma). Nemusí jít o 4 celé hodiny za sebou. Úspora je optimistická: počítáme s tím, že ceny každého dne jsou známé dopředu a spotřeba se přesune přesně do nejlevnějších čtvrthodin.",
       "Fotovoltaiku nemodelujeme. U domu s FVE zadej jen elektřinu odebranou ze sítě, výroba ani prodej přetoků se nepočítají.",
       "Nepočítáme slevy a bonusy dodavatelů ani jističe nad 3 × 63 A. Dynamický tarif ČEZ vyžaduje průběhové měření (chytrý elektroměr)."
     ]
@@ -73,8 +78,22 @@
     "distributor": "cez",
     "fix": { "cena": 3500, "stalyPlat": 163.35 },
     "spot": { "prirazka": 400, "stalyPlat": 163.35 },
-    "posun": { "hodnota": 0, "min": 0, "max": 30, "krok": 5 },
+    "posun": {
+      "hodnota": 0, "min": 0, "max": 30, "krok": 5,
+      "napoveda": "Platí pro spot a dynamický tarif. Třeba pračka, myčka, ohřev vody nebo nabíjení auta v levných hodinách. Přesouváme do 16 nejlevnějších čtvrthodin dne, roční spotřeba se nemění. Úspora je optimistická: počítá s tím, že ceny každého dne znáš dopředu."
+    },
     "poznamka": "Ceny fixu a spotu jsou orientační, vč. DPH (Kč/MWh a Kč/měsíc). Základní cenu a stálý plat dynamického tarifu bereme z dynamic.json."
+  },
+  "mereni": {
+    "_comment": "Revize SPOT-10: měření z CSV pod minimem pokrytí (podíl čtvrthodin období) nepoužijeme, krátký úsek by se přepočítal na celý rok.",
+    "minPokryti": 0.1,
+    "hrubyOdhadPod": 0.5,
+    "texty": {
+      "malo": "Měření pokrývá jen {pct} čtvrthodin období, méně než {min}. Z tak krátkého úseku nejde odhadnout roční spotřebu, proto ho nepoužijeme a výpočet se nemění. Nahraj delší export, ideálně za celý rok.",
+      "pouzito": "Počítáme s tvým měřením (interval {interval} min). Pokrývá {pct} čtvrthodin období, naměřeno {mwh} MWh.",
+      "doplneno": "Chybějící čtvrthodiny doplňujeme podle typového profilu ve stejném poměru.",
+      "hruby": "Měření pokrývá méně než {hranice} roku, výsledek je jen hrubý odhad."
+    }
   },
   "predvolby": [
     { "id": "byt", "nazev": "Byt", "sazba": "D02d", "mwh": 1.8, "jistic": "3x25", "napoveda": "Byt: typicky sazba D02d a 1 až 2,5 MWh za rok." },
