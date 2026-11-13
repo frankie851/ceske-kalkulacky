@@ -4,7 +4,7 @@
 // výchozí hodnoty a předvolby domácností v rules.json. Nic tu není natvrdo.
 import {
   buildQuarterGrid, consumptionProfile, computeVariants, dynamicPctPerQuarter,
-  hourlyAverage, hourlyShare, regulatedFor, sum,
+  hourlyAverage, hourlyShare, pozeAnnual, regulatedFor, sum,
 } from './calc.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { caroveGrafy, tabulkaDat, hezkeDeleni, esc } from '../../js/graf.js';
@@ -319,6 +319,8 @@ export function vystup(D, v, { tdd, mereni = false } = {}) {
   const sDph = (n) => n * (1 + v.vat);
   const distribuce = t.distributors[vstup.distributor];
   const breaker = t.breakers.find((b) => b.id === vstup.jistic);
+  // POZE: účtuje se nižší z platby podle spotřeby a podle jističe (calc.js) – ukazujeme to, co se opravdu účtuje.
+  const pozeRok = pozeAnnual(res.variants.fix.totalMWh, r.poze, res.months.length);
   const predpoklady = [
     { nazev: 'Období', hodnota: `${datum(D.meta.from)} – ${datum(D.meta.to)}, ${cislo(D.grid.length)} čtvrthodin` },
     { nazev: 'Profil spotřeby', hodnota: mereni ? 'tvoje průběhové měření z CSV' : `${tdd} (typový diagram OTE), ${mwh(sum(v.cons))} za rok` },
@@ -326,7 +328,7 @@ export function vystup(D, v, { tdd, mereni = false } = {}) {
       ? `${kcKwh(sDph(r.vt))}` : `vysoký tarif ${kcKwh(sDph(r.vt))}, nízký ${kcKwh(sDph(r.nt))}` },
     { nazev: `Jistič ${breaker.label} a nesíťová infrastruktura`, hodnota: `${kc(sDph(r.monthly), 2)} měsíčně` },
     { nazev: 'Daň z elektřiny a systémové služby', hodnota: kcKwh(sDph(r.perMWh)) },
-    { nazev: 'Podpora obnovitelných zdrojů (POZE)', hodnota: kcKwh(sDph(r.poze.perMWh)) },
+    { nazev: 'Podpora obnovitelných zdrojů (POZE)', hodnota: pozeRok > 0 ? `${kc(sDph(pozeRok))} za rok` : `${kc(0)} – ${t.common.poze.vysvetleniNuly}` },
     { nazev: `Dynamický tarif ${D.produkt.supplier}`, hodnota: `ceník od ${datum(D.produkt.validFrom)}, základní cena ${kcKwh(vstup.dyn.zaklad)}, pásma −50 až +25${NBSP}%` },
     { nazev: 'DPH', hodnota: `${procenta(v.vat * 100)}, je ve všech částkách` },
   ];

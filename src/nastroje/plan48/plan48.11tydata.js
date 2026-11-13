@@ -8,9 +8,10 @@ import * as v from './vystup.js';
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 const klicSady = pravidla.vychozi.sada;
 const sada = pravidla.sady[klicSady];
+const podpora = sada.odpocet.podminkyPodpory;
 
 // Ukázka z prototypu B: penzijko 3 000 Kč + životní pojištění 2 500 Kč měsíčně, sazba 15 %.
-// Kolik měsíců už proběhlo, bereme z data ověření pravidel (4. 11. 2026 → 10 měsíců).
+// Kolik měsíců už proběhlo, bereme z data ověření pravidel (12. 11. 2026 → 10 měsíců).
 // Výsledek na tom nezávisí: vklad 3 000 Kč je nad hranicí maximálního státního příspěvku.
 const vstup = {
   vek: 35,
@@ -100,7 +101,10 @@ export default {
     napovedy: {
       dps: `Do odpočtu jde jen část nad ${kc(sada.odpocet.dpsMesicniHranice)} měsíčně. Na maximální státní příspěvek stačí ${kc(najdiPasmo(vstup.vek, sada).maxZaklad)}.`,
       sazba: `${procenta(sada.sazbyDane.at(-1) * 100)} jen pro vysoké příjmy (část nad 36násobek průměrné mzdy).`,
+      dip: `Odečítá se od první koruny. Peníze jde vybrat nejdřív po ${cislo(podpora.mesicu)} měsících a nejdřív v roce, kdy ti bude ${cislo(podpora.vek)} let.`,
+      zp: 'Odečítá se od první koruny. Pro výběr platí stejné podmínky jako u DIP.',
     },
+    upozorneniPodpory: v.upozorneniPodpory(sada),
     shrnuti: v.shrnutiKroku(vstup, sada),
     // Výsledek
     odpocet: kc(r.odpocet.vyuzity),
@@ -108,7 +112,7 @@ export default {
     vysvetleni: v.vysvetleni(r),
     statistiky: v.statistiky(vstup, r, sada),
     akce: v.vetaCoUdelat(r.doporuceni, r.odpocet.limit),
-    akcePoznamka: v.poznamkaCoUdelat(r.doporuceni, pravidla.vychozi),
+    akcePoznamka: v.poznamkaCoUdelat(r.doporuceni, pravidla.vychozi, sada),
     limitCastka: kc(r.odpocet.limit),
     komentarLimitu: v.komentarLimitu(r.odpocet),
     grafLimitu: limit.graf,

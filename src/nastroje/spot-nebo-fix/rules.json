@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-12",
     "zdroje": [
       {
         "nazev": "OTE – výsledky denního trhu s elektřinou",
@@ -18,6 +18,11 @@
         "poznamka": "Průběh spotřeby domácností po čtvrthodinách (třídy TDD4 až TDD7)."
       },
       {
+        "nazev": "ERÚ – cenový výměr č. 14/2025 (ceny distribuce pro domácnosti, sazby D)",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf#page=30",
+        "poznamka": "Energetický regulační věstník 18/2025. Cena za jistič, vysoký a nízký tarif pro ČEZ Distribuci, EG.D a PREdistribuci, podmínky sazeb (délka nízkého tarifu, D61d). Ověřeno 12. 11. 2026."
+      },
+      {
         "nazev": "ERÚ – cenový výměr č. 13/2025 (systémové služby, nesíťová infrastruktura)",
         "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv172025.pdf",
         "poznamka": "Energetický regulační věstník 17/2025."
@@ -25,12 +30,17 @@
       {
         "nazev": "ERÚ – cenový výměr č. 15/2025 (podpora obnovitelných zdrojů, POZE)",
         "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv192025.pdf",
-        "poznamka": "Energetický regulační věstník 19/2025."
+        "poznamka": "Energetický regulační věstník 19/2025. Platba podle jističe je v roce 2026 0 Kč/A měsíčně, podporu platí stát. Ověřeno 12. 11. 2026."
+      },
+      {
+        "nazev": "Zákon č. 165/2012 Sb., o podporovaných zdrojích energie, § 28a odst. 2 (strop POZE 495 Kč/MWh)",
+        "url": "https://www.zakonyprolidi.cz/cs/2012-165#p28a",
+        "poznamka": "Platba na podporu elektřiny je nejvýš 495 Kč/MWh odebrané elektřiny. Účtuje se nižší z obou výpočtů."
       },
       {
         "nazev": "ČEZ Prodej – ceník Dynamický tarif, území ČEZ Distribuce",
         "url": "https://www.cez.cz/webpublic/file/edee/ceniky/moo_ele_cez_dynamicky_tarif_01062026_012026.pdf",
-        "poznamka": "Pásma dynamického tarifu a distribuční část ceny 2026 (ř. 3–12)."
+        "poznamka": "Pásma dynamického tarifu. Distribuční část ceny 2026 (ř. 3–12) jen pro kontrolu, zdrojem je cenový výměr ERÚ č. 14/2025."
       },
       {
         "nazev": "ČEZ Prodej – ceník Dynamický tarif, území EG.D",

@@ -306,7 +306,8 @@ export function planRodiny(vstupy, rules) {
     if (!maNarok.otec) {
       varovani.push({ typ: 'otcovskaBezNaroku', uroven: 'pozor', text: 'Otec nemá podle zadání příjem z pojištěného zaměstnání, otcovská se nepočítá.' });
     } else {
-      const odDne = Math.min(P.otecOdDne - 14, Math.max(0, Number(v.otcovskaOdDne) || 0));
+      // Nástup v období 6 týdnů ode dne narození (§ 38a odst. 4 zákona č. 187/2006 Sb.).
+      const odDne = Math.min(rules.otcovska.nastupDoDne, Math.max(0, Number(v.otcovskaOdDne) || 0));
       const start = pridejDny(B, odDne);
       const info = davkaRodice(rules, v.prijemOtec, true, start, rules.otcovska.sazba);
       const konec = pridejDny(start, rules.otcovska.dny - 1);
@@ -319,6 +320,7 @@ export function planRodiny(vstupy, rules) {
   // Poslední den měsíce 3. narozenin (§ 30b odst. 1 písm. d) ZSSP).
   const konecHorizontu = pridejDny(prvniDenMesice(B, vek + 1), -1);
   const mesice = new Map();
+  let otcovskaPrekryta = 0;
   const ppmInfo = { matka: null, otec: null };
   for (let ms = parseDatum(startHorizontu); ms <= parseDatum(konecHorizontu); ms += DEN_MS) {
     const iso = formatIso(ms);
@@ -334,21 +336,34 @@ export function planRodiny(vstupy, rules) {
     const kdo = pecujeV(iso);
     if (kdo) m.pecuje = kdo;
 
+    let otecNaPpm = false;
     if (ppm && iso >= ppm.start && iso <= ppm.konec && kdo && maNarok[kdo] && (kdo === 'matka' || iso >= sestinedeli)) {
       if (!ppmInfo[kdo]) {
         const prijem = kdo === 'matka' ? v.prijemMatka : v.prijemOtec;
         ppmInfo[kdo] = davkaRodice(rules, prijem, true, iso, P.sazba);
       }
       m.ppm[kdo]++;
+      if (kdo === 'otec') otecNaPpm = true;
       m.ppmKc[kdo] += davkaVRoce(rules, ppmInfo[kdo], Number(iso.slice(0, 4))).denni;
     }
-    const naOtcovske = otcovska && iso >= otcovska.start && iso <= otcovska.konec;
+    // Z jednoho pojištění má mateřská přednost před otcovskou (§ 48 odst. 1 písm. a) ZNP):
+    // dny, kdy otec už pobírá mateřskou, se otcovská nevyplácí, podpůrčí doba se neprodlužuje.
+    const otcovskaVPodpurciDobe = otcovska && iso >= otcovska.start && iso <= otcovska.konec;
+    if (otcovskaVPodpurciDobe && otecNaPpm) otcovskaPrekryta++;
+    const naOtcovske = otcovskaVPodpurciDobe && !otecNaPpm;
     if (naOtcovske) {
       m.otc++;
       m.otcKc += davkaVRoce(rules, otcovska, Number(iso.slice(0, 4))).denni;
     }
     if (kdo !== 'matka' && v.prijemMatka > 0) m.prace.matka++;
     if (kdo !== 'otec' && !naOtcovske && v.prijemOtec > 0) m.prace.otec++;
+  }
+
+  if (otcovskaPrekryta) {
+    varovani.push({
+      typ: 'otcovskaSMaterskou', uroven: 'info', dni: otcovskaPrekryta,
+      text: `Otcovská se ${otcovskaPrekryta} dní kryje s mateřskou otce. Za tyto dny se vyplácí jen mateřská (§ 48 odst. 1 písm. a) zákona o nemocenském pojištění).`,
+    });
   }
 
   for (const kdo of ['matka', 'otec']) {

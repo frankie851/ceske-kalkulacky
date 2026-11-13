@@ -84,12 +84,33 @@ function setError(id, msg) {
   else input.removeAttribute('aria-invalid');
 }
 
+/**
+ * Neplatné zadání: výsledek, graf, lištu a částku zálohy skryje (patřily by ke starému číslu)
+ * a ukáže upozornění. Po opravě je update() znovu vykreslí.
+ */
+function showInvalid(invalid) {
+  const box = $('osvc-neplatne');
+  const was = box ? !box.hidden : false;
+  if (box) box.hidden = !invalid;
+  $('osvc-vysledek').hidden = invalid;
+  $('osvc-graf').hidden = invalid;
+  const lista = document.querySelector('.lepiva-lista');
+  if (lista) lista.hidden = invalid;
+  if (invalid) {
+    const fp = $('osvc-first-payment');
+    if (fp) fp.hidden = true;
+    if (!was) $('osvc-hlaseni').textContent = tx.invalidResult;
+  }
+}
+
 function update({ submitted = false } = {}) {
   const state = readState();
   $('osvc-actual-pole').hidden = state.expenseMode !== 'actual';
   const r = readInput(state);
   for (const id of ['osvc-income', 'osvc-actual', 'osvc-children']) setError(id, r.field === id ? r.error : null);
+  showInvalid(Boolean(r.error));
   if (r.error) {
+    lastResult = null;
     if (submitted) $(r.field)?.focus();
     return;
   }

@@ -59,11 +59,11 @@ export default {
       prijemOtec: v.napovedaPrijmu(vstup.prijemOtec, pravidla),
       narokMatka: `Nárok má, kdo byl nemocensky pojištěný aspoň ${cislo(P.narokDnyPojisteni)} dní za poslední 2 roky. Počítáme jen se zaměstnanci, ne s OSVČ.`,
       kdoPpm: `Matka nastupuje ${P.nastupTydnyPredMax} až ${P.nastupTydnyPredMin} týdnů před termínem. Otec může mateřskou převzít nejdřív od 7. týdne po porodu.`,
-      otcovskaOd: `0 = v den porodu, nejvýš ${cislo(P.otecOdDne - pravidla.otcovska.dny)}. Otcovská trvá ${cislo(pravidla.otcovska.dny)} dní v kuse a musí začít do 6 týdnů od narození.`,
+      otcovskaOd: `0 = v den porodu, nejvýš ${cislo(pravidla.otcovska.nastupDoDne)}. Otcovská trvá ${cislo(pravidla.otcovska.dny)} dní v kuse a musí začít do 6 týdnů od narození.`,
       stridaniOd: 'Od kterého měsíce věku dítěte přebírá péči druhý rodič (0 = měsíc narození).',
       navratOd: `Od kterého měsíce věku dítěte pracují oba rodiče. Rodičovský příspěvek běží dál.`,
     },
-    otcovskaMax: P.otecOdDne - pravidla.otcovska.dny,
+    otcovskaMax: pravidla.otcovska.nastupDoDne,
     vekMax: vek - 1,
     shrnuti: v.shrnutiKroku(plan, pravidla),
     rp: {

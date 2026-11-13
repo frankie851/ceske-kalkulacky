@@ -34,8 +34,8 @@ styly: ['/nastroje/plan48/plan48.css']
       {%- endcall %}
       {%- call krok({ cislo: 2, titulek: 'Co si spoříš', shrnuti: p.shrnuti.vklady, otevreny: true, id: 'krok-vklady' }) %}
         {{ pole({ id: 'dps', label: 'Kolik si měsíčně posíláš na penzijko (DPS)?', hodnota: p.pole.dps, jednotka: 'Kč', napoveda: p.napovedy.dps, chybaMisto: true }) }}
-        {{ pole({ id: 'dip', label: 'DIP měsíčně', hodnota: p.pole.dip, jednotka: 'Kč', napoveda: 'Odečítá se od první koruny. Smlouva musí trvat aspoň 10 let a výběr nejdřív v 60 letech.', chybaMisto: true }) }}
-        {{ pole({ id: 'zp', label: 'Životní pojištění měsíčně', hodnota: p.pole.zp, jednotka: 'Kč', napoveda: 'Odečítá se od první koruny.', chybaMisto: true }) }}
+        {{ pole({ id: 'dip', label: 'DIP měsíčně', hodnota: p.pole.dip, jednotka: 'Kč', napoveda: p.napovedy.dip, chybaMisto: true }) }}
+        {{ pole({ id: 'zp', label: 'Životní pojištění měsíčně', hodnota: p.pole.zp, jednotka: 'Kč', napoveda: p.napovedy.zp, chybaMisto: true }) }}
         {{ pole({ id: 'zamestnavatel', label: 'Příspěvek zaměstnavatele měsíčně', hodnota: p.pole.zamestnavatel, jednotka: 'Kč', napoveda: 'Do odpočtu se nepočítá. Ukážeme ho jen v projekci.', chybaMisto: true }) }}
         {{ pole({ id: 'mesicu', label: 'Kolik měsíců letos už proběhlo?', moznosti: p.mesice, napoveda: 'Za uplynulé měsíce už státní příspěvek doplatit nejde.' }) }}
         <div class="form-actions plan48-akce-formulare" hidden>
@@ -139,7 +139,7 @@ styly: ['/nastroje/plan48/plan48.css']
     <section class="card" aria-labelledby="pozor-nadpis">
       <h2 id="pozor-nadpis">Na co si dát pozor</h2>
       <ul class="watch">
-        <li>{{ ikona('ikona-vystraha') }}<span>U DIP vzniká nárok na odpočet jen při trvání aspoň 10 let a výběru nejdřív v 60 letech.</span></li>
+        <li>{{ ikona('ikona-vystraha') }}<span>{{ p.upozorneniPodpory }}</span></li>
         <li>{{ ikona('ikona-vystraha') }}<span>Starobní důchodci státní příspěvek nedostávají.</span></li>
         <li>{{ ikona('ikona-vystraha') }}<span>Příspěvek zaměstnavatele se do odpočtu nepočítá.</span></li>
       </ul>

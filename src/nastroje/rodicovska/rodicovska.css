@@ -3,6 +3,9 @@
   /* Atribut hidden musí vyhrát i nad display: flex/grid z komponent */
   .rodicovska [hidden] { display: none !important; }
 
+  /* Upozornění na neplatné zadání: obal je živá oblast pro čtečky, bez upozornění nezabírá místo v mřížce */
+  .rodicovska-neplatne:not(:has(> :not([hidden]))) { margin-bottom: calc(-1 * var(--sp-6)); }
+
   /* Formulář je delší než okno – na širokých obrazovkách proto nelepí */
   @media (min-width: 1040px) { .rodicovska .calc-side { position: static; } }
 

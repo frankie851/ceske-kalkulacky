@@ -18,7 +18,8 @@ const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
 const DNI_DO_PORODU = 150;
 const TERMIN_MIN = [...pravidla.rodicovsky].map((r) => r.narozeniOd).sort()[0];
 const VEK_MAX = Math.max(...pravidla.rodicovsky.map((r) => r.vekMesicu)) - 1;
-const OTCOVSKA_MAX = pravidla.ppm.otecOdDne - pravidla.otcovska.dny;
+// Nástup na otcovskou do 6 týdnů od narození (§ 38a odst. 4 zákona č. 187/2006 Sb.).
+const OTCOVSKA_MAX = pravidla.otcovska.nastupDoDne;
 const SPRITE = ($('use[href*="sprite.svg#"]')?.getAttribute('href') || '/img/sprite.svg#').split('#')[0];
 
 /** Výše rodičovského příspěvku: 'navrh' (vyčerpat do 3 let), 'max' (strop), nebo 'vlastni' (posuvník). */
@@ -179,10 +180,23 @@ function zobrazZavisle(vstup) {
 
 let oznameniCasovac = null;
 
+/**
+ * Při chybě ve formuláři skryje celý plán (výsledek, osu, souhrn, kontrolní seznam i lištu)
+ * a ukáže upozornění, aby pod hláškou nezůstala čísla k jinému zadání (revize 5. 11. 2026, ROD-07).
+ */
+function oznacNeplatne(neplatne) {
+  $('[data-neplatne]').hidden = !neplatne;
+  for (const el of $$('#vysledek, [data-plan], .lepiva-lista')) el.hidden = neplatne;
+}
+
 function prepocitej() {
   const { vstup, chyby } = nactiVstup();
   zobrazZavisle(vstup);
-  if (chyby) return;
+  oznacNeplatne(Boolean(chyby));
+  if (chyby) {
+    clearTimeout(oznameniCasovac);
+    return;
+  }
 
   // Výše rodičovského příspěvku podle volby: nejdřív plán s návrhem, kvůli stropu
   const zaklad = planRodiny(vstup, pravidla);

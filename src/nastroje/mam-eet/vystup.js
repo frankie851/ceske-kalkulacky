@@ -4,7 +4,7 @@
 // čísla jdou z rules.json přes rules.js a osvc.js. Texty, které v rules.json nejsou,
 // jsou v objektu TEXTY.
 import { evaluate, buildChecklist, compareCosts, pruneAnswers, fill, uiVars } from './rules.js';
-import { compare, params } from './osvc.js';
+import { compare, params, flatBands } from './osvc.js';
 import { kc, datum } from '../../js/format.js';
 import { esc } from '../../js/graf.js';
 
@@ -344,7 +344,7 @@ export function stavyOvereni(rules) {
     { text: fill(tx.statusItemSocial, { main: kc(p.socialMinAdvanceMain), starting: kc(Math.ceil(p.socialMinBaseStarting * o.social.rate)), side: kc(p.socialMinAdvanceSide), threshold: kc(p.sideThreshold) }), item: o.social },
     { text: fill(tx.statusItemHealth, { main: kc(p.healthMinAdvance) }), item: o.health },
     { text: fill(tx.statusItemTax, { credit: kc(ti.taxpayerCredit), children: ti.childCredits.map((x) => kc(x)).join(' / '), threshold: kc(p.highRateThreshold) }), item: ti },
-    ...o.flatTax.bands.map((b) => ({ text: fill(tx.statusItemBand, { band: b.label, monthly: kc(b.monthly) }), item: b })),
+    ...flatBands(rules).map((b) => ({ text: fill(tx.statusItemBand, { band: b.label, monthly: kc(b.monthly) }), item: b })),
   ];
   return polozky.map(({ text, item }) => ({
     text, stav: stav(item.status), status: item.status, poznamka: item.note ?? null,
