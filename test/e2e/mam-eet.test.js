@@ -190,6 +190,17 @@ describe('OSVČ 2027', () => {
     await page.close();
   });
 
+  test('vedlejší činnost při zaměstnání: volba je rodově neutrální, paušální daň nedostupná', async () => {
+    const { page, chyby } = await otevri(OSVC, { sirka: 1440, vyska: 900 });
+    assert.equal(await text(page, 'input[name="osvc-activity"][value="sideEmployed"] + label'), 'Vedlejší – mám i zaměstnání');
+    assert.doesNotMatch(await text(page, 'main'), /jsem zaměstnanec/);
+    await page.click('input[name="osvc-activity"][value="sideEmployed"] + label');
+    assert.match(await radek(page, 'flat'), /Nedostupné: Zaměstnanec nemůže být v paušálním režimu/);
+    assert.match(await text(page, '#osvc-graf-popis'), /vedlejší – mám i zaměstnání/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
   test('plátce DPH → paušální daň ani EET OFF nejsou dostupné', async () => {
     const { page, chyby } = await otevri(OSVC, { sirka: 1440, vyska: 900 });
     await page.click('#osvc-vat-yes + label');

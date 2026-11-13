@@ -42,6 +42,8 @@ for (const sc of SCENARIOS) {
     // vysvětlení u každého uchazeče
     const vysvetleni = await page.$$eval('#vysledek [data-uchazec] .prij-proc li', (l) => l.length);
     assert.ok(vysvetleni >= Object.keys(EXPECTED[sc.id]).length);
+    // věty z převzatého explain() jsou na webu rodově neutrální
+    assert.doesNotMatch(await text(page, '#vysledek'), /\((a|á)\)|přijatý|Přijat|Nepřijat|nesplnil/);
     assert.deepEqual(chyby, []);
     await page.close();
   });

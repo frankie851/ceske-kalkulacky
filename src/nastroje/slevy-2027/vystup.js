@@ -4,13 +4,22 @@
 import { vyhodnot, predskolniVek } from './slevy.js';
 import { kc, procenta, datum } from '../../js/format.js';
 import { esc } from '../../js/graf.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 /* =====================================================================
    Odpovědi z formuláře → vstup pro slevy.js (bez DOM, testovatelné)
    ===================================================================== */
 
-const bezMezer = (t) => String(t ?? '').replace(/[\s\u00a0\u202f]/g, '');
-const cele = (t) => (bezMezer(t) === '' ? 0 : Number(bezMezer(t)));
+/**
+ * Číslo z pole v korunách: sdílené prectiCislo („40 000“, „40.000“, „40000 Kč“), jen celá nezáporná
+ * čísla. Prázdné pole = 0, haléře, minus nebo nečitelný zápis = NaN (formulář ukáže hlášku).
+ */
+export function celeZPole(text) {
+  const n = prectiCislo(text, { zaporne: false });
+  if (n === null) return 0;
+  return Number.isInteger(n) ? n : NaN;
+}
+const cele = celeZPole;
 
 /**
  * Převede stav průvodce (řetězce z polí) na vstup pro vyhodnot(). Školka se započte jen
