@@ -79,6 +79,7 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
         <ul class="options">
           <li class="opt"><input type="checkbox" name="duchod" id="duchod" value="ano" aria-describedby="duchod-napoveda"><label for="duchod"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Pobírám důchod<span class="dluhy-opt-popis" id="duchod-napoveda">Starobní, sirotčí nebo invalidní druhého či třetího stupně. Při {{ d.ctyriExekuce }} a více exekucích pro vás platí výjimka.</span></span></label></li>
           <li class="opt"><input type="checkbox" name="urok" id="urok" value="ano" aria-describedby="urok-napoveda" aria-controls="urok-pole"><label for="urok"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>Počítat i s úrokem z prodlení<span class="dluhy-opt-popis" id="urok-napoveda">{{ d.urokNapoveda }}</span></span></label></li>
+          <li class="opt"><input type="checkbox" name="stare-srazky" id="stare-srazky" value="ano" aria-describedby="stare-srazky-napoveda"><label for="stare-srazky"><span class="box">{{ ikona('ikona-zaskrtnuti') }}</span><span>{{ d.stareSrazky.label }}<span class="dluhy-opt-popis" id="stare-srazky-napoveda">{{ d.stareSrazky.napoveda }}</span></span></label></li>
         </ul>
         <div class="dluhy-sazba" id="urok-pole" hidden>
           {{ pole({ id: 'pololeti', label: 'Od kdy dluh nesplácíte?', moznosti: d.urokMoznosti, napoveda: 'Podle pololetí doplníme zákonnou sazbu. Sazbu ze smlouvy můžete napsat níže.' }) }}
@@ -96,8 +97,8 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
     <p class="dluhy-pruh">{{ ikona('ikona-srdce') }}<span>S výsledkem vám pomůže poradna. <a href="#pomoc" data-pomoc>Bezplatná pomoc je tady</a>.</span></p>
     <h2 id="vysledek-nadpis" tabindex="-1">Váš výsledek</h2>
     <p class="muted" data-rok>{{ d.rok.poznamka }} Ukázka pro hodnoty ve formuláři.</p>
-    <p class="dluhy-varovani" data-chyby role="status" hidden>{{ ikona('ikona-vystraha') }}<span>Opravte prosím označené údaje. Pak se výsledek přepočítá.</span></p>
-    <div class="dluhy-karty">
+    <p class="dluhy-varovani" data-chyby role="status" hidden>{{ ikona('ikona-vystraha') }}<span>Opravte prosím označené údaje. Do té doby výsledek neukazujeme, aby tu nezůstala čísla k jinému zadání.</span></p>
+    <div class="dluhy-karty" data-vysledky>
       <article class="card dluhy-karta" aria-labelledby="exekuce-nadpis">
         <h3 id="exekuce-nadpis">Při exekuci</h3>
         <p class="dluhy-hlavni"><span>Z výplaty vám zůstane</span><b class="num" data-ex-zustane>{{ d.ex.zustane }}</b></p>
@@ -143,7 +144,7 @@ styly: ['/nastroje/exekuce-nebo-oddluzeni/exekuce-nebo-oddluzeni.css']
       </article>
     </div>
 
-    <details class="card dluhy-jak">
+    <details class="card dluhy-jak" data-vysledky>
       <summary>Jak jsme to spočítali</summary>
       <h3>Exekuce</h3>
       <ul data-rozpis>

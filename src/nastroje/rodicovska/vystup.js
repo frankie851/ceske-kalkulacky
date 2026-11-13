@@ -176,6 +176,23 @@ export function napovedaPrijmu(prijem, rules) {
   return `${zaklad} Orientačně čistá mzda ${kc(cistaMzda(prijem, pm))} měsíčně (sazby ${pm.rok}, bez slevy na dítě).`;
 }
 
+/* ---------- otcovská a hospitalizace dítěte (§ 38a odst. 4 ZNP) ---------- */
+
+/** Nápověda pod polem „Kolik dní po porodu otec nastoupí“. maxDne = nastupOtcovskeMaxDne(). */
+export function napovedaOtcovskaOd(rules, maxDne) {
+  const prodlouzeni = maxDne - rules.otcovska.nastupDoDne;
+  const zaklad = `0 = v den porodu, nejvýš ${cislo(maxDne)}. Otcovská trvá ${cislo(rules.otcovska.dny)} dní v kuse a musí začít do 6 týdnů od narození.`;
+  return prodlouzeni > 0 ? `${zaklad} Lhůtu prodlužuje ${dnu(prodlouzeni)} v nemocnici.` : zaklad;
+}
+
+/** Nápovědy u otázky na hospitalizaci dítěte. Meze z rules.otcovska.hospitalizace. */
+export function napovedyHospitalizace(rules) {
+  return {
+    volba: 'Jen hospitalizace kvůli zdraví dítěte nebo matky. Lhůta pro nástup na otcovskou se pak prodlouží.',
+    dni: `Počítá se i den přijetí a den propuštění. Nejvýš ${cislo(rules.otcovska.hospitalizace.maxDni)}. O tolik dní se prodlouží lhůta pro nástup na otcovskou. Je dítě v nemocnici ještě na konci 6. týdne? Pak jde nastoupit i po propuštění, nejpozději do 1 roku dítěte. To tady nepočítáme.`,
+  };
+}
+
 /** Text pod posuvníkem výše rodičovského příspěvku. */
 export function napovedaRp(plan, rules) {
   const r = plan.rp;
@@ -256,8 +273,10 @@ export function kontrolniSeznam(plan, rules) {
   polozky.push({ ukol: 'Rodný list vystaví matrika podle místa narození. Dítě co nejdřív přihlas u zdravotní pojišťovny.', termin: 'Hned po porodu', typ: 'doporuceny' });
   if (plan.otec.otcovska) {
     polozky.push({
-      ukol: 'Otcovská: žádost na tiskopisu ČSSZ se podává přes zaměstnavatele. Nastoupit jde do 6 týdnů od narození.',
-      termin: `Nástup nejpozději ${datum(pridejDny(B, rules.otcovska.nastupDoDne))}`, typ: 'hard', zdroj: zdrojOtc,
+      ukol: plan.otec.otcovska.prodlouzeniDni > 0
+        ? `Otcovská: žádost na tiskopisu ČSSZ se podává přes zaměstnavatele. Nastoupit jde do 6 týdnů od narození. Lhůta se prodlouží o ${dnu(plan.otec.otcovska.prodlouzeniDni)}, kdy bylo dítě v nemocnici.`
+        : 'Otcovská: žádost na tiskopisu ČSSZ se podává přes zaměstnavatele. Nastoupit jde do 6 týdnů od narození.',
+      termin: `Nástup nejpozději ${datum(plan.otec.otcovska.nastupNejpozdeji ?? pridejDny(B, rules.otcovska.nastupDoDne))}`, typ: 'hard', zdroj: zdrojOtc,
     });
   }
   if (plan.otec.ppm) {

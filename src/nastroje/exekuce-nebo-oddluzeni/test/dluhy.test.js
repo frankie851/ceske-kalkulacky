@@ -105,6 +105,23 @@ test('náhrada zaměstnavateli 50 Kč se bere ze srážky (nejvýš třetina, na
   assert.equal(m.vericiDostanou, 66);
 });
 
+// Další práce po revizi (13. 11. 2026): u srážek nařízených před 1. 1. 2022 náhrada plátci mzdy
+// nenáleží (zákon č. 286/2021 Sb., čl. II bod 3 a čl. IV body 1 a 12). Datum je v rules.json.
+test('srážky nařízené před účinností zákona č. 286/2021 Sb.: bez náhrady, věřitelé dostanou celou srážku', () => {
+  assert.equal(p.nahradaJenProPrikazyOd, '2022-01-01');
+  const r = srazka(p, { cistaMzda: 23000, osoby: 0, prednostni: false, pocetExekuci: 1, stareSrazky: true });
+  assert.equal(r.srazka, 2966);
+  assert.equal(r.nahradaZamestnavateli, 0);
+  assert.equal(r.vericiDostanou, 2966);
+  assert.equal(r.zustane, 23000 - 2966);
+  // malá srážka: celá jde věřitelům
+  const m = srazka(p, { cistaMzda: 14402, osoby: 0, prednostni: false, pocetExekuci: 1, stareSrazky: true });
+  assert.equal(m.nahradaZamestnavateli, 0);
+  assert.equal(m.vericiDostanou, 100);
+  // bez volby se náhrada odečte jako dosud
+  assert.equal(srazka(p, { cistaMzda: 23000, osoby: 0, prednostni: false, pocetExekuci: 1, stareSrazky: false }).nahradaZamestnavateli, 50);
+});
+
 test('doba splácení v exekuci bez úroku', () => {
   const d = dobaSplaceniExekuce({ dluh: 100000, mesicne: 2916 });
   assert.equal(d.nesplatitelne, false);

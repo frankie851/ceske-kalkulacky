@@ -3,7 +3,7 @@
 // Termín porodu je deterministický: datum ověření pravidel + 150 dní (ne dnešek), aby build
 // vždy vyšel stejně. V prohlížeči se výchozí termín posune na dnešek + 150 dní.
 import fs from 'node:fs';
-import { planRodiny, VYCHOZI_VSTUP, pridejDny } from './rodina.js';
+import { planRodiny, VYCHOZI_VSTUP, pridejDny, nastupOtcovskeMaxDne } from './rodina.js';
 import { svgOsa } from './timeline.js';
 import { kc, cislo } from '../../js/format.js';
 import * as v from './vystup.js';
@@ -37,6 +37,7 @@ export default {
       prijemMatka: pole(vstup.prijemMatka),
       prijemOtec: pole(vstup.prijemOtec),
       otcovskaOd: String(vstup.otcovskaOdDne),
+      hospitalizaceDni: String(vstup.hospitalizaceDni),
       stridaniOd: String(vstup.stridaniOdMesice),
       navratOd: String(vstup.navratOdMesice),
     },
@@ -51,6 +52,7 @@ export default {
       ],
       tydnu,
       otcovska: ano(vstup.otcovska),
+      hospitalizace: ano(vstup.hospitalizace),
       stridani: ano(vstup.stridani),
       navrat: ano(vstup.navrat),
     },
@@ -59,7 +61,8 @@ export default {
       prijemOtec: v.napovedaPrijmu(vstup.prijemOtec, pravidla),
       narokMatka: `Nárok má, kdo byl nemocensky pojištěný aspoň ${cislo(P.narokDnyPojisteni)} dní za poslední 2 roky. Počítáme jen se zaměstnanci, ne s OSVČ.`,
       kdoPpm: `Matka nastupuje ${P.nastupTydnyPredMax} až ${P.nastupTydnyPredMin} týdnů před termínem. Otec může mateřskou převzít nejdřív od 7. týdne po porodu.`,
-      otcovskaOd: `0 = v den porodu, nejvýš ${cislo(pravidla.otcovska.nastupDoDne)}. Otcovská trvá ${cislo(pravidla.otcovska.dny)} dní v kuse a musí začít do 6 týdnů od narození.`,
+      otcovskaOd: v.napovedaOtcovskaOd(pravidla, nastupOtcovskeMaxDne(pravidla, vstup)),
+      hospitalizace: v.napovedyHospitalizace(pravidla),
       stridaniOd: 'Od kterého měsíce věku dítěte přebírá péči druhý rodič (0 = měsíc narození).',
       navratOd: `Od kterého měsíce věku dítěte pracují oba rodiče. Rodičovský příspěvek běží dál.`,
     },

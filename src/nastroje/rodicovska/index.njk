@@ -42,6 +42,10 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
       {%- call krok({ cislo: 4, titulek: 'Otcovská', shrnuti: r.shrnuti.otcovska, otevreny: true, id: 'krok-otcovska' }) %}
         {{ segmenty({ id: 'otcovska', legenda: 'Bude otec čerpat otcovskou?', moznosti: r.moznosti.otcovska }) }}
         <div data-zavisi="otcovska">
+          {{ segmenty({ id: 'hospitalizace', legenda: 'Bylo dítě po porodu v nemocnici?', moznosti: r.moznosti.hospitalizace, napoveda: r.napovedy.hospitalizace.volba }) }}
+          <div data-zavisi="hospitalizace">
+            {{ pole({ id: 'hospitalizace-dni', label: 'Kolik dní z prvních 6 týdnů bylo dítě v nemocnici', hodnota: r.pole.hospitalizaceDni, jednotka: 'dní', napoveda: r.napovedy.hospitalizace.dni, chybaMisto: true }) }}
+          </div>
           {{ pole({ id: 'otcovska-od', label: 'Kolik dní po porodu otec nastoupí', hodnota: r.pole.otcovskaOd, jednotka: 'dní', napoveda: r.napovedy.otcovskaOd, chybaMisto: true }) }}
         </div>
       {%- endcall %}

@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { pravidlaProRok } from '../dluhy.js';
-import { vysledek, urokNapoveda, moznostiUroku, cisloSazby, rozdilyKalkulacek, delkaSlovy } from '../vystup.js';
+import { vysledek, volbaStareSrazky, urokNapoveda, moznostiUroku, cisloSazby, rozdilyKalkulacek, delkaSlovy } from '../vystup.js';
 
 const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const p = pravidlaProRok(rules, 2026);
@@ -125,4 +125,27 @@ test('náhrada zaměstnavateli: text říká, kdy se neplatí (DLU-09)', () => {
   assert.match(t, /celou srážku/);
   assert.doesNotMatch(t, /\b(máš|tvoje|tvůj|dostaneš)\b/i);
   for (const veta of t.split(/(?<=[.!?])\s+/)) assert.ok(veta.split(/\s+/).length <= 20, `dlouhá věta: ${veta}`);
+});
+
+// Další práce po revizi (13. 11. 2026): volba „Srážky ze mzdy byly nařízené před 1. 1. 2022“
+test('srážky nařízené před 1. 1. 2022: náhrada se neodečte, text a rozpis to řeknou', () => {
+  const v = vysledek(p, { ...zaklad, stareSrazky: true });
+  assert.equal(v.cisla.s.nahradaZamestnavateli, 0);
+  assert.equal(bezNbsp(v.ex.vericum), '2 966 Kč');
+  // 100 000 / 2 966 Kč měsíčně → 34 měsíců
+  assert.equal(bezNbsp(v.ex.doba), 'Odhad doby splácení: 2 roky a 10 měsíců.');
+  const t = bezNbsp(v.ex.nahrada);
+  assert.match(t, /před 1\. 1\. 2022/);
+  assert.match(t, /nic nenechá/);
+  assert.match(t, /celou srážku/);
+  assert.doesNotMatch(t, /\b(máš|tvoje|tvůj|dostaneš)\b/i);
+  for (const veta of t.split(/(?<=[.!?])\s+/)) assert.ok(veta.split(/\s+/).length <= 20, `dlouhá věta: ${veta}`);
+  assert.ok(v.rozpis.some((r) => /celou srážku/.test(r)), 'rozpis zmíní, že náhrada se neodečítá');
+  assert.ok(!v.rozpis.some((r) => /nechá 50/.test(bezNbsp(r))));
+});
+
+test('popis volby o starých srážkách bere datum z pravidel a vyká', () => {
+  const t = bezNbsp(volbaStareSrazky(p).label + ' ' + volbaStareSrazky(p).napoveda);
+  assert.match(t, /před 1\. 1\. 2022/);
+  assert.doesNotMatch(t, /\b(máš|tvoje|tvůj|zaškrtni)\b/i);
 });

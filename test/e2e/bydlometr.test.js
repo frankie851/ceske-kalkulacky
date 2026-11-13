@@ -25,6 +25,19 @@ test('refixace: 3 500 000 Kč, 25 let, 4,94 % → splátka 20 337 Kč ± 5 Kč',
   await page.close();
 });
 
+// Další práce po revizi (13. 11. 2026): čísla čte jen sdílené prectiCislo, tečka odděluje tisíce
+test('refixace: „3.500.000“ s tečkami se čte jako 3 500 000 Kč', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#rf-zustatek', '3.500.000');
+  await vypln(page, '#rf-zbyva', '25');
+  await vypln(page, '#rf-sazba-banky', '4,94');
+  assert.equal(await page.$eval('#rf-zustatek', (el) => el.getAttribute('aria-invalid')), null);
+  const splatka = castka(await text(page, 'tr[data-varianta="accept"] td[data-label="Splátka"] .num'));
+  assert.ok(Math.abs(splatka - 20337) <= 5, `splátka ${splatka}`);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
 test('poplatek: mimořádná splátka 500 000 Kč, 3 roky do konce fixace → nejvýš 3 750 Kč', async () => {
   const { page, chyby } = await otevri(CESTA);
   await vypln(page, '#pp-castka', '500 000');
