@@ -121,3 +121,23 @@ test('úřední kalkulačky: zjištění a předpis, podle kterého počítáme'
   for (const o of rules.pomoc.filter((x) => x.rozdil)) assert.ok(k[o.rozdil], `pomoc ${o.url}: neznámý rozdíl ${o.rozdil}`);
   assert.deepEqual(rules.pomoc.filter((x) => x.rozdil).map((x) => x.rozdil).sort(), ['splatky', 'srazky']);
 });
+
+// DLU-09: kdy náleží paušální náhrada plátci mzdy a odkazy na pomoc vedou přímo na obsah
+test('náhrada plátci mzdy: datum, od kdy náleží, s citací přechodného ustanovení (DLU-09)', () => {
+  const n = rules.roky['2026'].nahradaJenProPrikazyOd;
+  assert.equal(n.hodnota, '2022-01-01');
+  overCitaci(n.zdroj, '2026.nahradaJenProPrikazyOd');
+  assert.match(n.zdroj.pravniZaklad, /286\/2021/);
+  assert.match(n.zdroj.citace, /nebyl vydán exekuční příkaz k provedení exekuce srážkami ze mzdy/);
+  assert.ok(rules.meta.zdroje.some((z) => z.url === 'https://e-sbirka.gov.cz/sb/2021/286'), 'meta.zdroje: zákon 286/2021');
+});
+
+test('pomoc: kalkulátor splátek a letáky ombudsmana mají přímý odkaz (DLU-09)', () => {
+  const urls = rules.pomoc.map((o) => o.url);
+  assert.ok(urls.includes('https://insolvence.justice.cz/kalkulator-splatek/'));
+  assert.ok(!urls.includes('https://insolvence.justice.cz/'), 'odkaz nevede jen na hlavní stránku');
+  const ombudsman = rules.pomoc.find((o) => /ochrance\.cz/.test(o.url));
+  assert.equal(ombudsman.url, 'https://www.ochrance.cz/letaky/');
+  assert.match(ombudsman.popis, /exekuc/);
+  assert.equal(rules.pomoc.find((o) => o.rozdil === 'splatky').url, rules.uredniKalkulacky.splatky.url);
+});

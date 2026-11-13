@@ -1101,3 +1101,48 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   „1.500.000“ a „23000,50“ ve formuláři přes sdílené `prectiCislo`. Při srážce, kterou celou
   dostane zaměstnavatel (mzda 14 105 Kč), stránka místo „déle než 50 let“ píše, že věřitelům
   nic nezbude; bez dluhu místo „0 měsíců“ píše, že dluh nebyl zadán.
+
+# Nízké nálezy revize 5. 11. 2026 (13. 11. 2026)
+
+## Přijímačky bez paniky – nízké nálezy (PRI-06, PRI-07, PRI-09)
+
+- **Termíny jednotné zkoušky v kroku 2 (PRI-06).** Krok „Jednotná zkouška dvakrát“ teď jmenuje
+  oba řádné termíny: čtyřleté obory 12. a 13. 4. 2027, šestiletá a osmiletá gymnázia
+  14. a 15. 4. 2027. Data se skládají z `rules.json` (`jpz-1/2`, `vg-1/2`), ručně se nepíšou.
+  Ověřeno 13. 11. 2026 ve sdělení MŠMT č. j. MSMT-525/2026-13 (§ 9 odst. 1 vyhlášky
+  č. 422/2023 Sb.) a na stránce CERMAT „Jednotná přijímací zkouška“. Pětileté obory
+  (např. bilingvní gymnázia) ani jeden zdroj výslovně nejmenuje, proto o nich krok nic
+  netvrdí a jsou v `meta.neovereno`.
+- **Strategie bez zadané školy (PRI-07).** `evaluateStrategy` vrací řádky jen pro zadané školy
+  (název nebo minimum) a pořadí priority zachová. Varování „Žádná škola nemá rezervu“ se
+  ukáže, až má aspoň jedna škola zadané minimum. Bez zadané školy stránka místo prázdných
+  řádků „Škola 1–3“ vyzve k doplnění. „Chybí loňské minimum“ se hlásí jen u zadané školy
+  bez minima (dřív i tehdy, když chyběly jen očekávané body). Test z PR #28, který dnešní
+  chování zapisoval, je přepsaný.
+- **Stav pravidla o reformě (PRI-09).** Tvrzení „nejdřív testy, pak přihlášky v roce 2027
+  neplatí“ plyne z úředního harmonogramu (přihlášky 1.–22. 2.) a sdělení o termínech
+  (zkouška 12.–15. 4.). Úřední dokument přímo o reformě nemáme, proto má pravidlo nový stav
+  `derived` se štítkem „Vyplývá z harmonogramu“ (místo „Ověřeno“), poznámku a citaci.
+  Data zdrojů v ISO tvaru (`sources[].date`) se na webu nevypisují; ta část nálezu na webu
+  neplatí, nic jsme neměnili.
+
+## Exekuce, nebo oddlužení? – nízké nálezy (DLU-07, DLU-09)
+
+- **Okrajové texty (DLU-07).** Opravil už PR #29 (dluh 0, srážka pohlcená náhradou, „úředník“).
+  Jen ověřeno testy `test/vystup.test.js`.
+- **Náhrada plátci mzdy (DLU-09).** Paušální náhrada 50 Kč (vyhláška č. 485/2000 Sb. § 4d a 4e)
+  náleží podle § 87 odst. 3 exekučního řádu a § 270 odst. 2 o. s. ř. ve znění zákona
+  č. 286/2021 Sb. Podle přechodných ustanovení (čl. IV body 1 a 12, čl. II bod 3) se u řízení,
+  kde exekuční příkaz ke srážkám ze mzdy (nebo usnesení o nařízení výkonu rozhodnutí) padl
+  před 1. 1. 2022, použije dřívější znění bez náhrady. Kalkulačka dál počítá s náhradou
+  (většina dnešních exekucí), u výsledku ale vyká větu, že u starších exekucí se neplatí
+  a věřitelé dostanou celou srážku. Datum je v `rules.json` → `roky.2026.nahradaJenProPrikazyOd`
+  s citací. Nové pole formuláře jsme kvůli nízkému nálezu nepřidávali.
+- **Odkazy na pomoc (DLU-09).** „Úřední informace o oddlužení“ vedly na hlavní stránku
+  insolvence.justice.cz; teď položka „Úřední kalkulačka splátek v oddlužení“ vede přímo na
+  /kalkulator-splatek/ (upozornění na rozdíl zůstává). Odkaz na ombudsmana vede na stránku
+  letáků /letaky/; popis jmenuje letáky o exekuci, srážkách ze mzdy, oddlužení a poradenství
+  (leták „Srážky ze mzdy“ tam 13. 11. 2026 je, revize ho 5. 11. nenašla). Obě adresy vrátily
+  13. 11. 2026 HTTP 200 se správným titulkem. Částka za sepis návrhu (4 000 / 6 000 Kč) na webu
+  není, tu část nálezu není co opravit.
+

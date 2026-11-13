@@ -2,7 +2,7 @@
   "meta": {
     "title": "Přijímací řízení na SŠ konané ve školním roce 2026/2027 (nástup 2027/2028)",
     "checked": "2026-11-05",
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-13",
     "zdroje": [
       { "nazev": "MŠMT – Časový harmonogram přijímacího řízení 2026/2027 (1. a 2. kolo)", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf" },
       { "nazev": "MŠMT – Metodický materiál k přijímacímu řízení 2026/2027", "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Metodika_prijimaci-rizeni_2026-2027.pdf" },
@@ -16,13 +16,15 @@
     "neovereno": [
       "Skutečné přijetí na konkrétní školu. Simulátor ho nepředpovídá, jen ukazuje, jak pravidla rozřazení fungují na modelové třídě. O ostatních uchazečích ani o letošních výsledcích nic nevíme.",
       "Připravovanou reformu „nejdřív testy, pak přihlášky“. Pro přijímačky 2027 podle MŠMT neplatí, a proto s ní nepočítáme. Kdy by mohla začít platit, zatím neověřujeme.",
+      "Termíny jednotné zkoušky pro pětileté obory (třeba bilingvní gymnázia). Sdělení MŠMT i stránka CERMAT jmenují jen čtyřleté obory s nástavbovým studiem a šestiletá a osmiletá gymnázia. Den zkoušky u pětiletého oboru potvrdí škola.",
       "Jestli jsou body z jednotné zkoušky vždy celé. Úřední zdroje uvádějí jen nejvyšší počet 50 bodů za test, proto pole přijmou i desetinné číslo (např. 62,5).",
       "Škálu celkového hodnocení na konkrétní škole. Každá škola si ji určuje sama (jednotná zkouška tvoří aspoň 60 %), proto ji pomůcka nepřepočítává a v „Strategii přihlášky“ chce jen body z jednotné zkoušky."
     ],
     "statusLegend": {
       "confirmed": "Ověřeno v oficiálním zdroji",
       "unverified": "Neověřeno – sledujte CERMAT a web školy",
-      "tip": "Doporučení této pomůcky, nejde o úřední termín"
+      "tip": "Doporučení této pomůcky, nejde o úřední termín",
+      "derived": "Vyplývá z úředního harmonogramu – samostatný úřední dokument to výslovně neuvádí"
     }
   },
   "body": {
@@ -65,7 +67,13 @@
     { "id": "vysledky", "title": "Výsledky a potvrzení", "text": "Výsledky 1. a 2. kola najdete v DiPSy a ve škole. Písemné rozhodnutí se nezasílá a přijetí v 1. ani 2. kole se nepotvrzuje. Pokud se přijetí vzdáte, nezískáte tím místo jinde, jen možnost hlásit se do dalšího kola.", "status": "confirmed", "source": "cermat-pruvodce" },
     { "id": "odvolani", "title": "Odvolání do 3 pracovních dnů", "text": "Odvolání se podává do 3 pracovních dnů od oznámení rozhodnutí, a to podle správního řádu, ne přes DiPSy. Pokud vás přijali na vyšší prioritu, odvolání proti nepřijetí na nižší prioritu nemůže uspět.", "status": "confirmed", "source": "msmt-metodika" },
     { "id": "druhe-kolo", "title": "2. kolo: zase s prioritami", "text": "Do 2. kola se může hlásit, kdo nebyl v 1. kole přijat nebo se přijetí vzdal. Platí stejná pravidla: až 3 + 2 obory seřazené podle priority. Ve 3. a dalších kolech se přihlášky podávají jen na papíře, bez omezení počtu a bez priorit.", "status": "confirmed", "source": "msmt-metodika" },
-    { "id": "reforma", "title": "„Nejdřív testy, pak přihlášky“ v roce 2027 neplatí", "text": "Podle harmonogramu MŠMT pro 2026/2027 se přihlášky podávají v únoru a jednotná zkouška se píše až v dubnu. Oficiální dokumenty k přijímačkám 2027 o žádné změně tohoto pořadí nemluví.", "status": "confirmed", "source": "msmt-harmonogram" }
+    { "id": "reforma", "title": "„Nejdřív testy, pak přihlášky“ v roce 2027 neplatí", "text": "Podle harmonogramu MŠMT pro 2026/2027 se přihlášky podávají v únoru a jednotná zkouška se píše až v dubnu. Oficiální dokumenty k přijímačkám 2027 o žádné změně tohoto pořadí nemluví.", "status": "derived", "note": "Pořadí únor → duben stojí v úředním harmonogramu a ve sdělení MŠMT o termínech. Úřední dokument přímo o reformě nemáme, proto tu není štítek „Ověřeno“. Jestli a kdy by reforma začala platit, nesledujeme.", "source": "msmt-harmonogram",
+      "overeno": "2026-11-13",
+      "zdroj": {
+        "pravniZaklad": "MŠMT – Časový harmonogram přijímacího řízení 2026/2027 (střední školy, 1. kolo); Sdělení MŠMT č. j. MSMT-525/2026-13 podle § 9 odst. 1 vyhlášky č. 422/2023 Sb.",
+        "url": "https://msmt.gov.cz/media/wp-content/uploads/2026/08/Casovy-harmonogram_2026-2027.pdf",
+        "citace": "Harmonogram, 1. kolo pro střední školy: „Podání přihlášky – 1. - 20., resp. 22. 2.“ Sdělení MSMT-525/2026-13: „Čtyřleté obory vzdělání, včetně nástavbového studia: 1. termín: pondělí 12. dubna 2027, 2. termín: úterý 13. dubna 2027“."
+      } }
   ],
   "events": [
     { "id": "kons-prihlasky", "group": "kons", "title": "Konzervatoře: podání přihlášek (nejvýše 2 obory)", "start": "2026-11-01", "end": "2026-11-30", "status": "confirmed", "source": "msmt-zmeny" },

@@ -63,7 +63,7 @@ styly: ['/nastroje/prijimacky/prijimacky.css']
         </svg>
         <div>
           <h3>Jednotná zkouška dvakrát, počítá se lepší</h3>
-          <p>Češtinu i matematiku jde psát dvakrát ({{ p.data.jpz }}). Z <strong>každého předmětu zvlášť</strong> se počítá lepší pokus.</p>
+          <p>Češtinu i matematiku jde psát dvakrát. Na čtyřleté obory {{ p.data.jpz }}, na šestiletá a osmiletá gymnázia {{ p.data.vg }}. Z <strong>každého předmětu zvlášť</strong> se počítá lepší pokus.</p>
         </div>
       </li>
       <li class="prij-krok">
@@ -124,8 +124,11 @@ styly: ['/nastroje/prijimacky/prijimacky.css']
       <li class="prij-pravidlo" data-pravidlo="{{ r.id }}">
         <h4>{{ r.nadpis }}</h4>
         <p>{{ r.text }}</p>
+        {%- if r.poznamka %}
+        <p class="small">{{ r.poznamka }}</p>
+        {%- endif %}
         <p class="prij-pravidlo-pata">
-          {%- if r.overeno %}{{ stitek({ typ: 'schvaleno', text: 'Ověřeno' }) }}{% else %}{{ stitek({ typ: 'navrh', text: 'Neověřeno' }) }}{% endif %}
+          {%- if r.overeno %}{{ stitek({ typ: 'schvaleno', text: 'Ověřeno' }) }}{% elif r.odvozeno %}{{ stitek({ typ: 'plain', text: 'Vyplývá z harmonogramu' }) }}{% else %}{{ stitek({ typ: 'navrh', text: 'Neověřeno' }) }}{% endif %}
           <span class="small">Zdroj: <a href="{{ r.zdroj.url }}">{{ r.zdroj.nazev }}</a></span>
         </p>
       </li>

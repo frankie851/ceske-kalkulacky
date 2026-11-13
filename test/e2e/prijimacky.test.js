@@ -117,6 +117,27 @@ test('strategie: kategorie podle evaluateStrategy a varování bez jistoty', asy
   await page.close();
 });
 
+test('PRI-07: bez zadané školy žádné řádky „Škola 1–3“ ani varování „Žádná škola nemá rezervu“', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  for (const i of [1, 2, 3]) {
+    await vypln(page, `#str-nazev-${i}`, '');
+    await vypln(page, `#str-min-${i}`, '');
+  }
+  await vypln(page, '#str-ocekavane', '60');
+  const vystup = await text(page, '[data-strategie-vystup]');
+  assert.equal(await page.$$eval('[data-strategie-vystup] [data-kategorie]', (l) => l.length), 0);
+  assert.equal(await page.$$eval('[data-strategie-vystup] [data-upozorneni]', (l) => l.length), 0);
+  assert.equal(await page.$$eval('[data-strategie-vystup] [data-strategie-prazdna]', (l) => l.length), 1);
+  assert.doesNotMatch(vystup, /Škola 1|Žádná škola nemá rezervu/);
+  await vypln(page, '#str-nazev-1', 'Gympl');
+  assert.deepEqual(await page.$$eval('[data-strategie-vystup] [data-kategorie]', (l) => l.map((x) => x.dataset.kategorie)), ['nevim']);
+  assert.deepEqual(await page.$$eval('[data-strategie-vystup] [data-upozorneni]', (l) => l.map((x) => x.dataset.upozorneni)), ['missing-min']);
+  await vypln(page, '#str-min-1', '70');
+  assert.deepEqual(await page.$$eval('[data-strategie-vystup] [data-upozorneni]', (l) => l.map((x) => x.dataset.upozorneni)), ['no-safe']);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
 // ---------- Revize 5. 11. 2026: PRI-02 (rozsah a hlášky), PRI-03 (desetinná čárka), PRI-04 (škála) ----------
 
 const neplatne = (page, sel) => page.$eval(sel, (el) => ({
@@ -236,7 +257,7 @@ test('kalendář: filtry a export .ics (Blob i stažený soubor s BEGIN:VCALENDA
   assert.ok(ics.text.endsWith('END:VCALENDAR\r\n'));
   assert.equal((ics.text.match(/BEGIN:VEVENT/g) || []).length, sKons);
   assert.match(ics.text, /SUMMARY:Konzervato/);
-  assert.match(ics.text, /DTSTAMP:20261105T000000Z/, 'pevný čas z meta.overeno');
+  assert.ok(ics.text.includes(`DTSTAMP:${pravidla.meta.overeno.replaceAll('-', '')}T000000Z`), 'pevný čas z meta.overeno');
 
   const soubor = path.join(slozka, 'prijimacky-2027.ics');
   for (let i = 0; i < 50 && !fs.existsSync(soubor); i++) await new Promise((r) => setTimeout(r, 100));

@@ -195,7 +195,8 @@
   @media (min-width: 560px) { .prij-str-pole { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
   .prij-str-skola .field { margin-bottom: var(--sp-3); }
   .prij-skala { margin: 0 0 var(--sp-4); }
-  .prij-str-neplatne { margin: var(--sp-3) 0 0; padding: var(--sp-3) var(--sp-4); border: 2px dashed var(--c-border-strong); border-radius: var(--r-md); font-weight: 700; }
+  .prij-str-neplatne, .prij-str-prazdna { margin: var(--sp-3) 0 0; padding: var(--sp-3) var(--sp-4); border: 2px dashed var(--c-border-strong); border-radius: var(--r-md); font-weight: 700; }
+  .prij-str-prazdna { font-weight: 400; }
   .prij-strategie { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
   .prij-str { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: var(--sp-1) var(--sp-3); align-items: start; padding: var(--sp-3) var(--sp-4); border: 2px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface); }
   .prij-str-poradi { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--c-surface-2); font-family: var(--font-display); font-weight: 600; }
