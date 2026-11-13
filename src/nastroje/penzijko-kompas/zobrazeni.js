@@ -9,6 +9,7 @@ import {
   dopadPoplatku,
   transformovanyFond,
   doporuceni,
+  poplatekZaPrevod,
 } from './calc.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { caroveGrafy, esc } from '../../js/graf.js';
@@ -36,7 +37,8 @@ export function platnaSada(rules) {
 
 /** Krátký název sady na přepínač: „Pravidla 2026“, „Návrh 2027“. */
 export function kratkyNazev(sada) {
-  const rok = String(sada.platnostOd).slice(0, 4);
+  // Rok sady (ne rok účinnosti): pravidla „2026“ platí beze změny už od 1. 7. 2024 (revize 5. 11. 2026, PEN-12).
+  const rok = sada.rok ?? String(sada.platnostOd).slice(0, 4);
   return sada.stav === 'navrh' ? `Návrh ${rok}` : `Pravidla ${rok}`;
 }
 
@@ -215,7 +217,7 @@ export function pouziteVynosyTF(rules, cil) {
 /** Karta „Transformovaný fond“: zůstat vs. přejít, poplatek za převod ke konkurenci. */
 export function htmlTF(rules, v) {
   const vekPenze = rules.predpoklady.vekPenze;
-  const { poplatek, zdarmaPoLetech } = rules.predpoklady.prevodKonkurence;
+  const { poplatek, zdarmaPoMesicich } = rules.predpoklady.prevodKonkurence;
   let html = '';
   if (v.vek < vekPenze) {
     const t = transformovanyFond(rules, v);
@@ -230,9 +232,10 @@ export function htmlTF(rules, v) {
       : `<p class="mt-4">Při tvém horizontu vychází lépe zůstat. Rozdíl je <span class="num">${esc(kc(-t.rozdilRealne))}</span>.</p>`;
     html += `<p class="table-note">${esc(pouziteVynosyTF(rules, t.cil))}</p>`;
   }
-  html += `<p class="table-note">Převod ke konkurenci: ${(v.delkaSmlouvy ?? 0) < zdarmaPoLetech
-    ? `smlouva trvá méně než ${zdarmaPoLetech} let, převod by stál až ${esc(kc(poplatek))}. Přechod v rámci stejné společnosti je zdarma.`
-    : `smlouva trvá aspoň ${zdarmaPoLetech} let, převod je zdarma.`}</p>`;
+  // § 61 odst. 3 a § 62 odst. 3 ZDPS: až 800 Kč, zdarma až po více než 60 měsících (revize 5. 11. 2026, PEN-10).
+  html += `<p class="table-note">Převod ke konkurenci: ${poplatekZaPrevod(rules, v.delkaSmlouvy) > 0
+    ? `zdarma je až po víc než ${zdarmaPoMesicich} měsících spoření u stejné společnosti. Do té doby může stát až ${esc(kc(poplatek))}. Přechod v rámci stejné společnosti je zdarma.`
+    : `spoříš u stejné společnosti víc než ${zdarmaPoMesicich} měsíců, převod je zdarma.`}</p>`;
   return html;
 }
 

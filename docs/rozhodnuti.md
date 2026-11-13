@@ -1162,3 +1162,62 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   Build tak vykreslí nabídku, `ui.js` ji při změně roku přestaví a vybraný měsíc mimo data posune
   na nejbližší dostupný. Poznámka o posledním dostupném měsíci ve výsledku zůstává v kódu pro
   případ, že by se měsíc bez dat dostal do výpočtu jinak.
+
+## Plán48, Penzijko kompas, Výpověď 2026, Rodičovská – nízké nálezy (P48-07, P48-08, P48-09, PEN-10, PEN-12, VYP-06, VYP-07, ROD-12, ROD-13, ROD-14)
+
+- **Zdroje návrhu „Lepší penzijko“** (P48-07, PEN-12): mediální odkazy (finance.cz, dumfinanci.cz,
+  ČSPS, KB, Finance.cz) z `rules.json` obou nástrojů zmizely. Návrh odkazuje na sněmovní tisk 285
+  (psp.cz), tiskovou zprávu MF „Vláda schválila Lepší penzijko“ z 24. 8. 2026 a prezentaci MF
+  z 3. 6. 2026 (s. 6 „Spoření od kolébky“: 40 % do 29 let, u dětí od 100 Kč). Obě stránky MF jsou
+  13. 11. 2026 ověřené (HTTP 200, text odpovídá). Stránka psp.cz z prostředí nejde otevřít
+  (connection reset), stav projednávání (1. čtení 24. 9. 2026, výbory 29. 10. 2026) je proto
+  převzatý z revize a je v `meta.neovereno`.
+- **Platnost pravidel 2026 v Penzijku** (PEN-12): `platnostOd` je 1. 7. 2024 (od té doby platí
+  dnešní státní příspěvek). Přepínač dál ukazuje „Pravidla 2026“ – nový klíč `rok` v sadě.
+- **Štítek návrhu** (P48-08): makro `statistiky` umí u dlaždice štítek (`stitek`; `null` = v HTML,
+  ale skrytý). Plán48 ho dává k dlaždici státního příspěvku a k nadpisu projekce; přepínač sady
+  ho ukazuje stejným mechanismem jako dosavadní štítky (`[data-stitek-sady]`).
+- **Texty Plánu48** (P48-09): sazba 23 % se týká „části základu daně“ (§ 16 odst. 1 ZDP). Věta
+  „Obvykle musí dorazit do 20. 12.“ zmizela i s položkou `vychozi.mimoradnyVkladPripsatDo` – zákon
+  termín nestanoví, určuje ho penzijní společnost; teď „Do kdy musí dorazit, určují podmínky tvé
+  penzijní společnosti.“ „Schválen vládou 8/2026“ nahradilo číslo tisku a data.
+- **Převod ke konkurenci** (PEN-10): zákon č. 427/2011 Sb., § 61 odst. 1 písm. b) a odst. 3
+  (nejvýše 800 Kč) a § 62 odst. 3 (neúčtuje se „po více než 60 měsících“). V zadání koordinátora
+  byl uveden § 136 – ten upravuje získávání informací od účastníka, se zpoplatněním převodu
+  nesouvisí. Pravidlo je v `predpoklady.prevodKonkurence` (`zdarmaPoMesicich: 60`, citace).
+  Délka smlouvy se zadává v celých letech, takže 5 let = 60 měsíců ještě zpoplatněno, zdarma od 6 let.
+- **Výpověď – texty** (VYP-06): ochranná doba „konec se posune o dobu, po kterou ochranná doba ve
+  výpovědní době trvala“ + možnost na prodloužení netrvat (§ 53 odst. 2 ZP, citace v
+  `zakonikPrace.ochrannaDoba.prodlouzeni`). Hraniční věk cituje § 43 zákona o zaměstnanosti („nad
+  52/57 let věku“, rozhoduje věk v den žádosti) místo „praxe úřadu práce“; výklad, že delší doba
+  platí ode dne narozenin, je v `meta.neovereno` (tabulka ÚP „52–57 let 8 měsíců, nad 57 let 11
+  měsíců“ to u 57 let jednoznačně neříká). Při zrušení ve zkušební době zaměstnavatelem připomene
+  zákaz v prvních 14 dnech neschopenky (§ 66 odst. 1 ZP, `zkusebniDoba.zakazPriNeschopnostiDnu`).
+- **Výpověď – kontroly** (VYP-07): výpověď doručená před 1. 6. 2025 se nepočítá, hláška
+  „Kalkulačka počítá výpovědi doručené od 1. 6. 2025.“ u pole doručení. Opora: čl. II bod 3 zákona
+  č. 120/2025 Sb. (výpověď doručená před účinností se řídí dřívějším § 51), účinnost 1. 6. 2025.
+  Dohody a zrušení ve zkušební době se netýká. Žádost o podporu před koncem pracovního poměru nebo
+  v jeho poslední den ukáže hlášku u pole žádosti (uchazečem nemůže být, kdo je v pracovněprávním
+  vztahu, § 25 odst. 1 písm. a) zákona o zaměstnanosti). Kontroly jsou čisté funkce
+  `kontrolaDoruceni` a `kontrolaZadosti` ve `vypoved.js`.
+- **Čistá mzda 2027** (ROD-12): sada `cistaMzda.2027` jen z úředních textů ve znění od 1. 1. 2027
+  (zakonyprolidi.cz, „budoucí znění“): ZDP § 38h odst. 2 (15 %, 23 % nad 3násobek průměrné mzdy) a
+  § 35ba (sleva 30 840 Kč → 2 570 Kč měsíčně), zákon č. 589/1992 Sb. § 7 odst. 1 písm. d) (7,1 %),
+  zákon č. 592/1992 Sb. § 2 (13,5 %, bez ohlášené změny) a zákon č. 48/1997 Sb. § 9 odst. 2 (třetina,
+  znění platné do 31. 12. 2027). Průměrná mzda 2027 = 48 900 × 1,0565 (NV č. 177/2026 Sb. § 1)
+  = 51 662,85 → 51 663 Kč nahoru (§ 23b odst. 4 zákona č. 589/1992 Sb.); hranice 154 989 Kč.
+  Odhad podle posledního roku zůstává pro rok 2028 a dál.
+- **DVZ bez nároku a jednorázová výplata** (ROD-13): DVZ matky pro strop rodičovského příspěvku se
+  počítá z jejího příjmu i bez 270 dnů pojištění (§ 30 odst. 2 ZSSP: rozhoduje i DVZ pro nemocenské
+  v souvislosti s porodem); plán to oznámí. U otce dál rozhoduje odpověď „je nemocensky pojištěný
+  zaměstnanec“. Kontrolní seznam u dalšího dítěte uvádí podmínku § 30a odst. 1 ZSSP (DVZ aspoň
+  jednoho rodiče, nebo OSVČ).
+- **Uložený plán a ukázkové příjmy** (ROD-14): obnova z localStorage jde přes čistou funkci
+  `ocistiUlozene` (`rodicovska/obnova.js`): datum ve formátu RRRR-MM-DD, skutečný den a ne dřív než
+  platnost pravidel; příjmy nezáporné; celá čísla v mezích formuláře z `rules.json`; přepínače jen
+  text bez zvláštních znaků (formulář pak ověří, že taková volba existuje); výše RP celé nezáporné
+  číslo. Neplatné položky se zahodí a pole si nechá dosavadní hodnotu.
+  Výchozí příjmy 40 000 / 50 000 Kč zůstávají: bez nich by stránka bez JavaScriptu neukázala
+  ukázkový plán a výsledek by se po načtení neukázal hned. Místo prázdných polí je nad nimi věta
+  „Předvyplněné mzdy … jsou jen ukázka. Přepiš je skutečnými hrubými mzdami.“, která zmizí, jakmile
+  se některá mzda změní.
