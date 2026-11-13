@@ -38,7 +38,10 @@ export function params(rules) {
   const minBaseMain = ceilKc(avg * s.minBaseShareMain);
   const minBaseSide = ceilKc(avg * s.minBaseShareSide);
   const minBaseStarting = ceilKc(avg * s.minBaseShareStarting);
-  const healthMinBase = ceilKc(avg * z.minBaseShareMain);
+  // Minimální VZ zdravotního pojištění (§ 3a odst. 2 zákona č. 592/1992 Sb.): dvanáctinásobek 50 %
+  // průměrné mzdy. Nahoru se zaokrouhluje jen průměrná mzda, ne její polovina ani roční součin.
+  const healthMinBaseMonthly = avg * z.minBaseShareMain;
+  const healthMinBaseAnnual = o.monthsPerYear * healthMinBaseMonthly;
   // Rozhodná částka (§ 10 odst. 2 zákona č. 155/1995 Sb.): 2,4 × (VVZ × koeficient) bez zaokrouhlení
   // průměrné mzdy. Zákon zaokrouhlení neurčuje: porovnává se přesná hodnota, zobrazuje se nahoru.
   const sideThresholdExact = aw.generalAssessmentBase * aw.conversionCoefficient * s.sideThresholdAverageWageMultiple;
@@ -52,8 +55,10 @@ export function params(rules) {
     socialMaxBaseAnnual: avg * s.maxBaseAverageWageMultiple,
     sideThreshold: ceilKc(sideThresholdExact),
     sideThresholdExact,
-    healthMinBase,
-    healthMinAdvance: ceilKc(healthMinBase * z.rate),
+    healthMinBaseMonthly,
+    healthMinBaseAnnual,
+    // Záloha: 13,5 % z dvanáctiny ročního minima, pojistné nahoru na celé Kč (§ 2 a § 8 odst. 2).
+    healthMinAdvance: ceilKc((healthMinBaseAnnual / o.monthsPerYear) * z.rate),
     highRateThreshold: avg * t.highRateAverageWageMultiple,
     bonusMinIncome: t.minimumWage * t.bonusMinIncomeMinimumWageMultiple,
   };
@@ -72,7 +77,7 @@ export function flatBands(rules) {
     if (!Number.isFinite(b.socialBaseFromMinBaseMultiple)) return b;
     const socialBase = ceilKc(p.socialMinBaseMain * b.socialBaseFromMinBaseMultiple);
     const social = ceilKc(socialBase * o.social.rate);
-    const health = ceilKc(o.averageWage.monthly * o.health.minBaseShareMain * o.health.rate);
+    const health = p.healthMinAdvance;
     return { ...b, socialBase, social, health, monthly: b.tax + social + health };
   });
 }
@@ -152,7 +157,7 @@ export function healthIns(zisk, activityId, rules) {
   const a = byId(o.activities, activityId);
   if (!a) throw new Error(`Neznámý druh činnosti: ${activityId}`);
   const p = params(rules);
-  const min = a.healthMinimum ? p.healthMinBase * p.months : 0;
+  const min = a.healthMinimum ? p.healthMinBaseAnnual : 0;
   const base = Math.max(ceilKc(zisk * o.health.profitShare), min);
   return { min, base, amount: ceilKc(base * o.health.rate) };
 }

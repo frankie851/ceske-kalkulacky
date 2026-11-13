@@ -37,9 +37,17 @@ function nastavChybu(id, zprava) {
 }
 
 const mesic = (id) => v.mesicZPoli($(`#${id}-rok`).value, $(`#${id}-mesic`).value);
+
+/** Nabídka měsíců jen s daty ČSÚ pro zvolený rok (revize INF-08); vybraný měsíc mimo data posune. */
+function obnovMesice(id, vybranyMesic = $(`#${id}-mesic`).value) {
+  const select = $(`#${id}-mesic`);
+  const mesice = v.mesiceRoku(series, $(`#${id}-rok`).value, vybranyMesic);
+  select.replaceChildren(...mesice.map((m) => new Option(m.text, m.hodnota, m.vybrano, m.vybrano)));
+}
+
 function nastavMesic(id, m) {
   $(`#${id}-rok`).value = m.slice(0, 4);
-  $(`#${id}-mesic`).value = m.slice(5);
+  obnovMesice(id, m.slice(5));
 }
 
 /** Vypíše chyby k polím a vrátí sestavený vstup (nebo null). */
@@ -156,6 +164,14 @@ for (const [i, z] of zalozky.entries()) {
 $('[data-zalozky]').hidden = false;
 
 /* ---------- formuláře ---------- */
+
+// Změna roku přestaví nabídku měsíců dřív, než formulář přepočítá výsledek (posluchač na poli běží
+// před posluchačem formuláře).
+for (const nastroj of NASTROJE) {
+  for (const id of [`${nastroj}-od`, `${nastroj}-do`]) {
+    $(`#${id}-rok`)?.addEventListener('change', () => obnovMesice(id));
+  }
+}
 
 for (const nastroj of NASTROJE) {
   const form = $(`#form-${nastroj}`);
