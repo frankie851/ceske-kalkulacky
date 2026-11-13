@@ -9,11 +9,17 @@ export function floor3(kc) {
   return cele - (cele % 3);
 }
 
+/**
+ * Lze podle sady pravidel počítat? Stav ze společného modelu (src/js/stav-pravidel.js): jen „plati“
+ * a „schvaleno“. Rok se stavem „neovereno“ (např. nevyhlášené normativní nájemné) je neúplný.
+ */
+export const jeUplnyRok = (r) => r?.stav === 'plati' || r?.stav === 'schvaleno';
+
 /** Vybere parametry pro daný rok. Neúplný rok (např. nevyhlášené nájemné) odmítne. */
 export function pravidlaProRok(rules, rok) {
   const r = rules?.roky?.[String(rok)];
   if (!r) throw new Error(`Pravidla pro rok ${rok} nejsou k dispozici.`);
-  if (r.status !== 'platné') throw new Error(`Pravidla pro rok ${rok} jsou neúplné: ${r.poznamka ?? ''}`);
+  if (!jeUplnyRok(r)) throw new Error(`Pravidla pro rok ${rok} jsou neúplné: ${r.poznamka ?? ''}`);
   const p = { rok: Number(rok) };
   for (const [klic, polozka] of Object.entries(r)) {
     if (polozka && typeof polozka === 'object' && 'hodnota' in polozka) {
@@ -28,10 +34,10 @@ export function pravidlaProRok(rules, rok) {
 export function nejnovejsiPlatnyRok(rules, dnesniRok) {
   const roky = Object.keys(rules.roky)
     .map(Number)
-    .filter((y) => y <= dnesniRok && rules.roky[y].status === 'platné')
+    .filter((y) => y <= dnesniRok && jeUplnyRok(rules.roky[y]))
     .sort((a, b) => b - a);
   if (roky.length) return roky[0];
-  const vse = Object.keys(rules.roky).map(Number).filter((y) => rules.roky[y].status === 'platné');
+  const vse = Object.keys(rules.roky).map(Number).filter((y) => jeUplnyRok(rules.roky[y]));
   return Math.min(...vse);
 }
 

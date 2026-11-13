@@ -70,7 +70,7 @@ const ceny2025 = cenyProRok(tarify, 2025);
 test('SPOT-09: sada 2025 existuje a cenyProRok ji vrátí pro rok 2025, pro 2026 aktuální ceník', () => {
   assert.equal(ceny2025.rok, 2025);
   assert.equal(ceny2025.rokCen, 2025);
-  assert.equal(ceny2025.presny, true);
+  assert.equal(ceny2025.stav, 'plati');
   const c26 = cenyProRok(tarify, 2026);
   assert.equal(c26.rokCen, 2026);
   assert.equal(c26.tarify.common.systemServices.value, tarify.common.systemServices.value);
@@ -240,7 +240,8 @@ test('SPOT-09: po přelomu roku (týdenní aktualizace posune okno do roku bez c
   const r = regulatedByMonth(tarify, grid, 'cez', 'D02d', '3x25');
   assert.equal(r.byMonth['2027-01'].rok, 2027);
   assert.equal(r.byMonth['2027-01'].rokCen, 2026);
-  assert.equal(r.byMonth['2027-01'].presny, false);
+  assert.equal(r.byMonth['2027-01'].stav, 'predbezne');
+  assert.equal(r.byMonth['2026-12'].stav, 'plati');
   close(r.byMonth['2027-01'].vt, r.byMonth['2026-12'].vt);
   const cons = grid.map(() => 0.0001);
   const res = computeVariants({

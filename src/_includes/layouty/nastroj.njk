@@ -16,8 +16,9 @@ layout: layouty/zaklad.njk
 {%- set aktualni = z or n -%}
 {%- set pravidla = n.pravidla -%}
 {%- set meta = n.meta -%}
-{#- meta.stav == 'neovereno' (např. skrytý nástroj čekající na schválení pravidel): místo štítku „Pravidla ověřena“ ukaž varování. -#}
-{%- if meta.stav == 'neovereno' %}{% set stitkyHlavicky = [{ typ: 'navrh', text: meta.stavText or 'Neověřeno: pravidla čekají na schválení' }] %}{% else %}{% set stitkyHlavicky = [{ typ: 'overeno', datum: meta.overeno }] %}{% endif -%}
+{#- meta.stav (slovník src/js/stav-pravidel.js) jiný než 'plati', např. 'neovereno' u skrytého nástroje čekajícího na schválení
+    pravidel: místo štítku „Pravidla ověřena“ ukaž štítek stavu (meta.stavText přepíše výchozí popisek). -#}
+{%- if meta.stav and meta.stav != 'plati' %}{% set stitkyHlavicky = [meta | stavStitek({ text: meta.stavText })] %}{% else %}{% set stitkyHlavicky = [{ typ: 'overeno', datum: meta.overeno }] %}{% endif -%}
 {%- for s in (stitkyNavic or []) %}{% set stitkyHlavicky = (stitkyHlavicky.concat([{ typ: 'plain', text: s }])) %}{% endfor -%}
 <div class="wrap">
   {%- set cesta = [{ nazev: 'Úvod', url: '/' }, { nazev: kat.nazev, url: '/' + kat.slug + '/' }] %}

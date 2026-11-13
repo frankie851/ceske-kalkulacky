@@ -34,7 +34,7 @@
   "dane": {
     "sazba": {
       "hodnota": 0.15,
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 16 odst. 1 písm. a) ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "15 % pro část základu daně do 36násobku průměrné mzdy" },
       "vyssiSazba": { "text": "23 % pro část základu daně přesahující 36násobek průměrné mzdy", "pravniZaklad": "§ 16 odst. 1 písm. b) ZDP", "pocita": false }
     }
@@ -51,21 +51,21 @@
     },
     "casovyTest": {
       "let": 3,
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. u) a zk) ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "přesáhne-li doba mezi nabytím a úplatným převodem tohoto kryptoaktiva při jeho úplatném převodu dobu 3 let" }
     },
     "cennePapiry": {
       "terminovy": "osvobození se nevztahuje na příjem, který plyne poplatníkovi z budoucího úplatného převodu cenného papíru, uskutečněného v době do 3 let od nabytí",
       "kmenovyList": "jedná-li se o kmenový list, činí doba místo 3 let 5 let",
       "opce": "osvobození se neuplatní pro cenné papíry nabyté uplatněním kvalifikované zaměstnanecké opce podle § 6a",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. u) ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586" }
     },
     "hodnotovyTest": {
       "limity": { "cenny-papir": 100000, "kryptoaktivum": 100000 },
       "spolecny": false,
       "elektronickyPenezniToken": "vyňat z hodnotového testu",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. t) a zj) ZDP (znění 1. 8. 2026)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "příjmy z úplatného převodu kryptoaktiva s výjimkou elektronického peněžního tokenu, pokud jejich úhrn u poplatníka nepřesáhne ve zdaňovacím období částku 100 000 Kč" },
       "zahrnoutOsvobozeneCasovymTestem": true,
       "zahrnuti": {
@@ -81,7 +81,7 @@
       "cennePapiryAPodily": "bez limitu od 1. 1. 2026",
       "zaklad": "úhrn příjmů",
       "nadLimit": "neosvobozena poměrná část (úhrn − 40 000 000) / úhrn",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 4 odst. 3 ZDP ve znění zák. č. 360/2025 Sb., účinnost 1. 1. 2026", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "není osvobozen v poměrné části vypočítané podle podílu části úhrnu těchto příjmů převyšující 40 000 000 Kč a úhrnu těchto příjmů" }
     },
     "krypto": {
@@ -91,7 +91,7 @@
       "neosvobozujeSe": "budoucí úplatný převod kryptoaktiva uskutečněný do 3 let od nabytí (§ 4/1/zk)",
       "terminovyCitace": "osvobození se nevztahuje na příjem, který plyne poplatníkovi z budoucího úplatného převodu kryptoaktiva, uskutečněného v době do 3 let od nabytí",
       "emt": "elektronický peněžní token je vyňatý jen z hodnotového testu (písm. zj); časový test (písm. zk) a limit podle § 4 odst. 3 výjimku nemají",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 4 odst. 1 písm. zj), zk) ZDP (zák. č. 32/2025 Sb.)", "url": "https://mfcr.cz/assets/attachments/2025-01-22_Info-106-99-MF-903-2024-74.pdf" },
       "smena": {
         "zdanitelna": true,
@@ -102,13 +102,13 @@
           "dědění v řadě přímé / manžel (zkrácení o držbu zůstavitele)"
         ],
         "poznamka": "stanovisko GFŘ pochází z doby před novelou 2025",
-        "stav": "potvrzeno",
+        "stav": "plati",
         "zdroj": { "pravniZaklad": "§ 10 odst. 1 písm. b) bod 3 ZDP; Informace GFŘ č. j. 18809/22/7100-40050-205680", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/Info_kryptomeny_GFR.pdf" }
       }
     },
     "naklady": {
       "text": "Náklady jsou nabývací cena, tedy cena při nákupu cenného papíru nebo kryptoaktiva. U cenných papírů k ní patří i poplatky za nákup a výdaje spojené s prodejem. U kryptoaktiva získaného směnou se vychází z ceny podle zákona o oceňování majetku.",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 10 odst. 5 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "U příjmů z úplatného převodu cenných papírů lze kromě nabývací ceny akcie nebo kmenového listu a pořizovací ceny ostatních cenných papírů uplatnit i výdaje související s uskutečněním úplatného převodu a platby za obchodování na trhu s cennými papíry při pořízení cenných papírů." }
     },
     "oznameni": {
@@ -122,7 +122,7 @@
         "nesplneno": 0.15,
         "zdroj": { "pravniZaklad": "§ 38w odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "0,1 % z částky neoznámeného příjmu, pokud tuto povinnost splní, aniž by k tomu byl vyzván" }
       },
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 38v odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Pokud poplatník daně z příjmů fyzických osob obdrží příjem, který je od daně z příjmů fyzických osob osvobozen a je vyšší než 5 000 000 Kč, je povinen oznámit správci daně tuto skutečnost do konce lhůty pro podání daňového přiznání" }
     },
     "zapocteni": {
@@ -131,7 +131,7 @@
       "zapornyVysledekDruhu": 0,
       "prevodZtraty": false,
       "castecneOsvobozeni": "výdaje krátit poměrem neosvobozené části",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 10 odst. 4 ZDP; pokyny k Příloze č. 2 DAP (25 5405/P2)", "url": "https://financnisprava.gov.cz/assets/cs/prilohy/dt-upozorneni-mf-k-tiskopisum/25_5405-P2_MFin_5405-P2_vzor13.pdf", "citace": "Jsou-li výdaje spojené s jednotlivým druhem příjmu uvedeným v odstavci 1 vyšší než příjem, k rozdílu se nepřihlíží." },
       "castecneZdroj": { "pravniZaklad": "§ 10 odst. 4 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "výdaje podle věty první snižují příjem jen v části odpovídající poměru, v jakém tento příjem není od daně osvobozen" },
       "kodKryptaP2": { "stav": "nejasne", "text": "kód druhu pro krypto v Příloze č. 2 (není samostatný kód)" }
@@ -139,24 +139,24 @@
   },
   "dividendy": {
     "zeme": {
-      "US": { "nazev": "USA", "smluvniSazba": { "hodnota": 0.15, "smlouva": "32/1994 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1994-32", "citace": "b) 15 % hrubé částky dividend ve všech ostatních případech." } }, "w8ben": { "stav": "nejasne", "text": "nejasné – US procedura, neověřeno z CZ zdroje" } },
-      "DE": { "nazev": "Německo", "smluvniSazba": { "hodnota": 0.15, "smlouva": "18/1984 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1984-18", "citace": "b) 15 % hrubé částky dividend ve všech ostatních případech." } } },
-      "GB": { "nazev": "Velká Británie", "smluvniSazba": { "hodnota": 0.15, "smlouva": "89/1992 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1992-89", "citace": "15 % hrubé částky dividend ve všech ostatních případech" } } },
-      "NL": { "nazev": "Nizozemsko", "smluvniSazba": { "hodnota": 0.1, "smlouva": "138/1974 Sb.", "clanek": "čl. 10 odst. 2", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1974-138", "citace": "Daň takto stanovená však nemůže přesáhnout 10 % hrubé částky dividend." } } },
-      "IE": { "nazev": "Irsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "163/1996 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1996-163", "citace": "15 % hrubé částky dividend ve všech ostatních případech" } } },
-      "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": 0.1, "smlouva": "79/2005 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2005-79", "citace": "b) 10 procent hrubé částky dividend ve všech ostatních případech." } } },
-      "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "281/1996 Sb. + Protokol 99/2013 Sb.m.s.", "clanek": "čl. 10 odst. 2 (nové znění)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2013-99", "citace": "daň takto stanovená nepřesáhne 15 procent hrubé částky dividend." } } },
-      "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": 0.15, "smlouva": "83/2002 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "potvrzeno", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2002-83", "citace": "b) 15 procent hrubé částky dividend ve všech ostatních případech." } } },
+      "US": { "nazev": "USA", "smluvniSazba": { "hodnota": 0.15, "smlouva": "32/1994 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1994-32", "citace": "b) 15 % hrubé částky dividend ve všech ostatních případech." } }, "w8ben": { "stav": "nejasne", "text": "nejasné – US procedura, neověřeno z CZ zdroje" } },
+      "DE": { "nazev": "Německo", "smluvniSazba": { "hodnota": 0.15, "smlouva": "18/1984 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1984-18", "citace": "b) 15 % hrubé částky dividend ve všech ostatních případech." } } },
+      "GB": { "nazev": "Velká Británie", "smluvniSazba": { "hodnota": 0.15, "smlouva": "89/1992 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1992-89", "citace": "15 % hrubé částky dividend ve všech ostatních případech" } } },
+      "NL": { "nazev": "Nizozemsko", "smluvniSazba": { "hodnota": 0.1, "smlouva": "138/1974 Sb.", "clanek": "čl. 10 odst. 2", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1974-138", "citace": "Daň takto stanovená však nemůže přesáhnout 10 % hrubé částky dividend." } } },
+      "IE": { "nazev": "Irsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "163/1996 Sb.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/cs/1996-163", "citace": "15 % hrubé částky dividend ve všech ostatních případech" } } },
+      "FR": { "nazev": "Francie", "smluvniSazba": { "hodnota": 0.1, "smlouva": "79/2005 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2005-79", "citace": "b) 10 procent hrubé částky dividend ve všech ostatních případech." } } },
+      "CH": { "nazev": "Švýcarsko", "smluvniSazba": { "hodnota": 0.15, "smlouva": "281/1996 Sb. + Protokol 99/2013 Sb.m.s.", "clanek": "čl. 10 odst. 2 (nové znění)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2013-99", "citace": "daň takto stanovená nepřesáhne 15 procent hrubé částky dividend." } } },
+      "CA": { "nazev": "Kanada", "smluvniSazba": { "hodnota": 0.15, "smlouva": "83/2002 Sb.m.s.", "clanek": "čl. 10 odst. 2 písm. b)", "stav": "plati", "zdroj": { "url": "https://www.zakonyprolidi.cz/ms/2002-83", "citace": "b) 15 procent hrubé částky dividend ve všech ostatních případech." } } },
       "XX": {
         "nazev": "Jiná země",
-        "smluvniSazba": { "hodnota": null, "stav": "neovereno" },
-        "bezSmlouvy": { "zapocet": 0, "stav": "potvrzeno", "zdroj": { "pravniZaklad": "§ 38f odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Při vyloučení dvojího zdanění příjmu plynoucího daňovému rezidentovi České republiky ze zdrojů v zahraničí se postupuje podle mezinárodní smlouvy." } }
+        "smluvniSazba": { "hodnota": null, "stav": "neovereno", "poznamka": "Smluvní sazby máme ověřené jen pro vyjmenované země. U jiné země zápočet omezíme jen českou daní." },
+        "bezSmlouvy": { "zapocet": 0, "stav": "plati", "zdroj": { "pravniZaklad": "§ 38f odst. 1 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Při vyloučení dvojího zdanění příjmu plynoucího daňovému rezidentovi České republiky ze zdrojů v zahraničí se postupuje podle mezinárodní smlouvy." } }
       }
     },
     "stropZapoctu": {
       "text": "uznatelná daň max. smluvní sazba × hrubá dividenda; opora § 38f odst. 3 (příjmy podléhající zdanění v zahraničí v souladu s mezinárodní smlouvou)",
       "ceskaDan": { "pravniZaklad": "§ 38f odst. 2 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "nejvýše však o částku daně z příjmů vypočtenou podle tohoto zákona, která připadá na příjmy ze zdrojů v zahraničí" },
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "SZDZ, čl. 10 odst. 2; čísla Sbírky dle přehledu MF k 2. 11. 2026", "url": "https://mf.gov.cz/cs/zahranici-a-eu/smlouvy-o-zamezeni-dvojiho-zdaneni/prehled-platnych-smluv" }
     },
     "doklady": {
@@ -164,7 +164,7 @@
         "Sraženou daň doložíš potvrzením zahraničního správce daně, v odůvodněných případech potvrzením plátce příjmu nebo depozitáře (brokera) o sražení daně.",
         "K přiznání přilož seznam všech potvrzení: stát zdroje, daň zaplacená v místní měně a v korunách a výše příjmů z daného státu."
       ],
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 38f odst. 5 a 10 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586" }
     },
     "meny": ["USD", "EUR", "GBP", "CHF", "CAD"],
@@ -175,7 +175,7 @@
       "zakon": { "pravniZaklad": "§ 8 odst. 4 a 8 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "Zahrne-li se takový příjem do tohoto základu daně, zahrnou se do tohoto základu daně veškeré příjmy podle věty první. Tyto příjmy se nesnižují o výdaje" },
       "zapocetZdroj": { "pravniZaklad": "§ 38f odst. 8 ZDP", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "vyloučení dvojího zdanění metodou prostého zápočtu se provede samostatně za každý stát" },
       "radkyDle": "tiskopis za rok 2025 (pokyny 2026 zatím nevydány)",
-      "stav": "potvrzeno",
+      "stav": "plati",
       "zdroj": { "pravniZaklad": "§ 8 odst. 4 a 8, § 16a odst. 1–2, § 38f odst. 1, 2, 8 ZDP; Pokyny k DAP 2025", "url": "https://adisspr.mfcr.cz/dpr/adis/idpr_pub/dpf/dp7/doc/pokyny_dap_2025.pdf" },
       "varianty": {
         "par8": {
@@ -216,7 +216,7 @@
     },
     "kombinovatLze": false,
     "volba": "denní kurz ČNB (kurz pro přepočet daně) NEBO jednotný kurz pro celé zdaňovací období",
-    "stav": "potvrzeno",
+    "stav": "plati",
     "zdroj": { "pravniZaklad": "§ 38 odst. 1 písm. b) a odst. 7 ZDP (znění 1. 8. 2026)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "V rámci zdaňovacího období nebo období, za které se podává daňové přiznání, nelze použít kurz pro přepočet daně a jednotný kurz současně." },
     "jednotny": {
       "2025": { "USD": 21.84, "EUR": 24.66, "GBP": 28.8, "CHF": 26.33, "CAD": 15.61 },
@@ -236,7 +236,7 @@
     "zakon": "180/2026 Sb.",
     "ucinnost": "2027-01-01",
     "prvniZdanovaciObdobi": 2027,
-    "stav": "potvrzeno",
+    "stav": "schvaleno",
     "zdroj": { "pravniZaklad": "zák. č. 180/2026 Sb.; § 38g odst. 1 a 2 ZDP", "url": "https://www.epravo.cz/_dataPublic/sbirky/2026/Sb_2026_180_PZZ.pdf" },
     "limity": [
       { "id": "celkem", "text": "Přiznání musí podat ten, jehož roční příjmy, které jsou předmětem daně, přesáhly (kromě osvobozených a sražených zvláštní sazbou)", "do2026": 50000, "od2027": 100000, "pravniZaklad": "§ 38g odst. 1 ZDP" },
@@ -248,11 +248,5 @@
       "oficialniStanovisko": "nenalezeno",
       "zdroj": { "pravniZaklad": "§ 38g odst. 1 a 2 ZDP (odst. 2 vyjímá jen příjmy osvobozené a sražené podle § 36)", "url": "https://e-sbirka.gov.cz/sb/1992/586", "citace": "pokud se nejedná o příjmy od daně osvobozené nebo o příjmy, z nichž je daň vybírána srážkou podle zvláštní sazby daně" }
     }
-  },
-  "stavy": {
-    "potvrzeno": { "text": "Potvrzeno", "stitek": "plain" },
-    "nejasne": { "text": "Nejasné", "stitek": "navrh" },
-    "neovereno": { "text": "Neověřeno", "stitek": "navrh" },
-    "nevydan": { "text": "Zatím nevydáno", "stitek": "navrh" }
   }
 }

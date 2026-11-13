@@ -128,17 +128,17 @@ test('PRI-06: krok 2 uvádí termíny jednotné zkoušky pro čtyřleté obory i
 
 test('PRI-09: tvrzení „reforma v roce 2027 neplatí“ nemá štítek „Ověřeno“, ale „Vyplývá z harmonogramu“ s citací', async () => {
   const r = pravidla.rules.find((x) => x.id === 'reforma');
-  assert.equal(r.status, 'derived');
-  assert.ok(pravidla.meta.statusLegend.derived);
+  assert.equal(r.stav, 'odvozeno');
   assert.ok(r.note, 'pravidlo vysvětluje, proč není „Ověřeno“');
   assert.ok(r.zdroj?.citace && r.zdroj?.pravniZaklad && r.zdroj?.url);
   const { default: data } = await import('../prijimacky.11tydata.js');
   const web = data.prij.pravidlaWeb.find((x) => x.id === 'reforma');
-  assert.equal(web.overeno, false);
-  assert.equal(web.odvozeno, true);
+  assert.deepEqual(web.stitek, { typ: 'odvozeno', text: 'Vyplývá z harmonogramu' });
+  assert.equal(data.prij.pravidlaWeb.find((x) => x.id === 'pocet').stitek.typ, 'plati');
   assert.ok(web.poznamka);
   const njk = readFileSync(new URL('../index.njk', import.meta.url), 'utf8');
-  assert.match(njk, /r\.odvozeno %\}\{\{ stitek\(\{ typ: 'plain', text: 'Vyplývá z harmonogramu' \}\) \}\}/);
+  assert.match(njk, /\{\{- stitek\(r\.stitek\) \}\}/);
+  assert.doesNotMatch(njk, /text: 'Ověřeno'/);
   // Data zdrojů (sources[].date v ISO tvaru) se na stránce nevypisují.
   assert.ok(!/\.date\b/.test(njk));
 });

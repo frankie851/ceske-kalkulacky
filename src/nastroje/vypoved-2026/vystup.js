@@ -4,6 +4,7 @@
 import { konecPomeru, vypovedniDoba, odstupne, nahradaUraz, podpora, kontrolniSeznam, denVTydnu, kontrolaZadosti } from './vypoved.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { esc, sloupcovyGraf } from '../../js/graf.js';
+import { stitekHtml } from '../../js/stav-pravidel.js';
 
 /** Důvody výpovědi (§ 52 písm. a–h) a „jiný“ jen pro dohodu. Popisy rodově neutrálně. */
 export const DUVODY = [
@@ -88,7 +89,7 @@ export function spocitej(vstup, rules) {
   if (!p.vylouceno && (p.hlavni.mesice.some((m) => m.omezenoStropem) || p.navrh?.mesice.some((m) => m.omezenoStropem))) {
     poznamky.push('Částka s hvězdičkou (*) je omezená maximální měsíční výší podpory.');
   }
-  if (p.hlavni.predbezne && !p.vylouceno) {
+  if (p.hlavni.stav === 'predbezne' && !p.vylouceno) {
     poznamky.push(`Strop podpory pro rok ${p.rok} zatím nebyl vyhlášen. Počítáme s částkou ${kc(p.hlavni.strop)} z roku ${roky[0]}, skutečná částka se bude lišit.`);
   }
   if (p.navrh) {
@@ -175,8 +176,9 @@ export function detailyHtml(m, rules, { sprite, sirkaGrafu = 640 } = {}) {
 </section>
 ${poznamkyHtml}`;
   }
-  const navrhStitek = '<span class="badge badge-draft">' + ikona('ikona-tuzka', sprite) + 'Návrh, zatím neschváleno</span>';
-  const hlavniNazev = `Platný zákon ${p.rok}${p.hlavni.predbezne ? ' (předběžně)' : ''}`;
+  const navrhStitek = stitekHtml(p.navrh?.stav ?? 'navrh', { sprite });
+  const predbezne = p.hlavni.stav === 'predbezne';
+  const hlavniNazev = `Platný zákon ${p.rok}${predbezne ? ' (předběžně)' : ''}`;
   const sloupce = ['Měsíc', p.navrh ? hlavniNazev : `Podpora ${p.rok}`, ...(p.navrh ? ['Pokud projde návrh'] : [])];
   const radky = p.hlavni.mesice.map((mes, i) => `<tr><th scope="row">${mes.poradi}. měsíc</th>${castkaBunka(mes, sloupce[1])}${p.navrh ? castkaBunka(p.navrh.mesice[i], sloupce[2]) : ''}</tr>`).join('');
   const soucet = `<tr class="vyp-soucet"><th scope="row">Celkem</th><td class="r" data-label="${esc(sloupce[1])}"><strong>${esc(kc(p.hlavni.celkem))}</strong></td>${p.navrh ? `<td class="r" data-label="${esc(sloupce[2])}"><strong>${esc(kc(p.navrh.celkem))}</strong></td>` : ''}</tr>`;
@@ -194,7 +196,7 @@ ${poznamkyHtml}`;
 <section class="card" aria-labelledby="podpora-nadpis">
   <div class="card-head">
     <h2 id="podpora-nadpis">Podpora v nezaměstnanosti</h2>
-    ${p.hlavni.predbezne ? '<span class="badge badge-plain">Strop předběžně</span>' : ''}
+    ${predbezne ? stitekHtml('predbezne', { sprite, text: 'Strop předběžně' }) : ''}
   </div>
   <p>Žádost podaná ${esc(datum(m.vstup.datumZadosti))}: podpůrčí doba ${esc(mesicu(p.hlavni.podpurciDoba))}, strop ${esc(kc(p.hlavni.strop))} měsíčně. Počítáno z čistého výdělku ${esc(kc(m.vstup.cisty))}.</p>
   ${graf}

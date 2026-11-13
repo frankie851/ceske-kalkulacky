@@ -6,6 +6,7 @@ import { osvobozeniProdeje } from './prodeje.js';
 import { spocitejDividendy, dostupneZpusoby } from './dividendy.js';
 import { vysledekProdeju, vysledekDividend, doPole } from './vystup.js';
 import { kc, procenta, datum } from '../../js/format.js';
+import { stavPravidla, jeStav } from '../../js/stav-pravidel.js';
 
 const rules = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 const rok = rules.rok;
@@ -29,7 +30,12 @@ const vyplaty = [
 ];
 const vd = spocitejDividendy(vyplaty, { rok, rezim }, rules);
 
-const stav = (s) => rules.stavy[s] || rules.stavy.neovereno;
+// Štítek stavu pravidla pro makro stitek ({ typ, text }) ze společného modelu src/js/stav-pravidel.js.
+// Neznámý nebo chybějící stav = neověřeno.
+const stav = (s, pravidlo = {}) => {
+  const x = stavPravidla({ ...pravidlo, stav: jeStav(s) ? s : 'neovereno' });
+  return { typ: x.typ, text: x.text };
+};
 const pr = rules.prodeje;
 const ht = pr.hodnotovyTest;
 const pct = (podil) => { const p = Math.round(podil * 10000) / 100; return procenta(p, Number.isInteger(p) ? 0 : 1); };
@@ -68,7 +74,7 @@ export default {
         { stav: stav(pr.oznameni.stav), zdroj: pr.oznameni.zdroj, text: `Osvobozený příjem vyšší než ${kc(pr.oznameni.limit)} je třeba oznámit finančnímu úřadu. Za neoznámení hrozí pokuta ${pct(pr.oznameni.pokuta.bezVyzvy)} až ${pct(pr.oznameni.pokuta.nesplneno)} z příjmu (${pr.oznameni.pokuta.zdroj.pravniZaklad}).` },
         { stav: stav(pr.oznameni.scitaniStav), zdroj: { ...pr.oznameni.zdroj, citace: null }, text: pr.oznameni.scitaniText },
         { stav: stav(rules.dane.sazba.stav), zdroj: rules.dane.sazba.zdroj, text: `Orientační daň počítáme sazbou ${pct(rules.dane.sazba.hodnota)}. Sazbu ${rules.dane.sazba.vyssiSazba.text} nepočítáme.` },
-        { stav: stav('potvrzeno'), zdroj: null, text: 'Kryptoaktiva a cenné papíry v obchodním majetku (podnikání) se osvobodit nedají. Nástroj počítá jen s osobními investicemi.' },
+        { stav: stav('plati'), zdroj: null, text: 'Kryptoaktiva a cenné papíry v obchodním majetku (podnikání) se osvobodit nedají. Nástroj počítá jen s osobními investicemi.' },
       ],
       naklady: pr.naklady.text,
       smena: {
@@ -83,7 +89,8 @@ export default {
       zpusob,
       napovedaZpusobu: rules.kurzy.zpusoby[zpusob].popis,
       jednotnyStav: jednotny ? null : {
-        stav: stav('nevydan'),
+        // Jednotný kurz za rok zatím nevyšel: není to stav pravidla, jen čekáme na úřad. Štítek jako „předběžně“.
+        stav: { typ: stav('predbezne').typ, text: 'Zatím nevydáno' },
         text: `Jednotný kurz za rok ${rok}: ${rules.kurzy.jednotnyPoznamka[String(rok)]}. Poslední vydaný je pokyn ${posledni.pokyn} za rok ${posledni.rok} (Finanční zpravodaj ${posledni.fz}).`,
         zdroj: posledni.zdroj,
       },
@@ -95,7 +102,7 @@ export default {
       radky: vyplaty.map((v) => ({ ...v, hruba: doPole(v.hruba), srazeno: doPole(v.srazeno), kurz: doPole(v.kurz) })),
       ...vysledekDividend(vd, rules),
       limity: pk.limity.map((l) => ({ text: l.text, pravniZaklad: l.pravniZaklad, do2026: kc(l.do2026), od2027: kc(l.od2027) })),
-      priznani: { stav: stav(pk.stav), zdroj: pk.zdroj, zakon: pk.zakon, prvni: pk.prvniZdanovaciObdobi },
+      priznani: { stav: stav(pk.stav, pk), zdroj: pk.zdroj, zakon: pk.zakon, prvni: pk.prvniZdanovaciObdobi },
       dividendyVLimitu: { ...pk.dividendyVLimitu, stavInfo: stav(pk.dividendyVLimitu.stav) },
       sazba: pct(rules.dane.sazba.hodnota),
     },

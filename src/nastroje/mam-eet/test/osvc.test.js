@@ -381,9 +381,9 @@ describe('revize 5. 11. 2026 – střední nálezy', () => {
     assert.match(z.citace, /alespoň 75 % příjmů ze samostatné činnosti/);
   });
 
-  test('1. pásmo má citaci zákonného vzorce a stav „derived“', () => {
+  test('1. pásmo má citaci zákonného vzorce a stav „odvozeno“ (dříve status „derived“)', () => {
     const b1 = o.flatTax.bands[0];
-    assert.equal(b1.status, 'derived');
+    assert.equal(b1.stav, 'odvozeno');
     assert.match(b1.note, /dopočteno podle zákonného vzorce, tabulka Finanční správy pro rok 2027 zatím nevyšla/i);
     assert.match(b1.zdroj.pravniZaklad, /§ 14 odst\. 3 písm\. a\)/);
     assert.match(b1.zdroj.citace, /zvýšeného o 15 %/);

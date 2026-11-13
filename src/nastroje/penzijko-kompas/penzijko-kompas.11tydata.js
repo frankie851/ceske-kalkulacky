@@ -1,7 +1,7 @@
 // Ukázkový výsledek Penzijko kompasu spočítaný při buildu (stránka bez JS).
 // Stejné moduly jako v prohlížeči: calc.js (výpočty) a zobrazeni.js (texty a HTML).
 import fs from 'node:fs';
-import { vypocet, predpoklady, doPole, kratkyNazev, platnaSada, pct } from './zobrazeni.js';
+import { vypocet, predpoklady, doPole, kratkyNazev, platnaSada, pct, stitekStavu } from './zobrazeni.js';
 
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 const typicky = pravidla.fondy.transformovany;
@@ -45,9 +45,12 @@ export default {
       text: kratkyNazev(s),
       vybrano: klic === vstup.sada,
     })),
+    // Štítek sady, která zatím neplatí (návrh 2027), podle jejího stavu.
+    stitekNavrhu: stitekStavu(Object.values(pravidla.sady).find((s) => s.stav !== 'plati') ?? { stav: 'navrh' }),
     tf: {
       // Konec transformovaných fondů je jen v návrhu (sněmovní tisk 285), ne v platném zákoně.
       konci: konecTf.konci,
+      stitek: stitekStavu(konecTf),
       nastupce: pravidla.fondy[konecTf.nastupce].nazev,
       sadaNavrhu: kratkyNazev(Object.values(pravidla.sady).find((s) => s.transformovaneFondy)),
       cil: pravidla.fondy[pravidla.predpoklady.doporuceni.cilovyFond].nazev,

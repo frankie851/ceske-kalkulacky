@@ -3,7 +3,8 @@
 // Všechna data jdou přes esc(); termíny a pravidla z rules.json, výpočet z matching.js a strategy.js.
 import { scoreOf, bestOfTwo } from './matching.js';
 import { pocetKol, rozsahTerminu, denMesic, denVTydnu, poMesicich } from './simulace.js';
-import { ty, neutralne, KATEGORIE, KATEGORIE_POPIS, textUpozorneni, SKUPINY, STAV_TERMINU } from './texty.js';
+import { ty, neutralne, KATEGORIE, KATEGORIE_POPIS, textUpozorneni, SKUPINY, STAV_TERMINU, DOPORUCENI } from './texty.js';
+import { stitekHtml } from '../../js/stav-pravidel.js';
 import { esc } from '../../js/graf.js';
 import { cislo as formatCislo } from '../../js/format.js';
 
@@ -291,8 +292,8 @@ export function kalendarHtml(terminy, pravidla) {
     + `<ol class="prij-terminy">${m.terminy.map((e) => {
       const zdroj = pravidla.sources[e.source];
       const viceDni = e.end && e.end !== e.start;
-      const stav = e.status === 'confirmed' ? ''
-        : `<span class="badge ${e.status === 'unverified' ? 'badge-draft' : 'badge-plain'}">${esc(STAV_TERMINU[e.status] ?? e.status)}</span>`;
+      const stav = e.doporuceni ? `<span class="badge badge-plain">${esc(DOPORUCENI)}</span>`
+        : e.stav === 'plati' ? '' : stitekHtml(e.stav, { text: STAV_TERMINU[e.stav] });
       const skupina = e.group !== 'ss' ? `<span class="badge badge-plain">${esc(SKUPINY[e.group] ?? e.group)}</span>` : '';
       return `<li class="prij-termin" data-termin="${esc(e.id)}" data-skupina="${esc(e.group)}">`
         + `<p class="prij-termin-datum"><span class="prij-termin-den">${esc(viceDni ? `${denMesic(e.start)}–${denMesic(e.end)}` : denMesic(e.start))}</span>`

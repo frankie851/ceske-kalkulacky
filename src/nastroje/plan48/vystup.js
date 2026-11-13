@@ -3,6 +3,7 @@
 // všechno se bere z výsledku calc.js a z rules.json.
 import { kc, cislo, procenta } from '../../js/format.js';
 import { skladanyPruh, caroveGrafy, tabulkaDat } from '../../js/graf.js';
+import { stavPravidla, typStitku } from '../../js/stav-pravidel.js';
 import { najdiPasmo, spocitejRok } from './calc.js';
 
 const MESICU = 12;
@@ -10,11 +11,15 @@ const NBSP = '\u00a0';
 /** Pevná mezera v datech typu „31. 12.“, aby se nezalomila. */
 const pevneDatum = (t) => t.replace(/(\d+)\. (\d+)\./g, `$1.${NBSP}$2.`);
 const pct = (podil) => procenta(Math.round(podil * 10000) / 100, Number.isInteger(Math.round(podil * 10000) / 100) ? 0 : 1);
-const velke = (text) => `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
 
-/** Text štítku sady („Návrh, zatím neschváleno“), nebo null u platných pravidel. */
+/** Text štítku sady podle jejího stavu („Návrh, zatím neschváleno“), nebo null u platných pravidel. */
 export function stitekSady(sada) {
-  return sada.stitek ? velke(sada.stitek) : null;
+  return sada.stav === 'plati' ? null : stavPravidla(sada).text;
+}
+
+/** Štítek pro makro stitek ({ typ, text }) podle stavu sady, nebo null u platných pravidel. */
+export function stitekSadyMakro(sada) {
+  return sada.stav === 'plati' ? null : { typ: typStitku(sada.stav), text: stitekSady(sada) };
 }
 
 function naZbyvajici(n) {
@@ -256,5 +261,5 @@ export function textyNavrhu(vstup, pravidla) {
   } else {
     proTebe = 'S tvým zadáním by se státní příspěvek podle návrhu nezměnil.';
   }
-  return { nazev: navrh.nazev, stitek: stitekSady(navrh), popis: popis.trim(), poznamka: navrh.poznamka, proTebe };
+  return { nazev: navrh.nazev, stitek: stitekSadyMakro(navrh), popis: popis.trim(), poznamka: navrh.poznamka, proTebe };
 }

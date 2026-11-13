@@ -9,7 +9,7 @@ import {
   spocitejRok,
   projekce,
 } from '../calc.js';
-import { poznamkaCoUdelat, upozorneniPodpory } from '../vystup.js';
+import { poznamkaCoUdelat, upozorneniPodpory, stitekSady } from '../vystup.js';
 
 const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const R2026 = rules.sady['2026'];
@@ -227,8 +227,11 @@ describe('rules.json', () => {
     }
   });
 
-  test('návrh má štítek „návrh, zatím neschváleno“', () => {
-    assert.equal(N2027.stitek, 'návrh, zatím neschváleno');
+  test('návrh má stav „navrh“ a štítek „Návrh, zatím neschváleno“ (společný model stavu)', () => {
+    assert.equal(N2027.stav, 'navrh');
+    assert.equal(rules.sady['2026'].stav, 'plati');
+    assert.equal(stitekSady(N2027), 'Návrh, zatím neschváleno');
+    assert.equal(stitekSady(rules.sady['2026']), null);
   });
 
   test('obsahuje obě požadované sady', () => {

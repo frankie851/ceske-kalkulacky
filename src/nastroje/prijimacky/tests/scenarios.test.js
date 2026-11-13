@@ -18,15 +18,16 @@ test('rules.json: každá událost a pravidlo má existující zdroj a platné d
   for (const item of [...rules.events, ...rules.rules]) {
     assert.ok(rules.sources[item.source], `${item.id}: chybí zdroj ${item.source}`);
   }
-  for (const e of rules.events) assert.ok(['confirmed', 'unverified', 'tip'].includes(e.status), e.id);
-  // PRI-09: pravidlo může být „derived“ (plyne z úředního harmonogramu), ale musí mít poznámku a stav v legendě.
+  // Společný model stavu (src/js/stav-pravidel.js): termíny a pravidla mají pole „stav“ ze slovníku.
+  for (const e of rules.events) assert.ok(['plati', 'neovereno'].includes(e.stav), e.id);
+  // PRI-09: pravidlo může být „odvozeno“ (plyne z úředního harmonogramu), ale musí mít poznámku.
   for (const r of rules.rules) {
-    assert.ok(['confirmed', 'unverified', 'tip', 'derived'].includes(r.status), r.id);
-    if (r.status === 'derived') assert.ok(r.note && rules.meta.statusLegend.derived, `${r.id}: odvozené pravidlo musí mít poznámku`);
+    assert.ok(['plati', 'neovereno', 'odvozeno'].includes(r.stav), r.id);
+    if (r.stav === 'odvozeno') assert.ok(r.note, `${r.id}: odvozené pravidlo musí mít poznámku`);
   }
   for (const e of rules.events) {
     assert.match(e.start, /^\d{4}-\d{2}-\d{2}$/);
     if (e.end) assert.ok(e.end >= e.start, e.id);
-    if (e.status !== 'confirmed') assert.ok(e.note, `${e.id}: neověřená událost musí mít poznámku`);
+    if (e.stav !== 'plati') assert.ok(e.note, `${e.id}: neověřená událost musí mít poznámku`);
   }
 });

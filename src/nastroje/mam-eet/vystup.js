@@ -7,6 +7,7 @@ import { evaluate, buildChecklist, compareCosts, pruneAnswers, fill, uiVars } fr
 import { compare, params, flatBands } from './osvc.js';
 import { kc, datum } from '../../js/format.js';
 import { esc } from '../../js/graf.js';
+import { stavPravidla } from '../../js/stav-pravidel.js';
 
 export const TEXTY = {
   vysledek: 'Výsledek',
@@ -338,7 +339,8 @@ export function stavyOvereni(rules) {
   const tx = o.texts;
   const p = params(rules);
   const ti = o.incomeTax;
-  const stav = (s) => ({ official: tx.statusOfficial, secondary: tx.statusSecondary, derived: tx.statusDerived }[s] ?? s);
+  // Stav pravidla (společný model src/js/stav-pravidel.js) a zvlášť kvalita zdroje (zdrojTyp).
+  const zdrojText = (typ) => ({ uredni: tx.zdrojUredni, sekundarni: tx.zdrojSekundarni }[typ] ?? null);
   const polozky = [
     { text: fill(tx.statusItemAverageWage, { value: kc(o.averageWage.monthly) }), item: o.averageWage },
     { text: fill(tx.statusItemSocial, { main: kc(p.socialMinAdvanceMain), starting: kc(Math.ceil(p.socialMinBaseStarting * o.social.rate)), side: kc(p.socialMinAdvanceSide), threshold: kc(p.sideThreshold) }), item: o.social },
@@ -347,7 +349,8 @@ export function stavyOvereni(rules) {
     ...flatBands(rules).map((b) => ({ text: fill(tx.statusItemBand, { band: b.label, monthly: kc(b.monthly) }), item: b })),
   ];
   return polozky.map(({ text, item }) => ({
-    text, stav: stav(item.status), status: item.status, poznamka: item.note ?? null,
+    text, stitek: (({ typ, text: t }) => ({ typ, text: t }))(stavPravidla(item)), stav: item.stav,
+    zdrojTyp: item.zdrojTyp ?? null, zdrojText: zdrojText(item.zdrojTyp), poznamka: item.note ?? null,
     zdroj: { nazev: item.sourceTitle, url: item.source },
   }));
 }

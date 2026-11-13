@@ -13,6 +13,7 @@ import {
 } from './calc.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { caroveGrafy, esc } from '../../js/graf.js';
+import { stavPravidla, popisekStavu } from '../../js/stav-pravidel.js';
 
 const PROCENT = 100;
 const TISIC = 1e3;
@@ -30,9 +31,15 @@ export const pct = (n) => procenta(n, mist(n));
 /** Hodnota do textového pole formuláře: 150 000, 0,8. */
 export const doPole = (n) => cislo(n, mist(n));
 
-/** Klíč platné sady pravidel (stav "platne"), jinak první sada. */
+/** Klíč platné sady pravidel (stav "plati"), jinak první sada. */
 export function platnaSada(rules) {
-  return Object.keys(rules.sady).find((k) => rules.sady[k].stav === 'platne') ?? Object.keys(rules.sady)[0];
+  return Object.keys(rules.sady).find((k) => rules.sady[k].stav === 'plati') ?? Object.keys(rules.sady)[0];
+}
+
+/** Štítek stavu pravidla pro makro stitek ({ typ, text }), společný model src/js/stav-pravidel.js. */
+export function stitekStavu(pravidlo, text) {
+  const s = stavPravidla(pravidlo);
+  return { typ: s.typ, text: text ?? s.text };
 }
 
 /** Krátký název sady na přepínač: „Pravidla 2026“, „Návrh 2027“. */
@@ -85,6 +92,7 @@ export function prispevky(rules, v) {
       nazev: sada.nazev,
       kratce: kratkyNazev(sada),
       navrh: sada.stav === 'navrh',
+      stitek: stitekStavu(sada),
       mesicne: kc(r.mesicne),
       rocne: kc(r.rocne),
       vysvetleni: vysvetleniPrispevku(sada, v, r),
@@ -365,7 +373,7 @@ export function predpoklady(rules) {
   }
   if (sadaTf) {
     const tf = sadaTf.transformovaneFondy;
-    polozky.push(`Transformovaný fond počítáme s platnými pravidly po celou dobu. S pravidly „${kratkyNazev(sadaTf)}“ (${tf.stitek}) ho po ${datum(tf.konci)} počítáme jako fond „${f[tf.nastupce].nazev}“.`);
+    polozky.push(`Transformovaný fond počítáme s platnými pravidly po celou dobu. S pravidly „${kratkyNazev(sadaTf)}“ (${popisekStavu(tf.stav).toLowerCase()}) ho po ${datum(tf.konci)} počítáme jako fond „${f[tf.nastupce].nazev}“.`);
   }
   if (se) {
     const dospeli = se.statniPrispevek.pasma.find((x) => x.vekDo === null || x.vekDo === undefined);

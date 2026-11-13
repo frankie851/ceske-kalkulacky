@@ -169,9 +169,9 @@ export function casExportu(pravidla) {
  * textPoznamky = funkce pro úpravu poznámky (tykání), upozorneni = věta na konec popisu.
  */
 export function udalostiProIcs(terminy, pravidla, { textPoznamky = (t) => t, upozorneni = '' } = {}) {
-  return terminy.filter((e) => e.status !== 'unverified').map((e) => ({
+  return terminy.filter((e) => e.stav !== 'neovereno').map((e) => ({
     id: `${e.id}-2027`,
-    title: e.status === 'tip' ? `${e.title} (doporučení)` : e.title,
+    title: e.doporuceni ? `${e.title} (doporučení)` : e.title,
     start: e.start,
     end: e.end,
     description: [e.note ? textPoznamky(e.note) : '', upozorneni].filter(Boolean).join('\n'),

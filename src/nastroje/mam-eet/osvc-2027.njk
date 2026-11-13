@@ -12,6 +12,7 @@ stitkyNavic: ['Paušální daň, přiznání, nebo EET OFF']
 {%- from "komponenty/formular.njk" import pole, segmenty, volby -%}
 {%- from "komponenty/vysledky.njk" import lepiva_lista -%}
 {%- from "komponenty/ikona.njk" import ikona -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
 {%- set sprite = '/img/sprite.svg' | url -%}
 {%- set p = osvc.pole -%}
 <div class="calc-layout osvc" id="osvc" data-sprite="{{ sprite }}">
@@ -76,7 +77,7 @@ stitkyNavic: ['Paušální daň, přiznání, nebo EET OFF']
       <p class="muted small">{{ osvc.stav.disclaimer }} {{ osvc.stav.poznamka }}</p>
       <ul class="osvc-stavy">
         {%- for s in osvc.stav.polozky %}
-        <li><span class="osvc-stav-text">{{ s.text }}</span> <span class="tag osvc-stav-{{ s.status }}">{{ s.stav }}</span>{% if s.poznamka %}<span class="hint">{{ s.poznamka }}</span>{% endif %}<span class="src">{{ ikona('ikona-odkaz') }}Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.nazev }}</a></span></li>
+        <li><span class="osvc-stav-text">{{ s.text }}</span> <span class="osvc-stav-stitky">{{ stitek(s.stitek) }}{% if s.zdrojText %}<span class="osvc-zdroj-typ">{{ s.zdrojText }}</span>{% endif %}</span>{% if s.poznamka %}<span class="hint">{{ s.poznamka }}</span>{% endif %}<span class="src">{{ ikona('ikona-odkaz') }}Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.nazev }}</a></span></li>
         {%- endfor %}
       </ul>
     </section>

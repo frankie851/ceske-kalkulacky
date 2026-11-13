@@ -1432,3 +1432,53 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   upozornění vyjmenuje měsíce mimo jeho rok (`jinyRokCen.dynamicky`).
 - **DPH** je ve všech sadách stejná; kdyby se lišila, `spocitej` skončí chybou (výpočet počítá
   s jednou sazbou) a test to hlídá.
+
+# Společný model štítků stavu (13. 11. 2026)
+
+Nástroje zapisovaly stav pravidel každý jinak (`stav: platne|navrh` + `stitek`, `stav: potvrzeno|…`
++ slovník `stavy`, `predbezne`/`jeNavrh`, `status: official|secondary|derived`, `status: confirmed|derived`
++ `statusLegend`, `status: platné|neúplné`, `pozn`, `presny`). Teď mají jedno pole `stav` s hodnotou
+ze společného slovníku a štítek se z něj vykreslí na jednom místě.
+
+- **Slovník** (`src/js/stav-pravidel.js`, bez DOM, běží v prohlížeči i v Node):
+  `plati` („Platí“), `schvaleno` („Schváleno“, s datem `platnostOd`/`ucinnost` „Schváleno, platí od 1. 1. 2027“),
+  `navrh` („Návrh, zatím neschváleno“), `predbezne` („Předběžně“), `odvozeno` („Dopočteno ze zákona“),
+  `nejasne` („Nejasné“), `neovereno` („Neověřeno“). Funkce: `STAVY`, `jeStav`, `typStitku`, `popisekStavu`,
+  `stavPravidla(pravidlo)` → `{ stav, typ, text, trida, ikona, platnostOd }`, `stitekHtml()` pro klientské skripty.
+- **Makro** `stitky.njk` umí všechny stavy jako typy. Vzhled bere z existujících tříd (kontrast už
+  hlídaný): `plati`/`schvaleno` = `badge-ok` + fajfka, `navrh` = `badge-draft` + tužka, `predbezne` =
+  `badge-soon` + hodiny (jako „Připravujeme“), `odvozeno` = `badge-plain` + kalkulačka, `nejasne` =
+  `badge-draft` + vykřičník, `neovereno` = `badge-draft` + „i“. `badge-draft` má nově `--ikona-pozadi`,
+  aby znak uvnitř kolečka byl vidět i v tmavém režimu; ikona štítku uvnitř `.note` už nepřebírá barvu poznámky.
+- **Filtr Eleventy** `stavStitek`: `{{ stitek(pravidlo | stavStitek) }}`, `{{ stitek('navrh' | stavStitek) }}`.
+  Layout nástroje: `meta.stav` jiný než `plati` ukáže místo „Pravidla ověřena“ štítek stavu.
+- **Kvalita zdroje není stav.** mam-eet rozlišoval `official`/`secondary`; to je teď `zdrojTyp: uredni|sekundarni`
+  a na stránce OSVČ 2027 je to text vedle štítku stavu.
+- **Test** `test/sdilene/stav-pravidel.test.js` projde všechny JSON v `src/nastroje/` (kromě `nastroj.json`)
+  a `_data/zmeny2027.json`: hodnota `stav` (a `…Stav`) ze slovníku, žádný starý klíč (`status`, `statusLegend`,
+  `predbezne`, `jeNavrh`, `stitek`, `stavy`, `presny`, `pozn`), u `navrh`/`predbezne`/`odvozeno`/`neovereno`
+  vysvětlení (`poznamka`, `note`, `zdroj`, `zdroje` nebo `vysvetleni`). Hlídá i, že makro umí všechny typy.
+- **Převod po nástrojích** (výsledky výpočtů beze změny, ověřeno unit i e2e testy a porovnáním sestaveného webu):
+  - Plán48, Penzijko kompas: `platne` → `plati`, `stitek` pryč (text z modulu). Konec transformovaných
+    fondů v Penzijku: `stitek` → `stav: navrh`.
+  - Zdaním to?: `potvrzeno` → `plati`, `nejasne`/`neovereno` beze změny, slovník `stavy` pryč. Limity pro
+    přiznání podle zákona č. 180/2026 Sb. (`ucinnost` 2027-01-01) jsou `schvaleno` („Schváleno, platí od 1. 1. 2027“).
+    Nevydaný jednotný kurz není stav pravidla; štítek „Zatím nevydáno“ má vzhled předběžného stavu.
+    „Jiná země“ u neověřené smluvní sazby má nově poznámku.
+  - Výpověď 2026: `predbezne: false` → `plati`, rok 2027 → `predbezne` (strop podle 2026, s poznámkou),
+    návrh z tisku 300 → `navrh` (dřív `predbezne` + `jeNavrh`). Štítek „Strop předběžně“ má vzhled `predbezne`.
+  - Mám EET? / OSVČ 2027: `official`/`secondary` → `stav: schvaleno` (hodnoty pro rok 2027 jsou vyhlášené)
+    + `zdrojTyp`, `derived` (1. pásmo) → `odvozeno`. Texty `statusOfficial/Secondary/Derived` → `zdrojUredni/Sekundarni`.
+  - Přijímačky: `confirmed` → `plati`, `derived` → `odvozeno` (štítek s vlastním textem „Vyplývá z harmonogramu“,
+    PRI-09), `statusLegend` pryč. Neověřený termín by měl `stav: neovereno` (ICS ho vynechá), tip pomůcky
+    příznak `doporuceni` – v datech teď žádný není. Pravidla mají místo „Ověřeno“ štítek „Platí“.
+  - Exekuce, nebo oddlužení?: `platné` → `plati`, `neúplné` (2027, nevyhlášené normativní nájemné) → `neovereno`.
+    Počítat jde jen se sadou `plati` nebo `schvaleno` (`jeUplnyRok`).
+  - Rodičovská: částky mají `stav` (350 000 Kč `plati`, 400 000 Kč podle zákona č. 152/2026 Sb. `schvaleno`),
+    `pozn` → `poznamka`. Štítek a upozornění se ukazují podle stavu, ne podle toho, jestli je vyplněná poznámka.
+  - Spot, nebo fix?: `presny: true|false` (ceny po rocích) → `stav: plati|predbezne`. Když některé měsíce
+    počítáme s cenami jiného roku, u upozornění je štítek „Předběžně“. Texty `jinyRokCen` jsou hlášky, ne stav, zůstávají.
+  - `_data/zmeny2027.json`: `schvaleno`/`navrh` zůstávají, karta „Svátky 2027“ není změna pravidel, má místo
+    `stav: kalendar` pole `druh: kalendar` (štítek „Podle kalendáře“ beze změny).
+  - Bydlometr, Slevy 2027, Inflační kalkulačka, Cestovní příkaz 2027, Volno 2027: stav pravidel v datech
+    nemají, beze změny (test je hlídá).

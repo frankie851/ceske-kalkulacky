@@ -729,13 +729,14 @@
   "osvc2027": {
     "year": 2027,
     "monthsPerYear": 12,
-    "verificationNote": "Hodnoty se stavem „official“ jsou přečtené přímo na oficiálním webu. Stav „secondary“ znamená, že oficiální web (ČSSZ, VZP, e-Sbírka) nebyl z prostředí dostupný a hodnota je ověřená shodou více zdrojů a přepočtem ze zákonného vzorce. Stav „derived“ je dopočet ze zákona, který úřad zatím nezveřejnil.",
+    "verificationNote": "Štítek u každé položky ukazuje stav pravidla: „Schváleno“ znamená, že hodnota je vyhlášená a platí pro rok 2027. „Dopočteno ze zákona“ znamená, že úřad hodnotu zatím nezveřejnil a spočítali jsme ji ze zákonného vzorce. Text vedle štítku říká, odkud hodnotu máme: z oficiálního webu, nebo shodou více zdrojů a přepočtem, když oficiální web (ČSSZ, VZP, e-Sbírka) nebyl z našeho prostředí dostupný.",
     "averageWage": {
       "monthly": 51663,
       "generalAssessmentBase": 48900,
       "conversionCoefficient": 1.0565,
       "note": "Průměrná mzda pro rok 2027 = všeobecný vyměřovací základ 2025 (48 900 Kč) × přepočítací koeficient 1,0565, zaokrouhleno nahoru (§ 23b odst. 4 zákona č. 589/1992 Sb.). Rozhodná částka pro vedlejší činnost se počítá z nezaokrouhleného součinu.",
-      "status": "secondary",
+      "stav": "schvaleno",
+      "zdrojTyp": "sekundarni",
       "source": "https://e-sbirka.gov.cz/sb/2026/177",
       "sourceTitle": "Nařízení vlády č. 177/2026 Sb., § 1",
       "verified": "2026-11-12",
@@ -763,7 +764,8 @@
         "minBaseStarting": 12916
       },
       "note": "Rozhodná částka pro vedlejší činnost = 2,4 × (všeobecný vyměřovací základ × přepočítací koeficient), tedy 123 990,84 Kč. Pojistné se platí, když zisk rozhodné částky dosáhne. Zákon zaokrouhlení neurčuje, zobrazujeme ji zaokrouhlenou nahoru. ČSSZ ji zatím nebylo možné ověřit.",
-      "status": "secondary",
+      "stav": "schvaleno",
+      "zdrojTyp": "sekundarni",
       "source": "https://e-sbirka.gov.cz/sb/1992/589",
       "sourceTitle": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 5b, § 14 a § 15a",
       "verified": "2026-11-12",
@@ -787,7 +789,8 @@
         "minBaseAnnual": 309978
       },
       "note": "Minimální vyměřovací základ = 12 × 50 % průměrné mzdy = 12 × 25 831,5 = 309 978 Kč. Měsíční minimální záloha = 13,5 % z dvanáctiny (25 831,5 Kč) = 3 487,25, nahoru 3 488 Kč.",
-      "status": "secondary",
+      "stav": "schvaleno",
+      "zdrojTyp": "sekundarni",
       "source": "https://e-sbirka.gov.cz/sb/1992/592",
       "sourceTitle": "Zákon č. 592/1992 Sb., o pojistném na veřejné zdravotní pojištění, § 2, § 3a a § 8",
       "verified": "2026-11-13",
@@ -814,7 +817,8 @@
       "minimumWageSource": "https://e-sbirka.gov.cz/sb/2026/171",
       "minimumWageSourceTitle": "Sdělení MPSV č. 171/2026 Sb. (minimální mzda 2027: 24 900 Kč)",
       "note": "Podmínku pro daňový bonus (příjmy aspoň 6 × minimální mzda) posuzujeme z příjmů, ne ze zisku.",
-      "status": "secondary",
+      "stav": "schvaleno",
+      "zdrojTyp": "sekundarni",
       "source": "https://e-sbirka.gov.cz/sb/1992/586",
       "sourceTitle": "Zákon č. 586/1992 Sb., o daních z příjmů (§ 7, § 16, § 35ba, § 35c)",
       "verified": "2026-11-12"
@@ -903,7 +907,7 @@
             "p40": 1000000,
             "p30": 1000000
           },
-          "status": "derived",
+          "stav": "odvozeno",
           "note": "Dopočteno podle zákonného vzorce, tabulka Finanční správy pro rok 2027 zatím nevyšla. Sociální část: nejnižší měsíční vyměřovací základ (35 % průměrné mzdy, 18 083 Kč) zvýšený o 15 % = 20 796 Kč, z toho 29,2 % = 6 073 Kč. Zdravotní část: 13,5 % z dvanáctiny minimálního vyměřovacího základu = 3 488 Kč. Daň 100 Kč. Celkem 9 661 Kč měsíčně.",
           "source": "https://e-sbirka.gov.cz/sb/1992/589",
           "sourceTitle": "Zákon č. 589/1992 Sb., § 14 odst. 3 písm. a); zákon č. 592/1992 Sb., § 8a; zákon č. 586/1992 Sb., § 38lk odst. 7",
@@ -937,7 +941,8 @@
             "p40": 1500000,
             "p30": 1500000
           },
-          "status": "official",
+          "stav": "schvaleno",
+          "zdrojTyp": "uredni",
           "source": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
           "sourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
           "verified": "2026-11-05"
@@ -955,7 +960,8 @@
             "p40": 2000000,
             "p30": 2000000
           },
-          "status": "official",
+          "stav": "schvaleno",
+          "zdrojTyp": "uredni",
           "source": "https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/pausalni-dan/obecne-informace",
           "sourceTitle": "financnisprava.gov.cz – Paušální daň, obecné informace",
           "verified": "2026-11-05"
@@ -1160,9 +1166,8 @@
       "cheaperFlat": "paušální daň",
       "cheaperClassic": "přiznání",
       "firstPaymentAmount": "Tvoje měsíční záloha: {amount}.",
-      "statusOfficial": "ověřeno na oficiálním webu",
-      "statusSecondary": "oficiální web nebyl dostupný, ověřeno shodou více zdrojů a přepočtem",
-      "statusDerived": "dopočteno ze zákona, úřad zatím nezveřejnil",
+      "zdrojUredni": "ověřeno na oficiálním webu",
+      "zdrojSekundarni": "oficiální web nebyl dostupný, ověřeno shodou více zdrojů a přepočtem",
       "statusItemAverageWage": "Průměrná mzda 2027: {value}",
       "statusItemSocial": "Sociální pojištění: min. záloha {main} (začínající {starting}, vedlejší {side}), rozhodná částka {threshold}",
       "statusItemHealth": "Zdravotní pojištění: min. záloha {main}",

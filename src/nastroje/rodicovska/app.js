@@ -249,9 +249,10 @@ function prepocitej() {
     $('span', li).textContent = st.popis;
     li.classList.toggle('sage', Boolean(st.zvyraznit));
   });
+  // Štítek částky podle schváleného zákona, který ještě neplatí (stav pravidla ze src/js/stav-pravidel.js).
   const novela = $('[data-novela]');
-  novela.hidden = !r.pozn;
-  if (r.pozn) {
+  if (novela) novela.hidden = r.stav === 'plati';
+  if (novela && r.stav !== 'plati') {
     const badge = $('.badge', novela);
     const uzel = [...badge.childNodes].reverse().find((n) => n.nodeType === Node.TEXT_NODE);
     if (uzel) uzel.textContent = `${kc(r.celkem)}: zákon č. ${r.zakon}`;

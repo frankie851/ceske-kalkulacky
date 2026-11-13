@@ -105,8 +105,10 @@ export const SKUPINY = {
   kons: 'Konzervatoře',
 };
 
+/** Vlastní texty štítků termínů v kalendáři podle stavu (jinak popisek ze src/js/stav-pravidel.js). */
 export const STAV_TERMINU = {
-  confirmed: 'Ověřeno',
-  unverified: 'Neověřeno – sleduj CERMAT a web školy',
-  tip: 'Doporučení, nejde o úřední termín',
+  neovereno: 'Neověřeno – sleduj CERMAT a web školy',
 };
+
+/** Štítek termínu s příznakem „doporuceni“ (tip pomůcky, nejde o úřední termín ani o stav pravidla). */
+export const DOPORUCENI = 'Doporučení, nejde o úřední termín';

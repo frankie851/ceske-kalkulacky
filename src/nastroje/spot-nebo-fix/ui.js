@@ -145,6 +145,7 @@ function zobraz(o) {
   const upozorneni = $('[data-upozorneni-obdobi]');
   upozorneni.hidden = !o.upozorneniObdobi;
   text('[data-upozorneni-obdobi-text]', o.upozorneniObdobi);
+  $('[data-stav-cen]').hidden = !o.stavCen;
   $('[data-tabulka-hodiny]').innerHTML = o.tabulkaHodiny;
   text('[data-hodiny-shrnuti]', o.hodinyShrnuti);
   $('[data-predpoklady]').innerHTML = o.predpoklady

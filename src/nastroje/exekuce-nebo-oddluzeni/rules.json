@@ -245,7 +245,7 @@
   "poznamka": "Parametry pro orientační výpočet srážek ze mzdy a splátek v oddlužení. Každá hodnota má uvedený zdroj. Závazné je znění předpisů ve Sbírce zákonů.",
   "roky": {
     "2026": {
-      "status": "platné",
+      "stav": "plati",
       "zivotniMinimum": {
         "hodnota": 4860,
         "popis": "Životní minimum jednotlivce k 1. 1. 2026. Pro srážky se použije po celý rok 2026.",
@@ -387,7 +387,7 @@
       }
     },
     "2027": {
-      "status": "neúplné",
+      "stav": "neovereno",
       "poznamka": "Normativní nájemné pro rok 2027 ještě nebylo vyhlášeno (stav k 12. 11. 2026). Zákon č. 151/2025 Sb. § 28 ve znění zákona č. 152/2026 Sb. ho stanoví podle okresů (sdělení č. 169/2026 Sb. pro 1. 10. až 31. 12. 2026), nařízení č. 595/2006 Sb. ale odkazuje na obec s alespoň 70 000 obyvateli. Výpočet pro rok 2027 proto zatím není možný.",
       "zivotniMinimum": {
         "hodnota": 5500,

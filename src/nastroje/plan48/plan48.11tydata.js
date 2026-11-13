@@ -95,7 +95,8 @@ export default {
       text: `${i} ${i === 1 ? 'měsíc' : i >= 2 && i <= 4 ? 'měsíce' : 'měsíců'} (teď je ${m})`,
       vybrano: i === vstup.mesicuProbehlo,
     })),
-    stitekNavrhu: v.stitekSady(Object.values(pravidla.sady).find((s) => s.stitek) || {}) || 'Návrh, zatím neschváleno',
+    // Štítek sady, která neplatí (návrh): v HTML je vždy, skrytý; JS ho ukáže při přepnutí sady.
+    stitekNavrhu: v.stitekSadyMakro(Object.values(pravidla.sady).find((s) => s.stav !== 'plati') ?? { stav: 'navrh' }),
     stitekSady: v.stitekSady(sada),
     nazevSady: sada.nazev,
     napovedy: {

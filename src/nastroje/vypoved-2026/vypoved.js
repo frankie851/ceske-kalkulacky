@@ -259,8 +259,7 @@ export function vypocetPodpory(vek, cistyVydelek, sada) {
     nazev: sada.nazev,
     podpurciDoba: pasmo.mesice,
     strop: sada.strop,
-    predbezne: Boolean(sada.predbezne),
-    jeNavrh: Boolean(sada.jeNavrh),
+    stav: sada.stav,
     mesice,
     celkem: mesice.reduce((s, m) => s + m.castka, 0),
   };

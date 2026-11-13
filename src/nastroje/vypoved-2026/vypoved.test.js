@@ -262,7 +262,8 @@ test('žádost v roce 2027 → platný zákon + vládní návrh (tisk 300)', () 
   const r = podpora({ vek: 40, cistyVydelek: 30000, datumZadosti: '2027-01-15' }, rules);
   assert.equal(r.rok, '2027');
   assert.deepEqual(castky(r.hlavni), [24000, 24000, 15000, 15000, 12000]);
-  assert.equal(r.hlavni.predbezne, true);
+  assert.equal(r.hlavni.stav, 'predbezne');
+  assert.equal(r.navrh.stav, 'navrh');
   assert.ok(r.navrh);
   assert.deepEqual(castky(r.navrh), [19500, 19500, 15000, 15000, 13500]);
   // strop návrhu 0,6× (ilustračně 28 903 Kč)

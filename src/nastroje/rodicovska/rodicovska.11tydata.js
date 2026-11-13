@@ -6,9 +6,13 @@ import fs from 'node:fs';
 import { planRodiny, VYCHOZI_VSTUP, pridejDny, nastupOtcovskeMaxDne } from './rodina.js';
 import { svgOsa } from './timeline.js';
 import { kc, cislo } from '../../js/format.js';
+import { typStitku } from '../../js/stav-pravidel.js';
 import * as v from './vystup.js';
 
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
+
+/** Štítek rodičovské podle novely: typ ze stavu pravidla, text „400 000 Kč: zákon č. 152/2026 Sb.“. */
+const stitekNovely = (rp) => (rp ? { typ: typStitku(rp.stav), text: `${kc(rp.celkem)}: zákon č. ${rp.zakon}` } : null);
 const P = pravidla.ppm;
 const DNI_DO_PORODU = 150;
 const SIRKA_OSY = 400;
@@ -76,7 +80,10 @@ export default {
       hodnota: plan.rp.vyse,
       text: kc(plan.rp.vyse),
       napoveda: v.napovedaRp(plan, pravidla),
-      novela: plan.rp.pozn ? `${kc(plan.rp.celkem)}: zákon č. ${plan.rp.zakon}` : null,
+      // Štítek částky podle zákona, který je schválený, ale ještě neplatí (stav ze src/js/stav-pravidel.js).
+      // V HTML je vždy (JS ho ukáže, když se rodičovská počítá podle takového zákona).
+      novela: plan.rp.stav !== 'plati',
+      novelaStitek: stitekNovely(plan.rp.stav !== 'plati' ? plan.rp : pravidla.rodicovsky.find((x) => x.stav !== 'plati')),
     },
     // Výsledek
     vysledek,
