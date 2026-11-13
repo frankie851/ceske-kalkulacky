@@ -6,7 +6,7 @@ Revize v této složce hodnotila **původní repozitáře** (plan48, penzijko-ko
 
 ## Souhrn
 
-Stav k 13. 11. 2026, po sloučení PR #14 až #37 do `main`.
+Stav k 13. 11. 2026, po sloučení PR #14 až #39 do `main`.
 
 - Nálezů: **136** (kritická 1, vysoká 18, střední 61, nízká 56).
 - Na webu před opravami platilo 79, částečně 25, neplatilo 32 (sloupec „Stav na webu“).
@@ -39,6 +39,8 @@ Stav k 13. 11. 2026, po sloučení PR #14 až #37 do `main`.
 | [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35) | Další práce – texty Slev, Mám EET? a Přijímaček, úklid skriptu `test:e2e:skryte` |
 | [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36) | Další práce – Dluhy (kontrast, srážky před 2022), Bydlometr, Rodičovská (průměrná mzda 2026, otcovská a hospitalizace) |
 | [#37](https://github.com/frankie851/ceske-kalkulacky/pull/37) | Další práce – SPOT-09: regulované ceny po rocích |
+| [#38](https://github.com/frankie851/ceske-kalkulacky/pull/38) | Tento soubor po #35–#37 |
+| [#39](https://github.com/frankie851/ceske-kalkulacky/pull/39) | Společný model štítků stavu: pole `stav`, sdílený modul `src/js/stav-pravidel.js`, test `test/sdilene/stav-pravidel.test.js` |
 
 ## Tabulka nálezů
 
@@ -213,10 +215,10 @@ Všechny nálezy revize jsou opravené. Drobnosti nalezené při opravách jsou 
 | Bydlometr: `parseNumber` | Opraveno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): nepoužívaná funkce odstraněna. |
 | Rodičovská: průměrná mzda 2026 | Ověřeno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): NV č. 365/2025 Sb., 48 967 Kč. |
 | Rodičovská: otcovská a hospitalizace | Opraveno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): lhůta nástupu se prodlouží o dny hospitalizace (§ 38a odst. 4 ZNP). |
+| Společný model štítků stavu | Hotovo v [#39](https://github.com/frankie851/ceske-kalkulacky/pull/39): jednotné pole `stav` (plati / schvaleno / navrh / predbezne / odvozeno / nejasne / neovereno) ve všech `rules.json`, štítky přes sdílený modul a makro, hlídá sdílený test. |
 | Projekt: skript `test:e2e:skryte` | Opraveno v [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35): skript odebrán, postup pro skryté nástroje v `docs/jak-pridat-nastroj.md`. |
 
 ### Zůstává otevřené
-- **Společný model štítků stavu** (platí / schváleno / návrh / předběžně): nástroje zapisují stav v `rules.json` každý jinak (`stav`, `status`, `predbezne`, `jeNavrh`). Rozpracováno v samostatném PR (13. 11. 2026).
 - **Přijímačky:** termíny jednotné zkoušky pro pětileté obory úřední zdroj neuvádí (v `meta.neovereno`).
 - **Rodičovská:** nástup na otcovskou po propuštění dítěte z nemocnice až do 1. roku (§ 38b odst. 2 ZNP) se nepočítá, jen je zmíněný v nápovědě.
 - **Bydlometr:** smlouvy uzavřené před 1. 12. 2016 (zákon č. 145/2010 Sb.) kalkulačka nepočítá.
