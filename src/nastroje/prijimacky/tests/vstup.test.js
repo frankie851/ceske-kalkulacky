@@ -92,9 +92,9 @@ test('PRI-07: strategie bez zadané školy → výzva k doplnění, žádné ř�
   assert.ok(!html.includes('Škola 1'));
 });
 
-test('vysvětlení z explain(): desetinná tečka → čárka, pořadí „1. priorita“ zůstane', () => {
+test('vysvětlení z explain(): desetinná tečka → čárka, pořadí „1. priorita“ zůstane, rodově neutrálně', () => {
   assert.equal(upravVetu('1. priorita A: nesplnil(a) kritéria (minimum 60 b., má 59.5 b.).'),
-    '1. priorita A: nesplnil(a) kritéria (minimum 60 b., má 59,5 b.).');
+    '1. priorita A: nesplňuje kritéria (minimum 60 b., má 59,5 b.).');
 });
 
 test('PRI-04: strategie upozorňuje, že body i minimum musí být na stejné škále (jednotná zkouška)', () => {

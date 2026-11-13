@@ -179,6 +179,27 @@ describe('Slevy 2027 – ovládání', () => {
     await page.close();
   });
 
+  test('čísla v českém zápisu: „40.000“ = 40 000 Kč, haléře → hláška u pole', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1990);
+    await vypln(page, '#mzda', '50.000');
+    await pokracovat(page);
+    assert.equal(await page.$('#mzda-chyba'), null, '„50.000“ je platná mzda');
+    for (let i = 0; i < 10 && !/^Hypotéka/.test(await nadpis(page)); i++) await pokracovat(page);
+    assert.match(await nadpis(page), /^Hypotéka/);
+    await vypln(page, '#uroky', '1500,50');
+    await pokracovat(page);
+    assert.equal(await page.$eval('#uroky', (el) => el.getAttribute('aria-invalid')), 'true');
+    assert.match(await text(page, '#uroky-chyba'), /celé číslo/);
+    await vypln(page, '#uroky', '40.000');
+    await dokonce(page);
+    assert.match(await rocne(page, 'uroky'), /odpočet 40 000 Kč$/);
+    // Kontrolní seznam tyká: žádné „jste nepracovali“ ani limit opsaný natvrdo.
+    assert.doesNotMatch(await text(page, '.slevy-seznam'), /\bjste\b|nepracovali/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
   test('Zpět zachová odpovědi', async () => {
     const { page, chyby } = await otevri(CESTA);
     await vypln(page, '#narRok', 1995);

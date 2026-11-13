@@ -47,6 +47,17 @@ aktivní verze) – záznam tam můžeš smazat.
 `ilustrace` je id symbolu ve `src/img/sprite.svg` (`nastroj-plan48`, `nastroj-mam-eet`,
 `nastroj-penzijko-kompas`, `nastroj-zdanim-to`, `nastroj-inflace`, `nastroj-obecny`).
 
+**Nezveřejněný nástroj.** `"skryty": true` v `nastroj.json` znamená, že běžný build stránky
+nástroje nevytvoří a nástroj se chová jako „Připravujeme“. Teď žádný skrytý nástroj není.
+Postup, když nějaký přibude:
+- `npm run build:vse` sestaví web i se skrytými nástroji do `_site-vse/` (nenasazuje se),
+- kontrola: `SITE_DIR=_site-vse npm run kontrola -- <cesta stránky>/`,
+- e2e testy skrytého nástroje dej do `test/e2e/skryte/` (`npm run test:e2e` je nehledá) a spusť je
+  `SITE_DIR=_site-vse node --test --test-concurrency=1 "test/e2e/skryte/*.test.js"`,
+- do `.github/workflows/web.yml` za Lighthouse přidej krok, který spustí `npm run build:vse`
+  a obě kontroly výše,
+- při zveřejnění smaž `"skryty": true`, testy přesuň do `test/e2e/` a krok z CI odeber.
+
 ### rules.json
 
 ```json

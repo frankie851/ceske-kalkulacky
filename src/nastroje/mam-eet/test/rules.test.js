@@ -355,3 +355,21 @@ describe('odkazy na e-Sbírku a popis zdroje 1. pásma (EET-13)', () => {
     assert.doesNotMatch(JSON.stringify(rules), /výpočet 1\. pásma/);
   });
 });
+
+describe('texty rodově neutrálně (další práce po revizi 5. 11. 2026)', () => {
+  // První a druhá osoba bez rodových tvarů: žádné „(a)“, „jsem zaměstnanec“, „podnikal(a)“.
+  // Právní pojmy ve třetí osobě („Zaměstnanec nemůže…“, „Plátce DPH…“) zůstávají.
+  const RODOVE = /\([a-zá]{1,2}\)|\bjsem (zaměstnan|podnikatel|student|důchodce|OSVČ)|\b(byl|mohl|měl|začal|podnikal|přijal|zaplatil|pracoval)\b/i;
+  const o = rules.osvc2027;
+
+  test('volby druhu činnosti (OSVČ 2027) jsou rodově neutrální', () => {
+    for (const a of o.activities) assert.doesNotMatch(a.label, RODOVE, a.label);
+    assert.equal(o.activities.find((a) => a.id === 'sideEmployed').label, 'Vedlejší – mám i zaměstnání');
+  });
+
+  test('texty OSVČ 2027 a ovládání průvodce jsou rodově neutrální', () => {
+    for (const [klic, t] of [...Object.entries(o.texts), ...Object.entries(rules.ui)]) {
+      assert.doesNotMatch(t, RODOVE, `${klic}: ${t}`);
+    }
+  });
+});

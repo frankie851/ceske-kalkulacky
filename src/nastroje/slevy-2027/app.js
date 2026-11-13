@@ -1,7 +1,7 @@
 // Slevy 2027 – průvodce po krocích (jedna skupina otázek na obrazovku, Zpět / Pokračovat).
 // Výpočet je v slevy.js, texty kroků a HTML výsledku ve vystup.js (sdílí je i build).
 // Odpovědi drží jen proměnná `stav` v paměti stránky: nic se neukládá ani neodesílá.
-import { textyKroku, modelVysledku, vysledekHtml, seznamHtml, ikona, MESICE, odpovediZeStavu } from './vystup.js';
+import { textyKroku, modelVysledku, vysledekHtml, seznamHtml, ikona, MESICE, odpovediZeStavu, celeZPole } from './vystup.js';
 import { esc } from '../../js/graf.js';
 import { kc } from '../../js/format.js';
 
@@ -37,9 +37,11 @@ const noveDite = () => ({ narozeni: { rok: '', mesic: 1, prvni: false }, ztpp: f
 
 /* ---------- Čísla z polí ---------- */
 
-const bezMezer = (t) => String(t ?? '').replace(/[\s  ]/g, '');
-const jeCele = (t) => bezMezer(t) === '' || /^\d+$/.test(bezMezer(t));
-const cele = (t) => (bezMezer(t) === '' ? 0 : Number(bezMezer(t)));
+// Částky čte sdílené prectiCislo (přes celeZPole ve vystup.js): „40 000“ i „40.000“ = 40 000,
+// haléře nebo minus → hláška. Rok narození se kontroluje zvlášť (čtyři číslice).
+const bezMezer = (t) => String(t ?? '').replace(/[\s\u00a0\u202f]/g, '');
+const jeCele = (t) => Number.isFinite(celeZPole(t));
+const cele = celeZPole;
 const CHYBA_CISLA = 'Zadej celé číslo bez haléřů, nebo pole nech prázdné.';
 
 /** Vrátí chyby pro číselná pole, která nejsou celé nezáporné číslo. */
