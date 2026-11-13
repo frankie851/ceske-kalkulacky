@@ -791,3 +791,29 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   (`ppm.urad`, `otcovska`, `rodicovskyUrad`). Dřív odkaz „MPSV / ÚP ČR – Rodičovský příspěvek“
   vedl na text zákona. Test `test/zdroje.test.js` hlídá jen úřední domény (gov.cz,
   zakonyprolidi.cz), žádné tiskové zprávy a shodu `zdroje` s `meta.zdroje`.
+
+## Spot, nebo fix? – střední nálezy (SPOT-03, SPOT-06, SPOT-07)
+
+- **Zdroj distribuce je cenový výměr ERÚ č. 14/2025** (SPOT-07, ERV 18/2025,
+  https://eru.gov.cz/sites/default/files/obsah/prilohy/erv182025.pdf). `tariffs.json` →
+  `distributors.*.source` má tvar `{ pravniZaklad, url (#page=30), citace, stranyPdf, overeno }`,
+  `stranyPdf` dává stranu PDF pro každou sazbu (D 01d str. 30 … D 61d str. 46). Ceník ČEZ Prodej
+  zůstal jen jako `kontrolniZdroj`. Všech 300 hodnot (10 sazeb × 3 distributoři × VT, NT a
+  8 pásem jističe) jsme 12. 11. 2026 strojově porovnali s textem PDF (`pdftotext -layout`):
+  žádný rozdíl, hodnoty se neměnily.
+- **POZE ve výstupu ukazuje to, co se účtuje** (SPOT-03). Dřív předpoklady psaly 0,60 Kč/kWh
+  (strop 495 Kč/MWh s DPH), i když výpočet účtuje 0 Kč. Teď `vystup.js` počítá roční POZE stejnou
+  funkcí jako výpočet (`pozeAnnual`, nižší z obou plateb). Při nule ukáže „0 Kč“ a důvod
+  z `tariffs.json` → `common.poze.vysvetleniNuly`. Důvod: CV ERÚ č. 15/2025 (ERV 19/2025, bod 2)
+  mění v CV 13/2025 bod (5.1.2) z 8,32 na 0 Kč/A/měsíc. Podle odůvodnění pokryjí náklady na
+  podporu v roce 2026 prostředky státního rozpočtu. Strop 495 Kč/MWh je ze zákona č. 165/2012 Sb.,
+  § 28a odst. 2. Citace jsou v `common.poze.zdroj`.
+- **Datum ověření regulovaných cen** je v `tariffs.json` → `overeno` (12. 11. 2026). Stránka ho
+  ukazuje v části „Předpoklady výpočtu“ s odkazem na CV ERÚ 14/2025. `rules.json` → `meta.zdroje`
+  má nově CV 14/2025 a zákon č. 165/2012 Sb. § 28a.
+- **Testy** (SPOT-06): `src/nastroje/spot-nebo-fix/test/regulovane.test.js` – pásma jističe
+  (1× 25 A a 3× 10 A až 3× 63 A), cena za jistič a VT/NT v `regulatedFor` pro D02d, D56d, D57d
+  a D61d u všech tří distributorů a všech 9 jističů, VT/NT a jistič 3× 25 A pro všech 10 sazeb
+  ČEZ. Očekávané hodnoty jsou opsané z PDF, ne z `tariffs.json`. Testy hodnot prošly už na `main`,
+  hodnoty byly správně. E2E `test/e2e/spot-nebo-fix.test.js`: změna jističe, distributora, sazby
+  a jejich kombinace přepočítá karty i předpoklady stejně jako `vystup.js` v Node.
