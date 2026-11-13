@@ -16,7 +16,6 @@
     "snimky": "node tools/kontroly/snimky-webu.mjs",
     "lighthouse": "node tools/kontroly/lighthouse.mjs",
     "build:vse": "ZOBRAZIT_SKRYTE=1 eleventy --output=_site-vse",
-    "test:e2e:skryte": "SITE_DIR=_site-vse node --test --test-concurrency=1 \"test/e2e/skryte/*.test.js\"",
     "kontrola:odkazy": "node tools/kontroly/odkazy-pomoci.mjs"
   },
   "devDependencies": {

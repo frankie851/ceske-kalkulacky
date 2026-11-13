@@ -144,9 +144,9 @@
       "limitPrijmu": 68000,
       "vekDitete": 3,
       "zdroj": {
-        "pravniZaklad": "§ 35bb odst. 2 písm. a) a § 35ba odst. 3 zákona č. 586/1992 Sb., o daních z příjmů (znění od 1. 1. 2027)",
+        "pravniZaklad": "§ 35bb odst. 2 písm. a) a b) a § 35ba odst. 3 zákona č. 586/1992 Sb., o daních z příjmů (znění od 1. 1. 2027)",
         "url": "https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101#p35bb",
-        "citace": "Slevu na manžela lze uplatnit pouze tehdy, pokud a) poplatník žije ve společně hospodařící domácnosti s manželem a vyživovaným dítětem poplatníka, které nedovršilo věku 3 let … Poplatník může uplatnit slevu na dani podle odstavce 1 písm. b) až f) o částku ve výši jedné dvanáctiny za každý kalendářní měsíc, na jehož počátku byly podmínky pro uplatnění nároku na slevu na dani splněny."
+        "citace": "Slevu na manžela lze uplatnit pouze tehdy, pokud a) poplatník žije ve společně hospodařící domácnosti s manželem a vyživovaným dítětem poplatníka, které nedovršilo věku 3 let, a b) manžel poplatníka nemá vlastní příjem přesahující za zdaňovací období 68000 Kč. … Poplatník může uplatnit slevu na dani podle odstavce 1 písm. b) až f) o částku ve výši jedné dvanáctiny za každý kalendářní měsíc, na jehož počátku byly podmínky pro uplatnění nároku na slevu na dani splněny."
       },
       "zdroje": [
         "zdp-2027",

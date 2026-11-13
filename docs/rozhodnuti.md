@@ -389,7 +389,8 @@ Změny:
   a stránky jsou v Lighthouse.
 
 Mechanismus `"skryty": true` (`ZOBRAZIT_SKRYTE=1`, `_site-vse`, `test/e2e/skryte/`) zůstává
-pro budoucí nástroje.
+pro budoucí nástroje. (13. 11. 2026: skript `test:e2e:skryte` je odebraný, postup pro skrytý
+nástroj je v `docs/jak-pridat-nastroj.md`, viz „Projekt – další práce“.)
 
 Výsledky:
 - `npm test` 477/477, `npm run test:e2e` 129/129,
@@ -1314,6 +1315,48 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   není, tu část nálezu není co opravit.
 
 # Další práce po revizi 5. 11. 2026 (13. 11. 2026)
+
+## Slevy 2027, Mám EET?, Přijímačky, projekt – další práce (texty, čtení čísel, skryté nástroje)
+
+- **Slevy 2027: kontrolní seznam tyká.** Věta o volitelném ročním zúčtování vykala („pokud jste
+  nepracovali celý rok“). Teď: „vyplatí se při práci jen část roku nebo když se během roku
+  změnily podmínky“. Opraveno přímo v `slevy.js` (`kontrolniSeznam`), ne ve `vystup.js`:
+  `slevy.js` není převzatý beze změny, revize ho už upravovaly a seznam se skládá jen tady.
+- **Slevy 2027: limit příjmu manžela z rules.json.** Doklad „nejvýš 68 000 Kč“ byl v textu
+  natvrdo. Teď se bere `slevy.manzel.limitPrijmu` (a věk dítěte `vekDitete`). Hodnota 68 000 Kč
+  je hranice vlastního příjmu manžela pro slevu na manžela: § 35bb odst. 2 písm. b) ZDP ve znění
+  od 1. 1. 2027 (https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101#p35bb, ověřeno
+  13. 11. 2026; stejná částka je v § 38k odst. 5 písm. c) bodu 1). Citace v `rules.json` doplněna
+  o písm. b).
+- **Slevy 2027: čísla přes sdílené `prectiCislo`.** Vlastní `cele()` ve `vystup.js` i `app.js`
+  nahradila `celeZPole()` ve `vystup.js` nad `prectiCislo` (`{ zaporne: false }`). Pravidlo celých
+  korun zůstává: haléře, minus nebo nečitelný zápis → hláška „Zadej celé číslo bez haléřů…“.
+  „40.000“ i „40 000 Kč“ jsou 40 000. Rok narození se dál kontroluje jako čtyři číslice.
+- **Mám EET? / OSVČ 2027: rodově neutrální volba.** „Vedlejší – zároveň jsem zaměstnanec“ →
+  „Vedlejší – mám i zaměstnání“ (id `sideEmployed` beze změny). Ostatní `osvc2027.texts` a `ui`
+  rodové tvary v první ani druhé osobě nemají. Právní pojmy ve třetí osobě („Zaměstnanec nemůže
+  být v paušálním režimu“, „Plátce DPH nemůže…“) a otázka „Jsi plátce DPH?“ zůstávají: „plátce
+  DPH“ je zákonné označení stavu a neutrální přepis („registrace k DPH“) by zahrnul
+  i identifikovanou osobu. Test v `test/rules.test.js` hlídá volby i texty.
+- **Přijímačky: věty z `explain()` rodově neutrálně.** `matching.js` zůstává převzatý beze změny
+  (vlna 2, bod 7). `texty.js` → `neutralne()` převádí „nesplnil(a) kritéria“ → „nesplňuje
+  kritéria“, „Přijat(a) na N. prioritu: X.“ → „Místo na N. prioritě: X.“, „Nepřijat(a) v tomto
+  kole“ → „V tomto kole bez místa“ a „poslední přijatý:“ → „poslední s místem:“.
+  `vystup.js` → `upravVetu()` ho volá. Build projde modelovou třídu se všemi druhy vět i všechny
+  scénáře a věty, které převod nepokryje, vypíše (`rodoveTvary()`), stejně jako u tykání.
+- **Přijímačky: termíny jednotné zkoušky pro pětileté obory.** Znovu prohledáno 13. 11. 2026:
+  sdělení MŠMT č. j. MSMT-525/2026-13, časový harmonogram a metodika MŠMT 2026/2027, stránka
+  CERMAT „Jednotná přijímací zkouška“ a Průvodce pro uchazeče k DiPSy 2027, vyhláška
+  č. 422/2023 Sb. a školský zákon. Termíny jsou jen pro čtyřleté obory (s nástavbou)
+  a šestiletá a osmiletá gymnázia. Vyhláška č. 422/2023 Sb. (§ 13) jen říká, že test pro
+  „ostatní obory“ je z učiva celého RVP ZV. Úřední termín pro pětileté obory jsme nenašli, bod
+  zůstává v `meta.neovereno` beze změny.
+- **Projekt: skript `test:e2e:skryte`.** Skrytý nástroj (`"skryty": true`) teď žádný není a složka
+  `test/e2e/skryte/` neexistuje, takže skript padal. Je odebraný. Krok CI pro skryté nástroje
+  odebral už PR se zveřejněním Zdaním to?, `web.yml` se nemění. `build:vse` zůstává: funguje
+  a patří k mechanismu skrytých nástrojů. Postup pro skrytý nástroj (build, kontrola, e2e, krok
+  v CI) je nově v `docs/jak-pridat-nastroj.md`. Test `test/sdilene/projekt.test.js` hlídá, že
+  globy testů ve skriptech něco najdou a `web.yml` volá jen existující skripty.
 
 ## Exekuce, nebo oddlužení?, Bydlometr, Rodičovská – další práce (Dluhy: kontrast, náhrada plátci mzdy; Bydlometr: parseNumber; Rodičovská: průměrná mzda 2026, otcovská a hospitalizace)
 

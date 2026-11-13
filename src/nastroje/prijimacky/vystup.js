@@ -3,7 +3,7 @@
 // Všechna data jdou přes esc(); termíny a pravidla z rules.json, výpočet z matching.js a strategy.js.
 import { scoreOf, bestOfTwo } from './matching.js';
 import { pocetKol, rozsahTerminu, denMesic, denVTydnu, poMesicich } from './simulace.js';
-import { ty, KATEGORIE, KATEGORIE_POPIS, textUpozorneni, SKUPINY, STAV_TERMINU } from './texty.js';
+import { ty, neutralne, KATEGORIE, KATEGORIE_POPIS, textUpozorneni, SKUPINY, STAV_TERMINU } from './texty.js';
 import { esc } from '../../js/graf.js';
 import { cislo as formatCislo } from '../../js/format.js';
 
@@ -214,10 +214,10 @@ export function kolaHtml(stav, beh, kolo, hotovo) {
 
 /* ---------- Výsledek ---------- */
 
-/** Drobná jazyková úprava vět z explain() (modul je převzatý beze změny). */
+/** Drobná jazyková úprava vět z explain() (modul je převzatý beze změny): rodově neutrálně, česká čísla. */
 export function upravVetu(veta) {
   // Desetinná tečka v bodech → čárka („59.5 b.“ → „59,5 b.“); „1. priorita“ se nezmění.
-  return veta.replace(/(\d)\.(\d)/g, '$1,$2').replace(/všech (\d+) míst obsadili uchazeči s lepším pořadím/, (cele, n) => {
+  return neutralne(veta).replace(/(\d)\.(\d)/g, '$1,$2').replace(/všech (\d+) míst obsadili uchazeči s lepším pořadím/, (cele, n) => {
     const k = Number(n);
     if (k === 1) return 'jediné místo obsadil někdo s lepším pořadím';
     if (k === 2) return 'obě místa obsadili uchazeči s lepším pořadím';

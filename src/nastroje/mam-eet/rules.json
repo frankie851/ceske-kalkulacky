@@ -867,7 +867,7 @@
       },
       {
         "id": "sideEmployed",
-        "label": "Vedlejší – zároveň jsem zaměstnanec",
+        "label": "Vedlejší – mám i zaměstnání",
         "flatTaxAllowed": false,
         "healthMinimum": false,
         "socialSide": true,

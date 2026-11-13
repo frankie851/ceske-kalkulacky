@@ -3,6 +3,7 @@
 // Měsíce se číslují 1–12; datum narození je { rok, mesic, den? } (den stačí vědět, když je to 1.).
 
 import { odpocitatelnaCastDps, rovnomerne } from '../../js/odpocet-dps.js';
+import { kc } from '../../js/format.js';
 
 const MESICE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -357,7 +358,7 @@ export function kontrolniSeznam(polozky, odpovedi, priznani, rules) {
   } else if (polozky.some((p) => p.kde === 'rocniZuctovani' && p.rocne > 0)) {
     kroky.push(`Požádat zaměstnavatele o roční zúčtování daně za rok ${rules.rok} – ${t.rocniZuctovani.text}.`);
   } else {
-    kroky.push(`Volitelně požádat o roční zúčtování za rok ${rules.rok} (${t.rocniZuctovani.text}) – vyplatí se, pokud jste nepracovali celý rok nebo se během roku změnily podmínky.`);
+    kroky.push(`Volitelně požádat o roční zúčtování za rok ${rules.rok} (${t.rocniZuctovani.text}) – vyplatí se při práci jen část roku nebo když se během roku změnily podmínky.`);
   }
 
   if (ma('student')) doklady.push('Potvrzení školy o soustavné přípravě na budoucí povolání (potvrzení o studiu, na každý školní/akademický rok)');
@@ -375,7 +376,8 @@ export function kontrolniSeznam(polozky, odpovedi, priznani, rules) {
   }
   if (ma('manzel')) {
     doklady.push('Jméno a rodné číslo manžela/manželky, oddací list');
-    doklady.push(`Doklad o příjmech manžela/manželky za rok ${rules.rok} (nejvýš 68 000 Kč) a rodný list dítěte do 3 let`);
+    const s = rules.slevy.manzel;
+    doklady.push(`Doklad o příjmech manžela/manželky za rok ${rules.rok} (nejvýš ${kc(s.limitPrijmu)}) a rodný list dítěte do ${s.vekDitete} let`);
     if (odpovedi.manzel?.ztpp) doklady.push('Průkaz ZTP/P manžela/manželky');
   }
   if (ma('uroky')) doklady.push(`Potvrzení banky / stavební spořitelny o úrocích zaplacených za rok ${rules.rok}; při prvním uplatnění úvěrová smlouva a výpis z katastru`);
