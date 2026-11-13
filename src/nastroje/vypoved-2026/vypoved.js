@@ -123,11 +123,41 @@ export function vypovedniDoba({ kdo, duvod, zkusebniDoba = false }, rules) {
   throw new Error(`Neznámá strana: ${kdo}`);
 }
 
+/** „2025-06-01“ → „1. 6. 2025“ (pro hlášky). */
+function cesky(isoDatum) {
+  const dt = parse(isoDatum);
+  return `${dt.getUTCDate()}. ${dt.getUTCMonth() + 1}. ${dt.getUTCFullYear()}`;
+}
+
+/**
+ * Výpověď doručená před účinností zákona č. 120/2025 Sb. se řídí dřívějším § 51 ZP
+ * (čl. II bod 3, datum v rules.json). Dohody a zrušení ve zkušební době se to netýká.
+ * Vrátí text hlášky, nebo null.
+ */
+export function kontrolaDoruceni({ doruceni, kdo, zkusebniDoba = false }, rules) {
+  parse(doruceni);
+  const od = rules.zakonikPrace.vypovedniDoba.ucinnost;
+  if (zkusebniDoba || kdo === 'dohoda' || doruceni >= od) return null;
+  return `Kalkulačka počítá výpovědi doručené od ${cesky(od)}. Pro dřívější platí předchozí znění § 51 zákoníku práce.`;
+}
+
+/**
+ * Žádost o podporu jde podat až po skončení pracovního poměru: uchazečem o zaměstnání
+ * nemůže být, kdo je v pracovněprávním vztahu (§ 25 odst. 1 písm. a) zákona o zaměstnanosti).
+ * Vrátí text hlášky, nebo null.
+ */
+export function kontrolaZadosti(datumZadosti, konec) {
+  parse(datumZadosti);
+  if (datumZadosti > konec) return null;
+  return `Žádost o podporu jde podat až po skončení pracovního poměru, nejdřív ${cesky(posunDny(konec, 1))}.`;
+}
+
 /**
  * Poslední den pracovního poměru. Neřeší prodloužení o ochrannou dobu (§ 53 ZP).
  */
 export function konecPomeru({ doruceni, kdo, duvod, zkusebniDoba = false, konecDohody }, rules) {
-  parse(doruceni);
+  const chybaDoruceni = kontrolaDoruceni({ doruceni, kdo, zkusebniDoba }, rules);
+  if (chybaDoruceni) throw new Error(chybaDoruceni);
   if (zkusebniDoba) return doruceni;
   if (kdo === 'dohoda') {
     if (!konecDohody) throw new Error('U dohody zadejte sjednaný den skončení.');

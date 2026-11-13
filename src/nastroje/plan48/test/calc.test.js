@@ -280,3 +280,41 @@ describe('P48-04: podmínky daňové podpory', () => {
     assert.equal(poznamkaCoUdelat(d, rules.vychozi, R2026), '');
   });
 });
+
+// Revize 5. 11. 2026, nízké nálezy P48-07 a P48-09.
+describe('P48-07: zdroje jen úřední', () => {
+  const uredni = (url) => /^https:\/\/(www\.zakonyprolidi\.cz|www\.psp\.cz|mf\.gov\.cz)\//.test(url);
+
+  test('návrh 2027 odkazuje na sněmovní tisk 285 a materiály MF, ne na média', () => {
+    const url = N2027.zdroje.map((z) => z.url);
+    assert.ok(url.includes('https://www.psp.cz/sqw/historie.sqw?o=10&T=285'), 'chybí tisk 285');
+    assert.ok(url.some((u) => u.startsWith('https://mf.gov.cz/')), 'chybí MF');
+    for (const u of url) assert.ok(uredni(u), u);
+  });
+
+  test('ani jinde v rules.json nejsou mediální odkazy', () => {
+    const vse = [...rules.meta.zdroje, ...Object.values(rules.sady).flatMap((s) => s.zdroje)];
+    for (const z of vse) assert.ok(uredni(z.url), `${z.nazev}: ${z.url}`);
+  });
+
+  test('poznámka návrhu uvádí číslo tisku a stav projednávání', () => {
+    assert.match(N2027.poznamka, /sněmovní tisk 285/);
+    assert.match(N2027.poznamka, /1\. čtení/);
+    assert.doesNotMatch(N2027.poznamka, /8\/2026/);
+  });
+});
+
+describe('P48-09: přesné texty', () => {
+  test('sazba 23 % se týká části základu daně, ne příjmů (§ 16 odst. 1 ZDP)', () => {
+    const t = rules.meta.neovereno.join(' ');
+    assert.match(t, /část základu daně nad 36násobek/);
+    assert.doesNotMatch(t, /část příjmů nad 36násobek/);
+  });
+
+  test('termín mimořádného vkladu není tvrzení „obvykle do 20. 12.“ bez zdroje', () => {
+    const d = rok({ dps: 1000, mesicuProbehlo: 10 }).doporuceni;
+    const t = poznamkaCoUdelat(d, rules.vychozi, R2026).replace(/ /g, ' ');
+    assert.doesNotMatch(t, /Obvykle|20\. 12\./);
+    assert.match(t, /podmínk\w* tvé penzijní společnosti/);
+  });
+});

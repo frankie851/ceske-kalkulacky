@@ -39,12 +39,20 @@ export function popisPrispevku(vstup, r, sada) {
   return `státní příspěvek za rok (${kc(r.statniPrispevekMesicne)} měsíčně, ${pct(pasmo.sazba)} vkladu)`;
 }
 
-/** Tři statistiky pod hlavním číslem (pořadí odpovídá prototypu B). */
+/** Nápověda k přepínači sazby daně (§ 16 odst. 1 ZDP: vyšší sazba jen pro část základu daně). */
+export function napovedaSazby(sazbyDane) {
+  return `${procenta(Math.round(sazbyDane.at(-1) * 100))} jen pro vysoké příjmy (část základu daně nad 36násobek průměrné mzdy).`;
+}
+
+/**
+ * Tři statistiky pod hlavním číslem (pořadí odpovídá prototypu B).
+ * Dlaždice státního příspěvku nese štítek sady (revize 5. 11. 2026, P48-08): u návrhu je vidět, u platných pravidel skrytý.
+ */
 export function statistiky(vstup, r, sada) {
   const o = r.odpocet;
   return [
     { hodnota: kc(r.uspora), popis: `daňová úspora při sazbě ${pct(vstup.sazbaDane)}`, zvyraznit: true },
-    { hodnota: kc(r.statniPrispevekRocne), popis: popisPrispevku(vstup, r, sada), zvyraznit: r.statniPrispevekRocne > 0 },
+    { hodnota: kc(r.statniPrispevekRocne), popis: popisPrispevku(vstup, r, sada), zvyraznit: r.statniPrispevekRocne > 0, stitek: stitekSady(sada) },
     o.nevyuzity > 0
       ? { hodnota: kc(o.nevyuzity), popis: `nevyužitý odpočet z limitu ${kc(o.limit)}`, zvyraznit: false }
       : { hodnota: kc(o.vyuzity), popis: `využitý odpočet, celý limit ${kc(o.limit)}`, zvyraznit: true },
@@ -105,12 +113,16 @@ export function upozorneniPodpory(sada) {
   return vety.join(' ');
 }
 
-/** Drobná poznámka pod akční větou (propadlý příspěvek, termín mimořádného vkladu, podmínky podpory). */
+/**
+ * Drobná poznámka pod akční větou (propadlý příspěvek, mimořádný vklad, podmínky podpory).
+ * Termín připsání mimořádného vkladu zákon nestanoví, určuje ho penzijní společnost (revize 5. 11. 2026, P48-09),
+ * proto tu žádné datum není. Parametr vychozi zůstává kvůli stejnému volání z buildu i z prohlížeče.
+ */
 export function poznamkaCoUdelat(d, vychozi, sada) {
   const p = [];
   if (d.prispevek?.propadlo > 0) p.push(`Za uplynulé měsíce už propadlo ${kc(d.prispevek.propadlo)} státního příspěvku.`);
   if (d.odpocet) {
-    p.push(`Mimořádný vklad na penzijko označ jako mimořádný, jinak se může počítat do dalšího roku. Obvykle musí dorazit do ${vychozi.mimoradnyVkladPripsatDo}`);
+    p.push('Mimořádný vklad na penzijko označ jako mimořádný, jinak se může počítat do dalšího roku. Do kdy musí dorazit, určují podmínky tvé penzijní společnosti. Pošli ho s předstihem.');
     p.push('Odpočet ušetří jen tolik daně, kolik jí opravdu platíš.');
     if (sada) p.push(upozorneniPodpory(sada));
   }

@@ -100,7 +100,7 @@ export default {
     nazevSady: sada.nazev,
     napovedy: {
       dps: `Do odpočtu jde jen část nad ${kc(sada.odpocet.dpsMesicniHranice)} měsíčně. Na maximální státní příspěvek stačí ${kc(najdiPasmo(vstup.vek, sada).maxZaklad)}.`,
-      sazba: `${procenta(sada.sazbyDane.at(-1) * 100)} jen pro vysoké příjmy (část nad 36násobek průměrné mzdy).`,
+      sazba: v.napovedaSazby(sada.sazbyDane),
       dip: `Odečítá se od první koruny. Peníze jde vybrat nejdřív po ${cislo(podpora.mesicu)} měsících a nejdřív v roce, kdy ti bude ${cislo(podpora.vek)} let.`,
       zp: 'Odečítá se od první koruny. Pro výběr platí stejné podmínky jako u DIP.',
     },

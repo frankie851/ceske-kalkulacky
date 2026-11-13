@@ -16,7 +16,7 @@ import {
   doporuceni,
   vkladProMaxPrispevek,
 } from '../calc.js';
-import { predpoklady, textKroku, htmlTF } from '../zobrazeni.js';
+import { predpoklady, textKroku, htmlTF, kratkyNazev } from '../zobrazeni.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const rules = JSON.parse(readFileSync(join(root, 'rules.json'), 'utf8'));
@@ -334,7 +334,46 @@ test('transformovaný fond: srovnání a poplatek 800 Kč u konkurence do 5 let'
   const t = transformovanyFond(rules, VSTUP);
   assert.ok(t.prejit.souhrn.realne > t.zustat.souhrn.realne);
   assert.equal(t.poplatekKonkurence, 800);
-  assert.equal(transformovanyFond(rules, { ...VSTUP, delkaSmlouvy: 5 }).poplatekKonkurence, 0);
+  assert.equal(transformovanyFond(rules, { ...VSTUP, delkaSmlouvy: 6 }).poplatekKonkurence, 0);
+});
+
+// Revize 5. 11. 2026, PEN-10: § 62 odst. 3 ZDPS – zdarma až „po více než 60 měsících“.
+test('PEN-10: převod ke konkurenci po přesně 5 letech (60 měsících) ještě může stát až 800 Kč', () => {
+  assert.equal(transformovanyFond(rules, { ...VSTUP, delkaSmlouvy: 5 }).poplatekKonkurence, 800);
+  assert.equal(transformovanyFond(rules, { ...VSTUP, delkaSmlouvy: 6 }).poplatekKonkurence, 0);
+  const t5 = htmlTF(rules, { ...VSTUP, delkaSmlouvy: 5 }).replace(/[\u00a0\u202f]/g, ' ');
+  assert.match(t5, /až 800 Kč/);
+  assert.doesNotMatch(t5, /převod je zdarma/);
+  const t6 = htmlTF(rules, { ...VSTUP, delkaSmlouvy: 6 }).replace(/[\u00a0\u202f]/g, ' ');
+  assert.match(t6, /víc než 60 měsíců/);
+  assert.match(t6, /převod je zdarma/);
+});
+
+test('PEN-10: poplatek za převod má zákonný zdroj (§ 61 odst. 3 a § 62 odst. 3 ZDPS)', () => {
+  const p = rules.predpoklady.prevodKonkurence;
+  assert.equal(p.poplatek, 800);
+  assert.equal(p.zdarmaPoMesicich, 60);
+  assert.match(p.zdroj.pravniZaklad, /§ 61 odst\. 1 písm\. b\) a odst\. 3/);
+  assert.match(p.zdroj.pravniZaklad, /§ 62 odst\. 3/);
+  assert.match(p.zdroj.url, /^https:\/\/www\.zakonyprolidi\.cz\/cs\/2011-427#p6[12]$/);
+  assert.match(p.zdroj.citace, /nejvýše 800 Kč/);
+  assert.match(p.zdroj.citace, /po více než 60 měsících/);
+});
+
+// Revize 5. 11. 2026, PEN-12: platnost pravidel 2026 a úřední zdroj návrhu.
+test('PEN-12: pravidla „2026“ platí od 1. 7. 2024, přepínač dál ukazuje „Pravidla 2026“', () => {
+  assert.equal(S2026.platnostOd, '2024-07-01');
+  assert.equal(kratkyNazev(S2026), 'Pravidla 2026');
+  assert.equal(kratkyNazev(N2027), 'Návrh 2027');
+});
+
+test('PEN-12: návrh odkazuje na sněmovní tisk 285 a MF, ne na média', () => {
+  const url = N2027.zdroje.map((z) => z.url);
+  assert.ok(url.includes('https://www.psp.cz/sqw/historie.sqw?o=10&T=285'));
+  for (const u of url) assert.match(u, /^https:\/\/(www\.psp\.cz|mf\.gov\.cz|www\.zakonyprolidi\.cz)\//, u);
+  for (const z of rules.meta.zdroje.filter((x) => /Návrh/.test(x.poznamka ?? ''))) {
+    assert.match(z.url, /^https:\/\/(www\.psp\.cz|mf\.gov\.cz)\//, z.nazev);
+  }
 });
 
 test('doporučení: max. 3 kroky, seřazené podle přínosu, všechny kladné', () => {

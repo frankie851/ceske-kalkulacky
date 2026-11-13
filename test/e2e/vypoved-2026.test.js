@@ -176,3 +176,30 @@ test('nápověda k délce pracovního poměru zmiňuje § 67 odst. 2 (pauza nejv
   assert.match(napoveda, /§ 67 odst\. 2/);
   await page.close();
 });
+
+// Revize 5. 11. 2026, VYP-07: čl. II bod 3 zákona č. 120/2025 Sb. a žádost až po skončení.
+test('doručení před 1. 6. 2025 → hláška u pole, výsledek se nepřepočítá', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await page.click('#kdo-zamestnanec + label');
+  await vypln(page, '#doruceni', '2025-05-15');
+  assert.equal(await page.$eval('#doruceni', (el) => el.getAttribute('aria-invalid')), 'true');
+  assert.match(await text(page, '#doruceni-chyba'), /Kalkulačka počítá výpovědi doručené od 1\. 6\. 2025\./);
+  await vypln(page, '#doruceni', '2025-06-01');
+  assert.equal(await page.$eval('#doruceni', (el) => el.hasAttribute('aria-invalid')), false);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('žádost o podporu před koncem pracovního poměru → hláška u pole žádosti', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await page.select('#duvod', 'c');
+  await vypln(page, '#doruceni', '2026-12-31');
+  await vypln(page, '#datumZadosti', '2026-12-15');
+  assert.equal(await page.$eval('#datumZadosti', (el) => el.getAttribute('aria-invalid')), 'true');
+  assert.match(await text(page, '#datumZadosti-chyba'), /až po skončení pracovního poměru/);
+  await vypln(page, '#datumZadosti', '2027-03-01');
+  assert.equal(await page.$eval('#datumZadosti', (el) => el.hasAttribute('aria-invalid')), false);
+  assert.equal(await text(page, '#vysledek [data-vysledek-cislo]'), '28. 2. 2027');
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-12",
+    "overeno": "2026-11-13",
     "zdroje": [
       {
         "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 51 a § 52 (výpovědní doba a důvody)",
@@ -15,8 +15,16 @@
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p271ca"
       },
       {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 53 (ochranná doba) a § 66 (zrušení ve zkušební době)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p53"
+      },
+      {
         "nazev": "Zákon č. 120/2025 Sb., novela zákoníku práce (znění § 52 od 1. 6. 2025)",
         "url": "https://www.zakonyprolidi.cz/cs/2025-120"
+      },
+      {
+        "nazev": "Zákon č. 120/2025 Sb., čl. II bod 3 (výpověď doručená před 1. 6. 2025 se řídí dřívějším § 51)",
+        "url": "https://www.zakonyprolidi.cz/cs/2025-120#cl2-3"
       },
       {
         "nazev": "Zákon č. 435/2004 Sb., o zaměstnanosti, § 39 (nárok na podporu)",
@@ -54,12 +62,14 @@
     "neovereno": [
       "Strop podpory pro rok 2027 je předběžný: zatím nebyl vyhlášen, proto počítáme s hodnotou pro rok 2026.",
       "Vládní návrh změn podpory od roku 2027 (sněmovní tisk 300) zatím není zákon a může se změnit. Jeho strop je jen ilustrační, spočítaný z hodnot roku 2026.",
-      "Nepočítáme prodloužení pracovního poměru o ochrannou dobu (§ 53 zákoníku práce), například při pracovní neschopnosti nebo mateřské.",
+      "Nepočítáme prodloužení pracovního poměru o ochrannou dobu (§ 53 odst. 2 zákoníku práce), například při pracovní neschopnosti nebo mateřské.",
       "Nepočítáme delší výpovědní dobu ani vyšší odstupné z kolektivní smlouvy, vnitřního předpisu nebo pracovní smlouvy.",
-      "Délka pracovního poměru, průměrný výdělek a věk se zadávají ručně. Úřad práce bere čistý výdělek ze zápočtového listu."
+      "Délka pracovního poměru, průměrný výdělek a věk se zadávají ručně. Úřad práce bere čistý výdělek ze zápočtového listu.",
+      "Výpovědi doručené před 1. 6. 2025 nepočítáme: řídí se dřívějším zněním § 51 zákoníku práce (čl. II bod 3 zákona č. 120/2025 Sb.).",
+      "Hraniční věk 52 a 57 let: § 43 zákona o zaměstnanosti dává delší podpůrčí dobu „nad 52“ a „nad 57 let věku“. Počítáme s ní už ode dne těchto narozenin. Tabulka úřadu práce („52–57 let 8 měsíců, nad 57 let 11 měsíců“) to u 57 let jednoznačně neříká."
     ]
   },
-  "overeno": "2026-11-12",
+  "overeno": "2026-11-13",
   "poznamka": "Parametry ověřeny k datu 'overeno'. Výpočet podpory se řídí rokem podání žádosti o podporu.",
   "zakonikPrace": {
     "predpis": "Zákon č. 262/2006 Sb., zákoník práce, ve znění zákona č. 120/2025 Sb.",
@@ -74,11 +84,24 @@
       "zacatek": "dnem doručení výpovědi",
       "konec": "dnem se stejným číselným označením; není-li v posledním měsíci, posledním dnem měsíce",
       "zdroj": "§ 51 zákoníku práce ve znění zákona č. 120/2025 Sb.",
-      "ucinnost": "2025-06-01"
+      "ucinnost": "2025-06-01",
+      "prechodneUstanoveni": {
+        "pravniZaklad": "čl. II bod 3 zákona č. 120/2025 Sb.",
+        "url": "https://www.zakonyprolidi.cz/cs/2025-120#cl2-3",
+        "citace": "Byla-li výpověď z pracovního poměru doručena přede dnem nabytí účinnosti tohoto zákona, řídí se délka výpovědní doby a její začátek a konec § 51 zákona č. 262/2006 Sb., ve znění účinném přede dnem nabytí účinnosti tohoto zákona.",
+        "overeno": "2026-11-13"
+      }
     },
     "zkusebniDoba": {
       "konec": "dnem doručení zrušení, není-li v něm uveden den pozdější",
-      "zdroj": "§ 66 zákoníku práce"
+      "zdroj": "§ 66 zákoníku práce",
+      "zakazPriNeschopnostiDnu": 14,
+      "zakazZdroj": {
+        "pravniZaklad": "§ 66 odst. 1 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p66",
+        "citace": "Zaměstnavatel nesmí ve zkušební době zrušit pracovní poměr v době prvních 14 kalendářních dnů trvání dočasné pracovní neschopnosti (karantény) zaměstnance.",
+        "overeno": "2026-11-13"
+      }
     },
     "odstupne": {
       "duvody": [
@@ -133,7 +156,13 @@
       "text": "Náhrada mzdy za nevyčerpanou dovolenou přísluší jen při skončení pracovního poměru."
     },
     "ochrannaDoba": {
-      "zdroj": "§ 53 a § 54 zákoníku práce"
+      "zdroj": "§ 53 a § 54 zákoníku práce",
+      "prodlouzeni": {
+        "pravniZaklad": "§ 53 odst. 2 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p53",
+        "citace": "Byla-li dána zaměstnanci výpověď před počátkem ochranné doby tak, že by výpovědní doba měla uplynout v ochranné době, ochranná doba se do výpovědní doby nezapočítává; pracovní poměr skončí teprve uplynutím zbývající části výpovědní doby po skončení ochranné doby, ledaže zaměstnanec sdělí zaměstnavateli, že na prodloužení pracovního poměru netrvá.",
+        "overeno": "2026-11-13"
+      }
     }
   },
   "podpora": {
@@ -328,8 +357,16 @@
       "url": "https://www.zakonyprolidi.cz/cs/2006-262#p271ca"
     },
     {
+      "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 53 (ochranná doba) a § 66 (zrušení ve zkušební době)",
+      "url": "https://www.zakonyprolidi.cz/cs/2006-262#p53"
+    },
+    {
       "nazev": "Zákon č. 120/2025 Sb., novela zákoníku práce (znění § 52 od 1. 6. 2025)",
       "url": "https://www.zakonyprolidi.cz/cs/2025-120"
+    },
+    {
+      "nazev": "Zákon č. 120/2025 Sb., čl. II bod 3 (výpověď doručená před 1. 6. 2025 se řídí dřívějším § 51)",
+      "url": "https://www.zakonyprolidi.cz/cs/2025-120#cl2-3"
     },
     {
       "nazev": "Zákon č. 435/2004 Sb., o zaměstnanosti, § 39 (nárok na podporu)",
@@ -363,5 +400,11 @@
       "nazev": "ÚP ČR – Co dělat při ztrátě zaměstnání",
       "url": "https://up.gov.cz/co-delat-pri-ztrate-zamestnani"
     }
-  ]
+  ],
+  "podpurciDobaZdroj": {
+    "pravniZaklad": "§ 43 zákona č. 435/2004 Sb., o zaměstnanosti",
+    "url": "https://www.zakonyprolidi.cz/cs/2004-435#p43",
+    "citace": "(1) … Podpůrčí doba činí u uchazeče o zaměstnání a) do 52 let věku 5 měsíců, b) nad 52 do 57 let věku 8 měsíců, c) nad 57 let věku 11 měsíců. (2) Rozhodující pro délku podpůrčí doby je věk uchazeče o zaměstnání dosažený ke dni podání žádosti o podporu v nezaměstnanosti.",
+    "overeno": "2026-11-13"
+  }
 }

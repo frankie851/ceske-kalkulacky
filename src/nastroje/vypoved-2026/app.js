@@ -2,7 +2,7 @@
 // a živě překresluje výsledek. Pravidla jsou ve stránce (#pravidla), nic se nenačítá,
 // neukládá ani neodesílá.
 import { spocitej, kartaHtml, detailyHtml, seznamHtml, denPo } from './vystup.js';
-import { konecPomeru } from './vypoved.js';
+import { konecPomeru, kontrolaDoruceni } from './vypoved.js';
 import { kc, datum } from '../../js/format.js';
 import { prectiCislo } from '../../js/cislo-vstup.js';
 
@@ -47,6 +47,11 @@ function precti() {
   const vstup = { ...v, delkaLet: cislo('delka'), vek: cislo('vek'), hruby: cislo('hruby'), cisty: cislo('cisty'), datumZadosti: $('datumZadosti').value };
   const chyby = {};
   if (!jeDatum(v.doruceni)) chyby.doruceni = 'Zadej den doručení výpovědi.';
+  else {
+    // Revize 5. 11. 2026, VYP-07: výpověď doručená před 1. 6. 2025 (čl. II bod 3 zákona č. 120/2025 Sb.).
+    const chyba = kontrolaDoruceni(v, rules);
+    if (chyba) chyby.doruceni = chyba;
+  }
   if (v.kdo === 'dohoda') {
     if (!jeDatum(v.konecDohody)) chyby.konecDohody = 'Zadej sjednaný den skončení podle dohody.';
     else if (jeDatum(v.doruceni)) {

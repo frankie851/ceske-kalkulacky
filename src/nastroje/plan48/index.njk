@@ -87,7 +87,10 @@ styly: ['/nastroje/plan48/plan48.css']
     </section>
 
     <section class="card" aria-labelledby="projekce-nadpis">
-      <h2 id="projekce-nadpis">Projekce úspor do {{ p.vekKonec }} let</h2>
+      <div class="card-head">
+        <h2 id="projekce-nadpis">Projekce úspor do {{ p.vekKonec }} let</h2>
+        <span data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: p.stitekSady or p.stitekNavrhu }) }}</span>
+      </div>
       <p class="muted">Penzijko (tvůj vklad, zaměstnavatel a stát) a DIP při stejných měsíčních vkladech. Bez životního pojištění, bez inflace a bez daně z výnosu.</p>
       <div class="plan48-dvojice">
         {{ pole({ id: 'vynos', label: 'Výnos ročně', hodnota: p.pole.vynos, jednotka: '%', inputmode: 'decimal', napoveda: 'Průměrný roční výnos fondu.', chybaMisto: true }) }}
