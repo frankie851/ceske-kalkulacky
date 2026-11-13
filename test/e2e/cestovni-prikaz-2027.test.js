@@ -202,3 +202,30 @@ test('100 km s přívěsem → základní náhrada 678,50 Kč', async () => {
   assert.deepEqual(chyby, []);
   await page.close();
 });
+
+// Revize 5. 11. 2026, nízké nálezy: CES-10 (letní čas), CES-12 (vyšší sjednané stravné).
+test('CES-10: 29. 3. 2026 0:30–5:30 trvá kvůli letnímu času 4 h → stravné nenáleží', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await nacisto(page);
+  await vypln(page, '#odjezd', '2026-03-29T00:30');
+  await vypln(page, '#navrat', '2026-03-29T05:30');
+  assert.match(await text(page, '[data-cp-jidla]'), /4:00 h · pod 5 h/);
+  await pridejCestu(page, { odjezd: '2026-03-29T00:30', navrat: '2026-03-29T05:30', km: '0' });
+  assert.equal(await statistika(page, 3), '0,00 Kč');
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('CES-12: sjednané stravné 200 Kč pro 5–12 h → cesta 8 h má stravné 200 Kč; pod minimem chyba', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await nacisto(page);
+  await vypln(page, '#sjednane0', '150');
+  assert.match(await text(page, '#sjednane0-chyba'), /Nejméně 155\sKč/);
+  await vypln(page, '#sjednane0', '200');
+  assert.equal(await page.$eval('#sjednane0', (el) => el.getAttribute('aria-invalid')), null);
+  await pridejCestu(page, { odjezd: '2026-05-04T08:00', navrat: '2026-05-04T16:00', km: '0' });
+  assert.equal(await statistika(page, 3), '200,00 Kč');
+  assert.match(await text(page, '[data-cp-vyuctovani]'), /Sjednané stravné/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

@@ -3,7 +3,7 @@
 // Deterministické: pevné cesty v roce 2026, žádné new Date().
 import fs from 'node:fs';
 import { PALIVA, DRUHY_VOZIDEL } from './cesty.js';
-import { kc, cislo } from '../../js/format.js';
+import { cislo } from '../../js/format.js';
 import * as v from './vystup.js';
 
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
@@ -18,6 +18,7 @@ const ukazka = {
     sfera: 'soukroma',
     kraceniPct: [...r.kraceniMaxPct],
     stravneVerejna: [null, null, null],
+    stravneSoukroma: [null, null, null],
     vozidlo: { spz: '1AB 2345', druh: 'osobni', palivo: 'benzin95', spotreba: 6 },
   },
   cesty: [
@@ -64,9 +65,7 @@ export default {
     jednotka: PALIVA[h.vozidlo.palivo].jednotka,
     privesPct: pravidla.zakonik.prives.pct,
     pasma: v.PASMA,
-    kraceniMax: r.kraceniMaxPct,
-    verejnaRozpeti: [0, 1, 2].map((i) => `${cislo(r.stravne.verejnaMin[i])}–${kc(r.stravne.verejnaMax[i])}`),
-    verejnaMin: r.stravne.verejnaMin.map((x) => String(x)),
+    napovedy: v.napovedyHlavicky(r, rok),
     // Výsledek ukázky
     cislo: v.hlavniCislo(vysledek),
     popis: v.popisVysledku(vysledek),

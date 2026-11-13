@@ -182,3 +182,29 @@ test('bez JavaScriptu: obě části pod sebou s ukázkovým výsledkem, bez zál
   assert.equal(await text(page, '[data-poplatek-cislo]'), '2 250 Kč');
   await page.close();
 });
+
+// Revize 5. 11. 2026, nízké nálezy: BYD-08 (varianta „o 0 let“) a BYD-11 (záporné růsty a výnos).
+test('BYD-08: prodloužení o 0 let a úspory 0 Kč → varianty se v tabulce neukážou', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#rf-prodlouzit', '0');
+  await vypln(page, '#rf-uspory', '0');
+  const varianty = await page.$$eval('[data-tabulka-variant] tr[data-varianta]', (els) => els.map((el) => el.dataset.varianta));
+  assert.deepEqual(varianty, ['accept', 'refinance']);
+  assert.doesNotMatch(await text(page, '[data-tabulka-stresu]'), /o 0 let/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('BYD-11: záporný růst nájmů i výnos investic projdou, mimo rozsah je chyba', async () => {
+  const { page, chyby } = await otevri(`${CESTA}#najem-vs-koupe`, { sirka: 1440, vyska: 900 });
+  await vypln(page, '#nk-rust-najmu', '-1');
+  await vypln(page, '#nk-vynos', '-2');
+  assert.equal(await page.$eval('#nk-rust-najmu', (el) => el.getAttribute('aria-invalid')), null);
+  assert.equal(await page.$eval('#nk-vynos', (el) => el.getAttribute('aria-invalid')), null);
+  assert.match(await text(page, '#vysledek-najem-nadpis'), /^Za 20 let vychází lépe/);
+  await vypln(page, '#nk-rust-najmu', '-50');
+  assert.equal(await page.$eval('#nk-rust-najmu', (el) => el.getAttribute('aria-invalid')), 'true');
+  assert.match(await text(page, '#nk-rust-najmu-chyba'), /Zadej číslo od −\d+ do \d+\./);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

@@ -1,6 +1,6 @@
 // Výpočet slev, daňového zvýhodnění a odpočtů pro rok 2027.
 // Čisté funkce bez DOM – všechny částky a termíny přicházejí z rules.json.
-// Měsíce se číslují 1–12; datum narození je { rok, mesic }.
+// Měsíce se číslují 1–12; datum narození je { rok, mesic, den? } (den stačí vědět, když je to 1.).
 
 import { odpocitatelnaCastDps, rovnomerne } from '../../js/odpocet-dps.js';
 
@@ -17,12 +17,20 @@ export function mesiceSplneno(rok, podminka, od = 1, doMesice = 12) {
 }
 
 /**
- * Je osoba narozená v (rok, měsíc) na počátku měsíce m mladší než `vek` let?
- * Narozeniny v daném měsíci se počítají ještě jako „před dovršením“
- * (na počátku měsíce věk ještě dovršen není – předpoklad: nenarodil se 1. dne).
+ * Je osoba na počátku měsíce m mladší než `vek` let? Věk se dovrší v den narozenin.
+ * Kdo má narozeniny 1. dne měsíce, má věk na počátku toho měsíce už dovršený; jinak se
+ * měsíc narozenin počítá ještě jako „před dovršením“ (§ 35ba odst. 3 a § 35c odst. 10 ZDP:
+ * rozhoduje stav na počátku kalendářního měsíce; revize SLV-10). Bez dne bereme, že to není 1.
  */
 function mladsiNez(narozeni, vek, rok, m) {
-  return porovnej(rok, m, narozeni.rok + vek, narozeni.mesic) <= 0;
+  const p = porovnej(rok, m, narozeni.rok + vek, narozeni.mesic);
+  return p < 0 || (p === 0 && Number(narozeni.den ?? 0) !== 1);
+}
+
+/** Je dítě na počátku měsíce m už na světě? Narozené 1. dne se počítá už za měsíc narození. */
+function narozenoNaPocatku(narozeni, rok, m) {
+  const p = porovnej(rok, m, narozeni.rok, narozeni.mesic);
+  return p > 0 || (p === 0 && Number(narozeni.den ?? 0) === 1);
 }
 
 // --- Slevy na dani (§ 35ba, § 35bc, § 35bd) ----------------------------------
@@ -54,7 +62,11 @@ export function slevaInvalidita({ invalidita }, rules) {
   return vysledek;
 }
 
-/** Sleva na manžela: jen ročně, 1/12 za každý měsíc, na jehož počátku manžel pečuje o dítě do 3 let. */
+/**
+ * Sleva na manžela (§ 35bb odst. 2 ZDP): jen ročně, 1/12 za každý měsíc, na jehož počátku žije
+ * v domácnosti vyživované dítě poplatníka mladší 3 let. Měsíce se počítají jen ze zadaných dětí:
+ * bez zadaného dítěte sleva nevzniká (revize SLV-10, dřív se bralo 12 měsíců).
+ */
 export function slevaManzel({ manzel, deti = [] }, rules) {
   const s = rules.slevy.manzel;
   const nic = { mesice: 0, rocne: 0 };
@@ -62,12 +74,11 @@ export function slevaManzel({ manzel, deti = [] }, rules) {
   if (cislo(manzel.prijem) > s.limitPrijmu) return { ...nic, duvod: 'prijem' };
 
   const sNarozenim = deti.filter((d) => d?.narozeni?.rok);
-  const mesice = sNarozenim.length === 0
-    ? 12 // dítě nebylo v dotazníku zadáno – bereme odpověď „pečuje o dítě do 3 let“ za celý rok
-    : mesiceSplneno(rules.rok, (r, m) => sNarozenim.some((d) =>
-      porovnej(r, m, d.narozeni.rok, d.narozeni.mesic) > 0 // na počátku měsíce už je na světě
-      && mladsiNez(d.narozeni, s.vekDitete, r, m)
-      && m >= (d.od ?? 1) && m <= (d.do ?? 12)));
+  if (sNarozenim.length === 0) return { ...nic, duvod: 'bezDitete' };
+  const mesice = mesiceSplneno(rules.rok, (r, m) => sNarozenim.some((d) =>
+    narozenoNaPocatku(d.narozeni, r, m)
+    && mladsiNez(d.narozeni, s.vekDitete, r, m)
+    && m >= (d.od ?? 1) && m <= (d.do ?? 12)));
 
   const rocniSazba = manzel.ztpp ? s.rocneZtpp : s.rocne;
   return { mesice, rocne: Math.round((rocniSazba * mesice) / 12) };

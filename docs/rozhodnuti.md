@@ -1221,3 +1221,52 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   ukázkový plán a výsledek by se po načtení neukázal hned. Místo prázdných polí je nad nimi věta
   „Předvyplněné mzdy … jsou jen ukázka. Přepiš je skutečnými hrubými mzdami.“, která zmizí, jakmile
   se některá mzda změní.
+
+## Bydlometr, Slevy 2027, Cestovní příkaz – nízké nálezy (BYD-08, BYD-09, BYD-11, SLV-09, SLV-10, CES-08, CES-10, CES-11, CES-12; ověřen SLV-08)
+
+- **Varianty bez obsahu se neukazují** (BYD-08): při prodloužení o 0 let chybí varianta
+  „Prodloužit splatnost“, při úsporách 0 Kč varianta mimořádné splátky. Obě by byly totožné
+  s přijetím nabídky banky („Prodloužit splatnost o 0 let“, „splatí 0 Kč“). Texty Bydlometru
+  jsme prošli: všude tykání, bez rodových tvarů.
+- **Nepoužité položky JSON** (BYD-09): po PR #27 se `dti.*` a `limitPre2021` používají. Nepoužité
+  byly jen sazby `rates.fix1y`, `rates.fix10y`, `rates.newLoans` (smazané z `defaults.json`)
+  a `prepayment.legacyRegime` (teď se cituje v textu poplatku u starších smluv, `short`). Test
+  hlídá, že každá položka s `value` v `defaults.json` a `rules.json` je v kódu použitá.
+- **Texty bez čísel** (BYD-09): posuny sazby v zátěžovém testu (+1 a +2 p. b.) a v citlivosti
+  (±2 p. b.) jsou v `rules.json` → `model` (návrh aplikace, ne pravidlo). Test čte řetězce
+  ve `vystup.js` a `ui.js` a v lidském textu dovoluje jen čísla paragrafů a předpisů, „1. rok“
+  a „větší než 0“.
+- **Záporné růsty** (BYD-11): růst cen, nájmů, ostatních nákladů i výnos investic smí být
+  záporný, všechny čtyři pole mají stejný rozsah −10 až 20 % ročně (`model.assumptionRange`,
+  pojistka proti překlepu, ne pravidlo). Kalkulačka poplatku říká, že neúčelový úvěr na bydlení
+  (§ 2 odst. 2 písm. a) zákona č. 257/2016 Sb.) má jiný strop podle § 117 odst. 4 a nepočítáme ho.
+- **Zvýšený strop darů** (SLV-09): 30 % stanovil § 1 odst. 1 zákona č. 128/2022 Sb. ve znění
+  čl. X bodu 1 zákona č. 24/2025 Sb., jen za roky 2022 až 2026 (ověřeno na zakonyprolidi.cz,
+  aktuální znění 128/2022 Sb. od 11. 2. 2025). Zákon č. 66/2022 Sb. je o zaměstnanosti a sociálním
+  zabezpečení. Pro rok 2027 platí § 15 odst. 1 ZDP ve znění od 1. 1. 2027: 15 %. Výpočet se nemění.
+- **Sleva na manžela jen ze zadaných dětí** (SLV-10): § 35bb odst. 2 písm. a) ZDP chce vyživované
+  dítě poplatníka mladší 3 let ve společné domácnosti. Bez zadaného dítěte je sleva 0 Kč a výsledek
+  radí dítě zadat v kroku „Děti“ (dřív 12 měsíců naslepo). Krok „Manžel“ to říká předem.
+- **Narozeniny 1. dne měsíce** (SLV-10): u sebe i u dítěte jde zaškrtnout „Narozeniny 1. dne
+  v měsíci“. Věk se dovrší v den narozenin, takže na počátku takového měsíce už je dovršený
+  (§ 35ba odst. 3, § 35c odst. 10 ZDP: rozhoduje počátek měsíce): student nar. 1. 6. 2001 má
+  slevu za 5 měsíců, ne 6. Dítě narozené 1. dne je na počátku měsíce už na světě (sleva na
+  manžela i za měsíc narození, shodně s poznámkou FS v `rules.json`). Bez zaškrtnutí zůstává
+  dřívější předpoklad.
+- **Odkazy na předpisy na výtisku** (CES-08): patička vyúčtování odkazuje na zákoník práce
+  (zakonyprolidi.cz/cs/2006-262), řádek „Sazby“ ve vyúčtování odkazuje na vyhlášku a novely
+  použité pro cesty (url z `rules.json`). Při tisku CSS doplní adresu za odkaz.
+- **Letní čas** (CES-10): délka cesty je skutečně uplynulý čas v zóně Europe/Prague (přes `Intl`,
+  bez knihoven), dny se dělí o místní půlnoci. 29. 3. 2026 0:30–5:30 = 4 h, 25. 10. 2026
+  0:30–5:00 = 5,5 h. Neexistující čas 2:00–2:59 při přechodu na letní čas posuneme o hodinu,
+  dvojznačný čas při přechodu na zimní bereme podruhé (v zimním čase). Zákon to neřeší výslovně,
+  rozhoduje doba trvání cesty.
+- **Hlavička podle roku cesty** (CES-11): rozpětí veřejné sféry, nejvyšší krácení a minimum
+  sjednaného stravného se v hlavičce nabízejí a ověřují podle roku rozpracované cesty (jinak
+  nejpozdější cesty v seznamu, jinak posledního roku se sazbami). Prázdné pole se ukládá jako
+  null a výpočet ho doplní podle sazeb roku každé cesty (dřív se doplňovalo z posledního roku).
+- **Vyšší sjednané stravné** (CES-12): v soukromé sféře jsou nepovinná pole „Vyšší sjednané
+  stravné“ pro tři pásma (§ 163 odst. 3 věta první ZP), nejméně zákonné minimum roku cesty.
+  Krácení za jídlo se počítá z této částky (§ 163 odst. 2). Vyúčtování ji uvádí.
+- **SLV-08** opravil PR #26: strop 15 % se počítá ze základu daně (test „SLV-08: ZD 600 000 …
+  → dary 90 000 Kč“ prochází).

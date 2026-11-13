@@ -33,6 +33,14 @@ export function rozdil(n) {
   if (r === 0) return kc(0);
   return `${r > 0 ? '+' : MINUS}${kc(Math.abs(r))}`;
 }
+/** Číslo s nejvýš dvěma desetinnými místy: 1 → „1“, 1.5 → „1,5“. */
+const desetinne = (n) => cislo(n, Number.isInteger(n) ? 0 : Number.isInteger(n * 10) ? 1 : 2);
+/** 1 procentní bod, 2 procentní body, 5 procentních bodů, 1,5 procentního bodu. */
+function procentniBody(n) {
+  if (!Number.isInteger(n)) return 'procentního bodu';
+  if (n === 1) return 'procentní bod';
+  return n >= 2 && n <= 4 ? 'procentní body' : 'procentních bodů';
+}
 /** 1 rok, 2 roky, 5 let, 2,5 roku. */
 export function roky(n) {
   if (!Number.isInteger(n)) return `${cislo(n, 1)}${NBSP}roku`;
@@ -61,7 +69,8 @@ function kratce(n) {
 
 // zdroj: "defaults:cesta" | "rules:cesta" | "mesto:klic" (položka zvoleného města).
 // meritko: hodnota v poli = value × meritko (práh 0,4 → 40 %). zaporne: povolit záporné číslo.
-// min/max: rozsah čísla v poli (pojistka proti překlepu). volitelne: prázdné pole = null, bez chyby.
+// min/max: rozsah čísla v poli (pojistka proti překlepu). meze: cesta v rules.json k rozsahu
+// { min, max } (BYD-11). volitelne: prázdné pole = null, bez chyby.
 export const POLE_REFIXACE = [
   { id: 'rf-zustatek', klic: 'balance', label: 'Zbývající dluh', jednotka: 'Kč', zdroj: 'defaults:refixExample.balance', kladne: true, krok: 1 },
   { id: 'rf-zbyva', klic: 'remainingYears', label: 'Zbývající doba splácení', jednotka: 'let', zdroj: 'defaults:refixExample.remainingYears', kladne: true, inputmode: 'decimal', krok: 1, min: 0, max: 50 },
@@ -95,10 +104,10 @@ export const POLE_NAJEM = [
   { id: 'nk-pojisteni', klic: 'insuranceYear', label: 'Pojištění ročně', jednotka: 'Kč', zdroj: 'defaults:ownership.insuranceYear', krok: 3 },
   { id: 'nk-dan', klic: 'propertyTaxYear', label: 'Daň z nemovitosti ročně', jednotka: 'Kč', zdroj: 'mesto:propertyTaxPerM2Year', bezZdroje: true, napoveda: 'Odhad podle města a plochy (zákon č. 338/1992 Sb.). Ověř vyhlášku své obce.', krok: 3 },
   { id: 'nk-udrzba', klic: 'maintenancePct', label: 'Údržba a opravy ročně', jednotka: '% ceny', zdroj: 'defaults:ownership.maintenancePct', inputmode: 'decimal', krok: 3 },
-  { id: 'nk-rust-cen', klic: 'priceGrowth', label: 'Růst cen nemovitostí ročně', jednotka: '%', zdroj: 'defaults:assumptions.priceGrowth', inputmode: 'decimal', zaporne: true, krok: 4 },
-  { id: 'nk-rust-najmu', klic: 'rentGrowth', label: 'Růst nájmů ročně', jednotka: '%', zdroj: 'defaults:assumptions.rentGrowth', inputmode: 'decimal', krok: 4 },
-  { id: 'nk-vynos', klic: 'investReturn', label: 'Výnos investic ročně', jednotka: '%', zdroj: 'defaults:assumptions.investReturn', inputmode: 'decimal', krok: 4 },
-  { id: 'nk-rust-nakladu', klic: 'costGrowth', label: 'Růst ostatních nákladů ročně', jednotka: '%', zdroj: 'defaults:assumptions.costGrowth', inputmode: 'decimal', krok: 4 },
+  { id: 'nk-rust-cen', klic: 'priceGrowth', label: 'Růst cen nemovitostí ročně', jednotka: '%', zdroj: 'defaults:assumptions.priceGrowth', inputmode: 'decimal', zaporne: true, meze: 'model.assumptionRange', napoveda: 'Může být i záporné.', krok: 4 },
+  { id: 'nk-rust-najmu', klic: 'rentGrowth', label: 'Růst nájmů ročně', jednotka: '%', zdroj: 'defaults:assumptions.rentGrowth', inputmode: 'decimal', zaporne: true, meze: 'model.assumptionRange', napoveda: 'Může být i záporné.', krok: 4 },
+  { id: 'nk-vynos', klic: 'investReturn', label: 'Výnos investic ročně', jednotka: '%', zdroj: 'defaults:assumptions.investReturn', inputmode: 'decimal', zaporne: true, meze: 'model.assumptionRange', napoveda: 'Může být i záporné.', krok: 4 },
+  { id: 'nk-rust-nakladu', klic: 'costGrowth', label: 'Růst ostatních nákladů ročně', jednotka: '%', zdroj: 'defaults:assumptions.costGrowth', inputmode: 'decimal', zaporne: true, meze: 'model.assumptionRange', napoveda: 'Může být i záporné.', krok: 4 },
   { id: 'nk-horizont', klic: 'horizonYears', label: 'Za kolik let porovnat', jednotka: 'let', zdroj: 'defaults:rentbuyExample.horizonYears', kladne: true, krok: 4, min: 1, max: 50 },
 ];
 
@@ -155,22 +164,33 @@ export function vychoziHodnota(pole, data, mesto) {
   return v === undefined ? null : v;
 }
 
+/** Číslo do hlášky: záporné se znaménkem minus (−10). */
+const cisloSeZnamenkem = (n) => `${n < 0 ? MINUS : ''}${cislo(Math.abs(n), Number.isInteger(n) ? 0 : 1)}`;
+
+/** Rozsah čísla v poli: z rules.json (pole.meze), jinak z pole.min a pole.max. */
+function rozsahPole(p, pravidla) {
+  const z = p.meze && pravidla ? val(cesta(pravidla, p.meze)) : null;
+  return z ? { min: z.min, max: z.max } : { min: p.min, max: p.max };
+}
+
 /**
- * Přečte texty polí formuláře (čistá funkce, bez DOM). texty = { id: text }.
- * Vrací { vstup: { klic: číslo }, chyby: [{ id, label, zprava }] }. Číslo se čte sdíleným prectiCislo.
+ * Přečte texty polí formuláře (čistá funkce, bez DOM). texty = { id: text }, pravidla = rules.json
+ * (rozsahy polí s `meze`). Vrací { vstup: { klic: číslo }, chyby: [{ id, label, zprava }] }.
+ * Číslo se čte sdíleným prectiCislo.
  */
-export function zkontrolujPole(seznam, texty) {
+export function zkontrolujPole(seznam, texty, pravidla) {
   const vstup = {};
   const chyby = [];
   for (const p of seznam) {
     const n = prectiCislo(texty[p.id]);
+    const { min, max } = rozsahPole(p, pravidla);
     let zprava = '';
     if (n === null && p.volitelne) { vstup[p.klic] = null; continue; }
     if (n === null) zprava = 'Vyplň číslo.';
     else if (Number.isNaN(n)) zprava = 'Zadej číslo, bez písmen.';
     else if (n < 0 && !p.zaporne) zprava = 'Číslo nemůže být záporné.';
     else if (p.kladne && n === 0) zprava = 'Zadej číslo větší než 0.';
-    else if (p.min !== undefined && p.max !== undefined && (n < p.min || n > p.max)) zprava = `Zadej číslo od ${p.min} do ${p.max}.`;
+    else if (min !== undefined && max !== undefined && (n < min || n > max)) zprava = `Zadej číslo od ${cisloSeZnamenkem(min)} do ${cisloSeZnamenkem(max)}.`;
     if (zprava) chyby.push({ id: p.id, label: p.label, zprava });
     else vstup[p.klic] = n / (p.meritko || 1);
   }
@@ -395,6 +415,7 @@ export function refixace(v, pravidla) {
     ...options.map((o) => (poznamkaVarianty(o) ? `${nazev(o)}: ${malym(poznamkaVarianty(o))}` : '')).filter(Boolean),
   ];
 
+  const posuny = val(pravidla.model.stressDeltas);
   const stresBunka = (s) => {
     if (!s) return { html: '–' };
     const b = urovenZateze(s.payment, v.income, v.threshold, okraj);
@@ -403,10 +424,10 @@ export function refixace(v, pravidla) {
   const tabulkaStresu = tabulka({
     caption: 'Splátka po další fixaci',
     popisek: 'zátěžový test sazby',
-    sloupce: ['Varianta', 'Splátka teď', 'Sazba +1 p. b.', 'Sazba +2 p. b.'],
+    sloupce: ['Varianta', 'Splátka teď', ...posuny.map((d) => `Sazba +${desetinne(d)} p. b.`)],
     vpravo: [1],
     atributy: options.map((o) => `data-varianta="${o.id}"`),
-    radky: options.map((o) => [nazev(o), kc(o.payment), stresBunka(o.stress[0]), stresBunka(o.stress[1])]),
+    radky: options.map((o) => [nazev(o), kc(o.payment), ...posuny.map((_, i) => stresBunka(o.stress[i]))]),
   });
 
   return {
@@ -421,7 +442,7 @@ export function refixace(v, pravidla) {
     lista: { cislo: kc(c.payment), popis: `Nejlevnější splátka: ${malym(nazev(c))}` },
     tabulkaVariant,
     poznamky,
-    uvodStresu: `Splátka po skončení nové fixace na ${roky(v.fixYears)}, kdyby sazba byla o 1 nebo 2 procentní body vyšší. Zbytek dluhu se pak splácí do původního konce.`,
+    uvodStresu: `Splátka po skončení nové fixace na ${roky(v.fixYears)}, kdyby sazba byla o ${posuny.map(desetinne).join(' nebo ')} ${procentniBody(posuny.at(-1))} vyšší. Zbytek dluhu se pak splácí do původního konce.`,
     tabulkaStresu,
     poznamkaZateze: `Zelená: v pořádku. Žlutá: blízko hranice (do ${podil(okraj)} pod ní). Červená: nad hranicí ${podil(v.threshold)} čistého příjmu. Hranice je orientační, nejde o limit ČNB. Ukazatele DSTI a DTI jsou pro vlastní bydlení vypnuté, banky si ale bonitu posuzují samy.`,
     shrnuti: shrnutiRefixace(v),
@@ -450,7 +471,7 @@ export function poplatek(p, pravidla) {
     return { popis: 'Poplatek', cislo: kc(0), duvod: starsi ? `${duvod} Platí to i pro smlouvy a fixace před ${zmena}.` : duvod };
   }
   if (r.legacyWarning) {
-    const zaklad = `Smlouva i současná fixace začaly před ${zmena}. Platí pro ně dřívější znění zákona: procentní strop neplatí, banka smí chtít jen skutečné náklady.`;
+    const zaklad = `Smlouva i současná fixace začaly před ${zmena}. Platí pro ně dřívější znění zákona (${pr.legacyRegime.short}): procentní strop neplatí, banka smí chtít jen skutečné náklady.`;
     if (r.fee === null) {
       return { popis: 'Poplatek', cislo: 'Zkontroluj smlouvu', duvod: `${zaklad} Nejvýš ale úrok do konce fixace (§ 117 odst. 5). Zadej smluvní sazbu a spočítáme ho. Zkontroluj smlouvu.` };
     }
@@ -529,7 +550,8 @@ export function tabulkaLet(res) {
 }
 
 export function tabulkaCitlivosti(v, pravidla) {
-  const s = sensitivity(v, pravidla);
+  const d = val(pravidla.model.sensitivityDelta);
+  const s = sensitivity(v, pravidla, [-d, 0, d]);
   return tabulka({
     caption: `Rozdíl čistého jmění za ${roky(v.horizonYears)} v Kč (koupě minus nájem)`,
     popisek: 'citlivost na růst cen a výnos investic',
@@ -622,7 +644,7 @@ export function najem(v, pravidla, rozmer = {}) {
     graf: grafNajmu(res, rozmer),
     tabulkaLet: tabulkaLet(res),
     tabulkaCitlivosti: tabulkaCitlivosti(v, pravidla),
-    uvodCitlivosti: `Jak se změní výsledek za ${roky(n)}, když ceny bytů rostou nebo investice vynášejí o 2 procentní body víc či míň. Kladné číslo: lépe vychází koupě. Záporné: lépe vychází nájem. Zvýrazněné pole je tvoje zadání.`,
+    uvodCitlivosti: `Jak se změní výsledek za ${roky(n)}, když ceny bytů rostou nebo investice vynášejí o ${desetinne(val(pravidla.model.sensitivityDelta))} ${procentniBody(val(pravidla.model.sensitivityDelta))} víc či míň. Kladné číslo: lépe vychází koupě. Záporné: lépe vychází nájem. Zvýrazněné pole je tvoje zadání.`,
     shrnuti: null,
     surove: res,
   };

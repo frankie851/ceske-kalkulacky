@@ -96,7 +96,7 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
 
         <section class="card" aria-labelledby="pp-nadpis">
           <h2 id="pp-nadpis">Poplatek za mimořádnou splátku během fixace</h2>
-          <p class="muted">Kolik nejvýš smí banka chtít, když splatíš část účelového úvěru na bydlení před koncem fixace. Nové stropy platí pro smlouvy uzavřené od {{ pp.platnost }} a pro novější fixace. U starších smluv ukážeme, co platí podle dřívějšího znění zákona.</p>
+          <p class="muted">Kolik nejvýš smí banka chtít, když splatíš část účelového úvěru na bydlení před koncem fixace. Nové stropy platí pro smlouvy uzavřené od {{ pp.platnost }} a pro novější fixace. U starších smluv ukážeme, co platí podle dřívějšího znění zákona. Neúčelový úvěr na bydlení (třeba americká hypotéka) má jiný strop podle § 117 odst. 4 zákona o spotřebitelském úvěru a tahle kalkulačka ho nepočítá.</p>
           <form id="form-poplatek" class="bm-poplatek-formular" action="#pp-vysledek" method="get" novalidate>
             <div class="bm-dvojice">
               {%- for f in pp.pole %}{{ pole(f) }}{% endfor %}
