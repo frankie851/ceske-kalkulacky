@@ -858,3 +858,50 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   v `zakonik.zaokrouhleni`.
 - **OSVČ** (CES-05): místo „pravidla jsme spolehlivě neověřili“ stránka říká, že náhrady OSVČ jsou
   mimo rozsah kalkulačky, a odkazuje na § 24 odst. 2 písm. k) a zt) ZDP.
+
+## Bydlometr – střední nálezy (BYD-01 až BYD-07)
+
+- **Poplatek za mimořádnou splátku = nejnižší ze tří stropů** (zákon č. 257/2016 Sb., znění od
+  1. 9. 2024, ověřeno na zakonyprolidi.cz): § 117 odst. 4 (0,25 % za započatý rok do konce fixace,
+  nejvýš 1 %), § 117 odst. 5 (úrok do konce fixace) a § 117 odst. 5 věta druhá s § 117a
+  (administrativní náklady nejvýš 1 000 Kč + kladný úrokový rozdíl). Kalkulačka se nově ptá na
+  smluvní sazbu (předvyplněná ukázková) a nepovinně na průměr sazeb ČNB podle § 117a. Bez průměru
+  ČNB výsledek připomene, že při průměru ≥ smluvní sazbě je strop 1 000 Kč.
+  - Úrok i úrokový rozdíl počítáme z mimořádné splátky, jako by se z ní do konce fixace platil jen
+    úrok. Pro anuitní úvěr je to horní mez (vyšší splátka úrok i rozdíl jen zmenší), takže věta
+    „Poplatek nejvýš …“ zůstává pravdivá bez dalších polí (zůstatek, splátka). Když průměr ČNB
+    není nižší než smluvní sazba, rozdíl není kladný a strop je 1 000 Kč.
+  - Průměr ČNB nepředvyplňujeme: ČNB ho zveřejňuje pro 20 skupin úvěrů a skupinu určuje banka.
+- **Starší smlouvy** (před 1. 9. 2024 a bez fixace začaté po tomto dni, zákon č. 462/2023 Sb.,
+  čl. XV bod 2: „ode dne, kdy po dni nabytí účinnosti … započne běžet nové období“): splátka ke
+  konci fixace a do 25 % v měsíci před výročím jsou zdarma i podle dřívějšího znění (§ 117 odst. 3
+  písm. c), d), f) a odst. 5 ve znění do 31. 8. 2024). Jinak procentní strop neplatil, banka smí
+  chtít skutečné náklady, nejvýš úrok do konce fixace – se smluvní sazbou ukážeme tuto mez.
+  Odečtení bezplatné části od vyšší splátky přinesla až novela (čl. XIV bod 7), u starších smluv
+  se proto neodečítá. Fixace začatá přesně 1. 9. 2024 se podle textu přechodného ustanovení řídí
+  dřívějším zněním (dřív kód bral „od 1. 9.“).
+- Pod kalkulačkou poplatku je výčet dalších bezplatných případů § 117 odst. 3 písm. a), b), e),
+  f), g) (seznam v `rules.json` → `prepayment.otherFreeReasons`, e) a f) jen pro nové znění).
+- **Neplatný vstup** (BYD-03): výsledek, tabulky a zátěžový test se skryjí, místo nich je hláška
+  s `role="alert"` a výčtem polí, lepivá lišta ukáže „–“. Kalkulačka poplatku ukáže „–“ a hlášku.
+  Kontrola polí je čistá funkce `zkontrolujPole` ve `vystup.js` (meze polí jsou v definici pole,
+  ne v `ui.js`), stav výsledku `stavVysledku`.
+- **DTI a úspora na dani** (BYD-04): refixace ukazuje DTI (zbývající dluh / roční čistý příjem)
+  s poznámkou, že pro vlastní bydlení ČNB limit nestanovila (záznam bankovní rady 4. 6. 2026), a
+  úsporu na dani za 1. rok nové fixace u nejlevnější varianty: min(úroky, limit) × 15 %. Limit
+  150 000 Kč (§ 15 odst. 4 ZDP), se zaškrtnutím „Bydlení je pořízené před 1. 1. 2021“ 300 000 Kč
+  (zákon č. 386/2020 Sb., čl. IV body 3 a 4). Nájem vs. koupě má nepovinné pole příjmu pro DTI,
+  u investičního bytu připomíná doporučení ČNB DTI 7 (TZ 27. 11. 2025) a nad ním varuje. Úspora na
+  dani v 1. roce a celkem je vidět ve výsledku. DTI počítáme jen z této hypotéky.
+- **Nad limitem LTV se porovnání nepočítá** (BYD-05): výsledek ukáže, kolik vlastních zdrojů
+  chybí; statistiky, graf, tabulky a citlivost jsou skryté. Platí i pro investiční byt (doporučení
+  ČNB 70 %), text tam mluví o doporučení. LTV v hlášce má jedno desetinné místo zaokrouhlené
+  nahoru, takže nad limitem nikdy neukáže „80 %“.
+- **Zdroje** (BYD-07): zákonná pravidla v `rules.json` mají úřední url (zakonyprolidi.cz s
+  paragrafem, cnb.cz) a citaci `zdroj: { pravniZaklad, url, citace }`. Komerční weby zůstaly jen
+  u tržních údajů a v `meta.zdroje` mají poznámku „Tržní údaj“. Poplatek za vklad do katastru
+  ověřen v zákoně č. 634/2004 Sb., položka 120 písm. a) (2 000 Kč), daň z nemovitosti v zákoně
+  č. 338/1992 Sb. (§ 10 odst. 3, § 11). Limit 150 000 Kč cituje § 15 odst. 4 ZDP.
+- **Testy** (BYD-06): `test/format.test.js` (parseNumber a formátování), `test/vystup.test.js`
+  (čtení formuláře, neplatný vstup, výstupy). Dva „bankovní“ testy anuity porovnávají přesnou
+  hodnotu ze vzorce (21 077,04 Kč; 16 385,50 Kč) místo tolerance.

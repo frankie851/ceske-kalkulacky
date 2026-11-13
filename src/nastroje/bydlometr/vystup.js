@@ -2,9 +2,10 @@
 // (ukázkový výsledek v bydlometr.11tydata.js) i v prohlížeči (ui.js), takže stránka po načtení JS
 // nemění rozvržení, jen čísla. Výpočty jsou v js/mortgage.js a js/rentbuy.js (převzato beze změny),
 // výchozí hodnoty v defaults.json, pravidla v rules.json. Žádné částky ani sazby tu nejsou natvrdo.
-import { compareRefixOptions, prepaymentFeeFromDates, startedYearsBetween } from './js/mortgage.js';
-import { simulateRentBuy, sensitivity } from './js/rentbuy.js';
+import { compareRefixOptions, prepaymentFeeFromDates, startedYearsBetween, newPrepaymentRulesApply, interestPaidInMonths, interestDeductionSaving } from './js/mortgage.js';
+import { simulateRentBuy, sensitivity, ltvNahoru } from './js/rentbuy.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 import { caroveGrafy, esc } from '../../js/graf.js';
 
 const NBSP = ' ';
@@ -22,6 +23,10 @@ export function podil(p) {
 export const sazba = (s) => procenta(s, Number.isInteger(s) ? 0 : 2);
 /** Podíl zaokrouhlený na celá procenta: 0.2345 → „23 %“. */
 export const cele = (p) => procenta(Math.round(p * 100));
+/** LTV nad limitem na desetinu procenta, zaokrouhlené nahoru: 0.80015 → „80,1 %“ (nikdy „80 %“). */
+export const ltvNadLimitem = (ltv) => procenta(Math.round(ltvNahoru(ltv) * 1000) / 10, 1);
+/** DTI na jedno desetinné místo: 3.111 → „3,1“. */
+export const dtiText = (x) => cislo(Math.round(x * 10) / 10, 1);
 /** Rozdíl se znaménkem: +1 234 Kč, −1 234 Kč, 0 Kč. */
 export function rozdil(n) {
   const r = Math.round(n);
@@ -56,9 +61,10 @@ function kratce(n) {
 
 // zdroj: "defaults:cesta" | "rules:cesta" | "mesto:klic" (položka zvoleného města).
 // meritko: hodnota v poli = value × meritko (práh 0,4 → 40 %). zaporne: povolit záporné číslo.
+// min/max: rozsah čísla v poli (pojistka proti překlepu). volitelne: prázdné pole = null, bez chyby.
 export const POLE_REFIXACE = [
   { id: 'rf-zustatek', klic: 'balance', label: 'Zbývající dluh', jednotka: 'Kč', zdroj: 'defaults:refixExample.balance', kladne: true, krok: 1 },
-  { id: 'rf-zbyva', klic: 'remainingYears', label: 'Zbývající doba splácení', jednotka: 'let', zdroj: 'defaults:refixExample.remainingYears', kladne: true, inputmode: 'decimal', krok: 1 },
+  { id: 'rf-zbyva', klic: 'remainingYears', label: 'Zbývající doba splácení', jednotka: 'let', zdroj: 'defaults:refixExample.remainingYears', kladne: true, inputmode: 'decimal', krok: 1, min: 0, max: 50 },
   { id: 'rf-sazba-dosud', klic: 'currentRate', label: 'Dosavadní sazba', jednotka: '%', zdroj: 'defaults:refixExample.currentRate', inputmode: 'decimal', krok: 1 },
   { id: 'rf-prijem', klic: 'income', label: 'Čistý měsíční příjem domácnosti', jednotka: 'Kč', zdroj: 'defaults:refixExample.income', napoveda: 'Jen pro podíl splátky na příjmu.', krok: 1 },
   { id: 'rf-sazba-banky', klic: 'offeredRate', label: 'Sazba, kterou nabízí tvoje banka', jednotka: '%', zdroj: 'defaults:rates.averageOffer', inputmode: 'decimal', napoveda: 'Předvyplněná je průměrná nabídková sazba.', krok: 2 },
@@ -69,7 +75,7 @@ export const POLE_REFIXACE = [
   { id: 'rf-ostatni', klic: 'otherCosts', label: 'Ostatní poplatky za refinancování', jednotka: 'Kč', zdroj: 'defaults:refinanceCosts.other', napoveda: 'Zpracování, čerpání a podobně.', krok: 2 },
   { id: 'rf-uspory', klic: 'savings', label: 'Úspory na mimořádnou splátku', jednotka: 'Kč', zdroj: 'defaults:refixExample.savings', napoveda: 'Ke konci fixace se dají splatit zdarma.', krok: 3 },
   { id: 'rf-prodlouzit', klic: 'extendYears', label: 'Prodloužit splatnost o', jednotka: 'let', zdroj: 'defaults:refixExample.extendYears', krok: 3 },
-  { id: 'rf-prah', klic: 'threshold', label: 'Hranice zátěže rozpočtu', jednotka: '%', zdroj: 'rules:burden.threshold', meritko: 100, inputmode: 'decimal', bezZdroje: true, napoveda: 'Kolik procent příjmu smí splátka spolknout. Orientační hodnota, není to limit ČNB.', krok: 3 },
+  { id: 'rf-prah', klic: 'threshold', label: 'Hranice zátěže rozpočtu', jednotka: '%', zdroj: 'rules:burden.threshold', meritko: 100, inputmode: 'decimal', bezZdroje: true, napoveda: 'Kolik procent příjmu smí splátka spolknout. Orientační hodnota, není to limit ČNB.', krok: 3, min: 0, max: 100 },
 ];
 
 export const POLE_NAJEM = [
@@ -80,9 +86,10 @@ export const POLE_NAJEM = [
   { id: 'nk-naklady-koupe', klic: 'purchaseCosts', label: 'Jednorázové náklady koupě', jednotka: 'Kč', zdroj: 'defaults:ownership.purchaseCosts', bezZdroje: true, napoveda: 'Vklad do katastru, odhad, ověření podpisů. Bez provize realitky.', krok: 2 },
   { id: 'nk-vek', klic: 'age', label: 'Věk žadatele', jednotka: 'let', zdroj: 'defaults:rentbuyExample.age', kladne: true, krok: 2,
     napoveda: ({ pravidla: { ltv } }) => `Mladším ${val(ltv.youngAgeLimit)} let půjčí banka až ${cele(val(ltv.youngApplicant))} ceny bytu, ostatním ${cele(val(ltv.ownHousing))}.` },
-  { id: 'nk-splatnost', klic: 'loanYears', label: 'Splatnost hypotéky', jednotka: 'let', zdroj: 'defaults:rentbuyExample.loanYears', kladne: true, krok: 2 },
+  { id: 'nk-splatnost', klic: 'loanYears', label: 'Splatnost hypotéky', jednotka: 'let', zdroj: 'defaults:rentbuyExample.loanYears', kladne: true, krok: 2, min: 1, max: 50 },
   { id: 'nk-sazba', klic: 'rate', label: 'Úroková sazba', jednotka: '%', zdroj: 'defaults:rates.averageOffer', inputmode: 'decimal', krok: 2 },
   { id: 'nk-fixace', klic: 'fixYears', label: 'Fixace', jednotka: 'let', zdroj: 'defaults:rentbuyExample.fixYears', kladne: true, krok: 2 },
+  { id: 'nk-prijem', klic: 'income', label: 'Čistý měsíční příjem domácnosti', jednotka: 'Kč', zdroj: 'defaults:rentbuyExample.income', volitelne: true, bezZdroje: true, napoveda: 'Nepovinné. Jen pro ukazatel DTI (úvěr k ročnímu čistému příjmu).', krok: 2 },
   { id: 'nk-sazba-po', klic: 'rateAfterFix', label: 'Sazba po skončení fixace', jednotka: '%', zdroj: 'defaults:rates.averageOffer', inputmode: 'decimal', bezZdroje: true, napoveda: 'Tvůj odhad. Platí až do konce splácení.', krok: 2 },
   { id: 'nk-fond-oprav', klic: 'repairFundPerM2Month', label: 'Fond oprav za m² měsíčně', jednotka: 'Kč', zdroj: 'defaults:ownership.repairFundPerM2Month', inputmode: 'decimal', krok: 3 },
   { id: 'nk-pojisteni', klic: 'insuranceYear', label: 'Pojištění ročně', jednotka: 'Kč', zdroj: 'defaults:ownership.insuranceYear', krok: 3 },
@@ -92,12 +99,16 @@ export const POLE_NAJEM = [
   { id: 'nk-rust-najmu', klic: 'rentGrowth', label: 'Růst nájmů ročně', jednotka: '%', zdroj: 'defaults:assumptions.rentGrowth', inputmode: 'decimal', krok: 4 },
   { id: 'nk-vynos', klic: 'investReturn', label: 'Výnos investic ročně', jednotka: '%', zdroj: 'defaults:assumptions.investReturn', inputmode: 'decimal', krok: 4 },
   { id: 'nk-rust-nakladu', klic: 'costGrowth', label: 'Růst ostatních nákladů ročně', jednotka: '%', zdroj: 'defaults:assumptions.costGrowth', inputmode: 'decimal', krok: 4 },
-  { id: 'nk-horizont', klic: 'horizonYears', label: 'Za kolik let porovnat', jednotka: 'let', zdroj: 'defaults:rentbuyExample.horizonYears', kladne: true, krok: 4 },
+  { id: 'nk-horizont', klic: 'horizonYears', label: 'Za kolik let porovnat', jednotka: 'let', zdroj: 'defaults:rentbuyExample.horizonYears', kladne: true, krok: 4, min: 1, max: 50 },
 ];
 
 export const POLE_POPLATEK = [
   { id: 'pp-castka', klic: 'amount', label: 'Mimořádná splátka', jednotka: 'Kč', zdroj: 'defaults:refixExample.savings', kladne: true },
   { id: 'pp-puvodni', klic: 'originalLoan', label: 'Původní výše úvěru', jednotka: 'Kč', zdroj: 'defaults:refixExample.originalLoan', kladne: true, napoveda: ({ pravidla }) => `Z ní se počítá bezplatných ${podil(val(pravidla.prepayment.freeShareOfOriginalLoan))} před výročím smlouvy.` },
+  { id: 'pp-sazba', klic: 'contractRatePct', label: 'Smluvní úroková sazba', jednotka: '%', zdroj: 'defaults:refixExample.contractRate', inputmode: 'decimal', volitelne: true, bezZdroje: true, min: 0, max: 30,
+    napoveda: 'Sazba současné fixace podle smlouvy. Poplatek nesmí být vyšší než úrok do konce fixace.' },
+  { id: 'pp-sazba-cnb', klic: 'referenceRatePct', label: 'Průměrná sazba ČNB pro srovnatelnou fixaci', jednotka: '%', zdroj: '', inputmode: 'decimal', volitelne: true, bezZdroje: true, min: 0, max: 30,
+    napoveda: 'Nepovinné. ČNB zveřejňuje průměry podle § 117a zákona o spotřebitelském úvěru. Kterou skupinu použít, ti řekne banka.' },
 ];
 export const DATA_POPLATKU = [
   { id: 'pp-smlouva', klic: 'contractDate', label: 'Datum uzavření smlouvy' },
@@ -110,6 +121,7 @@ const cesta = (obj, c) => c.split('.').reduce((o, k) => (o == null ? undefined :
 
 /** Položka {value, source, …} pro pole; u „mesto:“ z vybraného města. */
 export function polozka(pole, data, mesto) {
+  if (!pole.zdroj) return undefined;
   const [soubor, c] = pole.zdroj.split(':');
   if (soubor === 'mesto') return data.defaults.cities[mesto]?.[c];
   return cesta(soubor === 'rules' ? data.pravidla : data.defaults, c);
@@ -139,11 +151,40 @@ export function napovedaPole(pole, data, mesto) {
 
 /** Výchozí hodnota pro výpočet (bez měřítka pole). */
 export function vychoziHodnota(pole, data, mesto) {
-  return val(polozka(pole, data, mesto));
+  const v = val(polozka(pole, data, mesto));
+  return v === undefined ? null : v;
+}
+
+/**
+ * Přečte texty polí formuláře (čistá funkce, bez DOM). texty = { id: text }.
+ * Vrací { vstup: { klic: číslo }, chyby: [{ id, label, zprava }] }. Číslo se čte sdíleným prectiCislo.
+ */
+export function zkontrolujPole(seznam, texty) {
+  const vstup = {};
+  const chyby = [];
+  for (const p of seznam) {
+    const n = prectiCislo(texty[p.id]);
+    let zprava = '';
+    if (n === null && p.volitelne) { vstup[p.klic] = null; continue; }
+    if (n === null) zprava = 'Vyplň číslo.';
+    else if (Number.isNaN(n)) zprava = 'Zadej číslo, bez písmen.';
+    else if (n < 0 && !p.zaporne) zprava = 'Číslo nemůže být záporné.';
+    else if (p.kladne && n === 0) zprava = 'Zadej číslo větší než 0.';
+    else if (p.min !== undefined && p.max !== undefined && (n < p.min || n > p.max)) zprava = `Zadej číslo od ${p.min} do ${p.max}.`;
+    if (zprava) chyby.push({ id: p.id, label: p.label, zprava });
+    else vstup[p.klic] = n / (p.meritko || 1);
+  }
+  return { vstup, chyby };
+}
+
+/** Stav výsledku při chybách ve formuláři (BYD-03): s chybou se výsledek neukazuje. */
+export function stavVysledku(chyby) {
+  if (!chyby.length) return { platny: true, zprava: '' };
+  return { platny: false, zprava: `Výsledek neukazujeme, dokud neopravíš pole: ${chyby.map((c) => c.label).join(', ')}.` };
 }
 
 /** Text do pole formuláře z hodnoty pro výpočet (práh 0,4 → „40“). */
-export const textPole = (pole, hodnota) => hodnotaPole(Math.round(hodnota * (pole.meritko || 1) * 100) / 100);
+export const textPole = (pole, hodnota) => (hodnota === null || hodnota === undefined ? '' : hodnotaPole(Math.round(hodnota * (pole.meritko || 1) * 100) / 100));
 
 /** Daň z nemovitosti za rok: plocha × odhad na m² pro město. */
 export const danZNemovitosti = (data, mesto, plocha) =>
@@ -159,7 +200,7 @@ export function posunRoky(iso, n) {
 }
 
 export function vychoziRefixace(data) {
-  const v = {};
+  const v = { pre2021: false };
   for (const p of POLE_REFIXACE) v[p.klic] = vychoziHodnota(p, data);
   return v;
 }
@@ -267,10 +308,30 @@ function poznamkaVarianty(o) {
   return '';
 }
 
+/** DTI (dluh / čistý roční příjem) jen informativně: pro vlastní bydlení ČNB limit nestanovila. */
+function dtiStatistika(dti, pravidla) {
+  if (dti === null) return { hodnota: '–', popis: 'DTI, dluh k ročnímu čistému příjmu (příjem nezadán)', zvyraznit: false };
+  return { hodnota: dtiText(dti), popis: `DTI, dluh k ročnímu čistému příjmu: ${pravidla.dti.ownHousing.short}`, zvyraznit: false };
+}
+
+/** Úspora na dani z odpočtu úroků (§ 15 odst. 3 a 4 ZDP) za 1. rok nové fixace u nejlevnější varianty. */
+function danovaUspora(c, v, pravidla) {
+  const d = pravidla.interestDeduction;
+  const limit = val(v.pre2021 ? d.limitPre2021 : d.limit);
+  const sazbaDane = val(d.taxRate);
+  const uroky = c.principal > 0 ? interestPaidInMonths(c.principal, c.rate, c.months, 12) : 0;
+  return {
+    hodnota: kc(interestDeductionSaving(uroky, sazbaDane, limit)),
+    popis: `úspora na dani z odpočtu úroků za 1. rok (${podil(sazbaDane)} z úroků ${kc(uroky)}, odpočet nejvýš ${kc(limit)} na domácnost)`,
+    zvyraznit: false,
+  };
+}
+
 /**
  * Porovnání variant při konci fixace a zátěžový test.
  * v: balance, remainingYears, currentRate, income, offeredRate, fixYears, competitorRate,
- *    valuation, cadastreFee, otherCosts, savings, extendYears, threshold (podíl)
+ *    valuation, cadastreFee, otherCosts, savings, extendYears, threshold (podíl),
+ *    pre2021 (bytová potřeba obstaraná před 1. 1. 2021 → vyšší limit odpočtu úroků)
  */
 export function refixace(v, pravidla) {
   const res = compareRefixOptions({
@@ -308,6 +369,8 @@ export function refixace(v, pravidla) {
       popis: Number.isFinite(c.burden.ratio) ? `splátky z čistého příjmu, ${UROVEN[c.burden.level]} (hranice ${podil(v.threshold)})` : 'podíl na příjmu (příjem nezadán)',
       zvyraznit: c.burden.level === 'ok',
     },
+    dtiStatistika(res.dti, pravidla),
+    danovaUspora(c, v, pravidla),
   ];
 
   const nejlevnejsi = options.indexOf(c);
@@ -378,27 +441,50 @@ export function poplatek(p, pravidla) {
     };
   }
   const r = prepaymentFeeFromDates(p, pravidla);
-  if (r.legacyWarning) {
-    return {
-      popis: 'Poplatek', cislo: 'Zkontroluj smlouvu',
-      duvod: `Smlouva i současná fixace začaly před ${datum(val(pr.lawChangeDate))}. Pro ně můžou platit jiná pravidla, rozhoduje smlouva.`,
-    };
-  }
-  if (r.fee === 0) {
-    const duvod = p.paymentDate === p.fixEndDate
+  const zmena = datum(val(pr.lawChangeDate));
+  if (r.free) {
+    const duvod = r.freeReason === 'fixEnd'
       ? 'Splátka ke konci fixace je zdarma.'
       : `V měsíci před výročím smlouvy je splátka do ${podil(val(pr.freeShareOfOriginalLoan))} původní výše úvěru jednou ročně zdarma.`;
-    return { popis: 'Poplatek', cislo: kc(0), duvod };
+    const starsi = !newPrepaymentRulesApply(p.contractDate, p.fixStartDate, pravidla);
+    return { popis: 'Poplatek', cislo: kc(0), duvod: starsi ? `${duvod} Platí to i pro smlouvy a fixace před ${zmena}.` : duvod };
+  }
+  if (r.legacyWarning) {
+    const zaklad = `Smlouva i současná fixace začaly před ${zmena}. Platí pro ně dřívější znění zákona: procentní strop neplatí, banka smí chtít jen skutečné náklady.`;
+    if (r.fee === null) {
+      return { popis: 'Poplatek', cislo: 'Zkontroluj smlouvu', duvod: `${zaklad} Nejvýš ale úrok do konce fixace (§ 117 odst. 5). Zadej smluvní sazbu a spočítáme ho. Zkontroluj smlouvu.` };
+    }
+    return { popis: 'Poplatek nejvýš', cislo: kc(r.fee), duvod: `${zaklad} Nejvýš ale úrok z této částky do konce fixace (§ 117 odst. 5). Zkontroluj smlouvu.` };
   }
   const roku = Math.max(1, startedYearsBetween(p.paymentDate, p.fixEndDate));
   const zaRok = val(pr.feePerStartedYear);
   const zdarma = Math.max(0, p.amount - r.chargedAmount);
+  const admin = kc(val(pr.adminCostCap));
   let duvod = `Do konce fixace ${roku === 1 ? 'zbývá' : 'zbývají'} ${roky(roku)} (i započatý rok se počítá celý): ${roku} × ${podil(zaRok)} = ${podil(roku * zaRok)}`;
   duvod += r.capped ? `, ale nejvýš ${podil(val(pr.feeCap))}` : '';
-  duvod += ` z ${kc(r.chargedAmount)}.`;
+  duvod += ` z ${kc(r.chargedAmount)}, tedy ${kc(r.limits.pctCap)}.`;
   if (zdarma > 0) duvod += ` ${kc(zdarma)} (${podil(val(pr.freeShareOfOriginalLoan))} původní výše úvěru) je v měsíci před výročím smlouvy zdarma.`;
+  if (r.binding === 'interest') duvod += ` Poplatek ale nesmí přesáhnout úrok z této částky do konce fixace: ${kc(r.limits.interestCap)} (§ 117 odst. 5).`;
+  if (r.limits.costCap !== null) {
+    duvod += p.referenceRatePct >= p.contractRatePct
+      ? ` Průměr sazeb ČNB není nižší než tvoje sazba, takže banka smí chtít jen administrativní náklady, nejvýš ${admin} (§ 117a).`
+      : ` Podle průměru sazeb ČNB jsou skutečné náklady nejvýš ${kc(r.limits.costCap)}: administrativa do ${admin} a úrokový rozdíl (§ 117a).`;
+  } else {
+    duvod += ` Když je průměrná sazba ČNB pro srovnatelnou fixaci stejná nebo vyšší než tvoje, smí banka chtít nejvýš ${admin} (§ 117a). Doplň ji a spočítáme to přesně.`;
+  }
   duvod += ' Je to zákonný strop. Banka smí účtovat jen skutečné náklady, takže může chtít méně.';
   return { popis: 'Poplatek nejvýš', cislo: kc(r.fee), duvod };
+}
+
+/** Další bezplatné případy podle § 117 odst. 3 (pro výpis pod kalkulačkou poplatku). */
+export function dalsiDuvody(pravidla) {
+  const d = pravidla.prepayment.otherFreeReasons;
+  return {
+    polozky: val(d).map((x) => ({ ...x, text: `${x.text.charAt(0).toUpperCase()}${x.text.slice(1)}` })),
+    url: d.zdroj.url,
+    odkaz: 'zákon č. 257/2016 Sb., § 117 odst. 3',
+    poznamka: `Písmena e) a f) platí pro smlouvy uzavřené od ${datum(val(pravidla.prepayment.lawChangeDate))} a pro fixace začaté později.`,
+  };
 }
 
 /* ---------- nájem vs. koupě ---------- */
@@ -465,14 +551,58 @@ export function najem(v, pravidla, rozmer = {}) {
   const n = posledni.year;
   const be = res.breakEvenYear;
   const koupe = res.finalDiff >= 0;
+  const investicni = Boolean(v.investment);
+  const dtiInv = val(pravidla.dti.investment);
+  const limitLtv = `${investicni ? 'doporučení ČNB ' : 'limit '}${cele(res.maxLtv)}`;
 
   const varovani = [];
   if (v.ownFunds < (v.purchaseCosts ?? 0)) varovani.push(`Vlastní zdroje nepokryjí ani jednorázové náklady koupě (${kc(v.purchaseCosts)}).`);
-  if (!res.ltvOk) {
-    varovani.push(`Úvěr by měl LTV ${cele(res.ltv)}, ale limit je ${cele(res.maxLtv)}. Na koupi chybí ${kc(res.loan - res.maxLtv * res.price)} vlastních zdrojů, banka by takový úvěr neposkytla.`);
+  if (res.ltvExceeded) {
+    varovani.push(investicni
+      ? `Úvěr by měl LTV ${ltvNadLimitem(res.ltv)}, ale ČNB u investičního bytu doporučuje nejvýš ${cele(res.maxLtv)}. Na koupi chybí ${kc(res.missingOwnFunds)} vlastních zdrojů.`
+      : `Úvěr by měl LTV ${ltvNadLimitem(res.ltv)}, ale limit je ${cele(res.maxLtv)}. Na koupi chybí ${kc(res.missingOwnFunds)} vlastních zdrojů, banka by takový úvěr neposkytla.`);
+  }
+  if (investicni && res.dti !== null && res.dti > dtiInv) {
+    varovani.push(`DTI ${dtiText(res.dti)} je nad doporučením ČNB pro investiční byt, které je nejvýš ${cislo(dtiInv)}.`);
   }
 
+  const dtiPopis = res.dti !== null
+    ? `, DTI ${dtiText(res.dti)}${investicni ? ` (doporučení ČNB nejvýš ${cislo(dtiInv)})` : ''}`
+    : (investicni ? `, pro DTI zadej příjem (doporučení ČNB nejvýš ${cislo(dtiInv)})` : '');
+  const ltvPopis = res.ltvExceeded ? ltvNadLimitem(res.ltv) : cele(res.ltv);
+
+  // Úvěr nad limitem LTV: porovnání nepočítáme (BYD-05), ukážeme jen, kolik chybí
+  if (res.ltvExceeded) {
+    const pomlcka = (popis) => ({ hodnota: '–', popis, zvyraznit: false });
+    return {
+      platny: false,
+      vysledek: {
+        kicker: 'Nájem vs. koupě',
+        nadpis: 'Na koupi chybí vlastní zdroje',
+        cislo: kc(res.missingOwnFunds),
+        popis: investicni ? `vlastních zdrojů chybí do doporučení ČNB (LTV nejvýš ${cele(res.maxLtv)})` : `vlastních zdrojů chybí do limitu LTV ${cele(res.maxLtv)}`,
+        vysvetleni: `Úvěr ${kc(res.loan)} by byl ${ltvNadLimitem(res.ltv)} ceny bytu. Porovnání s nájmem proto nepočítáme. Přidej vlastní zdroje, nebo zmenši byt či cenu za m².`,
+        statistiky: [pomlcka('bod zvratu'), { hodnota: kc(res.price), popis: 'cena bytu', zvyraznit: false },
+          { hodnota: kc(res.loan), popis: `úvěr, LTV ${ltvPopis} (${limitLtv})${dtiPopis}`, zvyraznit: false }, pomlcka('splátka'), pomlcka('úspora na dani')],
+      },
+      lista: { cislo: kc(res.missingOwnFunds), popis: 'Na koupi chybí vlastní zdroje' },
+      varovani,
+      graf: '',
+      tabulkaLet: '',
+      tabulkaCitlivosti: '',
+      uvodCitlivosti: '',
+      shrnuti: null,
+      surove: res,
+    };
+  }
+
+  const odpocet = v.deductInterest !== false && !investicni;
+  const dan = odpocet
+    ? { hodnota: kc(res.taxSavingYear1), popis: `úspora na dani z odpočtu úroků v 1. roce (za ${roky(n)} celkem ${kc(res.taxSavingTotal)})`, zvyraznit: false }
+    : { hodnota: kc(0), popis: investicni ? 'úspora na dani: u investičního bytu se odpočet úroků neuplatní' : 'úspora na dani: odpočet úroků je vypnutý', zvyraznit: false };
+
   return {
+    platny: true,
     vysledek: {
       kicker: 'Nájem vs. koupě',
       nadpis: `Za ${roky(n)} vychází lépe ${koupe ? 'koupě' : 'nájem'}`,
@@ -482,8 +612,9 @@ export function najem(v, pravidla, rozmer = {}) {
       statistiky: [
         { hodnota: be ? `${be}. rok` : 'nenastane', popis: be ? 'bod zvratu: od něj vychází koupě aspoň tak dobře jako nájem' : `bod zvratu: v horizontu ${roky(n)} koupě nájem nedožene`, zvyraznit: Boolean(be) },
         { hodnota: kc(res.price), popis: `cena bytu (${cislo(v.area, Number.isInteger(v.area) ? 0 : 1)}${NBSP}m²)`, zvyraznit: false },
-        { hodnota: kc(res.loan), popis: `úvěr, LTV ${cele(res.ltv)} (limit ${cele(res.maxLtv)})`, zvyraznit: false },
+        { hodnota: kc(res.loan), popis: `úvěr, LTV ${ltvPopis} (${limitLtv})${dtiPopis}`, zvyraznit: false },
         { hodnota: kc(res.payments.initial), popis: `splátka v 1. měsíci, nájem ${kc(res.initialRent)}`, zvyraznit: false },
+        dan,
       ],
     },
     lista: { cislo: be ? `${be}. rok` : 'nenastane', popis: 'Bod zvratu: koupě se začne vyplácet' },

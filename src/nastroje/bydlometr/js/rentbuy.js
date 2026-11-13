@@ -3,11 +3,13 @@
 // Kdo má v daném měsíci nižší výdaj, investuje rozdíl. Čisté jmění:
 //   kupující = hodnota bytu − zůstatek úvěru + jeho portfolio, nájemník = jeho portfolio.
 
-import { annuityPayment, maxLtv } from './mortgage.js';
+import { annuityPayment, maxLtv, interestDeductionSaving } from './mortgage.js';
 import { formatCZK, formatPct } from './format.js';
 
 const val = (item) => (item && typeof item === 'object' && 'value' in item ? item.value : item);
 const monthlyFactor = (annualPct) => (1 + annualPct / 100) ** (1 / 12);
+/** LTV zaokrouhlené NAHORU na desetinu procenta, aby hláška nad limitem nikdy neukázala „80 %“. */
+export const ltvNahoru = (ltv) => Math.ceil(ltv * 1000 - 1e-9) / 1000;
 
 /**
  * @param {object} i vstupy (procenta jako 5 = 5 %):
@@ -15,7 +17,7 @@ const monthlyFactor = (annualPct) => (1 + annualPct / 100) ** (1 / 12);
  *  rate, fixYears, rateAfterFix, loanYears,
  *  priceGrowth, rentGrowth, investReturn, costGrowth,
  *  repairFundPerM2Month, insuranceYear, propertyTaxYear, maintenancePct,
- *  horizonYears, taxRate, deductInterest
+ *  horizonYears, taxRate, deductInterest, income (čistý měsíční příjem, nepovinné – jen pro DTI)
  */
 export function simulateRentBuy(i, rules) {
   const warnings = [];
@@ -28,10 +30,12 @@ export function simulateRentBuy(i, rules) {
   const ltv = price > 0 ? loan / price : 0;
   const limit = maxLtv(i.age, { investment: !!i.investment }, rules);
   const ltvOk = ltv <= limit + 1e-9;
+  const missingOwnFunds = ltvOk ? 0 : loan - limit * price;
   if (!ltvOk) {
-    const missing = loan - limit * price;
-    warnings.push(`Úvěr by měl LTV ${formatPct(ltv, 0)}, ale limit je ${formatPct(limit, 0)}. Na koupi chybí ${formatCZK(missing)} vlastních zdrojů – banka by takový úvěr neposkytla.`);
+    warnings.push(`Úvěr by měl LTV ${formatPct(ltvNahoru(ltv), 1)}, ale limit je ${formatPct(limit, 0)}. Na koupi chybí ${formatCZK(missingOwnFunds)} vlastních zdrojů – banka by takový úvěr neposkytla.`);
   }
+  // DTI = úvěr / čistý roční příjem (ČNB); jen z této hypotéky
+  const dti = i.income > 0 ? loan / (12 * i.income) : null;
 
   const loanMonths = Math.round(i.loanYears * 12);
   const fixMonths = Math.round(i.fixYears * 12);
@@ -101,7 +105,7 @@ export function simulateRentBuy(i, rules) {
     // Odpočet úroků se projeví jednou ročně (roční zúčtování / daňové přiznání)
     let saving = 0;
     if (deduct && m % 12 === 0) {
-      saving = Math.min(acc.interest, deductionLimit) * taxRate;
+      saving = interestDeductionSaving(acc.interest, taxRate, deductionLimit);
     }
 
     const rent = baseRent * (1 + i.rentGrowth / 100) ** yearIdx;
@@ -125,9 +129,11 @@ export function simulateRentBuy(i, rules) {
 
   const last = years.at(-1);
   const finalDiff = last.buyerNetWorth - last.renterNetWorth;
+  const taxSavingYear1 = years[1]?.year === 1 && horizon >= 12 ? years[1].taxSaving : 0;
+  const taxSavingTotal = years.reduce((s, y) => s + y.taxSaving, 0);
   return {
-    price, loan, downPayment: down, ltv, maxLtv: limit, ltvOk,
-    initialRent: baseRent, payments, totalInterest,
+    price, loan, downPayment: down, ltv, maxLtv: limit, ltvOk, ltvExceeded: !ltvOk, missingOwnFunds, dti,
+    initialRent: baseRent, payments, totalInterest, taxSavingYear1, taxSavingTotal,
     years, breakEvenYear: breakEven(years), finalDiff, warnings,
   };
 }
