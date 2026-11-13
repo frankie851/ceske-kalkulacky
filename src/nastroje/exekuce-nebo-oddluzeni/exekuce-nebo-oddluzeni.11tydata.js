@@ -3,7 +3,7 @@
 // Rok pravidel je rok z meta.overeno (deterministicky, nezávisle na dni sestavení).
 import fs from 'node:fs';
 import { pravidlaProRok } from './dluhy.js';
-import { rokPravidel, vysledek, delkaPravidlo, delkaSlovy, moznostiUroku, cisloSazby, urokNapoveda, rozdilyKalkulacek } from './vystup.js';
+import { rokPravidel, vysledek, volbaStareSrazky, delkaPravidlo, delkaSlovy, moznostiUroku, cisloSazby, urokNapoveda, rozdilyKalkulacek } from './vystup.js';
 import { cislo } from '../../js/format.js';
 
 const rules = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
@@ -21,6 +21,7 @@ const vstup = {
   prednostni: false,
   pocetExekuci: 1,
   duchodce: false,
+  stareSrazky: false,
   dluh: 100000,
   sazba: 0,
   drivejsiOdpusteni: 'ne',
@@ -40,6 +41,7 @@ export default {
       sazba: cisloSazby(vychoziUrok.sazba),
     },
     urokNapoveda: urokNapoveda(),
+    stareSrazky: volbaStareSrazky(p),
     urokMoznosti,
     rozdily: rozdilyKalkulacek(p, rules.uredniKalkulacky, rok.rok),
     ctyriExekuce: p.minimumExekuciProDveTretiny,

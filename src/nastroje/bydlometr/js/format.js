@@ -1,4 +1,5 @@
-// Formátování a čtení čísel v češtině. Bez vazby na DOM.
+// Formátování čísel v češtině. Bez vazby na DOM.
+// Čísla z formuláře čte sdílené prectiCislo (src/js/cislo-vstup.js), ne tento modul.
 
 const czk = new Intl.NumberFormat('cs-CZ', { maximumFractionDigits: 0 });
 
@@ -26,15 +27,6 @@ export function formatPct(value, digits = 0, isShare = true) {
 export function formatNumber(value, digits = 0) {
   if (!Number.isFinite(value)) return '—';
   return new Intl.NumberFormat('cs-CZ', { maximumFractionDigits: digits }).format(value);
-}
-
-/** „3 500 000“, „4,94“, „4.94“, „1 500 000 Kč“ → číslo; prázdné/neplatné → NaN */
-export function parseNumber(text) {
-  if (typeof text === 'number') return text;
-  if (typeof text !== 'string') return NaN;
-  const cleaned = text.replace(/[\s  ]/g, '').replace(/kč|%/gi, '').replace(',', '.');
-  if (cleaned === '' || !/^-?\d*\.?\d+$/.test(cleaned)) return NaN;
-  return Number(cleaned);
 }
 
 /** Datum ve formátu YYYY-MM-DD → „7. 10. 2026“ */

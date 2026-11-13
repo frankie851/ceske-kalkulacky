@@ -1,30 +1,32 @@
 // Revize 5. 11. 2026, BYD-06: testy pro js/format.js. Formulář na webu čte čísla sdíleným
-// prectiCislo (src/js/cislo-vstup.js), parseNumber zůstává pro výpočetní moduly a testy.
+// prectiCislo (src/js/cislo-vstup.js). Další práce (13. 11. 2026): vlastní parseNumber z js/format.js
+// je odstraněný. Nikde se nepoužíval a „2.800.000“ četl jako NaN.
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseNumber, formatCZK, formatDeltaCZK, formatPct, formatNumber, formatDate } from '../js/format.js';
+import * as format from '../js/format.js';
+import { prectiCislo } from '../../../js/cislo-vstup.js';
 
-const NBSP = /[\s  ]/g;
+const { formatCZK, formatDeltaCZK, formatPct, formatNumber, formatDate } = format;
+const NBSP = /[\s  ]/g;
 const bezMezer = (t) => t.replace(NBSP, ' ');
 
-describe('parseNumber', () => {
-  test('český zápis s mezerami, čárkou i tečkou', () => {
-    assert.equal(parseNumber('3 500 000'), 3_500_000);
-    assert.equal(parseNumber('3 500 000'), 3_500_000);
-    assert.equal(parseNumber('4,94'), 4.94);
-    assert.equal(parseNumber('4.94'), 4.94);
-    assert.equal(parseNumber('1 500 000 Kč'), 1_500_000);
-    assert.equal(parseNumber('22,5'), 22.5);
-    assert.equal(parseNumber('1500,50'), 1500.5);
-    assert.equal(parseNumber('5 %'), 5);
-    assert.equal(parseNumber('-500000'), -500_000);
-    assert.equal(parseNumber(42), 42);
+describe('čtení čísel: jen sdílené prectiCislo', () => {
+  test('js/format.js nemá vlastní čtení čísel (parseNumber)', () => {
+    assert.equal(format.parseNumber, undefined);
+    assert.deepEqual(Object.keys(format).sort(), ['formatCZK', 'formatDate', 'formatDeltaCZK', 'formatNumber', 'formatPct']);
   });
 
-  test('nečitelné a prázdné → NaN', () => {
-    for (const t of ['2.800.000', 'abc', '', '   ', '1,2,3', '--5', null, undefined, {}]) {
-      assert.ok(Number.isNaN(parseNumber(t)), `${JSON.stringify(t)} → NaN`);
-    }
+  test('zápisy, které Bydlometr potřebuje, čte prectiCislo – i „2.800.000“', () => {
+    assert.equal(prectiCislo('3 500 000'), 3_500_000);
+    assert.equal(prectiCislo('3 500 000'), 3_500_000);
+    assert.equal(prectiCislo('2.800.000'), 2_800_000);
+    assert.equal(prectiCislo('4,94'), 4.94);
+    assert.equal(prectiCislo('4.94'), 4.94);
+    assert.equal(prectiCislo('1 500 000 Kč'), 1_500_000);
+    assert.equal(prectiCislo('1500,50'), 1500.5);
+    assert.equal(prectiCislo('-500000'), -500_000);
+    assert.equal(prectiCislo(''), null);
+    for (const t of ['abc', '1,2,3', '--5']) assert.ok(Number.isNaN(prectiCislo(t)), `${t} → NaN`);
   });
 });
 

@@ -119,14 +119,78 @@ test('úrok z prodlení: volba pololetí doplní sazbu z pravidel, vlastní sazb
   await page.close();
 });
 
-test('chybný údaj ukáže chybu a výsledek nepřepíše', async () => {
+// Další práce po revizi (13. 11. 2026): při chybě se karty výsledku neztlumí (nízký kontrast),
+// ale skryjí a ukáže se hláška – stejně jako v Bydlometru a Rodičovské.
+const viditelne = (page, sel) => page.$eval(sel, (el) => el.getClientRects().length > 0);
+
+test('chybný údaj ukáže chybu, skryje výsledek a po opravě ho vrátí', async () => {
   const { page } = await otevri(CESTA);
   await vypln(page, '#mzda', 'hodně');
   assert.equal(await page.$eval('#mzda', (el) => el.getAttribute('aria-invalid')), 'true');
   assert.equal(await page.$eval('[data-chyby]', (el) => el.hidden), false);
-  assert.equal(await srazka(page), '2 966 Kč');
+  assert.match(await text(page, '[data-chyby]'), /Do té doby výsledek neukazujeme/);
+  assert.equal(await viditelne(page, '.dluhy-karty'), false, 'karty výsledku jsou skryté');
+  assert.equal(await viditelne(page, '.dluhy-jak'), false, 'rozpis výpočtu je skrytý');
+  assert.equal(await text(page, '[data-lista-cislo]'), '–');
   await vypln(page, '#mzda', '23 000');
   assert.equal(await page.$$eval('.is-error', (els) => els.length), 0);
+  assert.equal(await page.$eval('[data-chyby]', (el) => el.hidden), true);
+  assert.equal(await viditelne(page, '.dluhy-karty'), true);
+  assert.equal(await srazka(page), '2 966 Kč');
+  assert.equal(await text(page, '[data-lista-cislo]'), '20 034 Kč');
+  await page.close();
+});
+
+test('axe ve stavu s chybou (360 px, světlý i tmavý režim): 0 serious/critical', async () => {
+  const { AxePuppeteer } = await import('@axe-core/puppeteer');
+  const { page, chyby } = await otevri(CESTA, { sirka: 360 });
+  await vypln(page, '#mzda', 'hodně');
+  await page.click('label[for="urok"]');
+  await vypln(page, '#sazba', 'x');
+  for (const rezim of ['light', 'dark']) {
+    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: rezim }]);
+    await new Promise((r) => setTimeout(r, 400));
+    const r = await new AxePuppeteer(page).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
+    const vazne = r.violations.filter((x) => x.impact === 'serious' || x.impact === 'critical')
+      .map((x) => `${x.id}: ${x.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
+    assert.deepEqual(vazne, [], rezim);
+    const preteka = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+    assert.equal(preteka, false, `${rezim}: bez vodorovného posuvníku`);
+  }
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+// Další práce po revizi (13. 11. 2026): náhrada plátci mzdy 50 Kč nenáleží u srážek nařízených
+// před 1. 1. 2022 (zákon č. 286/2021 Sb., čl. II bod 3 a čl. IV body 1 a 12).
+test('volba „Srážky ze mzdy byly nařízené před 1. 1. 2022“: věřitelé dostanou celou srážku', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await zadej(page, { mzda: '23 000', dluh: '100 000', osoby: '0', prednostni: false });
+  assert.equal(await text(page, '[data-ex-vericum]'), '2 916 Kč');
+  assert.match(await text(page, 'label[for="stare-srazky"]'), /Srážky ze mzdy byly nařízené před 1\. 1\. 2022/);
+  await page.click('label[for="stare-srazky"]');
+  assert.equal(await srazka(page), '2 966 Kč');
+  assert.equal(await text(page, '[data-ex-vericum]'), '2 966 Kč');
+  assert.match(await text(page, '[data-ex-doba]'), /2 roky a 10 měsíců/);
+  assert.match(await text(page, '[data-ex-nahrada]'), /nic nenechá/);
+  await page.click('label[for="stare-srazky"]');
+  assert.equal(await text(page, '[data-ex-vericum]'), '2 916 Kč');
+  assert.match(await text(page, '[data-ex-doba]'), /2 roky a 11 měsíců/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('axe s novou volbou zaškrtnutou (360 px, světlý i tmavý režim): 0 serious/critical', async () => {
+  const { AxePuppeteer } = await import('@axe-core/puppeteer');
+  const { page } = await otevri(CESTA, { sirka: 360 });
+  await page.click('label[for="stare-srazky"]');
+  for (const rezim of ['light', 'dark']) {
+    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: rezim }]);
+    await new Promise((r) => setTimeout(r, 400));
+    const r = await new AxePuppeteer(page).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
+    const vazne = r.violations.filter((x) => x.impact === 'serious' || x.impact === 'critical').map((x) => x.id);
+    assert.deepEqual(vazne, [], rezim);
+  }
   await page.close();
 });
 

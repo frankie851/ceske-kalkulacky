@@ -1312,3 +1312,44 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   (leták „Srážky ze mzdy“ tam 13. 11. 2026 je, revize ho 5. 11. nenašla). Obě adresy vrátily
   13. 11. 2026 HTTP 200 se správným titulkem. Částka za sepis návrhu (4 000 / 6 000 Kč) na webu
   není, tu část nálezu není co opravit.
+
+# Další práce po revizi 5. 11. 2026 (13. 11. 2026)
+
+## Exekuce, nebo oddlužení?, Bydlometr, Rodičovská – další práce (Dluhy: kontrast, náhrada plátci mzdy; Bydlometr: parseNumber; Rodičovská: průměrná mzda 2026, otcovská a hospitalizace)
+
+- **Dluhy – výsledek při chybě.** Karty výsledku se při chybě ve formuláři už neztlumují
+  (`opacity: .45` neměla kontrast 4,5 : 1 a axe ji hlásil). Stejně jako v Bydlometru (BYD-03)
+  a Rodičovské (ROD-07) se karty i rozpis „Jak jsme to spočítali“ skryjí (`[data-vysledky]`),
+  lepivá lišta ukáže „–“ a hláška vyká: „Opravte prosím označené údaje. Do té doby výsledek
+  neukazujeme, aby tu nezůstala čísla k jinému zadání.“ Informace, že výsledek neplatí, se tak
+  neztratí. E2E test spouští axe ve stavu s chybou (360 px, světlý i tmavý režim).
+- **Dluhy – náhrada plátci mzdy u srážek před 1. 1. 2022.** Do „Doplňujících údajů“ přibyla
+  volba „Srážky ze mzdy byly nařízené před 1. 1. 2022“ (datum z `rules.json` →
+  `roky.2026.nahradaJenProPrikazyOd`). Když je zaškrtnutá, `srazka()` v `dluhy.js` náhradu
+  50 Kč neodečte a věřitelé dostanou celou srážku; mění se i odhad doby splácení. Podklad:
+  zákon č. 286/2021 Sb., čl. II bod 3 (soudní výkon rozhodnutí: na řízení s usnesením o nařízení
+  výkonu před účinností se použije § 270 odst. 2 a § 279 odst. 1 o. s. ř. v dřívějším znění)
+  a čl. IV body 1 a 12 (exekuce: § 87 odst. 3 EŘ v novém znění jen tam, kde exekuční příkaz ke
+  srážkám ze mzdy ještě nebyl vydán). Text přechodných ustanovení jsme 13. 11. 2026 znovu
+  přečetli na zakonyprolidi.cz. Nápověda radí zaškrtnout volbu, jen když jsou všechny srážky
+  starší: u novější exekuce náhrada náleží.
+- **Bydlometr – `parseNumber`.** Vlastní `parseNumber` v `js/format.js` se po PR #27 nikde
+  nepoužíval (formulář čte čísla sdíleným `prectiCislo`) a „2.800.000“ četl jako NaN. Funkci
+  jsme odstranili. `test/format.test.js` teď hlídá, že ji modul nevyváží, a ověřuje, že
+  `prectiCislo` čte zápisy Bydlometru včetně „2.800.000“. E2E: „3.500.000“ ve formuláři.
+- **Rodičovská – průměrná mzda 2026.** Hranice 23% zálohy 2026 (146 901 Kč = 3 × 48 967 Kč)
+  má teď úřední zdroj: nařízení vlády č. 365/2025 Sb., § 1 (VVZ za rok 2024 46 278 Kč,
+  přepočítací koeficient 1,0581), § 23b odst. 4 zákona č. 589/1992 Sb. (součin, nahoru na
+  koruny: 48 966,75 → 48 967 Kč) a § 21g odst. 2 a § 38h odst. 2 ZDP (znění 1. 8.–31. 12. 2026).
+  V `rules.json` je `cistaMzda.2026.prumernaMzda` se stejnou strukturou jako u roku 2027
+  a `cistaMzda.2026.zdroj` s citací. Hodnota se nezměnila.
+- **Rodičovská – otcovská a hospitalizace.** § 38a odst. 4 věta třetí zákona č. 187/2006 Sb.
+  (ověřeno ve znění 1. 11.–31. 12. 2026): období 6 týdnů pro nástup na otcovskou se prodlužuje
+  o kalendářní dny hospitalizace dítěte (kvůli zdraví dítěte nebo matky), které spadají do těchto
+  6 týdnů; počítá se i den přijetí a propuštění. Prodloužení je tedy nejvýš 42 dní
+  (`rules.json` → `otcovska.hospitalizace.maxDni`). Formulář má v kroku Otcovská otázku
+  „Bylo dítě po porodu v nemocnici?“ a počet dní; `nastupOtcovskeMaxDne()` v `rodina.js` z nich
+  spočítá poslední den nástupu, `app.js` podle něj kontroluje pole a mění nápovědu, kontrolní
+  seznam ukáže prodloužený termín. Druhou možnost z § 38b odst. 2 (dítě je v nemocnici ještě
+  na konci 6. týdne → nástup i po propuštění, nejpozději do 1 roku) nepočítáme: potřebovala by
+  datum propuštění. Je jen v nápovědě a v `meta.neovereno`.

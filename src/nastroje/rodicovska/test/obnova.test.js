@@ -54,3 +54,12 @@ test('volby přepínačů: jen text bez zvláštních znaků; výše RP jen klad
 test('poškozený záznam (ne objekt) → prázdný výsledek', () => {
   for (const x of [null, 'text', 42, ['termin']]) assert.deepEqual(ocistiUlozene(x, meze), {});
 });
+
+// Další práce po revizi (13. 11. 2026): hospitalizace dítěte (§ 38a odst. 4 věta třetí ZNP)
+test('hospitalizace: počet dní a delší nástup na otcovskou projdou jen v mezích z rules.json', () => {
+  assert.equal(meze.hospitalizaceMax, rules.otcovska.hospitalizace.maxDni);
+  const ok = { hospitalizace: 'ano', 'hospitalizace-dni': '10', 'otcovska-od': '50' };
+  assert.deepEqual(ocistiUlozene(ok, meze), ok);
+  assert.deepEqual(ocistiUlozene({ 'hospitalizace-dni': '43', 'otcovska-od': '84' }, meze), {});
+  assert.deepEqual(ocistiUlozene({ 'hospitalizace-dni': '-1' }, meze), {});
+});

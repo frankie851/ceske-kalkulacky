@@ -3,7 +3,7 @@
 // Pravidla bere z <script type="application/json" id="pravidla"> (žádný fetch).
 // Žádné částky ani sazby tu nejsou natvrdo: všechno je v rules.json.
 // Ukládá se JEN na kliknutí (sdílený modul uloziste.js), nic automaticky.
-import { planRodiny, VYCHOZI_VSTUP, pridejDny } from './rodina.js';
+import { planRodiny, VYCHOZI_VSTUP, pridejDny, nastupOtcovskeMaxDne } from './rodina.js';
 import { svgOsa } from './timeline.js';
 import * as v from './vystup.js';
 import { kc, datum } from '../../js/format.js';
@@ -19,8 +19,9 @@ const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
 const DNI_DO_PORODU = 150;
 const TERMIN_MIN = [...pravidla.rodicovsky].map((r) => r.narozeniOd).sort()[0];
 const VEK_MAX = Math.max(...pravidla.rodicovsky.map((r) => r.vekMesicu)) - 1;
-// Nástup na otcovskou do 6 týdnů od narození (§ 38a odst. 4 zákona č. 187/2006 Sb.).
-const OTCOVSKA_MAX = pravidla.otcovska.nastupDoDne;
+// Nástup na otcovskou do 6 týdnů od narození, lhůta se prodlouží o dny hospitalizace dítěte
+// v těchto 6 týdnech (§ 38a odst. 4 zákona č. 187/2006 Sb.). Meze z rules.json.
+const HOSPITALIZACE_MAX = pravidla.otcovska.hospitalizace.maxDni;
 const SPRITE = ($('use[href*="sprite.svg#"]')?.getAttribute('href') || '/img/sprite.svg#').split('#')[0];
 
 /** Výše rodičovského příspěvku: 'navrh' (vyčerpat do 3 let), 'max' (strop), nebo 'vlastni' (posuvník). */
@@ -83,13 +84,18 @@ function nactiVstup() {
   const otcovska = vybrane('otcovska') === 'ano';
   const stridani = vybrane('stridani') === 'ano';
   const navrat = vybrane('navrat') === 'ano';
-  const otcovskaOdDne = otcovska ? celeCislo('otcovska-od', 0, OTCOVSKA_MAX, 'počet dní') : 0;
+  const hospitalizace = otcovska && vybrane('hospitalizace') === 'ano';
+  const hospitalizaceDni = hospitalizace ? celeCislo('hospitalizace-dni', 0, HOSPITALIZACE_MAX, 'počet dní') : 0;
+  if (!hospitalizace) nastavChybu('hospitalizace-dni', '');
+  const otcovskaMax = nastupOtcovskeMaxDne(pravidla, { hospitalizace, hospitalizaceDni: hospitalizaceDni ?? 0 });
+  nastavNapovedu('otcovska-od', v.napovedaOtcovskaOd(pravidla, otcovskaMax));
+  const otcovskaOdDne = otcovska ? celeCislo('otcovska-od', 0, otcovskaMax, 'počet dní') : 0;
   const stridaniOdMesice = stridani ? celeCislo('stridani-od', 1, VEK_MAX, 'měsíc') : VYCHOZI_VSTUP.stridaniOdMesice;
   const navratOdMesice = navrat ? celeCislo('navrat-od', 1, VEK_MAX, 'měsíc') : VYCHOZI_VSTUP.navratOdMesice;
   if (!otcovska) nastavChybu('otcovska-od', '');
   if (!stridani) nastavChybu('stridani-od', '');
   if (!navrat) nastavChybu('navrat-od', '');
-  if (otcovskaOdDne === null || stridaniOdMesice === null || navratOdMesice === null) chyby++;
+  if (hospitalizaceDni === null || otcovskaOdDne === null || stridaniOdMesice === null || navratOdMesice === null) chyby++;
 
   return {
     chyby,
@@ -104,6 +110,8 @@ function nactiVstup() {
       ppmTydnuPred: Number($('#ppm-tydnu').value) || pravidla.ppm.nastupTydnyPredMin,
       otcovska,
       otcovskaOdDne: otcovskaOdDne ?? 0,
+      hospitalizace,
+      hospitalizaceDni: hospitalizaceDni ?? 0,
       rpVyse: null,
       stridani,
       stridaniOdMesice: stridaniOdMesice ?? 0,
@@ -268,8 +276,8 @@ function prepocitej() {
 
 /* ---------- ukládání (jen na kliknutí) ---------- */
 
-const POLE = ['termin', 'prijem-matka', 'prijem-otec', 'ppm-tydnu', 'otcovska-od', 'stridani-od', 'navrat-od'];
-const RADIA = ['vicercata', 'narok-matka', 'narok-otec', 'kdo-ppm', 'otcovska', 'stridani', 'navrat'];
+const POLE = ['termin', 'prijem-matka', 'prijem-otec', 'ppm-tydnu', 'hospitalizace-dni', 'otcovska-od', 'stridani-od', 'navrat-od'];
+const RADIA = ['vicercata', 'narok-matka', 'narok-otec', 'kdo-ppm', 'otcovska', 'hospitalizace', 'stridani', 'navrat'];
 
 function ziskej() {
   const data = { rpVolba, rpVyse: Number($('#rp-vyse').value) };
