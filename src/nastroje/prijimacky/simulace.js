@@ -1,6 +1,44 @@
 // Přijímačky bez paniky – čisté pomocné funkce pro simulátor a kalendář (bez DOM).
 // Používá je build (prijimacky.11tydata.js) i prohlížeč (ui.js). Výpočet dělá převzatý matching.js.
 import { deferredAcceptance, explain, bestOfTwo, TieError } from './matching.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
+
+/* ---------- Kontrola číselných polí (revize 5. 11. 2026, PRI-02 a PRI-03) ---------- */
+
+/**
+ * Meze číselných polí. Body z jednotné zkoušky jsou podle rules.json → body (2 testy po 50 b.,
+ * vyhláška č. 422/2023 Sb. a CERMAT), počet míst je jen pojistka proti překlepu (formular).
+ */
+export function mezePoli(pravidla) {
+  const { testMax, pocetTestu } = pravidla.body;
+  const max = testMax * pocetTestu;
+  const body = { min: 0, max, mimo: `Body z jednotné zkoušky jsou od 0 do ${max} (${pocetTestu} testy po ${testMax} bodech).` };
+  return {
+    body,
+    bodyPovinne: { ...body, povinne: 'Vyplň body. Kdo na zkoušku nepřišel, má 0.' },
+    pokus: { min: 0, max: testMax, mimo: `Jeden test má 0 až ${testMax} bodů.` },
+    kapacita: {
+      min: 0, max: pravidla.formular.kapacitaMax, cele: true,
+      povinne: 'Vyplň počet míst.',
+      mimo: `Počet míst zadej jako celé číslo od 0 do ${pravidla.formular.kapacitaMax}.`,
+    },
+    shoda: {},
+  };
+}
+
+/**
+ * Číslo z textového pole (čárka i tečka, mezery) a kontrola mezí.
+ * Vrací { hodnota } (null = prázdné pole), nebo { chyba } s textem hlášky.
+ */
+export function kontrolaCisla(text, { min = -Infinity, max = Infinity, cele = false, povinne = '', mimo = '' } = {}) {
+  const n = prectiCislo(text);
+  if (n === null) return povinne ? { chyba: povinne } : { hodnota: null };
+  if (Number.isNaN(n)) return { chyba: cele ? 'Zadej celé číslo, bez písmen.' : 'Zadej číslo, například 62 nebo 62,5.' };
+  if ((cele && !Number.isInteger(n)) || n < min || n > max) {
+    return { chyba: mimo || `Zadej číslo od ${min} do ${max}.` };
+  }
+  return { hodnota: n };
+}
 
 /** Uchazeč pro editor: vždy 3 priority, body i dva pokusy (kvůli přepínání režimu). */
 export function normalizujDite(a) {

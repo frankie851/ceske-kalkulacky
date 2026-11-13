@@ -82,6 +82,43 @@ test('úrok z prodlení: pole se sazbou se ukáže a upozorní na růst dluhu', 
   await page.close();
 });
 
+// DLU-06: formulář čte čísla sdíleným prectiCislo (src/js/cislo-vstup.js) – tečka jako oddělovač tisíců
+test('formulář čte „23.000“ i „150.000“ jako tisíce, „23000,50“ jako desetinné číslo', async () => {
+  const { page } = await otevri(CESTA);
+  await zadej(page, { mzda: '23.000', dluh: '100 000', osoby: '0', prednostni: false });
+  assert.equal(await srazka(page), '2 966 Kč');
+  assert.equal(await text(page, '[data-ex-zustane]'), '20 034 Kč');
+  await vypln(page, '#mzda', '23000,50');
+  assert.equal(await srazka(page), '2 966 Kč');
+  await vypln(page, '#mzda', '23 000 Kč');
+  await vypln(page, '#dluh', '150.000');
+  // 150 000 / 2 916 Kč měsíčně → 52 měsíců
+  assert.match(await text(page, '[data-ex-doba]'), /4 roky a 4 měsíce/);
+  await vypln(page, '#dluh', '1.500.000');
+  assert.match(await text(page, '[data-ex-doba]'), /42 let a 11 měsíců/);
+  await vypln(page, '#mzda', '-5000');
+  assert.equal(await page.$eval('#mzda', (el) => el.getAttribute('aria-invalid')), 'true');
+  await page.close();
+});
+
+// DLU-01: zákonná sazba podle pololetí vzniku prodlení (NV č. 351/2013 Sb., § 2 odst. 1)
+test('úrok z prodlení: volba pololetí doplní sazbu z pravidel, vlastní sazba přepne na „jindy“', async () => {
+  const { page } = await otevri(CESTA);
+  await page.click('label[for="urok"]');
+  await zadej(page, { mzda: '23 000', dluh: '100 000', osoby: '0', prednostni: false });
+  await page.select('#pololeti', '2023-01-01');
+  assert.equal(await page.$eval('#sazba', (el) => el.value), '15');
+  assert.match(await text(page, '[data-ex-doba]'), /3 roky a 10 měsíců/);
+  assert.match(await text(page, '[data-ex-upozorneni]'), /31 403 Kč/);
+  await page.select('#pololeti', '2024-07-01');
+  assert.equal(await page.$eval('#sazba', (el) => el.value), '12,75');
+  await vypln(page, '#sazba', '9');
+  assert.equal(await page.$eval('#pololeti', (el) => el.value), 'jina');
+  await vypln(page, '#sazba', '11.5');
+  assert.equal(await page.$eval('#sazba', (el) => el.getAttribute('aria-invalid')), null);
+  await page.close();
+});
+
 test('chybný údaj ukáže chybu a výsledek nepřepíše', async () => {
   const { page } = await otevri(CESTA);
   await vypln(page, '#mzda', 'hodně');

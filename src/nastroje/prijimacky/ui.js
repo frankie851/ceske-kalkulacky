@@ -5,10 +5,9 @@ import { SCENARIOS } from './scenarios.js';
 import { bestOfTwo, scoreOf } from './matching.js';
 import { evaluateStrategy } from './strategy.js';
 import { buildICS, downloadICS } from './ics.js';
-import { stavZeScenare, normalizujDite, rozdelBody, spust, vyberTerminy, udalostiProIcs, casExportu } from './simulace.js';
+import { stavZeScenare, normalizujDite, rozdelBody, spust, vyberTerminy, udalostiProIcs, casExportu, kontrolaCisla, mezePoli } from './simulace.js';
 import * as v from './vystup.js';
 import { ty } from './texty.js';
-import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const pravidla = JSON.parse(document.getElementById('pravidla').textContent);
 const koren = document.getElementById('prij');
@@ -17,11 +16,33 @@ const $ = (sel, k = koren) => k.querySelector(sel);
 const $$ = (sel, k = koren) => [...k.querySelectorAll(sel)];
 const omezitPohyb = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TEMPO = 1300; // ms mezi koly při přehrávání
+const MEZE = mezePoli(pravidla);
 
-/** Číslo z pole: prázdné → null, čárka i mezery povolené, nesmysl → null. */
-function cislo(hodnota) {
-  const n = prectiCislo(hodnota);
-  return Number.isFinite(n) ? n : null;
+/**
+ * Hláška u pole (stejně jako jinde na webu: .error-msg, aria-invalid, aria-describedby).
+ * Pole ve formuláři strategie mají obal .field z makra pole(), pole v tabulkách simulátoru ne.
+ */
+function nastavChybu(pole, text) {
+  const zprava = document.getElementById(`${pole.id}-chyba`);
+  pole.closest('.field')?.classList.toggle('is-error', Boolean(text));
+  if (text) pole.setAttribute('aria-invalid', 'true');
+  else pole.removeAttribute('aria-invalid');
+  if (!pole.closest('.field')) {
+    // V tabulce odkazuje pole na hlášku jen při chybě (makro pole() má odkaz vždy).
+    if (text) pole.setAttribute('aria-describedby', zprava.id);
+    else pole.removeAttribute('aria-describedby');
+  }
+  if (zprava) {
+    zprava.hidden = !text;
+    $('.error-text', zprava).textContent = text || '';
+  }
+}
+
+/** Přečte číselné pole, ukáže u něj hlášku a vrátí { hodnota } nebo { chyba }. */
+function ctiPole(pole, meze) {
+  const r = kontrolaCisla(pole.value, meze);
+  nastavChybu(pole, r.chyba);
+  return r;
 }
 
 // S JavaScriptem: pryč s upozorněním pro verzi bez JS, odemknout ovládání simulátoru.
@@ -30,7 +51,9 @@ $('[data-zamek]').disabled = false;
 
 /* =================== SIMULÁTOR =================== */
 
-const sim = { scenar: null, stav: null, beh: null, kolo: -1, hotovo: false, timer: null, seq: 0 };
+// chyby: id pole → { text, hodnota } u čísel, která neprošla kontrolou (do stavu se nezapíšou).
+const sim = { scenar: null, stav: null, beh: null, kolo: -1, hotovo: false, timer: null, seq: 0, chyby: new Map() };
+const CHYBA_POLI = 'Některé číslo v tabulce není v pořádku. Oprav pole s hláškou a simulace poběží znovu.';
 const el = {
   info: $('[data-scenar-info]'),
   skoly: $('[data-editor-skol]'),
@@ -55,11 +78,28 @@ function nactiScenar(id) {
   zastav();
   sim.scenar = sc;
   sim.stav = stavZeScenare(sc);
+  sim.chyby.clear();
   for (const r of $$('input[name="scenar"]')) r.checked = r.value === sc.id;
   el.zamichatPoznamka.textContent = '';
   vykresliInfo();
   vykresliEditor();
   prepocitej();
+}
+
+const volbyEditoru = () => ({ chyby: sim.chyby, sprite });
+const vykresliDeti = () => { el.deti.innerHTML = v.editorDetiHtml(sim.stav, volbyEditoru()); };
+
+/** Zapíše výsledek kontroly pole do sim.chyby (hlášku u pole ukáže ctiPole). */
+function zapisCislo(pole, meze) {
+  const r = ctiPole(pole, meze);
+  if (r.chyba) sim.chyby.set(pole.id, { text: r.chyba, hodnota: pole.value });
+  else sim.chyby.delete(pole.id);
+  return r;
+}
+
+/** Zapomene chyby polí, která už na stránce nejsou (odebraný řádek, přepnutý režim). */
+function zapomenChyby(test) {
+  for (const id of [...sim.chyby.keys()]) if (test(id)) sim.chyby.delete(id);
 }
 
 function vlastniTrida() {
@@ -75,13 +115,14 @@ function vykresliInfo() {
 
 function vykresliEditor() {
   el.rezim.checked = sim.stav.rezim === 'attempts';
-  el.skoly.innerHTML = v.editorSkolHtml(sim.stav);
-  el.deti.innerHTML = v.editorDetiHtml(sim.stav);
+  el.skoly.innerHTML = v.editorSkolHtml(sim.stav, volbyEditoru());
+  vykresliDeti();
 }
 
 function prepocitej() {
   zastav();
-  sim.beh = spust(sim.stav);
+  // Při chybném čísle se nepočítá a starý výsledek zmizí (PRI-02).
+  sim.beh = sim.chyby.size ? { deti: [], vysledek: null, proc: null, chyba: CHYBA_POLI } : spust(sim.stav);
   sim.kolo = -1;
   sim.hotovo = false;
   vykresliPrubeh();
@@ -159,14 +200,15 @@ el.skoly.addEventListener('input', (e) => {
     s.name = e.target.value;
     aktualizujJmenoVRadku(tr, s.name);
   } else if (e.target.dataset.pole === 'capacity') {
-    s.capacity = Math.max(0, Math.floor(cislo(e.target.value) ?? 0));
+    const r = zapisCislo(e.target, MEZE.kapacita);
+    if (!r.chyba) s.capacity = r.hodnota;
   }
   vlastniTrida();
   prepocitej();
 });
 // Nový název školy se promítne do výběru priorit až po opuštění pole (ať pole neztratí fokus).
 el.skoly.addEventListener('change', (e) => {
-  if (e.target.dataset.pole === 'name') el.deti.innerHTML = v.editorDetiHtml(sim.stav);
+  if (e.target.dataset.pole === 'name') vykresliDeti();
 });
 el.skoly.addEventListener('click', (e) => {
   const tl = e.target.closest('[data-odebrat-skolu]');
@@ -174,6 +216,7 @@ el.skoly.addEventListener('click', (e) => {
   const id = tl.dataset.odebratSkolu;
   sim.stav.skoly = sim.stav.skoly.filter((s) => s.id !== id);
   for (const a of sim.stav.deti) a.priorities = a.priorities.map((p) => (p === id ? '' : p));
+  zapomenChyby((pole) => pole.startsWith(`skola-${id}-`));
   vlastniTrida();
   vykresliEditor();
   prepocitej();
@@ -189,11 +232,17 @@ function zmenaDitete(e) {
   if (pole === 'name') {
     a.name = e.target.value;
     aktualizujJmenoVRadku(tr, a.name);
-  } else if (pole === 'score') a.score = cislo(e.target.value);
-  else if (pole === 'tiebreak') a.tiebreak = cislo(e.target.value);
-  else if (/^(cj|m)[01]$/.test(pole)) {
-    a.attempts[pole.slice(0, -1)][Number(pole.slice(-1))] = cislo(e.target.value);
-    $('[data-zapocte]', tr).textContent = `${bestOfTwo(a.attempts)} b.`;
+  } else if (pole === 'score') {
+    const r = zapisCislo(e.target, MEZE.bodyPovinne);
+    if (!r.chyba) a.score = r.hodnota;
+  } else if (pole === 'tiebreak') {
+    const r = zapisCislo(e.target, MEZE.shoda);
+    if (!r.chyba) a.tiebreak = r.hodnota;
+  } else if (/^(cj|m)[01]$/.test(pole)) {
+    const r = zapisCislo(e.target, MEZE.pokus);
+    if (!r.chyba) a.attempts[pole.slice(0, -1)][Number(pole.slice(-1))] = r.hodnota;
+    const chybaPokusu = ['cj0', 'cj1', 'm0', 'm1'].some((k) => sim.chyby.has(`dite-${a.id}-${k}`));
+    $('[data-zapocte]', tr).textContent = chybaPokusu ? '–' : v.b(bestOfTwo(a.attempts));
   } else if (/^pr[0-2]$/.test(pole)) a.priorities[Number(pole.slice(2))] = e.target.value;
   else return;
   vlastniTrida();
@@ -205,8 +254,9 @@ el.deti.addEventListener('click', (e) => {
   const tl = e.target.closest('[data-odebrat-dite]');
   if (!tl) return;
   sim.stav.deti = sim.stav.deti.filter((a) => a.id !== tl.dataset.odebratDite);
+  zapomenChyby((pole) => pole.startsWith(`dite-${tl.dataset.odebratDite}-`));
   vlastniTrida();
-  el.deti.innerHTML = v.editorDetiHtml(sim.stav);
+  vykresliDeti();
   prepocitej();
   $('[data-pridat-dite]').focus();
 });
@@ -235,7 +285,7 @@ $('[data-pridat-dite]').addEventListener('click', () => {
   if (sim.stav.rezim === 'attempts') dite.attempts = rozdelBody(body);
   sim.stav.deti.push(dite);
   vlastniTrida();
-  el.deti.innerHTML = v.editorDetiHtml(sim.stav);
+  vykresliDeti();
   prepocitej();
   $$('[data-editor-deti] tr[data-dite] input[data-pole="name"]').at(-1)?.focus();
 });
@@ -247,12 +297,15 @@ $('[data-zamichat]').addEventListener('click', () => {
     const j = Math.floor(Math.random() * (i + 1));
     [deti[i], deti[j]] = [deti[j], deti[i]];
   }
-  el.deti.innerHTML = v.editorDetiHtml(sim.stav);
+  vykresliDeti();
   prepocitej();
   const po = JSON.stringify(sim.beh?.vysledek?.assignment ?? null);
-  el.zamichatPoznamka.textContent = pred === po
-    ? 'Pořadí v tabulce se změnilo, výsledek zůstal stejný. Na pořadí zápisu nezáleží.'
-    : 'Výsledek se změnil – to by se stát nemělo.';
+  if (!sim.beh.vysledek) el.zamichatPoznamka.textContent = 'Pořadí v tabulce se změnilo. Výsledek bude vidět, až opravíš údaje v tabulce.';
+  else {
+    el.zamichatPoznamka.textContent = pred === po
+      ? 'Pořadí v tabulce se změnilo, výsledek zůstal stejný. Na pořadí zápisu nezáleží.'
+      : 'Výsledek se změnil – to by se stát nemělo.';
+  }
 });
 
 el.rezim.addEventListener('change', () => {
@@ -262,8 +315,10 @@ el.rezim.addEventListener('change', () => {
     if (sim.stav.rezim === 'score') a.score = bestOfTwo(a.attempts);
     else if (a.score != null && bestOfTwo(a.attempts) !== a.score) a.attempts = rozdelBody(a.score);
   }
+  // Pole druhého režimu zmizí; jejich chybné hodnoty se nepoužily, platí poslední správné.
+  zapomenChyby((pole) => (sim.stav.rezim === 'score' ? /-(cj|m)[01]$/ : /-body$/).test(pole));
   vlastniTrida();
-  el.deti.innerHTML = v.editorDetiHtml(sim.stav);
+  vykresliDeti();
   prepocitej();
 });
 
@@ -280,13 +335,20 @@ const formular = document.getElementById('strategie-formular');
 const vystupStrategie = $('[data-strategie-vystup]');
 
 function vyhodnotStrategii() {
-  const rezerva = cislo(formular.querySelector('input[name="str-rezerva"]:checked')?.value) ?? 5;
+  const rezerva = kontrolaCisla(formular.querySelector('input[name="str-rezerva"]:checked')?.value).hodnota ?? 5;
+  // Body i minimum jsou body z jednotné zkoušky, 0–100 (PRI-02, PRI-04). Při chybě se nepočítá.
+  const ocekavane = ctiPole(formular.elements['str-ocekavane'], MEZE.body);
+  const minima = [1, 2, 3].map((i) => ctiPole(formular.elements[`str-min-${i}`], MEZE.body));
+  if ([ocekavane, ...minima].some((r) => r.chyba)) {
+    vystupStrategie.innerHTML = v.strategieNeplatnaHtml();
+    return;
+  }
   const res = evaluateStrategy({
-    expected: cislo(formular.elements['str-ocekavane'].value),
+    expected: ocekavane.hodnota,
     margin: rezerva,
-    schools: [1, 2, 3].map((i) => ({
-      name: formular.elements[`str-nazev-${i}`].value,
-      lastMin: cislo(formular.elements[`str-min-${i}`].value),
+    schools: minima.map((m, k) => ({
+      name: formular.elements[`str-nazev-${k + 1}`].value,
+      lastMin: m.hodnota,
     })),
   });
   vystupStrategie.innerHTML = v.strategieHtml(res, rezerva, sprite);
