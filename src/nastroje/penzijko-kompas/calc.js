@@ -202,18 +202,27 @@ export function dopadPoplatku(rules, vstup) {
   };
 }
 
+/**
+ * Poplatek za převod k jiné penzijní společnosti (§ 61 odst. 3 ZDPS: nejvýše částka z rules.json).
+ * Neúčtuje se až „po více než 60 měsících“ spoření u téže společnosti (§ 62 odst. 3 ZDPS),
+ * délka smlouvy se zadává v celých letech – přesně 5 let (60 měsíců) je proto ještě zpoplatněno.
+ */
+export function poplatekZaPrevod(rules, delkaSmlouvyLet) {
+  const { poplatek, zdarmaPoMesicich } = rules.predpoklady.prevodKonkurence;
+  return (delkaSmlouvyLet ?? 0) * MESICU_V_ROCE > zdarmaPoMesicich ? 0 : poplatek;
+}
+
 /** Transformovaný fond: zůstat vs. přejít do účastnického fondu téže společnosti. */
 export function transformovanyFond(rules, vstup, cil = rules.predpoklady.doporuceni.cilovyFond) {
   const zustat = projekce(rules, zVstupu({ ...vstup, fond: 'transformovany' }, 'transformovany'));
   const prejit = projekce(rules, zVstupu({ ...vstup, fond: 'transformovany' }, cil));
-  const { poplatek, zdarmaPoLetech } = rules.predpoklady.prevodKonkurence;
   return {
     cil,
     zustat,
     prejit,
     rozdilNominal: prejit.souhrn.nominal - zustat.souhrn.nominal,
     rozdilRealne: prejit.souhrn.realne - zustat.souhrn.realne,
-    poplatekKonkurence: (vstup.delkaSmlouvy ?? 0) < zdarmaPoLetech ? poplatek : 0,
+    poplatekKonkurence: poplatekZaPrevod(rules, vstup.delkaSmlouvy),
     konci: rules.sady[vstup.sada]?.transformovaneFondy?.konci ?? null,
   };
 }

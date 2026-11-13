@@ -281,7 +281,13 @@ export function kontrolniSeznam(plan, rules) {
     });
   }
   polozky.push({ ukol: 'Daňové zvýhodnění na dítě uplatni u zaměstnavatele. V čisté mzdě tady započtené není.', termin: 'Po narození', typ: 'doporuceny' });
-  polozky.push({ ukol: 'Když se narodí další dítě, nahlas to Úřadu práce. Rodičovský příspěvek na starší dítě končí, nevyčerpaný zbytek jde vyplatit jednorázově.', termin: 'Při narození dalšího dítěte', typ: 'doporuceny', zdroj: zdrojRp });
+  // § 30a odst. 1 ZSSP: jednorázová výplata zbytku jen s DVZ aspoň jednoho rodiče nebo u OSVČ (revize 5. 11. 2026, ROD-13).
+  const zdrojVyplaty = rules.jednorazovaVyplata?.zdroj;
+  polozky.push({
+    ukol: `Když se narodí další dítě, nahlas to Úřadu práce. Rodičovský příspěvek na starší dítě končí. Nevyčerpaný zbytek se vyplatí jednorázově, když jde aspoň jednomu z rodičů k narození dalšího dítěte stanovit denní vyměřovací základ, nebo je jeden z rodičů OSVČ (${zdrojVyplaty ? zdrojVyplaty.pravniZaklad.replace('zákona č. 117/1995 Sb.', 'ZSSP') : '§ 30a odst. 1 ZSSP'}).`,
+    termin: 'Při narození dalšího dítěte', typ: 'doporuceny',
+    zdroj: zdrojVyplaty ? { nazev: `Zákon o státní sociální podpoře, ${zdrojVyplaty.pravniZaklad.replace(' zákona č. 117/1995 Sb.', '')}`, url: zdrojVyplaty.url } : zdrojRp,
+  });
   polozky.push({
     ukol: 'Poslední měsíc čerpání rodičovského příspěvku je měsíc 3. narozenin dítěte. Co se do té doby nevyčerpá, propadne.',
     termin: `Do ${datum(pridejDny(prvniDenMesice(B, vekMesicu(plan) + 1), -1))}`, typ: 'hard',

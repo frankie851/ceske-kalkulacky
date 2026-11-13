@@ -9,6 +9,7 @@ import * as v from './vystup.js';
 import { kc, datum } from '../../js/format.js';
 import { pripojUlozeni } from '../../js/uloziste.js';
 import { prectiCislo } from '../../js/cislo-vstup.js';
+import { ocistiUlozene, mezeFormulare } from './obnova.js';
 
 const pravidla = JSON.parse(document.getElementById('pravidla').textContent);
 const formular = document.getElementById('rodicovska-formular');
@@ -223,6 +224,8 @@ function prepocitej() {
   text('#krok-materska .step-sum', s.materska);
   text('#krok-otcovska .step-sum', s.otcovska);
   text('#krok-rp .step-sum', s.rp);
+  // Předvyplněné mzdy jsou ukázka; označení zmizí, jakmile je někdo přepíše (ROD-14).
+  $('[data-ukazka-prijmu]').hidden = vstup.prijemMatka !== VYCHOZI_VSTUP.prijemMatka || vstup.prijemOtec !== VYCHOZI_VSTUP.prijemOtec;
   nastavNapovedu('prijem-matka', v.napovedaPrijmu(vstup.prijemMatka, pravidla));
   nastavNapovedu('prijem-otec', v.napovedaPrijmu(vstup.prijemOtec, pravidla));
 
@@ -275,15 +278,16 @@ function ziskej() {
   return data;
 }
 
-function obnov(data) {
-  if (!data || typeof data !== 'object') return;
-  for (const id of POLE) if (typeof data[id] === 'string') $(`#${id}`).value = data[id];
+function obnov(ulozeno) {
+  // Revize 5. 11. 2026, ROD-14: do formuláře jen platné hodnoty, ostatní pole zůstanou, jak jsou.
+  const data = ocistiUlozene(ulozeno, mezeFormulare(pravidla));
+  for (const id of POLE) if (id in data) $(`#${id}`).value = data[id];
   for (const n of RADIA) {
     const radio = data[n] && formular.querySelector(`input[name="${n}"][value="${CSS.escape(String(data[n]))}"]`);
     if (radio) radio.checked = true;
   }
-  rpVolba = ['navrh', 'max', 'vlastni'].includes(data.rpVolba) ? data.rpVolba : 'navrh';
-  if (rpVolba === 'vlastni' && Number.isFinite(Number(data.rpVyse))) {
+  rpVolba = data.rpVolba ?? 'navrh';
+  if (rpVolba === 'vlastni' && 'rpVyse' in data) {
     const posuvnik = $('#rp-vyse');
     posuvnik.max = String(Math.max(Number(posuvnik.max), Number(data.rpVyse)));
     posuvnik.value = String(data.rpVyse);

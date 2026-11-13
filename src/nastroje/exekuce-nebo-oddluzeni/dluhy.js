@@ -36,7 +36,7 @@ export function nejnovejsiPlatnyRok(rules, dnesniRok) {
 }
 
 /** Součet životního minima, normativního nájemného a energetického paušálu (celé koruny). */
-function zakladniSoucet(p) {
+export function zakladniSoucet(p) {
   return p.zivotniMinimum + p.normativniNajemne + p.energetickyPausal;
 }
 
@@ -110,6 +110,22 @@ export function srazka(p, v) {
     nahradaZamestnavateli,
     vericiDostanou: celkem - nahradaZamestnavateli,
   };
+}
+
+/**
+ * Zákonná sazba úroku z prodlení (% ročně) pro prodlení vzniklé v daný den.
+ * Nařízení vlády č. 351/2013 Sb., § 2 odst. 1: repo sazba ČNB k prvnímu dni pololetí, v němž
+ * prodlení vzniklo, + 8 bodů. Sazba se po celou dobu prodlení nemění.
+ * @param {object} urok rules.urokZProdleni ({ pololeti: [{ od: 'RRRR-MM-DD', procenta }] })
+ * @param {string} datumIso den vzniku prodlení 'RRRR-MM-DD'
+ * @returns {number|null} sazba, nebo null pro den před první položkou historie
+ */
+export function sazbaUrokuZProdleni(urok, datumIso) {
+  let sazba = null;
+  for (const x of urok?.pololeti ?? []) {
+    if (x.od <= datumIso) sazba = x.procenta;
+  }
+  return sazba;
 }
 
 /**

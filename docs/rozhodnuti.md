@@ -984,7 +984,243 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   (12. 11. 2026). `meta.overeno` je datum štítku „Pravidla ověřena“ pro celý nástroj
   i pevný `DTSTAMP` v .ics a termíny jsme 12. 11. znovu neověřovali.
 
+## Plán48 a Penzijko kompas – střední nálezy (P48-04, PEN-05, PEN-06, PEN-07)
+
+- **Podmínky daňové podpory (P48-04).** Podle § 15b odst. 1 písm. a) bod 1 ZDP je produkt
+  daňově podporovaný, jen když se z něj vyplácí nejdřív po 120 kalendářních měsících a nejdřív
+  v roce 60 let (u penzijka i od věku 5 let před důchodovým věkem). Při výplatě nebo zániku
+  dřív se podpora vrací (§ 15b odst. 4): odpočty za předchozích 10 zdaňovacích období se
+  zdaní jako ostatní příjem (§ 15b odst. 5 písm. a)). Čísla jsou v `rules.json` →
+  `sady.*.odpocet.podminkyPodpory` s citací, text skládá `vystup.js` → `upozorneniPodpory`.
+  Upozornění je v poznámce pod radou „Co udělat do 31. 12.“ (jen když rada radí vložit peníze),
+  v seznamu „Na co si dát pozor“ a v nápovědě pole DIP. Dřívější věta „trvání aspoň 10 let“
+  byla nepřesná: zákon počítá 120 měsíců od vzniku produktu do výplaty, ne délku placení.
+  Podmínky soukromého životního pojištění podle § 15a odst. 3 (pojistná částka, věk 60)
+  nástroj dál nekontroluje, je to v `meta.neovereno`.
+- **Odkaz MF (PEN-05).** Stránka `mf.gov.cz/cs/financni-trh/penzijni-sporeni` vrací 404.
+  Nahrazena stránkou MF „Základní informace“ k III. pilíři (HTTP 200, titulek „Základní
+  informace | Ministerstvo financí ČR“, 12. 11. 2026). Odkazy na kb.cz, finance.cz, finex.cz,
+  dumfinanci.cz, csps.cz a psp.cz se z prostředí nedají otevřít (proxy je blokuje), proto
+  zůstávají beze změny a jsou uvedené v PR k ruční kontrole.
+- **Výnosy fondů (PEN-06).** Prezentace MF z 3. 6. 2026 uvádí předpoklady svého modelu: na
+  s. 12–15 výnos akcií 7,5 %, dluhopisů 4,0 %, peněžního trhu 2,5 % a inflaci 2,5 %, na s. 17
+  výnos transformovaného fondu 1,5 %. Ty jsou teď v `rules.json` s citací (`vynosZdroj`,
+  `cyklus.zdrojAkcie`, `cyklus.zdrojDluhopisy`, `predpoklady.inflaceZdroj`):
+  - transformovaný fond 1,5 % (beze změny, teď se zdrojem),
+  - akcie ve strategii životního cyklu 7 → 7,5 %, dluhopisy 3 → 4 %,
+  - akciový fond 7 → 7,5 % (počítáme ho celý v akciích, to je předpoklad kalkulačky),
+  - inflace 2,5 % (beze změny, teď se zdrojem).
+  Výnos konzervativního (3 %) a vyváženého (4,5 %) fondu MF neuvádí. Hodnoty zůstávají a mají
+  poznámku „předpoklad kalkulačky, ne úřední údaj“. Rozložení životního cyklu (100 % akcií
+  do 45 let, 20 % v 65) zůstává vlastním předpokladem. MF v modelu počítá s 98 % akcií do
+  55 let a pak se snížením na 30 %, to je v poznámce fondu. Stránka v „S čím počítáme“ říká,
+  odkud který výnos je, a výslovně, že výnos transformovaného fondu rozhoduje o radě „přejít“.
+  Karta transformovaného fondu ukazuje použité výnosy pod výsledkem. Vyšší výnosy akcií
+  a dluhopisů zvýší projekce akciového fondu a životního cyklu a s nimi přínos přechodu
+  z transformovaného fondu (výchozí ukázka: 392 791 Kč v dnešních penězích).
+- **Testy (PEN-07).** Přibyly testy `vkladProMaxPrispevek` (obě sady, hranice pásem 17/18
+  a 29/30 let, věk bez pásma, minimální vklad), větve doporučení „poplatky“ a test 6 teď
+  ověřuje přesnou hodnotu měsíčního modelu 100 000 × (1 − 0,01/12)^120 = 90 479,97 Kč
+  místo tolerance 0,5 % kolem 90 438 Kč (to je roční strhávání ze zadání, 100 000 × 0,99^10).
+
+## Mám EET? + OSVČ 2027 – střední nálezy (EET-03, EET-05, EET-06, EET-07, EET-09, s nimi EET-11)
+
+- **1. pásmo paušální daně 2027 podle zákonného vzorce** (EET-03, rozhodnutí uživatele): o 15 % se
+  zvyšuje vyměřovací základ, ne záloha (§ 14 odst. 3 písm. a) a odst. 13 zákona č. 589/1992 Sb.).
+  35 % × 51 663 = 18 083 Kč, × 1,15 = 20 796 Kč, pojistné 29,2 % = 6 073 Kč (§ 7 odst. 3, nahoru).
+  Zdravotní část je 13,5 % z dvanáctiny minimálního VZ = 3 488 Kč (§ 8a a § 3a odst. 5 zákona
+  č. 592/1992 Sb.), daň 100 Kč (§ 38lk odst. 7 ZDP). Celkem **9 661 Kč** měsíčně, 115 932 Kč ročně,
+  EET OFF 132 732 Kč. Stejný postup dává oficiální částky FS pro rok 2026 (5 756 / 3 306 Kč).
+  `osvc.js` → `flatBands()` 1. pásmo dopočítá z parametrů. `rules.json` drží jen daň, násobek 1,15,
+  kontrolní hodnoty v `expected` a citace (`zdroj`, `zdrojZdravotni`, `zdrojDan`). Stav zůstává
+  „derived“: tabulka Finanční správy pro rok 2027 k 12. 11. 2026 nevyšla (ověřeno na
+  financnisprava.gov.cz, je tam jen rok 2026). Po zveřejnění tabulky přepnout na „official“.
+  Zdroj 1. pásma už neodkazuje na tiskovou zprávu FS bez výpočtu (část EET-13). Karta na úvodní
+  stránce (`zmeny2027.json`) uvádí 9 661 Kč se zdrojem v zákoně.
+- **Neplatné zadání v OSVČ 2027** (EET-05): výsledek, graf, lepivá lišta i částka první zálohy se
+  skryjí a místo nich je upozornění „V zadání je chyba…“. Hlášku u pole formulář ukazuje už při
+  psaní, čtečka ji oznámí jednou. Po opravě se vše přepočítá.
+- **Jedna činnost a podmínka 75 %** (EET-06, § 2a odst. 5 ZDP): kalkulačka se dál ptá jen na jeden
+  výdajový paušál. Nápověda pole to říká. Výsledek přidá poznámku, když pásmo vychází jen díky
+  vyššímu limitu (1,5 nebo 2 mil. Kč): ten platí, jen když aspoň 75 % příjmů tvoří příjmy
+  s paušálem 80 % nebo 60 % (2 mil. Kč jen 80 %). Jinak je limit 1. pásma 1 mil. Kč (2. pásma
+  1,5 mil. Kč). Doplňkovou otázku na podíl příjmů jsme nepřidali, zjednodušení je v `meta.neovereno`.
+- **Rozhodná částka u vedlejší činnosti** (EET-07, § 10 odst. 2 zákona č. 155/1995 Sb.): účast
+  vzniká, když zisk rozhodné částky „dosáhl“. Bez pojistného je jen zisk pod ní (dřív `<=`).
+  Rozhodná částka se počítá z nezaokrouhleného součinu VVZ × koeficient (NV č. 177/2026 Sb.:
+  48 900 Kč × 1,0565), ne z průměrné mzdy zaokrouhlené nahoru (EET-11, stejná funkce). Zákon
+  zaokrouhlení neurčuje: porovnává se přesná hodnota 123 990,84 Kč, zobrazuje se 123 991 Kč.
+  Pro rok 2027: 123 990 Kč → bez pojistného, 123 991 Kč → 19 914 Kč. Průměrná mzda 51 663 Kč
+  se kontroluje testem jako VVZ × koeficient nahoru (§ 23b odst. 4 ZPSZ).
+- **Zadání** (EET-09, rozhodnutí uživatele): `docs/zadani.md` opraveno s poznámkou „(opraveno podle
+  revize 5. 11. 2026, EET-09)“: 1. pásmo 9 661 Kč a kritéria 115 932 / 132 732 Kč, minimální
+  zálohy 35 % PM nejsou návrh, 25 % PM pro začínající, výjimka jen pro průkaz ZTP nebo ZTP/P kvůli
+  nevidomosti, těžké ztrátě zraku nebo hluchoslepotě (§ 11 odst. 4 zákona č. 180/2026 Sb.),
+  MOJE eet „zejména pro nejvýše 2 evidenční jednotky“ bez limitu zaměstnanců (eet.gov.cz).
+- Přepsané testy, které chybu konzervovaly: 115 944 → 115 932 Kč, 132 744 → 132 732 Kč, měsíčně
+  9 662 → 9 661 Kč a EET OFF 11 062 → 11 061 Kč (`test/osvc.test.js`, `test/e2e/mam-eet.test.js`
+  včetně ukázky bez JS). Test „1. pásmo = min. soc. záloha × 1,15“ nahradil test zákonného vzorce.
+
+## Exekuce, nebo oddlužení? – střední nálezy (DLU-01, DLU-02, DLU-03, DLU-06, s nimi DLU-07)
+
+- **Úrok z prodlení podle pololetí (DLU-01).** Podle NV č. 351/2013 Sb. § 2 odst. 1 je sazba
+  repo sazba ČNB k prvnímu dni pololetí, v němž prodlení vzniklo, + 8 bodů, a po celou dobu
+  prodlení se nemění. Jedna sazba 11,75 % s textem „zákonná sazba“ proto platila jen pro dluh
+  po splatnosti od 1. 7. 2026. Historie je v `rules.json` → `urokZProdleni.pololeti` (1. pololetí
+  2022 až 2. pololetí 2026) s repo sazbou a dnem, od kdy platila, podle souboru ČNB
+  `vyvoj_repo_historie.txt` (stažen 12. 11. 2026): 2022/1 11,75 %, 2022/2–2023/2 15 %,
+  2024/1 14,75 %, 2024/2 12,75 %, 2025/1 12 %, 2025/2 a 2026/1 11,5 %, 2026/2 11,75 %.
+  Formulář má volbu „Od kdy dluh nesplácíte?“ (nejnovější pololetí vybrané), sazba se doplní
+  z pravidel; vlastní sazba (smlouva, starší dluh) přepne volbu na „Jindy, nebo mám sazbu ze
+  smlouvy“. Nápověda už neobsahuje číslo. Repo sazba je od 6. 11. 2026 4,00 %; sazbu pro
+  prodlení od 1. 1. 2027 doplníme až po 1. 1. 2027 (`meta.neovereno`).
+- **Životní minimum (DLU-02).** 4 860 Kč k 1. 1. 2026 plyne z NV č. 361/2025 Sb. § 1 (účinné
+  1. 10. 2025, pozbylo platnosti 30. 9. 2026), NV č. 436/2022 Sb. bylo zrušeno k 1. 10. 2025.
+  Od 1. 10. 2026 je 5 500 Kč přímo v § 2 zákona č. 110/2006 Sb. (novela č. 152/2025 Sb.);
+  nařízení o zvýšení částek účinné k 12. 11. 2026 neexistuje. Pro srážky platí po celý rok
+  částky k 1. lednu (NV č. 595/2006 Sb. § 4, znění od 1. 1. 2026, bez budoucího znění), takže
+  rok 2026 počítá se 4 860 Kč a 5 500 Kč patří k roku 2027. Hodnoty se nemění.
+  Normativní nájemné 9 430 Kč je ze sdělení č. 526/2025 Sb. platného k 1. 1. 2026; od
+  1. 10. 2026 ho nahradilo sdělení č. 169/2026 Sb. s částkami podle okresů (zákon č. 152/2026
+  Sb.). Pro srážky 2026 to nic nemění (§ 4), pro rok 2027 zůstává výpočet neúplný, protože
+  nařízení dál odkazuje na „obec s alespoň 70 000 obyvateli“. Energetický paušál 2 300 Kč
+  je v § 32 odst. 2 písm. a) zákona č. 151/2025 Sb. Změněné položky mají citaci
+  `zdroj: { pravniZaklad, url, citace }`.
+- **Úřední kalkulačky (DLU-03).** Ověřeno ze zdrojového kódu stránek 12. 11. 2026:
+  exekuce.justice.cz nabízí jako první volbu „2026 výpočet od 1. 10.“ s životním minimem
+  5 500 Kč, což § 4 NV č. 595/2006 Sb. neodpovídá; kalkulátor splátek insolvence.justice.cz
+  strhává celý zbytek mzdy nad 1násobkem součtu místo 1,9násobku (§ 2). U odkazů je teď
+  vykající upozornění; hranici 30 692 Kč (nezabavitelná částka + 1 × součet, bez vyživovaných
+  osob) počítá `vystup.js` z pravidel. Zjištění jsou v `rules.json` → `uredniKalkulacky`.
+  Konkrétní rozdíly ve výsledcích (2 784 vs 2 966 Kč atd.) přebíráme z revize, znovu jsme je
+  nepočítali, a proto je na stránce neuvádíme.
+- **Testy (DLU-06) a okrajové texty (DLU-07).** Nové `test/vystup.test.js` (větve
+  „prilis-dlouho“, „zadna-srazka“, úrok vyšší než splátka, `delkaSlovy`, volby pololetí,
+  upozornění u kalkulaček) a `test/bez-cisel.test.js` (žádná sazba ani desetinné číslo natvrdo
+  v `ui.js`, `vystup.js`, `11tydata` a `index.njk`). E2E ověřuje čtení „23.000“, „150.000“,
+  „1.500.000“ a „23000,50“ ve formuláři přes sdílené `prectiCislo`. Při srážce, kterou celou
+  dostane zaměstnavatel (mzda 14 105 Kč), stránka místo „déle než 50 let“ píše, že věřitelům
+  nic nezbude; bez dluhu místo „0 měsíců“ píše, že dluh nebyl zadán.
+
 # Nízké nálezy revize 5. 11. 2026 (13. 11. 2026)
+
+## Mám EET? + OSVČ 2027 – nízké nálezy (EET-10, EET-11, EET-13)
+
+- **Minimální vyměřovací základ zdravotního pojištění** (EET-10): § 3a odst. 2 zákona
+  č. 592/1992 Sb. (https://www.zakonyprolidi.cz/cs/1992-592#p3a) říká „dvanáctinásobek 50 %
+  průměrné mzdy“ a nahoru zaokrouhluje jen průměrnou mzdu (51 663 Kč). Roční minimum je tedy
+  12 × 25 831,5 = 309 978 Kč, ne 12 × 25 832 = 309 984 Kč. `osvc.js` → `params()` vrací
+  `healthMinBaseMonthly` (25 831,5, bez zaokrouhlení) a `healthMinBaseAnnual` (309 978) místo
+  zaokrouhlené měsíční části. Pojistné se zaokrouhluje nahoru (§ 2 odst. 2): 41 847,03 → 41 848 Kč,
+  pro rok 2027 tedy bez rozdílu v částce, změní se jen mezivýsledek v rozpisu („minimum 309 978 Kč“).
+  Minimální měsíční záloha a zdravotní část 1. pásma paušální daně se počítají z dvanáctiny ročního
+  minima (§ 8 odst. 1 a 2, § 8a): 25 831,5 × 13,5 % = 3 487,25 → 3 488 Kč, 1. pásmo zůstává 9 661 Kč.
+  `rules.json` → `osvc2027.health` má `zdroj` s citací § 3a odst. 2, § 2 a § 8 a `expected.minBaseAnnual`.
+- **Rozhodná částka** (EET-11) – ověřeno, opraveno už v PR #23: `osvc.js` počítá
+  2,4 × (VVZ 48 900 × koeficient 1,0565) bez zaokrouhlení, zobrazuje 123 991 Kč.
+- **Odkazy na e-Sbírku** (EET-13): e-Sbírka je úřední zdroj, proto zůstává (integritní test
+  povoluje jen úřední domény, zakonyprolidi.cz je u citací v `zdroj.url`). Tvar URL je správný:
+  `www.e-sbirka.cz/sb/1992/592` přesměruje kódem 308 na `e-sbirka.gov.cz/sb/1992/592`, ten vrací 200
+  (obsah se skládá až v prohlížeči). Kotvy na paragraf u e-Sbírky z prostředí ověřit nejde, proto
+  paragraf nese titulek odkazu (doporučení revize): `meta.zdroje` a `*SourceTitle` u zákonů
+  č. 586/1992, 589/1992, 592/1992 Sb. a NV č. 177/2026 Sb. uvádějí paragrafy. Popis zdroje 1. pásma
+  („výpočet 1. pásma“ z tiskové zprávy) opravil už PR #23 – titulek cituje § 14 odst. 3 písm. a)
+  ZPSZ, § 8a ZPZP a § 38lk ZDP. Test v `test/rules.test.js` hlídá tvar URL a paragraf v titulku.
+
+## Spot, nebo fix? – nízké nálezy (SPOT-09, SPOT-10, SPOT-11, SPOT-12)
+
+- **Měsíce mimo rok regulovaných cen** (SPOT-09): data jsou vždy posledních 12 celých měsíců, kdežto
+  regulované ceny v `tariffs.json` jen pro jeden rok. Úplné ceny 2025 (CR ERÚ č. 12/2024 pro
+  distribuci, č. 11/2024 pro ostatní složky, ERV 14/2024 a 13/2024) jsou na eru.gov.cz dostupné,
+  ale jejich doplnění by znamenalo přestavět výpočet na ceny po měsících a pro 2025 stejně chybí
+  ceník dynamického tarifu. Proto 2025 nedopočítáváme, ale **jasně označujeme**: pod tabulkou
+  „Náklady po měsících“ je upozornění, které vyjmenuje měsíce mimo rok cen (`mesiceMimoRokCen`,
+  `upozorneniObdobi` ve `vystup.js`, text v `tariffs.json` → `jinyRokCen`). U roku 2025 dodá
+  úředně doložený rozdíl: POZE 84,70 Kč/A/měsíc (trojfázově trojnásobek), nejvýš 495 Kč/MWh
+  (CR ERÚ č. 11/2024, body 5.1.2 až 5.3, https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22;
+  od 1. 10. 2025 strop podle § 28a zákona č. 165/2012 Sb., CV ERÚ č. 3/2025). Upozornění funguje
+  i pro budoucí přelom roku (např. leden 2027 s cenami 2026).
+- **Krátké CSV** (SPOT-10): pod `rules.json` → `mereni.minPokryti` (10 % čtvrthodin období, jak
+  navrhla revize) měření nepoužijeme, pole „Roční spotřeba“ se nepřepíše a stav napíše proč
+  (`posudMereni` ve `vystup.js`). Hranice „hrubého odhadu“ (50 %) je také v `rules.json`.
+  „Zpět na typový profil“ vrátí hodnotu, kterou měl uživatel v poli před měřením, ne předvolbu.
+- **Plánovaný běh workflow** (SPOT-11): `gh api …/actions/runs?event=schedule` ukazuje plánovaný
+  běh „Aktualizace dat OTE a ČNB“ 9. 11. 2026 05:39 UTC (cron pondělí 4:41 UTC) se stavem success,
+  všechny kroky prošly, data se nezměnila (poslední den 31. 10. 2026), proto bez PR. Chyba se ale
+  našla v testu: `regulovane.test.js` hlídal `meta.overeno === '2026-11-12'`, přitom workflow při
+  nových datech přepisuje `meta.overeno` datem stažení – první běh s novými daty by na testech
+  spadl a PR s daty by nevznikl. Test teď hlídá jen tvar data a že není starší než 13. 11. 2026.
+- **Popis posunu** (SPOT-12): kód přesouvá do 16 nejlevnějších čtvrthodin dne
+  (`POSUN_CTVRTHODIN` v `calc.js`), ne do 4 celých hodin. Nápověda u posuvníku
+  (`rules.json` → `vychozi.posun.napoveda`) i „Co zatím neověřujeme“ to teď říkají stejně a dodávají,
+  že úspora je optimistická (ceny každého dne známé dopředu, přesun přesně do nejlevnějších čtvrthodin).
+
+## Inflační kalkulačka – nízké nálezy (INF-08)
+
+- **Výběr měsíce jen s daty** (INF-08): `mesiceRoku()` ve `vystup.js` vrací měsíce roku, za které
+  má ČSÚ data (v posledním roce do posledního měsíce `data/cpi.json`, v prvním roce od prvního).
+  Build tak vykreslí nabídku, `ui.js` ji při změně roku přestaví a vybraný měsíc mimo data posune
+  na nejbližší dostupný. Poznámka o posledním dostupném měsíci ve výsledku zůstává v kódu pro
+  případ, že by se měsíc bez dat dostal do výpočtu jinak.
+
+## Plán48, Penzijko kompas, Výpověď 2026, Rodičovská – nízké nálezy (P48-07, P48-08, P48-09, PEN-10, PEN-12, VYP-06, VYP-07, ROD-12, ROD-13, ROD-14)
+
+- **Zdroje návrhu „Lepší penzijko“** (P48-07, PEN-12): mediální odkazy (finance.cz, dumfinanci.cz,
+  ČSPS, KB, Finance.cz) z `rules.json` obou nástrojů zmizely. Návrh odkazuje na sněmovní tisk 285
+  (psp.cz), tiskovou zprávu MF „Vláda schválila Lepší penzijko“ z 24. 8. 2026 a prezentaci MF
+  z 3. 6. 2026 (s. 6 „Spoření od kolébky“: 40 % do 29 let, u dětí od 100 Kč). Obě stránky MF jsou
+  13. 11. 2026 ověřené (HTTP 200, text odpovídá). Stránka psp.cz z prostředí nejde otevřít
+  (connection reset), stav projednávání (1. čtení 24. 9. 2026, výbory 29. 10. 2026) je proto
+  převzatý z revize a je v `meta.neovereno`.
+- **Platnost pravidel 2026 v Penzijku** (PEN-12): `platnostOd` je 1. 7. 2024 (od té doby platí
+  dnešní státní příspěvek). Přepínač dál ukazuje „Pravidla 2026“ – nový klíč `rok` v sadě.
+- **Štítek návrhu** (P48-08): makro `statistiky` umí u dlaždice štítek (`stitek`; `null` = v HTML,
+  ale skrytý). Plán48 ho dává k dlaždici státního příspěvku a k nadpisu projekce; přepínač sady
+  ho ukazuje stejným mechanismem jako dosavadní štítky (`[data-stitek-sady]`).
+- **Texty Plánu48** (P48-09): sazba 23 % se týká „části základu daně“ (§ 16 odst. 1 ZDP). Věta
+  „Obvykle musí dorazit do 20. 12.“ zmizela i s položkou `vychozi.mimoradnyVkladPripsatDo` – zákon
+  termín nestanoví, určuje ho penzijní společnost; teď „Do kdy musí dorazit, určují podmínky tvé
+  penzijní společnosti.“ „Schválen vládou 8/2026“ nahradilo číslo tisku a data.
+- **Převod ke konkurenci** (PEN-10): zákon č. 427/2011 Sb., § 61 odst. 1 písm. b) a odst. 3
+  (nejvýše 800 Kč) a § 62 odst. 3 (neúčtuje se „po více než 60 měsících“). V zadání koordinátora
+  byl uveden § 136 – ten upravuje získávání informací od účastníka, se zpoplatněním převodu
+  nesouvisí. Pravidlo je v `predpoklady.prevodKonkurence` (`zdarmaPoMesicich: 60`, citace).
+  Délka smlouvy se zadává v celých letech, takže 5 let = 60 měsíců ještě zpoplatněno, zdarma od 6 let.
+- **Výpověď – texty** (VYP-06): ochranná doba „konec se posune o dobu, po kterou ochranná doba ve
+  výpovědní době trvala“ + možnost na prodloužení netrvat (§ 53 odst. 2 ZP, citace v
+  `zakonikPrace.ochrannaDoba.prodlouzeni`). Hraniční věk cituje § 43 zákona o zaměstnanosti („nad
+  52/57 let věku“, rozhoduje věk v den žádosti) místo „praxe úřadu práce“; výklad, že delší doba
+  platí ode dne narozenin, je v `meta.neovereno` (tabulka ÚP „52–57 let 8 měsíců, nad 57 let 11
+  měsíců“ to u 57 let jednoznačně neříká). Při zrušení ve zkušební době zaměstnavatelem připomene
+  zákaz v prvních 14 dnech neschopenky (§ 66 odst. 1 ZP, `zkusebniDoba.zakazPriNeschopnostiDnu`).
+- **Výpověď – kontroly** (VYP-07): výpověď doručená před 1. 6. 2025 se nepočítá, hláška
+  „Kalkulačka počítá výpovědi doručené od 1. 6. 2025.“ u pole doručení. Opora: čl. II bod 3 zákona
+  č. 120/2025 Sb. (výpověď doručená před účinností se řídí dřívějším § 51), účinnost 1. 6. 2025.
+  Dohody a zrušení ve zkušební době se netýká. Žádost o podporu před koncem pracovního poměru nebo
+  v jeho poslední den ukáže hlášku u pole žádosti (uchazečem nemůže být, kdo je v pracovněprávním
+  vztahu, § 25 odst. 1 písm. a) zákona o zaměstnanosti). Kontroly jsou čisté funkce
+  `kontrolaDoruceni` a `kontrolaZadosti` ve `vypoved.js`.
+- **Čistá mzda 2027** (ROD-12): sada `cistaMzda.2027` jen z úředních textů ve znění od 1. 1. 2027
+  (zakonyprolidi.cz, „budoucí znění“): ZDP § 38h odst. 2 (15 %, 23 % nad 3násobek průměrné mzdy) a
+  § 35ba (sleva 30 840 Kč → 2 570 Kč měsíčně), zákon č. 589/1992 Sb. § 7 odst. 1 písm. d) (7,1 %),
+  zákon č. 592/1992 Sb. § 2 (13,5 %, bez ohlášené změny) a zákon č. 48/1997 Sb. § 9 odst. 2 (třetina,
+  znění platné do 31. 12. 2027). Průměrná mzda 2027 = 48 900 × 1,0565 (NV č. 177/2026 Sb. § 1)
+  = 51 662,85 → 51 663 Kč nahoru (§ 23b odst. 4 zákona č. 589/1992 Sb.); hranice 154 989 Kč.
+  Odhad podle posledního roku zůstává pro rok 2028 a dál.
+- **DVZ bez nároku a jednorázová výplata** (ROD-13): DVZ matky pro strop rodičovského příspěvku se
+  počítá z jejího příjmu i bez 270 dnů pojištění (§ 30 odst. 2 ZSSP: rozhoduje i DVZ pro nemocenské
+  v souvislosti s porodem); plán to oznámí. U otce dál rozhoduje odpověď „je nemocensky pojištěný
+  zaměstnanec“. Kontrolní seznam u dalšího dítěte uvádí podmínku § 30a odst. 1 ZSSP (DVZ aspoň
+  jednoho rodiče, nebo OSVČ).
+- **Uložený plán a ukázkové příjmy** (ROD-14): obnova z localStorage jde přes čistou funkci
+  `ocistiUlozene` (`rodicovska/obnova.js`): datum ve formátu RRRR-MM-DD, skutečný den a ne dřív než
+  platnost pravidel; příjmy nezáporné; celá čísla v mezích formuláře z `rules.json`; přepínače jen
+  text bez zvláštních znaků (formulář pak ověří, že taková volba existuje); výše RP celé nezáporné
+  číslo. Neplatné položky se zahodí a pole si nechá dosavadní hodnotu.
+  Výchozí příjmy 40 000 / 50 000 Kč zůstávají: bez nich by stránka bez JavaScriptu neukázala
+  ukázkový plán a výsledek by se po načtení neukázal hned. Místo prázdných polí je nad nimi věta
+  „Předvyplněné mzdy … jsou jen ukázka. Přepiš je skutečnými hrubými mzdami.“, která zmizí, jakmile
+  se některá mzda změní.
 
 ## Bydlometr, Slevy 2027, Cestovní příkaz – nízké nálezy (BYD-08, BYD-09, BYD-11, SLV-09, SLV-10, CES-08, CES-10, CES-11, CES-12; ověřen SLV-08)
 

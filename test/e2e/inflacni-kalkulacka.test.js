@@ -68,13 +68,28 @@ test('mzda 40 000 → 50 000 Kč při růstu cen o 20 % → reálně +4,17 %', a
   await page.close();
 });
 
-test('měsíc bez dat: počítá s posledním dostupným a napíše to u výsledku', async () => {
-  const { page } = await otevri(CESTA);
+// Revize 5. 11. 2026, INF-08: dřív nabídka v posledním roce obsahovala i měsíce bez dat
+// (test vybíral prosinec a čekal poznámku). Teď výběr nabízí jen měsíce s daty ČSÚ.
+test('výběr měsíce nabízí jen měsíce s daty ČSÚ (INF-08)', async () => {
+  const { page, chyby } = await otevri(CESTA);
   const posledni = Object.keys(cpi).sort().at(-1);
-  if (posledni.endsWith('-12')) return; // v prosinci není v posledním roce žádný pozdější měsíc
+  const [rok, mesic] = posledni.split('-');
+  const nabidka = () => page.$$eval('#prepocet-do-mesic option', (o) => o.map((x) => x.value));
+  assert.equal(await page.$eval('#prepocet-do-rok', (el) => el.value), rok);
+  assert.equal((await nabidka()).length, Number(mesic));
+  assert.equal((await nabidka()).at(-1), mesic);
+  // Starší rok: všech 12 měsíců, prosinec jde vybrat.
+  await vypln(page, '#prepocet-do-rok', String(Number(rok) - 1));
+  assert.equal((await nabidka()).length, 12);
   await vypln(page, '#prepocet-do-mesic', '12');
-  assert.equal(await page.$eval('[data-poznamka-obal]', (el) => el.hidden), false);
-  assert.match(await text(page, '[data-poznamka]'), /zatím data nejsou/);
+  // Zpět na poslední rok: prosinec v nabídce není, výběr se posune na poslední měsíc s daty.
+  await vypln(page, '#prepocet-do-rok', rok);
+  assert.equal((await nabidka()).length, Number(mesic));
+  assert.equal(await page.$eval('#prepocet-do-mesic', (el) => el.value), mesic);
+  const ocekavano = Math.round(10000 * (cpi[posledni] / cpi['2005-01']));
+  assert.equal((await cislo(page)).replace(/\s/g, ''), `${ocekavano}Kč`);
+  assert.equal(await page.$eval('[data-poznamka-obal]', (el) => el.hidden), true);
+  assert.deepEqual(chyby, []);
   await page.close();
 });
 

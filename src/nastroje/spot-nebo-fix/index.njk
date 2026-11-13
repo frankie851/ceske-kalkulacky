@@ -112,7 +112,7 @@ styly: ['/nastroje/spot-nebo-fix/spot-nebo-fix.css']
         <label for="posun">Přesun spotřeby do nejlevnějších hodin dne</label>
         <p class="spot-posun-hodnota" aria-hidden="true"><output id="posun-text" for="posun" data-posun-text>{{ s.posun.hodnota }} %</output> denní spotřeby</p>
         <input type="range" id="posun" name="posun" min="{{ s.posun.min }}" max="{{ s.posun.max }}" step="{{ s.posun.krok }}" value="{{ s.posun.hodnota }}" aria-valuetext="{{ s.posun.hodnota }} % denní spotřeby" aria-describedby="posun-napoveda">
-        <span class="hint" id="posun-napoveda">Platí pro spot a dynamický tarif. Třeba pračka, myčka, ohřev vody nebo nabíjení auta v levných hodinách. Roční spotřeba se nemění.</span>
+        <span class="hint" id="posun-napoveda">{{ s.posun.napoveda }}</span>
       </div>
       <p class="note">{{ ikona('ikona-info') }}<span>Ceny z burzy do {{ s.posledniDen }} (OTE, {{ s.obdobi }}), kurzy ČNB. Data aktualizujeme jednou týdně. Orientační výpočet, nejde o nabídku dodavatele.</span></p>
       <p class="note spot-chyba" data-chyba-vypoctu hidden>{{ ikona('ikona-vystraha') }}<span data-chyba-text></span></p>
@@ -125,6 +125,7 @@ styly: ['/nastroje/spot-nebo-fix/spot-nebo-fix.css']
       <div class="spot-graf spot-graf-uzky" data-graf-mesice="uzky">{{ u.grafMesice.uzky | safe }}</div>
       <div class="spot-graf spot-graf-siroky" data-graf-mesice="siroky">{{ u.grafMesice.siroky | safe }}</div>
       <div class="spot-tabulka" data-tabulka-mesice>{{ u.tabulkaMesice | safe }}</div>
+      <p class="note" data-upozorneni-obdobi{% if not u.upozorneniObdobi %} hidden{% endif %}>{{ ikona('ikona-info') }}<span data-upozorneni-obdobi-text>{{ u.upozorneniObdobi }}</span></p>
     </section>
 
     <section class="card" aria-labelledby="hodiny-nadpis">

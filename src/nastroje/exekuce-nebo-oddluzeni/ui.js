@@ -2,12 +2,16 @@
 // Pravidla bere z <script type="application/json" id="pravidla"> (žádný požadavek na síť).
 // Nic se neukládá ani neodesílá a zadané hodnoty se nedávají do adresy stránky.
 import { pravidlaProRok } from './dluhy.js';
-import { rokPravidel, vysledek } from './vystup.js';
+import { rokPravidel, vysledek, moznostiUroku, cisloSazby } from './vystup.js';
 import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const rules = JSON.parse(document.getElementById('pravidla').textContent);
 const rok = rokPravidel(rules, new Date().getFullYear());
 const p = pravidlaProRok(rules, rok.rok);
+
+const urokMoznosti = moznostiUroku(rules.urokZProdleni);
+const sazbaPololeti = new Map(urokMoznosti.map((m) => [m.hodnota, m.sazba]));
+const vychoziSazba = cisloSazby(urokMoznosti.find((m) => m.vybrano).sazba);
 
 const formular = document.getElementById('dluhy-formular');
 const $ = (sel, koren = document) => koren.querySelector(sel);
@@ -45,7 +49,7 @@ function nactiVstup() {
   let sazba = 0;
   if ($('#urok').checked) {
     sazba = nactiCislo('sazba');
-    chyby += nastavChybu('sazba', sazba === null || Number.isNaN(sazba) || sazba > 100 ? 'Napište sazbu v procentech, třeba 11,75.' : '');
+    chyby += nastavChybu('sazba', sazba === null || Number.isNaN(sazba) || sazba > 100 ? `Napište sazbu v procentech, třeba ${vychoziSazba}.` : '');
   } else {
     nastavChybu('sazba', '');
   }
@@ -136,6 +140,19 @@ const urokPole = $('#urok-pole');
 const prepniUrok = () => { urokPole.hidden = !urok.checked; };
 urok.addEventListener('change', prepniUrok);
 prepniUrok();
+
+// Volba pololetí doplní zákonnou sazbu z rules.json. Vlastní sazba (třeba ze smlouvy)
+// přepne volbu na „Jindy, nebo mám sazbu ze smlouvy“.
+const pololetiPole = $('#pololeti');
+const sazbaPole = $('#sazba');
+pololetiPole.addEventListener('change', () => {
+  const s = sazbaPololeti.get(pololetiPole.value);
+  if (s !== null && s !== undefined) sazbaPole.value = cisloSazby(s);
+});
+sazbaPole.addEventListener('input', () => {
+  const s = sazbaPololeti.get(pololetiPole.value);
+  if (s !== null && s !== undefined && nactiCislo('sazba') !== s) pololetiPole.value = 'jina';
+});
 
 for (const el of document.querySelectorAll('[data-jen-js]')) el.hidden = false;
 $('[data-ukaz-vysledek]').addEventListener('click', () => {

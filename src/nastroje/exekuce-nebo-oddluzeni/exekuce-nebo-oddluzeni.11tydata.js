@@ -3,13 +3,16 @@
 // Rok pravidel je rok z meta.overeno (deterministicky, nezávisle na dni sestavení).
 import fs from 'node:fs';
 import { pravidlaProRok } from './dluhy.js';
-import { rokPravidel, vysledek, delkaPravidlo, delkaSlovy } from './vystup.js';
-import { cislo, procenta, datum } from '../../js/format.js';
+import { rokPravidel, vysledek, delkaPravidlo, delkaSlovy, moznostiUroku, cisloSazby, urokNapoveda, rozdilyKalkulacek } from './vystup.js';
+import { cislo } from '../../js/format.js';
 
 const rules = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 const rok = rokPravidel(rules, Number(rules.meta.overeno.slice(0, 4)));
 const p = pravidlaProRok(rules, rok.rok);
-const urok = rules.roky[String(rok.rok)].urokZProdleniProcenta;
+// Zákonná sazba úroku z prodlení podle pololetí vzniku prodlení (rules.urokZProdleni).
+// Výchozí je nejnovější pololetí; sazba se do pole doplní z pravidel, ne natvrdo.
+const urokMoznosti = moznostiUroku(rules.urokZProdleni);
+const vychoziUrok = urokMoznosti.find((m) => m.vybrano);
 
 // Ukázka: čistá mzda 23 000 Kč, bez vyživovaných osob, běžný dluh, 1 exekuce, dluhy 100 000 Kč.
 const vstup = {
@@ -34,9 +37,11 @@ export default {
       osoby: String(vstup.osoby),
       exekuce: String(vstup.pocetExekuci),
       dluh: bezna(vstup.dluh),
-      sazba: String(urok.hodnota).replace('.', ','),
+      sazba: cisloSazby(vychoziUrok.sazba),
     },
-    urokNapoveda: `Úrok z prodlení platíte, když nesplácíte včas. Zákonná sazba od ${datum(urok.ucinnostOd)} je ${procenta(urok.hodnota, 2)} ročně. Ve smlouvě můžete mít jinou.`,
+    urokNapoveda: urokNapoveda(),
+    urokMoznosti,
+    rozdily: rozdilyKalkulacek(p, rules.uredniKalkulacky, rok.rok),
     ctyriExekuce: p.minimumExekuciProDveTretiny,
     zakazLet: p.zakazOpakovaniLet,
     delkaPravidlo: delkaPravidlo(p),

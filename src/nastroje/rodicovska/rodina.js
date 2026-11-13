@@ -376,11 +376,18 @@ export function planRodiny(vstupy, rules) {
   const ppmVMesici = new Map([...mesice.values()].filter((m) => m.index >= 0).map((m) => [m.index, m.ppmKc.matka + m.ppmKc.otec]));
   // Strop z DVZ redukovaného hranicemi roku narození dítěte (§ 30 odst. 3 písm. b) ZSSP, § 22 odst. 2 ZNP).
   const hraniceNarozeni = hraniceProDatum(rules, B);
+  // DVZ matky jde stanovit i bez nároku na mateřskou (270 dní pojištění): stačí pojištěný příjem,
+  // rozhoduje i DVZ pro nemocenské v souvislosti s porodem (§ 30 odst. 2 ZSSP; revize 5. 11. 2026, ROD-13).
+  // U otce rozhoduje odpověď „je nemocensky pojištěný zaměstnanec“.
+  const maDvz = { matka: v.prijemMatka > 0, otec: maNarok.otec };
   const dvzProRp = ['matka', 'otec'].map((kdo) => {
     if (ppmInfo[kdo]) return redukovanyDvz(ppmInfo[kdo].dvz, hraniceNarozeni, P.redukce);
-    const info = davkaRodice(rules, kdo === 'matka' ? v.prijemMatka : v.prijemOtec, maNarok[kdo], B, P.sazba);
+    const info = davkaRodice(rules, kdo === 'matka' ? v.prijemMatka : v.prijemOtec, maDvz[kdo], B, P.sazba);
     return info ? info.redDvz : 0;
   });
+  if (!maNarok.matka && dvzProRp[0] > dvzProRp[1] && rules.dvzBezNaroku) {
+    varovani.push({ typ: 'dvzBezNaroku', uroven: 'info', text: rules.dvzBezNaroku.text });
+  }
   const strop = stropRp({ redDvz: dvzProRp, vicercata: v.vicercata }, rp, rules);
   const navrh = navrhVyseSOdectem({ celkem, vekMesicu: vek, odecet: ppmVMesici, strop });
   let vyse = v.rpVyse == null || v.rpVyse === '' ? navrh : Number(v.rpVyse);

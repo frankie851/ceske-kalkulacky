@@ -5,6 +5,8 @@
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { otevri, vypln, text, zavri } from './pomocnik.mjs';
 import * as v from '../../src/nastroje/spot-nebo-fix/vystup.js';
 
@@ -205,6 +207,63 @@ test('chybná spotřeba ukáže chybu u pole a výsledek nechá', async () => {
   assert.equal(await page.$eval('#mwh', (el) => el.getAttribute('aria-invalid')), 'true');
   assert.match(await text(page, '#mwh-chyba'), /číslem/);
   assert.deepEqual((await zobrazeno(page)).karty, pred.karty);
+  await page.close();
+});
+
+/** CSV se čtvrthodinovým měřením (0,15 kWh) za `dni` dnů od `od`, v dočasném souboru. */
+function csvSoubor(od, dni) {
+  const radky = ['Čas;Spotřeba kWh'];
+  const zacatek = Date.parse(`${od}T00:00:00Z`);
+  for (let d = 0; d < dni; d++) {
+    const den = new Date(zacatek + d * 864e5).toISOString().slice(0, 10);
+    for (let q = 0; q < 96; q++) radky.push(`${den} ${String(Math.floor(q / 4)).padStart(2, '0')}:${String((q % 4) * 15).padStart(2, '0')};0,15`);
+  }
+  const soubor = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'spot-csv-')), `mereni-${dni}.csv`);
+  fs.writeFileSync(soubor, radky.join('\n'));
+  return soubor;
+}
+
+async function nahrajCsv(page, soubor) {
+  await page.$eval('.spot-csv', (el) => { el.open = true; });
+  await (await page.$('#csv-soubor')).uploadFile(soubor);
+  await page.waitForFunction(() => !document.querySelector('[data-csv-mapovani]').hidden);
+  await page.select('#csv-konec', '0');
+  await page.click('[data-csv-pouzit]');
+}
+
+test('SPOT-10: měření ze 2 dnů roční spotřebu nepřepíše, 60 dnů ano a „Zpět“ vrátí zadanou hodnotu', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#mwh', '3');
+  await spocitano(page);
+  const pred = await zobrazeno(page);
+  await nahrajCsv(page, csvSoubor('2026-01-05', 2));
+  await page.waitForFunction(() => /nepoužijeme/.test(document.querySelector('[data-csv-stav]').textContent));
+  assert.equal(await page.$eval('[data-csv-stav]', (el) => el.classList.contains('is-chyba')), true);
+  assert.match(await text(page, '[data-csv-stav]'), /méně než 10 %/);
+  assert.equal(await page.$eval('#mwh', (el) => el.value), '3');
+  assert.equal(await page.$eval('#mwh', (el) => el.readOnly), false);
+  assert.deepEqual((await zobrazeno(page)).karty, pred.karty);
+
+  await nahrajCsv(page, csvSoubor('2026-01-01', 60));
+  await page.waitForFunction(() => document.querySelector('#mwh').readOnly);
+  assert.match(await text(page, '[data-csv-stav]'), /hrubý odhad/);
+  assert.notEqual(await page.$eval('#mwh', (el) => el.value), '3');
+  await page.click('[data-csv-zrusit]');
+  assert.equal(await page.$eval('#mwh', (el) => el.value), '3');
+  assert.equal(await page.$eval('#mwh', (el) => el.readOnly), false);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('SPOT-09: pod tabulkou po měsících je upozornění na měsíce mimo rok regulovaných cen', async () => {
+  const { page } = await otevri(CESTA);
+  const o = v.vystup(D, v.spocitej(D, vychozi, cti(`data/tdd/${v.tridaTdd(tarify, vychozi.sazba, vychozi.region)}.json`).values), { tdd: 'x' });
+  const skryte = await page.$eval('[data-upozorneni-obdobi]', (el) => el.hidden);
+  assert.equal(skryte, !o.upozorneniObdobi);
+  if (o.upozorneniObdobi) {
+    assert.equal(await text(page, '[data-upozorneni-obdobi-text]'), mezery(o.upozorneniObdobi));
+    assert.match(await text(page, '[data-upozorneni-obdobi-text]'), new RegExp(`regulovanými cenami roku ${tarify.year}`));
+  }
   await page.close();
 });
 
