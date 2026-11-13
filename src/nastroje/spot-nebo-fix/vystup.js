@@ -99,6 +99,54 @@ export function dekodujCeny(kod) {
   return out;
 }
 
+/* ---------- upozornění a texty z JSON ---------- */
+
+/** Doplní {klíče} v textu z rules.json nebo tariffs.json. */
+const doplnit = (sablona, hodnoty) => sablona.replace(/\{(\w+)\}/g, (_, k) => String(hodnoty[k] ?? ''));
+
+/** "a, b a c" */
+const vycet = (polozky) => (polozky.length < 2 ? polozky.join('') : `${polozky.slice(0, -1).join(', ')} a ${polozky.at(-1)}`);
+
+/** Měsíce období (RRRR-MM), které leží mimo rok regulovaných cen v tariffs.json (revize SPOT-09). */
+export function mesiceMimoRokCen(mesice, rok) {
+  return mesice.filter((m) => Number(m.slice(0, 4)) !== Number(rok));
+}
+
+/**
+ * Upozornění, že část období počítáme s regulovanými cenami jiného roku (revize SPOT-09).
+ * Text a známé rozdíly (u roku 2025 nenulová POZE podle CR ERÚ č. 11/2024) jsou v tariffs.json.
+ * @returns {string} prázdný řetězec, když celé období leží v roce cen
+ */
+export function upozorneniObdobi(mesice, tarify, cenikOd) {
+  const mimo = mesiceMimoRokCen(mesice, tarify.year);
+  if (!mimo.length) return '';
+  const j = tarify.jinyRokCen;
+  const text = [doplnit(j.text, { mesice: vycet(mimo.map(nazevMesice)), rok: tarify.year, cenik: datum(cenikOd) })];
+  for (const rok of [...new Set(mimo.map((m) => m.slice(0, 4)))]) {
+    const r = j.roky[rok];
+    if (r) text.push(doplnit(r.text, { pozeA: cislo(r.poze.perAmpPhase, 2), pozeMax: cislo(r.poze.perMWhMax) }));
+  }
+  return text.join(' ');
+}
+
+/**
+ * Posoudí měření z CSV (revize SPOT-10): pod minimem pokrytí (rules.json → mereni.minPokryti) ho
+ * nepoužijeme, protože by se krátký úsek přepočítal na celý rok a přepsal roční spotřebu.
+ * @param {{coverage:number, interval:number, measuredMWh:number}} r výsledek profileFromCsv
+ * @returns {{pouzit:boolean, chyba:boolean, zprava:string}}
+ */
+export function posudMereni(r, nastaveni) {
+  const t = nastaveni.texty;
+  const pct = r.coverage > 0 && r.coverage < 0.005 ? `méně než ${procenta(1)}` : procenta(Math.round(r.coverage * 100));
+  if (r.coverage < nastaveni.minPokryti) {
+    return { pouzit: false, chyba: true, zprava: doplnit(t.malo, { pct, min: procenta(nastaveni.minPokryti * 100) }) };
+  }
+  let zprava = doplnit(t.pouzito, { interval: r.interval, pct, mwh: cislo(r.measuredMWh, 2) });
+  if (r.coverage < 1) zprava += ` ${t.doplneno}`;
+  if (r.coverage < nastaveni.hrubyOdhadPod) zprava += ` ${doplnit(t.hruby, { hranice: procenta(nastaveni.hrubyOdhadPod * 100) })}`;
+  return { pouzit: true, chyba: false, zprava };
+}
+
 /** Klíč souboru TDD (data/tdd/<klic>.json) pro sazbu a region. */
 export function tridaTdd(tarify, sazba, region) {
   const t = tarify.sazbyInfo[sazba]?.tdd;
@@ -332,6 +380,9 @@ export function vystup(D, v, { tdd, mereni = false } = {}) {
     { nazev: `Dynamický tarif ${D.produkt.supplier}`, hodnota: `ceník od ${datum(D.produkt.validFrom)}, základní cena ${kcKwh(vstup.dyn.zaklad)}, pásma −50 až +25${NBSP}%` },
     { nazev: 'DPH', hodnota: `${procenta(v.vat * 100)}, je ve všech částkách` },
   ];
+  // Revize SPOT-09: měsíce mimo rok regulovaných cen (data jsou posledních 12 celých měsíců);
+  // upozornění je pod tabulkou nákladů po měsících.
+  const upozorneni = upozorneniObdobi(res.months, t, D.produkt.validFrom);
 
   return {
     nejlevnejsi: best.klic,
@@ -353,6 +404,7 @@ export function vystup(D, v, { tdd, mereni = false } = {}) {
     tabulkaHodiny: tabHodiny,
     hodinyShrnuti,
     predpoklady,
+    upozorneniObdobi: upozorneni,
     rocniMwh: sum(v.cons),
   };
 }

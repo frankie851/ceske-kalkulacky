@@ -1101,3 +1101,64 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   „1.500.000“ a „23000,50“ ve formuláři přes sdílené `prectiCislo`. Při srážce, kterou celou
   dostane zaměstnavatel (mzda 14 105 Kč), stránka místo „déle než 50 let“ píše, že věřitelům
   nic nezbude; bez dluhu místo „0 měsíců“ píše, že dluh nebyl zadán.
+
+# Nízké nálezy revize 5. 11. 2026 (13. 11. 2026)
+
+## Mám EET? + OSVČ 2027 – nízké nálezy (EET-10, EET-11, EET-13)
+
+- **Minimální vyměřovací základ zdravotního pojištění** (EET-10): § 3a odst. 2 zákona
+  č. 592/1992 Sb. (https://www.zakonyprolidi.cz/cs/1992-592#p3a) říká „dvanáctinásobek 50 %
+  průměrné mzdy“ a nahoru zaokrouhluje jen průměrnou mzdu (51 663 Kč). Roční minimum je tedy
+  12 × 25 831,5 = 309 978 Kč, ne 12 × 25 832 = 309 984 Kč. `osvc.js` → `params()` vrací
+  `healthMinBaseMonthly` (25 831,5, bez zaokrouhlení) a `healthMinBaseAnnual` (309 978) místo
+  zaokrouhlené měsíční části. Pojistné se zaokrouhluje nahoru (§ 2 odst. 2): 41 847,03 → 41 848 Kč,
+  pro rok 2027 tedy bez rozdílu v částce, změní se jen mezivýsledek v rozpisu („minimum 309 978 Kč“).
+  Minimální měsíční záloha a zdravotní část 1. pásma paušální daně se počítají z dvanáctiny ročního
+  minima (§ 8 odst. 1 a 2, § 8a): 25 831,5 × 13,5 % = 3 487,25 → 3 488 Kč, 1. pásmo zůstává 9 661 Kč.
+  `rules.json` → `osvc2027.health` má `zdroj` s citací § 3a odst. 2, § 2 a § 8 a `expected.minBaseAnnual`.
+- **Rozhodná částka** (EET-11) – ověřeno, opraveno už v PR #23: `osvc.js` počítá
+  2,4 × (VVZ 48 900 × koeficient 1,0565) bez zaokrouhlení, zobrazuje 123 991 Kč.
+- **Odkazy na e-Sbírku** (EET-13): e-Sbírka je úřední zdroj, proto zůstává (integritní test
+  povoluje jen úřední domény, zakonyprolidi.cz je u citací v `zdroj.url`). Tvar URL je správný:
+  `www.e-sbirka.cz/sb/1992/592` přesměruje kódem 308 na `e-sbirka.gov.cz/sb/1992/592`, ten vrací 200
+  (obsah se skládá až v prohlížeči). Kotvy na paragraf u e-Sbírky z prostředí ověřit nejde, proto
+  paragraf nese titulek odkazu (doporučení revize): `meta.zdroje` a `*SourceTitle` u zákonů
+  č. 586/1992, 589/1992, 592/1992 Sb. a NV č. 177/2026 Sb. uvádějí paragrafy. Popis zdroje 1. pásma
+  („výpočet 1. pásma“ z tiskové zprávy) opravil už PR #23 – titulek cituje § 14 odst. 3 písm. a)
+  ZPSZ, § 8a ZPZP a § 38lk ZDP. Test v `test/rules.test.js` hlídá tvar URL a paragraf v titulku.
+
+## Spot, nebo fix? – nízké nálezy (SPOT-09, SPOT-10, SPOT-11, SPOT-12)
+
+- **Měsíce mimo rok regulovaných cen** (SPOT-09): data jsou vždy posledních 12 celých měsíců, kdežto
+  regulované ceny v `tariffs.json` jen pro jeden rok. Úplné ceny 2025 (CR ERÚ č. 12/2024 pro
+  distribuci, č. 11/2024 pro ostatní složky, ERV 14/2024 a 13/2024) jsou na eru.gov.cz dostupné,
+  ale jejich doplnění by znamenalo přestavět výpočet na ceny po měsících a pro 2025 stejně chybí
+  ceník dynamického tarifu. Proto 2025 nedopočítáváme, ale **jasně označujeme**: pod tabulkou
+  „Náklady po měsících“ je upozornění, které vyjmenuje měsíce mimo rok cen (`mesiceMimoRokCen`,
+  `upozorneniObdobi` ve `vystup.js`, text v `tariffs.json` → `jinyRokCen`). U roku 2025 dodá
+  úředně doložený rozdíl: POZE 84,70 Kč/A/měsíc (trojfázově trojnásobek), nejvýš 495 Kč/MWh
+  (CR ERÚ č. 11/2024, body 5.1.2 až 5.3, https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22;
+  od 1. 10. 2025 strop podle § 28a zákona č. 165/2012 Sb., CV ERÚ č. 3/2025). Upozornění funguje
+  i pro budoucí přelom roku (např. leden 2027 s cenami 2026).
+- **Krátké CSV** (SPOT-10): pod `rules.json` → `mereni.minPokryti` (10 % čtvrthodin období, jak
+  navrhla revize) měření nepoužijeme, pole „Roční spotřeba“ se nepřepíše a stav napíše proč
+  (`posudMereni` ve `vystup.js`). Hranice „hrubého odhadu“ (50 %) je také v `rules.json`.
+  „Zpět na typový profil“ vrátí hodnotu, kterou měl uživatel v poli před měřením, ne předvolbu.
+- **Plánovaný běh workflow** (SPOT-11): `gh api …/actions/runs?event=schedule` ukazuje plánovaný
+  běh „Aktualizace dat OTE a ČNB“ 9. 11. 2026 05:39 UTC (cron pondělí 4:41 UTC) se stavem success,
+  všechny kroky prošly, data se nezměnila (poslední den 31. 10. 2026), proto bez PR. Chyba se ale
+  našla v testu: `regulovane.test.js` hlídal `meta.overeno === '2026-11-12'`, přitom workflow při
+  nových datech přepisuje `meta.overeno` datem stažení – první běh s novými daty by na testech
+  spadl a PR s daty by nevznikl. Test teď hlídá jen tvar data a že není starší než 13. 11. 2026.
+- **Popis posunu** (SPOT-12): kód přesouvá do 16 nejlevnějších čtvrthodin dne
+  (`POSUN_CTVRTHODIN` v `calc.js`), ne do 4 celých hodin. Nápověda u posuvníku
+  (`rules.json` → `vychozi.posun.napoveda`) i „Co zatím neověřujeme“ to teď říkají stejně a dodávají,
+  že úspora je optimistická (ceny každého dne známé dopředu, přesun přesně do nejlevnějších čtvrthodin).
+
+## Inflační kalkulačka – nízké nálezy (INF-08)
+
+- **Výběr měsíce jen s daty** (INF-08): `mesiceRoku()` ve `vystup.js` vrací měsíce roku, za které
+  má ČSÚ data (v posledním roce do posledního měsíce `data/cpi.json`, v prvním roce od prvního).
+  Build tak vykreslí nabídku, `ui.js` ji při změně roku přestaví a vybraný měsíc mimo data posune
+  na nejbližší dostupný. Poznámka o posledním dostupném měsíci ve výsledku zůstává v kódu pro
+  případ, že by se měsíc bez dat dostal do výpočtu jinak.

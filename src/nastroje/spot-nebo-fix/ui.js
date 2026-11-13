@@ -84,6 +84,7 @@ const cena = (id, priklad) => cisloZPole(id, {
 });
 
 let mereni = null; // { cons, matched, coverage, measuredMWh, interval } z CSV
+let mwhPredMerenim = null; // co bylo v poli „Roční spotřeba“ před použitím měření (vrátí ho „Zpět“)
 
 function nactiVstup() {
   const mwh = mereni ? sum(mereni.cons) : cisloZPole('mwh', {
@@ -141,6 +142,9 @@ function zobraz(o) {
     $(`[data-graf-hodiny="${verze}"]`).innerHTML = o.grafHodiny[verze];
   }
   $('[data-tabulka-mesice]').innerHTML = o.tabulkaMesice;
+  const upozorneni = $('[data-upozorneni-obdobi]');
+  upozorneni.hidden = !o.upozorneniObdobi;
+  text('[data-upozorneni-obdobi-text]', o.upozorneniObdobi);
   $('[data-tabulka-hodiny]').innerHTML = o.tabulkaHodiny;
   text('[data-hodiny-shrnuti]', o.hodinyShrnuti);
   $('[data-predpoklady]').innerHTML = o.predpoklady
@@ -307,15 +311,16 @@ $('[data-csv-pouzit]').addEventListener('click', async () => {
       timeCol: Number($('#csv-cas').value), valueCol: Number($('#csv-hodnota').value),
       timeIsEnd: $('#csv-konec').value === '1', unit: $('#csv-jednotka').value,
     }, D.grid, tdd);
-    mereni = r;
+    // Revize SPOT-10: krátké měření (pod minimem pokrytí z rules.json) nepoužijeme a roční spotřebu nepřepíšeme.
+    const posudek = v.posudMereni(r, pravidla.mereni);
+    csvStav(posudek.zprava, posudek.chyba);
+    if (!posudek.pouzit) return;
     const pole = $('#mwh');
+    if (!mereni) mwhPredMerenim = pole.value;
+    mereni = r;
     pole.value = v.doPole(Math.round(sum(r.cons) * 100) / 100);
     pole.readOnly = true;
     nastavChybu('mwh', '');
-    const pct = Math.round(r.coverage * 100);
-    csvStav(`Počítáme s tvým měřením (interval ${r.interval} min). Pokrývá ${pct} % čtvrthodin období, naměřeno ${cislo(r.measuredMWh, 2)} MWh.`
-      + (pct < 100 ? ' Chybějící čtvrthodiny doplňujeme podle typového profilu ve stejném poměru.' : '')
-      + (pct < 50 ? ' Měření pokrývá méně než polovinu roku, výsledek je jen hrubý odhad.' : ''));
     naplanuj();
   } catch (chyba) {
     csvStav(chyba.message, true);
@@ -328,7 +333,9 @@ $('[data-csv-zrusit]').addEventListener('click', () => {
   $('#csv-soubor').value = '';
   $('[data-csv-mapovani]').hidden = true;
   $('#mwh').readOnly = false;
-  pouzijPredvolbu();
+  // Vrátíme hodnotu, kterou měl uživatel v poli před měřením, ne předvolbu.
+  if (mwhPredMerenim !== null) $('#mwh').value = mwhPredMerenim;
+  mwhPredMerenim = null;
   csvStav('Počítáme zase s typovým profilem spotřeby (TDD).');
   naplanuj();
 });

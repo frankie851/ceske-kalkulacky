@@ -3,6 +3,22 @@
   "year": 2026,
   "_overenoComment": "Datum, ke kterému jsou regulované ceny (distribuce, poplatky, POZE) ověřené proti cenovým výměrům ERÚ. Ukazuje se na stránce u předpokladů výpočtu.",
   "overeno": "2026-11-12",
+  "_jinyRokCenComment": "Revize SPOT-09: data jsou posledních 12 celých měsíců, regulované ceny jen pro rok 'year'. Měsíce jiného roku počítáme s cenami roku 'year' a ve výsledku to říkáme. Pro známé roky doplňujeme úředně doložený rozdíl.",
+  "jinyRokCen": {
+    "text": "Za {mesice} počítáme s regulovanými cenami roku {rok} a s ceníkem dynamického tarifu od {cenik}. Skutečné ceny v těchto měsících se liší.",
+    "roky": {
+      "2025": {
+        "text": "V roce 2025 se navíc platila podpora obnovitelných zdrojů (POZE): {pozeA} Kč bez DPH měsíčně za každý ampér hlavního jističe (u trojfázového připojení trojnásobek), nejvýš {pozeMax} Kč bez DPH za MWh. Od roku 2026 ji platí stát, proto ji za tyto měsíce nepočítáme a skutečný účet byl vyšší.",
+        "poze": { "perAmpPhase": 84.7, "perMWhMax": 495 },
+        "zdroj": {
+          "pravniZaklad": "Cenové rozhodnutí ERÚ č. 11/2024 ze dne 29. listopadu 2024 (Energetický regulační věstník 13/2024), body (5.1.2), (5.2) a (5.3); od 1. 10. 2025 bod (5.3) podle cenového výměru ERÚ č. 3/2025 (ERV 6/2025) odkazuje na § 28a zákona č. 165/2012 Sb.",
+          "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22",
+          "citace": "(5.1.2) pro předávací místa s distribuční soustavou na napěťové hladině NN podle jmenovité proudové hodnoty hlavního jističe před elektroměrem v předávacím místě 84,70 Kč/A/měsíc. (5.2) … Pokud je předávací místo … připojeno k distribuční soustavě trojfázově, účtuje se trojnásobek ceny podle bodu (5.1.2). (5.3) Maximální platba na podporu elektřiny zákazníka za odběrné místo za zúčtovací období je určena součinem částky 495 Kč/MWh a celkového odebraného množství elektřiny …",
+          "overeno": "2026-11-13"
+        }
+      }
+    }
+  },
   "vat": {
     "value": 0.21,
     "source": "Zákon č. 235/2004 Sb., o dani z přidané hodnoty – základní sazba 21 %",
