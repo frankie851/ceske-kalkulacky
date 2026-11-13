@@ -45,7 +45,7 @@ export default {
     rok,
     overeno: pravidla.meta.overeno,
     vyhlaska: r.vyhlaska,
-    urlVyhlasky: pravidla.meta.zdroje[0]?.url,
+    urlVyhlasky: r.zdroj?.url,
     rokyBezSazeb: v.rokyBezSazeb(pravidla).map((x) => ({ rok: x, text: v.textChybySazby(pravidla, x) })),
     // Hodnoty polí hlavičky
     pole: {

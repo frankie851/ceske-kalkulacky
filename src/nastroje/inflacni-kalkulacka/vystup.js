@@ -7,6 +7,7 @@ import {
 } from './inflation.js';
 import { kc, cislo, procenta } from '../../js/format.js';
 import { caroveGrafy, tabulkaDat } from '../../js/graf.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 export const MESICE = ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 const MESICE_GEN = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
@@ -59,6 +60,72 @@ export function vychozi(series, pravidla) {
   };
 }
 
+/* ---------- čtení formulářů (bez DOM, revize INF-04) ---------- */
+
+/** Rok a měsíc z výběrů → "RRRR-MM". */
+export const mesicZPoli = (rok, mesic) => `${rok}-${String(mesic).padStart(2, '0')}`;
+
+/**
+ * Částka z textu pole (český zápis, sdílené prectiCislo).
+ * @returns {{ hodnota: number|null, chyba: string }} hodnota je null, když je ve vstupu chyba
+ */
+export function castkaZTextu(text, { kladna = false } = {}) {
+  const n = prectiCislo(text);
+  let chyba = '';
+  if (n === null) chyba = 'Vyplň částku, například 10 000.';
+  else if (Number.isNaN(n)) chyba = 'Zadej částku číslem, bez písmen.';
+  else if (n < 0 || (kladna && n === 0)) chyba = kladna ? 'Zadej kladnou částku, větší než 0.' : 'Částka nemůže být záporná.';
+  return { hodnota: chyba ? null : n, chyba };
+}
+
+/** Výnos v procentech z textu pole. */
+export function vynosZTextu(text) {
+  const n = prectiCislo(text);
+  let chyba = '';
+  if (n === null) chyba = 'Vyplň výnos v procentech, například 4.';
+  else if (Number.isNaN(n)) chyba = 'Zadej výnos číslem, například 4 nebo 3,5.';
+  else if (n <= -100) chyba = 'Výnos musí být větší než −100 %.';
+  return { hodnota: chyba ? null : n, chyba };
+}
+
+/**
+ * Směr přepočtu mezi dvěma měsíci (RRRR-MM, už v rozsahu dat).
+ * smer: 'dopredu' = z minulosti do pozdějšího měsíce, 'zpet' = opačně, 'stejne' = týž měsíc.
+ * zacatek/konec jsou vždy chronologicky – změna cen se popisuje ve směru času i při obráceném přepočtu.
+ */
+export function smerPrepoctu(od, doM) {
+  const smer = od === doM ? 'stejne' : od < doM ? 'dopredu' : 'zpet';
+  const [zacatek, konec] = od <= doM ? [od, doM] : [doM, od];
+  return { smer, zacatek, konec, mesicu: monthsBetween(zacatek, konec) };
+}
+
+/** Tlačítko ⇄: prohodí výchozí a cílový měsíc. */
+export const prohodMesice = ({ od, do: doM }) => ({ od: doM, do: od });
+
+/**
+ * Hodnoty formuláře (texty polí, měsíce RRRR-MM) → vstup pro prepocet/vynos/mzda.
+ * @returns {{ vstup: object|null, chyby: Record<string, string> }} chyby podle id pole ('' = v pořádku)
+ */
+export function vstupPrepoctu({ castka: text, od, do: doM }) {
+  const c = castkaZTextu(text);
+  return { vstup: c.chyba ? null : { castka: c.hodnota, od, do: doM }, chyby: { castka: c.chyba } };
+}
+
+export function vstupVynosu({ urok: text, typ, od, do: doM }) {
+  const u = vynosZTextu(text);
+  return { vstup: u.chyba ? null : { urok: u.hodnota, typ: typ || 'pa', od, do: doM }, chyby: { urok: u.chyba } };
+}
+
+export function vstupMzdy({ mzdaTehdy, mzdaTed, od, do: doM }) {
+  const tehdy = castkaZTextu(mzdaTehdy, { kladna: true });
+  const ted = castkaZTextu(mzdaTed, { kladna: true });
+  const chyby = { 'mzda-tehdy': tehdy.chyba, 'mzda-ted': ted.chyba };
+  return {
+    vstup: tehdy.chyba || ted.chyba ? null : { mzdaTehdy: tehdy.hodnota, mzdaTed: ted.hodnota, od, do: doM },
+    chyby,
+  };
+}
+
 /** Měsíce mimo data nahradí nejbližšími dostupnými a vrátí poznámky k výsledku. */
 export function vyresObdobi(series, odZadany, doZadany) {
   const poznamky = [];
@@ -82,12 +149,11 @@ export function prepocet(series, { castka: c, od: odZadany, do: doZadany }) {
   const i0 = series.index(od);
   const i1 = series.index(doM);
   const vysledek = convert(c, i0, i1);
-  const [a, b] = od <= doM ? [od, doM] : [doM, od];
-  const mesicu = monthsBetween(a, b);
+  const { smer, zacatek: a, konec: b, mesicu } = smerPrepoctu(od, doM);
   // změna cen v chronologickém směru (i při obráceném přepočtu)
   const zmena = cumulativeInflation(series.index(a), series.index(b));
   const rocne = mesicu > 0 ? annualizedInflation(series.index(a), series.index(b), mesicu) : 0;
-  const vysvetleni = od === doM
+  const vysvetleni = smer === 'stejne'
     ? 'Výchozí i cílový měsíc jsou stejné, částka se nemění.'
     : `Ceny od ${gen(a)} do ${gen(b)} ${zmena >= 0 ? 'vzrostly' : 'klesly'} o ${procenta(Math.abs(zmena) * 100, 1)} `
       + `(průměrně ${pct(rocne)} ročně). ${castka(c)} v ${lok(od)} má stejnou kupní sílu jako ${castka(vysledek)} v ${lok(doM)}.`;
@@ -105,6 +171,9 @@ export function prepocet(series, { castka: c, od: odZadany, do: doZadany }) {
     lista: { cislo: castka(vysledek), popis: `${castka(c)} z ${gen(od)}` },
     poznamky,
     obdobi: { od, do: doM },
+    smer,
+    zmena,
+    rocne,
     ton: null,
   };
 }

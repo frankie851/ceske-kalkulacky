@@ -1,9 +1,10 @@
-// Inflační kalkulačka – klientský modul. Čte formuláře, počítá přes inflation.js (vystup.js)
-// a aktualizuje kartu výsledku, grafy a tabulku. Data indexu bere z <script id="data-cpi">
-// (žádný fetch); výchozí hodnoty formulářů vykreslil build z rules.json. Hash adresy jen vybírá záložku.
+// Inflační kalkulačka – klientský modul. Bere texty z formulářů; vstup (čísla přes sdílené
+// prectiCislo) a směr přepočtu sestaví čisté funkce ve vystup.js, testované v Node (revize INF-04).
+// Tady se jen vypisují chyby k polím a aktualizuje karta výsledku, grafy a tabulka.
+// Data indexu bere z <script id="data-cpi"> (žádný fetch); výchozí hodnoty formulářů vykreslil
+// build z rules.json. Hash adresy jen vybírá záložku.
 import { createSeries } from './inflation.js';
 import * as v from './vystup.js';
-import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const series = createSeries(JSON.parse(document.getElementById('data-cpi').textContent));
 
@@ -18,10 +19,7 @@ const posledni = {}; // nástroj → poslední platný výsledek
 
 /* ---------- čtení vstupů ---------- */
 
-/** Číslo z pole: mezery pryč, desetinná čárka. Prázdné = null, nesmysl = NaN. */
-function nactiCislo(id) {
-  return prectiCislo($(`#${id}`).value);
-}
+const hodnota = (id) => $(`#${id}`).value;
 
 function nastavChybu(id, zprava) {
   const pole = $(`#${id}`);
@@ -38,37 +36,29 @@ function nastavChybu(id, zprava) {
   }
 }
 
-const mesic = (id) => `${$(`#${id}-rok`).value}-${$(`#${id}-mesic`).value}`;
+const mesic = (id) => v.mesicZPoli($(`#${id}-rok`).value, $(`#${id}-mesic`).value);
 function nastavMesic(id, m) {
   $(`#${id}-rok`).value = m.slice(0, 4);
   $(`#${id}-mesic`).value = m.slice(5);
 }
 
-function castkaZPole(id, { kladna = false } = {}) {
-  const n = nactiCislo(id);
-  if (n === null) { nastavChybu(id, 'Vyplň částku, například 10 000.'); return null; }
-  if (Number.isNaN(n)) { nastavChybu(id, 'Zadej částku číslem, bez písmen.'); return null; }
-  if (n < 0 || (kladna && n === 0)) { nastavChybu(id, kladna ? 'Zadej kladnou částku, větší než 0.' : 'Částka nemůže být záporná.'); return null; }
-  nastavChybu(id, '');
-  return n;
+/** Vypíše chyby k polím a vrátí sestavený vstup (nebo null). */
+function vstupSChybami({ vstup, chyby }) {
+  for (const [id, zprava] of Object.entries(chyby)) nastavChybu(id, zprava);
+  return vstup;
 }
 
 const spocitej = {
   prepocet() {
-    const c = castkaZPole('castka');
-    if (c === null) return null;
-    return v.prepocet(series, { castka: c, od: mesic('prepocet-od'), do: mesic('prepocet-do') });
+    const vstup = vstupSChybami(v.vstupPrepoctu({ castka: hodnota('castka'), od: mesic('prepocet-od'), do: mesic('prepocet-do') }));
+    return vstup && v.prepocet(series, vstup);
   },
   vynos() {
-    const urok = nactiCislo('urok');
-    let chyba = '';
-    if (urok === null) chyba = 'Vyplň výnos v procentech, například 4.';
-    else if (Number.isNaN(urok)) chyba = 'Zadej výnos číslem, například 4 nebo 3,5.';
-    else if (urok <= -100) chyba = 'Výnos musí být větší než −100 %.';
-    nastavChybu('urok', chyba);
-    const typ = $('input[name="typ"]:checked')?.value || 'pa';
-    if (chyba) return null;
-    const r = v.vynos(series, { urok, typ, od: mesic('vynos-od'), do: mesic('vynos-do') });
+    const vstup = vstupSChybami(v.vstupVynosu({
+      urok: hodnota('urok'), typ: $('input[name="typ"]:checked')?.value, od: mesic('vynos-od'), do: mesic('vynos-do'),
+    }));
+    if (!vstup) return null;
+    const r = v.vynos(series, vstup);
     nastavChybu('vynos-do', r.chyba ? r.chyba.text : '');
     $$('#vynos-do-mesic, #vynos-do-rok').forEach((el) => {
       if (r.chyba) el.setAttribute('aria-describedby', 'vynos-do-chyba');
@@ -77,10 +67,10 @@ const spocitej = {
     return r.chyba ? null : r;
   },
   mzda() {
-    const tehdy = castkaZPole('mzda-tehdy', { kladna: true });
-    const ted = castkaZPole('mzda-ted', { kladna: true });
-    if (tehdy === null || ted === null) return null;
-    return v.mzda(series, { mzdaTehdy: tehdy, mzdaTed: ted, od: mesic('mzda-od'), do: mesic('mzda-do') });
+    const vstup = vstupSChybami(v.vstupMzdy({
+      mzdaTehdy: hodnota('mzda-tehdy'), mzdaTed: hodnota('mzda-ted'), od: mesic('mzda-od'), do: mesic('mzda-do'),
+    }));
+    return vstup && v.mzda(series, vstup);
   },
 };
 
@@ -180,9 +170,9 @@ for (const nastroj of NASTROJE) {
 
 $('[data-prohodit-obal]').hidden = false;
 $('[data-prohodit]').addEventListener('click', () => {
-  const od = mesic('prepocet-od');
-  nastavMesic('prepocet-od', mesic('prepocet-do'));
-  nastavMesic('prepocet-do', od);
+  const nove = v.prohodMesice({ od: mesic('prepocet-od'), do: mesic('prepocet-do') });
+  nastavMesic('prepocet-od', nove.od);
+  nastavMesic('prepocet-do', nove.do);
   prepocitej('prepocet');
 });
 

@@ -222,8 +222,7 @@ export function vyuctovani(stav, vysledek, rules) {
       </table>
     </div>
     <p class="cp-k-vyplate"><span>K výplatě celkem</span><strong class="num">${kc(s.celkemKc)}</strong></p>
-    <p class="small muted">Každou položku počítáme na haléře, celkovou částku zaokrouhlujeme nahoru na celé koruny.
-      Vyhláška ani zákoník práce zaokrouhlení neupravují.${vysledek.polozky.length > ok.length ? ` <strong>Nezapočteno: ${vysledek.polozky.length - ok.length} ${sklonujCesty(vysledek.polozky.length - ok.length)} bez platných sazeb.</strong>` : ''}</p>
+    <p class="small muted">Každou položku počítáme na haléře (konvence kalkulačky). Částku k výplatě zaokrouhlujeme nahoru na celé koruny podle § 183 odst. 5 zákoníku práce.${vysledek.polozky.length > ok.length ? ` <strong>Nezapočteno: ${vysledek.polozky.length - ok.length} ${sklonujCesty(vysledek.polozky.length - ok.length)} bez platných sazeb.</strong>` : ''}</p>
     <div class="cp-podpisy">
       <div><p>Vyúčtování předkládá (kdo jede)</p><p class="cp-linka">Datum:</p><p class="cp-linka">Podpis:</p></div>
       <div><p>Vyúčtování schvaluje (za zaměstnavatele)</p><p class="cp-linka">Datum:</p><p class="cp-linka">Podpis:</p></div>
