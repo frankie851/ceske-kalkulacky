@@ -1,7 +1,10 @@
 {#
   stitek({ typ, text, datum, li })
-    typ   – 'overeno' (Pravidla ověřena k …), 'navrh' (Návrh, zatím neschváleno), 'nove' (Mění se v roce 2027),
-            'schvaleno', 'kalendar' (Podle kalendáře), 'pripravujeme', 'plain' (neutrální)
+    typ   – 'overeno' (Pravidla ověřena k …), 'nove' (Mění se v roce 2027), 'kalendar' (Podle kalendáře),
+            'pripravujeme', 'plain' (neutrální)
+            a typy stavu pravidla (src/js/stav-pravidel.js): 'plati', 'schvaleno', 'navrh', 'predbezne',
+            'odvozeno', 'nejasne', 'neovereno'. Ze stavu pravidla je vytvoří filtr stavStitek:
+            {{ stitek(pravidlo | stavStitek) }} nebo stitek(pravidlo | stavStitek({ text: '…' })).
     text  – vlastní text (jinak výchozí podle typu)
     datum – ISO datum pro typ 'overeno' (např. meta.overeno)
     li    – true: vykreslí <li class="badge …"> do seznamu <ul class="badges">, jinak <span>
@@ -12,10 +15,20 @@
 {%- set tag = 'li' if p.li else 'span' -%}
 {%- if typ == 'overeno' -%}
 <{{ tag }} class="badge badge-ok">{{ ikona('ikona-overeno') }}{{ p.text or ('Pravidla ověřena k ' + (p.datum | datum)) }}</{{ tag }}>
+{%- elif typ == 'plati' -%}
+<{{ tag }} class="badge badge-ok">{{ ikona('ikona-overeno') }}{{ p.text or 'Platí' }}</{{ tag }}>
 {%- elif typ == 'schvaleno' -%}
 <{{ tag }} class="badge badge-ok">{{ ikona('ikona-overeno') }}{{ p.text or 'Schváleno' }}</{{ tag }}>
 {%- elif typ == 'navrh' -%}
 <{{ tag }} class="badge badge-draft">{{ ikona('ikona-tuzka') }}{{ p.text or 'Návrh, zatím neschváleno' }}</{{ tag }}>
+{%- elif typ == 'predbezne' -%}
+<{{ tag }} class="badge badge-soon">{{ ikona('ikona-hodiny') }}{{ p.text or 'Předběžně' }}</{{ tag }}>
+{%- elif typ == 'odvozeno' -%}
+<{{ tag }} class="badge badge-plain">{{ ikona('ikona-kalkulacka') }}{{ p.text or 'Dopočteno ze zákona' }}</{{ tag }}>
+{%- elif typ == 'nejasne' -%}
+<{{ tag }} class="badge badge-draft">{{ ikona('ikona-vystraha') }}{{ p.text or 'Nejasné' }}</{{ tag }}>
+{%- elif typ == 'neovereno' -%}
+<{{ tag }} class="badge badge-draft">{{ ikona('ikona-info') }}{{ p.text or 'Neověřeno' }}</{{ tag }}>
 {%- elif typ == 'nove' -%}
 <{{ tag }} class="badge badge-new">{{ p.text or 'Mění se v roce 2027' }}</{{ tag }}>
 {%- elif typ == 'kalendar' -%}

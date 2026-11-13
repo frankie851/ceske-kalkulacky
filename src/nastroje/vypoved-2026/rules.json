@@ -172,7 +172,7 @@
       "ucinnost": "2026-01-01",
       "strop": 38537,
       "stropVypocet": "0,8 × průměrná mzda za 1.–3. čtvrtletí 2025 (48 171 Kč)",
-      "predbezne": false,
+      "stav": "plati",
       "pasma": [
         {
           "odVeku": 0,
@@ -225,7 +225,8 @@
       "ucinnost": "2027-01-01",
       "strop": 38537,
       "stropVypocet": "0,8 × průměrná mzda za 1.–3. čtvrtletí 2026 – zatím nevyhlášeno, použita částka pro rok 2026",
-      "predbezne": true,
+      "stav": "predbezne",
+      "poznamka": "Pravidla podpory platí, předběžný je jen strop: průměrnou mzdu za 1.–3. čtvrtletí 2026 MPSV zatím nevyhlásilo, proto počítáme se stropem pro rok 2026.",
       "pasma": [
         {
           "odVeku": 0,
@@ -279,8 +280,8 @@
       "ucinnost": "2027-01-01",
       "strop": 28903,
       "stropVypocet": "0,6 × průměrná mzda; ilustračně na hodnotách roku 2026 (MPSV)",
-      "predbezne": true,
-      "jeNavrh": true,
+      "stav": "navrh",
+      "poznamka": "Vládní návrh, zatím neschváleno. Strop je ilustrační: 0,6 × průměrná mzda na hodnotách roku 2026.",
       "pasma": [
         {
           "odVeku": 0,

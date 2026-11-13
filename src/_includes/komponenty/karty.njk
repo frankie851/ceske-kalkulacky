@@ -15,7 +15,8 @@
   kategorie_dlazdice({ nazev, popis, url, ikona })
 
   zmena_2027(z, nastroje, { uroven = 3 })
-    z – položka ze zmeny2027.json { id, titulek, datum, text, nastroj, akce, stav: schvaleno|navrh|kalendar, zdroj }
+    z – položka ze zmeny2027.json { id, titulek, datum, text, nastroj, akce, stav (slovník src/js/stav-pravidel.js),
+        druh: 'kalendar' (nejde o změnu pravidel, jen o kalendář; bez stavu), zdroj }
 
   souvisi(idcka, nastroje, { nadpis, uroven = 2 })
     idcka – pole id nástrojů (nastroj.souvisi); záložky (např. osvc-2027) se dohledají také
@@ -72,9 +73,8 @@
   <h{{ uroven }}>{{ z.titulek }}</h{{ uroven }}>
   <p>{{ z.text }}</p>
   <div class="change-foot">
-    {%- if z.stav == 'navrh' %}{{ stitek({ typ: 'navrh' }) }}
-    {%- elif z.stav == 'kalendar' %}{{ stitek({ typ: 'kalendar' }) }}
-    {%- else %}{{ stitek({ typ: 'schvaleno' }) }}{% endif %}
+    {%- if z.druh == 'kalendar' %}{{ stitek({ typ: 'kalendar' }) }}
+    {%- else %}{{ stitek(z | stavStitek) }}{% endif %}
     {%- if n and n.stav == 'aktivni' %}
     <a href="{{ n.url | url }}">{{ z.akce or n.nazev }}</a>
     {%- elif n %}

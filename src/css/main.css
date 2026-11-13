@@ -348,7 +348,7 @@
   }
   .badge .ikona { width: 18px; height: 18px; }
   .badge-ok { background: var(--c-sage-soft); color: var(--c-sage-ink); --ikona-pozadi: var(--c-sage-soft); }
-  .badge-draft { background: var(--c-draft-bg); color: var(--c-draft-ink); border: 2px dashed var(--c-draft-line); }
+  .badge-draft { background: var(--c-draft-bg); color: var(--c-draft-ink); border: 2px dashed var(--c-draft-line); --ikona-pozadi: var(--c-draft-bg); }
   .badge-new { background: var(--c-accent-soft); color: var(--c-text); }
   .badge-plain { background: var(--c-surface-2); color: var(--c-text); }
   .badge-soon { background: var(--c-surface); color: var(--c-text-muted); border: 2px dashed var(--c-border-strong); }
@@ -736,6 +736,7 @@
 
   .note { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--fs-sm); color: var(--c-text-muted); margin: var(--sp-3) 0 0; }
   .note .ikona { width: 20px; height: 20px; margin-top: 2px; color: var(--c-sage-ink); --ikona-pozadi: var(--c-surface); }
+  .note .badge .ikona { width: 18px; height: 18px; margin-top: 0; color: inherit; --ikona-pozadi: inherit; }
 
   /* ---------- Tabulky ---------- */
   .table-wrap { overflow-x: auto; border-radius: var(--r-md); border: 2px solid var(--c-border); background: var(--c-surface); margin: var(--sp-3) 0 0; }

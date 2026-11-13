@@ -10,6 +10,7 @@ import { buildICS } from './ics.js';
 import { stavZeScenare, spust, vyberTerminy, udalostiProIcs, casExportu, rozsahTerminu, denMesic, datumPlne } from './simulace.js';
 import * as v from './vystup.js';
 import { ty, neprevedeneTexty, rodoveTvary } from './texty.js';
+import { typStitku, popisekStavu } from '../../js/stav-pravidel.js';
 
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 
@@ -124,11 +125,11 @@ export default {
       id: r.id,
       nadpis: r.title,
       text: ty(r.text),
-      overeno: r.status === 'confirmed',
-      // PRI-09: „derived“ = plyne z úředního harmonogramu, samostatný úřední dokument to netvrdí.
-      odvozeno: r.status === 'derived',
+      // Štítek podle stavu (společný model src/js/stav-pravidel.js). PRI-09: „odvozeno“ = plyne z úředního
+      // harmonogramu, samostatný úřední dokument to netvrdí, proto vlastní text štítku.
+      stitek: { typ: typStitku(r.stav), text: r.stav === 'odvozeno' ? 'Vyplývá z harmonogramu' : popisekStavu(r.stav) },
       poznamka: r.note ? ty(r.note) : '',
-      stav: r.status,
+      stav: r.stav,
       zdroj: { nazev: pravidla.sources[r.source].name, url: pravidla.sources[r.source].url },
     })),
     data: {

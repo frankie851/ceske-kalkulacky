@@ -494,22 +494,24 @@ export function regulatedFor(tariffs, grid, distributor, sazba, breakerId) {
 /**
  * Sada regulovaných cen pro kalendářní rok (revize SPOT-09). Aktuální rok je nahoře v tariffs.json (year),
  * předchozí roky ve starsiRoky ve stejné struktuře. Pro rok bez sady (po přelomu roku, než se doplní nové
- * ceny) vrátí poslední známý rok před ním, pro rok před nejstarší sadou nejstarší sadu; presny = false.
- * @returns {{rok:number, rokCen:number, presny:boolean, tarify:object}} tarify ve tvaru pro regulatedFor()
+ * ceny) vrátí poslední známý rok před ním, pro rok před nejstarší sadou nejstarší sadu.
+ * stav (společný model src/js/stav-pravidel.js): 'plati' = ceny toho roku, 'predbezne' = ceny jiného roku,
+ * dokud ERÚ ceny pro rok nevyhlásí (a my je nedoplníme).
+ * @returns {{rok:number, rokCen:number, stav:'plati'|'predbezne', tarify:object}} tarify ve tvaru pro regulatedFor()
  */
 export function cenyProRok(tariffs, rok) {
   const starsi = tariffs.starsiRoky ?? {};
   const zname = [Number(tariffs.year), ...Object.keys(starsi).map(Number)].sort((a, b) => a - b);
   const rokCen = zname.includes(rok) ? rok : (zname.filter((r) => r < rok).at(-1) ?? zname[0]);
-  const presny = rokCen === rok;
-  if (rokCen === Number(tariffs.year)) return { rok, rokCen, presny, tarify: tariffs };
+  const stav = rokCen === rok ? 'plati' : 'predbezne';
+  if (rokCen === Number(tariffs.year)) return { rok, rokCen, stav, tarify: tariffs };
   const s = starsi[rokCen];
   const distributors = Object.fromEntries(Object.entries(tariffs.distributors).map(([id, d]) => {
     if (!s.distributors[id]) throw new Error(`Chybí ceny distributora ${id} pro rok ${rokCen}`);
     return [id, { ...d, ...s.distributors[id] }];
   }));
   return {
-    rok, rokCen, presny,
+    rok, rokCen, stav,
     tarify: { ...tariffs, year: rokCen, overeno: s.overeno, vat: s.vat, common: s.common, ntHours: s.ntHours, distributors },
   };
 }
@@ -517,7 +519,7 @@ export function cenyProRok(tariffs, rok) {
 /**
  * Regulované složky po měsících: každý měsíc s cenami roku, do kterého patří (cenyProRok). Maska nízkého
  * tarifu se skládá z oken platných v daném roce. Výsledek jde do computeVariants() jako `regulated`.
- * @returns {{ntMask:number[]|null, byMonth:Object<string,{vt,nt,perMWh,monthly,poze,rok,rokCen,presny}>}}
+ * @returns {{ntMask:number[]|null, byMonth:Object<string,{vt,nt,perMWh,monthly,poze,rok,rokCen,stav}>}}
  */
 export function regulatedByMonth(tariffs, grid, distributor, sazba, breakerId) {
   const months = [...new Set(grid.map((q) => q.month))];
@@ -534,7 +536,7 @@ export function regulatedByMonth(tariffs, grid, distributor, sazba, breakerId) {
   for (const m of months) {
     const s = sady.get(Number(m.slice(0, 4)));
     const { ntMask: _maska, ...ceny } = s.reg;
-    byMonth[m] = { ...ceny, rok: s.rok, rokCen: s.rokCen, presny: s.presny };
+    byMonth[m] = { ...ceny, rok: s.rok, rokCen: s.rokCen, stav: s.stav };
   }
   return { ntMask, byMonth };
 }

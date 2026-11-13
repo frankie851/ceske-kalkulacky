@@ -2,16 +2,19 @@
 // (ui-prodeje.js, ui-dividendy.js), aby ukázka bez JS a živý výpočet vypadaly stejně a stránka
 // po načtení neposkočila. Žádné částky ani sazby tu nejsou natvrdo: vše z výsledku a rules.json.
 import { kc, cislo, procenta, datum } from '../../js/format.js';
+import { stitekHtml, jeStav } from '../../js/stav-pravidel.js';
 
 /** Escapování textu do HTML. */
 export const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (z) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[z]);
 
 const pct = (podil) => { const p = Math.round(podil * 100 * 100) / 100; return procenta(p, Number.isInteger(p) ? 0 : 1); };
 
-/** Štítek stavu pravidla (Potvrzeno / Nejasné / Neověřeno) jako HTML. */
-export function stitekStavu(stav, rules) {
-  const s = rules.stavy[stav] || rules.stavy.neovereno;
-  return `<span class="badge ${s.stitek === 'navrh' ? 'badge-draft' : 'badge-plain'} zt-stav">${esc(s.text)}</span>`;
+/**
+ * Štítek stavu pravidla (Platí / Nejasné / Neověřeno…) jako HTML ze společného modelu src/js/stav-pravidel.js.
+ * Neznámý nebo chybějící stav = neověřeno. Druhý parametr (rules) se už nepoužívá.
+ */
+export function stitekStavu(stav) {
+  return stitekHtml(jeStav(stav) ? stav : 'neovereno', { trida: 'zt-stav' });
 }
 
 /* ================= Prodeje ================= */
@@ -86,7 +89,7 @@ export function uhrnyHtml(v, rules) {
 export function upozorneniProdejuHtml(v, rules) {
   const pr = rules.prodeje;
   const texty = v.upozorneni.map((u) => {
-    const s = stitekStavu(u.stav, rules);
+    const s = stitekStavu(u.stav);
     const druh = esc(nazevDruhu(u.druh, rules));
     if (u.id === 'uhrn-casovy') {
       const dopad = u.meniVysledek
@@ -108,7 +111,7 @@ export function upozorneniProdejuHtml(v, rules) {
       const oz = pr.oznameni;
       const prodeje = u.polozky.map((x) => `prodej ${x.index + 1} (${kc(x.castka)})`).join(', ');
       const scitani = u.scitani
-        ? ` ${stitekStavu(u.scitaniStav, rules)} Osvobozené příjmy za rok jsme sečetli: ${kc(u.castka)}. ${esc(oz.scitaniText)}`
+        ? ` ${stitekStavu(u.scitaniStav)} Osvobozené příjmy za rok jsme sečetli: ${kc(u.castka)}. ${esc(oz.scitaniText)}`
         : '';
       return `<li><span>${s} Osvobozený příjem vyšší než ${kc(u.limit)} musíš oznámit finančnímu úřadu do konce lhůty pro podání přiznání (${esc(oz.zdroj.pravniZaklad)}). `
         + `Týká se: ${prodeje}. V oznámení uvedeš výši příjmu, okolnosti jeho nabytí a datum, kdy vznikl.${scitani} `
@@ -171,29 +174,29 @@ export function stropyHtml(v, rules) {
       : `${esc(z.nazev)} ${pct(s.hodnota)} (smlouva ${s.zdroj?.url ? `<a href="${esc(s.zdroj.url)}">${esc(s.smlouva)}</a>` : esc(s.smlouva)}, ${esc(s.clanek)})`;
   });
   if (!zeme.length) return '';
-  return `<p class="small zt-stropy">${stitekStavu(strop.stav, rules)} Zápočet je nejvýš smluvní sazba × hrubá dividenda: ${zeme.join('; ')}.</p>`;
+  return `<p class="small zt-stropy">${stitekStavu(strop.stav)} Zápočet je nejvýš smluvní sazba × hrubá dividenda: ${zeme.join('; ')}.</p>`;
 }
 
 /** Přeplacená daň, W-8BEN, chybějící smluvní sazby a orientační zápočet u § 16a (HTML). */
 export function upozorneniDividendHtml(v, rules) {
   const casti = [];
   for (const u of v.upozorneni.filter((x) => x.id === 'zapocet-16a')) {
-    casti.push(`<li><span>${stitekStavu(u.stav, rules)} Režim § 16a: jak se zahraniční daň započítává v příloze č. 4, se z pokynů ověřit nepodařilo. Zápočet ukazujeme jen orientačně.</span></li>`);
+    casti.push(`<li><span>${stitekStavu(u.stav)} Režim § 16a: jak se zahraniční daň započítává v příloze č. 4, se z pokynů ověřit nepodařilo. Zápočet ukazujeme jen orientačně.</span></li>`);
   }
   for (const z of v.zeme.filter((x) => x.preplaceno > 0 && !x.bezSmlouvy)) {
     casti.push(`<li><span><strong>${esc(z.nazev)}: přeplaceno v zahraničí ${kc(z.preplaceno)}.</strong> Tuhle část v Česku nezapočteš. Přeplatek můžeš zkusit získat zpět v zemi, kde se daň strhla.</span></li>`);
   }
   for (const u of v.upozorneni) {
     if (u.id === 'w8ben') {
-      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: srážku u zdroje může snížit formulář W-8BEN u brokera. Je to americký postup, z českého zdroje jsme ho neověřili.</span></li>`);
+      casti.push(`<li><span>${stitekStavu(u.stav)} ${esc(u.nazev)}: srážku u zdroje může snížit formulář W-8BEN u brokera. Je to americký postup, z českého zdroje jsme ho neověřili.</span></li>`);
     }
     if (u.id === 'bez-smlouvy') {
       const zdroj = rules.dividendy.zeme[u.zeme].bezSmlouvy.zdroj;
-      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: zápočet zahraniční daně jsme nepočítali, doplácíš celou českou daň. `
+      casti.push(`<li><span>${stitekStavu(u.stav)} ${esc(u.nazev)}: zápočet zahraniční daně jsme nepočítali, doplácíš celou českou daň. `
         + `Podle ${esc(zdroj.pravniZaklad)} se postupuje podle smlouvy o zamezení dvojího zdanění. Když ji země s Českem má, uplatníš zápočet podle sazby ve smlouvě.</span></li>`);
     }
     if (u.id === 'smluvni-sazba') {
-      casti.push(`<li><span>${stitekStavu(u.stav, rules)} ${esc(u.nazev)}: smluvní sazbu v ověřených pravidlech nemáme. Zápočet jsme omezili jen českou daní. Podle smlouvy může být nižší, bez smlouvy žádný.</span></li>`);
+      casti.push(`<li><span>${stitekStavu(u.stav)} ${esc(u.nazev)}: smluvní sazbu v ověřených pravidlech nemáme. Zápočet jsme omezili jen českou daní. Podle smlouvy může být nižší, bez smlouvy žádný.</span></li>`);
     }
   }
   return casti.length ? `<ul class="zt-upozorneni">${casti.join('')}</ul>` : '';
@@ -205,7 +208,7 @@ export function navodHtml(v, rules) {
   const x = rz.varianty[v.rezim];
   const c = v.celkem;
   const orientacne = v.zapocetOrientacni ? ' (orientačně)' : '';
-  return `<p>${stitekStavu(rz.stav, rules)} Zvolený režim: <strong>${esc(x.nazev)}</strong>, ${esc(x.popis)}. `
+  return `<p>${stitekStavu(rz.stav)} Zvolený režim: <strong>${esc(x.nazev)}</strong>, ${esc(x.popis)}. `
     + `Volba platí pro všechny tvoje zahraniční příjmy z kapitálového majetku najednou (${esc(rz.podminka)}). `
     + `${esc(rz.zakon.pravniZaklad)}: <q class="zt-citace">${esc(rz.zakon.citace)}</q></p>`
     + '<ol class="zt-kroky">'

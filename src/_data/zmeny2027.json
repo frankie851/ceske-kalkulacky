@@ -46,7 +46,7 @@
     "text": "1. 5., 8. 5. a oba vánoční svátky připadnou na víkend, zato 5.–6. 7. dají čtyři dny volna bez dovolené.",
     "nastroj": "volno-2027",
     "akce": "Volno 2027",
-    "stav": "kalendar",
+    "druh": "kalendar",
     "zdroj": { "nazev": "vlastní výpočet z kalendáře", "kratce": "vlastní výpočet z kalendáře", "url": null }
   }
 ]

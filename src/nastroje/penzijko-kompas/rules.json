@@ -64,7 +64,7 @@
   "sady": {
     "2026": {
       "nazev": "Platná pravidla 2026",
-      "stav": "platne",
+      "stav": "plati",
       "rok": 2026,
       "platnostOd": "2024-07-01",
       "overeno": "2026-11-12",
@@ -109,7 +109,6 @@
       "nazev": "Návrh „Lepší penzijko“ (od 2027)",
       "stav": "navrh",
       "rok": 2027,
-      "stitek": "návrh, zatím neschváleno",
       "platnostOd": "2027-01-01",
       "overeno": "2026-11-13",
       "zdroje": [
@@ -168,7 +167,7 @@
       "transformovaneFondy": {
         "konci": "2036-12-31",
         "nastupce": "konzervativni",
-        "stitek": "návrh, zatím neschváleno",
+        "stav": "navrh",
         "zdroj": {
           "pravniZaklad": "Vládní návrh novely zákona č. 427/2011 Sb. „Lepší penzijko“, sněmovní tisk 285 (stav k 5. 11. 2026: po 1. čtení, ve výborech)",
           "url": "https://www.psp.cz/sqw/historie.sqw?o=10&T=285",

@@ -128,7 +128,7 @@ styly: ['/nastroje/prijimacky/prijimacky.css']
         <p class="small">{{ r.poznamka }}</p>
         {%- endif %}
         <p class="prij-pravidlo-pata">
-          {%- if r.overeno %}{{ stitek({ typ: 'schvaleno', text: 'Ověřeno' }) }}{% elif r.odvozeno %}{{ stitek({ typ: 'plain', text: 'Vyplývá z harmonogramu' }) }}{% else %}{{ stitek({ typ: 'navrh', text: 'Neověřeno' }) }}{% endif %}
+          {{- stitek(r.stitek) }}
           <span class="small">Zdroj: <a href="{{ r.zdroj.url }}">{{ r.zdroj.nazev }}</a></span>
         </p>
       </li>

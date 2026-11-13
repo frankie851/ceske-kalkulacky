@@ -46,8 +46,7 @@
   "sady": {
     "2026": {
       "nazev": "Pravidla 2026",
-      "stav": "platne",
-      "stitek": null,
+      "stav": "plati",
       "datum": "2026-11-12",
       "platnostOd": "2024-07-01",
       "poznamka": "Pravidla platná od 1. 7. 2024 (státní příspěvek) a od 1. 1. 2024 (odpočet podle § 15 odst. 6 a 7 ZDP), beze změny pro rok 2026.",
@@ -103,7 +102,6 @@
     "navrh2027": {
       "nazev": "Návrh 2027",
       "stav": "navrh",
-      "stitek": "návrh, zatím neschváleno",
       "datum": "2026-11-13",
       "platnostOd": "2027-01-01",
       "poznamka": "Vládní návrh novely zákona o doplňkovém penzijním spoření, sněmovní tisk 285. Vláda ho schválila 24. 8. 2026, Sněmovna ho projednává (1. čtení 24. 9. 2026). Zatím neprošel Sněmovnou ani Senátem. Parametry odpočtu převzaty z pravidel 2026.",

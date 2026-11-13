@@ -137,7 +137,7 @@ test('pravidla odpovídají ověřovacímu souboru: smluvní sazby, jednotný ku
   const sazby = { US: 0.15, DE: 0.15, GB: 0.15, NL: 0.1, IE: 0.15, FR: 0.1, CH: 0.15, CA: 0.15 };
   for (const [kod, sazba] of Object.entries(sazby)) {
     assert.equal(rules.dividendy.zeme[kod].smluvniSazba.hodnota, sazba, kod);
-    assert.equal(rules.dividendy.zeme[kod].smluvniSazba.stav, 'potvrzeno', kod);
+    assert.equal(rules.dividendy.zeme[kod].smluvniSazba.stav, 'plati', kod);
     // Ověřeno z textu smlouvy (čl. 10 odst. 2), doslovně v docs/zdroje/smlouvy-cl10.md
     assert.match(rules.dividendy.zeme[kod].smluvniSazba.zdroj.url, /^https:\/\/www\.zakonyprolidi\.cz\//, kod);
     assert.match(rules.dividendy.zeme[kod].smluvniSazba.zdroj.citace, new RegExp(`${sazba * 100} (%|procent) hrubé částky dividend`), kod);
@@ -154,4 +154,16 @@ test('pravidla odpovídají ověřovacímu souboru: smluvní sazby, jednotný ku
   assert.equal(rules.dividendy.zeme.XX.bezSmlouvy.zapocet, 0);
   assert.equal(rules.dividendy.zeme.XX.bezSmlouvy.zdroj.pravniZaklad, '§ 38f odst. 1 ZDP');
   assert.equal(rules.dividendy.rezimy.varianty.par16a.sazbaZdroj.pravniZaklad, '§ 16a odst. 1 ZDP');
+});
+
+// Společný model stavu (13. 11. 2026): štítky ze src/js/stav-pravidel.js, žádný vlastní slovník „stavy“.
+test('stav pravidel: limity přiznání od 2027 jsou schválené, štítky jdou přes sdílený modul', async () => {
+  const { stitekStavu } = await import('../vystup.js');
+  assert.equal(rules.stavy, undefined);
+  assert.equal(rules.priznani.stav, 'schvaleno');
+  assert.equal(rules.priznani.ucinnost, '2027-01-01');
+  assert.equal(rules.dane.sazba.stav, 'plati');
+  assert.match(stitekStavu('nejasne'), /class="badge badge-draft zt-stav">Nejasné</);
+  assert.match(stitekStavu('plati'), /class="badge badge-ok zt-stav">Platí</);
+  assert.match(stitekStavu(undefined), />Neověřeno</);
 });

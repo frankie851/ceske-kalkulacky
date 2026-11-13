@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { kc, cislo, procenta, datum } from './src/js/format.js';
 import { skryteNastroje } from './src/_lib/nastroje.js';
+import { stavPravidla } from './src/js/stav-pravidel.js';
 
 // Jediný inline skript webu: nastaví režim (světlý/tmavý) ještě před vykreslením.
 // CSP ho povoluje přes sha256 (globální data cspHash). Při změně textu se hash přepočítá sám.
@@ -86,6 +87,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('procenta', (n, des = 0) => procenta(n, des));
   eleventyConfig.addFilter('datum', (iso) => datum(iso));
   eleventyConfig.addFilter('json', (v) => bezpecnyJson(v));
+  // Štítek stavu pravidla (src/js/stav-pravidel.js): pravidlo | stavStitek → { typ, text } pro makro stitek.
+  // Řetězec se bere jako hodnota stavu; p.text přepíše výchozí popisek.
+  eleventyConfig.addFilter('stavStitek', (pravidlo, p = {}) => {
+    const s = stavPravidla(typeof pravidlo === 'string' ? { stav: pravidlo } : pravidlo);
+    return { typ: s.typ, text: p.text || s.text, li: p.li };
+  });
 
   // Najde nástroj (nebo záložku nástroje, např. osvc-2027) podle id
   eleventyConfig.addFilter('najdiNastroj', (nastroje, id) => {

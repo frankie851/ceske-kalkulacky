@@ -164,6 +164,7 @@
   "rodicovsky": [
     {
       "narozeniOd": "2026-01-01",
+      "stav": "plati",
       "celkem": 350000,
       "celkemVicercata": 700000,
       "minStrop": 15000,
@@ -175,13 +176,14 @@
     },
     {
       "narozeniOd": "2027-01-01",
+      "stav": "schvaleno",
       "celkem": 400000,
       "celkemVicercata": 800000,
       "minStrop": 15000,
       "minStropVicercata": 30000,
       "nasobekVicercata": 2,
       "vekMesicu": 36,
-      "pozn": "Pro děti narozené od 1. 1. 2027 je celková částka 400 000 Kč (u vícerčat 800 000 Kč) podle zákona č. 152/2026 Sb. Měsíční stropy se nemění.",
+      "poznamka": "Pro děti narozené od 1. 1. 2027 je celková částka 400 000 Kč (u vícerčat 800 000 Kč) podle zákona č. 152/2026 Sb. Měsíční stropy se nemění.",
       "zdroj": "Zákon č. 152/2026 Sb., čl. I a čl. II (přechodné ustanovení)",
       "url": "https://www.zakonyprolidi.cz/cs/2026-152",
       "zakon": "152/2026 Sb."

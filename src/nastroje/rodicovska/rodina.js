@@ -481,7 +481,8 @@ export function planRodiny(vstupy, rules) {
   if (odhadMzdy) {
     varovani.push({ typ: 'odhadMzdy', uroven: 'info', text: 'Pro čistou mzdu v dalších letech jsou použity sazby roku ' + Object.keys(rules.cistaMzda).sort().pop() + '.' });
   }
-  if (rp.pozn) varovani.push({ typ: 'novela400', uroven: 'info', text: rp.pozn });
+  // Částka podle zákona, který je schválený, ale ještě neplatí (stav ze src/js/stav-pravidel.js).
+  if (rp.stav !== 'plati' && rp.poznamka) varovani.push({ typ: 'novela400', uroven: 'info', text: rp.poznamka });
   if (v.navrat && Number(v.navratOdMesice) < 24) {
     varovani.push({
       typ: 'jesle', uroven: 'info',

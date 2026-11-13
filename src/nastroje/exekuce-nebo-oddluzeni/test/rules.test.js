@@ -19,7 +19,7 @@ test('rules.json má datum ověření', () => {
 
 test('každá hodnota má popis, zdroj, odkaz do e-Sbírky a datum účinnosti', () => {
   for (const [rok, r] of Object.entries(rules.roky)) {
-    assert.ok(['platné', 'neúplné'].includes(r.status), `${rok}: status`);
+    assert.ok(['plati', 'neovereno'].includes(r.stav), `${rok}: stav`);
     for (const [klic, v] of Object.entries(r)) {
       if (!v || typeof v !== 'object') continue;
       const kde = `${rok}.${klic}`;
@@ -27,7 +27,7 @@ test('každá hodnota má popis, zdroj, odkaz do e-Sbírky a datum účinnosti',
       if (typeof v.zdroj === 'object') overCitaci(v.zdroj, kde);
       else assert.match(v.zdroj, /(Sb\.|zákon|vyhláška)/i, `${kde}: zdroj`);
       assert.match(v.odkaz, /^https:\/\/e-sbirka\.gov\.cz\/sb\/\d{4}\/\d+$/, `${kde}: odkaz`);
-      if (r.status === 'platné') {
+      if (r.stav === 'plati') {
         assert.ok(['number', 'string'].includes(typeof v.hodnota), `${kde}: hodnota`);
         assert.match(v.ucinnostOd, /^\d{4}-\d{2}-\d{2}$/, `${kde}: účinnost`);
       }
@@ -45,9 +45,10 @@ test('součty pro rok 2026 odpovídají ověřeným částkám', () => {
   assert.equal(spravce, 1089);
 });
 
-test('rok 2027 je označen jako neúplný, dokud chybí normativní nájemné', () => {
+test('rok 2027 je označen jako neúplný (stav „neovereno“), dokud chybí normativní nájemné', () => {
   const r = rules.roky['2027'];
-  assert.equal(r.status, 'neúplné');
+  assert.equal(r.stav, 'neovereno');
+  assert.match(r.poznamka, /nebylo vyhlášeno/);
   assert.equal(r.normativniNajemne.hodnota, null);
   assert.equal(r.zivotniMinimum.hodnota, 5500);
 });

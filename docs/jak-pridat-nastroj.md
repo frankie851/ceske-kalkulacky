@@ -74,6 +74,31 @@ Postup, když nějaký přibude:
 Bez `meta.overeno` build spadne. Štítek „Pravidla ověřena k …“, seznam zdrojů na stránce
 i na `/zdroje/` a blok „Co zatím neověřujeme a nepočítáme“ se berou odsud.
 
+**Stav pravidla.** Když pravidlo nebo sada pravidel ještě neplatí nebo není jisté, dej mu pole `stav`
+ze společného slovníku (`src/js/stav-pravidel.js`):
+
+| `stav` | Kdy | Štítek |
+| --- | --- | --- |
+| `plati` | platný a účinný předpis, ověřeno v úředním zdroji | Platí |
+| `schvaleno` | vyhlášeno ve Sbírce, účinnost později (s `platnostOd`) | Schváleno, platí od … |
+| `navrh` | návrh, zatím neschváleno (sněmovní tisk) | Návrh, zatím neschváleno |
+| `predbezne` | odhad, dokud úřad hodnotu nevyhlásí | Předběžně |
+| `odvozeno` | dopočteno ze zákonného vzorce, úřední tabulka zatím nevyšla | Dopočteno ze zákona |
+| `nejasne` | výklad sporný, nástroj na to upozorní | Nejasné |
+| `neovereno` | nepodařilo se ověřit v úředním zdroji | Neověřeno |
+
+```json
+"navrh2027": { "nazev": "Návrh 2027", "stav": "navrh", "platnostOd": "2027-01-01", "poznamka": "Sněmovní tisk 285 …" }
+```
+
+- `navrh`, `predbezne`, `odvozeno` a `neovereno` potřebují vysvětlení (`poznamka` nebo `zdroj`).
+- Kvalita zdroje (úřední / sekundární) do `stav` nepatří, dej ji zvlášť (např. `zdrojTyp`).
+- Žádné vlastní klíče stavu (`status`, `stitek` s textem, `predbezne: true`…). Hlídá to
+  `test/sdilene/stav-pravidel.test.js` pro všechny JSON nástroje.
+- Štítek v šabloně: `{{ stitek(pravidlo | stavStitek) }}` (vlastní text: `pravidlo | stavStitek({ text: '…' })`),
+  v klientském skriptu `stitekHtml(pravidlo, { sprite })`, v datech šablony `stavPravidla(pravidlo)` → `{ typ, text }`.
+- `meta.stav` (např. `neovereno` u skrytého nástroje) ukáže v hlavičce místo „Pravidla ověřena“ štítek stavu.
+
 ### Stránka (index.njk)
 
 ```njk
@@ -138,7 +163,7 @@ popsané v komentáři na začátku každého souboru. Přehled:
 | Soubor | Makro | Parametry |
 | --- | --- | --- |
 | ikona.njk | `ikona(id, trida, titulek)` | id symbolu ve spritu |
-| stitky.njk | `stitek({ typ, text, datum, li })` | typ: overeno, navrh, nove, schvaleno, kalendar, pripravujeme, plain |
+| stitky.njk | `stitek({ typ, text, datum, li })` | typ: overeno, nove, kalendar, pripravujeme, plain a stavy pravidel plati, schvaleno, navrh, predbezne, odvozeno, nejasne, neovereno (filtr `stavStitek`) |
 | rozvrzeni.njk | `drobecky(polozky)`, `hlavicka_stranky({…})`, `zalozky({ polozky, url })`, `hlavicka`, `paticka` | layouty je volají samy |
 | karty.njk | `karta_nastroje(n, { uroven, stitky })`, `situace(s)`, `kategorie_dlazdice({…})`, `zmena_2027(z, nastroje)`, `souvisi(idcka, nastroje, { nadpis })` | |
 | formular.njk | `pole({ id, label, hodnota, jednotka, napoveda, chyba, chybaMisto, moznosti, typ, inputmode })` | chyba → `.is-error`, `aria-invalid`, `.error-msg` (id `<id>-chyba`); nápověda id `<id>-napoveda` |
@@ -205,7 +230,7 @@ Pro stovky bodů (Spot, nebo fix?) body předem zjednoduš, `graf-bod` se kresl�
   modulů a do front matter `skripty`. Data pro skript předávej přes
   `<script type="application/json" id="…">{{ data | json | safe }}</script>`.
 - **Žádné natvrdo zapsané částky, sazby ani limity v JS** – vše z `rules.json`.
-- Návrh zákona vždy se štítkem `stitek({ typ: 'navrh' })` („Návrh, zatím neschváleno“).
+- Návrh zákona vždy se štítkem stavu `navrh` („Návrh, zatím neschváleno“): `stav: "navrh"` v `rules.json` a `stitek(sada | stavStitek)`.
 - Tón: **tykání a rodově neutrálně** („zadáno“, „tvoje odpověď“, ne „zadal jsi“), krátké věty.
   **Sekce Dluhy vyká.**
 - Bez reklam a affiliate odkazů. Nic neukládej do `localStorage` (kromě volby režimu, kterou

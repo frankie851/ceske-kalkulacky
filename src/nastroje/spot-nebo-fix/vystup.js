@@ -109,7 +109,7 @@ const vycet = (polozky) => (polozky.length < 2 ? polozky.join('') : `${polozky.s
 
 /** Měsíce období (RRRR-MM), pro jejichž rok nemáme v tariffs.json regulované ceny (revize SPOT-09). */
 export function mesiceBezCen(mesice, tarify) {
-  return mesice.filter((m) => !cenyProRok(tarify, Number(m.slice(0, 4))).presny);
+  return mesice.filter((m) => cenyProRok(tarify, Number(m.slice(0, 4))).stav !== 'plati');
 }
 
 /**
@@ -429,6 +429,8 @@ export function vystup(D, v, { tdd, mereni = false } = {}) {
     hodinyShrnuti,
     predpoklady,
     upozorneniObdobi: upozorneni,
+    // Štítek „Předběžně“ u upozornění, když některé měsíce počítáme s regulovanými cenami jiného roku.
+    stavCen: mesiceBezCen(res.months, t).length ? 'predbezne' : null,
     rocniMwh: sum(v.cons),
   };
 }

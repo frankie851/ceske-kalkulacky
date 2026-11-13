@@ -188,6 +188,11 @@ test('narození od 1. 1. 2027 → 400 000 Kč, stejný scénář 8 000 Kč od 6.
   assert.equal(plan.rp.vycerpano, 248000);
   assert.equal(plan.rp.propadne, 152000);
   assert.ok(plan.varovani.some((x) => x.typ === 'novela400'));
+  // Společný model stavu: 400 000 Kč je schválené (zákon č. 152/2026 Sb.), 350 000 Kč platí.
+  assert.equal(plan.rp.stav, 'schvaleno');
+  assert.equal(pravidlaRp(rules, '2026-06-01').stav, 'plati');
+  const plan2026 = planRodiny({ terminPorodu: '2026-03-15', prijemMatka: 30000, prijemOtec: 40000, kdoPpm: 'matka', otcovska: false, rpVyse: 8000 }, rules);
+  assert.ok(!plan2026.varovani.some((x) => x.typ === 'novela400'));
 });
 
 test('vícerčata 2027 → 800 000 Kč', () => {

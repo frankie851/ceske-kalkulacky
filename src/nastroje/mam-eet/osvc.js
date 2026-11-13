@@ -346,7 +346,7 @@ export function compare(input, rules) {
   const single = singleActivityNote(flat, input, rules);
   if (single) notes.push(single);
   const band1 = byId(o.flatTax.bands, rules.eetOff.eligibleBandId);
-  if (band1.status === 'derived' && (flat.band?.id === band1.id || off.available)) {
+  if (band1.stav === 'odvozeno' && (flat.band?.id === band1.id || off.available)) {
     notes.push(fill(tx.noteBand1Status, { year: o.year, verified: formatDate(band1.verified) }));
   }
   if (byId(o.activities, input.activityId)?.socialMinimum === 'starting') {

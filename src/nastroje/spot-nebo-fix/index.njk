@@ -11,6 +11,7 @@ styly: ['/nastroje/spot-nebo-fix/spot-nebo-fix.css']
 {%- from "komponenty/formular.njk" import pole, volby -%}
 {%- from "komponenty/vysledky.njk" import vysledek, lepiva_lista -%}
 {%- from "komponenty/ikona.njk" import ikona -%}
+{%- from "komponenty/stitky.njk" import stitek -%}
 {%- set s = spot -%}
 {%- set u = s.ukazka -%}
 
@@ -125,7 +126,7 @@ styly: ['/nastroje/spot-nebo-fix/spot-nebo-fix.css']
       <div class="spot-graf spot-graf-uzky" data-graf-mesice="uzky">{{ u.grafMesice.uzky | safe }}</div>
       <div class="spot-graf spot-graf-siroky" data-graf-mesice="siroky">{{ u.grafMesice.siroky | safe }}</div>
       <div class="spot-tabulka" data-tabulka-mesice>{{ u.tabulkaMesice | safe }}</div>
-      <p class="note" data-upozorneni-obdobi{% if not u.upozorneniObdobi %} hidden{% endif %}>{{ ikona('ikona-info') }}<span data-upozorneni-obdobi-text>{{ u.upozorneniObdobi }}</span></p>
+      <p class="note" data-upozorneni-obdobi{% if not u.upozorneniObdobi %} hidden{% endif %}>{{ ikona('ikona-info') }}<span><span class="spot-stav-cen" data-stav-cen{% if not u.stavCen %} hidden{% endif %}>{{ stitek('predbezne' | stavStitek) }} </span><span data-upozorneni-obdobi-text>{{ u.upozorneniObdobi }}</span></span></p>
     </section>
 
     <section class="card" aria-labelledby="hodiny-nadpis">

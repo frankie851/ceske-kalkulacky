@@ -34,7 +34,7 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
                    napoveda: 'Při pobírání starobního důchodu stát na penzijko nepřispívá.' }) }}
         {{ segmenty({ id: 'sada', legenda: 'Podle jakých pravidel počítat', moznosti: k.sady,
                       napoveda: 'Návrh 2027 zatím není zákon. Projekci, poplatky a doporučení spočítáme podle zvolených pravidel.' }) }}
-        <p class="kompas-navrh-stitek">{{ stitek({ typ: 'navrh' }) }}</p>
+        <p class="kompas-navrh-stitek">{{ stitek(k.stitekNavrhu) }}</p>
       {% endcall %}
 
       {% call krok({ cislo: 2, titulek: 'Tvoje spoření', shrnuti: k.shrnuti.penzijko, otevreny: true, hotovo: false, id: 'krok-penzijko' }) %}
@@ -76,14 +76,14 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
                        cislo: k.hlavni.cislo, popis: k.hlavni.popis, ilustraceSvg: obrazek, ukazka: true }) %}
       <ul class="badges kompas-hlavni-stitky">
         <li class="badge badge-plain" data-hlavni-sada>Počítáno podle: {{ k.hlavni.sada }}</li>
-        <li class="kompas-stitek-obal" data-hlavni-navrh{% if not k.hlavni.navrh %} hidden{% endif %}>{{ stitek({ typ: 'navrh' }) }}</li>
+        <li class="kompas-stitek-obal" data-hlavni-navrh{% if not k.hlavni.navrh %} hidden{% endif %}>{{ stitek(k.stitekNavrhu) }}</li>
       </ul>
       <div class="kompas-sady">
         {%- for s in k.prispevky %}
         <article class="kompas-sada{% if s.navrh %} kompas-sada-navrh{% endif %}{% if s.klic == k.vstup.sada %} is-vybrana{% endif %}" data-sada="{{ s.klic }}" aria-labelledby="sada-{{ s.klic }}-nadpis">
           <div class="kompas-sada-hlava">
             <h3 id="sada-{{ s.klic }}-nadpis">{{ s.kratce }}</h3>
-            {% if s.navrh %}{{ stitek({ typ: 'navrh' }) }}{% else %}{{ stitek({ typ: 'schvaleno', text: 'Platí' }) }}{% endif %}
+            {{ stitek(s.stitek) }}
           </div>
           <p class="kompas-sada-cislo"><span data-mesicne>{{ s.mesicne }}</span> <span class="kompas-sada-jednotka">měsíčně</span></p>
           <p class="kompas-sada-rocne"><span data-rocne>{{ s.rocne }}</span> za rok</p>
@@ -114,7 +114,7 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
     <section class="card card-draft" aria-labelledby="poplatky-nadpis">
       <div class="card-head">
         <h2 id="poplatky-nadpis">Poplatky tě stojí</h2>
-        {{ stitek({ typ: 'navrh', text: 'Strop: návrh, zatím neschváleno' }) }}
+        {{ stitek({ typ: k.stitekNavrhu.typ, text: 'Strop: ' + (k.stitekNavrhu.text | lower) }) }}
       </div>
       <div data-poplatky>{{ k.html.poplatky | safe }}</div>
     </section>
@@ -122,7 +122,7 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
     <section class="card" id="karta-tf" aria-labelledby="tf-nadpis" data-karta-tf{% if not k.maTF %} hidden{% endif %}>
       <h2 id="tf-nadpis">Transformovaný fond: zůstat, nebo přejít?</h2>
       <div data-tf>{{ k.html.tf | safe }}</div>
-      <p class="mt-4 kompas-navrh-stitek">{{ stitek({ typ: 'navrh' }) }}</p>
+      <p class="mt-4 kompas-navrh-stitek">{{ stitek(k.tf.stitek) }}</p>
       <p>Platný zákon konec transformovaných fondů nestanoví. Podle návrhu Lepší penzijko (sněmovní tisk 285) mají skončit {{ k.tf.konci | datum }} a peníze pak přejdou do fondu „{{ k.tf.nastupce }}“. Výhodou transformovaného fondu je, že nesmí vykázat záporné zhodnocení. Účastnické fondy můžou krátkodobě klesnout, dlouhodobě ale mají vyšší očekávaný výnos.</p>
       <h3>Jak přejít ve 3 krocích</h3>
       <ol class="kompas-postup">

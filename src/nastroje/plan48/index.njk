@@ -30,7 +30,7 @@ styly: ['/nastroje/plan48/plan48.css']
         {{ segmenty({ id: 'duchod', legenda: 'Pobíráš starobní důchod?', moznosti: p.duchod, napoveda: 'Důchodci státní příspěvek nedostávají. Penzijko si ale odečtou od první koruny.' }) }}
         {{ segmenty({ id: 'sazba', legenda: 'Sazba daně', moznosti: p.sazby, napoveda: p.napovedy.sazba }) }}
         {{ segmenty({ id: 'sada', legenda: 'Podle jakých pravidel počítat', moznosti: p.sady, napoveda: 'Návrh 2027 zatím není zákon. Ukážeme ho jen pro srovnání.' }) }}
-        <p class="plan48-stitek" data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: p.stitekSady or p.stitekNavrhu }) }}</p>
+        <p class="plan48-stitek" data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: p.stitekNavrhu.typ, text: p.stitekSady or p.stitekNavrhu.text }) }}</p>
       {%- endcall %}
       {%- call krok({ cislo: 2, titulek: 'Co si spoříš', shrnuti: p.shrnuti.vklady, otevreny: true, id: 'krok-vklady' }) %}
         {{ pole({ id: 'dps', label: 'Kolik si měsíčně posíláš na penzijko (DPS)?', hodnota: p.pole.dps, jednotka: 'Kč', napoveda: p.napovedy.dps, chybaMisto: true }) }}
@@ -63,7 +63,7 @@ styly: ['/nastroje/plan48/plan48.css']
     </svg>
     {%- endset %}
     {%- call vysledek({ id: 'vysledek', kicker: 'Počítáme podle: ' + p.nazevSady, nadpis: 'Tady je tvůj výsledek', cislo: p.odpocet, popis: p.popis, vysvetleni: p.vysvetleni, ilustraceSvg: prasatko, ukazka: true }) %}
-      <p class="plan48-navrh-vysledek" data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: p.stitekSady or p.stitekNavrhu }) }}<span>Počítáš podle návrhu. Zatím to není zákon.</span></p>
+      <p class="plan48-navrh-vysledek" data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: p.stitekNavrhu.typ, text: p.stitekSady or p.stitekNavrhu.text }) }}<span>Počítáš podle návrhu. Zatím to není zákon.</span></p>
       {{ statistiky(p.statistiky) }}
       <div class="todo">
         {{ ikona('ikona-kalendar-31') }}
@@ -89,7 +89,7 @@ styly: ['/nastroje/plan48/plan48.css']
     <section class="card" aria-labelledby="projekce-nadpis">
       <div class="card-head">
         <h2 id="projekce-nadpis">Projekce úspor do {{ p.vekKonec }} let</h2>
-        <span data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: p.stitekSady or p.stitekNavrhu }) }}</span>
+        <span data-stitek-sady{% if not p.stitekSady %} hidden{% endif %}>{{ stitek({ typ: p.stitekNavrhu.typ, text: p.stitekSady or p.stitekNavrhu.text }) }}</span>
       </div>
       <p class="muted">Penzijko (tvůj vklad, zaměstnavatel a stát) a DIP při stejných měsíčních vkladech. Bez životního pojištění, bez inflace a bez daně z výnosu.</p>
       <div class="plan48-dvojice">
@@ -109,7 +109,7 @@ styly: ['/nastroje/plan48/plan48.css']
     <section class="card card-draft" aria-labelledby="navrh-nadpis">
       <div class="card-head">
         <h2 id="navrh-nadpis">A co {{ p.navrh.nazev | lower }}?</h2>
-        {{ stitek({ typ: 'navrh', text: p.navrh.stitek }) }}
+        {{ stitek(p.navrh.stitek) }}
       </div>
       <p>{{ p.navrh.popis }}</p>
       <p class="muted">{{ p.navrh.poznamka }}</p>

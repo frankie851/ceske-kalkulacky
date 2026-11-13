@@ -105,8 +105,8 @@
   .osvc-stavy .src { margin-top: 4px; }
   .osvc-stavy .hint { margin-top: 4px; }
   .osvc-stav-text { font-weight: 700; }
-  .osvc-stav-official { background: var(--c-sage-soft); color: var(--c-sage-ink); }
-  .osvc-stav-derived { background: var(--c-draft-bg); color: var(--c-draft-ink); }
+  .osvc-stav-stitky { display: flex; flex-wrap: wrap; align-items: center; gap: 4px var(--sp-3); margin-top: 4px; }
+  .osvc-zdroj-typ { font-size: var(--fs-xs); font-weight: 700; color: var(--c-text-muted); }
   .osvc #osvc-actual-pole[hidden] { display: none; }
 }
 

@@ -133,7 +133,7 @@ test('krypto: časově osvobozené příjmy 50 mil. Kč → neosvobozeno 20 %, n
   assert.deepEqual(v.uhrny.kryptoaktivum.limit40, { uhrn: 50000000, limit: 40000000, pomer: 0.2 });
   assert.deepEqual(v.polozky[0].zdanitelnaCast, { pomer: 0.2, prijem: 6000000, naklady: 1200000, rozdil: 4800000 });
   assert.equal(v.zdanitelnyRozdil, 8000000);
-  assert.equal(v.upozorneni.find((u) => u.id === 'krypto-40mil').stav, 'potvrzeno');
+  assert.equal(v.upozorneni.find((u) => u.id === 'krypto-40mil').stav, 'plati');
 });
 
 test('cenné papíry nad 40 mil. Kč: žádný horní limit', () => {
@@ -154,7 +154,7 @@ test('ztráta z krypta se neodečte od zisku z cenných papírů; záporný výs
 test('osvobozený příjem nad 5 000 000 Kč → upozornění na oznámení (§ 38v), zdanitelný ne', () => {
   const v = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 6000000, 1000000), cp('2025-01-01', '2026-03-01', 7000000, 6000000)], 2026, rules);
   const u = v.upozorneni.find((x) => x.id === 'oznameni');
-  assert.equal(u.stav, 'potvrzeno');
+  assert.equal(u.stav, 'plati');
   assert.deepEqual(u.polozky, [{ index: 0, castka: 6000000 }]);
   const pod = osvobozeniProdeje([cp('2020-01-01', '2026-02-01', 5000000, 0)], 2026, rules);
   assert.ok(!pod.upozorneni.some((x) => x.id === 'oznameni'), 'přesně 5 000 000 Kč se neoznamuje');

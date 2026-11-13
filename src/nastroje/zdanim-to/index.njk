@@ -69,7 +69,7 @@ stitkyNavic: ['Za rok 2026']
       </div>
       <details class="zt-smena">
         <summary>Směna kryptoaktiva za jiné kryptoaktivum</summary>
-        <p class="small">{{ stitek({ typ: 'navrh' if p.smena.stav.stitek == 'navrh' else 'plain', text: p.smena.stav.text }) }} Směna kryptoaktiva za jiné kryptoaktivum je prodej. Zadej ji jako prodej: příjem je hodnota získaného kryptoaktiva v korunách ke dni směny. Získané kryptoaktivum má nové datum nákupu, ode dne směny.</p>
+        <p class="small">{{ stitek(p.smena.stav) }} Směna kryptoaktiva za jiné kryptoaktivum je prodej. Zadej ji jako prodej: příjem je hodnota získaného kryptoaktiva v korunách ke dni směny. Získané kryptoaktivum má nové datum nákupu, ode dne směny.</p>
         <p class="small">Časový test nepřerušuje:</p>
         <ul class="small">
           {%- for t in p.smena.neprerusuje %}<li>{{ t }}</li>{% endfor %}
@@ -91,7 +91,7 @@ stitkyNavic: ['Za rok 2026']
     <h2 id="zt-postup-nadpis">Jak počítáme</h2>
     <ol class="zt-sporne zt-postup">
       {%- for s in p.kroky %}
-      <li>{{ stitek({ typ: 'navrh' if s.stav.stitek == 'navrh' else 'plain', text: s.stav.text }) }}<span>{{ s.text }}{% if s.zdroj %}{% if s.zdroj.citace %} <q class="zt-citace">{{ s.zdroj.citace }}</q>{% endif %} <span class="src-meta">Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.pravniZaklad }}</a></span>{% endif %}</span></li>
+      <li>{{ stitek(s.stav) }}<span>{{ s.text }}{% if s.zdroj %}{% if s.zdroj.citace %} <q class="zt-citace">{{ s.zdroj.citace }}</q>{% endif %} <span class="src-meta">Zdroj: <a href="{{ s.zdroj.url }}">{{ s.zdroj.pravniZaklad }}</a></span>{% endif %}</span></li>
       {%- endfor %}
     </ol>
     <p class="note">{{ ikona('ikona-info') }}<span>Pravidla se mění skoro každý rok. Než podáš přiznání, <a href="{{ zt.overitUrl }}">ověř je u finanční správy</a>.</span></p>
