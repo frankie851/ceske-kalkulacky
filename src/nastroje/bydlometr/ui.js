@@ -50,7 +50,7 @@ function nastavChybu(id, zprava) {
 /** Přečte pole podle konfigurace z vystup.js (kontrola je čistá funkce v.zkontrolujPole). */
 function nactiPole(seznam) {
   const texty = Object.fromEntries(seznam.map((p) => [p.id, $(`#${p.id}`).value]));
-  const { vstup, chyby } = v.zkontrolujPole(seznam, texty);
+  const { vstup, chyby } = v.zkontrolujPole(seznam, texty, data.pravidla);
   const podle = new Map(chyby.map((c) => [c.id, c.zprava]));
   for (const p of seznam) nastavChybu(p.id, podle.get(p.id) || '');
   return { vstup, chyby };

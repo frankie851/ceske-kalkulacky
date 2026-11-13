@@ -16,13 +16,16 @@ const cele = (t) => (bezMezer(t) === '' ? 0 : Number(bezMezer(t)));
  * Převede stav průvodce (řetězce z polí) na vstup pro vyhodnot(). Školka se započte jen
  * u dítěte v předškolním věku, i když ve stavu zůstala ze starší odpovědi (revize SLV-01).
  */
+/** Narození ze stavu: den znát nemusíme, jen jestli jsou narozeniny 1. dne měsíce (revize SLV-10). */
+const narozeniZeStavu = (n) => ({ rok: cele(n.rok), mesic: n.mesic, ...(n.prvni ? { den: 1 } : {}) });
+
 export function odpovediZeStavu(s, rules) {
   return {
-    narozeni: { rok: cele(s.narozeni.rok), mesic: s.narozeni.mesic },
+    narozeni: narozeniZeStavu(s.narozeni),
     mzda: cele(s.mzda.mesicne) ? { mesicne: cele(s.mzda.mesicne), mesice: s.mzda.mesice } : null,
     studium: { ...s.studium, druh: s.studium.druh === 'doktorskeJine' ? 'vs' : s.studium.druh },
     deti: s.deti.map((d) => {
-      const narozeni = { rok: cele(d.narozeni.rok), mesic: d.narozeni.mesic };
+      const narozeni = narozeniZeStavu(d.narozeni);
       const skolka = Boolean(d.skolka) && predskolniVek(narozeni, rules);
       return {
         narozeni,
@@ -175,6 +178,7 @@ function poznamka(p, odp, rules) {
         : `${mesicu(p.mesice)} × ${kc(s.student.mesicne)}.`;
     case 'manzel':
       if (p.duvod === 'prijem') return `Nárok nevzniká: příjem manžela nebo manželky přesahuje ${kc(s.manzel.limitPrijmu)}.`;
+      if (p.duvod === 'bezDitete') return `Zatím bez nároku: dítě mladší ${s.manzel.vekDitete} let zadej i v kroku „Děti“. Podle jeho narození spočítáme, za kolik měsíců sleva náleží.`;
       if (p.rocne === 0) return `Nárok nevzniká: v roce ${rules.rok} nežije ve společné domácnosti dítě mladší ${s.manzel.vekDitete} let.`;
       return p.mesice < 12
         ? `Za ${p.mesice} z 12 měsíců (na jejich začátku bylo dítěti méně než ${s.manzel.vekDitete} roky).`

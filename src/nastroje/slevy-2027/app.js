@@ -19,7 +19,7 @@ let stav = novyStav();
 
 function novyStav() {
   return {
-    narozeni: { rok: '', mesic: 1 },
+    narozeni: { rok: '', mesic: 1, prvni: false },
     mzda: { mesicne: '', mesice: 12 },
     studium: { studuje: false, od: 1, do: 12, druh: 'vs' },
     deti: [],
@@ -33,7 +33,7 @@ function novyStav() {
   };
 }
 
-const noveDite = () => ({ narozeni: { rok: '', mesic: 1 }, ztpp: false, od: 1, do: 12, studuje: false, skolka: false, skolne: '', dveDomacnosti: false, dohodaStrop: '' });
+const noveDite = () => ({ narozeni: { rok: '', mesic: 1, prvni: false }, ztpp: false, od: 1, do: 12, studuje: false, skolka: false, skolne: '', dveDomacnosti: false, dohodaStrop: '' });
 
 /* ---------- Čísla z polí ---------- */
 
@@ -110,6 +110,7 @@ function diteHtml(d, i, ch) {
     ${mesic(`ditOd${i}`, `V domácnosti v roce ${ROK} od`, d.od)}
     ${mesic(`ditDo${i}`, 'do', d.do, ch[`ditDo${i}`])}
   </div>
+  ${zaskrtnuti(`ditPrvni${i}`, 'Narozeniny má 1. dne v měsíci', d.narozeni.prvni)}
   ${zaskrtnuti(`ditZtpp${i}`, 'Dítě má průkaz ZTP/P', d.ztpp)}
   ${zaskrtnuti(`ditStuduje${i}`, `Studuje nebo se jinak soustavně připravuje na povolání (rozhoduje od ${rules.deti.vekMaxBezStudia} let)`, d.studuje)}
   <button type="button" class="btn btn-ghost slevy-odebrat" data-akce="odebrat" data-index="${i}">Odebrat ${i + 1}. dítě</button>
@@ -124,12 +125,13 @@ const KROKY = {
       ${pole({ id: 'narRok', label: 'Rok narození', hodnota: s.narozeni.rok, chyba: ch.narRok })}
       ${mesic('narMesic', 'Měsíc narození', s.narozeni.mesic)}
     </div>
+    ${zaskrtnuti('narPrvni', 'Narozeniny mám 1. dne v měsíci', s.narozeni.prvni)}
     <div class="slevy-mrizka">
       ${pole({ id: 'mzda', label: 'Hrubá měsíční mzda (nepovinné)', hodnota: s.mzda.mesicne, jednotka: 'Kč', napoveda: 'U hlavního zaměstnavatele.', chyba: ch.mzda })}
       ${vyber({ id: 'mzdaMesice', label: `Kolik měsíců v roce ${ROK} pracuješ?`, hodnota: s.mzda.mesice, moznosti: Array.from({ length: 12 }, (_, i) => ({ hodnota: 12 - i, text: String(12 - i) })) })}
     </div>`,
     cti: (fd, s) => {
-      s.narozeni = { rok: fd.get('narRok') ?? '', mesic: Number(fd.get('narMesic')) || 1 };
+      s.narozeni = { rok: fd.get('narRok') ?? '', mesic: Number(fd.get('narMesic')) || 1, prvni: ano(fd, 'narPrvni') };
       s.mzda = { mesicne: fd.get('mzda') ?? '', mesice: Number(fd.get('mzdaMesice')) || 12 };
     },
     over: (s) => {
@@ -166,7 +168,7 @@ const KROKY = {
     cti: (fd, s) => {
       s.deti.forEach((d, i) => {
         if (!fd.has(`ditRok${i}`)) return;
-        d.narozeni = { rok: fd.get(`ditRok${i}`) ?? '', mesic: Number(fd.get(`ditMesic${i}`)) || 1 };
+        d.narozeni = { rok: fd.get(`ditRok${i}`) ?? '', mesic: Number(fd.get(`ditMesic${i}`)) || 1, prvni: ano(fd, `ditPrvni${i}`) };
         d.od = Number(fd.get(`ditOd${i}`)) || 1;
         d.do = Number(fd.get(`ditDo${i}`)) || 12;
         d.ztpp = ano(fd, `ditZtpp${i}`);
@@ -219,6 +221,7 @@ const KROKY = {
     <div data-zavisi="maManzela">
       ${pole({ id: 'manzelPrijem', label: `Jeho nebo její vlastní příjem za rok ${ROK}`, hodnota: s.manzel.prijem, jednotka: 'Kč', napoveda: 'Například mateřská, nemocenská nebo mzda. Bez rodičovského příspěvku a dávek státní sociální podpory.', chyba: ch.manzelPrijem })}
       ${zaskrtnuti('peceODite', `Žijeme spolu s naším dítětem mladším ${rules.slevy.manzel.vekDitete} let`, s.manzel.peceODite)}
+      <p class="note">${ikona('ikona-info', sprite)}<span>Dítě zadej i v kroku „Děti“. Podle jeho narození spočítáme, za které měsíce sleva náleží.</span></p>
       ${zaskrtnuti('manzelZtpp', 'Manžel nebo manželka má průkaz ZTP/P', s.manzel.ztpp)}
     </div>`,
     cti: (fd, s) => {

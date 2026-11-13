@@ -5,8 +5,9 @@ import {
   ChybaSazby, ChybaVstupu, PALIVA, DRUHY_VOZIDEL,
   spocitejCestu, souhrn, nazevPasma, formatMinuty,
 } from './cesty.js';
-import { kc, cislo, procenta, datum } from '../../js/format.js';
+import { kc, cislo, procenta, datum, NBSP } from '../../js/format.js';
 import { esc } from '../../js/graf.js';
+import { prectiCislo } from '../../js/cislo-vstup.js';
 
 export const JIDLA = [['s', 'snídaně'], ['o', 'oběd'], ['v', 'večeře']];
 export const PASMA = ['5–12 h', '12–18 h', 'nad 18 h'];
@@ -25,6 +26,56 @@ export function textChybySazby(rules, rok) {
     return `Sazby pro rok ${rok} vyjdou ve vyhlášce obvykle koncem prosince. Zatím spočítáš cesty v roce ${posledni}.`;
   }
   return `Sazby pro rok ${rok} tu nemáme. Spočítáš cesty v roce ${posledni}.`;
+}
+
+/* ---------- hlavička: sazby podle roku cesty (revize CES-11) ---------- */
+
+/**
+ * Rok, podle kterého se v hlavičce nabízí a ověřuje rozpětí stravného a krácení: rok rozpracované
+ * cesty (odjezd ve formuláři), jinak nejpozdější rok cest v seznamu, jinak poslední rok se sazbami.
+ */
+export function rokHlavicky(rules, odjezd, cesty = []) {
+  const maSazby = (rok) => Boolean(rok && /^\d{4}$/.test(rok) && rules[rok]);
+  const zOdjezdu = String(odjezd ?? '').slice(0, 4);
+  if (maSazby(zOdjezdu)) return zOdjezdu;
+  return cesty.map((c) => String(c?.odjezd ?? '').slice(0, 4)).filter(maSazby).sort().at(-1) ?? posledniRok(rules);
+}
+
+/**
+ * Přečte stravné z polí hlavičky (texty = { id: text }) a ověří ho proti sazbám roku r.
+ * Prázdné pole = null (výpočet použije výchozí hodnotu roku cesty), neplatné = undefined + chyba.
+ * kraceni0–2: krácení za jídlo (nejvýš podle § 163 odst. 2), verejna0–2: částka v rozpětí (§ 176),
+ * sjednane0–2: vyšší sjednané stravné v soukromé sféře, aspoň zákonné minimum (§ 163 odst. 3).
+ */
+export function stravneHlavicky(texty, r) {
+  const chyby = {};
+  const cti = (id, chyba) => {
+    const n = prectiCislo(texty[id]);
+    if (n === null) return null;
+    const zprava = Number.isFinite(n) ? chyba(n) : chyba(NaN);
+    if (zprava) { chyby[id] = zprava; return undefined; }
+    return n;
+  };
+  const pasma = [0, 1, 2];
+  return {
+    kraceniPct: pasma.map((i) => cti(`kraceni${i}`, (n) => (n >= 0 && n <= r.kraceniMaxPct[i] ? '' : `Nejvýš ${r.kraceniMaxPct[i]}${NBSP}%.`))),
+    stravneVerejna: pasma.map((i) => {
+      const min = r.stravne.verejnaMin[i];
+      const max = r.stravne.verejnaMax[i];
+      return cti(`verejna${i}`, (n) => (n >= min && n <= max ? '' : `Jen ${min}–${max}${NBSP}Kč.`));
+    }),
+    stravneSoukroma: pasma.map((i) => cti(`sjednane${i}`, (n) => (n >= r.stravne.soukroma[i] ? '' : `Nejméně ${r.stravne.soukroma[i]}${NBSP}Kč.`))),
+    chyby,
+  };
+}
+
+/** Nápovědy k polím stravného v hlavičce pro sazby roku r (sdílí build i prohlížeč). */
+export function napovedyHlavicky(r, rok) {
+  return {
+    kraceni: `Pro rok ${rok} zákon dovoluje nejvýš ${r.kraceniMaxPct.join(' / ')} %. Nižší procento musí firma určit předem, před cestou. Prázdné pole: nejvyšší krácení.`,
+    verejna: [0, 1, 2].map((i) => `${cislo(r.stravne.verejnaMin[i])}–${kc(r.stravne.verejnaMax[i])}`),
+    sjednane: [0, 1, 2].map((i) => `Nejméně ${kc(r.stravne.soukroma[i])}.`),
+  };
 }
 
 /* ---------- formátování ---------- */
@@ -48,19 +99,21 @@ export function terminCesty(c) {
 
 /* ---------- výpočet ---------- */
 
-/** Uložená hlavička → vstup pro spocitejCestu (veřejná sféra: prázdné = dolní hranice rozpětí). */
-export function hlavickaProVypocet(h, rules) {
-  const r = rules[posledniRok(rules)];
+/**
+ * Uložená hlavička → vstup pro spocitejCestu. Prázdné hodnoty zůstanou null a cesty.js je doplní
+ * podle sazeb roku cesty (revize CES-11): veřejná sféra dolní hranicí rozpětí, krácení nejvyšším
+ * zákonným procentem, stravné v soukromé sféře zákonným minimem.
+ */
+export function hlavickaProVypocet(h) {
+  const pasma = (pole) => [0, 1, 2].map((i) => pole?.[i] ?? null);
   const out = {
     firma: h.firma, zamestnanec: h.kdo, sfera: h.sfera,
     vozidlo: { ...h.vozidlo, spotreba: Number(h.vozidlo.spotreba) },
   };
-  if (h.sfera === 'verejna') {
-    if ((h.stravneVerejna || []).some((v) => v !== null && v !== undefined)) {
-      out.stravneVerejna = [0, 1, 2].map((i) => h.stravneVerejna[i] ?? r.stravne.verejnaMin[i]);
-    }
-  } else {
-    out.kraceniPct = [0, 1, 2].map((i) => h.kraceniPct?.[i] ?? r.kraceniMaxPct[i]);
+  if (h.sfera === 'verejna') out.stravneVerejna = pasma(h.stravneVerejna);
+  else {
+    out.kraceniPct = pasma(h.kraceniPct);
+    out.stravneSoukroma = pasma(h.stravneSoukroma);
   }
   return out;
 }
@@ -77,7 +130,7 @@ const tykani = (text) => String(text)
 /** Spočítá jednu cestu. Chyby sazeb a vstupu vrátí jako { ok: false }, jiné vyhodí. */
 export function vypocitejCestu(hlavicka, c, rules) {
   try {
-    const v = spocitejCestu(hlavickaProVypocet(hlavicka, rules),
+    const v = spocitejCestu(hlavickaProVypocet(hlavicka),
       { ...c, cenaDoklad: c.cenaDoklad ?? undefined, jidla: pocetJidel(c.jidla) }, rules);
     return { c, ok: true, v };
   } catch (e) {
@@ -174,9 +227,17 @@ export function vyuctovani(stav, vysledek, rules) {
   if (!ok.length) {
     return '<p class="muted">Vyúčtování se ukáže, až přidáš aspoň jednu cestu, kterou jde spočítat.</p>';
   }
-  const vyhlasky = [...new Set(ok.map((p) => p.v.vyhlaska))];
-  const novely = [...new Set(ok.map((p) => rules[p.c.odjezd.slice(0, 4)]?.novely || []).flat()
-    .filter((n) => ok.some((p) => p.c.odjezd.slice(0, 10) >= n.ucinnost)).map((n) => n.cislo))];
+  // Odkazy na texty předpisů na zakonyprolidi.cz (revize CES-08); při tisku je doplní CSS i jako adresu.
+  const odkaz = (url, text) => (url ? `<a href="${esc(url)}">${esc(text)}</a>` : esc(text));
+  const roky = [...new Set(ok.map((p) => p.c.odjezd.slice(0, 4)))];
+  const vyhlasky = [...new Map(roky.map((rok) => [rules[rok].vyhlaska, rules[rok].zdroj?.url])).entries()]
+    .map(([c, url]) => odkaz(url, c));
+  const novely = [...new Map(roky.flatMap((rok) => rules[rok].novely || [])
+    .filter((n) => ok.some((p) => p.c.odjezd.slice(0, 10) >= n.ucinnost)).map((n) => [n.cislo, n.url])).entries()]
+    .map(([c, url]) => odkaz(url, c));
+  const sjednane = h.sfera !== 'verejna' && (h.stravneSoukroma || []).some((x) => x !== null && x !== undefined)
+    ? `<div><dt>Sjednané stravné (§ 163 odst. 3 zákoníku práce)</dt><dd>${PASMA.map((p, i) => `${p}: ${h.stravneSoukroma[i] !== null && h.stravneSoukroma[i] !== undefined ? kc(h.stravneSoukroma[i]) : 'zákonné minimum'}`).join(', ')}</dd></div>`
+    : '';
   const palivo = PALIVA[h.vozidlo.palivo];
   const jedn = palivo?.jednotka ?? 'l';
   const sfera = h.sfera === 'verejna' ? 'veřejná sféra (§ 176 zákoníku práce)' : 'soukromá sféra (§ 163 zákoníku práce)';
@@ -202,8 +263,8 @@ export function vyuctovani(stav, vysledek, rules) {
       <div><dt>Kdo jede</dt><dd>${esc(h.kdo) || '–'}</dd></div>
       <div><dt>Vozidlo</dt><dd>${esc(h.vozidlo.spz) || 'SPZ nevyplněna'}, ${esc(DRUHY_VOZIDEL[h.vozidlo.druh] || '')}</dd></div>
       <div><dt>Palivo a spotřeba (technický průkaz)</dt><dd>${esc(palivo?.nazev || '')}, ${h.vozidlo.spotreba ? desetinne(h.vozidlo.spotreba) : '–'} ${jedn}/100 km</dd></div>
-      <div><dt>Sféra</dt><dd>${sfera}</dd></div>
-      <div><dt>Sazby</dt><dd>vyhláška č. ${vyhlasky.map(esc).join(', ')}${novely.length ? ` ve znění ${novely.map(esc).join(', ')}` : ''}</dd></div>
+      <div><dt>Sféra</dt><dd>${sfera}</dd></div>${sjednane}
+      <div><dt>Sazby</dt><dd>vyhláška č. ${vyhlasky.join(', ')}${novely.length ? ` ve znění ${novely.join(', ')}` : ''}</dd></div>
     </dl>
     <div class="table-wrap" role="region" aria-label="Tabulka: vyúčtování cest" tabindex="0">
       <table class="stack-table cp-tabulka">

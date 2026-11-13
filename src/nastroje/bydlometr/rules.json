@@ -1,8 +1,8 @@
 {
   "meta": {
     "description": "Pravidla pro výpočty Bydlometru. Každá položka má hodnotu, zdroj a datum. Při změně pravidel uprav value, source, url a date.",
-    "checked": "2026-11-12",
-    "overeno": "2026-11-12",
+    "checked": "2026-11-13",
+    "overeno": "2026-11-13",
     "zdroje": [
       {
         "nazev": "ČNB – Stanovení horní hranice úvěrových ukazatelů LTV, DSTI a DTI (LTV 80 %, 90 % pro žadatele mladší 36 let)",
@@ -338,6 +338,7 @@
       "unit": "text",
       "label": "Starší smlouvy bez nové fixace po 1. 9. 2024",
       "source": "Zákon č. 257/2016 Sb., § 117 odst. 4 a 5 ve znění do 31. 8. 2024",
+      "short": "§ 117 odst. 4 a 5 ve znění do 31. 8. 2024",
       "url": "https://www.zakonyprolidi.cz/cs/2016-257/zneni-20240501#p117",
       "date": "2026-11-12",
       "note": "Procentní strop pro úvěr na bydlení neplatil (kromě prodeje nemovitosti: 1 %, nejvýš 50 000 Kč). Banka smí chtít účelně vynaložené náklady, nejvýš úrok do konce fixace. Ověřeno ve znění od 1. 5. 2024 do 31. 8. 2024 (verze 11).",
@@ -404,6 +405,35 @@
         "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16",
         "citace": "b) 23 % pro část základu daně přesahující 36násobek průměrné mzdy."
       }
+    }
+  },
+  "model": {
+    "stressDeltas": {
+      "value": [1, 2],
+      "unit": "procentní body",
+      "label": "Zátěžový test: o kolik vyšší sazba po další fixaci",
+      "source": "Návrh aplikace",
+      "url": "",
+      "date": "2026-11-13",
+      "note": "Nejde o pravidlo ČNB ani zákona, jen o ukázku citlivosti splátky na sazbu."
+    },
+    "sensitivityDelta": {
+      "value": 2,
+      "unit": "procentní body",
+      "label": "Citlivost nájem vs. koupě: posun růstu cen a výnosu investic nahoru i dolů",
+      "source": "Návrh aplikace",
+      "url": "",
+      "date": "2026-11-13",
+      "note": ""
+    },
+    "assumptionRange": {
+      "value": { "min": -10, "max": 20 },
+      "unit": "% p. a.",
+      "label": "Povolený rozsah polí růst cen, růst nájmů, růst ostatních nákladů a výnos investic",
+      "source": "Návrh aplikace (pojistka proti překlepu)",
+      "url": "",
+      "date": "2026-11-13",
+      "note": "Záporné hodnoty jsou povolené: ceny, nájmy i investice mohou klesat."
     }
   },
   "burden": {
