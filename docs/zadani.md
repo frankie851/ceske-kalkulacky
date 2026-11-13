@@ -227,8 +227,8 @@ Obě aplikace mohou sdílet `calc.js` a `rules.json`. Pokud je chceš mít na je
 - **Co se eviduje:** kontaktní platby, tedy hotovost vždy, karta na provozovně, QR platba u pultu, stravenky a poukázky; neevidují se faktury placené převodem ani čistě online platby přes platební bránu e-shopu ([Fakturoid](https://www.fakturoid.cz/almanach/legislativa/eet), [Deník](https://www.denik.cz/ekonomika/vlada-projednala-nove-eet/)). Kontaktní platbou je i placení virtuálním aktivem ([epravo](https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1)).
 - **EET OFF:** jen pro 1. pásmo paušální daně s ročními příjmy do 1 mil. Kč; daňová složka 1 500 Kč měsíčně místo 100 Kč; režim nejde měnit během roku ([brožura MF](https://mf.gov.cz/assets/attachments/2026-09-09_Brozura-EET-2-0-jednoduse-moderne-a-prehledne.pdf)).
 - **Kdy se EET OFF nevyplatí:** podle výpočtu Podnikatel.cz se s přirážkou 1 400 Kč paušální daň vyplatí až od příjmů zhruba 643 000 Kč u 40% výdajového paušálu a 950 000 Kč u 60%, u 80% nikdy ([Podnikatel.cz](https://www.podnikatel.cz/clanky/jak-bude-vypadat-eet-2-0-prinasime-podrobny-prehled/)).
-- **Výjimky z evidence:** mimo jiné letecká doprava, bankovnictví, prodejní automaty ([BusinessInfo](https://www.businessinfo.cz/eet)) a podnikatelé se ZTP/P bez zaměstnanců ([epravo](https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1)).
-- **Bezplatná aplikace MOJE EET:** od 1. 12. 2026, nejdřív je třeba vygenerovat pokladní certifikát ([DAUČ](https://www.dauc.cz/aktuality/2087/moje-eet-pro-drobne-podnikatele)); je pro nejvýš dvě evidenční jednotky a dva zaměstnance a propojuje se s Daňovou informační schránkou plus ([Podnikatel.cz](https://www.podnikatel.cz/clanky/financni-sprava-ukazala-jak-by-mela-vypadat-aplikace-zdarma-moje-eet/)).
+- **Výjimky z evidence:** mimo jiné letecká doprava, bankovnictví, prodejní automaty ([BusinessInfo](https://www.businessinfo.cz/eet)) a podnikatelé s průkazem ZTP nebo ZTP/P kvůli oboustranné těžké ztrátě zraku, nevidomosti nebo hluchoslepotě, kteří podnikají bez zaměstnanců a spolupracujících osob a tržby přijímají sami (§ 11 odst. 4 zákona č. 180/2026 Sb., [zakonyprolidi.cz](https://www.zakonyprolidi.cz/cs/2026-180#p11)) (opraveno podle revize 5. 11. 2026, EET-09) ([epravo](https://www.epravo.cz/top/aktualne/eet-20-je-na-svete-od-ledna-2027-budou-podnikatele-evidovat-i-platby-kartou-a-qr-kodem-121639.html?pdf=1)).
+- **Bezplatná aplikace MOJE EET:** od 1. 12. 2026, nejdřív je třeba vygenerovat pokladní certifikát ([DAUČ](https://www.dauc.cz/aktuality/2087/moje-eet-pro-drobne-podnikatele)); je určena zejména pro malé podnikatele s nejvýše dvěma evidenčními jednotkami; limit dvou zaměstnanců úřední zdroj neuvádí ([eet.gov.cz](https://eet.gov.cz/cs/zacinam-s-eet/prakticke-informace)) (opraveno podle revize 5. 11. 2026, EET-09); propojuje se s Daňovou informační schránkou plus ([Podnikatel.cz](https://www.podnikatel.cz/clanky/financni-sprava-ukazala-jak-by-mela-vypadat-aplikace-zdarma-moje-eet/)).
 - **Pozor na rozpory:** některé weby uvádějí i výjimku pro hotovostní tržby do 300 000 Kč ročně. V brožuře MF jsem ji nenašel, proto ji aplikace nesmí uvádět, dokud ji nepotvrdí oficiální web eet.gov.cz.
 
 ```markdown
@@ -258,17 +258,21 @@ pro hotovostní tržby do 300 000 Kč, pokud ji oficiální zdroj výslovně neu
   na místě, QR platba na místě, stravenky, poukázky, virtuální aktiva.
 - Neeviduje se: faktura placená převodem, online platba přes platební bránu.
 - Výjimky z evidence podle zákona (např. letecká doprava, bankovnictví, prodejní automaty,
-  podnikatel se ZTP/P bez zaměstnanců) – přesný seznam vezmi z eet.gov.cz.
+  podnikatel s průkazem ZTP nebo ZTP/P kvůli nevidomosti, těžké ztrátě zraku nebo
+  hluchoslepotě, bez zaměstnanců a spolupracujících osob, § 11 odst. 4 zákona
+  č. 180/2026 Sb.) – přesný seznam vezmi z eet.gov.cz. (opraveno podle revize 5. 11. 2026, EET-09)
 - EET OFF: jen 1. pásmo paušální daně a roční příjmy do 1 000 000 Kč; daňová složka
   paušální daně 1 500 Kč/měs místo 100 Kč (přirážka 1 400 Kč/měs = 16 800 Kč/rok);
   režim nelze měnit během roku.
-- Spuštění 1. 1. 2027; bezplatná aplikace MOJE EET od 1. 12. 2026 (max. 2 evidenční
-  jednotky a 2 zaměstnanci, nutný pokladní certifikát a Daňová informační schránka plus).
+- Spuštění 1. 1. 2027; bezplatná aplikace MOJE EET od 1. 12. 2026 (určena zejména pro
+  nejvýše 2 evidenční jednotky, nutný pokladní certifikát a Daňová informační schránka
+  plus). (opraveno podle revize 5. 11. 2026, EET-09)
 
 ## Obrazovky
 1. Dotazník (jedna otázka na obrazovku, max. 8 otázek, tlačítko Zpět): forma podnikání,
    jak přijímáš platby (zaškrtávací výběr), obor, paušální daň a pásmo, roční příjmy,
-   počet provozoven/pokladen, počet zaměstnanců, ZTP/P.
+   počet provozoven/pokladen, počet zaměstnanců, průkaz ZTP nebo ZTP/P kvůli nevidomosti
+   nebo hluchoslepotě. (opraveno podle revize 5. 11. 2026, EET-09)
 2. Výsledek: jedna jasná věta ("Ano, musíš evidovat" / "Ne" / "Můžeš zvolit EET OFF"),
    pod ní proč (které odpovědi o tom rozhodly) a odkaz na zdroj u každého důvodu.
 3. Kalkulačka EET OFF: přirážka 16 800 Kč/rok vedle nákladů na evidenci (MOJE EET zdarma,
@@ -480,7 +484,7 @@ Všech šest nápadů stojí na stejném vzoru jako předchozí aplikace: česk�
 
 | Aplikace | Co řeší | Proč teď | Náročnost | Konkurence |
 | --- | --- | --- | --- | --- |
-| **OSVČ 2027: paušál, nebo přiznání?** (rozšíření Mám EET?) | Spočítá, jestli se živnostníkovi vyplatí paušální daň, klasické přiznání s výdajovým paušálem, nebo EET OFF | Přihlásit se k paušální dani je třeba do 11. 1. 2027; 1. pásmo stoupá na 9 662 Kč měsíčně ([Pohoda](https://portal.pohoda.cz/?p=45627), tabulka pásem v [E15](https://www.e15.cz/pausalni-dan-2027)) | Střední | Tabulky a kalkulačky finančních webů, ale bez volby EET OFF |
+| **OSVČ 2027: paušál, nebo přiznání?** (rozšíření Mám EET?) | Spočítá, jestli se živnostníkovi vyplatí paušální daň, klasické přiznání s výdajovým paušálem, nebo EET OFF | Přihlásit se k paušální dani je třeba do 11. 1. 2027; 1. pásmo stoupá podle zákonného vzorce na 9 661 Kč měsíčně, média uváděla 9 662 Kč (opraveno podle revize 5. 11. 2026, EET-09) ([Pohoda](https://portal.pohoda.cz/?p=45627), tabulka pásem v [E15](https://www.e15.cz/pausalni-dan-2027)) | Střední | Tabulky a kalkulačky finančních webů, ale bez volby EET OFF |
 | **Zdaním to?** (krypto, akcie, ETF) | Ke každému prodeji řekne, jestli je osvobozený, a hlídá roční limity | U krypta osvobození do 100 000 Kč příjmů ročně nebo po 3 letech držby; limit 40 mil. Kč od roku 2026 zůstal jen u krypta ([Pohoda](https://portal.pohoda.cz/?p=36233)); přiznání za rok 2026 se podává na jaře 2027 | Nízká s ručním zadáním, vyšší s importem CSV z burz | Divly (placené), RuleCalc |
 | **Volno 2027** | Navrhne, kdy si vzít dovolenou, aby vyšlo co nejvíc volných dní v kuse; ukáže i dny se zavřenými obchody | Lidé teď plánují dovolené na příští rok; v roce 2027 připadnou 1. 5., 8. 5. a oba vánoční svátky na víkend, zato 5.–6. 7. dají čtyři dny volna bez dovolené (vlastní výpočet z kalendáře) | Velmi nízká | Jen články |
 | **Slevy 2027: na co mám nárok** | Projde situaci zaměstnance a řekne, které slevy a odpočty si má říct u zaměstnavatele | Vrací se sleva na studenta 4 020 Kč ročně a školkovné do výše minimální mzdy ([Práce a mzda](https://www.praceamzda.cz/tydenik/253/podtrzeno-secteno-c-26-30-2026)); volnočasové benefity budou bez limitu kromě rekreace ([Crowe](https://www.crowe.com/cz/cs-cz/news/dan-z-prijmu-2027-novinky-v-oblasti-zamestnaneckych-benefitu-a-dalsi)) | Nízká | Mzdové kalkulačky (např. [Finance.cz](https://www.finance.cz/kalkulacky/mzdova-kalkulacka-2027/)), ne průvodce slevami |
@@ -500,10 +504,10 @@ OSVČ 2027 porovná pro živnostníka tři cesty: paušální daň, klasické p�
 
 **Podklady, ze kterých prompt vychází:**
 
-- **Paušální daň 2027 (měsíčně):** 1. pásmo 9 662 Kč (daň 100, sociální 6 074, zdravotní 3 488), 2. pásmo 16 745 Kč, 3. pásmo 27 139 Kč ([Forvis Mazars / iDNES](https://www.forvismazars.com/cz/cs/prehledy/forvis-mazars-v-mediich/archiv-2026/pausalni-dan-2027-podnikatele-si-priplati)). Přihlásit se je třeba do 11. 1. 2027, první platba do 20. 1. ([Pohoda](https://portal.pohoda.cz/?p=45627)).
+- **Paušální daň 2027 (měsíčně):** 1. pásmo 9 661 Kč (daň 100, sociální 6 073, zdravotní 3 488; dopočteno podle § 14 odst. 3 písm. a) zákona č. 589/1992 Sb.: nejnižší měsíční vyměřovací základ 18 083 Kč zvýšený o 15 % = 20 796 Kč, z toho 29,2 % = 6 073 Kč; tabulka Finanční správy pro rok 2027 zatím nevyšla, média uváděla 9 662 Kč) (opraveno podle revize 5. 11. 2026, EET-09), 2. pásmo 16 745 Kč, 3. pásmo 27 139 Kč ([Forvis Mazars / iDNES](https://www.forvismazars.com/cz/cs/prehledy/forvis-mazars-v-mediich/archiv-2026/pausalni-dan-2027-podnikatele-si-priplati)). Přihlásit se je třeba do 11. 1. 2027, první platba do 20. 1. ([Pohoda](https://portal.pohoda.cz/?p=45627)).
 - **Pásma:** 1. pásmo do 1 mil. Kč příjmů, nebo do 1,5 mil. Kč, pokud aspoň 75 % příjmů spadá pod 80% nebo 60% výdajový paušál, nebo do 2 mil. Kč při 80% paušálu; paušální daň nemůže mít plátce DPH ([Běhounek](https://www.behounek.eu/l/pausalni-dan/)).
-- **Minimální zálohy 2027 (návrh):** sociální 5 281 Kč, zdravotní 3 488 Kč měsíčně ([Pohoda](https://portal.pohoda.cz/dane-ucetnictvi-mzdy/page/8/?page=28)); průměrná mzda pro rok 2027 je 51 663 Kč ([money.cz](https://money.cz/novinky-a-tipy/?p=19357)). Sazby 29,2 % a 13,5 % se nemění ([E15 / Forvis Mazars](https://www.forvismazars.com/cz/cs/prehledy/forvis-mazars-v-mediich/archiv-2026/kolik-zaplatite-na-zalohach-v-roce-2027)); sociální pojištění se počítá z 55 % zisku ([BusinessInfo](https://www.businessinfo.cz/clanky/kdo-plati-minimalni-a-kdo-vyssi-zalohy-na-povinna-pojisteni-terminy-se-blizi/)).
-- **Kontrolní tabulka:** E15 uvádí pro daňový základ 200 000 Kč (sleva na poplatníka, dvě děti) přímé odvody 115 944 Kč v paušálu a 67 704 Kč při klasickém zdanění ([E15](https://www.e15.cz/pausalni-dan-2027)).
+- **Minimální zálohy 2027:** sociální 5 281 Kč, zdravotní 3 488 Kč měsíčně ([Pohoda](https://portal.pohoda.cz/dane-ucetnictvi-mzdy/page/8/?page=28)). Minimum 35 % průměrné mzdy není návrh, je v § 14 odst. 5 zákona č. 589/1992 Sb. ([zakonyprolidi.cz](https://www.zakonyprolidi.cz/cs/1992-589#p14)). Začínající OSVČ má v roce zahájení hlavní činnosti a ve 2 dalších letech minimum 25 % průměrné mzdy, tedy záloha 3 772 Kč měsíčně (§ 14 odst. 5 věta druhá; neplatí, kdo byl OSVČ v předchozích 20 letech) (opraveno podle revize 5. 11. 2026, EET-09); průměrná mzda pro rok 2027 je 51 663 Kč ([money.cz](https://money.cz/novinky-a-tipy/?p=19357)). Sazby 29,2 % a 13,5 % se nemění ([E15 / Forvis Mazars](https://www.forvismazars.com/cz/cs/prehledy/forvis-mazars-v-mediich/archiv-2026/kolik-zaplatite-na-zalohach-v-roce-2027)); sociální pojištění se počítá z 55 % zisku ([BusinessInfo](https://www.businessinfo.cz/clanky/kdo-plati-minimalni-a-kdo-vyssi-zalohy-na-povinna-pojisteni-terminy-se-blizi/)).
+- **Kontrolní tabulka:** E15 uvádí pro daňový základ 200 000 Kč (sleva na poplatníka, dvě děti) přímé odvody 115 944 Kč v paušálu a 67 704 Kč při klasickém zdanění ([E15](https://www.e15.cz/pausalni-dan-2027)). Podle zákonného vzorce je paušál 115 932 Kč (12 × 9 661 Kč) (opraveno podle revize 5. 11. 2026, EET-09).
 - **Limit pro přiznání od 2027:** OSVČ podává přiznání až nad 100 000 Kč příjmů ročně ([BusinessInfo](https://www.businessinfo.cz/clanky/zmeny-u-dani-z-prijmu-jake-novinky-cekaji-podnikatele-i-zamestnance-od-ledna-2027/)).
 
 ```markdown
@@ -533,15 +537,21 @@ Ověř a vypiš tabulku hodnota → zdroj → datum pro: výši paušální dan�
 podmínky pásem, průměrnou mzdu 2027, minimální vyměřovací základy, sazby pojistného,
 výdajové paušály a jejich stropy, slevu na poplatníka, daňové zvýhodnění na děti,
 hranici pro 23% sazbu (36× průměrná mzda) a pravidla zaokrouhlení. Minimální zálohy
-byly v době zadání jen návrhem – ověř, že platí.
+jsou v § 14 odst. 5 zákona č. 589/1992 Sb. (35 % průměrné mzdy, u začínající OSVČ
+25 %), nejde o návrh – ověř jejich výši. 1. pásmo paušální daně ověř podle vzorce
+v § 14 odst. 3 písm. a) téhož zákona. (opraveno podle revize 5. 11. 2026, EET-09)
 
 ## Výpočet klasického zdanění (ověř)
 - Zisk = příjmy − výdaje (výdajový paušál 80/60/40/30 % se stropem, nebo skutečné výdaje).
 - Daň = 15 % ze zisku (23 % nad hranicí) − sleva na poplatníka 30 840 Kč (min. 0)
   − daňové zvýhodnění na děti (může vzniknout bonus).
-- Sociální = max(55 % zisku, roční minimální vyměřovací základ) × 29,2 %.
+- Sociální = max(55 % zisku, roční minimální vyměřovací základ) × 29,2 %. Minimum je
+  35 % průměrné mzdy měsíčně, u začínající OSVČ (rok zahájení hlavní činnosti a 2 další
+  roky) 25 %. (opraveno podle revize 5. 11. 2026, EET-09)
 - Zdravotní = max(50 % zisku, roční minimální vyměřovací základ) × 13,5 %.
 - Paušál: 12 × měsíční částka pásma. EET OFF: paušál 1. pásma + 12 × 1 400 Kč.
+- 1. pásmo: daň 100 Kč + 29,2 % z (nejnižší měsíční vyměřovací základ × 1,15, nahoru)
+  + 13,5 % z dvanáctiny ročního minimálního vyměřovacího základu zdravotního pojištění. (opraveno podle revize 5. 11. 2026, EET-09)
 
 ## Obrazovka
 1. Formulář: roční příjmy, druh činnosti (výdajový paušál), nebo skutečné výdaje,
@@ -555,8 +565,8 @@ byly v době zadání jen návrhem – ověř, že platí.
 
 ## Kritéria hotovo
 - `node --test` projde, včetně těchto případů:
-  - paušál 1. pásmo za rok = 115 944 Kč (12 × 9 662)
-  - EET OFF za rok = 115 944 + 16 800 = 132 744 Kč
+  - paušál 1. pásmo za rok = 115 932 Kč (12 × 9 661) (opraveno podle revize 5. 11. 2026, EET-09)
+  - EET OFF za rok = 115 932 + 16 800 = 132 732 Kč (opraveno podle revize 5. 11. 2026, EET-09)
   - plátce DPH → paušální daň nedostupná
   - příjmy 1 200 000 Kč, 40% paušál → 1. pásmo nedostupné, EET OFF nedostupný
   - daňový základ 200 000 Kč, sleva na poplatníka, 2 děti → klasicky cca 67 700 Kč/rok

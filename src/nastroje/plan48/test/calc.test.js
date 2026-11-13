@@ -9,6 +9,7 @@ import {
   spocitejRok,
   projekce,
 } from '../calc.js';
+import { poznamkaCoUdelat, upozorneniPodpory } from '../vystup.js';
 
 const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const R2026 = rules.sady['2026'];
@@ -233,5 +234,49 @@ describe('rules.json', () => {
   test('obsahuje obě požadované sady', () => {
     assert.ok(rules.sady['2026'] && rules.sady['navrh2027']);
     assert.ok(rules.sady[rules.vychozi.sada]);
+  });
+});
+
+// Revize 5. 11. 2026, P48-04: rada „DIP, životní pojištění nebo penzijko“ neupozorňovala na podmínky
+// daňové podpory (§ 15b odst. 1 písm. a) bod 1 ZDP) ani na její navrácení (§ 15b odst. 4 a 5 ZDP).
+describe('P48-04: podmínky daňové podpory', () => {
+  test('pravidla obou sad mají 120 měsíců, 60 let a dodanění za 10 let s citací § 15b ZDP', () => {
+    for (const sada of [R2026, N2027]) {
+      const p = sada.odpocet.podminkyPodpory;
+      assert.ok(p, sada.nazev);
+      assert.equal(p.mesicu, 120);
+      assert.equal(p.vek, 60);
+      assert.equal(p.vraceniZaObdobi, 10);
+      assert.match(p.zdroj.pravniZaklad, /§ 15b/);
+      assert.match(p.zdroj.url, /zakonyprolidi\.cz\/cs\/1992-586#p15b/);
+      assert.match(p.zdroj.citace, /120 kalendářních měsících/);
+      assert.match(p.zdroj.citace, /60 let věku/);
+      assert.match(p.zdroj.citace, /10 zdaňovacích období/);
+    }
+  });
+
+  test('poznámka k radě do 31. 12. upozorní na podmínky a dodanění', () => {
+    const d = rok({ dps: 1000, mesicuProbehlo: 10 }).doporuceni;
+    const t = poznamkaCoUdelat(d, rules.vychozi, R2026).replace(/ /g, ' ');
+    assert.match(t, /120 měsících/);
+    assert.match(t, /60 let/);
+    assert.match(t, /dodaníš/);
+    assert.match(t, /10 let/);
+  });
+
+  test('čísla v upozornění jdou z rules.json, ne z kódu', () => {
+    const jina = structuredClone(R2026);
+    Object.assign(jina.odpocet.podminkyPodpory, { mesicu: 123, vek: 61, vraceniZaObdobi: 9 });
+    const t = upozorneniPodpory(jina).replace(/ /g, ' ');
+    assert.match(t, /123 měsících/);
+    assert.match(t, /61 let/);
+    assert.match(t, /9 let/);
+    const zdroj = readFileSync(new URL('../vystup.js', import.meta.url), 'utf8');
+    assert.ok(!/\b120\b|\b60 let|\b10 let/.test(zdroj), 'vystup.js obsahuje podmínky natvrdo');
+  });
+
+  test('bez rady na odpočet se upozornění nepřidává', () => {
+    const d = rok({ dps: 5700, mesicuProbehlo: 10 }).doporuceni;
+    assert.equal(poznamkaCoUdelat(d, rules.vychozi, R2026), '');
   });
 });

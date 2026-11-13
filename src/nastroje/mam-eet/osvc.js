@@ -30,7 +30,8 @@ function pct(rate) {
  */
 export function params(rules) {
   const o = rules.osvc2027;
-  const avg = o.averageWage.monthly;
+  const aw = o.averageWage;
+  const avg = aw.monthly;
   const s = o.social;
   const z = o.health;
   const t = o.incomeTax;
@@ -38,6 +39,9 @@ export function params(rules) {
   const minBaseSide = ceilKc(avg * s.minBaseShareSide);
   const minBaseStarting = ceilKc(avg * s.minBaseShareStarting);
   const healthMinBase = ceilKc(avg * z.minBaseShareMain);
+  // Rozhodná částka (§ 10 odst. 2 zákona č. 155/1995 Sb.): 2,4 × (VVZ × koeficient) bez zaokrouhlení
+  // průměrné mzdy. Zákon zaokrouhlení neurčuje: porovnává se přesná hodnota, zobrazuje se nahoru.
+  const sideThresholdExact = aw.generalAssessmentBase * aw.conversionCoefficient * s.sideThresholdAverageWageMultiple;
   return {
     months: o.monthsPerYear,
     socialMinBaseMain: minBaseMain,
@@ -46,12 +50,31 @@ export function params(rules) {
     socialMinAdvanceMain: ceilKc(minBaseMain * s.rate),
     socialMinAdvanceSide: ceilKc(minBaseSide * s.rate),
     socialMaxBaseAnnual: avg * s.maxBaseAverageWageMultiple,
-    sideThreshold: Math.floor(avg * s.sideThresholdAverageWageMultiple + EPS),
+    sideThreshold: ceilKc(sideThresholdExact),
+    sideThresholdExact,
     healthMinBase,
     healthMinAdvance: ceilKc(healthMinBase * z.rate),
     highRateThreshold: avg * t.highRateAverageWageMultiple,
     bonusMinIncome: t.minimumWage * t.bonusMinIncomeMinimumWageMultiple,
   };
+}
+
+/**
+ * Pásma paušální daně. Pásmo s `socialBaseFromMinBaseMultiple` (1. pásmo) se dopočítá ze zákona:
+ * sociální = 29,2 % z nejnižšího měsíčního vyměřovacího základu zvýšeného o 15 %, zaokrouhleného
+ * nahoru (§ 14 odst. 3 písm. a) a odst. 13 zákona č. 589/1992 Sb.), zdravotní = 13,5 % z dvanáctiny
+ * ročního minimálního vyměřovacího základu (§ 8a a § 3a odst. 5 zákona č. 592/1992 Sb.).
+ */
+export function flatBands(rules) {
+  const o = rules.osvc2027;
+  const p = params(rules);
+  return o.flatTax.bands.map((b) => {
+    if (!Number.isFinite(b.socialBaseFromMinBaseMultiple)) return b;
+    const socialBase = ceilKc(p.socialMinBaseMain * b.socialBaseFromMinBaseMultiple);
+    const social = ceilKc(socialBase * o.social.rate);
+    const health = ceilKc(o.averageWage.monthly * o.health.minBaseShareMain * o.health.rate);
+    return { ...b, socialBase, social, health, monthly: b.tax + social + health };
+  });
 }
 
 /** Výdaje: skutečné (pokud jsou zadané), jinak výdajový paušál se stropem. */
@@ -113,7 +136,8 @@ export function socialIns(zisk, activityId, rules) {
   const a = byId(o.activities, activityId);
   if (!a) throw new Error(`Neznámý druh činnosti: ${activityId}`);
   const p = params(rules);
-  if (a.socialSide && zisk <= p.sideThreshold) {
+  // § 10 odst. 2 zákona č. 155/1995 Sb.: účast vzniká, když příjem rozhodné částky „dosáhl“.
+  if (a.socialSide && zisk + EPS < p.sideThresholdExact) {
     return { none: true, threshold: p.sideThreshold, min: 0, base: 0, amount: 0 };
   }
   const minBase = { main: p.socialMinBaseMain, side: p.socialMinBaseSide, starting: p.socialMinBaseStarting }[a.socialMinimum];
@@ -156,8 +180,7 @@ export function classic(input, rules) {
 
 /** Na která pásma paušální daně má poplatník nárok a proč ne. */
 export function flatTaxBands(input, rules) {
-  const f = rules.osvc2027.flatTax;
-  return f.bands.map((b) => {
+  return flatBands(rules).map((b) => {
     const limit = b.limits[input.flatRateId];
     return { band: b, limit, eligible: input.income <= limit };
   });
@@ -198,7 +221,7 @@ export function eetOffVariant(input, rules) {
   const tx = o.texts;
   const e = rules.eetOff;
   const flat = flatTax(input, rules);
-  const band1 = byId(o.flatTax.bands, e.eligibleBandId);
+  const band1 = byId(flatBands(rules), e.eligibleBandId);
   const fr = byId(o.expenseFlatRates, input.flatRateId);
   const base = { id: 'eetOff', band: band1, surchargeMonthly: e.surchargeMonthly };
   const no = (code, reason) => ({ ...base, available: false, code, reason });
@@ -262,6 +285,28 @@ function breakdown(c, flat, off, input, rules) {
 }
 
 /**
+ * Upozornění na předpoklad jedné činnosti (§ 2a odst. 5 zákona č. 586/1992 Sb.): když pásmo vychází
+ * jen díky vyššímu limitu pro 80% nebo 60% paušál, platí to, jen pokud aspoň 75 % příjmů ze samostatné
+ * činnosti spadá pod takový paušál. Vrací text, nebo null.
+ */
+function singleActivityNote(flat, input, rules) {
+  if (!flat.available) return null;
+  const o = rules.osvc2027;
+  const limits = flat.band.limits;
+  const base = Math.min(...Object.values(limits));
+  if (input.income <= base) return null;
+  const chosen = limits[input.flatRateId];
+  const rates = o.expenseFlatRates.filter((fr) => limits[fr.id] >= chosen).map((fr) => pct(fr.rate));
+  return fill(o.texts.noteSingleActivity, {
+    limit: formatCzk(chosen, rules),
+    band: flat.band.label,
+    share: pct(o.flatTax.singleActivity.share),
+    rates: rates.join(` ${o.texts.or} `),
+    base: formatCzk(base, rules),
+  });
+}
+
+/**
  * Porovnání tří variant: roční a měsíční odvody, nejlevnější varianta, rozdíly,
  * důvody nedostupnosti, poznámky a rozpis výpočtu.
  */
@@ -293,6 +338,8 @@ export function compare(input, rules) {
   if (flat.available && c.tax.childTotal > 0) notes.push(fill(tx.noteChildrenFlat, { children: k(c.tax.childTotal) }));
   if (input.contactPayments) notes.push(fill(tx.noteEvidence, { launch: formatDate(rules.launch.date) }));
   notes.push(fill(tx.notePrevYear, { prevYear: rules.eetOff.incomeYear }));
+  const single = singleActivityNote(flat, input, rules);
+  if (single) notes.push(single);
   const band1 = byId(o.flatTax.bands, rules.eetOff.eligibleBandId);
   if (band1.status === 'derived' && (flat.band?.id === band1.id || off.available)) {
     notes.push(fill(tx.noteBand1Status, { year: o.year, verified: formatDate(band1.verified) }));

@@ -7,6 +7,10 @@
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p157"
       },
       {
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 158 (náhrada za pohonné hmoty, spotřeba z technického průkazu)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p158"
+      },
+      {
         "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 163 (stravné, cesta přes 2 kalendářní dny)",
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p163"
       },
@@ -15,22 +19,26 @@
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p176"
       },
       {
-        "nazev": "Práce a mzda – vyhláška č. 573/2025 Sb. o změně sazeb základní náhrady a stravného",
-        "url": "https://www.praceamzda.cz/predpisy/573-2025-sb",
-        "poznamka": "Sazby pro rok 2026: náhrada za km, stravné a průměrné ceny pohonných hmot."
+        "nazev": "Zákon č. 262/2006 Sb., zákoník práce, § 183 (vyúčtování, zaokrouhlení na celé koruny nahoru)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p183"
       },
       {
-        "nazev": "epravo.cz – vyhláška č. 573/2025 Sb.",
-        "url": "https://www.epravo.cz/top/zakony/sbirka-zakonu/sb/2025/573"
+        "nazev": "Vyhláška č. 573/2025 Sb. o změně sazby základní náhrady za používání silničních motorových vozidel a stravného a o stanovení průměrné ceny pohonných hmot pro účely poskytování cestovních náhrad pro rok 2026",
+        "url": "https://www.zakonyprolidi.cz/cs/2025-573",
+        "poznamka": "Sazby pro rok 2026: náhrada za km, stravné a průměrné ceny pohonných hmot. Účinnost od 1. 1. 2026."
       },
       {
-        "nazev": "Sbírka zákonů – vyhláška č. 573/2025 Sb. (PDF)",
-        "url": "https://www.epravo.cz/_dataPublic/sbirky/2025/Sb_2025_573_PZZ.pdf",
-        "poznamka": "Vyšla 22. 12. 2025. Vyhláška pro rok 2027 se čeká v podobném termínu."
+        "nazev": "Vyhláška č. 78/2026 Sb., kterou se mění vyhláška č. 573/2025 Sb.",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-78",
+        "poznamka": "Motorová nafta 44,50 Kč/l (místo 34,10 Kč) od 1. 6. 2026."
+      },
+      {
+        "nazev": "Vyhláška č. 175/2026 Sb., kterou se mění vyhláška č. 573/2025 Sb.",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-175",
+        "poznamka": "Benzin 95 41,80 Kč/l (místo 34,70 Kč) od 1. 10. 2026."
       }
     ],
     "neovereno": [
-      "Sazby pro rok 2026 a změny cen pohonných hmot (vyhlášky 78/2026 Sb. a 175/2026 Sb.) jsme ověřili jen shodou sekundárních zdrojů (MPSV, SME Union, ČMKOS, Money, iustoria, mzdy.cz). Plné znění ve Sbírce zákonů jsme neměli k dispozici.",
       "Zahraniční pracovní cesty nepočítáme.",
       "Náhrady pro OSVČ, která jezdí za sebe (stravné podle § 24 zákona o daních z příjmů, auto mimo obchodní majetek, paušální výdaj na dopravu), nepočítáme."
     ]
@@ -51,16 +59,36 @@
         "url": "https://www.zakonyprolidi.cz/cs/2006-262#p163",
         "citace": "Při pracovní cestě, která spadá do 2 kalendářních dnů, se upustí od odděleného posuzování doby trvání pracovní cesty v kalendářním dnu, je-li to pro zaměstnance výhodnější."
       }
+    },
+    "spotreba": {
+      "zdroj": {
+        "pravniZaklad": "§ 158 odst. 4 zákoníku práce",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p158",
+        "citace": "Při určení spotřeby pohonné hmoty použije zaměstnavatel údaj o spotřebě pro kombinovaný provoz podle norem Evropské unie. Není-li tento údaj v technickém průkazu vozidla ani osvědčení o registraci vozidla uveden, vypočítá zaměstnavatel spotřebu pohonné hmoty vozidla aritmetickým průměrem z údajů v technickém průkazu vozidla nebo osvědčení o registraci vozidla uvedených."
+      }
+    },
+    "zaokrouhleni": {
+      "poznamka": "Zákon upravuje jen zaokrouhlení výsledné částky (nahoru na celé koruny). Položky (náhrada za km, PHM, stravné) počítá kalkulačka na haléře, polovinu haléře zaokrouhluje nahoru – to je konvence kalkulačky.",
+      "zdroj": {
+        "pravniZaklad": "§ 183 odst. 5 zákoníku práce (vratka nevyúčtované zálohy § 183 odst. 3)",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-262#p183",
+        "citace": "Částka, kterou má zaměstnavatel zaměstnanci poskytnout v české měně, se zaokrouhlí na celé koruny směrem nahoru."
+      }
     }
   },
   "2026": {
     "vyhlaska": "573/2025 Sb.",
+    "zdroj": {
+      "pravniZaklad": "vyhláška č. 573/2025 Sb., § 1 až 4, ve znění vyhlášek č. 78/2026 Sb. a č. 175/2026 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/2025-573",
+      "citace": "Sazba základní náhrady za 1 km jízdy … a) u jednostopých vozidel a tříkolek 1,60 Kč, b) u osobních silničních motorových vozidel 5,90 Kč. … Výše průměrné ceny pohonné hmoty … a) 34,70 Kč (od 1. 10. 2026 41,80 Kč) za 1 litr benzinu automobilového 95 oktanů, b) 39 Kč za 1 litr benzinu automobilového 98 oktanů, c) 34,10 Kč (od 1. 6. 2026 44,50 Kč) za 1 litr motorové nafty, d) 7,20 Kč za 1 kilowatthodinu elektřiny."
+    },
     "novely": [
-      { "cislo": "78/2026 Sb.", "ucinnost": "2026-06-01", "popis": "motorová nafta 44,50 Kč/l" },
-      { "cislo": "175/2026 Sb.", "ucinnost": "2026-10-01", "popis": "benzin 95 41,80 Kč/l" }
+      { "cislo": "78/2026 Sb.", "ucinnost": "2026-06-01", "popis": "motorová nafta 44,50 Kč/l", "url": "https://www.zakonyprolidi.cz/cs/2026-78" },
+      { "cislo": "175/2026 Sb.", "ucinnost": "2026-10-01", "popis": "benzin 95 41,80 Kč/l", "url": "https://www.zakonyprolidi.cz/cs/2026-175" }
     ],
-    "overeno": "2026-11-05",
-    "poznamkaOvereni": "Ověřeno shodou sekundárních zdrojů (MPSV ppropo, SME Union, ČMKOS, Money, iustoria, mzdy.cz); plné znění ve Sbírce nebylo z prostředí dostupné.",
+    "overeno": "2026-11-12",
+    "poznamkaOvereni": "Ověřeno 12. 11. 2026 proti textům vyhlášek č. 573/2025 Sb., 78/2026 Sb. a 175/2026 Sb. na zakonyprolidi.cz (aktuální znění vyhlášky 573/2025 Sb. od 1. 10. 2026, verze 3). Původní ceny benzinu 95 (34,70 Kč) a nafty (34,10 Kč) plynou z textu novel, které je nahrazují.",
     "sazbaKm": { "osobni": 5.90, "jednostope": 1.60 },
     "stravne": {
       "soukroma": [155, 236, 370],

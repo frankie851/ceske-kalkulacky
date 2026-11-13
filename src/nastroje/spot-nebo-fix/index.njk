@@ -142,6 +142,7 @@ styly: ['/nastroje/spot-nebo-fix/spot-nebo-fix.css']
     <section class="card" aria-labelledby="predpoklady-nadpis">
       <h2 id="predpoklady-nadpis">Předpoklady výpočtu</h2>
       <p class="muted">Ke všem třem variantám připočítáváme stejné regulované složky podle tvého distributora, sazby a jističe. Ceny jsou vč. DPH, regulované ceny z roku {{ s.tarifyRok }}.</p>
+      <p class="small" data-regulovane-overeno>Regulované ceny jsme ověřili k {{ s.regulovaneOvereno }}. Distribuce je z <a href="{{ s.zdrojDistribuce.url }}">cenového výměru ERÚ č. 14/2025</a>, systémové služby, nesíťová infrastruktura a POZE z výměrů č. 13/2025 a 15/2025.</p>
       <dl class="spot-predpoklady" data-predpoklady>
         {%- for p in u.predpoklady %}
         <div><dt>{{ p.nazev }}</dt><dd>{{ p.hodnota }}</dd></div>

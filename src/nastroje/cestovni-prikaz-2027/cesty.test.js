@@ -208,7 +208,9 @@ test('desetinné km a haléřové zaokrouhlení', () => {
   assert.equal(nahradaPHM(0.1, 5, 4100), 21);
 });
 
-test('souhrn sčítá položky a celkovou částku zaokrouhlí nahoru na koruny', () => {
+// Revize 5. 11. 2026, CES-05/CES-06: zaokrouhlení částky k výplatě nahoru na celé koruny stanoví
+// § 183 odst. 5 zákoníku práce (dřív test i aplikace mluvily o „konvenci aplikace“).
+test('souhrn sčítá položky a částku k výplatě zaokrouhlí nahoru na koruny (§ 183 odst. 5 ZP)', () => {
   const s = souhrn([
     { zakladniHal: 7375, phmHal: 7395, stravneHal: 15340, celkemHal: 30110 },
     { zakladniHal: 59000, phmHal: 20820, stravneHal: 23600, celkemHal: 103420 },

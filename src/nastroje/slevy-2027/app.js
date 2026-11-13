@@ -25,7 +25,7 @@ function novyStav() {
     deti: [],
     manzel: { ma: false, prijem: '', peceODite: false, ztpp: false },
     invalidita: { stupen: 0, ztpp: false },
-    hypoteka: { uroky: '', stareSmlouva: false },
+    hypoteka: { uroky: '', bytovaPotrebaPred2021: false },
     stari: { penzijko: '', penzijkoMimoradny: '', dip: '', zivotni: '', dlouhodobaPece: '' },
     dary: { dary: '', krev: '' },
     odbory: false,
@@ -239,8 +239,8 @@ const KROKY = {
   },
   hypoteka: {
     html: (s, ch) => `${pole({ id: 'uroky', label: `Úroky zaplacené za rok ${ROK}`, hodnota: s.hypoteka.uroky, jednotka: 'Kč', napoveda: 'Najdeš je v potvrzení od banky. Bez úvěru nech pole prázdné.', chyba: ch.uroky })}
-    ${zaskrtnuti('stareSmlouva', 'Bydlení, na které je úvěr, bylo pořízené před 1. 1. 2021', s.hypoteka.stareSmlouva)}`,
-    cti: (fd, s) => { s.hypoteka = { uroky: fd.get('uroky') ?? '', stareSmlouva: ano(fd, 'stareSmlouva') }; },
+    ${zaskrtnuti('bytovaPotrebaPred2021', 'Bydlení, na které je úvěr, bylo pořízené před 1. 1. 2021', s.hypoteka.bytovaPotrebaPred2021)}`,
+    cti: (fd, s) => { s.hypoteka = { uroky: fd.get('uroky') ?? '', bytovaPotrebaPred2021: ano(fd, 'bytovaPotrebaPred2021') }; },
     over: (s) => overCisla([['uroky', s.hypoteka.uroky]]),
   },
   stari: {

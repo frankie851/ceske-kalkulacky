@@ -2,7 +2,7 @@
 // Spuštění: npx eleventy && node --test test/e2e/mam-eet.test.js
 import { test, after, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { otevri, zavri, text } from './pomocnik.mjs';
+import { otevri, zavri, text, vypln } from './pomocnik.mjs';
 
 after(zavri);
 
@@ -166,11 +166,13 @@ describe('Mám EET? – ovládání', () => {
 describe('OSVČ 2027', () => {
   const radek = (page, id) => text(page, `#osvc-vysledek tr[data-varianta="${id}"]`);
 
-  test('výchozí srovnání: 1. pásmo 115 944 Kč, EET OFF 132 744 Kč', async () => {
+  // Revize 5. 11. 2026, EET-03: 1. pásmo podle § 14 odst. 3 písm. a) ZPSZ = 9 661 Kč měsíčně.
+  test('výchozí srovnání: 1. pásmo 115 932 Kč, EET OFF 132 732 Kč', async () => {
     const { page, chyby } = await otevri(OSVC, { sirka: 1440, vyska: 900 });
-    assert.match(await radek(page, 'flat'), /Paušální daň \(1\. pásmo\).*115 944 Kč/);
-    assert.match(await radek(page, 'eetOff'), /132 744 Kč/);
-    assert.match(await text(page, '#osvc-vysledek-karta'), /115 944 Kč/);
+    assert.match(await radek(page, 'flat'), /Paušální daň \(1\. pásmo\).*115 932 Kč/);
+    assert.match(await radek(page, 'eetOff'), /132 732 Kč/);
+    assert.match(await text(page, '#osvc-vysledek-karta'), /115 932 Kč/);
+    assert.match(await text(page, '#osvc-first-payment'), /9 661 Kč/);
     assert.ok(await page.$('#osvc-graf svg.osvc-svg'), 'interaktivní graf');
     assert.equal(await page.$('#osvc-vysledek [data-ukazka]'), null, 's JS už nejde o ukázku');
     assert.deepEqual(chyby, []);
@@ -210,12 +212,52 @@ describe('OSVČ 2027', () => {
     await page.close();
   });
 
+  // Revize 5. 11. 2026, EET-05: při neplatném vstupu nesmí zůstat vidět výsledek pro staré číslo.
+  test('neplatný vstup skryje starý výsledek, oprava ho vrátí', async () => {
+    const { page, chyby } = await otevri(OSVC, { sirka: 360, vyska: 800 });
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    const vstup = (hodnota) => vypln(page, '#osvc-income', hodnota);
+    const viditelne = (sel) => page.$eval(sel, (el) => !el.closest('[hidden]') && el.getClientRects().length > 0);
+    await vstup('1200000');
+    assert.match(await text(page, '#osvc-vysledek-karta'), /Paušální daň/);
+    for (const spatne of ['1200000,50', '', '-100']) {
+      await vstup(spatne);
+      assert.equal(await viditelne('#osvc-vysledek'), false, `výsledek pro „${spatne}“ musí zmizet`);
+      assert.equal(await viditelne('#osvc-graf'), false, `graf pro „${spatne}“ musí zmizet`);
+      assert.equal(await viditelne('.lepiva-lista'), false, `lišta pro „${spatne}“ musí zmizet`);
+      assert.equal(await viditelne('#osvc-neplatne'), true);
+      assert.match(await text(page, '#osvc-neplatne'), /opravíš/);
+      assert.equal(await page.$eval('#osvc-income-chyba', (el) => el.hidden), false);
+    }
+    await page.click('#osvc-form button[type="submit"]');
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'osvc-income');
+    assert.equal(await viditelne('#osvc-vysledek'), false);
+    await vstup('800000');
+    assert.equal(await viditelne('#osvc-vysledek'), true);
+    assert.equal(await viditelne('#osvc-graf'), true);
+    assert.equal(await viditelne('.lepiva-lista'), true);
+    assert.equal(await viditelne('#osvc-neplatne'), false);
+    assert.match(await radek(page, 'flat'), /115 932 Kč/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  // Revize 5. 11. 2026, EET-06: pásmo se určuje z jedné činnosti, podmínka 75 % příjmů (§ 2a odst. 5 ZDP).
+  test('nápověda k druhu činnosti a poznámka o podmínce 75 % příjmů', async () => {
+    const { page, chyby } = await otevri(OSVC, { sirka: 1440, vyska: 900 });
+    assert.match(await text(page, '#osvc-form'), /aspoň 75 % příjmů/);
+    await vypln(page, '#osvc-income', 1200000);
+    assert.match(await text(page, '#osvc-vysledek'), /75 % příjmů/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
   test('bez JavaScriptu je vidět tabulka variant s ukázkou', async () => {
     const { page } = await otevri(OSVC, { js: false });
     const ukazka = await text(page, '#osvc-vysledek');
     assert.ok(await page.$('#osvc-vysledek [data-ukazka]'));
-    assert.match(ukazka, /115 944 Kč/);
-    assert.match(ukazka, /132 744 Kč/);
+    assert.match(ukazka, /115 932 Kč/);
+    assert.match(ukazka, /132 732 Kč/);
     await page.close();
   });
 });

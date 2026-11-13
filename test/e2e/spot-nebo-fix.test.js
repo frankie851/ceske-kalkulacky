@@ -31,6 +31,7 @@ function ocekavej(zmeny = {}) {
     cislo: mezery(o.cislo),
     karty: Object.fromEntries(o.karty.map((k) => [k.klic, mezery(k.castka)])),
     nejlevnejsi: o.nejlevnejsi,
+    predpoklady: o.predpoklady.map((p) => [mezery(p.nazev), mezery(p.hodnota)]),
   };
 }
 
@@ -38,7 +39,9 @@ async function zobrazeno(page) {
   const karty = {};
   for (const k of ['fix', 'spot', 'dynamic']) karty[k] = await text(page, `[data-varianta="${k}"] [data-castka]`);
   const nejlevnejsi = await page.$$eval('.spot-varianta.is-best', (els) => els.map((el) => el.dataset.varianta));
+  const predpoklady = await page.$$eval('[data-predpoklady] > div', (els) => els.map((el) => [el.querySelector('dt').textContent, el.querySelector('dd').textContent]));
   return {
+    predpoklady: predpoklady.map(([n, h]) => [mezery(n), mezery(h)]),
     nadpis: await text(page, '#vysledek-nadpis'),
     cislo: await text(page, '#vysledek [data-vysledek-cislo]'),
     karty,
@@ -120,6 +123,77 @@ test('posun spotřeby 20 % zlevní spot a dynamický tarif, fix nezmění', asyn
   assert.match(await text(page, '[data-varianta="spot"] [data-posun-efekt]'), /S posunem 20 % ušetříš \d/);
   assert.equal(await page.$$eval('[data-graf-hodiny="siroky"] .graf-legenda li', (els) => els.length), 3, 'křivka po posunu');
   assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+// Revize 5. 11. 2026, SPOT-06: propojení formuláře – změna jističe, distributora a sazby přepočítá výsledek
+// (karty i předpoklady s cenou distribuce podle CV ERÚ 14/2025) stejně jako vystup.js v Node.
+async function zmenAOver(zmeny, ocekavane) {
+  const { page, chyby } = await otevri(CESTA);
+  const pred = await zobrazeno(page);
+  for (const [selektor, hodnota] of zmeny) {
+    await vypln(page, selektor, hodnota);
+    await spocitano(page);
+  }
+  const o = ocekavej(ocekavane);
+  const z = await zobrazeno(page);
+  assert.deepEqual(z.karty, o.karty);
+  assert.notDeepEqual(z.karty, pred.karty);
+  assert.equal(z.cislo, o.cislo);
+  assert.deepEqual(z.nejlevnejsi, [o.nejlevnejsi]);
+  assert.deepEqual(z.predpoklady, o.predpoklady);
+  assert.notDeepEqual(z.predpoklady, pred.predpoklady);
+  assert.deepEqual(chyby, []);
+  return { page, o, z };
+}
+const predpoklad = (z, re) => z.predpoklady.find(([n]) => re.test(n));
+
+test('SPOT-06: změna jističe na 3× 63 A přepočítá výsledek a cenu za jistič', async () => {
+  const { page, z } = await zmenAOver([['#jistic', '3x63']], { jistic: '3x63' });
+  // CV ERÚ 14/2025, D 02d, ČEZ, „nad 3x50 A do 3x63 A“ 644 Kč/měsíc + nesíťová infrastruktura 12,87 Kč, × 1,21 DPH
+  assert.deepEqual(predpoklad(z, /^Jistič/), ['Jistič 3× 63 A a nesíťová infrastruktura', '794,81 Kč měsíčně']);
+  await page.close();
+});
+
+test('SPOT-06: jistič 1× 25 A má stejnou cenu jako 3× 10 A a jiný výsledek než 3× 25 A', async () => {
+  const { page, z } = await zmenAOver([['#jistic', '1x25']], { jistic: '1x25' });
+  const o10 = ocekavej({ jistic: '3x10' });
+  assert.equal(predpoklad(z, /^Jistič/)[1], predpoklad(o10, /^Jistič/)[1]);
+  await page.close();
+});
+
+test('SPOT-06: změna distributora na PREdistribuci přepočítá výsledek a ceny distribuce', async () => {
+  const { page, z } = await zmenAOver([['#distributor', 'pre']], { distributor: 'pre', region: 'P' });
+  assert.match(predpoklad(z, /^Distribuce/)[0], /PREdistribuce, D02d/);
+  await page.close();
+});
+
+test('SPOT-06: změna sazby na D61d přepočítá výsledek s vysokým a nízkým tarifem', async () => {
+  const { page, o, z } = await zmenAOver([['#sazba', 'D61d']], { sazba: 'D61d' });
+  assert.equal(o.tdd, 'TDD4');
+  assert.match(predpoklad(z, /^Distribuce/)[1], /^vysoký tarif .* nízký /);
+  await page.close();
+});
+
+test('SPOT-06: EG.D a sazba D56d – kombinace distributora, sazby a jističe 3× 40 A', async () => {
+  const { page } = await zmenAOver([['#distributor', 'egd'], ['#sazba', 'D56d'], ['#jistic', '3x40']], { distributor: 'egd', sazba: 'D56d', jistic: '3x40', region: tarify.distributors.egd.tdd5Regions[0] });
+  await page.close();
+});
+
+test('SPOT-03: předpoklady ukazují POZE 0 Kč s důvodem a datum ověření regulovaných cen', async () => {
+  const { page } = await otevri(CESTA);
+  const z = await zobrazeno(page);
+  const poze = predpoklad(z, /POZE/)[1];
+  assert.equal(poze, mezery(`0 Kč – ${tarify.common.poze.vysvetleniNuly}`));
+  assert.doesNotMatch(poze, /Kč\/kWh/);
+  const overeno = await text(page, '[data-regulovane-overeno]');
+  const [r, m, d] = tarify.overeno.split('-').map(Number);
+  assert.ok(overeno.includes(`ověřili k ${d}. ${m}. ${r}`), overeno);
+  assert.match(await page.$eval('[data-regulovane-overeno] a', (el) => el.href), /erv182025\.pdf#page=30$/);
+  // Po přepočtu (jiná spotřeba) zůstává POZE 0 Kč – stejně jako ve výpočtu.
+  await vypln(page, '#mwh', '20');
+  await spocitano(page);
+  assert.equal(predpoklad(await zobrazeno(page), /POZE/)[1], poze);
   await page.close();
 });
 

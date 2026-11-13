@@ -63,6 +63,13 @@
   .osvc .calc-side { position: static; }
   .osvc .calc-side .card > h2 { font-size: var(--fs-xl); }
   .osvc-vysledek > * + * { margin-top: var(--sp-6); }
+  /* Neplatné zadání: místo starého výsledku upozornění (revize 5. 11. 2026, EET-05) */
+  .osvc-neplatne {
+    display: flex; gap: var(--sp-2); align-items: flex-start; margin: 0 0 var(--sp-6);
+    padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md);
+    background: var(--c-draft-bg); color: var(--c-draft-ink); font-weight: 700; font-size: var(--fs-sm);
+  }
+  .osvc-neplatne .ikona { width: 20px; height: 20px; flex: none; margin-top: 1px; color: var(--c-draft-ink); --ikona-pozadi: var(--c-draft-bg); }
   .osvc .calc-side .options { grid-template-columns: 1fr; margin: var(--sp-2) 0 var(--sp-4); }
   .osvc .calc-side .opt label { min-height: 52px; }
   .osvc .calc-side fieldset.volby { margin-bottom: var(--sp-2); }
