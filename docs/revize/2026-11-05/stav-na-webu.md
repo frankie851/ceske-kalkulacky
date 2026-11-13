@@ -6,12 +6,12 @@ Revize v této složce hodnotila **původní repozitáře** (plan48, penzijko-ko
 
 ## Souhrn
 
-Stav k 13. 11. 2026, po sloučení PR #14 až #33 do `main`.
+Stav k 13. 11. 2026, po sloučení PR #14 až #37 do `main`.
 
 - Nálezů: **136** (kritická 1, vysoká 18, střední 61, nízká 56).
 - Na webu před opravami platilo 79, částečně 25, neplatilo 32 (sloupec „Stav na webu“).
-- Z 104 nálezů, které na webu platily nebo platily částečně: **opraveno 102**, ověřeno bez potřeby změny 1, částečně 1, zbývá 0.
-- Neopravené části a drobnosti, které se objevily při opravách, jsou v seznamu k další práci na konci.
+- Z 104 nálezů, které na webu platily nebo platily částečně: **opraveno 103**, ověřeno bez potřeby změny 1, částečně 0, zbývá 0.
+- Drobnosti, které se objevily při opravách, jsou opravené v PR #35 až #37. Co zůstává otevřené, je v seznamu k další práci na konci.
 
 | PR | Obsah |
 |---|---|
@@ -35,6 +35,10 @@ Stav k 13. 11. 2026, po sloučení PR #14 až #33 do `main`.
 | [#31](https://github.com/frankie851/ceske-kalkulacky/pull/31) | Nízké – penze, Výpověď, Rodičovská: P48-07 až P48-09, PEN-10, PEN-12, VYP-06, VYP-07, ROD-12 až ROD-14 |
 | [#32](https://github.com/frankie851/ceske-kalkulacky/pull/32) | Nízké – Bydlometr, Slevy, Cestovní příkaz: BYD-08, BYD-09, BYD-11, SLV-09, SLV-10, CES-08, CES-10 až CES-12 |
 | [#33](https://github.com/frankie851/ceske-kalkulacky/pull/33) | Nízké – Přijímačky a Dluhy: PRI-06, PRI-07, PRI-09, DLU-09 |
+| [#34](https://github.com/frankie851/ceske-kalkulacky/pull/34) | Tento soubor po opravách #14–#33 |
+| [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35) | Další práce – texty Slev, Mám EET? a Přijímaček, úklid skriptu `test:e2e:skryte` |
+| [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36) | Další práce – Dluhy (kontrast, srážky před 2022), Bydlometr, Rodičovská (průměrná mzda 2026, otcovská a hospitalizace) |
+| [#37](https://github.com/frankie851/ceske-kalkulacky/pull/37) | Další práce – SPOT-09: regulované ceny po rocích |
 
 ## Tabulka nálezů
 
@@ -86,7 +90,7 @@ Stav = stav na webu před opravami. Důkaz = soubor:řádek na webu, výsledek p
 | SPOT-06 | S | `src/nastroje/spot-nebo-fix` | částečně | formulář pokrývá e2e (`test/e2e/spot-nebo-fix.test.js:71, 125`); `calc.test.js` netestuje přiřazení TDD, okna NT, pásma jističe | opraveno v [#25](https://github.com/frankie851/ceske-kalkulacky/pull/25) |
 | SPOT-07 | S | `src/nastroje/spot-nebo-fix` | platí | `tariffs.json:413–418` `distributors.*.source` je ceník ČEZ Prodej; cenový výměr ERÚ 14/2025 chybí | opraveno v [#25](https://github.com/frankie851/ceske-kalkulacky/pull/25) |
 | SPOT-08 | S | `src/nastroje/spot-nebo-fix` | částečně | pole `type=text`, `ui.js:52–56` přijme čárku; „3.500“ ale projde jako 3,5 | opraveno v [#20](https://github.com/frankie851/ceske-kalkulacky/pull/20) |
-| SPOT-09 | N | `src/nastroje/spot-nebo-fix` | platí | jen zdokumentováno: `rules.json:281` ceny 2026 i pro listopad a prosinec 2025 | částečně v [#30](https://github.com/frankie851/ceske-kalkulacky/pull/30): ceny 2025 se nedoplnily, měsíce mimo rok cen mají upozornění a POZE 2025 podle CR ERÚ 11/2024 |
+| SPOT-09 | N | `src/nastroje/spot-nebo-fix` | platí | jen zdokumentováno: `rules.json:281` ceny 2026 i pro listopad a prosinec 2025 | opraveno v [#37](https://github.com/frankie851/ceske-kalkulacky/pull/37) (regulované ceny podle roku měsíce, 2025 z CR ERÚ 11/2024 a 12/2024; dřív jen upozornění v [#30](https://github.com/frankie851/ceske-kalkulacky/pull/30)) |
 | SPOT-10 | N | `src/nastroje/spot-nebo-fix` | platí | `calc.js:435–436` extrapoluje přes `scale`; `ui.js:313–319` | opraveno v [#30](https://github.com/frankie851/ceske-kalkulacky/pull/30) |
 | SPOT-11 | N | `src/nastroje/spot-nebo-fix` | platí | plán v `.github/workflows/aktualizace-spot.yml:9–10`; běh na GitHubu z repozitáře nejde doložit | ověřeno v [#30](https://github.com/frankie851/ceske-kalkulacky/pull/30): plánovaný běh 9. 11. 2026 proběhl; opraven test, který by první automatický PR s daty shodil |
 | SPOT-12 | N | `src/nastroje/spot-nebo-fix` | částečně | `rules.json:283` „do 16 nejlevnějších čtvrthodin téhož dne“; optimismus (ceny známé dopředu) dál nezmíněn | opraveno v [#30](https://github.com/frankie851/ceske-kalkulacky/pull/30) |
@@ -196,18 +200,25 @@ Stav = stav na webu před opravami. Důkaz = soubor:řádek na webu, výsledek p
 
 ## Seznam k další práci
 
-Všechny nálezy revize jsou opravené kromě části SPOT-09. Při opravách se našlo pár drobností mimo rozsah revize.
+Všechny nálezy revize jsou opravené. Drobnosti nalezené při opravách jsou hotové takto:
 
-### Z revize
-- **SPOT-09** (nízká, částečně): za listopad a prosinec 2025 se pořád počítá s regulovanými cenami 2026. Ceny 2025 jsou v cenových rozhodnutích ERÚ 11/2024 a 12/2024. Úplná oprava vyžaduje ceny po měsících a ceník dynamického tarifu 2025. Teď stránka u těchto měsíců zobrazí upozornění ([#30](https://github.com/frankie851/ceske-kalkulacky/pull/30)).
+| Položka | Stav |
+|---|---|
+| SPOT-09: ceny 2025 | Opraveno v [#37](https://github.com/frankie851/ceske-kalkulacky/pull/37): regulované složky a POZE podle roku měsíce, ověřeno skriptem proti PDF ERÚ (294 hodnot). Dynamický tarif má jen obchodní ceník 2026, měsíce mimo něj mají upozornění. |
+| Slevy 2027: kontrolní seznam a čtení čísel | Opraveno v [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35): tyká, limit 68 000 Kč z `rules.json` (§ 35bb odst. 2 písm. b) ZDP), čísla přes `prectiCislo`. |
+| Mám EET?: rodový tvar volby | Opraveno v [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35): „Vedlejší – mám i zaměstnání“. |
+| Přijímačky: rodové tvary z `explain()` | Opraveno v [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35): neutrální věty přes `texty.js` → `neutralne()`. |
+| Dluhy: kontrast při chybě | Opraveno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): výsledek se při chybě skryje, axe 0 nálezů. |
+| Dluhy: náhrada plátci u srážek před 1. 1. 2022 | Opraveno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): zaškrtávátko, 50 Kč se pak neodečítá (zákon č. 286/2021 Sb.). |
+| Bydlometr: `parseNumber` | Opraveno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): nepoužívaná funkce odstraněna. |
+| Rodičovská: průměrná mzda 2026 | Ověřeno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): NV č. 365/2025 Sb., 48 967 Kč. |
+| Rodičovská: otcovská a hospitalizace | Opraveno v [#36](https://github.com/frankie851/ceske-kalkulacky/pull/36): lhůta nástupu se prodlouží o dny hospitalizace (§ 38a odst. 4 ZNP). |
+| Projekt: skript `test:e2e:skryte` | Opraveno v [#35](https://github.com/frankie851/ceske-kalkulacky/pull/35): skript odebrán, postup pro skryté nástroje v `docs/jak-pridat-nastroj.md`. |
 
-### Nalezeno při opravách
-- **Slevy 2027:** kontrolní seznam (`slevy.js` → `kontrolniSeznam`) vyká a má v textu částku „nejvýš 68 000 Kč“ natvrdo. Čísla čte vlastní funkcí `cele()` místo sdíleného `prectiCislo`.
-- **Mám EET?:** volba „Vedlejší – zároveň jsem zaměstnanec“ není rodově neutrální.
-- **Přijímačky:** věty z převzatého `explain()` mají rodové tvary „Přijat(a)“, „nesplnil(a)“. Termíny jednotné zkoušky pro pětileté obory úřední zdroj neuvádí.
-- **Dluhy:** při chybě ve formuláři jsou karty výsledku ztlumené (`opacity: .45`) a axe na nich hlásí nízký kontrast. Náhrada plátci 50 Kč se odečítá vždy, i u exekucí nařízených před 1. 1. 2022 (vysvětleno textem, chybí pole).
-- **Bydlometr:** `parseNumber` v `js/format.js` čte „2.800.000“ jako NaN (formulář už používá sdílené `prectiCislo`). Smlouvy uzavřené před 1. 12. 2016 kalkulačka nepočítá.
-- **Penze a Výpověď:** stav sněmovních tisků 285 a 300 na psp.cz nejde z prostředí ověřit (spojení se nenaváže).
-- **Rodičovská:** prodloužení lhůty nástupu na otcovskou o dobu hospitalizace (§ 38a odst. 4 věta třetí ZNP) se nepočítá. Průměrná mzda 48 967 Kč pro hranici 23% daně 2026 stojí jen na stránce MPSV.
-- **Napříč nástroji:** stav pravidel se v `rules.json` zapisuje v každém nástroji jinak (`stav`, `status`, `predbezne`, `jeNavrh`). Společný model štítků „platí / schváleno / návrh / předběžně“ by sjednotil zobrazení.
-- **Projekt:** skript `test:e2e:skryte` v `package.json` míří na neexistující `test/e2e/skryte/`.
+### Zůstává otevřené
+- **Společný model štítků stavu** (platí / schváleno / návrh / předběžně): nástroje zapisují stav v `rules.json` každý jinak (`stav`, `status`, `predbezne`, `jeNavrh`). Rozpracováno v samostatném PR (13. 11. 2026).
+- **Přijímačky:** termíny jednotné zkoušky pro pětileté obory úřední zdroj neuvádí (v `meta.neovereno`).
+- **Rodičovská:** nástup na otcovskou po propuštění dítěte z nemocnice až do 1. roku (§ 38b odst. 2 ZNP) se nepočítá, jen je zmíněný v nápovědě.
+- **Bydlometr:** smlouvy uzavřené před 1. 12. 2016 (zákon č. 145/2010 Sb.) kalkulačka nepočítá.
+- **Spot, nebo fix?:** obchodní ceník dynamického tarifu existuje jen pro rok 2026.
+- **Penze a Výpověď:** stav sněmovních tisků 285 a 300 na psp.cz nejde z prostředí ověřit.
