@@ -337,15 +337,28 @@ export function grafy(series, od, doM, { sirka = 640, vyska = 300 } = {}) {
   };
 }
 
-/** Možnosti pro výběr měsíce a roku (od prvního roku v datech po poslední). */
+/**
+ * Měsíce roku `rok`, za které má ČSÚ data (revize INF-08): v posledním roce jen do posledního
+ * měsíce řady, v prvním roce od prvního. Vybraný měsíc mimo data se posune na nejbližší dostupný.
+ * @returns {{hodnota: string, text: string, vybrano: boolean}[]}
+ */
+export function mesiceRoku(series, rok, vybranyMesic) {
+  const r = String(rok);
+  const od = r === series.first.slice(0, 4) ? Number(series.first.slice(5)) : 1;
+  const po = r === series.last.slice(0, 4) ? Number(series.last.slice(5)) : MESICE.length;
+  const vybrany = Math.min(po, Math.max(od, Number(vybranyMesic)));
+  const mesice = [];
+  for (let i = od; i <= po; i++) {
+    mesice.push({ hodnota: String(i).padStart(2, '0'), text: MESICE[i - 1], vybrano: i === vybrany });
+  }
+  return mesice;
+}
+
+/** Možnosti pro výběr měsíce a roku (od prvního roku v datech po poslední, jen měsíce s daty). */
 export function moznostiMesice(series, pravidla, vybrany) {
   const prvni = Math.max(pravidla.vychozi.prvniRok, Number(series.first.slice(0, 4)));
   const posledni = Number(series.last.slice(0, 4));
   const roky = [];
   for (let r = posledni; r >= prvni; r--) roky.push({ hodnota: String(r), text: String(r), vybrano: String(r) === vybrany.slice(0, 4) });
-  const mesice = MESICE.map((m, i) => {
-    const h = String(i + 1).padStart(2, '0');
-    return { hodnota: h, text: m, vybrano: h === vybrany.slice(5) };
-  });
-  return { mesice, roky };
+  return { mesice: mesiceRoku(series, vybrany.slice(0, 4), vybrany.slice(5)), roky };
 }

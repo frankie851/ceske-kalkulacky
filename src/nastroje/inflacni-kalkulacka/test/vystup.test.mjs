@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 import { createSeries } from '../inflation.js';
 import {
   mesicZPoli, castkaZTextu, vynosZTextu, smerPrepoctu, prohodMesice,
-  vstupPrepoctu, vstupVynosu, vstupMzdy, prepocet,
+  vstupPrepoctu, vstupVynosu, vstupMzdy, prepocet, moznostiMesice, mesiceRoku,
 } from '../vystup.js';
 
 const close = (actual, expected, eps = 1e-4) =>
@@ -100,4 +100,29 @@ test('prepocet leden 2005 ↔ září 2026: změna cen +98,5 %, průměrně 3,2 
   assert.equal(bezNbsp(tam.cislo), '19 850 Kč');
   assert.equal(bezNbsp(zpet.cislo), '5 038 Kč');
   assert.match(bezNbsp(zpet.vysvetleni), /Ceny od ledna 2005 do září 2026 vzrostly o 98,5 % \(průměrně 3,2 % ročně\)/);
+});
+
+// Revize 5. 11. 2026, INF-08: výběr měsíce nabízí jen měsíce, za které má ČSÚ data.
+const pravidla = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
+const hodnoty = (seznam) => seznam.map((m) => m.hodnota);
+
+test('INF-08: v posledním roce dat jen měsíce do posledního měsíce ČSÚ', () => {
+  const [rok, posledni] = cpi.last.split('-');
+  const { mesice } = moznostiMesice(cpi, pravidla, `${rok}-01`);
+  assert.equal(mesice.length, Number(posledni));
+  assert.equal(mesice.at(-1).hodnota, posledni);
+  assert.deepEqual(hodnoty(mesiceRoku(cpi, rok, '01')), hodnoty(mesice));
+  // V jiném roce všech 12 měsíců.
+  assert.equal(moznostiMesice(cpi, pravidla, '2005-01').mesice.length, 12);
+});
+
+test('INF-08: měsíc bez dat se v nabídce posledního roku posune na poslední dostupný', () => {
+  const ukazkaRok = createSeries({ '2019-11': 98, '2019-12': 99, '2020-01': 100, '2020-02': 110, '2020-03': 125 });
+  assert.deepEqual(hodnoty(mesiceRoku(ukazkaRok, '2020', '12')), ['01', '02', '03']);
+  assert.equal(mesiceRoku(ukazkaRok, '2020', '12').find((m) => m.vybrano).hodnota, '03');
+  // První rok dat: jen měsíce od prvního měsíce řady.
+  assert.deepEqual(hodnoty(mesiceRoku(ukazkaRok, '2019', '01')), ['11', '12']);
+  assert.equal(mesiceRoku(ukazkaRok, '2019', '01').find((m) => m.vybrano).hodnota, '11');
+  assert.equal(mesiceRoku(ukazkaRok, '2019', '12').find((m) => m.vybrano).hodnota, '12');
+  assert.equal(mesiceRoku(ukazkaRok, '2019', '12').filter((m) => m.vybrano).length, 1);
 });

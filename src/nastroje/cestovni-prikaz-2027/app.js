@@ -12,7 +12,6 @@ const $$ = (sel, koren = document) => [...koren.querySelectorAll(sel)];
 
 const rules = JSON.parse($('#pravidla').textContent);
 const UKAZKA = JSON.parse($('#cp-ukazka').textContent);
-const rSazby = rules[v.posledniRok(rules)];
 
 const fh = $('#cp-hlavicka');
 const fc = $('#cp-cesta');
@@ -50,6 +49,30 @@ function nastavChybu(id, text) {
 
 /* ---------- hlavička ---------- */
 
+const POLE_STRAVNEHO = ['kraceni', 'verejna', 'sjednane'].flatMap((p) => [0, 1, 2].map((i) => `${p}${i}`));
+
+/** Sazby, podle kterých se hlavička nabízí a ověřuje: rok rozpracované cesty, jinak cest v seznamu (CES-11). */
+function sazbyHlavicky() {
+  const rok = v.rokHlavicky(rules, $('#odjezd').value, stav.cesty);
+  return { rok, r: rules[rok] };
+}
+
+/** Přepíše text nápovědy pod polem (za skrytým popisem jednotky). */
+function nastavNapovedu(el, t) {
+  if (!el) return;
+  const uzel = el.lastChild;
+  if (uzel && uzel.nodeType === Node.TEXT_NODE) { if (uzel.nodeValue !== t) uzel.nodeValue = t; } else el.append(t);
+}
+
+function aktualizujNapovedy({ rok, r }) {
+  const n = v.napovedyHlavicky(r, rok);
+  nastavNapovedu($('#cp-kraceni-napoveda'), n.kraceni);
+  [0, 1, 2].forEach((i) => {
+    nastavNapovedu($(`#verejna${i}-napoveda`), n.verejna[i]);
+    nastavNapovedu($(`#sjednane${i}-napoveda`), n.sjednane[i]);
+  });
+}
+
 function naplnHlavicku() {
   const h = stav.hlavicka;
   $('#firma').value = h.firma || '';
@@ -57,14 +80,15 @@ function naplnHlavicku() {
   const radio = $(`#sfera-${h.sfera}`);
   if (radio) radio.checked = true;
   [0, 1, 2].forEach((i) => {
-    $(`#kraceni${i}`).value = naText(h.kraceniPct?.[i] ?? rSazby.kraceniMaxPct[i]);
+    $(`#kraceni${i}`).value = naText(h.kraceniPct?.[i]);
     $(`#verejna${i}`).value = naText(h.stravneVerejna?.[i]);
+    $(`#sjednane${i}`).value = naText(h.stravneSoukroma?.[i]);
   });
   $('#spz').value = h.vozidlo.spz || '';
   $('#druh').value = h.vozidlo.druh;
   $('#palivo').value = h.vozidlo.palivo;
   $('#spotreba').value = naText(h.vozidlo.spotreba);
-  ['spotreba', 'kraceni0', 'kraceni1', 'kraceni2', 'verejna0', 'verejna1', 'verejna2'].forEach((id) => nastavChybu(id, ''));
+  ['spotreba', ...POLE_STRAVNEHO].forEach((id) => nastavChybu(id, ''));
   prepniHlavicku();
 }
 
@@ -72,6 +96,7 @@ function naplnHlavicku() {
 function prepniHlavicku() {
   const sfera = fh.querySelector('input[name="sfera"]:checked')?.value || 'soukroma';
   $('#cp-kraceni').hidden = sfera !== 'soukroma';
+  $('#cp-sjednane').hidden = sfera !== 'soukroma';
   $('#cp-verejna').hidden = sfera !== 'verejna';
   const jedn = PALIVA[$('#palivo').value]?.jednotka ?? 'l';
   const nastavJednotku = (id, text) => {
@@ -84,35 +109,18 @@ function prepniHlavicku() {
   nastavJednotku('cena', `Kč/${jedn}`);
 }
 
-/** Přečte hlavičku. Neplatná pole označí a ponechá jejich poslední platnou hodnotu. */
+/**
+ * Přečte hlavičku. Stravné a krácení ověří podle sazeb roku rozpracované cesty (CES-11).
+ * Neplatná pole označí a ponechá jejich poslední platnou hodnotu. Prázdné pole = null.
+ */
 function prectiHlavicku() {
   const h = stav.hlavicka;
   const sfera = fh.querySelector('input[name="sfera"]:checked')?.value || 'soukroma';
-  const kraceni = [0, 1, 2].map((i) => {
-    const id = `kraceni${i}`;
-    const max = rSazby.kraceniMaxPct[i];
-    const n = nactiCislo(id);
-    if (n === null) { nastavChybu(id, ''); return max; }
-    if (!Number.isFinite(n) || n < 0 || n > max) {
-      nastavChybu(id, `Nejvýš ${max}\u00a0%.`);
-      return h.kraceniPct?.[i] ?? max;
-    }
-    nastavChybu(id, '');
-    return n;
-  });
-  const verejna = [0, 1, 2].map((i) => {
-    const id = `verejna${i}`;
-    const min = rSazby.stravne.verejnaMin[i];
-    const max = rSazby.stravne.verejnaMax[i];
-    const n = nactiCislo(id);
-    if (n === null) { nastavChybu(id, ''); return null; }
-    if (!Number.isFinite(n) || n < min || n > max) {
-      nastavChybu(id, `Jen ${min}–${max}\u00a0Kč.`);
-      return h.stravneVerejna?.[i] ?? null;
-    }
-    nastavChybu(id, '');
-    return n;
-  });
+  const sazby = sazbyHlavicky();
+  aktualizujNapovedy(sazby);
+  const st = v.stravneHlavicky(Object.fromEntries(POLE_STRAVNEHO.map((id) => [id, $(`#${id}`).value])), sazby.r);
+  POLE_STRAVNEHO.forEach((id) => nastavChybu(id, st.chyby[id] || ''));
+  const nebo = (nove, stare) => nove.map((x, i) => (x === undefined ? stare?.[i] ?? null : x));
   const sp = nactiCislo('spotreba');
   let spotreba = sp;
   if (sp !== null && (!Number.isFinite(sp) || sp <= 0 || sp > 100)) {
@@ -124,8 +132,9 @@ function prectiHlavicku() {
     firma: $('#firma').value.trim(),
     kdo: $('#kdo').value.trim(),
     sfera,
-    kraceniPct: kraceni,
-    stravneVerejna: verejna,
+    kraceniPct: nebo(st.kraceniPct, h.kraceniPct),
+    stravneVerejna: nebo(st.stravneVerejna, h.stravneVerejna),
+    stravneSoukroma: nebo(st.stravneSoukroma, h.stravneSoukroma),
     vozidlo: { spz: $('#spz').value.trim().toUpperCase(), druh: $('#druh').value, palivo: $('#palivo').value, spotreba },
   };
 }
@@ -295,6 +304,8 @@ function oznam(text) {
 }
 
 function vykresli() {
+  // Hlavička se čte znovu: rok cest (a tím rozpětí stravného a krácení) se mohl změnit (CES-11).
+  prectiHlavicku();
   const vysledek = v.vypocitej(stav, rules);
   const cislo = v.hlavniCislo(vysledek);
   $('#vysledek [data-vysledek-cislo]').textContent = cislo;
@@ -314,13 +325,15 @@ function vykresli() {
 /* ---------- události ---------- */
 
 fh.addEventListener('submit', (e) => e.preventDefault());
-fh.addEventListener('input', () => { prepniHlavicku(); prectiHlavicku(); vykresli(); });
-fh.addEventListener('change', () => { prepniHlavicku(); prectiHlavicku(); vykresli(); });
+fh.addEventListener('input', () => { prepniHlavicku(); vykresli(); });
+fh.addEventListener('change', () => { prepniHlavicku(); vykresli(); });
 
 $('#odjezd').addEventListener('change', () => {
   // Návrat předvyplníme na stejný den, když je prázdný
   if (!$('#navrat').value && $('#odjezd').value) $('#navrat').value = $('#odjezd').value;
   vykresliJidla();
+  // Rok cesty určuje rozpětí stravného a krácení v hlavičce (CES-11)
+  vykresli();
 });
 $('#navrat').addEventListener('change', vykresliJidla);
 $('[data-cp-jidla]').addEventListener('change', (e) => {

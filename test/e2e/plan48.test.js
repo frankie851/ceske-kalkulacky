@@ -85,6 +85,27 @@ test('bez JS je vidět ukázkový výsledek 45 600 Kč', async () => {
   await page.close();
 });
 
+// Revize 5. 11. 2026, P48-08: štítek návrhu i u dlaždice státního příspěvku a u projekce.
+test('Návrh 2027 → štítek „Návrh, zatím neschváleno“ u dlaždice příspěvku a u projekce', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  const stitky = ['#vysledek .stats > li:nth-child(2) [data-stitek-sady]', 'section[aria-labelledby="projekce-nadpis"] [data-stitek-sady]'];
+  const vidno = (s) => page.$eval(s, (el) => !el.hidden && el.getBoundingClientRect().height > 0);
+  for (const s of stitky) assert.equal(await vidno(s), false, `${s} je u pravidel 2026 skrytý`);
+  await page.click('label[for="sada-navrh2027"]');
+  for (const s of stitky) {
+    assert.ok(await vidno(s), `${s} je u návrhu vidět`);
+    assert.match(await text(page, s), /Návrh, zatím neschváleno/);
+  }
+  // Popis dlaždice se pořád přepisuje (štítek nesmí zabrat první <span>)
+  await vypln(page, '#vek', '25');
+  await vypln(page, '#dps', '1 700');
+  assert.match(await text(page, '#vysledek .stats > li:nth-child(2) > span:first-of-type'), /státní příspěvek za rok/);
+  await page.click('label[for="sada-2026"]');
+  for (const s of stitky) assert.equal(await vidno(s), false, `${s} se u pravidel 2026 zase skryje`);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
 // Revize 5. 11. 2026, P48-01: § 15 odst. 7 ZDP – odpočet DPS po měsících.
 test('DPS 1 000 Kč, 10 měsíců za námi → rada „48 000 Kč mimořádně na penzijko“, ne 55 000 Kč', async () => {
   const { page, chyby } = await otevri(CESTA);

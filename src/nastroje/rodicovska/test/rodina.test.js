@@ -6,6 +6,7 @@ import {
   pravidlaRp, stropRp, cerpaniRp, navrhVyse, cistaMzda, parametryMzdy,
   planRodiny, pridejDny,
 } from '../rodina.js';
+import { kontrolniSeznam } from '../vystup.js';
 
 const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const H2026 = rules.redukcniHranice['2026'];
@@ -310,4 +311,45 @@ test('dřívější návrat do práce do 2 let → upozornění na limit jeslí 
   assert.doesNotMatch(j.text, /92/);
   const m12 = plan.mesice.find((m) => m.index === 12);
   assert.ok(m12.polozky.some((p) => p.typ === 'mzda' && p.kdo === 'matka'));
+});
+
+// Revize 5. 11. 2026, ROD-12: čistá mzda 2027 – hranice 23 % = 3 × průměrná mzda 51 663 Kč
+// (NV č. 177/2026 Sb.: 48 900 × 1,0565, § 23b odst. 4 zákona č. 589/1992 Sb.; § 38h odst. 2 ZDP).
+test('ROD-12: parametry čisté mzdy 2027 z úředních zdrojů, hranice 23 % 154 989 Kč', () => {
+  const p = parametryMzdy(rules, 2027);
+  assert.equal(p.rok, 2027);
+  assert.equal(p.odhad, false);
+  assert.equal(p.hraniceDan2Mesic, 154989);
+  assert.equal(p.sp, 0.071);
+  assert.equal(p.zp, 0.045);
+  assert.equal(p.slevaMesic, 2570);
+  assert.equal(Math.ceil(p.prumernaMzda.vvz * p.prumernaMzda.koeficient), p.prumernaMzda.castka);
+  assert.equal(3 * p.prumernaMzda.castka, p.hraniceDan2Mesic);
+  // 155 000 Kč: v roce 2027 jen 11 Kč nad hranicí 23 % (2026 by to bylo 8 099 Kč).
+  assert.equal(cistaMzda(155000, p), 116339);
+  assert.equal(cistaMzda(155000, parametryMzdy(rules, 2026)), 115692);
+  const p28 = parametryMzdy(rules, 2028);
+  assert.equal(p28.rok, 2027);
+  assert.equal(p28.odhad, true);
+});
+
+// Revize 5. 11. 2026, ROD-13: DVZ jde stanovit i matce bez nároku na mateřskou (§ 30 odst. 2 ZSSP).
+test('ROD-13: matka bez 270 dní pojištění, ale s příjmem → strop RP z jejího DVZ', () => {
+  const zaklad = { terminPorodu: '2027-03-15', prijemMatka: 60000, prijemOtec: 0, narokOtec: false, kdoPpm: 'nikdo', otcovska: false };
+  const sNarokem = planRodiny({ ...zaklad, narokMatka: true }, rules);
+  const bezNaroku = planRodiny({ ...zaklad, narokMatka: false }, rules);
+  assert.ok(sNarokem.rp.strop > rules.rodicovsky[1].minStrop);
+  assert.equal(bezNaroku.rp.strop, sNarokem.rp.strop);
+  assert.ok(bezNaroku.varovani.some((x) => x.typ === 'dvzBezNaroku' && /§ 30 odst\. 2/.test(x.text)));
+  // Bez příjmu DVZ není, strop je zákonné minimum.
+  const bezPrijmu = planRodiny({ ...zaklad, prijemMatka: 0, narokMatka: false }, rules);
+  assert.equal(bezPrijmu.rp.strop, rules.rodicovsky[1].minStrop);
+});
+
+test('ROD-13: jednorázová výplata zbytku jen s DVZ nebo OSVČ (§ 30a odst. 1 ZSSP)', () => {
+  const plan = planRodiny({ terminPorodu: '2027-03-15', prijemMatka: 30000, kdoPpm: 'matka' }, rules);
+  const u = kontrolniSeznam(plan, rules).find((x) => /další dítě/.test(x.ukol));
+  assert.match(u.ukol, /denní vyměřovací základ/);
+  assert.match(u.ukol, /OSVČ/);
+  assert.match(u.ukol, /§ 30a odst\. 1/);
 });

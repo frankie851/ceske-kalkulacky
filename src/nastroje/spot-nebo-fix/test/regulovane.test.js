@@ -105,7 +105,11 @@ test('SPOT-07: zdrojem distribuce je CV ERÚ 14/2025 se stranou PDF a datem ově
     assert.match(dist.kontrolniZdroj.url, /cez\.cz/, d);
   }
   assert.ok(pravidla.meta.zdroje.some((z) => /erv182025\.pdf/.test(z.url) && /14\/2025/.test(z.nazev)), 'rules.json meta.zdroje');
-  assert.equal(pravidla.meta.overeno, '2026-11-12');
+  // Nízké nálezy SPOT-09, SPOT-10, SPOT-12 (13. 11. 2026) změnily rules.json a přidaly zdroj ERÚ 11/2024.
+  // Týdenní workflow aktualizace-spot.yml přepisuje meta.overeno datem stažení dat (SPOT-11), proto
+  // test nehlídá přesné datum (dřív '2026-11-12'), jen tvar a to, že není starší než tato oprava.
+  assert.match(pravidla.meta.overeno, /^\d{4}-\d{2}-\d{2}$/);
+  assert.ok(pravidla.meta.overeno >= '2026-11-13', pravidla.meta.overeno);
 });
 
 test('SPOT-03: tariffs.json nese datum ověření regulovaných cen a citaci nulového POZE', () => {

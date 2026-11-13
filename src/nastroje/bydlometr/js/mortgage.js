@@ -287,6 +287,7 @@ export function compareRefixOptions(input, rules) {
   const currentPayment = annuityPayment(balance, currentRate, n);
   const prepaid = Math.min(Math.max(0, savings), balance);
 
+  const stressDeltas = rules.model ? val(rules.model.stressDeltas) : undefined;
   const make = (id, label, principal, rate, months, costs, extra = {}) => {
     const payment = principal > 0 ? annuityPayment(principal, rate, months) : 0;
     const interest = principal > 0 ? totalInterest(principal, rate, months) : 0;
@@ -295,25 +296,26 @@ export function compareRefixOptions(input, rules) {
       paymentChange: payment - currentPayment,
       interest, costs, totalCost: interest + costs,
       burden: burdenLevel(payment, income, threshold, margin),
-      stress: principal > 0 ? stressTest(principal, rate, months, fixYears) : [],
+      stress: principal > 0 ? stressTest(principal, rate, months, fixYears, stressDeltas) : [],
       ...extra,
     };
   };
 
   const extendYears = Math.round((extendMonths / 12) * 10) / 10;
+  // Mimořádná splátka bez úspor a prodloužení o 0 let by byly totéž co přijetí nabídky (revize BYD-08).
   const options = [
     make('accept', 'Přijmout nabídku banky', balance, offeredRate, n, 0),
     make('refinance', 'Refinancovat jinde', balance, competitorRate, n, refinanceCosts, {
       note: `Včetně nákladů refinancování ${formatCZK(refinanceCosts)}.`,
     }),
-    make('prepay', 'Mimořádná splátka + nabídka banky', balance - prepaid, offeredRate, n, 0, {
+    prepaid > 0 && make('prepay', 'Mimořádná splátka + nabídka banky', balance - prepaid, offeredRate, n, 0, {
       prepaid,
       note: `Splatí ${formatCZK(prepaid)} z úspor ke konci fixace (zdarma). Úspory pak chybí v rezervě a nevydělávají.`,
     }),
-    make('extend', `Prodloužit splatnost o ${String(extendYears).replace('.', ',')} let`, balance, offeredRate, n + extendMonths, 0, {
+    extendMonths > 0 && make('extend', `Prodloužit splatnost o ${String(extendYears).replace('.', ',')} let`, balance, offeredRate, n + extendMonths, 0, {
       note: 'Nižší splátka za cenu vyšších úroků. Banka prodloužení posuzuje podle věku a příjmu.',
     }),
-  ];
+  ].filter(Boolean);
 
   const cheapest = options.reduce((best, o) => (o.totalCost < best.totalCost - 0.5 ? o : best), options[0]);
   const accept = options[0];

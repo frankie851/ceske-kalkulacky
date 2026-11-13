@@ -206,12 +206,15 @@ export function dynamicPctPerQuarter(grid, product) {
 // Posun spotřeby
 // ---------------------------------------------------------------------------
 
+/** Do kolika nejlevnějších čtvrthodin dne přesouváme posunutou spotřebu (texty v rules.json to opakují). */
+export const POSUN_CTVRTHODIN = 16;
+
 /**
  * Přesune podíl `frac` (0–1) denní spotřeby do `k` nejlevnějších čtvrthodin téhož dne podle `rank`
  * (nižší = levnější). Každá čtvrthodina odevzdá stejný podíl své spotřeby, přesunutá energie
  * se rozdělí rovným dílem. Denní i roční součet zůstává stejný.
  */
-export function shiftLoad(cons, rank, frac, ranges, k = 16) {
+export function shiftLoad(cons, rank, frac, ranges, k = POSUN_CTVRTHODIN) {
   if (!frac) return cons.slice();
   const out = cons.map((v) => v * (1 - frac));
   for (const [a, b] of ranges) {

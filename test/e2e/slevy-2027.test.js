@@ -137,6 +137,36 @@ describe('Slevy 2027 – opravy podle revize', () => {
     assert.deepEqual([...chyby, ...druha.chyby], []);
     await druha.page.close();
   });
+
+  // Revize 5. 11. 2026, SLV-10: věk dovršený 1. dne měsíce a sleva na manžela jen ze zadaných dětí.
+  test('SLV-10: dítě nar. 1. 6. 2009 bez studia → zvýhodnění za 5 měsíců (6 335 Kč)', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1980);
+    await pokracovat(page);
+    await pokracovat(page);
+    await page.click('[data-akce="pridat"]');
+    await vypln(page, '#ditRok0', 2009);
+    await page.select('#ditMesic0', '6');
+    await zvol(page, 'ditPrvni0');
+    await dokonce(page);
+    assert.match(await rocne(page, 'deti'), /^6 335 Kč$/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
+
+  test('SLV-10: manžel pečuje o dítě do 3 let, ale dítě není zadané → 0 Kč a rada zadat dítě', async () => {
+    const { page, chyby } = await otevri(CESTA);
+    await vypln(page, '#narRok', 1990);
+    while (!/^Manžel nebo manželka/.test(await nadpis(page))) await pokracovat(page);
+    await zvol(page, 'maManzela', 'ano');
+    await zvol(page, 'peceODite');
+    assert.match(await text(page, '#slevy-formular'), /Dítě zadej i v kroku „Děti“/);
+    await dokonce(page);
+    assert.match(await rocne(page, 'manzel'), /^0 Kč$/);
+    assert.match(await text(page, 'tr[data-polozka="manzel"]'), /zadej i v kroku „Děti“/);
+    assert.deepEqual(chyby, []);
+    await page.close();
+  });
 });
 
 describe('Slevy 2027 – ovládání', () => {

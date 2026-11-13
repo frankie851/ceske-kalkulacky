@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Výchozí hodnoty formulářů. Uprav value, source, url a date. Položky se source „předpoklad“ nejsou měřená data, ale rozumný odhad.",
-    "updated": "2026-11-12"
+    "updated": "2026-11-13"
   },
   "rates": {
     "averageOffer": {
@@ -12,33 +12,6 @@
       "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
       "date": "2026-10-07",
       "note": "Nabídkové sazby bank, ne skutečně sjednané."
-    },
-    "fix1y": {
-      "value": 5.42,
-      "unit": "% p. a.",
-      "label": "Průměrná sazba, fixace 1 rok (LTV do 80 %)",
-      "source": "Swiss Life Hypoindex, říjen 2026",
-      "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
-      "date": "2026-10-07",
-      "note": ""
-    },
-    "fix10y": {
-      "value": 6.35,
-      "unit": "% p. a.",
-      "label": "Průměrná sazba, fixace 10 let (LTV do 80 %)",
-      "source": "Swiss Life Hypoindex, říjen 2026",
-      "url": "https://www.hypoindex.cz/clanky/swiss-life-hypoindex-sazby-hypotek-v-rijnu-prudce-stouply-blizi-se-sesti-procentum/",
-      "date": "2026-10-07",
-      "note": ""
-    },
-    "newLoans": {
-      "value": 5.1,
-      "unit": "% p. a.",
-      "label": "Průměrná sazba nově sjednaných hypoték",
-      "source": "ČBA Hypomonitor, září 2026 (převzato z banky.cz)",
-      "url": "https://www.banky.cz/clanky/hypomonitor-za-zari-2026-sazba-51-a-splatka-prumerne-hypoteky/",
-      "date": "2026-10-15",
-      "note": ""
     },
     "refinance": {
       "value": 5.05,

@@ -124,7 +124,7 @@ function zajistiSazby(sada) {
     const label = Object.assign(document.createElement('label'), { htmlFor: `sazba-${h}`, textContent: procenta(Number(h)) });
     return [input, label];
   }));
-  nastavNapovedu('sazba', `${procenta(Number(hodnoty.at(-1)))} jen pro vysoké příjmy (část nad 36násobek průměrné mzdy).`);
+  nastavNapovedu('sazba', v.napovedaSazby(sada.sazbyDane));
 }
 
 /* ---------- vykreslení ---------- */

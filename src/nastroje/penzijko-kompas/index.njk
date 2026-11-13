@@ -28,7 +28,7 @@ styly: ['/nastroje/penzijko-kompas/penzijko-kompas.css']
         {{ pole({ id: 'vek', label: 'Kolik ti je?', hodnota: k.pole.vek, jednotka: 'let', chybaMisto: true,
                   napoveda: 'Podle věku se určí státní příspěvek. Projekci počítáme do ' + k.vekPenze + ' let.' }) }}
         {{ pole({ id: 'delkaSmlouvy', label: 'Jak dlouho máš smlouvu?', hodnota: k.pole.delkaSmlouvy, jednotka: 'let', chybaMisto: true,
-                  napoveda: 'Převod k jiné společnosti je zdarma, když smlouva trvá aspoň ' + k.prevod.zdarmaPoLetech + ' let. Nová smlouva = 0.' }) }}
+                  napoveda: 'Převod k jiné společnosti je zdarma až po víc než ' + k.prevod.zdarmaPoMesicich + ' měsících u stejné společnosti. Nová smlouva = 0.' }) }}
         {{ volby({ id: 'duchodce', legenda: 'Starobní důchod', typ: 'checkbox',
                    moznosti: [{ hodnota: 'ano', text: 'Pobírám starobní důchod', vybrano: k.vstup.duchodce }],
                    napoveda: 'Při pobírání starobního důchodu stát na penzijko nepřispívá.' }) }}

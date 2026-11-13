@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-12",
+    "overeno": "2026-11-13",
     "zdroje": [
       {
         "nazev": "Zákon č. 117/1995 Sb., o státní sociální podpoře, § 30 až § 31 (rodičovský příspěvek)",
@@ -55,6 +55,14 @@
         "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16"
       },
       {
+        "nazev": "Nařízení vlády č. 177/2026 Sb. (všeobecný vyměřovací základ 2025 a přepočítací koeficient: průměrná mzda 2027 51 663 Kč)",
+        "url": "https://www.zakonyprolidi.cz/cs/2026-177"
+      },
+      {
+        "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů, ve znění od 1. 1. 2027, § 38h odst. 2 (záloha 23 % nad 3násobek průměrné mzdy)",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101#p38h"
+      },
+      {
         "nazev": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 7 (pojistné zaměstnance 7,1 %)",
         "url": "https://www.zakonyprolidi.cz/cs/1992-589#p7"
       },
@@ -68,11 +76,12 @@
       "Předpokládáme porod v den termínu a stejný měsíční příjem v celém rozhodném období, bez vyloučených dob (nemoc, předchozí mateřská).",
       "Rodičovský příspěvek počítáme v jedné měsíční výši po celou dobu. Úřad práce dovolí změnu jednou za 3 měsíce.",
       "Čistá mzda je orientační: bez daňového zvýhodnění na dítě a bez dalších slev a odpočtů.",
-      "Redukční hranice a sazby pro čistou mzdu na rok, který v pravidlech ještě není, odhadujeme podle posledního známého roku.",
-      "Jednorázovou výplatu zbytku při narození dalšího dítěte ani převzetí dítěte do péče nepočítáme."
+      "Redukční hranice a sazby pro čistou mzdu na rok, který v pravidlech ještě není (teď 2028 a dál), odhadujeme podle posledního známého roku.",
+      "Jednorázovou výplatu zbytku při narození dalšího dítěte ani převzetí dítěte do péče nepočítáme.",
+      "Sazby pojistného zaměstnance (7,1 % a třetina z 13,5 %) a slevu na poplatníka pro rok 2027 jsme ověřili ve znění zákonů platném k 13. 11. 2026. Pozdější novela je může změnit."
     ]
   },
-  "overeno": "2026-11-12",
+  "overeno": "2026-11-13",
   "poznamka": "Parametry pro výpočet. Každý rok doplňte nový rok do redukcniHranice a cistaMzda (viz README.md).",
   "redukcniHranice": {
     "2025": {
@@ -211,6 +220,31 @@
       "slevaMesic": 2570,
       "zdroj": "Zákon č. 586/1992 Sb. § 16 (15 %, 23 % nad 36násobkem průměrné mzdy) a § 35ba (sleva 30 840 Kč ročně); zákon č. 589/1992 Sb. § 7 odst. 1 písm. d) (7,1 %); zákon č. 592/1992 Sb. § 2 a zákon č. 48/1997 Sb. § 9 odst. 2 (třetina z 13,5 %); průměrná mzda 2026 48 967 Kč (mpsv.gov.cz – Nemocenské pojištění v roce 2026: polovina průměrné mzdy 24 484 Kč)",
       "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16"
+    },
+    "2027": {
+      "sp": 0.071,
+      "zp": 0.045,
+      "dan": 0.15,
+      "dan2": 0.23,
+      "hraniceDan2Mesic": 154989,
+      "slevaMesic": 2570,
+      "prumernaMzda": {
+        "vvz": 48900,
+        "koeficient": 1.0565,
+        "castka": 51663,
+        "zdroj": {
+          "pravniZaklad": "§ 1 nařízení vlády č. 177/2026 Sb.; § 23b odst. 4 zákona č. 589/1992 Sb.; § 21g odst. 2 zákona č. 586/1992 Sb.",
+          "url": "https://www.zakonyprolidi.cz/cs/2026-177",
+          "citace": "NV 177/2026 Sb., § 1: (1) Výše všeobecného vyměřovacího základu za rok 2025 činí 48900 Kč. (2) Výše přepočítacího koeficientu pro úpravu všeobecného vyměřovacího základu za rok 2025 činí 1,0565. – Zákon 589/1992 Sb., § 23b odst. 4: Za průměrnou mzdu se … považuje částka, která se vypočte jako součin všeobecného vyměřovacího základu za kalendářní rok, který o 2 roky předchází kalendářnímu roku, pro který se průměrná mzda zjišťuje, a přepočítacího koeficientu …; vypočtená částka se zaokrouhluje na celé koruny nahoru. (48 900 × 1,0565 = 51 662,85 → 51 663 Kč)",
+          "overeno": "2026-11-13"
+        }
+      },
+      "zdroj": {
+        "pravniZaklad": "Zákon č. 586/1992 Sb. ve znění od 1. 1. 2027, § 38h odst. 2 (15 %, 23 % nad 3násobek průměrné mzdy) a § 35ba odst. 1 písm. a) (sleva 30 840 Kč ročně); zákon č. 589/1992 Sb. ve znění od 1. 1. 2027, § 7 odst. 1 písm. d) (7,1 %); zákon č. 592/1992 Sb. § 2 odst. 1 (13,5 %) a zákon č. 48/1997 Sb. § 9 odst. 2 (třetina zaměstnanec)",
+        "url": "https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101#p38h",
+        "citace": "§ 38h odst. 2 ZDP: Sazba zálohy činí 15 % pro část základu pro výpočet zálohy do 3násobku průměrné mzdy a 23 % pro část základu pro výpočet zálohy přesahující 3násobek průměrné mzdy. § 35ba odst. 1 písm. a) ZDP: základní slevu ve výši 30 840 Kč na poplatníka. § 7 odst. 1 písm. d) z. 589/1992 Sb.: u zaměstnance 7,1 % z vyměřovacího základu. § 2 odst. 1 z. 592/1992 Sb.: Výše pojistného činí 13,5 % z vyměřovacího základu. § 9 odst. 2 z. 48/1997 Sb.: Pojistné za zaměstnance hradí z jedné třetiny zaměstnanec, ze dvou třetin zaměstnavatel.",
+        "overeno": "2026-11-13"
+      }
     }
   },
   "zdroje": [
@@ -267,6 +301,14 @@
       "url": "https://www.zakonyprolidi.cz/cs/1992-586#p16"
     },
     {
+      "nazev": "Nařízení vlády č. 177/2026 Sb. (všeobecný vyměřovací základ 2025 a přepočítací koeficient: průměrná mzda 2027 51 663 Kč)",
+      "url": "https://www.zakonyprolidi.cz/cs/2026-177"
+    },
+    {
+      "nazev": "Zákon č. 586/1992 Sb., o daních z příjmů, ve znění od 1. 1. 2027, § 38h odst. 2 (záloha 23 % nad 3násobek průměrné mzdy)",
+      "url": "https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101#p38h"
+    },
+    {
       "nazev": "Zákon č. 589/1992 Sb., o pojistném na sociální zabezpečení, § 7 (pojistné zaměstnance 7,1 %)",
       "url": "https://www.zakonyprolidi.cz/cs/1992-589#p7"
     },
@@ -274,5 +316,22 @@
       "nazev": "Zákon č. 48/1997 Sb., o veřejném zdravotním pojištění, § 9 odst. 2 (zaměstnanec hradí třetinu z 13,5 % podle § 2 zákona č. 592/1992 Sb.)",
       "url": "https://www.zakonyprolidi.cz/cs/1997-48#p9"
     }
-  ]
+  ],
+  "dvzBezNaroku": {
+    "text": "Matka nemá podle zadání nárok na mateřskou, ale z pojištěného příjmu jde stanovit denní vyměřovací základ (pro nemocenské v souvislosti s porodem). Podle něj počítáme strop rodičovského příspěvku (§ 30 odst. 2 zákona o státní sociální podpoře).",
+    "zdroj": {
+      "pravniZaklad": "§ 30 odst. 2 zákona č. 117/1995 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30",
+      "citace": "Pro stanovení nároku a výše rodičovského příspěvku je rozhodující výše denního vyměřovacího základu pro stanovení peněžité pomoci v mateřství nebo nemocenského v souvislosti s porodem nebo převzetím dítěte podle zákona o nemocenském pojištění.",
+      "overeno": "2026-11-13"
+    }
+  },
+  "jednorazovaVyplata": {
+    "zdroj": {
+      "pravniZaklad": "§ 30a odst. 1 zákona č. 117/1995 Sb.",
+      "url": "https://www.zakonyprolidi.cz/cs/1995-117#p30a",
+      "citace": "Rodič, kterému zanikl nárok na rodičovský příspěvek z důvodu narození dalšího nejmladšího dítěte v rodině, … má nárok na jednorázovou výplatu částky, která nebyla vyčerpána … Podmínkou je, že alespoň jednomu z rodičů lze k datu narození dalšího nejmladšího dítěte v rodině stanovit denní vyměřovací základ nebo že je některý z rodičů k tomuto datu osobou, která se pro účely důchodového pojištění považuje za osobu samostatně výdělečně činnou.",
+      "overeno": "2026-11-13"
+    }
+  }
 }

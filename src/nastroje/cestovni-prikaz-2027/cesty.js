@@ -44,14 +44,48 @@ function naCele(hodnota, meritko, nazev) {
 const ISO_DATUM = /^(\d{4})-(\d{2})-(\d{2})$/;
 const ISO_DATUM_CAS = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/;
 
+// Tuzemská cesta: časy jsou místní (Europe/Prague). Délka se počítá jako skutečně uplynulý čas,
+// takže den přechodu na letní čas má 23 hodin a na zimní 25 (revize CES-10). Bez knihoven, přes Intl.
+const ZONA = 'Europe/Prague';
+let formatZony = null;
+
+/** Posun Europe/Prague proti UTC (v minutách) v okamžiku t (ms od epochy). */
+function posunZony(t) {
+  formatZony ??= new Intl.DateTimeFormat('en-US', {
+    timeZone: ZONA, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
+  });
+  const c = Object.fromEntries(formatZony.formatToParts(new Date(t)).map((x) => [x.type, x.value]));
+  return (Date.UTC(+c.year, +c.month - 1, +c.day, +c.hour, +c.minute) - t) / 60000;
+}
+
+/**
+ * Místní čas v Praze → minuty od epochy (skutečný okamžik). Čas, který při přechodu na letní čas
+ * neexistuje (2:00–2:59), se posune o hodinu dál; dvojznačný čas při přechodu na zimní čas
+ * (2:00–2:59) se bere podruhé, už v zimním čase.
+ */
+function mistniNaMinuty(rok, mesic, den, hodina, minuta) {
+  const nastenne = Date.UTC(rok, mesic - 1, den, hodina, minuta);
+  const odhad = nastenne - posunZony(nastenne) * 60000;
+  return (nastenne - posunZony(odhad) * 60000) / 60000;
+}
+
 function parseDatumCas(s, nazev) {
   const m = ISO_DATUM_CAS.exec(String(s ?? ''));
   if (!m) throw new ChybaVstupu(`${nazev}: zadejte datum a čas.`);
-  // UTC = „nástěnné“ hodiny bez vlivu letního času
-  return Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]) / 60000; // minuty
+  return { datum: `${m[1]}-${m[2]}-${m[3]}`, minuty: mistniNaMinuty(+m[1], +m[2], +m[3], +m[4], +m[5]) };
 }
 
-const minutyNaDatum = (min) => new Date(min * 60000).toISOString().slice(0, 10);
+/** Následující kalendářní den: '2026-03-28' → '2026-03-29'. */
+function dalsiDen(datum) {
+  const [r, m, d] = datum.split('-').map(Number);
+  return new Date(Date.UTC(r, m - 1, d + 1)).toISOString().slice(0, 10);
+}
+
+/** Místní půlnoc na začátku dne `datum` → minuty od epochy. */
+function pulnoc(datum) {
+  const [r, m, d] = datum.split('-').map(Number);
+  return mistniNaMinuty(r, m, d, 0, 0);
+}
 
 // --- sazby ---
 
@@ -113,19 +147,21 @@ export function nahradaPHM(km, spotreba, cenaHal) {
 
 // --- stravné ---
 
-/** Rozdělí dobu cesty na kalendářní dny: [{ datum, minuty }]. */
+/** Rozdělí dobu cesty na kalendářní dny podle místního času: [{ datum, minuty }] (skutečné minuty). */
 export function hodinyPoDnech(odjezd, navrat) {
   const a = parseDatumCas(odjezd, 'Odjezd');
   const b = parseDatumCas(navrat, 'Návrat');
-  if (b <= a) throw new ChybaVstupu('Návrat musí být později než odjezd.');
-  if (b - a > 31 * 1440) throw new ChybaVstupu('Cesta delší než 31 dní – rozdělte ji prosím.');
+  if (b.minuty <= a.minuty) throw new ChybaVstupu('Návrat musí být později než odjezd.');
+  if (b.minuty - a.minuty > 31 * 1440) throw new ChybaVstupu('Cesta delší než 31 dní – rozdělte ji prosím.');
   const dny = [];
-  let zacatek = a;
-  while (zacatek < b) {
-    const pulnoc = (Math.floor(zacatek / 1440) + 1) * 1440;
-    const konec = Math.min(pulnoc, b);
-    dny.push({ datum: minutyNaDatum(zacatek), minuty: konec - zacatek });
+  let datum = a.datum;
+  let zacatek = a.minuty;
+  while (zacatek < b.minuty) {
+    const dalsi = dalsiDen(datum);
+    const konec = Math.min(pulnoc(dalsi), b.minuty);
+    dny.push({ datum, minuty: konec - zacatek });
     zacatek = konec;
+    datum = dalsi;
   }
   return dny;
 }
@@ -140,8 +176,9 @@ export function pasmo(minuty) {
 
 /**
  * Stravné za jeden kalendářní den.
- * Soukromá sféra (§ 163): minimum z vyhlášky; krácení „až o“ 70/35/25 % za jídlo, nižší
- *   procento může zaměstnavatel určit předem (hlavicka.kraceniPct).
+ * Soukromá sféra (§ 163): minimum z vyhlášky, nebo vyšší stravné sjednané či určené předem
+ *   (hlavicka.stravneSoukroma, § 163 odst. 3 věta první); krácení „až o“ 70/35/25 % za jídlo,
+ *   nižší procento může zaměstnavatel určit předem (hlavicka.kraceniPct).
  * Veřejná sféra (§ 176): částka v rozpětí vyhlášky (hlavicka.stravneVerejna, jinak dolní
  *   hranice); krácení pevně 70/35/25 %.
  */
@@ -164,7 +201,11 @@ export function stravneDen(minuty, jidla, hlavicka, r) {
     }
     pct = r.kraceniMaxPct[p];
   } else if (hlavicka.sfera === 'soukroma') {
-    zakladKc = r.stravne.soukroma[p];
+    const min = r.stravne.soukroma[p];
+    zakladKc = hlavicka.stravneSoukroma?.[p] ?? min;
+    if (!(zakladKc >= min)) {
+      throw new ChybaVstupu(`Sjednané stravné pro pásmo ${PASMA[p]} musí být aspoň ${min} Kč.`);
+    }
     const max = r.kraceniMaxPct[p];
     pct = hlavicka.kraceniPct?.[p] ?? max;
     if (!(pct >= 0 && pct <= max)) {

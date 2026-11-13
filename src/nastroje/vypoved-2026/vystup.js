@@ -1,7 +1,7 @@
 // Výpověď 2026 – výpočet výsledku a jeho HTML. Sdílí ho build (vypoved-2026.11tydata.js,
 // ukázka bez JavaScriptu) i prohlížeč (app.js), takže obě podoby vypadají stejně.
 // Žádný DOM a žádné částky natvrdo: čísla jdou z rules.json přes vypoved.js.
-import { konecPomeru, vypovedniDoba, odstupne, nahradaUraz, podpora, kontrolniSeznam, denVTydnu } from './vypoved.js';
+import { konecPomeru, vypovedniDoba, odstupne, nahradaUraz, podpora, kontrolniSeznam, denVTydnu, kontrolaZadosti } from './vypoved.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { esc, sloupcovyGraf } from '../../js/graf.js';
 
@@ -62,6 +62,9 @@ export function spocitej(vstup, rules) {
     konecDohody: vstup.kdo === 'dohoda' ? vstup.konecDohody : undefined,
   };
   const konec = konecPomeru(v, rules);
+  // Revize 5. 11. 2026, VYP-07: žádost o podporu až po skončení pracovního poměru.
+  const chybaZadosti = kontrolaZadosti(vstup.datumZadosti, konec);
+  if (chybaZadosti) throw new Error(chybaZadosti);
   const doba = vypovedniDoba(v, rules);
   const od = odstupne({ ...v, delkaLet: vstup.delkaLet, prumernyHruby: vstup.hruby }, rules);
   const nahrada = nahradaUraz({ ...v, pricinaUraz: Boolean(vstup.pricinaUraz), prumernyHruby: vstup.hruby }, rules);
@@ -96,10 +99,14 @@ export function spocitej(vstup, rules) {
     poznamky.push(`Pro rok ${vstup.datumZadosti.slice(0, 4)} zatím pravidla nemáme, počítáme s pravidly pro rok ${p.rok}.`);
   }
   if (vekHranice.includes(vstup.vek) && !p.vylouceno) {
-    poznamky.push(`Hraniční věk ${vstup.vek} let: počítáme s delší podpůrčí dobou (dosavadní praxe úřadu práce). Ověř si to na úřadu práce.`);
+    poznamky.push(`Hraniční věk ${vstup.vek} let: delší podpůrčí doba náleží „nad ${vstup.vek} let věku“ a rozhoduje věk v den podání žádosti (§ 43 zákona o zaměstnanosti). Počítáme s tím, že ode dne ${vstup.vek}. narozenin už máš delší dobu. Ověř si to na úřadu práce.`);
   }
   if (v.kdo === 'zamestnavatel' && !v.zkusebniDoba) {
-    poznamky.push('Když výpovědní doba skončí v ochranné době (třeba při pracovní neschopnosti nebo mateřské), pracovní poměr se prodlouží o zbytek výpovědní doby (§ 53 ZP). U některých důvodů to neplatí (§ 54 ZP).');
+    poznamky.push('Když by výpovědní doba skončila v ochranné době (třeba při pracovní neschopnosti nebo mateřské), ochranná doba se do ní nepočítá. Konec se posune o dobu, po kterou ochranná doba ve výpovědní době trvala (§ 53 odst. 2 ZP). Když na prodloužení netrváš, řekni to zaměstnavateli. U některých důvodů to neplatí (§ 54 ZP).');
+  }
+  if (v.kdo === 'zamestnavatel' && v.zkusebniDoba) {
+    const z = rules.zakonikPrace.zkusebniDoba;
+    poznamky.push(`Zaměstnavatel nesmí zrušit pracovní poměr ve zkušební době v prvních ${z.zakazPriNeschopnostiDnu} kalendářních dnů tvé pracovní neschopnosti nebo karantény (${z.zakazZdroj.pravniZaklad.replace('zákoníku práce', 'ZP')}).`);
   }
   if (v.kdo === rules.vylouceniPodpory.kdo && rules.vylouceniPodpory.priZvlastHrubem.includes(v.duvod) && !vstup.zvlastHrube) {
     poznamky.push('Když výpověď podle písm. g) dostaneš za zvlášť hrubé porušení povinností, podpora ti nenáleží (§ 39 odst. 2 zákona o zaměstnanosti). Zaškrtni to ve formuláři.');

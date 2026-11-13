@@ -25,6 +25,7 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
       {%- endcall %}
 
       {%- call krok({ cislo: 2, titulek: 'Příjmy', shrnuti: r.shrnuti.prijmy, otevreny: true, id: 'krok-prijmy' }) %}
+        <p class="small muted" data-ukazka-prijmu>Předvyplněné mzdy {{ r.pole.prijemMatka }} Kč a {{ r.pole.prijemOtec }} Kč jsou jen ukázka. Přepiš je skutečnými hrubými mzdami.</p>
         {{ pole({ id: 'prijem-matka', label: 'Hrubá mzda – matka', hodnota: r.pole.prijemMatka, jednotka: 'Kč', napoveda: r.napovedy.prijemMatka, chybaMisto: true }) }}
         {{ segmenty({ id: 'narok-matka', legenda: 'Má matka nárok na mateřskou?', moznosti: r.moznosti.narokMatka, napoveda: r.napovedy.narokMatka }) }}
         {{ pole({ id: 'prijem-otec', label: 'Hrubá mzda – otec', hodnota: r.pole.prijemOtec, jednotka: 'Kč', napoveda: r.napovedy.prijemOtec, chybaMisto: true }) }}

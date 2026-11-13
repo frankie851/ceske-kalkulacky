@@ -196,3 +196,36 @@ test('otcovská od 35. a 41. dne po porodu jde zadat, 42. den ukáže chybu', as
   assert.deepEqual(chyby, []);
   await page.close();
 });
+
+// Revize 5. 11. 2026, ROD-14: podvržený záznam v localStorage se do formuláře nedostane.
+test('načtení poškozeného uloženého plánu: neplatné hodnoty se ignorují, žádné NaN ani chyba', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  const vychozi = await page.$eval('#prijem-matka', (el) => el.value);
+  const termin = await page.$eval('#termin', (el) => el.value);
+  await page.evaluate((k) => localStorage.setItem(k, JSON.stringify({ verze: 1, ulozeno: '2026-11-13T00:00:00Z', data: {
+    termin: '2020-01-01', 'prijem-matka': '<img src=x onerror=alert(1)>', 'prijem-otec': '-5', 'otcovska-od': '999',
+    'kdo-ppm': '<img>', rpVolba: 'vlastni', rpVyse: 'NaN',
+  } })), KLIC);
+  await page.reload({ waitUntil: 'networkidle0' });
+  await klik(page, '[data-ulozeni-nacist]');
+  assert.equal(await page.$eval('#prijem-matka', (el) => el.value), vychozi);
+  assert.equal(await page.$eval('#termin', (el) => el.value), termin);
+  assert.equal(await page.$$eval('.is-error', (els) => els.length), 0, 'žádné pole v chybě');
+  assert.doesNotMatch(await text(page, 'main'), /NaN/);
+  assert.equal(await page.$('img[src="x"]'), null);
+  await page.evaluate((k) => localStorage.removeItem(k), KLIC);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+// Revize 5. 11. 2026, ROD-14: předvyplněné příjmy jsou výslovně ukázka.
+test('předvyplněné mzdy jsou označené jako ukázka, po přepsání označení zmizí', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  const sel = '[data-ukazka-prijmu]';
+  assert.equal(await page.$eval(sel, (el) => !el.hidden && el.getBoundingClientRect().height > 0), true);
+  assert.match(await text(page, sel), /ukázka/i);
+  await vypln(page, '#prijem-matka', '36 000');
+  assert.equal(await page.$eval(sel, (el) => el.hidden), true);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

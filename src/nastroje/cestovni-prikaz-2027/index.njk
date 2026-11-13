@@ -34,10 +34,20 @@ styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
 
       <fieldset class="cp-trojice" id="cp-kraceni" aria-describedby="cp-kraceni-napoveda">
         <legend>Krácení stravného za jedno zaplacené jídlo</legend>
-        <p class="hint" id="cp-kraceni-napoveda">Zákon dovoluje nejvýš {{ p.kraceniMax[0] }} / {{ p.kraceniMax[1] }} / {{ p.kraceniMax[2] }} %. Nižší procento musí firma určit předem, před cestou.</p>
+        <p class="hint" id="cp-kraceni-napoveda">{{ p.napovedy.kraceni }}</p>
         <div class="cp-trojice-pole">
           {%- for pasmo in p.pasma %}
           {{ pole({ id: 'kraceni' + loop.index0, label: pasmo, hodnota: p.pole.kraceni[loop.index0], jednotka: '%', chybaMisto: true }) }}
+          {%- endfor %}
+        </div>
+      </fieldset>
+
+      <fieldset class="cp-trojice" id="cp-sjednane" aria-describedby="cp-sjednane-napoveda">
+        <legend>Vyšší sjednané stravné (nepovinné)</legend>
+        <p class="hint" id="cp-sjednane-napoveda">Firma může předem sjednat nebo určit vyšší stravné, než je zákonné minimum (§ 163 odst. 3 zákoníku práce). Když necháš pole prázdné, počítáme s minimem.</p>
+        <div class="cp-trojice-pole">
+          {%- for pasmo in p.pasma %}
+          {{ pole({ id: 'sjednane' + loop.index0, label: pasmo, hodnota: '', jednotka: 'Kč', inputmode: 'decimal', napoveda: p.napovedy.sjednane[loop.index0], chybaMisto: true }) }}
           {%- endfor %}
         </div>
       </fieldset>
@@ -47,7 +57,7 @@ styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
         <p class="hint" id="cp-verejna-napoveda">Firma určí částku v rozpětí z vyhlášky. Když necháš pole prázdné, počítáme s dolní hranicí. Krácení za jídlo je pevné.</p>
         <div class="cp-trojice-pole">
           {%- for pasmo in p.pasma %}
-          {{ pole({ id: 'verejna' + loop.index0, label: pasmo, hodnota: '', jednotka: 'Kč', napoveda: p.verejnaRozpeti[loop.index0], chybaMisto: true }) }}
+          {{ pole({ id: 'verejna' + loop.index0, label: pasmo, hodnota: '', jednotka: 'Kč', napoveda: p.napovedy.verejna[loop.index0], chybaMisto: true }) }}
           {%- endfor %}
         </div>
       </fieldset>
@@ -136,7 +146,7 @@ styly: ['/nastroje/cestovni-prikaz-2027/cestovni-prikaz-2027.css']
       <button class="btn btn-primary" type="button" data-cp-tisk hidden>Vytisknout nebo uložit PDF</button>
     </div>
     <div data-cp-vyuctovani>{{ p.vyuctovani | safe }}</div>
-    <p class="small muted cp-tisk-poznamka">Orientační výpočet z webu {{ site.nazev }}. Pravidla ověřena {{ p.overeno | datum }}. Zákoník práce § 157, § 158, § 163 a § 176.</p>
+    <p class="small muted cp-tisk-poznamka">Orientační výpočet z webu {{ site.nazev }}. Pravidla ověřena {{ p.overeno | datum }}. Podle <a href="https://www.zakonyprolidi.cz/cs/2006-262">zákoníku práce (zákon č. 262/2006 Sb.)</a>, § 157, § 158, § 163, § 176 a § 183, a vyhlášky se sazbami uvedené nahoře u vyúčtování.</p>
   </section>
 
   {%- for s in p.sazby %}

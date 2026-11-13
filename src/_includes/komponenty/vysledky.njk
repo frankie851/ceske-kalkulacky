@@ -10,7 +10,9 @@
     Prvky pro živou aktualizaci z JS: [data-vysledek-cislo], [data-vysledek-popis], [data-vysledek-vysvetleni].
 
   statistiky(polozky)
-    polozky – pole { hodnota, popis, zvyraznit } (hodnota už naformátovaná)
+    polozky – pole { hodnota, popis, zvyraznit, stitek } (hodnota už naformátovaná)
+    stitek  – nepovinné: text štítku návrhu u dlaždice; null = štítek je v HTML, ale skrytý
+              ([data-stitek-sady], JS ho ukáže při přepnutí na návrh – Plán48)
 
   tabulka({ caption, popisek, sloupce, radky, vpravo = [], stack = false, zvyraznit = -1, poznamka, id })
     sloupce  – texty záhlaví; radky – pole polí buněk (první buňka = záhlaví řádku <th scope="row">)
@@ -24,6 +26,7 @@
     Mobilní lišta dole s hlavním číslem; na šířce ≥ 1040 px skrytá. JS aktualizuje [data-lista-cislo].
 #}
 {% from "komponenty/ikona.njk" import ikona %}
+{% from "komponenty/stitky.njk" import stitek %}
 
 {% macro vysledek(p) %}
 {%- set id = p.id or 'vysledek' -%}
@@ -48,7 +51,9 @@
 {% macro statistiky(polozky) %}
 <ul class="stats">
   {%- for s in polozky %}
-  <li class="stat{% if s.zvyraznit %} sage{% endif %}"><b>{{ s.hodnota }}</b><span>{{ s.popis }}</span></li>
+  <li class="stat{% if s.zvyraznit %} sage{% endif %}"><b>{{ s.hodnota }}</b><span>{{ s.popis }}</span>
+    {%- if s.stitek is defined %}<span class="stat-stitek" data-stitek-sady{% if not s.stitek %} hidden{% endif %}>{{ stitek({ typ: 'navrh', text: s.stitek }) }}</span>{% endif -%}
+  </li>
   {%- endfor %}
 </ul>
 {% endmacro %}

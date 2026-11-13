@@ -62,5 +62,5 @@ test('meta.zdroje: neúřední zdroje jsou jen tržní údaje a jsou tak označe
     assert.match(`${z.nazev} ${z.poznamka ?? ''}`, /tržní údaj/i, `${z.nazev}: ${z.url}`);
     assert.doesNotMatch(z.nazev, /Zákon č\./, `${z.nazev}: zákon s neúředním odkazem`);
   }
-  assert.equal(rules.meta.overeno, '2026-11-12');
+  assert.equal(rules.meta.overeno, '2026-11-13');
 });

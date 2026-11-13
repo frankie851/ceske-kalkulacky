@@ -93,7 +93,8 @@ describe('parametry 2027 odpovídají ověřeným hodnotám', () => {
     assert.equal(p.socialMinAdvanceSide, s.minAdvanceSide);
     assert.equal(p.socialMaxBaseAnnual, s.maxBaseAnnual);
     assert.equal(p.sideThreshold, s.sideThreshold);
-    assert.equal(p.healthMinBase, o.health.expected.minBaseMain);
+    // Revize 5. 11. 2026, EET-10: roční minimum 309 978 Kč (dříve se zaokrouhlovala měsíční část na 25 832 Kč).
+    assert.equal(p.healthMinBaseAnnual, o.health.expected.minBaseAnnual);
     assert.equal(p.healthMinAdvance, o.health.expected.minAdvanceMain);
   });
 
@@ -185,7 +186,8 @@ describe('výdaje a daň', () => {
 describe('pojistné', () => {
   test('hlavní činnost: nejméně roční minimum', () => {
     assert.equal(socialIns(100000, 'main', rules).amount, ceilKc(18083 * 12 * 0.292));
-    assert.equal(healthIns(100000, 'main', rules).amount, ceilKc(25832 * 12 * 0.135));
+    // Revize 5. 11. 2026, EET-10: minimum je 12 × 25 831,5 = 309 978 Kč, ne 12 × 25 832 Kč.
+    assert.equal(healthIns(100000, 'main', rules).amount, ceilKc(309978 * 0.135));
   });
 
   test('nad minimem: 55 % / 50 % zisku', () => {
@@ -386,5 +388,44 @@ describe('revize 5. 11. 2026 – střední nálezy', () => {
     assert.match(b1.zdroj.pravniZaklad, /§ 14 odst\. 3 písm\. a\)/);
     assert.match(b1.zdroj.citace, /zvýšeného o 15 %/);
     assert.deepEqual(b1.expected, { social: 6073, health: 3488, monthly: 9661, annual: 115932, eetOffAnnual: 132732 });
+  });
+});
+
+describe('revize 5. 11. 2026 – nízké nálezy', () => {
+  // EET-10: § 3a odst. 2 zákona č. 592/1992 Sb. – minimální vyměřovací základ je dvanáctinásobek
+  // 50 % průměrné mzdy; nahoru se zaokrouhluje jen průměrná mzda, ne její polovina (12 × 25 831,5 Kč).
+  test('roční minimální VZ zdravotního pojištění = 12 × 50 % průměrné mzdy = 309 978 Kč', () => {
+    const p = params(rules);
+    assert.equal(p.healthMinBaseAnnual, 309978);
+    assert.equal(p.healthMinBaseAnnual, o.monthsPerYear * o.health.minBaseShareMain * o.averageWage.monthly);
+    const h = healthIns(0, 'main', rules);
+    assert.equal(h.min, 309978);
+    assert.equal(h.base, 309978);
+    // § 2 odst. 2: pojistné se zaokrouhluje nahoru – 41 847,03 → 41 848 Kč.
+    assert.equal(h.amount, 41848);
+    assert.equal(healthIns(0, 'sideEmployed', rules).min, 0);
+    const rozpis = compare(inp({ income: 100000 }), rules).breakdown.join(' ');
+    assert.match(rozpis, /minimum 309\s978\sKč/);
+    assert.doesNotMatch(rozpis, /309\s984/);
+  });
+
+  test('měsíční záloha a zdravotní část 1. pásma zůstávají 3 488 Kč (1/12 minima × 13,5 %, nahoru)', () => {
+    const p = params(rules);
+    assert.equal(p.healthMinBaseMonthly, 25831.5);
+    assert.equal(p.healthMinAdvance, 3488);
+    assert.equal(p.healthMinAdvance, ceilKc((p.healthMinBaseAnnual / o.monthsPerYear) * o.health.rate));
+    const b1 = flatTax(inp({}), rules).band;
+    assert.equal(b1.health, p.healthMinAdvance);
+    assert.equal(b1.monthly, 9661);
+    assert.deepEqual(o.health.expected, { minAdvanceMain: 3488, minBaseAnnual: 309978 });
+  });
+
+  test('zdroj zdravotního pojištění cituje § 3a odst. 2 a § 2 zákona č. 592/1992 Sb.', () => {
+    const z = o.health.zdroj;
+    assert.match(z.pravniZaklad, /§ 3a odst\. 2/);
+    assert.match(z.pravniZaklad, /§ 2 odst\. 1 a 2/);
+    assert.match(z.url, /^https:\/\/www\.zakonyprolidi\.cz\/cs\/1992-592#p3a$/);
+    assert.match(z.citace, /dvanáctinásobek 50 % průměrné mzdy/);
+    assert.equal(o.health.verified, '2026-11-13');
   });
 });
