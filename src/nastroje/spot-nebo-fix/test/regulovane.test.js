@@ -131,26 +131,60 @@ const D = v.pripravData({
 const vychozi = v.vychoziVstup(pravidla, tarify, dynamicky);
 const radekPoze = (o) => o.predpoklady.find((p) => /POZE/.test(p.nazev)).hodnota;
 
-test('SPOT-03: v předpokladech je POZE 0 Kč s vysvětlením, ne 0,60 Kč/kWh', () => {
-  const tdd = v.tridaTdd(tarify, vychozi.sazba, vychozi.region);
-  const vyp = v.spocitej(D, vychozi, cti(`../data/tdd/${tdd}.json`).values);
-  const o = v.vystup(D, vyp, { tdd });
+// Přepsáno 13. 11. 2026 (SPOT-09, regulované ceny po rocích): dřív se POZE 2026 (0 Kč) brala na celé období
+// 11/2025–10/2026 a řádek byl vždy „0 Kč – …“. Teď má rok 2025 vlastní POZE (CR ERÚ 11/2024), proto
+// testujeme řádek pro období jen v roce 2026 (výřez dat) a pro celé období po rocích.
+/** Výřez připravených dat od měsíce `od` (RRRR-MM) do konce období. */
+function vyrez(D0, od) {
+  const i = D0.grid.findIndex((q) => q.month >= od);
+  const sl = (a) => a.slice(i);
+  return {
+    ...D0, grid: sl(D0.grid), spotEur: sl(D0.spotEur), fx: sl(D0.fx), spotKc: sl(D0.spotKc), dynPct: sl(D0.dynPct),
+    meta: { ...D0.meta, from: D0.grid[i].date }, od: i,
+  };
+}
+const spocti = (Dx, vstup, t = tarify) => {
+  const tdd = v.tridaTdd(t, vstup.sazba, vstup.region);
+  const vyp = v.spocitej(Dx, vstup, cti(`../data/tdd/${tdd}.json`).values.slice(Dx.od ?? 0));
+  return { vyp, o: v.vystup(Dx, vyp, { tdd }) };
+};
+
+test('SPOT-03: v předpokladech je POZE 0 Kč s vysvětlením, ne 0,60 Kč/kWh (období v roce 2026)', () => {
+  const D26 = vyrez(D, '2026-01');
+  const { o } = spocti(D26, vychozi);
   const radek = radekPoze(o);
   assert.match(radek, /^0\sKč – /);
   assert.doesNotMatch(radek, /Kč\/kWh/);
   assert.ok(radek.includes(tarify.common.poze.vysvetleniNuly), radek);
 });
 
+test('SPOT-03 a SPOT-09: celé období – POZE po rocích, rok 2026 0 Kč s vysvětlením', () => {
+  const { vyp, o } = spocti(D, vychozi);
+  const roky = [...new Set(vyp.res.months.map((m) => m.slice(0, 4)))];
+  const radek = radekPoze(o);
+  if (roky.length === 1) return; // období zrovna leží v jednom roce, pokrývá to test výše
+  assert.ok(radek.includes(`2026: ${kc(0)}`), radek);
+  assert.ok(radek.includes(tarify.common.poze.vysvetleniNuly), radek);
+  if (roky.includes('2025')) {
+    // 2025: nižší z 495 Kč/MWh × spotřeba a 84,70 Kč/A × 25 A × 3 fáze měsíčně (CR ERÚ 11/2024), vč. DPH.
+    const m25 = vyp.res.months.filter((m) => m.startsWith('2025'));
+    let mwh25 = 0;
+    D.grid.forEach((q, i) => { if (q.month.startsWith('2025')) mwh25 += vyp.cons[i]; });
+    const ocekavano = Math.min(mwh25 * 495, 84.70 * 75 * m25.length) * 1.21;
+    assert.ok(ocekavano > 0);
+    assert.ok(radek.startsWith(`2025: ${kc(ocekavano)}; `), radek);
+  }
+});
+
 test('SPOT-03: kdyby POZE podle jističe nebylo nulové, předpoklady ukážou účtovanou roční částku', () => {
   const t = structuredClone(tarify);
   t.common.poze.perAmpPhase = 8.32; // CV 13/2025 bod (5.1.2) před změnou CV 15/2025
-  const D2 = { ...D, tarify: t };
+  const D2 = { ...vyrez(D, '2026-01'), tarify: t };
   for (const mwh of [3, 20]) {
     const vstup = { ...vychozi, mwh };
-    const tdd = v.tridaTdd(t, vstup.sazba, vstup.region);
-    const vyp = v.spocitej(D2, vstup, cti(`../data/tdd/${tdd}.json`).values);
-    const o = v.vystup(D2, vyp, { tdd });
-    const rocne = pozeAnnual(sum(vyp.cons), vyp.regulated.poze, vyp.res.months.length) * (1 + t.vat.value);
+    const { vyp, o } = spocti(D2, vstup, t);
+    const poze = Object.values(vyp.regulated.byMonth)[0].poze;
+    const rocne = pozeAnnual(sum(vyp.cons), poze, vyp.res.months.length) * (1 + t.vat.value);
     assert.ok(rocne > 0);
     assert.equal(radekPoze(o), `${kc(rocne)} za rok`);
   }

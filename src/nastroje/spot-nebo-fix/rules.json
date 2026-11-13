@@ -33,9 +33,24 @@
         "poznamka": "Energetický regulační věstník 19/2025. Platba podle jističe je v roce 2026 0 Kč/A měsíčně, podporu platí stát. Ověřeno 12. 11. 2026."
       },
       {
-        "nazev": "ERÚ – cenové rozhodnutí č. 11/2024 (POZE v roce 2025)",
-        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22",
-        "poznamka": "Energetický regulační věstník 13/2024, body (5.1.2) až (5.3): 84,70 Kč/A/měsíc, u trojfázového připojení trojnásobek, nejvýš 495 Kč/MWh. Platilo v roce 2025, tedy i pro listopad a prosinec 2025 v období dat. Ověřeno 13. 11. 2026."
+        "nazev": "ERÚ – cenové rozhodnutí č. 12/2024 (ceny distribuce pro domácnosti v roce 2025, sazby D)",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf#page=28",
+        "poznamka": "Energetický regulační věstník 14/2024. Cena za jistič, vysoký a nízký tarif pro ČEZ Distribuci, EG.D a PREdistribuci a podmínky sazeb v roce 2025 (D35d 16 h, D56d 22 h nízkého tarifu). Cenový výměr č. 4/2025 (ERV 7/2025) ceny nezměnil. Ověřeno 13. 11. 2026."
+      },
+      {
+        "nazev": "ERÚ – cenové rozhodnutí č. 11/2024 (systémové služby, nesíťová infrastruktura a POZE v roce 2025)",
+        "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=7",
+        "poznamka": "Energetický regulační věstník 13/2024: systémové služby 170,92 Kč/MWh (bod 3.1.1), operátor trhu a datové centrum 2,26 + 0,99 + 5,20 Kč měsíčně (bod 6.2), POZE 84,70 Kč/A/měsíc, u trojfázového připojení trojnásobek, nejvýš 495 Kč/MWh (body 5.1.2 až 5.3). Ověřeno 13. 11. 2026."
+      },
+      {
+        "nazev": "Nařízení vlády č. 392/2015 Sb., o stanovení sazby poplatku na činnost ERÚ, § 1",
+        "url": "https://www.zakonyprolidi.cz/cs/2015-392#p1",
+        "poznamka": "Poplatek ERÚ v ceně za nesíťovou infrastrukturu: 4 Kč měsíčně za odběrné místo od 1. 9. 2025 (nařízení vlády č. 248/2025 Sb.), předtím 2,39 Kč."
+      },
+      {
+        "nazev": "Zákon č. 261/2007 Sb., část 47 (daň z elektřiny), § 6 odst. 2",
+        "url": "https://www.zakonyprolidi.cz/cs/2007-261#f3812849",
+        "poznamka": "Sazba daně z elektřiny 28,30 Kč/MWh, stejná v roce 2025 i 2026."
       },
       {
         "nazev": "Zákon č. 165/2012 Sb., o podporovaných zdrojích energie, § 28a odst. 2 (strop POZE 495 Kč/MWh)",
@@ -61,7 +76,7 @@
     "neovereno": [
       "Spotřebu po čtvrthodinách odhadujeme z typového diagramu dodávky (TDD) OTE pro tvoji sazbu, bez teplotního přepočtu. Skutečná zima nebo léto se může lišit.",
       "Časy nízkého tarifu (HDO) určuje distributor pro každé odběrné místo jinak. Počítáme s typickými okny podle sazby.",
-      "Distribuci, poplatky a ceník dynamického tarifu z roku 2026 používáme na celé období, i na listopad a prosinec 2025. V roce 2025 se navíc platila POZE (84,70 Kč bez DPH měsíčně za ampér jističe, u trojfázového připojení trojnásobek, nejvýš 495 Kč/MWh), kterou za tyto měsíce nepočítáme. Měsíce mimo rok 2026 vyjmenujeme u výsledku.",
+      "Distribuci a poplatky bereme za každý měsíc z cen roku, do kterého měsíc patří (rok 2025 podle cenových rozhodnutí ERÚ č. 12/2024 a 11/2024, rok 2026 podle cenových výměrů č. 13/2025 až 15/2025). Pro rok, pro který ceny ještě nemáme, počítáme s posledními známými a měsíce vyjmenujeme u výsledku. Ceník dynamického tarifu máme jen pro rok 2026, počítáme s ním na celé období.",
       "Spot počítáme z 15minutové ceny denního trhu a kurzu ČNB. Dodavatelé ho můžou účtovat jinak, například hodinovým průměrem nebo s poplatkem za odchylky.",
       "Posun spotřeby: zvolený podíl spotřeby každého dne přesuneme rovným dílem do 16 nejlevnějších čtvrthodin téhož dne (u spotu podle ceny na burze, u dynamického tarifu podle pásma). Nemusí jít o 4 celé hodiny za sebou. Úspora je optimistická: počítáme s tím, že ceny každého dne jsou známé dopředu a spotřeba se přesune přesně do nejlevnějších čtvrthodin.",
       "Fotovoltaiku nemodelujeme. U domu s FVE zadej jen elektřinu odebranou ze sítě, výroba ani prodej přetoků se nepočítají.",

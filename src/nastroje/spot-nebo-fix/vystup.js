@@ -1,10 +1,10 @@
 // Spot, nebo fix? – příprava dat, výpočet a texty, grafy a tabulky výsledku. Bez DOM: stejný modul
 // běží při buildu (ukázkový výsledek v spot-nebo-fix.11tydata.js) i v prohlížeči (ui.js).
-// Výpočty jsou v calc.js (převzato beze změny); ceny a poplatky v tariffs.json a dynamic.json,
+// Výpočty jsou v calc.js (převzato, revize doplnila regulované ceny po rocích); ceny a poplatky v tariffs.json a dynamic.json,
 // výchozí hodnoty a předvolby domácností v rules.json. Nic tu není natvrdo.
 import {
   buildQuarterGrid, consumptionProfile, computeVariants, dynamicPctPerQuarter,
-  hourlyAverage, hourlyShare, pozeAnnual, regulatedFor, sum,
+  hourlyAverage, hourlyShare, cenyProRok, regulatedByMonth, sum,
 } from './calc.js';
 import { kc, cislo, procenta, datum } from '../../js/format.js';
 import { caroveGrafy, tabulkaDat, hezkeDeleni, esc } from '../../js/graf.js';
@@ -107,24 +107,31 @@ const doplnit = (sablona, hodnoty) => sablona.replace(/\{(\w+)\}/g, (_, k) => St
 /** "a, b a c" */
 const vycet = (polozky) => (polozky.length < 2 ? polozky.join('') : `${polozky.slice(0, -1).join(', ')} a ${polozky.at(-1)}`);
 
-/** Měsíce období (RRRR-MM), které leží mimo rok regulovaných cen v tariffs.json (revize SPOT-09). */
-export function mesiceMimoRokCen(mesice, rok) {
-  return mesice.filter((m) => Number(m.slice(0, 4)) !== Number(rok));
+/** Měsíce období (RRRR-MM), pro jejichž rok nemáme v tariffs.json regulované ceny (revize SPOT-09). */
+export function mesiceBezCen(mesice, tarify) {
+  return mesice.filter((m) => !cenyProRok(tarify, Number(m.slice(0, 4))).presny);
 }
 
 /**
- * Upozornění, že část období počítáme s regulovanými cenami jiného roku (revize SPOT-09).
- * Text a známé rozdíly (u roku 2025 nenulová POZE podle CR ERÚ č. 11/2024) jsou v tariffs.json.
- * @returns {string} prázdný řetězec, když celé období leží v roce cen
+ * Upozornění k období dat (revize SPOT-09). Regulované ceny bereme po měsících podle roku; hlásí se jen
+ * měsíce roku, pro který ceny ještě nemáme (počítáme s posledními známými), a měsíce mimo rok ceníku
+ * dynamického tarifu. Texty jsou v tariffs.json → jinyRokCen.
+ * @param {string[]} mesice  měsíce období (RRRR-MM)
+ * @param {string} cenikOd   platnost ceníku dynamického tarifu (RRRR-MM-DD)
+ * @returns {string} prázdný řetězec, když není co hlásit
  */
 export function upozorneniObdobi(mesice, tarify, cenikOd) {
-  const mimo = mesiceMimoRokCen(mesice, tarify.year);
-  if (!mimo.length) return '';
   const j = tarify.jinyRokCen;
-  const text = [doplnit(j.text, { mesice: vycet(mimo.map(nazevMesice)), rok: tarify.year, cenik: datum(cenikOd) })];
-  for (const rok of [...new Set(mimo.map((m) => m.slice(0, 4)))]) {
-    const r = j.roky[rok];
-    if (r) text.push(doplnit(r.text, { pozeA: cislo(r.poze.perAmpPhase, 2), pozeMax: cislo(r.poze.perMWhMax) }));
+  const text = [];
+  const bez = mesiceBezCen(mesice, tarify);
+  for (const rok of [...new Set(bez.map((m) => Number(m.slice(0, 4))))]) {
+    const tyto = bez.filter((m) => Number(m.slice(0, 4)) === rok);
+    text.push(doplnit(j.bezCen, { mesice: vycet(tyto.map(nazevMesice)), rok: cenyProRok(tarify, rok).rokCen }));
+  }
+  const rokCeniku = cenikOd.slice(0, 4);
+  const mimoCenik = mesice.filter((m) => m.slice(0, 4) !== rokCeniku);
+  if (mimoCenik.length) {
+    text.push(doplnit(j.dynamicky, { mesice: vycet(mimoCenik.map(nazevMesice)), cenik: datum(cenikOd), rokCeniku }));
   }
   return text.join(' ');
 }
@@ -186,7 +193,11 @@ export function spocitej(D, vstup, tdd, mereni = null) {
   const vat = D.tarify.vat.value;
   const bez = (n) => n / (1 + vat);
   const cons = mereni || consumptionProfile(vstup.mwh, tdd);
-  const regulated = regulatedFor(D.tarify, D.grid, vstup.distributor, vstup.sazba, vstup.jistic);
+  // Revize SPOT-09: regulované ceny po měsících podle roku (tariffs.json → year a starsiRoky).
+  const regulated = regulatedByMonth(D.tarify, D.grid, vstup.distributor, vstup.sazba, vstup.jistic);
+  // computeVariants počítá s jednou sazbou DPH; kdyby se v některém roce období lišila, výsledek by nebyl přesný.
+  const dph = new Set(Object.values(regulated.byMonth).map((r) => cenyProRok(D.tarify, r.rok).tarify.vat.value));
+  if (dph.size > 1) throw new Error('Sazba DPH se v období dat liší, výpočet s jednou sazbou by nebyl přesný.');
   const p = {
     grid: D.grid, cons, spotEur: D.spotEur, fx: D.fx, vat, regulated,
     fix: { price: bez(vstup.fix.cena), monthlyFee: bez(vstup.fix.stalyPlat) },
@@ -362,26 +373,39 @@ export function vystup(D, v, { tdd, mereni = false } = {}) {
   });
 
   // Předpoklady pro zvolené odběrné místo (vše vč. DPH)
+  // Revize SPOT-09: regulované ceny jsou po měsících podle roku; když období zasahuje do dvou roků,
+  // ukazujeme ceny každého roku („2025: …; 2026: …“).
   const t = D.tarify;
-  const r = v.regulated;
   const sDph = (n) => n * (1 + v.vat);
   const distribuce = t.distributors[vstup.distributor];
   const breaker = t.breakers.find((b) => b.id === vstup.jistic);
+  const roky = [...new Set(res.months.map((m) => m.slice(0, 4)))];
+  const cenyRoku = roky.map((rok) => ({ rok, r: v.regulated.byMonth[res.months.find((m) => m.startsWith(rok))] }));
+  const poRocich = (fn) => (cenyRoku.length === 1 ? fn(cenyRoku[0].r) : cenyRoku.map(({ rok, r }) => `${rok}: ${fn(r)}`).join('; '));
   // POZE: účtuje se nižší z platby podle spotřeby a podle jističe (calc.js) – ukazujeme to, co se opravdu účtuje.
-  const pozeRok = pozeAnnual(res.variants.fix.totalMWh, r.poze, res.months.length);
+  const pozeRoku = roky.map((rok) => ({
+    rok,
+    castka: sum(res.months.map((m, i) => (m.startsWith(rok) ? res.variants.fix.pozeMonthly[i] : 0))),
+    vysvetleni: cenyProRok(t, Number(rok)).tarify.common.poze.vysvetleniNuly,
+  }));
+  const nulova = pozeRoku.find((p) => !(p.castka > 0) && p.vysvetleni);
+  const poze = pozeRoku.length === 1
+    ? (pozeRoku[0].castka > 0 ? `${kc(pozeRoku[0].castka)} za rok` : `${kc(0)} – ${pozeRoku[0].vysvetleni}`)
+    : pozeRoku.map((p) => `${p.rok}: ${kc(p.castka > 0 ? p.castka : 0)}`).join('; ') + (nulova ? ` – ${nulova.vysvetleni}` : '');
+  const jednotarif = distribuce.sazby[vstup.sazba].nt == null;
   const predpoklady = [
     { nazev: 'Období', hodnota: `${datum(D.meta.from)} – ${datum(D.meta.to)}, ${cislo(D.grid.length)} čtvrthodin` },
     { nazev: 'Profil spotřeby', hodnota: mereni ? 'tvoje průběhové měření z CSV' : `${tdd} (typový diagram OTE), ${mwh(sum(v.cons))} za rok` },
-    { nazev: `Distribuce ${distribuce.name}, ${vstup.sazba}`, hodnota: t.distributors[vstup.distributor].sazby[vstup.sazba].nt == null
-      ? `${kcKwh(sDph(r.vt))}` : `vysoký tarif ${kcKwh(sDph(r.vt))}, nízký ${kcKwh(sDph(r.nt))}` },
-    { nazev: `Jistič ${breaker.label} a nesíťová infrastruktura`, hodnota: `${kc(sDph(r.monthly), 2)} měsíčně` },
-    { nazev: 'Daň z elektřiny a systémové služby', hodnota: kcKwh(sDph(r.perMWh)) },
-    { nazev: 'Podpora obnovitelných zdrojů (POZE)', hodnota: pozeRok > 0 ? `${kc(sDph(pozeRok))} za rok` : `${kc(0)} – ${t.common.poze.vysvetleniNuly}` },
+    { nazev: `Distribuce ${distribuce.name}, ${vstup.sazba}`, hodnota: poRocich((r) => (jednotarif
+      ? kcKwh(sDph(r.vt)) : `vysoký tarif ${kcKwh(sDph(r.vt))}, nízký ${kcKwh(sDph(r.nt))}`)) },
+    { nazev: `Jistič ${breaker.label} a nesíťová infrastruktura`, hodnota: poRocich((r) => `${kc(sDph(r.monthly), 2)} měsíčně`) },
+    { nazev: 'Daň z elektřiny a systémové služby', hodnota: poRocich((r) => kcKwh(sDph(r.perMWh))) },
+    { nazev: 'Podpora obnovitelných zdrojů (POZE)', hodnota: poze },
     { nazev: `Dynamický tarif ${D.produkt.supplier}`, hodnota: `ceník od ${datum(D.produkt.validFrom)}, základní cena ${kcKwh(vstup.dyn.zaklad)}, pásma −50 až +25${NBSP}%` },
     { nazev: 'DPH', hodnota: `${procenta(v.vat * 100)}, je ve všech částkách` },
   ];
-  // Revize SPOT-09: měsíce mimo rok regulovaných cen (data jsou posledních 12 celých měsíců);
-  // upozornění je pod tabulkou nákladů po měsících.
+  // Revize SPOT-09: měsíce bez regulovaných cen svého roku a mimo rok ceníku dynamického tarifu
+  // (data jsou posledních 12 celých měsíců); upozornění je pod tabulkou nákladů po měsících.
   const upozorneni = upozorneniObdobi(res.months, t, D.produkt.validFrom);
 
   return {

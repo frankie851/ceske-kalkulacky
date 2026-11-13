@@ -243,7 +243,9 @@ export function shiftLoad(cons, rank, frac, ranges, k = POSUN_CTVRTHODIN) {
  * @param {number[]} p.spotEur   spotová cena EUR/MWh po čtvrthodinách
  * @param {number[]} p.fx        kurz Kč/EUR po čtvrthodinách
  * @param {number}   p.vat       sazba DPH (0.21)
- * @param {object}   p.regulated { vt, nt, ntMask, perMWh, monthly, poze: { perMWh, monthly } }
+ * @param {object}   p.regulated { vt, nt, ntMask, perMWh, monthly, poze: { perMWh, monthly } } pro celé období,
+ *                               nebo { ntMask, byMonth: { 'RRRR-MM': { vt, nt, perMWh, monthly, poze } } } po měsících
+ *                               (regulatedByMonth – ceny roku, do kterého měsíc patří; revize SPOT-09)
  * @param {object}   p.fix       { price, monthlyFee }
  * @param {object}   p.spot      { margin, monthlyFee }
  * @param {object}   p.dynamic   { base, pct[], monthlyFee }
@@ -271,22 +273,39 @@ export function computeVariants(p) {
     },
   };
 
+  // Regulované ceny každého měsíce (jedna sada pro celé období, nebo po měsících podle roku).
+  const regM = months.map((mo) => {
+    const r = regulated.byMonth ? regulated.byMonth[mo] : regulated;
+    if (!r) throw new Error(`Chybí regulované ceny pro ${mo}`);
+    return r;
+  });
+  const ntMask = regulated.ntMask;
+  // POZE: nižší z platby podle spotřeby a podle jističe se porovnává za měsíce se stejnými cenami POZE
+  // (u jedné sady za celé období, u cen po rocích za každý rok zvlášť).
+  const pozeGroups = new Map();
+  regM.forEach((r, mi) => {
+    if (!pozeGroups.has(r.poze)) pozeGroups.set(r.poze, []);
+    pozeGroups.get(r.poze).push(mi);
+  });
+
   const variants = {};
   for (const [name, d] of Object.entries(defs)) {
     const m = months.map(() => ({ energy: 0, regulated: 0, fixedFees: 0, poze: 0, mwh: 0 }));
     for (let i = 0; i < n; i++) {
       const c = d.cons[i];
-      const row = m[monthIdx.get(grid[i].month)];
+      const mi = monthIdx.get(grid[i].month);
+      const row = m[mi];
+      const r = regM[mi];
       row.mwh += c;
       row.energy += c * d.unit(i);
-      row.regulated += c * ((regulated.ntMask && regulated.ntMask[i] ? regulated.nt : regulated.vt) + regulated.perMWh);
+      row.regulated += c * ((ntMask && ntMask[i] ? r.nt : r.vt) + r.perMWh);
     }
     const totalMWh = sum(m.map((r) => r.mwh));
-    const pozeByMWh = totalMWh * regulated.poze.perMWh <= regulated.poze.monthly * months.length;
-    for (const r of m) {
-      r.fixedFees = regulated.monthly + d.monthlyFee;
-      r.poze = pozeByMWh ? r.mwh * regulated.poze.perMWh : regulated.poze.monthly;
+    for (const [poze, idx] of pozeGroups) {
+      const pozeByMWh = sum(idx.map((mi) => m[mi].mwh)) * poze.perMWh <= poze.monthly * idx.length;
+      for (const mi of idx) m[mi].poze = pozeByMWh ? m[mi].mwh * poze.perMWh : poze.monthly;
     }
+    m.forEach((r, mi) => { r.fixedFees = regM[mi].monthly + d.monthlyFee; });
     const k = 1 + vat;
     const monthly = m.map((r) => (r.energy + r.regulated + r.fixedFees + r.poze) * k);
     variants[name] = {
@@ -294,6 +313,8 @@ export function computeVariants(p) {
       energy: sum(m.map((r) => r.energy)) * k,
       regulated: sum(m.map((r) => r.regulated + r.poze)) * k,
       fixedFees: sum(m.map((r) => r.fixedFees)) * k,
+      poze: sum(m.map((r) => r.poze)) * k,
+      pozeMonthly: m.map((r) => r.poze * k),
       totalMWh,
       monthly,
       cons: d.cons,
@@ -468,4 +489,52 @@ export function regulatedFor(tariffs, grid, distributor, sazba, breakerId) {
     monthly: rates.breaker[breaker.tier] + c.nonNetworkInfra.value,
     poze: { perMWh: c.poze.perMWh, monthly: c.poze.perAmpPhase * breaker.amps * breaker.phases },
   };
+}
+
+/**
+ * Sada regulovaných cen pro kalendářní rok (revize SPOT-09). Aktuální rok je nahoře v tariffs.json (year),
+ * předchozí roky ve starsiRoky ve stejné struktuře. Pro rok bez sady (po přelomu roku, než se doplní nové
+ * ceny) vrátí poslední známý rok před ním, pro rok před nejstarší sadou nejstarší sadu; presny = false.
+ * @returns {{rok:number, rokCen:number, presny:boolean, tarify:object}} tarify ve tvaru pro regulatedFor()
+ */
+export function cenyProRok(tariffs, rok) {
+  const starsi = tariffs.starsiRoky ?? {};
+  const zname = [Number(tariffs.year), ...Object.keys(starsi).map(Number)].sort((a, b) => a - b);
+  const rokCen = zname.includes(rok) ? rok : (zname.filter((r) => r < rok).at(-1) ?? zname[0]);
+  const presny = rokCen === rok;
+  if (rokCen === Number(tariffs.year)) return { rok, rokCen, presny, tarify: tariffs };
+  const s = starsi[rokCen];
+  const distributors = Object.fromEntries(Object.entries(tariffs.distributors).map(([id, d]) => {
+    if (!s.distributors[id]) throw new Error(`Chybí ceny distributora ${id} pro rok ${rokCen}`);
+    return [id, { ...d, ...s.distributors[id] }];
+  }));
+  return {
+    rok, rokCen, presny,
+    tarify: { ...tariffs, year: rokCen, overeno: s.overeno, vat: s.vat, common: s.common, ntHours: s.ntHours, distributors },
+  };
+}
+
+/**
+ * Regulované složky po měsících: každý měsíc s cenami roku, do kterého patří (cenyProRok). Maska nízkého
+ * tarifu se skládá z oken platných v daném roce. Výsledek jde do computeVariants() jako `regulated`.
+ * @returns {{ntMask:number[]|null, byMonth:Object<string,{vt,nt,perMWh,monthly,poze,rok,rokCen,presny}>}}
+ */
+export function regulatedByMonth(tariffs, grid, distributor, sazba, breakerId) {
+  const months = [...new Set(grid.map((q) => q.month))];
+  const sady = new Map();
+  for (const m of months) {
+    const rok = Number(m.slice(0, 4));
+    if (sady.has(rok)) continue;
+    const c = cenyProRok(tariffs, rok);
+    sady.set(rok, { ...c, reg: regulatedFor(c.tarify, grid, distributor, sazba, breakerId) });
+  }
+  const sadaQ = (q) => sady.get(Number(q.month.slice(0, 4)));
+  const ntMask = [...sady.values()].every((s) => !s.reg.ntMask) ? null : grid.map((q, i) => sadaQ(q).reg.ntMask?.[i] ?? 0);
+  const byMonth = {};
+  for (const m of months) {
+    const s = sady.get(Number(m.slice(0, 4)));
+    const { ntMask: _maska, ...ceny } = s.reg;
+    byMonth[m] = { ...ceny, rok: s.rok, rokCen: s.rokCen, presny: s.presny };
+  }
+  return { ntMask, byMonth };
 }

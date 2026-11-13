@@ -34,6 +34,11 @@ const ukazka = v.vystup(D, vypocet, { tdd });
 const moznosti = (polozky, vybrana) => polozky.map(([hodnota, text]) => ({ hodnota, text, vybrano: hodnota === vybrana }));
 const distributor = tarify.distributors[vstup.distributor];
 const posledniDen = datum(meta.lastPriceDay);
+// Revize SPOT-09: roky období dat, pro které jsou regulované ceny ve starsiRoky (u předpokladů jmenujeme jejich zdroj).
+const rokyObdobi = [...new Set(D.grid.map((q) => q.month.slice(0, 4)))];
+const zdrojeStarsichRoku = rokyObdobi.filter((rok) => tarify.starsiRoky?.[rok]).map((rok) => ({
+  rok, popis: tarify.starsiRoky[rok].popisZdroju, url: tarify.starsiRoky[rok].distributors[vstup.distributor].source.url,
+}));
 
 export default {
   stitkyNavic: [`Ceny z burzy do ${posledniDen}`],
@@ -69,6 +74,7 @@ export default {
     // Revize 5. 11. 2026, SPOT-03/SPOT-07: datum ověření regulovaných cen a úřední zdroj distribuce (CV ERÚ 14/2025).
     regulovaneOvereno: datum(tarify.overeno),
     zdrojDistribuce: distributor.source,
+    zdrojeStarsichRoku,
     // Data pro prohlížeč (vloží se jako <script type="application/json">)
     data: { ceny: v.zakodujCeny(ceny), kurzy, meta, tarify, dynamicky },
   },

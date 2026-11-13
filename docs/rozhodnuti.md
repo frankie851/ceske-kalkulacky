@@ -1312,3 +1312,41 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   (leták „Srážky ze mzdy“ tam 13. 11. 2026 je, revize ho 5. 11. nenašla). Obě adresy vrátily
   13. 11. 2026 HTTP 200 se správným titulkem. Částka za sepis návrhu (4 000 / 6 000 Kč) na webu
   není, tu část nálezu není co opravit.
+
+# Další práce po revizi 5. 11. 2026 (13. 11. 2026)
+
+## Spot, nebo fix? – další práce (SPOT-09, regulované ceny po rocích)
+
+- **Ceny po měsících podle roku.** Data jsou posledních 12 celých měsíců (teď 11/2025–10/2026).
+  Regulované složky (distribuce VT/NT a cena za jistič podle sazby a distributora, systémové
+  služby, nesíťová infrastruktura, POZE, daň z elektřiny) se teď berou za každý měsíc z cen roku,
+  do kterého měsíc patří. Rozhodnutí uživatele „regulované ceny po rocích“ nahrazuje dřívější
+  řešení z PR #30 (jen upozornění a poznámka o nezapočtené POZE 2025).
+- **Data.** `tariffs.json` má nahoře dál aktuální rok (`year` 2026) a nově `starsiRoky.2025` ve
+  stejné struktuře (`vat`, `common`, `ntHours`, `distributors.<id>.source` a `sazby`). Na nový rok
+  se aktuální sada přesune do `starsiRoky` a nahoře nahradí novou. `cenyProRok` v `calc.js` vrátí
+  sadu pro rok, `regulatedByMonth` z ní sestaví ceny po měsících a masku nízkého tarifu podle oken
+  platných v daném roce; `computeVariants` přijímá vedle jedné sady i ceny po měsících.
+- **Zdroje 2025 (jen úřední, ověřeno 13. 11. 2026).** Distribuce: cenové rozhodnutí ERÚ
+  č. 12/2024 (ERV 14/2024, https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf,
+  strany PDF 28–41); všech 10 sazeb × 3 distributoři × VT/NT/8 pásem jističe jsme vytěžili
+  skriptem z PDF (`pdftotext -layout`, každá sazba ze své strany) a porovnali s daty. Cenový výměr
+  č. 4/2025 (ERV 7/2025) ceny nezměnil. Systémové služby 170,92 Kč/MWh, operátor trhu a datové
+  centrum 2,26 + 0,99 + 5,20 Kč měsíčně, POZE 84,70 Kč/A/měsíc (trojfázově trojnásobek, nejvýš
+  495 Kč/MWh): cenové rozhodnutí č. 11/2024 (ERV 13/2024, body 3.1.1, 6.2, 5.1.2 až 5.3).
+  Poplatek ERÚ v nesíťové infrastruktuře: nařízení vlády č. 392/2015 Sb. § 1, od 1. 9. 2025 4 Kč
+  (nařízení vlády č. 248/2025 Sb.), předtím 2,39 Kč; sada 2025 má 12,45 Kč s `platiOd` 2025-09-01
+  a test hlídá, že období dat nezačíná dřív. Daň z elektřiny 28,30 Kč/MWh (zákon č. 261/2007 Sb.,
+  část 47, § 6 odst. 2), DPH 21 % (zákon č. 235/2004 Sb. § 47 odst. 1 písm. a)).
+- **Nízký tarif 2025.** Podle CR ERÚ č. 12/2024 měla D35d 16 h a D56d 22 h nízkého tarifu
+  (v roce 2026 obě 20 h). Typická okna 2025 jsou ta, se kterými nástroj počítal před opravou SPOT-05.
+- **POZE** se porovnává (nižší z platby podle spotřeby a podle jističe) za měsíce každého roku
+  zvlášť; u jedné sady za celé období jako dřív. Předpoklady u výsledku ukazují ceny každého roku
+  („2025: …; 2026: …“), pro rok 2026 dál 0 Kč s důvodem.
+- **Přelom roku.** Týdenní workflow `aktualizace-spot.yml` posouvá okno dat. Pro rok bez sady
+  (např. leden 2027 před doplněním cen 2027) výpočet použije poslední známý rok a upozornění pod
+  tabulkou po měsících ty měsíce vyjmenuje (`mesiceBezCen`, `tariffs.json` → `jinyRokCen.bezCen`).
+- **Dynamický tarif** (obchodní ceník ČEZ Prodej, `dynamic.json`) zůstává podle ceníku 2026;
+  upozornění vyjmenuje měsíce mimo jeho rok (`jinyRokCen.dynamicky`).
+- **DPH** je ve všech sadách stejná; kdyby se lišila, `spocitej` skončí chybou (výpočet počítá
+  s jednou sazbou) a test to hlídá.
