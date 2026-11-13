@@ -99,8 +99,12 @@
   }
   .prij-edit select { cursor: pointer; min-width: 9.5rem; }
   @media (min-width: 760px) { .prij-edit-skoly td:first-child { width: 60%; } }
-  .prij-edit input[type="number"] { max-width: 6.5rem; }
   .prij-edit input[type="text"] { min-width: 8rem; }
+  .prij-edit input.prij-cislo { min-width: 4.5rem; max-width: 6.5rem; }
+  /* Chybné číslo (PRI-02): stejné barvy jako .field.is-error, hláška .error-msg pod polem */
+  .prij-edit input[aria-invalid="true"] { border-color: var(--c-error); border-width: 3px; background: var(--c-error-soft); }
+  .prij-edit .error-msg { font-size: var(--fs-xs); max-width: 16rem; --ikona-pozadi: var(--c-surface); }
+  .prij-edit .error-msg .ikona { width: 16px; height: 16px; flex: none; }
   .prij-edit input:disabled, .prij-edit select:disabled, .prij-odebrat:disabled { opacity: 0.65; cursor: default; }
   .prij-lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .prij-pole { display: block; }
@@ -190,6 +194,8 @@
   .prij-str-pole { clear: both; display: grid; gap: 0 var(--sp-3); }
   @media (min-width: 560px) { .prij-str-pole { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
   .prij-str-skola .field { margin-bottom: var(--sp-3); }
+  .prij-skala { margin: 0 0 var(--sp-4); }
+  .prij-str-neplatne { margin: var(--sp-3) 0 0; padding: var(--sp-3) var(--sp-4); border: 2px dashed var(--c-border-strong); border-radius: var(--r-md); font-weight: 700; }
   .prij-strategie { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
   .prij-str { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: var(--sp-1) var(--sp-3); align-items: start; padding: var(--sp-3) var(--sp-4); border: 2px solid var(--c-border); border-radius: var(--r-md); background: var(--c-surface); }
   .prij-str-poradi { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--c-surface-2); font-family: var(--font-display); font-weight: 600; }
