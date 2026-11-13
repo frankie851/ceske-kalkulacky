@@ -1,5 +1,6 @@
 // Přijímačky bez paniky – texty pro web (tykání, rodově neutrálně).
-// Převzaté moduly (scenarios.js, strategy.js) a rules.json jsou beze změny a některé jejich texty vykají.
+// Převzaté moduly (scenarios.js, strategy.js, matching.js) a rules.json jsou beze změny a některé
+// jejich texty vykají nebo mají rodové tvary.
 // Tady je jejich podoba pro web: klíčem je PŮVODNÍ znění. Když se původní text v rules.json nebo
 // ve scenarios.js změní, klíč přestane sedět a stránka ukáže nové znění tak, jak je (fakta mají
 // přednost před tónem). Kontrola `neprevedeneTexty()` při buildu takové texty vypíše.
@@ -48,6 +49,27 @@ export function neprevedeneTexty(pravidla, scenare) {
     ...scenare.flatMap((s) => [s.lead, s.watch, s.takeaway]),
   ];
   return texty.filter((t) => !TYKANI.has(t) && VYKANI.test(t));
+}
+
+// Věty z explain() (matching.js, převzatý beze změny) mají rodové tvary „Přijat(a)“, „nesplnil(a)“
+// a „poslední přijatý“. Na webu je převádíme na rodově neutrální znění. Když se znění v modulu
+// změní, převod přestane sedět a build vypíše věty, které rodové tvary pořád mají (rodoveTvary()).
+const RODOVE_PREVODY = [
+  [/: nesplnil\(a\) kritéria/, ': nesplňuje kritéria'],
+  [/^Přijat\(a\) na (\d+)\. prioritu: /, 'Místo na $1. prioritě: '],
+  [/^Nepřijat\(a\) v tomto kole/, 'V tomto kole bez místa'],
+  [/\(poslední přijatý: /, '(poslední s místem: '],
+];
+const RODOVE = /\([a-záý]{1,2}\)|přijat|nesplnil/i;
+
+/** Věta z explain() v rodově neutrálním znění (neznámé znění zůstane beze změny). */
+export function neutralne(veta) {
+  return RODOVE_PREVODY.reduce((t, [vzor, nahrada]) => t.replace(vzor, nahrada), veta);
+}
+
+/** Věty z explain(), které i po převodu mají rodové tvary (vypíše je build). */
+export function rodoveTvary(vety) {
+  return vety.filter((v) => RODOVE.test(neutralne(v)));
 }
 
 /** Kategorie strategie (id z strategy.js → popisek na webu). */

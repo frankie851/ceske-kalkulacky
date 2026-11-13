@@ -6,7 +6,7 @@ import { prectiCislo } from '../../js/cislo-vstup.js';
 
 const MAX_DELKA = 40;
 const VOLBY_RP = ['navrh', 'max', 'vlastni'];
-const RADIA = ['vicercata', 'narok-matka', 'narok-otec', 'kdo-ppm', 'otcovska', 'stridani', 'navrat'];
+const RADIA = ['vicercata', 'narok-matka', 'narok-otec', 'kdo-ppm', 'otcovska', 'hospitalizace', 'stridani', 'navrat'];
 
 /** Meze polí formuláře podle pravidel (stejné jako kontrola v app.js). */
 export function mezeFormulare(rules) {
@@ -14,6 +14,7 @@ export function mezeFormulare(rules) {
     terminMin: [...rules.rodicovsky].map((r) => r.narozeniOd).sort()[0],
     vekMax: Math.max(...rules.rodicovsky.map((r) => r.vekMesicu)) - 1,
     otcovskaMax: rules.otcovska.nastupDoDne,
+    hospitalizaceMax: rules.otcovska.hospitalizace.maxDni,
     ppmTydnuMin: rules.ppm.nastupTydnyPredMin,
     ppmTydnuMax: rules.ppm.nastupTydnyPredMax,
   };
@@ -51,7 +52,9 @@ export function ocistiUlozene(data, meze) {
     'prijem-matka': platnyPrijem,
     'prijem-otec': platnyPrijem,
     'ppm-tydnu': (x) => celeVRozsahu(x, meze.ppmTydnuMin, meze.ppmTydnuMax),
-    'otcovska-od': (x) => celeVRozsahu(x, 0, meze.otcovskaMax),
+    // S hospitalizací dítěte může být nástup na otcovskou později; přesnou mez ověří formulář.
+    'otcovska-od': (x) => celeVRozsahu(x, 0, meze.otcovskaMax + meze.hospitalizaceMax),
+    'hospitalizace-dni': (x) => celeVRozsahu(x, 0, meze.hospitalizaceMax),
     'stridani-od': (x) => celeVRozsahu(x, 1, meze.vekMax),
     'navrat-od': (x) => celeVRozsahu(x, 1, meze.vekMax),
     rpVolba: (x) => VOLBY_RP.includes(x),

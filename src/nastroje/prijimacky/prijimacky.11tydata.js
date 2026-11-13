@@ -4,17 +4,37 @@
 // Soubor .ics se tu skládá s pevným časem (meta.overeno), nikdy s new Date().
 import fs from 'node:fs';
 import { SCENARIOS, EXPECTED } from './scenarios.js';
+import { deferredAcceptance, explain } from './matching.js';
 import { evaluateStrategy } from './strategy.js';
 import { buildICS } from './ics.js';
 import { stavZeScenare, spust, vyberTerminy, udalostiProIcs, casExportu, rozsahTerminu, denMesic, datumPlne } from './simulace.js';
 import * as v from './vystup.js';
-import { ty, neprevedeneTexty } from './texty.js';
+import { ty, neprevedeneTexty, rodoveTvary } from './texty.js';
 
 const pravidla = JSON.parse(fs.readFileSync(new URL('./rules.json', import.meta.url), 'utf8'));
 
 const chybiTykani = neprevedeneTexty(pravidla, SCENARIOS);
 if (chybiTykani.length) {
   console.warn(`[prijimacky] Texty bez převodu do tykání (doplň je do texty.js):\n  ${chybiTykani.join('\n  ')}`);
+}
+
+// Věty z explain() (matching.js) na webu převádí texty.js → neutralne(). Modelová třída projde všechny
+// druhy vět (nesplněné minimum, plná škola, přijetí, nepřijetí); co převod nepokryje, build vypíše.
+{
+  const skoly = [{ id: 'A', capacity: 1, minScore: 60 }, { id: 'B', capacity: 1 }, { id: 'C', capacity: 1 }];
+  const deti = [
+    { id: 'x', score: 80, priorities: ['B', 'C'] },
+    { id: 'y', score: 59, priorities: ['A', 'B', 'C'] },
+    { id: 'z', score: 50, priorities: ['B'] },
+  ];
+  const vety = [
+    ...Object.values(explain(deferredAcceptance(deti, skoly), deti, skoly)).flat(),
+    ...SCENARIOS.flatMap((s) => Object.values(spust(stavZeScenare(s)).proc ?? {}).flat()),
+  ];
+  const rodove = rodoveTvary(vety);
+  if (rodove.length) {
+    console.warn(`[prijimacky] Věty z explain() s rodovými tvary (doplň převod do texty.js):\n  ${rodove.join('\n  ')}`);
+  }
 }
 
 // ---------- Simulátor: scénář „body“ po posledním kole ----------

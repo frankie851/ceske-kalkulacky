@@ -389,7 +389,8 @@ Změny:
   a stránky jsou v Lighthouse.
 
 Mechanismus `"skryty": true` (`ZOBRAZIT_SKRYTE=1`, `_site-vse`, `test/e2e/skryte/`) zůstává
-pro budoucí nástroje.
+pro budoucí nástroje. (13. 11. 2026: skript `test:e2e:skryte` je odebraný, postup pro skrytý
+nástroj je v `docs/jak-pridat-nastroj.md`, viz „Projekt – další práce“.)
 
 Výsledky:
 - `npm test` 477/477, `npm run test:e2e` 129/129,
@@ -1314,6 +1315,87 @@ neotevře) a v `rules.json` má citaci (`zdroj: { pravniZaklad, url, citace }`).
   není, tu část nálezu není co opravit.
 
 # Další práce po revizi 5. 11. 2026 (13. 11. 2026)
+
+## Slevy 2027, Mám EET?, Přijímačky, projekt – další práce (texty, čtení čísel, skryté nástroje)
+
+- **Slevy 2027: kontrolní seznam tyká.** Věta o volitelném ročním zúčtování vykala („pokud jste
+  nepracovali celý rok“). Teď: „vyplatí se při práci jen část roku nebo když se během roku
+  změnily podmínky“. Opraveno přímo v `slevy.js` (`kontrolniSeznam`), ne ve `vystup.js`:
+  `slevy.js` není převzatý beze změny, revize ho už upravovaly a seznam se skládá jen tady.
+- **Slevy 2027: limit příjmu manžela z rules.json.** Doklad „nejvýš 68 000 Kč“ byl v textu
+  natvrdo. Teď se bere `slevy.manzel.limitPrijmu` (a věk dítěte `vekDitete`). Hodnota 68 000 Kč
+  je hranice vlastního příjmu manžela pro slevu na manžela: § 35bb odst. 2 písm. b) ZDP ve znění
+  od 1. 1. 2027 (https://www.zakonyprolidi.cz/cs/1992-586/zneni-20270101#p35bb, ověřeno
+  13. 11. 2026; stejná částka je v § 38k odst. 5 písm. c) bodu 1). Citace v `rules.json` doplněna
+  o písm. b).
+- **Slevy 2027: čísla přes sdílené `prectiCislo`.** Vlastní `cele()` ve `vystup.js` i `app.js`
+  nahradila `celeZPole()` ve `vystup.js` nad `prectiCislo` (`{ zaporne: false }`). Pravidlo celých
+  korun zůstává: haléře, minus nebo nečitelný zápis → hláška „Zadej celé číslo bez haléřů…“.
+  „40.000“ i „40 000 Kč“ jsou 40 000. Rok narození se dál kontroluje jako čtyři číslice.
+- **Mám EET? / OSVČ 2027: rodově neutrální volba.** „Vedlejší – zároveň jsem zaměstnanec“ →
+  „Vedlejší – mám i zaměstnání“ (id `sideEmployed` beze změny). Ostatní `osvc2027.texts` a `ui`
+  rodové tvary v první ani druhé osobě nemají. Právní pojmy ve třetí osobě („Zaměstnanec nemůže
+  být v paušálním režimu“, „Plátce DPH nemůže…“) a otázka „Jsi plátce DPH?“ zůstávají: „plátce
+  DPH“ je zákonné označení stavu a neutrální přepis („registrace k DPH“) by zahrnul
+  i identifikovanou osobu. Test v `test/rules.test.js` hlídá volby i texty.
+- **Přijímačky: věty z `explain()` rodově neutrálně.** `matching.js` zůstává převzatý beze změny
+  (vlna 2, bod 7). `texty.js` → `neutralne()` převádí „nesplnil(a) kritéria“ → „nesplňuje
+  kritéria“, „Přijat(a) na N. prioritu: X.“ → „Místo na N. prioritě: X.“, „Nepřijat(a) v tomto
+  kole“ → „V tomto kole bez místa“ a „poslední přijatý:“ → „poslední s místem:“.
+  `vystup.js` → `upravVetu()` ho volá. Build projde modelovou třídu se všemi druhy vět i všechny
+  scénáře a věty, které převod nepokryje, vypíše (`rodoveTvary()`), stejně jako u tykání.
+- **Přijímačky: termíny jednotné zkoušky pro pětileté obory.** Znovu prohledáno 13. 11. 2026:
+  sdělení MŠMT č. j. MSMT-525/2026-13, časový harmonogram a metodika MŠMT 2026/2027, stránka
+  CERMAT „Jednotná přijímací zkouška“ a Průvodce pro uchazeče k DiPSy 2027, vyhláška
+  č. 422/2023 Sb. a školský zákon. Termíny jsou jen pro čtyřleté obory (s nástavbou)
+  a šestiletá a osmiletá gymnázia. Vyhláška č. 422/2023 Sb. (§ 13) jen říká, že test pro
+  „ostatní obory“ je z učiva celého RVP ZV. Úřední termín pro pětileté obory jsme nenašli, bod
+  zůstává v `meta.neovereno` beze změny.
+- **Projekt: skript `test:e2e:skryte`.** Skrytý nástroj (`"skryty": true`) teď žádný není a složka
+  `test/e2e/skryte/` neexistuje, takže skript padal. Je odebraný. Krok CI pro skryté nástroje
+  odebral už PR se zveřejněním Zdaním to?, `web.yml` se nemění. `build:vse` zůstává: funguje
+  a patří k mechanismu skrytých nástrojů. Postup pro skrytý nástroj (build, kontrola, e2e, krok
+  v CI) je nově v `docs/jak-pridat-nastroj.md`. Test `test/sdilene/projekt.test.js` hlídá, že
+  globy testů ve skriptech něco najdou a `web.yml` volá jen existující skripty.
+
+## Exekuce, nebo oddlužení?, Bydlometr, Rodičovská – další práce (Dluhy: kontrast, náhrada plátci mzdy; Bydlometr: parseNumber; Rodičovská: průměrná mzda 2026, otcovská a hospitalizace)
+
+- **Dluhy – výsledek při chybě.** Karty výsledku se při chybě ve formuláři už neztlumují
+  (`opacity: .45` neměla kontrast 4,5 : 1 a axe ji hlásil). Stejně jako v Bydlometru (BYD-03)
+  a Rodičovské (ROD-07) se karty i rozpis „Jak jsme to spočítali“ skryjí (`[data-vysledky]`),
+  lepivá lišta ukáže „–“ a hláška vyká: „Opravte prosím označené údaje. Do té doby výsledek
+  neukazujeme, aby tu nezůstala čísla k jinému zadání.“ Informace, že výsledek neplatí, se tak
+  neztratí. E2E test spouští axe ve stavu s chybou (360 px, světlý i tmavý režim).
+- **Dluhy – náhrada plátci mzdy u srážek před 1. 1. 2022.** Do „Doplňujících údajů“ přibyla
+  volba „Srážky ze mzdy byly nařízené před 1. 1. 2022“ (datum z `rules.json` →
+  `roky.2026.nahradaJenProPrikazyOd`). Když je zaškrtnutá, `srazka()` v `dluhy.js` náhradu
+  50 Kč neodečte a věřitelé dostanou celou srážku; mění se i odhad doby splácení. Podklad:
+  zákon č. 286/2021 Sb., čl. II bod 3 (soudní výkon rozhodnutí: na řízení s usnesením o nařízení
+  výkonu před účinností se použije § 270 odst. 2 a § 279 odst. 1 o. s. ř. v dřívějším znění)
+  a čl. IV body 1 a 12 (exekuce: § 87 odst. 3 EŘ v novém znění jen tam, kde exekuční příkaz ke
+  srážkám ze mzdy ještě nebyl vydán). Text přechodných ustanovení jsme 13. 11. 2026 znovu
+  přečetli na zakonyprolidi.cz. Nápověda radí zaškrtnout volbu, jen když jsou všechny srážky
+  starší: u novější exekuce náhrada náleží.
+- **Bydlometr – `parseNumber`.** Vlastní `parseNumber` v `js/format.js` se po PR #27 nikde
+  nepoužíval (formulář čte čísla sdíleným `prectiCislo`) a „2.800.000“ četl jako NaN. Funkci
+  jsme odstranili. `test/format.test.js` teď hlídá, že ji modul nevyváží, a ověřuje, že
+  `prectiCislo` čte zápisy Bydlometru včetně „2.800.000“. E2E: „3.500.000“ ve formuláři.
+- **Rodičovská – průměrná mzda 2026.** Hranice 23% zálohy 2026 (146 901 Kč = 3 × 48 967 Kč)
+  má teď úřední zdroj: nařízení vlády č. 365/2025 Sb., § 1 (VVZ za rok 2024 46 278 Kč,
+  přepočítací koeficient 1,0581), § 23b odst. 4 zákona č. 589/1992 Sb. (součin, nahoru na
+  koruny: 48 966,75 → 48 967 Kč) a § 21g odst. 2 a § 38h odst. 2 ZDP (znění 1. 8.–31. 12. 2026).
+  V `rules.json` je `cistaMzda.2026.prumernaMzda` se stejnou strukturou jako u roku 2027
+  a `cistaMzda.2026.zdroj` s citací. Hodnota se nezměnila.
+- **Rodičovská – otcovská a hospitalizace.** § 38a odst. 4 věta třetí zákona č. 187/2006 Sb.
+  (ověřeno ve znění 1. 11.–31. 12. 2026): období 6 týdnů pro nástup na otcovskou se prodlužuje
+  o kalendářní dny hospitalizace dítěte (kvůli zdraví dítěte nebo matky), které spadají do těchto
+  6 týdnů; počítá se i den přijetí a propuštění. Prodloužení je tedy nejvýš 42 dní
+  (`rules.json` → `otcovska.hospitalizace.maxDni`). Formulář má v kroku Otcovská otázku
+  „Bylo dítě po porodu v nemocnici?“ a počet dní; `nastupOtcovskeMaxDne()` v `rodina.js` z nich
+  spočítá poslední den nástupu, `app.js` podle něj kontroluje pole a mění nápovědu, kontrolní
+  seznam ukáže prodloužený termín. Druhou možnost z § 38b odst. 2 (dítě je v nemocnici ještě
+  na konci 6. týdne → nástup i po propuštění, nejpozději do 1 roku) nepočítáme: potřebovala by
+  datum propuštění. Je jen v nápovědě a v `meta.neovereno`.
 
 ## Spot, nebo fix? – další práce (SPOT-09, regulované ceny po rocích)
 

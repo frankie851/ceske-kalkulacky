@@ -61,6 +61,7 @@ function nactiVstup() {
       prednostni: formular.elements.druh.value === 'prednostni',
       pocetExekuci: exekuce,
       duchodce: $('#duchod').checked,
+      stareSrazky: $('#stare-srazky').checked,
       dluh,
       sazba,
       drivejsiOdpusteni: formular.elements.odpusteni.value,
@@ -115,9 +116,15 @@ function zobraz(v) {
 let casovac = null;
 function prepocitej() {
   const { chyby, vstup } = nactiVstup();
+  // Při chybě výsledek skryjeme a ukážeme hlášku. Nezůstanou tu čísla k jinému zadání
+  // a nic se nezobrazuje ztlumeně s nízkým kontrastem.
   $('[data-chyby]').hidden = !chyby;
-  $('#vysledek').classList.toggle('dluhy-neplatne', Boolean(chyby));
-  if (chyby) return;
+  for (const el of document.querySelectorAll('[data-vysledky]')) el.hidden = Boolean(chyby);
+  if (chyby) {
+    clearTimeout(casovac);
+    nastav('[data-lista-cislo]', '–');
+    return;
+  }
   const v = vysledek(p, vstup);
   zobraz(v);
   // Čtečkám oznámíme výsledek až po krátké pauze v psaní

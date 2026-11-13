@@ -326,7 +326,7 @@
       },
       "nahradaJenProPrikazyOd": {
         "hodnota": "2022-01-01",
-        "popis": "Paušální náhrada plátci mzdy náleží jen u exekucí, kde exekuční příkaz ke srážkám ze mzdy vydal exekutor od tohoto dne (u soudního výkonu rozhodnutí: kde soud srážky nařídil od tohoto dne). U starších se náhrada neplatí a věřitelé dostanou celou srážku. Kalkulačka počítá s náhradou vždy; větu o výjimce ukazuje u výsledku.",
+        "popis": "Paušální náhrada plátci mzdy náleží jen u exekucí, kde exekuční příkaz ke srážkám ze mzdy vydal exekutor od tohoto dne (u soudního výkonu rozhodnutí: kde soud srážky nařídil od tohoto dne). U starších se náhrada neplatí a věřitelé dostanou celou srážku. Ve formuláři je volba „Srážky ze mzdy byly nařízené před 1. 1. 2022“; když ji uživatel zaškrtne, kalkulačka náhradu neodečte a věřitelům počítá celou srážku.",
         "zdroj": {
           "pravniZaklad": "Zákon č. 120/2001 Sb. (exekuční řád), § 87 odst. 3, a občanský soudní řád § 270 odst. 2, oboje ve znění zákona č. 286/2021 Sb. (účinnost 1. 1. 2022); přechodná ustanovení zákona č. 286/2021 Sb., čl. II bod 3 a čl. IV body 1 a 12",
           "url": "https://www.zakonyprolidi.cz/cs/2001-120#p87-3",

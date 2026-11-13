@@ -35,7 +35,7 @@ export function rokPravidel(rules, dnesniRok) {
 /**
  * Všechny texty a částky pro obě karty výsledku.
  * @param {object} p pravidla roku (pravidlaProRok)
- * @param {object} v vstup: cistaMzda, osoby, prednostni, pocetExekuci, duchodce, dluh, sazba, drivejsiOdpusteni
+ * @param {object} v vstup: cistaMzda, osoby, prednostni, pocetExekuci, duchodce, stareSrazky, dluh, sazba, drivejsiOdpusteni
  */
 export function vysledek(p, v) {
   const s = srazka(p, v);
@@ -75,6 +75,7 @@ export function vysledek(p, v) {
         : 'U běžných dluhů se strhává jedna třetina.',
     s.nadHranici > 0 ? `Částka nad ${kc(s.hranice)} se strhne celá. To je ${kc(s.nadHranici)}.` : null,
     s.nahradaZamestnavateli > 0 ? `Ze srážky si zaměstnavatel nechá ${kc(s.nahradaZamestnavateli)}. Zbytek dostanou věřitelé.` : null,
+    v.stareSrazky && s.srazka > 0 ? 'Srážky byly nařízené před změnou zákona. Zaměstnavatel si nic nenechá. Věřitelé dostanou celou srážku.' : null,
   ].filter(Boolean);
 
   // Oddlužení
@@ -96,8 +97,10 @@ export function vysledek(p, v) {
         // DLU-09: náhrada nenáleží u exekucí, kde příkaz ke srážkám ze mzdy padl před účinností zákona č. 286/2021 Sb.
         ? `Zaměstnavatel si ze srážky nechá ${kc(s.nahradaZamestnavateli)} za svou práci. Tak to určuje zákon. `
           + `Neplatí to u starších exekucí, kde exekutor nebo soud nařídil srážky ze mzdy před ${datum(p.nahradaJenProPrikazyOd)}. `
-          + 'Tam dostanou věřitelé celou srážku.'
-        : '',
+          + 'Tam dostanou věřitelé celou srážku. Zaškrtněte to pak ve formuláři.'
+        : v.stareSrazky && s.srazka > 0
+          ? `Srážky ze mzdy vám nařídili před ${datum(p.nahradaJenProPrikazyOd)}. Zaměstnavatel si proto ze srážky nic nenechá. Věřitelé dostanou celou srážku.`
+          : '',
       doba,
       upozorneni,
     },
@@ -121,6 +124,18 @@ export function vysledek(p, v) {
     },
     rozpis,
     cisla: { s, ex, od },
+  };
+}
+
+/**
+ * Volba „Srážky ze mzdy byly nařízené před …“ (datum z rules.json). Zákon č. 286/2021 Sb.,
+ * čl. II bod 3 a čl. IV body 1 a 12: u takových srážek náhrada plátci mzdy nenáleží.
+ */
+export function volbaStareSrazky(p) {
+  const d = datum(p.nahradaJenProPrikazyOd);
+  return {
+    label: `Srážky ze mzdy byly nařízené před ${d}`,
+    napoveda: 'Datum najdete na exekučním příkazu nebo usnesení soudu. Zaměstnavatel si pak ze srážky nic nenechá. Zaškrtněte, jen když jsou všechny vaše srážky starší.',
   };
 }
 

@@ -197,6 +197,57 @@ test('otcovská od 35. a 41. dne po porodu jde zadat, 42. den ukáže chybu', as
   await page.close();
 });
 
+// Další práce po revizi (13. 11. 2026): § 38a odst. 4 věta třetí zákona č. 187/2006 Sb. – lhůta pro nástup
+// na otcovskou se prodlouží o dny, kdy bylo dítě v prvních 6 týdnech v nemocnici.
+test('otcovská: dítě v nemocnici 10 dní → nástup jde až 51. den po porodu', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#termin', '2026-03-15');
+  await vypln(page, '#prijem-otec', '30 000');
+  await page.click('label[for="otcovska-ano"]');
+  assert.equal(await page.$eval('[data-zavisi="hospitalizace"]', (el) => el.hidden), true);
+  await vypln(page, '#otcovska-od', '50');
+  assert.match(await text(page, '#otcovska-od-chyba'), /od 0 do 41/);
+  await page.click('label[for="hospitalizace-ano"]');
+  assert.equal(await page.$eval('[data-zavisi="hospitalizace"]', (el) => el.hidden), false);
+  await vypln(page, '#hospitalizace-dni', '10');
+  assert.equal(await page.$eval('#otcovska-od', (el) => el.hasAttribute('aria-invalid')), false);
+  assert.match(await text(page, '#krok-otcovska .step-sum'), /4\. 5\. 2026 až 17\. 5\. 2026/);
+  assert.match(await text(page, '#otcovska-od-napoveda'), /nejvýš 51\..*10 dní v nemocnici/);
+  assert.match(await text(page, '[data-kontrolni-seznam]'), /Nástup nejpozději 5\. 5\. 2026/);
+  await vypln(page, '#otcovska-od', '52');
+  assert.match(await text(page, '#otcovska-od-chyba'), /od 0 do 51/);
+  await vypln(page, '#otcovska-od', '50');
+  await vypln(page, '#hospitalizace-dni', '43');
+  assert.match(await text(page, '#hospitalizace-dni-chyba'), /od 0 do 42/);
+  assert.equal(await page.$eval('[data-neplatne]', (el) => el.hidden), false);
+  await vypln(page, '#hospitalizace-dni', '10');
+  // Volba „Ne“ vrátí lhůtu na 6 týdnů
+  await page.click('label[for="hospitalizace-ne"]');
+  assert.match(await text(page, '#otcovska-od-chyba'), /od 0 do 41/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('axe s otázkou na hospitalizaci a chybou v počtu dní (360 px, světlý i tmavý režim): 0 serious/critical', async () => {
+  const { AxePuppeteer } = await import('@axe-core/puppeteer');
+  const { page, chyby } = await otevri(CESTA, { sirka: 360 });
+  await page.click('label[for="otcovska-ano"]');
+  await page.click('label[for="hospitalizace-ano"]');
+  await vypln(page, '#hospitalizace-dni', '50');
+  for (const rezim of ['light', 'dark']) {
+    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: rezim }]);
+    await new Promise((r) => setTimeout(r, 400));
+    const r = await new AxePuppeteer(page).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
+    const vazne = r.violations.filter((x) => x.impact === 'serious' || x.impact === 'critical')
+      .map((x) => `${x.id}: ${x.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' | ')}`);
+    assert.deepEqual(vazne, [], rezim);
+    const preteka = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+    assert.equal(preteka, false, `${rezim}: bez vodorovného posuvníku`);
+  }
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
 // Revize 5. 11. 2026, ROD-14: podvržený záznam v localStorage se do formuláře nedostane.
 test('načtení poškozeného uloženého plánu: neplatné hodnoty se ignorují, žádné NaN ani chyba', async () => {
   const { page, chyby } = await otevri(CESTA);

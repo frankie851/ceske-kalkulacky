@@ -195,6 +195,17 @@ export function cistaMzda(hruba, p) {
 
 // ---------- Plán rodiny ----------
 
+/**
+ * Poslední den (počítáno od dne narození = 0), kdy lze nastoupit na otcovskou.
+ * § 38a odst. 4 zákona č. 187/2006 Sb.: 6 týdnů ode dne narození; období se prodlužuje
+ * o kalendářní dny hospitalizace dítěte, které spadají do těchto 6 týdnů (nejvýš maxDni z rules.json).
+ */
+export function nastupOtcovskeMaxDne(rules, v) {
+  const h = rules.otcovska.hospitalizace;
+  const dni = v?.hospitalizace ? Math.min(h.maxDni, Math.max(0, Math.floor(Number(v.hospitalizaceDni) || 0))) : 0;
+  return rules.otcovska.nastupDoDne + dni;
+}
+
 export const VYCHOZI_VSTUP = {
   terminPorodu: '2027-04-15',
   vicercata: false,
@@ -206,6 +217,8 @@ export const VYCHOZI_VSTUP = {
   ppmTydnuPred: 6,
   otcovska: true,
   otcovskaOdDne: 0,
+  hospitalizace: false, // dítě bylo v prvních 6 týdnech hospitalizováno (§ 38a odst. 4 věta třetí ZNP)
+  hospitalizaceDni: 0,
   rpVyse: null, // null = navrhnout výši, se kterou se RP vyčerpá do 3 let
   stridani: false,
   stridaniOdMesice: 12,
@@ -306,12 +319,18 @@ export function planRodiny(vstupy, rules) {
     if (!maNarok.otec) {
       varovani.push({ typ: 'otcovskaBezNaroku', uroven: 'pozor', text: 'Otec nemá podle zadání příjem z pojištěného zaměstnání, otcovská se nepočítá.' });
     } else {
-      // Nástup v období 6 týdnů ode dne narození (§ 38a odst. 4 zákona č. 187/2006 Sb.).
-      const odDne = Math.min(rules.otcovska.nastupDoDne, Math.max(0, Number(v.otcovskaOdDne) || 0));
+      // Nástup v období 6 týdnů ode dne narození, prodlouženém o dny hospitalizace dítěte
+      // (§ 38a odst. 4 zákona č. 187/2006 Sb.).
+      const maxDne = nastupOtcovskeMaxDne(rules, v);
+      const odDne = Math.min(maxDne, Math.max(0, Number(v.otcovskaOdDne) || 0));
       const start = pridejDny(B, odDne);
       const info = davkaRodice(rules, v.prijemOtec, true, start, rules.otcovska.sazba);
       const konec = pridejDny(start, rules.otcovska.dny - 1);
-      otcovska = { start, konec, ...info, sazby: sazbyDavky(rules, info, start, konec) };
+      otcovska = {
+        start, konec, ...info, sazby: sazbyDavky(rules, info, start, konec),
+        nastupNejpozdeji: pridejDny(B, maxDne),
+        prodlouzeniDni: maxDne - rules.otcovska.nastupDoDne,
+      };
     }
   }
 

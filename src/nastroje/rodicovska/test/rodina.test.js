@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import {
   dvz, redukovanyDvz, denniDavka, dnyRozhodnehoObdobi, hraniceProDatum,
   pravidlaRp, stropRp, cerpaniRp, navrhVyse, cistaMzda, parametryMzdy,
-  planRodiny, pridejDny,
+  planRodiny, pridejDny, nastupOtcovskeMaxDne,
 } from '../rodina.js';
 import { kontrolniSeznam } from '../vystup.js';
 
@@ -266,12 +266,16 @@ test('otcovská překrytá mateřskou otce: za společné dny jen mateřská, s 
   assert.ok(!bez.varovani.some((x) => x.typ === 'otcovskaSMaterskou'));
 });
 
-test('formulář dovolí nástup na otcovskou do dne z rules.otcovska.nastupDoDne', async () => {
+// Další práce (13. 11. 2026): mez nástupu počítá nastupOtcovskeMaxDne() z rules.json
+// (6 týdnů + dny hospitalizace dítěte), už ne konstanta OTCOVSKA_MAX.
+test('formulář dovolí nástup na otcovskou do dne z rules.otcovska.nastupDoDne (+ dny hospitalizace)', async () => {
   const { default: data } = await import('../rodicovska.11tydata.js');
   assert.equal(data.rodicovska.otcovskaMax, rules.otcovska.nastupDoDne);
   assert.match(data.rodicovska.napovedy.otcovskaOd, /nejvýš 41/);
   const app = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
-  assert.match(app, /OTCOVSKA_MAX = pravidla\.otcovska\.nastupDoDne/);
+  assert.match(app, /HOSPITALIZACE_MAX = pravidla\.otcovska\.hospitalizace\.maxDni/);
+  assert.match(app, /nastupOtcovskeMaxDne\(pravidla, \{ hospitalizace, hospitalizaceDni/);
+  assert.match(app, /celeCislo\('otcovska-od', 0, otcovskaMax,/);
 });
 
 test('střídání: otec převezme mateřskou nejdříve od 7. týdne a RP pak pobírá on', () => {
@@ -352,4 +356,56 @@ test('ROD-13: jednorázová výplata zbytku jen s DVZ nebo OSVČ (§ 30a odst. 1
   assert.match(u.ukol, /denní vyměřovací základ/);
   assert.match(u.ukol, /OSVČ/);
   assert.match(u.ukol, /§ 30a odst\. 1/);
+});
+
+// Další práce po revizi (13. 11. 2026): průměrná mzda 2026 48 967 Kč z úředního předpisu, ne jen ze stránky MPSV.
+// NV č. 365/2025 Sb., § 1: VVZ 2024 = 46 278 Kč, koeficient 1,0581 → 48 966,75 → nahoru 48 967 Kč
+// (§ 23b odst. 4 zákona č. 589/1992 Sb.); § 21g odst. 2 a § 38h odst. 2 ZDP: záloha 23 % nad 3násobek.
+test('čistá mzda 2026: hranice 23 % = 3 × průměrná mzda z NV č. 365/2025 Sb.', () => {
+  const p = parametryMzdy(rules, 2026);
+  assert.equal(p.rok, 2026);
+  assert.equal(p.prumernaMzda.vvz, 46278);
+  assert.equal(p.prumernaMzda.koeficient, 1.0581);
+  assert.equal(Math.ceil(p.prumernaMzda.vvz * p.prumernaMzda.koeficient), p.prumernaMzda.castka);
+  assert.equal(p.prumernaMzda.castka, 48967);
+  assert.equal(3 * p.prumernaMzda.castka, p.hraniceDan2Mesic);
+  const z = p.prumernaMzda.zdroj;
+  assert.match(z.pravniZaklad, /365\/2025 Sb\./);
+  assert.match(z.url, /^https:\/\/www\.zakonyprolidi\.cz\/cs\/2025-365#p1$/);
+  assert.match(z.citace, /46278 Kč/);
+  assert.match(z.citace, /1,0581/);
+  assert.equal(typeof p.zdroj, 'object');
+  assert.match(p.zdroj.url, /^https:\/\/www\.zakonyprolidi\.cz\/cs\/1992-586#p38h$/);
+  assert.match(p.zdroj.citace, /3násobku průměrné mzdy/);
+  assert.match(p.zdroj.citace, /§ 21g odst\. 2/);
+  assert.ok(rules.meta.zdroje.some((x) => x.url === 'https://www.zakonyprolidi.cz/cs/2025-365'), 'meta.zdroje: NV 365/2025 Sb.');
+});
+
+// Další práce po revizi (13. 11. 2026): § 38a odst. 4 věta třetí zákona č. 187/2006 Sb. – období pro nástup
+// na otcovskou (6 týdnů) se prodlužuje o dny hospitalizace dítěte, které spadají do těchto 6 týdnů.
+test('otcovská: hospitalizace dítěte prodlouží lhůtu nástupu o dny v nemocnici (nejvýš 6 týdnů)', () => {
+  const h = rules.otcovska.hospitalizace;
+  assert.equal(rules.otcovska.nastupDoDne, 41);
+  assert.equal(h.maxDni, 42);
+  assert.match(h.zdroj.url, /^https:\/\/www\.zakonyprolidi\.cz\/cs\/2006-187#p38a$/);
+  assert.match(h.zdroj.citace, /prodlužuje o kalendářní dny, po které bylo dítě hospitalizováno/);
+  assert.match(h.zdroj.citace, /den přijetí dítěte/);
+  assert.match(h.zdroj.pravniZaklad, /§ 38a odst\. 4 věta třetí/);
+
+  assert.equal(nastupOtcovskeMaxDne(rules, {}), 41);
+  assert.equal(nastupOtcovskeMaxDne(rules, { hospitalizace: false, hospitalizaceDni: 10 }), 41);
+  assert.equal(nastupOtcovskeMaxDne(rules, { hospitalizace: true, hospitalizaceDni: 10 }), 51);
+  assert.equal(nastupOtcovskeMaxDne(rules, { hospitalizace: true, hospitalizaceDni: 99 }), 83);
+
+  const zaklad = { terminPorodu: '2027-04-15', prijemMatka: 40000, prijemOtec: 50000, kdoPpm: 'matka', otcovska: true, otcovskaOdDne: 50 };
+  // bez hospitalizace se nástup omezí na 41. den
+  assert.equal(planRodiny(zaklad, rules).otec.otcovska.start, pridejDny('2027-04-15', 41));
+  // 10 dní v nemocnici → nástup 50. den je v pořádku
+  const s = planRodiny({ ...zaklad, hospitalizace: true, hospitalizaceDni: 10 }, rules);
+  assert.equal(s.otec.otcovska.start, pridejDny('2027-04-15', 50));
+  assert.equal(s.otec.otcovska.nastupNejpozdeji, pridejDny('2027-04-15', 51));
+  // kontrolní seznam ukáže prodloužený termín
+  const otc = kontrolniSeznam(s, rules).find((p) => /^Otcovská/.test(p.ukol));
+  assert.match(otc.termin, /nejpozději 5\.\s6\.\s2027$/);
+  assert.match(otc.ukol, /nemocnici/);
 });

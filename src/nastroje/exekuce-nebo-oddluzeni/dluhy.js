@@ -66,7 +66,8 @@ export function spravceMesicne(p) {
 /**
  * Srážka ze mzdy při exekuci.
  * @param {object} p pravidla roku
- * @param {object} v vstup: cistaMzda, osoby, prednostni, pocetExekuci, duchodce
+ * @param {object} v vstup: cistaMzda, osoby, prednostni, pocetExekuci, duchodce,
+ *   stareSrazky (srážky ze mzdy nařízené před dnem p.nahradaJenProPrikazyOd → bez náhrady plátci mzdy)
  */
 export function srazka(p, v) {
   const cistaMzda = Math.max(0, Math.floor(Number(v.cistaMzda) || 0));
@@ -92,7 +93,9 @@ export function srazka(p, v) {
   const celkem = zTretin + nadHranici;
 
   // Náhrada zaměstnavateli: 50 Kč, nejvýš třetina sražené částky nahoru (vyhl. 485/2000 § 4d, 4e).
-  const nahradaZamestnavateli = celkem > 0 ? Math.min(p.nahradaZamestnavateli, Math.ceil(celkem / 3)) : 0;
+  // Nenáleží, když srážky nařídil exekutor nebo soud před účinností zákona č. 286/2021 Sb.
+  // (čl. II bod 3 a čl. IV body 1 a 12; datum v rules.json → nahradaJenProPrikazyOd).
+  const nahradaZamestnavateli = celkem > 0 && !v.stareSrazky ? Math.min(p.nahradaZamestnavateli, Math.ceil(celkem / 3)) : 0;
 
   return {
     cistaMzda,
