@@ -15,7 +15,7 @@ const odpovedi = {
   deti: [],
   manzel: { ma: false, prijem: 0, peceODite: false, ztpp: false },
   invalidita: { stupen: 0, ztpp: false },
-  hypoteka: { uroky: 0, stareSmlouva: false },
+  hypoteka: { uroky: 0, bytovaPotrebaPred2021: false },
   stari: { penzijko: 0, dip: 0, zivotni: 0, dlouhodobaPece: 0 },
   dary: { dary: 0, krev: 0 },
   odbory: false,

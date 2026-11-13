@@ -60,12 +60,15 @@ export default {
       ...refixace,
       surove: undefined,
       kroky: poKrocich(v.POLE_REFIXACE, vstupRefixace),
+      volby: [{ hodnota: 'pred2021', text: 'Bydlení je pořízené před 1. 1. 2021', vybrano: vstupRefixace.pre2021 }],
+      napovedaVoleb: `Pak je limit odpočtu úroků ${kc(val(pravidla.interestDeduction.limitPre2021))} místo ${kc(val(pravidla.interestDeduction.limit))} ročně na domácnost (zákon č. 386/2020 Sb.). Úsporu počítáme se sazbou daně ${v.podil(val(pravidla.interestDeduction.taxRate))}.`,
     },
     poplatek: {
       ...poplatek,
       pole: v.POLE_POPLATEK.map((p) => pole(p, vstupPoplatku[p.klic])),
       data: v.DATA_POPLATKU.map((p) => ({ id: p.id, label: p.label, typ: 'date', hodnota: vstupPoplatku[p.klic], chybaMisto: true })),
       platnost: datum(val(pravidla.prepayment.lawChangeDate)),
+      dalsiDuvody: v.dalsiDuvody(pravidla),
       vyuzito: [{ hodnota: 'vyuzito', text: `Letos už byla bezplatná splátka (${v.podil(val(pravidla.prepayment.freeShareOfOriginalLoan))}) využitá` }],
     },
     najem: {
@@ -79,7 +82,7 @@ export default {
         { hodnota: 'odpocet', text: 'Uplatnit odpočet úroků z daní', vybrano: vstupNajmu.deductInterest },
         { hodnota: 'investicni', text: 'Investiční byt (k pronájmu nebo třetí a další)', vybrano: vstupNajmu.investment },
       ],
-      napovedaVoleb: `Odpočet úroků je nejvýš ${kc(val(pravidla.interestDeduction.limit))} ročně a jen u vlastního bydlení. U investičního bytu doporučuje ČNB nejvýš LTV ${v.cele(val(vek.investment))}.`,
+      napovedaVoleb: `Odpočet úroků je nejvýš ${kc(val(pravidla.interestDeduction.limit))} ročně a jen u vlastního bydlení. U investičního bytu doporučuje ČNB nejvýš LTV ${v.cele(val(vek.investment))} a DTI ${val(pravidla.dti.investment)}.`,
     },
   },
 };

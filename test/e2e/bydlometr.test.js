@@ -90,15 +90,76 @@ test('záložky fungují z klávesnice (šipky, Home, End) a mění hash', async
   await page.close();
 });
 
-test('chybný vstup ukáže chybu u pole a výsledek nezmění', async () => {
+// Revize 5. 11. 2026, BYD-03: dřív tu test ověřoval, že starý výsledek zůstane na obrazovce.
+// Teď se výsledek, tabulky i zátěžový test při chybě skryjí a místo nich je hláška.
+test('chybný vstup ukáže chybu u pole a skryje výsledek, po opravě se vrátí', async () => {
   const { page, chyby } = await otevri(CESTA);
+  const vidno = (sel) => page.$eval(sel, (el) => el.getBoundingClientRect().height > 0 && !el.closest('[hidden]'));
   const pred = await text(page, '#vysledek [data-vysledek-cislo]');
   await vypln(page, '#rf-zustatek', 'abc');
   assert.equal(await page.$eval('#rf-zustatek-chyba', (el) => el.hidden), false);
   assert.equal(await page.$eval('#rf-zustatek', (el) => el.getAttribute('aria-invalid')), 'true');
-  assert.equal(await text(page, '#vysledek [data-vysledek-cislo]'), pred);
+  assert.equal(await vidno('#vysledek'), false, 'výsledek skrytý');
+  assert.equal(await vidno('[data-tabulka-variant]'), false, 'tabulka variant skrytá');
+  assert.equal(await vidno('[data-tabulka-stresu]'), false, 'zátěžový test skrytý');
+  assert.equal(await page.$eval('[data-neplatne="rf"]', (el) => el.getAttribute('role')), 'alert');
+  assert.match(await text(page, '[data-neplatne="rf"]'), /neopravíš pole: Zbývající dluh\./);
+  assert.equal(await text(page, '[data-lista-cislo]'), '–');
   await vypln(page, '#rf-zustatek', '2 800 000');
   assert.equal(await page.$eval('#rf-zustatek-chyba', (el) => el.hidden), true);
+  assert.equal(await vidno('#vysledek'), true);
+  assert.equal(await vidno('[data-neplatne="rf"]'), false);
+  assert.equal(await text(page, '#vysledek [data-vysledek-cislo]'), pred);
+  // Kalkulačka poplatku: chybné pole → místo částky pomlčka a hláška
+  await vypln(page, '#pp-castka', 'abc');
+  assert.equal(await text(page, '[data-poplatek-cislo]'), '–');
+  assert.match(await text(page, '[data-poplatek-duvod]'), /neopravíš pole: Mimořádná splátka\./);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('poplatek: starší smlouva 2021 v den konce fixace → 0 Kč; § 117a s průměrem ČNB → nejvýš 1 000 Kč', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#pp-castka', '500 000');
+  await vypln(page, '#pp-smlouva', '2021-03-01');
+  await vypln(page, '#pp-zacatek', '2021-03-01');
+  await vypln(page, '#pp-konec', '2026-03-01');
+  await vypln(page, '#pp-splatka', '2026-03-01');
+  assert.equal(await text(page, '[data-poplatek-cislo]'), '0 Kč');
+  // Nová smlouva, 3 roky do konce fixace, průměr ČNB = smluvní sazba
+  await vypln(page, '#pp-castka', '300 000');
+  await vypln(page, '#pp-smlouva', '2025-03-01');
+  await vypln(page, '#pp-zacatek', '2025-03-01');
+  await vypln(page, '#pp-konec', '2030-03-01');
+  await vypln(page, '#pp-splatka', '2027-03-01');
+  await vypln(page, '#pp-sazba', '4,5');
+  assert.equal(await text(page, '[data-poplatek-cislo]'), '2 250 Kč');
+  await vypln(page, '#pp-sazba-cnb', '4,5');
+  assert.equal(await text(page, '[data-poplatek-cislo]'), '1 000 Kč');
+  assert.match(await text(page, '[data-poplatek-duvod]'), /§ 117a/);
+  assert.ok((await page.$$('.bm-dalsi-duvody li')).length === 5, 'další bezplatné důvody');
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+test('nájem vs. koupě: nad limitem LTV se porovnání nepočítá (BYD-05), DTI a úspora na dani se ukážou (BYD-04)', async () => {
+  const { page, chyby } = await otevri(`${CESTA}#najem-vs-koupe`, { sirka: 1440, vyska: 900 });
+  const vidno = (sel) => page.$eval(sel, (el) => el.getBoundingClientRect().height > 0 && !el.closest('[hidden]'));
+  assert.match(await text(page, '#vysledek-najem .stats'), /DTI \d+,\d/);
+  assert.match(await text(page, '#vysledek-najem .stats'), /úspora na dani z odpočtu úroků v 1\. roce/);
+  await page.select('#nk-mesto', 'brno');
+  await vypln(page, '#nk-vlastni', '1 500 000');
+  await vypln(page, '#nk-naklady-koupe', '12 000');
+  await vypln(page, '#nk-vek', '40');
+  assert.equal(await text(page, '#vysledek-najem-nadpis'), 'Na koupi chybí vlastní zdroje');
+  assert.equal(await text(page, '#vysledek-najem [data-vysledek-cislo]'), '11 448 Kč');
+  assert.match(await text(page, '[data-varovani]'), /LTV 80,2 %, ale limit je 80 %/);
+  assert.equal(await vidno('[data-graf]'), false, 'graf skrytý');
+  assert.equal(await vidno('[data-tabulka-citlivosti]'), false, 'citlivost skrytá');
+  assert.equal(await vidno('#vysledek-najem .stats'), false, 'statistiky skryté');
+  await vypln(page, '#nk-vek', '30');
+  assert.match(await text(page, '#vysledek-najem-nadpis'), /^Za 20 let vychází lépe/);
+  assert.equal(await vidno('[data-graf] svg'), true, 'graf zpět');
   assert.deepEqual(chyby, []);
   await page.close();
 });

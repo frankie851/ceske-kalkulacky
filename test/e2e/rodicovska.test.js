@@ -145,3 +145,54 @@ test('rodičovská i v měsíci 3. narozenin, souběžně s nízkou mateřskou a
   assert.deepEqual(chyby, []);
   await page.close();
 });
+
+// Revize 5. 11. 2026, ROD-07: při neplatném vstupu nesmí pod hláškou zůstat starý plán.
+test('neplatný termín nebo příjem skryje starý souhrn a kontrolní seznam, oprava je vrátí', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  const viditelne = (sel) => page.$eval(sel, (el) => el.checkVisibility());
+  await vypln(page, '#termin', '2026-12-15');
+  assert.equal(await viditelne('#vysledek'), true);
+  assert.equal(await viditelne('[data-kontrolni-seznam]'), true);
+  assert.equal(await viditelne('[data-neplatne]'), false);
+
+  await vypln(page, '#termin', '2025-12-31');
+  assert.match(await text(page, '#termin-chyba'), /Zadej termín od/);
+  assert.equal(await viditelne('[data-neplatne]'), true);
+  assert.match(await text(page, '[data-neplatne]'), /Oprav zvýrazněná pole/);
+  for (const sel of ['#vysledek', '#tabulka-souhrnu', '[data-kontrolni-seznam]', '[data-osa]', '.lepiva-lista']) {
+    assert.equal(await viditelne(sel), false, `${sel} má být skryté`);
+  }
+
+  await vypln(page, '#termin', '2027-02-01');
+  assert.equal(await viditelne('[data-neplatne]'), false);
+  assert.equal(await viditelne('#vysledek'), true);
+  assert.equal(await viditelne('[data-kontrolni-seznam]'), true);
+  assert.match(await text(page, '#krok-dite .step-sum'), /1\. 2\. 2027/);
+
+  await vypln(page, '#prijem-matka', '-30 000');
+  assert.match(await text(page, '#prijem-matka-chyba'), /záporný/);
+  assert.equal(await viditelne('[data-neplatne]'), true);
+  assert.equal(await viditelne('#vysledek'), false);
+  await vypln(page, '#prijem-matka', '30 000');
+  assert.equal(await viditelne('#vysledek'), true);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});
+
+// Revize 5. 11. 2026, ROD-09: § 38a odst. 4 zákona č. 187/2006 Sb. – nástup do 6 týdnů od narození.
+test('otcovská od 35. a 41. dne po porodu jde zadat, 42. den ukáže chybu', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  await vypln(page, '#termin', '2026-03-15');
+  await vypln(page, '#prijem-otec', '30 000');
+  await page.click('label[for="otcovska-ano"]');
+  await vypln(page, '#otcovska-od', '35');
+  assert.equal(await page.$eval('#otcovska-od', (el) => el.hasAttribute('aria-invalid')), false);
+  assert.match(await text(page, '#krok-otcovska .step-sum'), /19\. 4\. 2026 až 2\. 5\. 2026/);
+  await vypln(page, '#otcovska-od', '41');
+  assert.match(await text(page, '#krok-otcovska .step-sum'), /25\. 4\. 2026 až 8\. 5\. 2026/);
+  assert.match(await text(page, '#otcovska-od-napoveda'), /nejvýš 41/);
+  await vypln(page, '#otcovska-od', '42');
+  assert.match(await text(page, '#otcovska-od-chyba'), /od 0 do 41/);
+  assert.deepEqual(chyby, []);
+  await page.close();
+});

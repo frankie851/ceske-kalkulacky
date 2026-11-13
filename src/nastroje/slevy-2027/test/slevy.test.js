@@ -136,16 +136,84 @@ test('součet produktů na stáří nad limit → 48 000 Kč', () => {
   assert.equal(odpocetStari({ penzijko: 50400, dip: 10000, zivotni: 20000 }, rules).odpocet, 48000);
 });
 
-test('úroky z hypotéky nad limit → 150 000, stará smlouva 300 000', () => {
+// Revize 5. 11. 2026, SLV-04/SLV-06: vyšší limit 300 000 Kč patří k bytové potřebě obstarané
+// před 1. 1. 2021 (zákon č. 386/2020 Sb., čl. IV bod 3), ne ke smlouvě. Dřív vstup „stareSmlouva“.
+test('úroky z hypotéky nad limit → 150 000, bydlení pořízené před 1. 1. 2021 → 300 000', () => {
   assert.equal(odpocetUroky({ uroky: 200000 }, rules).odpocet, 150000);
-  assert.equal(odpocetUroky({ uroky: 200000, stareSmlouva: true }, rules).odpocet, 200000);
+  assert.equal(odpocetUroky({ uroky: 200000, bytovaPotrebaPred2021: true }, rules).odpocet, 200000);
+  assert.equal(odpocetUroky({ uroky: 400000, bytovaPotrebaPred2021: true }, rules).odpocet, 300000);
   assert.equal(odpocetUroky({ uroky: 200000, mesice: 6 }, rules).odpocet, 75000);
+});
+
+test('SLV-06: byt koupený 2019, úvěr refinancovaný 2023, úroky 180 000 Kč → odečte 180 000 Kč', () => {
+  // Rozhoduje, kdy bylo bydlení pořízené. Datum (nové) smlouvy se nezadává a výsledek neovlivní.
+  assert.equal(odpocetUroky({ uroky: 180000, bytovaPotrebaPred2021: true }, rules).odpocet, 180000);
+  // Byt pořízený v roce 2021 nebo později: jen 150 000 Kč, i kdyby smlouva byla z prosince 2020.
+  assert.equal(odpocetUroky({ uroky: 180000, bytovaPotrebaPred2021: false }, rules).odpocet, 150000);
+  assert.equal(rules.odpocty.uroky.limitPred2021, 300000);
+  assert.match(rules.odpocty.uroky.zdroj.url, /zakonyprolidi\.cz\/cs\/2020-386/);
+});
+
+test('SLV-06: zaškrtnutí „bydlení pořízené před 1. 1. 2021“ v dotazníku dojde až do výpočtu', () => {
+  const stav = {
+    narozeni: { rok: '1990', mesic: 1 },
+    mzda: { mesicne: '60 000', mesice: 12 },
+    studium: { studuje: false, od: 1, do: 12, druh: 'vs' },
+    deti: [],
+    manzel: { ma: false, prijem: '', peceODite: false, ztpp: false },
+    invalidita: { stupen: 0, ztpp: false },
+    hypoteka: { uroky: '180 000', bytovaPotrebaPred2021: true },
+    stari: { penzijko: '', dip: '', zivotni: '', dlouhodobaPece: '' },
+    dary: { dary: '', krev: '' },
+    odbory: false,
+    prijmy: { maleDohody: '', soubezne: '', ostatni: '' },
+  };
+  const uroky = (s) => vyhodnot(odpovediZeStavu(s, rules), rules).polozky.find((p) => p.id === 'uroky').rocne;
+  assert.equal(uroky(stav), 180000);
+  stav.hypoteka.bytovaPotrebaPred2021 = false;
+  assert.equal(uroky(stav), 150000);
 });
 
 test('dary: pod 1 000 Kč a pod 2 % → 0; strop 15 % základu daně', () => {
   assert.equal(odpocetDary({ dary: 800 }, 600000, rules).odpocet, 0);
   assert.equal(odpocetDary({ dary: 500, krev: 1 }, 600000, rules).odpocet, 3500);
   assert.equal(odpocetDary({ dary: 200000 }, 600000, rules).odpocet, 90000);
+});
+
+// § 15 odst. 1 ZDP (znění od 1. 1. 2027): úhrn nad 2 % základu daně nebo aspoň 1 000 Kč,
+// v úhrnu nejvýš 15 % ze základu daně.
+test('SLV-06: strop a minimum darů s jiným základem daně než 600 000 Kč', () => {
+  assert.equal(rules.odpocty.dary.maxPodilZakladu, 0.15);
+  assert.equal(rules.odpocty.dary.minPodilZakladu, 0.02);
+  assert.equal(rules.odpocty.dary.minKc, 1000);
+  // základ 360 000 Kč → strop 54 000 Kč
+  assert.equal(odpocetDary({ dary: 70000 }, 360000, rules).odpocet, 54000);
+  assert.equal(odpocetDary({ dary: 70000 }, 360000, rules).omezeno, true);
+  assert.equal(odpocetDary({ dary: 50000 }, 360000, rules).odpocet, 50000);
+  // základ 30 000 Kč: 900 Kč je víc než 2 % (600 Kč) → odečte se, i když je to pod 1 000 Kč
+  assert.equal(odpocetDary({ dary: 900 }, 30000, rules).odpocet, 900);
+  // a strop 15 % = 4 500 Kč
+  assert.equal(odpocetDary({ dary: 6000 }, 30000, rules).odpocet, 4500);
+  // základ 360 000 Kč: 900 Kč není 2 % (7 200 Kč) ani 1 000 Kč → nic
+  assert.equal(odpocetDary({ dary: 900 }, 360000, rules).odpocet, 0);
+});
+
+// Revize 5. 11. 2026, SLV-08: strop 15 % se počítá ze základu daně, ne ze základu sníženého
+// o odpočty na stáří a úroky (§ 15 odst. 1 ZDP: „nejvýše 15 % ze základu daně“).
+test('SLV-08: ZD 600 000, stáří 48 000, úroky 150 000, dary 100 000 → dary 90 000 Kč', () => {
+  const r = vyhodnot({
+    narozeni: { rok: 1980, mesic: 1 },
+    mzda: { mesicne: 50000, mesice: 12 },
+    hypoteka: { uroky: 150000 },
+    stari: { dip: 48000 },
+    dary: { dary: 100000 },
+  }, rules);
+  assert.equal(r.zakladDane, 600000);
+  const dary = r.polozky.find((p) => p.id === 'dary');
+  assert.equal(dary.rocne, 90000);
+  assert.equal(dary.omezeno, true);
+  // Odpočty dohromady 288 000 Kč → zdaní se 312 000 Kč.
+  assert.equal(r.dan.zaklad, 312000);
 });
 
 test('slevy sníží daň nejvýš na nulu, zbytek zvýhodnění na děti je bonus', () => {
@@ -281,7 +349,7 @@ test('SLV-01: převod stavu formuláře – dítě 2012 se zbylou školkou jde d
     deti: [{ narozeni: { rok: '2012', mesic: 1 }, ztpp: false, od: 1, do: 12, studuje: false, skolka: true, skolne: '20 000', dveDomacnosti: false, dohodaStrop: '' }],
     manzel: { ma: false, prijem: '', peceODite: false, ztpp: false },
     invalidita: { stupen: 0, ztpp: false },
-    hypoteka: { uroky: '', stareSmlouva: false },
+    hypoteka: { uroky: '', bytovaPotrebaPred2021: false },
     stari: { penzijko: '', dip: '', zivotni: '', dlouhodobaPece: '' },
     dary: { dary: '', krev: '' },
     odbory: false,

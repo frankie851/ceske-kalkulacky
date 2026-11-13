@@ -51,10 +51,11 @@ export default {
     nazev: tx.title,
     uvod: fill(tx.intro, vars),
     soukromi: tx.panelPrivacy,
+    neplatne: tx.invalidResult,
     pole: {
       prijmy: { label: fill(tx.fieldIncome, vars), hodnota: cislo(vstup.income), napoveda: tx.fieldIncomeHelp, jednotka: rules.meta.currency },
       pausal: {
-        label: tx.fieldFlatRate, napoveda: tx.fieldFlatRateHelp,
+        label: tx.fieldFlatRate, napoveda: fill(tx.fieldFlatRateHelp, { share: formatPercent(o.flatTax.singleActivity.share) }),
         moznosti: o.expenseFlatRates.map((f) => ({ hodnota: f.id, text: f.label, vybrano: vybrano(f.id, vstup.flatRateId) })),
       },
       vydaje: {

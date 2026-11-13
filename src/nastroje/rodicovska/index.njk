@@ -72,6 +72,9 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
   </section>
 
   <div class="calc-main">
+    <div class="rodicovska-neplatne" role="status">
+      <div class="notice" data-neplatne hidden>{{ ikona('ikona-vystraha') }}<div><p><strong>Plán se nepřepočítal.</strong></p><p>Oprav zvýrazněná pole ve formuláři. Do té doby plán neukazujeme, aby tu nezůstala čísla k jinému zadání.</p></div></div>
+    </div>
     {%- call vysledek({ id: 'vysledek', kicker: 'Plán do 3 let dítěte', nadpis: 'Tady je plán pro tvoji rodinu', cislo: r.vysledek.cislo, popis: r.vysledek.popis, vysvetleni: r.vysledek.vysvetleni, ilustrace: 'situace-rodina', ukazka: true }) %}
       <p class="rodicovska-novela" data-novela{% if not r.rp.novela %} hidden{% endif %}>{{ stitek({ typ: 'schvaleno', text: r.rp.novela or 'Zákon č. 152/2026 Sb.' }) }}</p>
       {{ statistiky(r.vysledek.statistiky) }}
@@ -83,7 +86,7 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
       <p class="sr-only" aria-live="polite" data-oznameni></p>
     {%- endcall %}
 
-    <section class="card" aria-labelledby="osa-karta-nadpis">
+    <section class="card" aria-labelledby="osa-karta-nadpis" data-plan>
       <h2 id="osa-karta-nadpis">Časová osa po měsících</h2>
       <p class="muted">Kolik rodina dostane každý měsíc: dávky a orientační čisté mzdy toho, kdo zrovna pracuje. ★ je měsíc porodu, ✓ měsíc, kdy se rodičovský příspěvek vyčerpá.</p>
       <ul class="graf-legenda rodicovska-legenda" aria-label="Legenda časové osy">
@@ -98,7 +101,7 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
       </details>
     </section>
 
-    <section class="card" aria-labelledby="souhrn-nadpis">
+    <section class="card" aria-labelledby="souhrn-nadpis" data-plan>
       <h2 id="souhrn-nadpis">Souhrn</h2>
       {{ tabulka({ caption: 'Kolik rodina dostane do 3 let dítěte', popisek: 'souhrn', sloupce: r.sloupceSouhrnu, radky: r.radkySouhrnu, vpravo: [1], stack: true, zvyraznit: r.zvyraznitSouhrn, id: 'tabulka-souhrnu' }) }}
       <details class="rodicovska-tabulka">
@@ -110,7 +113,7 @@ styly: ['/nastroje/rodicovska/rodicovska.css']
       <p class="note">{{ ikona('ikona-info') }}<span>Orientační výpočet, nejde o rozhodnutí úřadu. O mateřské a otcovské rozhoduje ČSSZ, o rodičovském příspěvku Úřad práce ČR.</span></p>
     </section>
 
-    <section class="card" aria-labelledby="seznam-nadpis">
+    <section class="card" aria-labelledby="seznam-nadpis" data-plan>
       <h2 id="seznam-nadpis">Kontrolní seznam: kdy a kde požádat</h2>
       <p class="muted">Termíny podle zadaného plánu. Odškrtnutí se nikam neukládá.</p>
       <div data-kontrolni-seznam>

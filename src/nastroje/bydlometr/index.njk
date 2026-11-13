@@ -66,17 +66,19 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
           {%- endcall %}
           {%- call krok({ cislo: 3, titulek: 'Další možnosti', shrnuti: r.shrnuti[3], otevreny: true, id: 'rf-krok-3' }) %}
             {%- for f in r.kroky[3] %}{{ pole(f) }}{% endfor %}
+            {{ volby({ id: 'rf-volby', legenda: 'Odpočet úroků z daní', moznosti: r.volby, napoveda: r.napovedaVoleb }) }}
           {%- endcall %}
         </form>
       </section>
 
       <div class="calc-main">
+        <p class="bm-neplatne" data-neplatne="rf" role="alert" hidden></p>
         {%- call vysledek({ id: 'vysledek', kicker: r.vysledek.kicker, nadpis: r.vysledek.nadpis, cislo: r.vysledek.cislo, popis: r.vysledek.popis, vysvetleni: r.vysledek.vysvetleni, ilustraceSvg: obrazekRefixace, ukazka: true }) %}
           {{ statistiky(r.vysledek.statistiky) }}
           <p class="sr-only" aria-live="polite" data-oznameni></p>
         {%- endcall %}
 
-        <section class="card" aria-labelledby="rf-varianty-nadpis">
+        <section class="card" aria-labelledby="rf-varianty-nadpis" data-vysledky="rf">
           <h2 id="rf-varianty-nadpis">Porovnání variant</h2>
           <p class="muted">Splátka, úroky a poplatky do konce splácení pro každou variantu. Nejlevnější je zvýrazněná.</p>
           <div data-tabulka-variant>{{ r.tabulkaVariant | safe }}</div>
@@ -85,7 +87,7 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
           </ul>
         </section>
 
-        <section class="card" aria-labelledby="rf-stres-nadpis">
+        <section class="card" aria-labelledby="rf-stres-nadpis" data-vysledky="rf">
           <h2 id="rf-stres-nadpis">Zátěžový test sazby</h2>
           <p class="muted" data-uvod-stresu>{{ r.uvodStresu }}</p>
           <div data-tabulka-stresu>{{ r.tabulkaStresu | safe }}</div>
@@ -94,7 +96,7 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
 
         <section class="card" aria-labelledby="pp-nadpis">
           <h2 id="pp-nadpis">Poplatek za mimořádnou splátku během fixace</h2>
-          <p class="muted">Kolik nejvýš smí banka chtít, když splatíš část dluhu před koncem fixace. Pravidla platí pro smlouvy a fixace od {{ pp.platnost }}.</p>
+          <p class="muted">Kolik nejvýš smí banka chtít, když splatíš část účelového úvěru na bydlení před koncem fixace. Nové stropy platí pro smlouvy uzavřené od {{ pp.platnost }} a pro novější fixace. U starších smluv ukážeme, co platí podle dřívějšího znění zákona.</p>
           <form id="form-poplatek" class="bm-poplatek-formular" action="#pp-vysledek" method="get" novalidate>
             <div class="bm-dvojice">
               {%- for f in pp.pole %}{{ pole(f) }}{% endfor %}
@@ -108,6 +110,13 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
             <p class="bm-poplatek-hlavni"><span data-poplatek-popis>{{ pp.popis }}</span> <b class="num" data-poplatek-cislo>{{ pp.cislo }}</b></p>
             <p class="muted" data-poplatek-duvod>{{ pp.duvod }}</p>
             <p class="sr-only" aria-live="polite" data-poplatek-oznameni></p>
+          </div>
+          <div class="bm-dalsi-duvody">
+            <h3>Zdarma je splátka i v těchto případech</h3>
+            <ul class="bm-poznamky">
+              {%- for d in pp.dalsiDuvody.polozky %}<li>{{ d.text }} (písm. {{ d.pismeno }})</li>{% endfor %}
+            </ul>
+            <p class="muted small">{{ pp.dalsiDuvody.poznamka }} Podrobně: <a href="{{ pp.dalsiDuvody.url }}">{{ pp.dalsiDuvody.odkaz }}</a>.</p>
           </div>
         </section>
       </div>
@@ -141,6 +150,7 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
       </section>
 
       <div class="calc-main">
+        <p class="bm-neplatne" data-neplatne="nk" role="alert" hidden></p>
         {%- call vysledek({ id: 'vysledek-najem', kicker: n.vysledek.kicker, nadpis: n.vysledek.nadpis, cislo: n.vysledek.cislo, popis: n.vysledek.popis, vysvetleni: n.vysledek.vysvetleni, ilustraceSvg: obrazekNajmu, ukazka: true }) %}
           <ul class="bm-varovani" data-varovani{% if not n.varovani.length %} hidden{% endif %}>
             {%- for t in n.varovani %}<li>{{ ikona('ikona-vystraha') }}<span>{{ t }}</span></li>{% endfor %}
@@ -149,7 +159,7 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
           <p class="sr-only" aria-live="polite" data-oznameni></p>
         {%- endcall %}
 
-        <section class="card" aria-labelledby="nk-graf-nadpis">
+        <section class="card" aria-labelledby="nk-graf-nadpis" data-vysledky="nk" data-nk-detail{% if not n.platny %} hidden{% endif %}>
           <h2 id="nk-graf-nadpis">Čisté jmění v čase</h2>
           <p class="muted">Koupě: hodnota bytu minus zbývající dluh plus investice kupujícího. Nájem: investované vlastní zdroje a měsíční rozdíl.</p>
           <div class="bm-graf" data-graf>{{ n.graf | safe }}</div>
@@ -159,7 +169,7 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
           </details>
         </section>
 
-        <section class="card" aria-labelledby="nk-citlivost-nadpis">
+        <section class="card" aria-labelledby="nk-citlivost-nadpis" data-vysledky="nk" data-nk-detail{% if not n.platny %} hidden{% endif %}>
           <h2 id="nk-citlivost-nadpis">Citlivost na předpoklady</h2>
           <p class="muted" data-uvod-citlivosti>{{ n.uvodCitlivosti }}</p>
           <div data-tabulka-citlivosti>{{ n.tabulkaCitlivosti | safe }}</div>
@@ -170,7 +180,8 @@ styly: ['/nastroje/bydlometr/bydlometr.css']
           <ul class="bm-poznamky">
             <li>Simulace běží po měsících. Kupující platí splátku a náklady vlastnictví, nájemník nájem. Kdo má v daném měsíci nižší výdaj, rozdíl investuje.</li>
             <li>Nájemník investuje vlastní zdroje od prvního dne. Kupující je dá do bytu a do nákladů koupě.</li>
-            <li>Odpočet úroků z daní se projeví jednou ročně. Nájem roste jednou ročně, cena bytu a investice každý měsíc.</li>
+            <li>Odpočet úroků z daní (§ 15 odst. 3 a 4 zákona o daních z příjmů) se projeví jednou ročně. Nájem roste jednou ročně, cena bytu a investice každý měsíc.</li>
+            <li>Když by úvěr přesáhl limit LTV, porovnání nepočítáme a ukážeme, kolik vlastních zdrojů chybí.</li>
             <li>Zjednodušení: nominální koruny bez přepočtu na inflaci, bez daně z výnosů, bez nákladů na prodej bytu a bez provize realitní kanceláře. Sazba po konci fixace platí do konce splácení.</li>
           </ul>
         </section>
