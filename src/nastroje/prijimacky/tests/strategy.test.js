@@ -37,11 +37,33 @@ test('očekávané body bez škol → žádné řádky ani varování', () => {
   assert.deepEqual(r.warnings, []);
 });
 
-test('tři prázdné školy → „Chybí údaje“; dnešní chování: varování no-safe, ale ne missing-min (PRI-07 neopraven)', () => {
+test('PRI-07: tři prázdné školy → žádné řádky „Škola 1–3“ ani varování no-safe', () => {
   const r = evaluateStrategy({ expected: 60, schools: [1, 2, 3].map(() => ({ name: '', lastMin: null })) });
-  assert.deepEqual(r.schools.map((s) => s.category), ['nevim', 'nevim', 'nevim']);
-  assert.deepEqual(r.schools.map((s) => s.name), ['Škola 1', 'Škola 2', 'Škola 3']);
+  assert.deepEqual(r.schools, []);
+  assert.deepEqual(r.warnings, []);
+});
+
+test('PRI-07: škola jen s názvem (bez minima) → bez no-safe, jen výzva doplnit minimum', () => {
+  const r = evaluateStrategy({ expected: 60, schools: [{ name: 'Gympl', lastMin: null }, { name: '', lastMin: null }, { name: '', lastMin: null }] });
+  assert.deepEqual(r.schools.map((s) => [s.priority, s.name, s.category]), [[1, 'Gympl', 'nevim']]);
+  assert.deepEqual(r.warnings.map((w) => w.id), ['missing-min']);
+});
+
+test('PRI-07: vyplněná jen 2. priorita → jeden řádek s pořadím 2; bez jistoty → no-safe', () => {
+  const r = evaluateStrategy({ expected: 60, schools: [{ name: '', lastMin: null }, { name: 'Průmyslovka', lastMin: 62 }, { name: '', lastMin: null }] });
+  assert.deepEqual(r.schools.map((s) => [s.priority, s.name, s.category]), [[2, 'Průmyslovka', 'riziko']]);
   assert.deepEqual(r.warnings.map((w) => w.id), ['no-safe']);
+});
+
+test('PRI-07: minimum bez názvu školy se počítá jako zadaná škola („Škola 3“)', () => {
+  const r = evaluateStrategy({ expected: 70, schools: [{ name: '', lastMin: null }, { name: '', lastMin: null }, { name: '', lastMin: 50 }] });
+  assert.deepEqual(r.schools.map((s) => [s.priority, s.name, s.category]), [[3, 'Škola 3', 'jistota']]);
+  assert.deepEqual(r.warnings, []);
+});
+
+test('PRI-07: chybí očekávané body, minima zadaná → jen missing-expected (ne „chybí minimum“)', () => {
+  const r = evaluateStrategy({ expected: null, schools: [{ name: 'A', lastMin: 50 }, { name: 'B', lastMin: 60 }] });
+  assert.deepEqual(r.warnings.map((w) => w.id), ['missing-expected']);
 });
 
 test('hranice kategorií: rozdíl = rezerva → jistota, 0 → těsné, záporný → riziko; desetinné body', () => {

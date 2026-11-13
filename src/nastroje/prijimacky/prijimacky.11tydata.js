@@ -56,6 +56,8 @@ const prihlStart = event('ss-prihlasky-start');
 const prihlKonec = event('ss-prihlasky-konec');
 const jpz1 = event('jpz-1');
 const jpz2 = event('jpz-2');
+const vg1 = event('vg-1');
+const vg2 = event('vg-2');
 const nahr1 = event('jpz-nahr-1');
 const nahr2 = event('jpz-nahr-2');
 const kriteria = event('ss-kriteria');
@@ -103,11 +105,15 @@ export default {
       nadpis: r.title,
       text: ty(r.text),
       overeno: r.status === 'confirmed',
+      // PRI-09: „derived“ = plyne z úředního harmonogramu, samostatný úřední dokument to netvrdí.
+      odvozeno: r.status === 'derived',
+      poznamka: r.note ? ty(r.note) : '',
       stav: r.status,
       zdroj: { nazev: pravidla.sources[r.source].name, url: pravidla.sources[r.source].url },
     })),
     data: {
       jpz: `${denMesic(jpz1.start)} a ${datumPlne(jpz2.start)}`,
+      vg: `${denMesic(vg1.start)} a ${datumPlne(vg2.start)}`,
       vysledky1: datumPlne(vysledky1.start),
       prihlasky: `${denMesic(prihlStart.start)}–${datumPlne(prihlKonec.start)}`,
     },

@@ -150,7 +150,7 @@ test('u úředních kalkulaček je upozornění na jiné číslo', () => {
   assert.ok(srazky.includes(k.srazky.variantaOdchylna), 'chybí název odchylné volby');
   assert.ok(srazky.includes(k.srazky.variantaPodleNarizeni), 'chybí název správné volby');
   assert.match(srazky, /k 1\. lednu/);
-  const splatky = textZHtml(polozka('https://insolvence.justice.cz/')).replace(/\s+/g, ' ');
+  const splatky = textZHtml(polozka('https://insolvence.justice.cz/kalkulator-splatek/')).replace(/\s+/g, ' ');
   assert.match(splatky, /vyšší splátku/);
   assert.match(splatky, /30 692 Kč/);
 });

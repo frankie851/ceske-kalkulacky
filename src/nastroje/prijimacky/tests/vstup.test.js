@@ -83,6 +83,15 @@ test('strategie: desetinné body česky („o 2,5 b. nad“)', () => {
   assert.match(html, /Loňské minimum 60 b\./);
 });
 
+test('PRI-07: strategie bez zadané školy → výzva k doplnění, žádné řádky ani varování no-safe', () => {
+  const html = strategieHtml(evaluateStrategy({ expected: 60, schools: [1, 2, 3].map(() => ({ name: '', lastMin: null })) }), 5, '/s.svg');
+  assert.match(html, /data-strategie-prazdna/);
+  assert.match(html, /Doplň aspoň jednu školu/);
+  assert.ok(!html.includes('data-kategorie'));
+  assert.ok(!html.includes('no-safe'));
+  assert.ok(!html.includes('Škola 1'));
+});
+
 test('vysvětlení z explain(): desetinná tečka → čárka, pořadí „1. priorita“ zůstane', () => {
   assert.equal(upravVetu('1. priorita A: nesplnil(a) kritéria (minimum 60 b., má 59.5 b.).'),
     '1. priorita A: nesplnil(a) kritéria (minimum 60 b., má 59,5 b.).');
@@ -98,4 +107,38 @@ test('PRI-04: strategie upozorňuje, že body i minimum musí být na stejné š
     assert.match(sekce, new RegExp(`id: '${id}[^}]*chybaMisto: true`), `${id} má místo pro hlášku`);
     assert.match(sekce, new RegExp(`id: '${id}[^}]*inputmode: 'decimal'`), `${id} přijme desetinnou čárku`);
   }
+});
+
+// ---------- Nízké nálezy revize 5. 11. 2026 (opraveno 13. 11. 2026) ----------
+
+test('PRI-06: krok 2 uvádí termíny jednotné zkoušky pro čtyřleté obory i pro šesti- a osmiletá gymnázia', async () => {
+  const { default: data } = await import('../prijimacky.11tydata.js');
+  const ev = (id) => pravidla.events.find((e) => e.id === id).start;
+  // Sdělení MŠMT č. j. MSMT-525/2026-13: čtyřleté obory 12. a 13. 4., šestiletá a osmiletá gymnázia 14. a 15. 4. 2027.
+  assert.deepEqual([ev('jpz-1'), ev('jpz-2'), ev('vg-1'), ev('vg-2')], ['2027-04-12', '2027-04-13', '2027-04-14', '2027-04-15']);
+  const mezery = (t) => t.replace(/\u00a0/g, ' ');
+  assert.equal(mezery(data.prij.data.jpz), '12. 4. a 13. 4. 2027');
+  assert.equal(mezery(data.prij.data.vg), '14. 4. a 15. 4. 2027');
+  const njk = readFileSync(new URL('../index.njk', import.meta.url), 'utf8');
+  const od = njk.indexOf('Jednotná zkouška dvakrát');
+  const krok = njk.slice(od, njk.indexOf('</li>', od));
+  assert.match(krok, /čtyřleté obory[^{]*\{\{ p\.data\.jpz \}\}/);
+  assert.match(krok, /šestiletá a osmiletá gymnázia[^{]*\{\{ p\.data\.vg \}\}/);
+});
+
+test('PRI-09: tvrzení „reforma v roce 2027 neplatí“ nemá štítek „Ověřeno“, ale „Vyplývá z harmonogramu“ s citací', async () => {
+  const r = pravidla.rules.find((x) => x.id === 'reforma');
+  assert.equal(r.status, 'derived');
+  assert.ok(pravidla.meta.statusLegend.derived);
+  assert.ok(r.note, 'pravidlo vysvětluje, proč není „Ověřeno“');
+  assert.ok(r.zdroj?.citace && r.zdroj?.pravniZaklad && r.zdroj?.url);
+  const { default: data } = await import('../prijimacky.11tydata.js');
+  const web = data.prij.pravidlaWeb.find((x) => x.id === 'reforma');
+  assert.equal(web.overeno, false);
+  assert.equal(web.odvozeno, true);
+  assert.ok(web.poznamka);
+  const njk = readFileSync(new URL('../index.njk', import.meta.url), 'utf8');
+  assert.match(njk, /r\.odvozeno %\}\{\{ stitek\(\{ typ: 'plain', text: 'Vyplývá z harmonogramu' \}\) \}\}/);
+  // Data zdrojů (sources[].date v ISO tvaru) se na stránce nevypisují.
+  assert.ok(!/\.date\b/.test(njk));
 });

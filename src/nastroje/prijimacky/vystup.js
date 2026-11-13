@@ -270,7 +270,10 @@ export function strategieHtml(res, rezerva, sprite) {
   }).join('');
   const upozorneni = res.warnings.map((w) => `<li class="prij-upoz prij-upoz-${w.level === 'warn' ? 'warn' : 'info'}" data-upozorneni="${esc(w.id)}">`
     + `${ikona(w.level === 'warn' ? 'ikona-vystraha' : 'ikona-info', sprite)}<span>${esc(textUpozorneni(w, rezerva))}</span></li>`).join('');
-  return `<ol class="prij-strategie">${radky}</ol>`
+  // PRI-07: bez zadané školy jen výzva k doplnění, žádné prázdné řádky „Škola 1–3“.
+  const seznam = radky ? `<ol class="prij-strategie">${radky}</ol>`
+    : '<p class="prij-str-prazdna" data-strategie-prazdna>Doplň aspoň jednu školu a její loňské minimum. Pak tu uvidíš, jak vychází.</p>';
+  return seznam
     + (upozorneni ? `<ul class="prij-upozorneni">${upozorneni}</ul>` : '')
     + '<p class="note">Pořadí na přihlášce dej podle toho, kam dítě chce nejvíc. Nižší priorita mu šanci na vyšší nevezme.</p>';
 }

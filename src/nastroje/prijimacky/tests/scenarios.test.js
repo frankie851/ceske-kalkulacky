@@ -17,7 +17,12 @@ test('rules.json: každá událost a pravidlo má existující zdroj a platné d
   const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
   for (const item of [...rules.events, ...rules.rules]) {
     assert.ok(rules.sources[item.source], `${item.id}: chybí zdroj ${item.source}`);
-    assert.ok(['confirmed', 'unverified', 'tip'].includes(item.status), item.id);
+  }
+  for (const e of rules.events) assert.ok(['confirmed', 'unverified', 'tip'].includes(e.status), e.id);
+  // PRI-09: pravidlo může být „derived“ (plyne z úředního harmonogramu), ale musí mít poznámku a stav v legendě.
+  for (const r of rules.rules) {
+    assert.ok(['confirmed', 'unverified', 'tip', 'derived'].includes(r.status), r.id);
+    if (r.status === 'derived') assert.ok(r.note && rules.meta.statusLegend.derived, `${r.id}: odvozené pravidlo musí mít poznámku`);
   }
   for (const e of rules.events) {
     assert.match(e.start, /^\d{4}-\d{2}-\d{2}$/);

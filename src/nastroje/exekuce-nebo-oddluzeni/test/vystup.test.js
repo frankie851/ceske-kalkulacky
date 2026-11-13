@@ -113,3 +113,16 @@ test('upozornění u úředních kalkulaček: proč mohou ukázat jiné číslo'
     for (const veta of t.split(/(?<=[.!?])\s+/)) assert.ok(veta.split(/\s+/).length <= 20, `dlouhá věta: ${veta}`);
   }
 });
+
+// DLU-09 (revize 5. 11. 2026, nízký nález): náhrada plátci mzdy nenáleží u exekucí, kde příkaz
+// ke srážkám ze mzdy vydal exekutor před 1. 1. 2022 (zákon č. 286/2021 Sb., čl. IV bod 1 a 12).
+test('náhrada zaměstnavateli: text říká, kdy se neplatí (DLU-09)', () => {
+  const v = vysledek(p, zaklad);
+  assert.equal(v.cisla.s.nahradaZamestnavateli, 50);
+  const t = bezNbsp(v.ex.nahrada);
+  assert.match(t, /nechá 50 Kč/);
+  assert.match(t, /před 1\. 1\. 2022/);
+  assert.match(t, /celou srážku/);
+  assert.doesNotMatch(t, /\b(máš|tvoje|tvůj|dostaneš)\b/i);
+  for (const veta of t.split(/(?<=[.!?])\s+/)) assert.ok(veta.split(/\s+/).length <= 20, `dlouhá věta: ${veta}`);
+});

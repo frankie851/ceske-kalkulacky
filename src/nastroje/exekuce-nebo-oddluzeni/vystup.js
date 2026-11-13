@@ -3,7 +3,7 @@
 // takže stránka bez JavaScriptu ukáže stejné texty jako živý výpočet.
 // Žádné částky ani sazby tu nejsou natvrdo: všechno je v rules.json. Texty vykají.
 import { nejnovejsiPlatnyRok, srazka, dobaSplaceniExekuce, oddluzeni, nezabavitelnaCastka, zakladniSoucet } from './dluhy.js';
-import { kc, procenta } from '../../js/format.js';
+import { kc, procenta, datum } from '../../js/format.js';
 
 /** 1 měsíc, 2–4 měsíce, 5 a víc měsíců. */
 export function mesicuSlovy(n) {
@@ -93,7 +93,10 @@ export function vysledek(p, v) {
       vericum: kc(s.vericiDostanou),
       nezabavitelna: kc(s.nezabavitelna),
       nahrada: s.nahradaZamestnavateli > 0
-        ? `Zaměstnavatel si ze srážky nechá ${kc(s.nahradaZamestnavateli)} za svou práci. Tak to určuje zákon.`
+        // DLU-09: náhrada nenáleží u exekucí, kde příkaz ke srážkám ze mzdy padl před účinností zákona č. 286/2021 Sb.
+        ? `Zaměstnavatel si ze srážky nechá ${kc(s.nahradaZamestnavateli)} za svou práci. Tak to určuje zákon. `
+          + `Neplatí to u starších exekucí, kde exekutor nebo soud nařídil srážky ze mzdy před ${datum(p.nahradaJenProPrikazyOd)}. `
+          + 'Tam dostanou věřitelé celou srážku.'
         : '',
       doba,
       upozorneni,

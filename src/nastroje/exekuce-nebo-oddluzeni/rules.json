@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-12",
+    "overeno": "2026-11-13",
     "zdroje": [
       {
         "nazev": "Nařízení vlády o nezabavitelných částkách, číslo 595/2006, ve znění nařízení 548/2025",
@@ -21,6 +21,10 @@
       {
         "nazev": "Vyhláška o náhradě nákladů zaměstnavatele, číslo 485/2000, paragrafy 4d a 4e",
         "url": "https://e-sbirka.gov.cz/sb/2000/485"
+      },
+      {
+        "nazev": "Zákon, kterým se mění občanský soudní řád a exekuční řád, číslo 286/2021 (náhrada plátci mzdy jen u exekucí od 1. 1. 2022)",
+        "url": "https://e-sbirka.gov.cz/sb/2021/286"
       },
       {
         "nazev": "Nařízení vlády o částkách životního minima, číslo 361/2025 (hodnota k 1. 1. 2026)",
@@ -121,17 +125,17 @@
       "rozdil": "srazky"
     },
     {
-      "nazev": "Úřední informace o oddlužení",
-      "url": "https://insolvence.justice.cz/",
+      "nazev": "Úřední kalkulačka splátek v oddlužení",
+      "url": "https://insolvence.justice.cz/kalkulator-splatek/",
       "provozovatel": "Ministerstvo spravedlnosti",
-      "popis": "Jak oddlužení funguje. Najdete tu i kalkulačku splátek.",
+      "popis": "Spočítá měsíční splátku v oddlužení. Na stejném webu je i vysvětlení, jak oddlužení funguje.",
       "rozdil": "splatky"
     },
     {
       "nazev": "Veřejný ochránce práv",
-      "url": "https://www.ochrance.cz/",
+      "url": "https://www.ochrance.cz/letaky/",
       "provozovatel": "Kancelář veřejného ochránce práv",
-      "popis": "Srozumitelné letáky o srážkách ze mzdy a o poradenství."
+      "popis": "Srozumitelné letáky o exekuci, srážkách ze mzdy, oddlužení a poradenství."
     }
   ],
   "urokZProdleni": {
@@ -237,7 +241,7 @@
       }
     }
   },
-  "overeno": "2026-11-12",
+  "overeno": "2026-11-13",
   "poznamka": "Parametry pro orientační výpočet srážek ze mzdy a splátek v oddlužení. Každá hodnota má uvedený zdroj. Závazné je znění předpisů ve Sbírce zákonů.",
   "roky": {
     "2026": {
@@ -319,6 +323,18 @@
         "zdroj": "Vyhláška č. 485/2000 Sb., § 4d a § 4e; občanský soudní řád § 270 odst. 2 a § 279 odst. 1",
         "odkaz": "https://e-sbirka.gov.cz/sb/2000/485",
         "ucinnostOd": "2022-01-01"
+      },
+      "nahradaJenProPrikazyOd": {
+        "hodnota": "2022-01-01",
+        "popis": "Paušální náhrada plátci mzdy náleží jen u exekucí, kde exekuční příkaz ke srážkám ze mzdy vydal exekutor od tohoto dne (u soudního výkonu rozhodnutí: kde soud srážky nařídil od tohoto dne). U starších se náhrada neplatí a věřitelé dostanou celou srážku. Kalkulačka počítá s náhradou vždy; větu o výjimce ukazuje u výsledku.",
+        "zdroj": {
+          "pravniZaklad": "Zákon č. 120/2001 Sb. (exekuční řád), § 87 odst. 3, a občanský soudní řád § 270 odst. 2, oboje ve znění zákona č. 286/2021 Sb. (účinnost 1. 1. 2022); přechodná ustanovení zákona č. 286/2021 Sb., čl. II bod 3 a čl. IV body 1 a 12",
+          "url": "https://www.zakonyprolidi.cz/cs/2001-120#p87-3",
+          "citace": "EŘ § 87 odst. 3: „Plátce mzdy má právo na paušálně stanovenou náhradu nákladů, které mu vznikly za každý kalendářní měsíc, v němž provádí srážky ze mzdy nebo jiných příjmů povinného.“ Zákon č. 286/2021 Sb., čl. IV bod 1: „… dokončí se exekuční řízení zahájená přede dnem nabytí účinnosti tohoto zákona podle zákona č. 120/2001 Sb., ve znění účinném přede dnem nabytí účinnosti tohoto zákona …“; bod 12: „V řízeních zahájených přede dnem nabytí účinnosti tohoto zákona, v nichž přede dnem nabytí účinnosti tohoto zákona nebyl vydán exekuční příkaz k provedení exekuce srážkami ze mzdy a jiných příjmů, se použijí § 49 odst. 1 písm. a), § 87 odst. 3 a § 89 zákona č. 120/2001 Sb., ve znění účinném ode dne nabytí účinnosti tohoto zákona.“ Čl. II bod 3: na řízení, v nichž bylo před účinností vydáno usnesení o nařízení výkonu rozhodnutí, se použije mimo jiné § 270 odst. 2 a § 279 odst. 1 o. s. ř. ve znění účinném před 1. 1. 2022."
+        },
+        "odkaz": "https://e-sbirka.gov.cz/sb/2021/286",
+        "ucinnostOd": "2022-01-01",
+        "overeno": "2026-11-13"
       },
       "odmenaSpravceMesicne": {
         "hodnota": 750,
