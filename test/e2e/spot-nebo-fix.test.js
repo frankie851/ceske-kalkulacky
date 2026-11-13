@@ -9,6 +9,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { otevri, vypln, text, zavri } from './pomocnik.mjs';
 import * as v from '../../src/nastroje/spot-nebo-fix/vystup.js';
+import { kc } from '../../src/js/format.js';
 
 after(zavri);
 
@@ -152,8 +153,13 @@ const predpoklad = (z, re) => z.predpoklady.find(([n]) => re.test(n));
 
 test('SPOT-06: změna jističe na 3× 63 A přepočítá výsledek a cenu za jistič', async () => {
   const { page, z } = await zmenAOver([['#jistic', '3x63']], { jistic: '3x63' });
-  // CV ERÚ 14/2025, D 02d, ČEZ, „nad 3x50 A do 3x63 A“ 644 Kč/měsíc + nesíťová infrastruktura 12,87 Kč, × 1,21 DPH
-  assert.deepEqual(predpoklad(z, /^Jistič/), ['Jistič 3× 63 A a nesíťová infrastruktura', '794,81 Kč měsíčně']);
+  // CV ERÚ 14/2025, D 02d, ČEZ, „nad 3x50 A do 3x63 A“ 644 Kč/měsíc + nesíťová infrastruktura 12,87 Kč, × 1,21 DPH.
+  // Přepsáno 13. 11. 2026 (SPOT-09, ceny po rocích): období 11/2025–10/2026 ukazuje i cenu 2025 podle
+  // CR ERÚ 12/2024: 620 Kč + nesíťová infrastruktura 12,45 Kč, × 1,21 DPH = 765,26 Kč.
+  const [nazev, hodnota] = predpoklad(z, /^Jistič/);
+  assert.equal(nazev, 'Jistič 3× 63 A a nesíťová infrastruktura');
+  assert.ok(hodnota.endsWith('794,81 Kč měsíčně'), hodnota);
+  if (hodnota.includes('2025:')) assert.ok(hodnota.startsWith('2025: 765,26 Kč měsíčně; 2026: '), hodnota);
   await page.close();
 });
 
@@ -173,7 +179,7 @@ test('SPOT-06: změna distributora na PREdistribuci přepočítá výsledek a ce
 test('SPOT-06: změna sazby na D61d přepočítá výsledek s vysokým a nízkým tarifem', async () => {
   const { page, o, z } = await zmenAOver([['#sazba', 'D61d']], { sazba: 'D61d' });
   assert.equal(o.tdd, 'TDD4');
-  assert.match(predpoklad(z, /^Distribuce/)[1], /^vysoký tarif .* nízký /);
+  assert.match(predpoklad(z, /^Distribuce/)[1], /vysoký tarif .* nízký /);
   await page.close();
 });
 
@@ -182,20 +188,23 @@ test('SPOT-06: EG.D a sazba D56d – kombinace distributora, sazby a jističe 3�
   await page.close();
 });
 
-test('SPOT-03: předpoklady ukazují POZE 0 Kč s důvodem a datum ověření regulovaných cen', async () => {
+// Přepsáno 13. 11. 2026 (SPOT-09, ceny po rocích): dřív byla POZE 0 Kč na celé období. Teď má rok 2025
+// vlastní POZE (CR ERÚ 11/2024), rok 2026 dál 0 Kč s důvodem; řádek musí sedět s vystup.js v Node.
+test('SPOT-03: předpoklady ukazují POZE 2026 0 Kč s důvodem, POZE po rocích a datum ověření regulovaných cen', async () => {
   const { page } = await otevri(CESTA);
   const z = await zobrazeno(page);
   const poze = predpoklad(z, /POZE/)[1];
-  assert.equal(poze, mezery(`0 Kč – ${tarify.common.poze.vysvetleniNuly}`));
+  assert.equal(poze, predpoklad(ocekavej(), /POZE/)[1]);
+  assert.ok(poze.endsWith(mezery(`0 Kč – ${tarify.common.poze.vysvetleniNuly}`)), poze);
   assert.doesNotMatch(poze, /Kč\/kWh/);
   const overeno = await text(page, '[data-regulovane-overeno]');
   const [r, m, d] = tarify.overeno.split('-').map(Number);
   assert.ok(overeno.includes(`ověřili k ${d}. ${m}. ${r}`), overeno);
   assert.match(await page.$eval('[data-regulovane-overeno] a', (el) => el.href), /erv182025\.pdf#page=30$/);
-  // Po přepočtu (jiná spotřeba) zůstává POZE 0 Kč – stejně jako ve výpočtu.
+  // Po přepočtu (jiná spotřeba) se POZE 2025 změní stejně jako ve výpočtu, 2026 zůstává 0 Kč.
   await vypln(page, '#mwh', '20');
   await spocitano(page);
-  assert.equal(predpoklad(await zobrazeno(page), /POZE/)[1], poze);
+  assert.equal(predpoklad(await zobrazeno(page), /POZE/)[1], predpoklad(ocekavej({ mwh: 20 }), /POZE/)[1]);
   await page.close();
 });
 
@@ -255,15 +264,43 @@ test('SPOT-10: měření ze 2 dnů roční spotřebu nepřepíše, 60 dnů ano a
   await page.close();
 });
 
-test('SPOT-09: pod tabulkou po měsících je upozornění na měsíce mimo rok regulovaných cen', async () => {
+// Přepsáno 13. 11. 2026 (SPOT-09, ceny po rocích): dřív upozornění hlásilo „regulovanými cenami roku 2026“
+// i pro listopad a prosinec 2025. Teď má rok 2025 vlastní ceny, hlásí se jen ceník dynamického tarifu
+// a měsíce roku, pro který regulované ceny ještě nemáme.
+test('SPOT-09: pod tabulkou po měsících je upozornění jako ve vystup.js (ceník dynamického tarifu, roky bez cen)', async () => {
   const { page } = await otevri(CESTA);
   const o = v.vystup(D, v.spocitej(D, vychozi, cti(`data/tdd/${v.tridaTdd(tarify, vychozi.sazba, vychozi.region)}.json`).values), { tdd: 'x' });
   const skryte = await page.$eval('[data-upozorneni-obdobi]', (el) => el.hidden);
   assert.equal(skryte, !o.upozorneniObdobi);
+  const mesice = [...new Set(D.grid.map((q) => q.month))];
   if (o.upozorneniObdobi) {
-    assert.equal(await text(page, '[data-upozorneni-obdobi-text]'), mezery(o.upozorneniObdobi));
-    assert.match(await text(page, '[data-upozorneni-obdobi-text]'), new RegExp(`regulovanými cenami roku ${tarify.year}`));
+    const zobrazene = await text(page, '[data-upozorneni-obdobi-text]');
+    assert.equal(zobrazene, mezery(o.upozorneniObdobi));
+    if (!v.mesiceBezCen(mesice, tarify).length) assert.doesNotMatch(zobrazene, /regulovanými cenami roku/);
   }
+  await page.close();
+});
+
+test('SPOT-09: náklady po měsících a předpoklady s cenami 2025 a 2026 sedí s vystup.js v Node', async () => {
+  const { page, chyby } = await otevri(CESTA);
+  const kontrola = async (zmeny) => {
+    const vstup = { ...vychozi, ...zmeny };
+    const tdd = v.tridaTdd(tarify, vstup.sazba, vstup.region);
+    const vyp = v.spocitej(D, vstup, cti(`data/tdd/${tdd}.json`).values);
+    const o = v.vystup(D, vyp, { tdd });
+    const radky = await page.$$eval('[data-tabulka-mesice] tbody tr', (trs) => trs.map((tr) => [...tr.children].map((c) => c.textContent)));
+    const ocekavane = vyp.res.months.map((m, i) => [v.nazevMesice(m), ...v.VARIANTY.map((x) => kc(vyp.res.variants[x.klic].monthly[i]))]);
+    assert.deepEqual(radky.slice(0, -1).map((r) => [r[0], ...r.slice(2)].map(mezery)), ocekavane.map((r) => r.map(mezery)));
+    const z = await zobrazeno(page);
+    assert.deepEqual(z.predpoklady, o.predpoklady.map((p) => [mezery(p.nazev), mezery(p.hodnota)]));
+    const roky = [...new Set(vyp.res.months.map((m) => m.slice(0, 4)))];
+    if (roky.length > 1) for (const rok of roky) assert.match(predpoklad(z, /^Distribuce/)[1], new RegExp(`${rok}: `));
+  };
+  await kontrola({});
+  await vypln(page, '#sazba', 'D56d');
+  await spocitano(page);
+  await kontrola({ sazba: 'D56d' });
+  assert.deepEqual(chyby, []);
   await page.close();
 });
 

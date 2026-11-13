@@ -10,39 +10,33 @@ const pravidla = cti('../rules.json');
 const tarify = cti('../tariffs.json');
 const bezNbsp = (t) => String(t).replace(/[\u00a0\u202f]/g, ' ');
 
-/* ---------- SPOT-09: měsíce mimo rok regulovaných cen ---------- */
+/* ---------- SPOT-09: měsíce bez regulovaných cen svého roku ---------- */
+// Přepsáno 13. 11. 2026 (další práce, „regulované ceny po rocích“): dřív se ceny 2026 braly i pro 2025
+// a test hlídal upozornění „regulovanými cenami roku 2026“ a poznámku o nezapočtené POZE 2025. Teď má
+// tariffs.json sadu 2025 (starsiRoky) a hlásí se jen měsíce roku, pro který ceny ještě nemáme.
 
-test('SPOT-09: měsíce období mimo rok regulovaných cen se poznají', () => {
-  const mesice = ['2025-11', '2025-12', '2026-01', '2026-10'];
-  assert.deepEqual(v.mesiceMimoRokCen(mesice, 2026), ['2025-11', '2025-12']);
-  assert.deepEqual(v.mesiceMimoRokCen(['2026-01', '2026-12'], 2026), []);
-  assert.deepEqual(v.mesiceMimoRokCen(['2026-12', '2027-01'], 2026), ['2027-01']);
+test('SPOT-09: měsíce období bez regulovaných cen svého roku se poznají', () => {
+  assert.deepEqual(v.mesiceBezCen(['2025-11', '2025-12', '2026-01', '2026-10'], tarify), []);
+  assert.deepEqual(v.mesiceBezCen(['2026-01', '2026-12'], tarify), []);
+  assert.deepEqual(v.mesiceBezCen(['2026-12', '2027-01'], tarify), ['2027-01']);
 });
 
-test('SPOT-09: upozornění vyjmenuje měsíce, rok cen a u roku 2025 nenulovou POZE podle CR ERÚ 11/2024', () => {
-  const text = bezNbsp(v.upozorneniObdobi(['2025-11', '2025-12', '2026-01'], tarify, '2026-06-01'));
-  assert.match(text, /listopad 2025 a prosinec 2025/);
+test('SPOT-09: upozornění u roku bez cen vyjmenuje měsíce a rok použitých cen; POZE 2025 už jen nehlásí', () => {
+  const text = bezNbsp(v.upozorneniObdobi(['2026-11', '2026-12', '2027-01', '2027-02'], tarify, '2026-06-01'));
+  assert.match(text, /leden 2027 a únor 2027/);
   assert.match(text, /regulovanými cenami roku 2026/);
-  assert.match(text, /POZE/);
-  assert.match(text, /84,70 Kč/);
+  const s2025 = bezNbsp(v.upozorneniObdobi(['2025-11', '2025-12', '2026-01'], tarify, '2026-06-01'));
+  assert.doesNotMatch(s2025, /POZE|regulovanými cenami roku/);
   assert.equal(v.upozorneniObdobi(['2026-01', '2026-12'], tarify, '2026-06-01'), '');
-  const rok2025 = tarify.jinyRokCen.roky['2025'];
-  assert.equal(rok2025.poze.perAmpPhase, 84.7);
-  assert.match(rok2025.zdroj.pravniZaklad, /11\/2024/);
-  assert.match(rok2025.zdroj.url, /^https:\/\/eru\.gov\.cz\/.*erv132024\.pdf#page=22$/);
-  assert.match(rok2025.zdroj.citace, /84,70 Kč\/A\/měsíc/);
+  assert.equal(tarify.jinyRokCen.roky, undefined, 'poznámka o nezapočtené POZE 2025 je pryč');
 });
 
-test('SPOT-09: období dat v rules.json mimo rok cen → upozornění vyjmenuje všechny takové měsíce', () => {
+test('SPOT-09: období dat v rules.json – upozornění vyjmenuje všechny měsíce bez cen svého roku', () => {
   const { od, do: konec } = pravidla.data;
   const grid = buildQuarterGrid(od, konec);
   const mesice = [...new Set(grid.map((q) => q.month))];
-  const mimo = v.mesiceMimoRokCen(mesice, tarify.year);
-  // Data jsou posledních 12 celých měsíců; pokud zrovna pokrývají jen rok cen, není co hlásit.
-  if (!mimo.length) return;
-  const text = v.upozorneniObdobi(mesice, tarify, '2026-06-01');
-  assert.ok(text.length > 0);
-  for (const m of mimo) assert.ok(bezNbsp(text).includes(bezNbsp(v.nazevMesice(m))), m);
+  const text = bezNbsp(v.upozorneniObdobi(mesice, tarify, '2026-06-01'));
+  for (const m of v.mesiceBezCen(mesice, tarify)) assert.ok(text.includes(bezNbsp(v.nazevMesice(m))), m);
 });
 
 /* ---------- SPOT-10: krátké CSV nepřepíše roční spotřebu ---------- */

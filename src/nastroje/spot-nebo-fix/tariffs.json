@@ -3,21 +3,10 @@
   "year": 2026,
   "_overenoComment": "Datum, ke kterému jsou regulované ceny (distribuce, poplatky, POZE) ověřené proti cenovým výměrům ERÚ. Ukazuje se na stránce u předpokladů výpočtu.",
   "overeno": "2026-11-12",
-  "_jinyRokCenComment": "Revize SPOT-09: data jsou posledních 12 celých měsíců, regulované ceny jen pro rok 'year'. Měsíce jiného roku počítáme s cenami roku 'year' a ve výsledku to říkáme. Pro známé roky doplňujeme úředně doložený rozdíl.",
+  "_jinyRokCenComment": "Revize SPOT-09: data jsou posledních 12 celých měsíců. Regulované ceny bereme po měsících podle roku: aktuální rok 'year' nahoře, předchozí roky ve 'starsiRoky'. Měsíce roku, pro který ceny ještě nemáme (po přelomu roku, než se doplní nové ceny), počítáme s posledními známými a vyjmenujeme je. Ceník dynamického tarifu (dynamic.json) máme jen pro jeden rok, měsíce mimo něj také vyjmenujeme.",
   "jinyRokCen": {
-    "text": "Za {mesice} počítáme s regulovanými cenami roku {rok} a s ceníkem dynamického tarifu od {cenik}. Skutečné ceny v těchto měsících se liší.",
-    "roky": {
-      "2025": {
-        "text": "V roce 2025 se navíc platila podpora obnovitelných zdrojů (POZE): {pozeA} Kč bez DPH měsíčně za každý ampér hlavního jističe (u trojfázového připojení trojnásobek), nejvýš {pozeMax} Kč bez DPH za MWh. Od roku 2026 ji platí stát, proto ji za tyto měsíce nepočítáme a skutečný účet byl vyšší.",
-        "poze": { "perAmpPhase": 84.7, "perMWhMax": 495 },
-        "zdroj": {
-          "pravniZaklad": "Cenové rozhodnutí ERÚ č. 11/2024 ze dne 29. listopadu 2024 (Energetický regulační věstník 13/2024), body (5.1.2), (5.2) a (5.3); od 1. 10. 2025 bod (5.3) podle cenového výměru ERÚ č. 3/2025 (ERV 6/2025) odkazuje na § 28a zákona č. 165/2012 Sb.",
-          "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22",
-          "citace": "(5.1.2) pro předávací místa s distribuční soustavou na napěťové hladině NN podle jmenovité proudové hodnoty hlavního jističe před elektroměrem v předávacím místě 84,70 Kč/A/měsíc. (5.2) … Pokud je předávací místo … připojeno k distribuční soustavě trojfázově, účtuje se trojnásobek ceny podle bodu (5.1.2). (5.3) Maximální platba na podporu elektřiny zákazníka za odběrné místo za zúčtovací období je určena součinem částky 495 Kč/MWh a celkového odebraného množství elektřiny …",
-          "overeno": "2026-11-13"
-        }
-      }
-    }
+    "bezCen": "Za {mesice} ještě nemáme regulované ceny, počítáme s regulovanými cenami roku {rok}. Skutečné ceny se můžou lišit.",
+    "dynamicky": "Dynamický tarif počítáme s ceníkem od {cenik}, máme ho jen pro rok {rokCeniku}. Za {mesice} platil jiný ceník dodavatele, skutečné náklady se můžou lišit."
   },
   "vat": {
     "value": 0.21,
@@ -73,6 +62,846 @@
         }
       ],
       "year": 2026
+    }
+  },
+  "_starsiRokyComment": "Revize SPOT-09 (13. 11. 2026): regulované ceny předchozích roků ve stejné struktuře jako aktuální rok (vat, common, ntHours, distributors.<id>.source a sazby). Data jsou posledních 12 měsíců, výpočet bere ceny po měsících podle roku. Na nový rok přesuň aktuální sadu sem a nahoře ji nahraď novou.",
+  "starsiRoky": {
+    "2025": {
+      "_comment": "Regulované ceny roku 2025 (bez DPH) ve stejné struktuře jako aktuální rok nahoře. Výpočet je bere pro měsíce roku 2025 (cenyProRok v calc.js). Ceny distribuce vytěžené skriptem z PDF ERV 14/2024 a porovnané s ním.",
+      "overeno": "2026-11-13",
+      "popisZdroju": "cenových rozhodnutí ERÚ č. 12/2024 (distribuce) a č. 11/2024 (systémové služby, nesíťová infrastruktura, POZE)",
+      "urlZdroju": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf#page=28",
+      "vat": {
+        "value": 0.21,
+        "source": "Zákon č. 235/2004 Sb., o dani z přidané hodnoty, § 47 odst. 1 písm. a) – základní sazba 21 %",
+        "zdroj": {
+          "pravniZaklad": "Zákon č. 235/2004 Sb., o dani z přidané hodnoty, § 47 odst. 1 písm. a); poslední změna odstavce zákonem č. 349/2023 Sb. (od 1. 1. 2024) sazbu 21 % nezměnila",
+          "url": "https://www.zakonyprolidi.cz/cs/2004-235#p47-1-a",
+          "citace": "U zdanitelného plnění nebo přijaté úplaty se uplatňuje a) základní sazba daně ve výši 21 %, nebo b) snížená sazba daně ve výši 12 %.",
+          "overeno": "2026-11-13"
+        },
+        "year": 2025
+      },
+      "common": {
+        "electricityTax": {
+          "value": 28.3,
+          "unit": "Kč/MWh",
+          "source": "Zákon č. 261/2007 Sb., část čtyřicátá sedmá (daň z elektřiny), § 6 odst. 2",
+          "zdroj": {
+            "pravniZaklad": "Zákon č. 261/2007 Sb., o stabilizaci veřejných rozpočtů, část čtyřicátá sedmá (zákon o dani z elektřiny), § 6 odst. 2; znění účinné od 1. 8. 2025",
+            "url": "https://www.zakonyprolidi.cz/cs/2007-261#f3812849",
+            "citace": "Sazba daně činí 28,30 Kč/MWh.",
+            "overeno": "2026-11-13"
+          },
+          "year": 2025
+        },
+        "systemServices": {
+          "value": 170.92,
+          "unit": "Kč/MWh",
+          "source": "Cenové rozhodnutí ERÚ č. 11/2024, bod (3.1.1), Energetický regulační věstník 13/2024",
+          "zdroj": {
+            "pravniZaklad": "Cenové rozhodnutí ERÚ č. 11/2024 ze dne 29. listopadu 2024 (Energetický regulační věstník 13/2024), bod (3.1.1)",
+            "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=7",
+            "citace": "(3.1) Cena za systémové služby poskytované provozovatelem přenosové soustavy účastníkům trhu s elektřinou … je: (3.1.1) 170,92 Kč/MWh",
+            "overeno": "2026-11-13"
+          },
+          "year": 2025
+        },
+        "nonNetworkInfra": {
+          "value": 12.45,
+          "unit": "Kč/měsíc",
+          "platiOd": "2025-09-01",
+          "poznamka": "Součet cen za činnosti operátora trhu 2,26 + 0,99 Kč, datového centra 5,20 Kč a poplatku na činnost ERÚ 4 Kč. Poplatek ERÚ je 4 Kč od 1. 9. 2025, do 31. 8. 2025 byl 2,39 Kč (složka 10,84 Kč). Období dat začíná nejdřív listopadem 2025, starší měsíce 2025 se nepočítají.",
+          "source": "Cenové rozhodnutí ERÚ č. 11/2024, body (6.2.1.1), (6.2.1.2), (6.2.2) a (6.2.3); nařízení vlády č. 392/2015 Sb. § 1",
+          "zdroj": [
+            {
+              "pravniZaklad": "Cenové rozhodnutí ERÚ č. 11/2024 (Energetický regulační věstník 13/2024), body (6.2.1.1), (6.2.1.2) a (6.2.2)",
+              "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=23",
+              "citace": "(6.2.1.1) cena za činnosti související se zúčtováním odchylek ve výši 2,26 Kč/odběrné místo/měsíc, (6.2.1.2) cena za činnosti související s výplatou a administrací podpory z podporovaných zdrojů ve výši 0,99 Kč/odběrné místo/měsíc, (6.2.2) cenu za činnost datového centra ve výši 5,20 Kč/odběrné místo/měsíc, (6.2.3) poplatek na činnost Energetického regulačního úřadu … stanovený nařízením vlády",
+              "overeno": "2026-11-13"
+            },
+            {
+              "pravniZaklad": "Nařízení vlády č. 392/2015 Sb., o stanovení sazby poplatku na činnost Energetického regulačního úřadu, § 1 ve znění nařízení vlády č. 248/2025 Sb. (účinnost od 1. 9. 2025)",
+              "url": "https://www.zakonyprolidi.cz/cs/2015-392#p1",
+              "citace": "Sazba poplatku na činnost Energetického regulačního úřadu v odvětví elektroenergetiky činí 4 Kč za měsíc na každé odběrné místo zákazníka odebírajícího elektřinu. (NV 248/2025 Sb.: V § 1 se číslo „2,39“ nahrazuje číslem „4“.)",
+              "overeno": "2026-11-13"
+            }
+          ],
+          "year": 2025
+        },
+        "poze": {
+          "perMWh": 495,
+          "perAmpPhase": 84.7,
+          "unit": "Kč/MWh nebo Kč/A/fáze/měsíc – účtuje se nižší z obou",
+          "source": "Cenové rozhodnutí ERÚ č. 11/2024, body (5.1.2), (5.2) a (5.3); od 1. 10. 2025 zákon č. 165/2012 Sb. § 28a odst. 2",
+          "zdroj": [
+            {
+              "pravniZaklad": "Cenové rozhodnutí ERÚ č. 11/2024 ze dne 29. listopadu 2024 (Energetický regulační věstník 13/2024), body (5.1.2), (5.2) a (5.3)",
+              "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv132024.pdf#page=22",
+              "citace": "(5.1.2) pro předávací místa s distribuční soustavou na napěťové hladině NN podle jmenovité proudové hodnoty hlavního jističe před elektroměrem v předávacím místě 84,70 Kč/A/měsíc. (5.2) … Pokud je předávací místo … připojeno k distribuční soustavě trojfázově, účtuje se trojnásobek ceny podle bodu (5.1.2). (5.3) Maximální platba na podporu elektřiny zákazníka za odběrné místo za zúčtovací období je určena součinem částky 495 Kč/MWh a celkového odebraného množství elektřiny …",
+              "overeno": "2026-11-13"
+            },
+            {
+              "pravniZaklad": "Cenový výměr ERÚ č. 3/2025 (Energetický regulační věstník 6/2025), bod 31, účinnost od 1. 10. 2025; zákon č. 165/2012 Sb. § 28a odst. 2",
+              "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv062025.pdf#page=6",
+              "citace": "Bod (5.3) … zní: „Maximální platba na podporu elektřiny zákazníka za odběrné místo za zúčtovací období je určena zákonem o podporovaných zdrojích energie.“ Zákon č. 165/2012 Sb. § 28a odst. 2: „… součinem částky 495 Kč/MWh a celkového odebraného množství elektřiny …“",
+              "overeno": "2026-11-13"
+            }
+          ],
+          "year": 2025
+        }
+      },
+      "ntHours": {
+        "_comment": "Typická okna NT v roce 2025 v lokálních hodinách [od, do). Délky podle podmínek sazeb v cenovém rozhodnutí ERÚ č. 12/2024: D25d, D26d a D27d 8 h (D27d jen 18:00–8:00), D35d 16 h, D45d a D57d 20 h, D56d 22 h, D61d od pátku 12:00 do neděle 22:00.",
+        "D25d": {
+          "workday": [
+            [
+              0,
+              6
+            ],
+            [
+              13,
+              15
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              6
+            ],
+            [
+              13,
+              15
+            ]
+          ]
+        },
+        "D26d": {
+          "workday": [
+            [
+              0,
+              6
+            ],
+            [
+              13,
+              15
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              6
+            ],
+            [
+              13,
+              15
+            ]
+          ]
+        },
+        "D27d": {
+          "workday": [
+            [
+              0,
+              6
+            ],
+            [
+              22,
+              24
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              6
+            ],
+            [
+              22,
+              24
+            ]
+          ]
+        },
+        "D35d": {
+          "workday": [
+            [
+              0,
+              7
+            ],
+            [
+              9,
+              11
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              21,
+              24
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              7
+            ],
+            [
+              9,
+              11
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              21,
+              24
+            ]
+          ]
+        },
+        "D45d": {
+          "workday": [
+            [
+              0,
+              8
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              18,
+              20
+            ],
+            [
+              21,
+              24
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              8
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              18,
+              20
+            ],
+            [
+              21,
+              24
+            ]
+          ]
+        },
+        "D56d": {
+          "workday": [
+            [
+              0,
+              8
+            ],
+            [
+              9,
+              17
+            ],
+            [
+              18,
+              24
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              8
+            ],
+            [
+              9,
+              17
+            ],
+            [
+              18,
+              24
+            ]
+          ]
+        },
+        "D57d": {
+          "workday": [
+            [
+              0,
+              8
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              18,
+              20
+            ],
+            [
+              21,
+              24
+            ]
+          ],
+          "weekend": [
+            [
+              0,
+              8
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              13,
+              17
+            ],
+            [
+              18,
+              20
+            ],
+            [
+              21,
+              24
+            ]
+          ]
+        },
+        "D61d": {
+          "byWeekday": {
+            "5": [
+              [
+                12,
+                24
+              ]
+            ],
+            "6": [
+              [
+                0,
+                24
+              ]
+            ],
+            "0": [
+              [
+                0,
+                22
+              ]
+            ]
+          }
+        },
+        "_zdroj": {
+          "pravniZaklad": "Cenové rozhodnutí ERÚ č. 12/2024 (ERV 14/2024), podmínky uplatnění sazeb D 35d, D 56d a D 61d",
+          "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf#page=33",
+          "citace": "D 35d: … v celkové délce minimálně 16 hodin denně. D 56d: … v celkové délce minimálně 22 hodin denně. D 61d: Doba platnosti nízkého tarifu je stanovena celoročně od pátku 12.00 hodin do neděle 22.00 hodin.",
+          "overeno": "2026-11-13"
+        }
+      },
+      "distributors": {
+        "cez": {
+          "source": {
+            "pravniZaklad": "Cenové rozhodnutí ERÚ č. 12/2024 ze dne 29. listopadu 2024, kterým se stanovují ceny za související službu v elektroenergetice odběratelům ze sítí nízkého napětí (Energetický regulační věstník 14/2024), část čtvrtá – sazby kategorie D, sloupec ČEZ. Cenový výměr ERÚ č. 4/2025 (ERV 7/2025) ceny nezměnil.",
+            "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf#page=29",
+            "citace": "Sazba D 02d, sloupec ČEZ: jistič do 3x10 A a do 1x25 A včetně 98 Kč/měsíc, nad 3x20 A do 3x25 A včetně 246 Kč/měsíc, nad 3x50 A do 3x63 A včetně 620 Kč/měsíc; cena za distribuované množství elektřiny 2 099,63 Kč/MWh. Ceny bez DPH a daně z elektřiny.",
+            "stranyPdf": {
+              "D01d": 28,
+              "D02d": 29,
+              "D25d": 30,
+              "D26d": 31,
+              "D27d": 32,
+              "D35d": 33,
+              "D45d": 35,
+              "D56d": 37,
+              "D57d": 39,
+              "D61d": 41
+            },
+            "overeno": "2026-11-13",
+            "validFrom": "2025-01-01",
+            "year": 2025
+          },
+          "sazby": {
+            "D01d": {
+              "vt": 2803.18,
+              "nt": null,
+              "breaker": {
+                "3x10|1x25": 44,
+                "3x16": 70,
+                "3x20": 87,
+                "3x25": 109,
+                "3x32": 139,
+                "3x40": 174,
+                "3x50": 218,
+                "3x63": 274
+              }
+            },
+            "D02d": {
+              "vt": 2099.63,
+              "nt": null,
+              "breaker": {
+                "3x10|1x25": 98,
+                "3x16": 157,
+                "3x20": 197,
+                "3x25": 246,
+                "3x32": 315,
+                "3x40": 394,
+                "3x50": 492,
+                "3x63": 620
+              }
+            },
+            "D25d": {
+              "vt": 2267.11,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 95,
+                "3x16": 152,
+                "3x20": 190,
+                "3x25": 237,
+                "3x32": 303,
+                "3x40": 379,
+                "3x50": 474,
+                "3x63": 597
+              }
+            },
+            "D26d": {
+              "vt": 1046.0,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 140,
+                "3x16": 223,
+                "3x20": 279,
+                "3x25": 349,
+                "3x32": 446,
+                "3x40": 558,
+                "3x50": 698,
+                "3x63": 879
+              }
+            },
+            "D27d": {
+              "vt": 2267.11,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 90,
+                "3x16": 144,
+                "3x20": 180,
+                "3x25": 225,
+                "3x32": 288,
+                "3x40": 360,
+                "3x50": 450,
+                "3x63": 567
+              }
+            },
+            "D35d": {
+              "vt": 721.45,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 171,
+                "3x16": 273,
+                "3x20": 341,
+                "3x25": 427,
+                "3x32": 546,
+                "3x40": 683,
+                "3x50": 854,
+                "3x63": 1075
+              }
+            },
+            "D45d": {
+              "vt": 721.45,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 188,
+                "3x16": 300,
+                "3x20": 375,
+                "3x25": 469,
+                "3x32": 600,
+                "3x40": 750,
+                "3x50": 938,
+                "3x63": 1181
+              }
+            },
+            "D56d": {
+              "vt": 721.45,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 188,
+                "3x16": 300,
+                "3x20": 375,
+                "3x25": 469,
+                "3x32": 600,
+                "3x40": 750,
+                "3x50": 938,
+                "3x63": 1181
+              }
+            },
+            "D57d": {
+              "vt": 721.45,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 188,
+                "3x16": 300,
+                "3x20": 375,
+                "3x25": 469,
+                "3x32": 600,
+                "3x40": 758,
+                "3x50": 1089,
+                "3x63": 1606
+              }
+            },
+            "D61d": {
+              "vt": 3282.6,
+              "nt": 206.0,
+              "breaker": {
+                "3x10|1x25": 79,
+                "3x16": 126,
+                "3x20": 158,
+                "3x25": 197,
+                "3x32": 252,
+                "3x40": 316,
+                "3x50": 395,
+                "3x63": 497
+              }
+            }
+          }
+        },
+        "egd": {
+          "source": {
+            "pravniZaklad": "Cenové rozhodnutí ERÚ č. 12/2024 ze dne 29. listopadu 2024, kterým se stanovují ceny za související službu v elektroenergetice odběratelům ze sítí nízkého napětí (Energetický regulační věstník 14/2024), část čtvrtá – sazby kategorie D, sloupec EG.D. Cenový výměr ERÚ č. 4/2025 (ERV 7/2025) ceny nezměnil.",
+            "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf#page=29",
+            "citace": "Sazba D 02d, sloupec EG.D: jistič do 3x10 A a do 1x25 A včetně 94 Kč/měsíc, nad 3x20 A do 3x25 A včetně 235 Kč/měsíc, nad 3x50 A do 3x63 A včetně 592 Kč/měsíc; cena za distribuované množství elektřiny 2 171,45 Kč/MWh. Ceny bez DPH a daně z elektřiny.",
+            "stranyPdf": {
+              "D01d": 28,
+              "D02d": 29,
+              "D25d": 30,
+              "D26d": 31,
+              "D27d": 32,
+              "D35d": 33,
+              "D45d": 35,
+              "D56d": 37,
+              "D57d": 39,
+              "D61d": 41
+            },
+            "overeno": "2026-11-13",
+            "validFrom": "2025-01-01",
+            "year": 2025
+          },
+          "sazby": {
+            "D01d": {
+              "vt": 2694.79,
+              "nt": null,
+              "breaker": {
+                "3x10|1x25": 41,
+                "3x16": 66,
+                "3x20": 83,
+                "3x25": 104,
+                "3x32": 132,
+                "3x40": 166,
+                "3x50": 207,
+                "3x63": 261
+              }
+            },
+            "D02d": {
+              "vt": 2171.45,
+              "nt": null,
+              "breaker": {
+                "3x10|1x25": 94,
+                "3x16": 150,
+                "3x20": 188,
+                "3x25": 235,
+                "3x32": 300,
+                "3x40": 376,
+                "3x50": 470,
+                "3x63": 592
+              }
+            },
+            "D25d": {
+              "vt": 2123.08,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 91,
+                "3x16": 145,
+                "3x20": 181,
+                "3x25": 227,
+                "3x32": 290,
+                "3x40": 362,
+                "3x50": 453,
+                "3x63": 571
+              }
+            },
+            "D26d": {
+              "vt": 958.21,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 142,
+                "3x16": 227,
+                "3x20": 283,
+                "3x25": 354,
+                "3x32": 453,
+                "3x40": 566,
+                "3x50": 708,
+                "3x63": 892
+              }
+            },
+            "D27d": {
+              "vt": 2123.08,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 86,
+                "3x16": 138,
+                "3x20": 172,
+                "3x25": 215,
+                "3x32": 276,
+                "3x40": 344,
+                "3x50": 431,
+                "3x63": 542
+              }
+            },
+            "D35d": {
+              "vt": 718.76,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 165,
+                "3x16": 264,
+                "3x20": 330,
+                "3x25": 413,
+                "3x32": 528,
+                "3x40": 660,
+                "3x50": 825,
+                "3x63": 1040
+              }
+            },
+            "D45d": {
+              "vt": 718.76,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 174,
+                "3x16": 278,
+                "3x20": 347,
+                "3x25": 434,
+                "3x32": 556,
+                "3x40": 695,
+                "3x50": 869,
+                "3x63": 1094
+              }
+            },
+            "D56d": {
+              "vt": 718.76,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 174,
+                "3x16": 278,
+                "3x20": 347,
+                "3x25": 434,
+                "3x32": 556,
+                "3x40": 695,
+                "3x50": 869,
+                "3x63": 1094
+              }
+            },
+            "D57d": {
+              "vt": 718.76,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 174,
+                "3x16": 279,
+                "3x20": 348,
+                "3x25": 435,
+                "3x32": 557,
+                "3x40": 704,
+                "3x50": 1012,
+                "3x63": 1491
+              }
+            },
+            "D61d": {
+              "vt": 3178.99,
+              "nt": 222.64,
+              "breaker": {
+                "3x10|1x25": 83,
+                "3x16": 132,
+                "3x20": 166,
+                "3x25": 207,
+                "3x32": 265,
+                "3x40": 331,
+                "3x50": 414,
+                "3x63": 522
+              }
+            }
+          }
+        },
+        "pre": {
+          "source": {
+            "pravniZaklad": "Cenové rozhodnutí ERÚ č. 12/2024 ze dne 29. listopadu 2024, kterým se stanovují ceny za související službu v elektroenergetice odběratelům ze sítí nízkého napětí (Energetický regulační věstník 14/2024), část čtvrtá – sazby kategorie D, sloupec PRE. Cenový výměr ERÚ č. 4/2025 (ERV 7/2025) ceny nezměnil.",
+            "url": "https://eru.gov.cz/sites/default/files/obsah/prilohy/erv142024.pdf#page=29",
+            "citace": "Sazba D 02d, sloupec PRE: jistič do 3x10 A a do 1x25 A včetně 83 Kč/měsíc, nad 3x20 A do 3x25 A včetně 209 Kč/měsíc, nad 3x50 A do 3x63 A včetně 525 Kč/měsíc; cena za distribuované množství elektřiny 1 405,58 Kč/MWh. Ceny bez DPH a daně z elektřiny.",
+            "stranyPdf": {
+              "D01d": 28,
+              "D02d": 29,
+              "D25d": 30,
+              "D26d": 31,
+              "D27d": 32,
+              "D35d": 33,
+              "D45d": 35,
+              "D56d": 37,
+              "D57d": 39,
+              "D61d": 41
+            },
+            "overeno": "2026-11-13",
+            "validFrom": "2025-01-01",
+            "year": 2025
+          },
+          "sazby": {
+            "D01d": {
+              "vt": 1823.39,
+              "nt": null,
+              "breaker": {
+                "3x10|1x25": 38,
+                "3x16": 61,
+                "3x20": 77,
+                "3x25": 96,
+                "3x32": 123,
+                "3x40": 154,
+                "3x50": 192,
+                "3x63": 242
+              }
+            },
+            "D02d": {
+              "vt": 1405.58,
+              "nt": null,
+              "breaker": {
+                "3x10|1x25": 83,
+                "3x16": 133,
+                "3x20": 167,
+                "3x25": 209,
+                "3x32": 267,
+                "3x40": 334,
+                "3x50": 417,
+                "3x63": 525
+              }
+            },
+            "D25d": {
+              "vt": 1539.98,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 76,
+                "3x16": 121,
+                "3x20": 151,
+                "3x25": 189,
+                "3x32": 242,
+                "3x40": 302,
+                "3x50": 378,
+                "3x63": 476
+              }
+            },
+            "D26d": {
+              "vt": 739.91,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 114,
+                "3x16": 182,
+                "3x20": 227,
+                "3x25": 284,
+                "3x32": 364,
+                "3x40": 455,
+                "3x50": 569,
+                "3x63": 716
+              }
+            },
+            "D27d": {
+              "vt": 1539.98,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 72,
+                "3x16": 115,
+                "3x20": 143,
+                "3x25": 179,
+                "3x32": 229,
+                "3x40": 287,
+                "3x50": 359,
+                "3x63": 452
+              }
+            },
+            "D35d": {
+              "vt": 296.85,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 124,
+                "3x16": 199,
+                "3x20": 248,
+                "3x25": 311,
+                "3x32": 397,
+                "3x40": 497,
+                "3x50": 621,
+                "3x63": 782
+              }
+            },
+            "D45d": {
+              "vt": 296.85,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 144,
+                "3x16": 230,
+                "3x20": 287,
+                "3x25": 359,
+                "3x32": 460,
+                "3x40": 575,
+                "3x50": 719,
+                "3x63": 905
+              }
+            },
+            "D56d": {
+              "vt": 296.85,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 144,
+                "3x16": 230,
+                "3x20": 287,
+                "3x25": 359,
+                "3x32": 460,
+                "3x40": 575,
+                "3x50": 719,
+                "3x63": 905
+              }
+            },
+            "D57d": {
+              "vt": 296.85,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 144,
+                "3x16": 230,
+                "3x20": 287,
+                "3x25": 359,
+                "3x32": 460,
+                "3x40": 582,
+                "3x50": 879,
+                "3x63": 1296
+              }
+            },
+            "D61d": {
+              "vt": 2199.27,
+              "nt": 114.44,
+              "breaker": {
+                "3x10|1x25": 61,
+                "3x16": 97,
+                "3x20": 121,
+                "3x25": 152,
+                "3x32": 194,
+                "3x40": 242,
+                "3x50": 303,
+                "3x63": 382
+              }
+            }
+          }
+        }
+      }
     }
   },
   "breakers": [
