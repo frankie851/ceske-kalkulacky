@@ -1,6 +1,6 @@
 {
   "meta": {
-    "overeno": "2026-11-05",
+    "overeno": "2026-11-12",
     "zdroje": [
       {
         "nazev": "Nařízení vlády o nezabavitelných částkách, číslo 595/2006, ve znění nařízení 548/2025",
@@ -23,25 +23,32 @@
         "url": "https://e-sbirka.gov.cz/sb/2000/485"
       },
       {
-        "nazev": "Nařízení vlády o životním minimu, číslo 436/2022",
-        "url": "https://e-sbirka.gov.cz/sb/2022/436"
+        "nazev": "Nařízení vlády o částkách životního minima, číslo 361/2025 (hodnota k 1. 1. 2026)",
+        "url": "https://e-sbirka.gov.cz/sb/2025/361",
+        "poznamka": "Platilo od 1. 10. 2025 do 30. 9. 2026. Pro srážky v roce 2026 se použije hodnota k 1. lednu."
       },
       {
         "nazev": "Zákon o životním a existenčním minimu, číslo 110/2006",
         "url": "https://e-sbirka.gov.cz/sb/2006/110",
-        "poznamka": "Životní minimum od 1. 10. 2026"
+        "poznamka": "Od 1. 10. 2026 je životní minimum přímo v paragrafu 2. Pro srážky se použije od ledna 2027."
       },
       {
         "nazev": "Sdělení ministerstva práce o normativním nájemném pro rok 2026, číslo 526/2025",
-        "url": "https://e-sbirka.gov.cz/sb/2025/526"
+        "url": "https://e-sbirka.gov.cz/sb/2025/526",
+        "poznamka": "Hodnota k 1. 1. 2026. Od 1. 10. 2026 ho nahradilo sdělení číslo 169/2026 s nájemným podle okresů."
       },
       {
         "nazev": "Zákon o dávce státní sociální pomoci, číslo 151/2025, paragrafy 28 a 32",
         "url": "https://e-sbirka.gov.cz/sb/2025/151"
       },
       {
-        "nazev": "Nařízení vlády o úroku z prodlení, číslo 351/2013",
+        "nazev": "Nařízení vlády o úroku z prodlení, číslo 351/2013, paragraf 2",
         "url": "https://e-sbirka.gov.cz/sb/2013/351"
+      },
+      {
+        "nazev": "Česká národní banka: vývoj repo sazby",
+        "url": "https://www.cnb.cz/cs/casto-kladene-dotazy/.galleries/vyvoj_repo_historie.txt",
+        "poznamka": "Z ní plyne sazba úroku z prodlení po pololetích"
       },
       {
         "nazev": "Zákon o dani z přidané hodnoty, číslo 235/2004, paragraf 47",
@@ -89,7 +96,8 @@
     "neovereno": [
       "Pravidla pro rok 2027 zatím nejsou úplná. Ministerstvo práce ještě nevyhlásilo normativní nájemné. Do té doby počítáme podle roku 2026.",
       "Nepočítáme náklady exekuce. Dluh o ně může dál růst.",
-      "Pravidlo, že se od čtyř exekucí strhávají dvě třetiny i u běžných dluhů, uvádí jen část zdrojů. Ověřte si ho v poradně."
+      "Pravidlo, že se od čtyř exekucí strhávají dvě třetiny i u běžných dluhů, uvádí jen část zdrojů. Ověřte si ho v poradně.",
+      "Sazbu úroku z prodlení pro rok 2027 zatím neznáme. Určí ji repo sazba České národní banky platná 1. 1. 2027."
     ]
   },
   "pomoc": [
@@ -109,13 +117,15 @@
       "nazev": "Úřední kalkulačka srážek ze mzdy",
       "url": "https://exekuce.justice.cz/vypocet-srazek-ze-mzdy/",
       "provozovatel": "Ministerstvo spravedlnosti",
-      "popis": "Spočítá srážky ze mzdy podle platných pravidel."
+      "popis": "Spočítá srážky ze mzdy podle platných pravidel.",
+      "rozdil": "srazky"
     },
     {
       "nazev": "Úřední informace o oddlužení",
       "url": "https://insolvence.justice.cz/",
       "provozovatel": "Ministerstvo spravedlnosti",
-      "popis": "Jak oddlužení funguje. Najdete tu i kalkulačku splátek."
+      "popis": "Jak oddlužení funguje. Najdete tu i kalkulačku splátek.",
+      "rozdil": "splatky"
     },
     {
       "nazev": "Veřejný ochránce práv",
@@ -124,31 +134,149 @@
       "popis": "Srozumitelné letáky o srážkách ze mzdy a o poradenství."
     }
   ],
-  "overeno": "2026-11-05",
+  "urokZProdleni": {
+    "popis": "Zákonná sazba úroku z prodlení. Řídí se pololetím, ve kterém prodlení vzniklo, a po celou dobu prodlení se nemění. Položka platí pro prodlení vzniklé ode dne „od“ do začátku další položky.",
+    "zdroj": {
+      "pravniZaklad": "Nařízení vlády č. 351/2013 Sb., § 2 odst. 1",
+      "url": "https://www.zakonyprolidi.cz/cs/2013-351#p2",
+      "citace": "Výše úroku z prodlení odpovídá ročně výši repo sazby stanovené Českou národní bankou pro první den kalendářního pololetí, v němž došlo k prodlení, zvýšené o 8 procentních bodů."
+    },
+    "odkaz": "https://e-sbirka.gov.cz/sb/2013/351",
+    "prirazkaBodu": 8,
+    "repoZdroj": {
+      "nazev": "Česká národní banka, vývoj repo sazby (PLATNA_OD|CNB_REPO_SAZBA_V_%)",
+      "url": "https://www.cnb.cz/cs/casto-kladene-dotazy/.galleries/vyvoj_repo_historie.txt"
+    },
+    "overeno": "2026-11-12",
+    "poznamka": "Repo sazba je od 6. 11. 2026 4,00 %. Sazbu pro prodlení vzniklé od 1. 1. 2027 určí repo sazba platná 1. 1. 2027; doplní se po tomto dni. Zvláštní sazba u výživného pro nezletilé dítě (§ 2 odst. 2) se nepočítá.",
+    "pololeti": [
+      {
+        "od": "2022-01-01",
+        "repoSazba": 3.75,
+        "repoPlatnaOd": "2021-12-23",
+        "procenta": 11.75
+      },
+      {
+        "od": "2022-07-01",
+        "repoSazba": 7,
+        "repoPlatnaOd": "2022-06-23",
+        "procenta": 15
+      },
+      {
+        "od": "2023-01-01",
+        "repoSazba": 7,
+        "repoPlatnaOd": "2022-06-23",
+        "procenta": 15
+      },
+      {
+        "od": "2023-07-01",
+        "repoSazba": 7,
+        "repoPlatnaOd": "2022-06-23",
+        "procenta": 15
+      },
+      {
+        "od": "2024-01-01",
+        "repoSazba": 6.75,
+        "repoPlatnaOd": "2023-12-22",
+        "procenta": 14.75
+      },
+      {
+        "od": "2024-07-01",
+        "repoSazba": 4.75,
+        "repoPlatnaOd": "2024-06-28",
+        "procenta": 12.75
+      },
+      {
+        "od": "2025-01-01",
+        "repoSazba": 4,
+        "repoPlatnaOd": "2024-11-08",
+        "procenta": 12
+      },
+      {
+        "od": "2025-07-01",
+        "repoSazba": 3.5,
+        "repoPlatnaOd": "2025-05-09",
+        "procenta": 11.5
+      },
+      {
+        "od": "2026-01-01",
+        "repoSazba": 3.5,
+        "repoPlatnaOd": "2025-05-09",
+        "procenta": 11.5
+      },
+      {
+        "od": "2026-07-01",
+        "repoSazba": 3.75,
+        "repoPlatnaOd": "2026-06-19",
+        "procenta": 11.75
+      }
+    ]
+  },
+  "uredniKalkulacky": {
+    "overeno": "2026-11-12",
+    "popis": "Úřední kalkulačky, na které odkazujeme, u některých vstupů ukazují jiná čísla, než plyne z nařízení vlády. Zjištěno ze zdrojového kódu jejich stránek 12. 11. 2026.",
+    "srazky": {
+      "url": "https://exekuce.justice.cz/vypocet-srazek-ze-mzdy/",
+      "variantaOdchylna": "2026 výpočet od 1. 10.",
+      "variantaPodleNarizeni": "2026 výpočet od 1. 1.",
+      "zjisteni": "Formulář nabízí jako první volbu „2026 výpočet od 1. 10.“ se životním minimem 5 500 Kč (skryté pole livemin102026). Volba „2026 výpočet od 1. 1.“ počítá se 4 860 Kč (livemin012026). Novela nařízení č. 595/2006 Sb. k 1. 10. 2026 neexistuje (zakonyprolidi.cz: aktuální znění od 1. 1. 2026, verze 7, bez budoucího znění).",
+      "zdroj": {
+        "pravniZaklad": "Nařízení vlády č. 595/2006 Sb., § 4, ve znění nařízení vlády č. 548/2025 Sb.",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-595#p4",
+        "citace": "Při výpočtu nezabavitelné částky a částky, nad kterou se zbytek čisté mzdy srazí bez omezení, se použije částka životního minima jednotlivce, částka normativního nájemného a částka energetického paušálu podle § 1 odst. 1 ve výši k 1. lednu kalendářního roku, do kterého spadá výplata mzdy."
+      }
+    },
+    "splatky": {
+      "url": "https://insolvence.justice.cz/kalkulator-splatek/",
+      "nasobekKalkulacky": 1,
+      "zjisteni": "Skript kalkul.js strhává celý zbytek mzdy už nad 1násobkem součtu životního minima, normativního nájemného a energetického paušálu (skryté pole puvodni_vypocet_nasobeni012026 = 1). Nařízení určuje 1,9násobek. Do čisté mzdy rovné nezabavitelné částce plus 1násobku součtu vychází stejně.",
+      "zdroj": {
+        "pravniZaklad": "Nařízení vlády č. 595/2006 Sb., § 2; insolvenční zákon č. 182/2006 Sb., § 398 odst. 3",
+        "url": "https://www.zakonyprolidi.cz/cs/2006-595#p2",
+        "citace": "Částka, nad kterou se zbytek čisté mzdy vypočtené podle § 279 odst. 1 věty první občanského soudního řádu srazí bez omezení, činí 1,9násobek součtu částky životního minima jednotlivce, částky normativního nájemného a částky energetického paušálu podle § 1 odst. 1."
+      }
+    }
+  },
+  "overeno": "2026-11-12",
   "poznamka": "Parametry pro orientační výpočet srážek ze mzdy a splátek v oddlužení. Každá hodnota má uvedený zdroj. Závazné je znění předpisů ve Sbírce zákonů.",
   "roky": {
     "2026": {
       "status": "platné",
       "zivotniMinimum": {
         "hodnota": 4860,
-        "popis": "Životní minimum jednotlivce k 1. 1. 2026",
-        "zdroj": "Nařízení vlády č. 436/2022 Sb., § 1",
-        "odkaz": "https://e-sbirka.gov.cz/sb/2022/436",
-        "ucinnostOd": "2023-01-01"
+        "popis": "Životní minimum jednotlivce k 1. 1. 2026. Pro srážky se použije po celý rok 2026.",
+        "zdroj": {
+          "pravniZaklad": "Nařízení vlády č. 361/2025 Sb., § 1 (účinné od 1. 10. 2025 do 30. 9. 2026); hodnota k 1. lednu podle nařízení vlády č. 595/2006 Sb., § 4",
+          "url": "https://www.zakonyprolidi.cz/cs/2025-361#p1",
+          "citace": "Částka životního minima jednotlivce činí měsíčně 4860 Kč."
+        },
+        "odkaz": "https://e-sbirka.gov.cz/sb/2025/361",
+        "ucinnostOd": "2025-10-01",
+        "overeno": "2026-11-12"
       },
       "normativniNajemne": {
         "hodnota": 9430,
         "popis": "Normativní nájemné, jednočlenná domácnost, obec s alespoň 70 000 obyvateli",
-        "zdroj": "Sdělení MPSV č. 526/2025 Sb., písm. a)",
+        "zdroj": {
+          "pravniZaklad": "Sdělení MPSV č. 526/2025 Sb., písm. a) (platilo k 1. 1. 2026, zrušeno k 1. 10. 2026 zákonem č. 152/2026 Sb.); hodnota k 1. lednu podle nařízení vlády č. 595/2006 Sb., § 4",
+          "url": "https://www.zakonyprolidi.cz/cs/2025-526#p1",
+          "citace": "Normativní nájemné za kalendářní měsíc, jednočlenná domácnost, obec s alespoň 70 000 obyvateli: 9 430 Kč"
+        },
         "odkaz": "https://e-sbirka.gov.cz/sb/2025/526",
-        "ucinnostOd": "2026-01-01"
+        "ucinnostOd": "2026-01-01",
+        "overeno": "2026-11-12"
       },
       "energetickyPausal": {
         "hodnota": 2300,
         "popis": "Energetický paušál, jednočlenná domácnost",
-        "zdroj": "Zákon č. 151/2025 Sb., § 32 odst. 2 písm. a)",
+        "zdroj": {
+          "pravniZaklad": "Zákon č. 151/2025 Sb., o dávce státní sociální pomoci, § 32 odst. 2 písm. a)",
+          "url": "https://www.zakonyprolidi.cz/cs/2025-151#p32",
+          "citace": "Výše energetického paušálu činí a) 2300 Kč pro jednočlennou domácnost"
+        },
         "odkaz": "https://e-sbirka.gov.cz/sb/2025/151",
-        "ucinnostOd": "2025-10-01"
+        "ucinnostOd": "2025-10-01",
+        "overeno": "2026-11-12"
       },
       "procentoDluznik": {
         "hodnota": 85,
@@ -191,13 +319,6 @@
         "zdroj": "Vyhláška č. 485/2000 Sb., § 4d a § 4e; občanský soudní řád § 270 odst. 2 a § 279 odst. 1",
         "odkaz": "https://e-sbirka.gov.cz/sb/2000/485",
         "ucinnostOd": "2022-01-01"
-      },
-      "urokZProdleniProcenta": {
-        "hodnota": 11.75,
-        "popis": "Úrok z prodlení ročně pro prodlení vzniklé ve 2. pololetí 2026 (repo sazba 3,75 % + 8 bodů). Pro 1. pololetí 2026 platí 11,50 %.",
-        "zdroj": "Nařízení vlády č. 351/2013 Sb., § 2 odst. 1; repo sazba ČNB 3,75 % od 19. 6. 2026",
-        "odkaz": "https://e-sbirka.gov.cz/sb/2013/351",
-        "ucinnostOd": "2026-07-01"
       },
       "odmenaSpravceMesicne": {
         "hodnota": 750,
@@ -251,13 +372,18 @@
     },
     "2027": {
       "status": "neúplné",
-      "poznamka": "Normativní nájemné pro rok 2027 ještě nebylo vyhlášeno (stav k 5. 11. 2026). Zákon č. 151/2025 Sb. § 28 je nově stanoví podle okresů, nařízení č. 595/2006 Sb. ale odkazuje na obec s alespoň 70 000 obyvateli. Výpočet pro rok 2027 proto zatím není možný.",
+      "poznamka": "Normativní nájemné pro rok 2027 ještě nebylo vyhlášeno (stav k 12. 11. 2026). Zákon č. 151/2025 Sb. § 28 ve znění zákona č. 152/2026 Sb. ho stanoví podle okresů (sdělení č. 169/2026 Sb. pro 1. 10. až 31. 12. 2026), nařízení č. 595/2006 Sb. ale odkazuje na obec s alespoň 70 000 obyvateli. Výpočet pro rok 2027 proto zatím není možný.",
       "zivotniMinimum": {
         "hodnota": 5500,
         "popis": "Životní minimum jednotlivce od 1. 10. 2026; pro srážky se použije od ledna 2027",
-        "zdroj": "Zákon č. 110/2006 Sb., § 2, ve znění zákona č. 152/2025 Sb.; nařízení vlády č. 595/2006 Sb., § 4",
+        "zdroj": {
+          "pravniZaklad": "Zákon č. 110/2006 Sb., § 2, ve znění zákona č. 152/2025 Sb. (účinné od 1. 10. 2026); nařízení vlády č. 595/2006 Sb., § 4",
+          "url": "https://www.zakonyprolidi.cz/cs/2006-110#p2",
+          "citace": "Částka životního minima jednotlivce činí měsíčně 5500 Kč."
+        },
         "odkaz": "https://e-sbirka.gov.cz/sb/2006/110",
-        "ucinnostOd": "2026-10-01"
+        "ucinnostOd": "2026-10-01",
+        "overeno": "2026-11-12"
       },
       "normativniNajemne": {
         "hodnota": null,

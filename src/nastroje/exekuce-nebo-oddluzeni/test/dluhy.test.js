@@ -9,6 +9,9 @@ import {
   dobaSplaceniExekuce,
   oddluzeni,
   floor3,
+  sazbaUrokuZProdleni,
+  nejnovejsiPlatnyRok,
+  zakladniSoucet,
 } from '../dluhy.js';
 
 const rules = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
@@ -169,4 +172,68 @@ test('oddlužení: malý dluh se splatí dřív a nic se neodpouští', () => {
 
 test('rok 2027 je neúplný a nelze podle něj počítat', () => {
   assert.throws(() => pravidlaProRok(rules, 2027), /neúplné|nevyhlášen/i);
+});
+
+// DLU-01: zákonná sazba úroku z prodlení se řídí pololetím, v němž prodlení vzniklo
+// (NV č. 351/2013 Sb., § 2 odst. 1). Repo sazby z ČNB (vyvoj_repo_historie.txt, 12. 11. 2026).
+test('sazba úroku z prodlení podle data vzniku prodlení', () => {
+  const u = rules.urokZProdleni;
+  assert.equal(sazbaUrokuZProdleni(u, '2023-03-01'), 15);
+  assert.equal(sazbaUrokuZProdleni(u, '2024-01-01'), 14.75);
+  assert.equal(sazbaUrokuZProdleni(u, '2024-09-01'), 12.75);
+  assert.equal(sazbaUrokuZProdleni(u, '2025-02-15'), 12);
+  assert.equal(sazbaUrokuZProdleni(u, '2025-12-31'), 11.5);
+  assert.equal(sazbaUrokuZProdleni(u, '2026-01-01'), 11.5);
+  assert.equal(sazbaUrokuZProdleni(u, '2026-06-30'), 11.5);
+  assert.equal(sazbaUrokuZProdleni(u, '2026-07-01'), 11.75);
+  assert.equal(sazbaUrokuZProdleni(u, '2022-03-01'), 11.75);
+  assert.equal(sazbaUrokuZProdleni(u, '2022-07-01'), 15);
+  // Před první položkou historie sazbu neznáme
+  assert.equal(sazbaUrokuZProdleni(u, '2019-05-01'), null);
+});
+
+test('dluh po splatnosti od roku 2023: 15 % → 46 měsíců a úroky asi 31 403 Kč', () => {
+  const d = dobaSplaceniExekuce({ dluh: 100000, mesicne: 2916, rocniUrokProcent: sazbaUrokuZProdleni(rules.urokZProdleni, '2023-03-01') });
+  assert.equal(d.mesicu, 46);
+  assert.ok(Math.abs(d.uroky - 31403) <= 1, `úroky ${d.uroky}`);
+});
+
+// DLU-06: větve doby splácení a okrajové případy
+test('doba splácení: přes 600 měsíců → nesplatitelné, důvod „prilis-dlouho“', () => {
+  const d = dobaSplaceniExekuce({ dluh: 10000000, mesicne: 2916 });
+  assert.equal(d.nesplatitelne, true);
+  assert.equal(d.duvod, 'prilis-dlouho');
+  assert.ok(d.zbyva > 0);
+});
+
+test('doba splácení: nulová platba → důvod „zadna-srazka“', () => {
+  const d = dobaSplaceniExekuce({ dluh: 100000, mesicne: 0 });
+  assert.equal(d.nesplatitelne, true);
+  assert.equal(d.duvod, 'zadna-srazka');
+});
+
+test('srážka 1 Kč celá připadne zaměstnavateli, věřitelům nic (vyhl. 485/2000 § 4e)', () => {
+  const s = srazka(p, { cistaMzda: 14105, osoby: 0, prednostni: false, pocetExekuci: 1 });
+  assert.equal(s.srazka, 1);
+  assert.equal(s.nahradaZamestnavateli, 1);
+  assert.equal(s.vericiDostanou, 0);
+});
+
+test('důchodce se 4 exekucemi: třetina rovná 1 089 Kč výjimku nespustí → dvě třetiny', () => {
+  const rovno = srazka(p, { cistaMzda: 17369, osoby: 0, prednostni: false, pocetExekuci: 4, duchodce: true });
+  assert.equal(rovno.tretina, 1089);
+  assert.equal(rovno.srazka, 2178);
+  const mene = srazka(p, { cistaMzda: 16502, osoby: 0, prednostni: false, pocetExekuci: 4, duchodce: true });
+  assert.equal(mene.srazka, 800);
+});
+
+test('nejnovější platný rok: pro rok 2027 se počítá podle 2026', () => {
+  assert.equal(nejnovejsiPlatnyRok(rules, 2027), 2026);
+  assert.equal(nejnovejsiPlatnyRok(rules, 2026), 2026);
+  // Rok před všemi pravidly: vezme se nejstarší platný
+  assert.equal(nejnovejsiPlatnyRok(rules, 2020), 2026);
+});
+
+test('součet tří položek pro rok 2026 je 16 590 Kč', () => {
+  assert.equal(zakladniSoucet(p), 16590);
 });
